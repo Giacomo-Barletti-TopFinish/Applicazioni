@@ -1,6 +1,6 @@
 ﻿namespace Preventivi
 {
-    partial class Form1
+    partial class PreventiviMainForm
     {
         /// <summary>
         /// Required designer variable.

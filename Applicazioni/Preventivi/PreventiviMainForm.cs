@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Preventivi
 {
-    public partial class Form1 : Form
+    public partial class PreventiviMainForm : Form
     {
-        public Form1()
+        public PreventiviMainForm()
         {
             InitializeComponent();
         }
