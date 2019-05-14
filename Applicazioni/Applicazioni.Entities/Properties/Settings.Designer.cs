@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Preventivi.Properties {
+namespace Applicazioni.Entities.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,10 +25,11 @@ namespace Preventivi.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\'00253\'")]
-        public string FiltroBalenciaga {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=RVL;User ID=ditta1;Password=DITTA1;Unicode=True")]
+        public string ConnectionString {
             get {
-                return ((string)(this["FiltroBalenciaga"]));
+                return ((string)(this["ConnectionString"]));
             }
         }
     }

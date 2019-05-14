@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdapterBase.cs" />
+    <Compile Include="Anagrafica\AnagraficaAdapter.cs" />
+    <Compile Include="Anagrafica\AnagraficaBusiness.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="Core\AdapterBase.cs" />
     <Compile Include="Core\BusinessBase.cs" />
@@ -54,11 +56,20 @@
     <Compile Include="Core\DaoExtensor.cs" />
     <Compile Include="Core\DataContextAttribute.cs" />
     <Compile Include="Core\Exceptions.cs" />
+    <Compile Include="Preventivi\PreventiviAdapter.cs" />
+    <Compile Include="Preventivi\PreventiviBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
+      <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
+      <Name>Applicazioni.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
