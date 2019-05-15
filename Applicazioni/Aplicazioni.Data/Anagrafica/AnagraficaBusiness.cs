@@ -33,5 +33,26 @@ namespace Applicazioni.Data.Anagrafica
                 a.FillMAGAZZ(ds, articoliDaCaricare);
             }
         }
+
+        [DataContext]
+        public void FillUSR_PREV_GRUPPI(AnagraficaDS ds)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PREV_GRUPPI(ds);
+        }
+
+        [DataContext]
+        public void FillUSR_PRD_CDDIBA(AnagraficaDS ds)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_CDDIBA(ds);
+        }
+
+        [DataContext]
+        public void FillUSR_TAB_VOCICOSTO(AnagraficaDS ds)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillUSR_TAB_VOCICOSTO(ds);
+        }
     }
 }

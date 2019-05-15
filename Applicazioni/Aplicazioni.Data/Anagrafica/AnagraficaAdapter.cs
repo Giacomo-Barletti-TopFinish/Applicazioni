@@ -27,5 +27,35 @@ namespace Applicazioni.Data.Anagrafica
                 da.Fill(ds.MAGAZZ);
             }
         }
+
+        public void FillUSR_PREV_GRUPPI(AnagraficaDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.USR_PREV_GRUPPI ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PREV_GRUPPI);
+            }
+        }
+
+        public void FillUSR_TAB_VOCICOSTO(AnagraficaDS ds)
+        {
+            string select = @"SELECT * FROM GRUPPO.USR_TAB_VOCICOSTO ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_TAB_VOCICOSTO);
+            }
+        }
+
+        public void FillUSR_PRD_CDDIBA(AnagraficaDS ds)
+        {
+            string select = @"SELECT * FROM ditta1.USR_PRD_CDDIBA ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_CDDIBA);
+            }
+        }
     }
 }

@@ -23,5 +23,55 @@ namespace Applicazioni.Data.Preventivi
             PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
             a.FillUSR_VENDITEPD(ds, IDVENDITEPT);
         }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF(PreventiviDS ds, string IDVENDITEPD)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF(ds, IDVENDITEPD);
+        }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF_DIBA(PreventiviDS ds, string IDVENDITEPF)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF_DIBA(ds, IDVENDITEPF);
+        }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF_DIBATREE(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF_DIBATREE(ds, IDVENDITEPFDIBA);
+        }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF_DIBACOS(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF_DIBACOS(ds, IDVENDITEPFDIBA);
+        }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF_GRUPPOT(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF_GRUPPOT(ds, IDVENDITEPFDIBA);
+        }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF_GRUPPOD(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF_GRUPPOD(ds, IDVENDITEPFDIBA);
+        }
+
+        [DataContext]
+        public void FillUSR_VENDITEPF_TOTPREV(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITEPF_TOTPREV(ds, IDVENDITEPFDIBA);
+        }
+
     }
 }

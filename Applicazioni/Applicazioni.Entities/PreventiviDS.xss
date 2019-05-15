@@ -7,14 +7,14 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="617" ViewPortY="0" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:USR_VENDITEPD" ZOrder="9" X="864" Y="84" Height="467" Width="163" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="463" />
-    <Shape ID="DesignTable:USR_VENDITEPF" ZOrder="2" X="648" Y="416" Height="304" Width="160" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPF_DIBA" ZOrder="1" X="1157" Y="103" Height="304" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPF_DIBACOS" ZOrder="8" X="1131" Y="323" Height="304" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPT" ZOrder="7" X="635" Y="18" Height="304" Width="165" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPF_DIBATREE" ZOrder="6" X="1467" Y="323" Height="304" Width="223" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPF_GRUPPOD" ZOrder="5" X="1635" Y="323" Height="304" Width="225" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPF_GRUPPOT" ZOrder="4" X="1803" Y="323" Height="304" Width="223" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:USR_VENDITEPF_TOTPREV" ZOrder="3" X="1971" Y="323" Height="295" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="291" />
+    <Shape ID="DesignTable:USR_VENDITEPF" ZOrder="6" X="648" Y="416" Height="304" Width="160" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:USR_VENDITEPF_DIBA" ZOrder="5" X="1319" Y="44" Height="304" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:USR_VENDITEPF_DIBACOS" ZOrder="4" X="1079" Y="97" Height="676" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="672" />
+    <Shape ID="DesignTable:USR_VENDITEPT" ZOrder="8" X="635" Y="18" Height="304" Width="165" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:USR_VENDITEPF_DIBATREE" ZOrder="2" X="1358" Y="416" Height="304" Width="223" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:USR_VENDITEPF_GRUPPOD" ZOrder="1" X="1634" Y="432" Height="304" Width="225" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:USR_VENDITEPF_GRUPPOT" ZOrder="3" X="1599" Y="38" Height="304" Width="223" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:USR_VENDITEPF_TOTPREV" ZOrder="7" X="1971" Y="323" Height="295" Width="219" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="291" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

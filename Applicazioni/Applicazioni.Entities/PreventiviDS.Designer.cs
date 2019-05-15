@@ -2242,6 +2242,10 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnVALOREUNITARIO;
             
+            private global::System.Data.DataColumn columnCODVOCECOSTO;
+            
+            private global::System.Data.DataColumn columnDESVOCECOSTO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_VENDITEPF_DIBACOSDataTable() {
@@ -2469,6 +2473,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODVOCECOSTOColumn {
+                get {
+                    return this.columnCODVOCECOSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESVOCECOSTOColumn {
+                get {
+                    return this.columnDESVOCECOSTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2528,7 +2548,9 @@ namespace Applicazioni.Entities {
                         string IDVENDITEPF, 
                         string IDVENDITEPD, 
                         string IDVENDITEPT, 
-                        decimal VALOREUNITARIO) {
+                        decimal VALOREUNITARIO, 
+                        string CODVOCECOSTO, 
+                        string DESVOCECOSTO) {
                 USR_VENDITEPF_DIBACOSRow rowUSR_VENDITEPF_DIBACOSRow = ((USR_VENDITEPF_DIBACOSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDVENDITEPFDIBACOS,
@@ -2554,7 +2576,9 @@ namespace Applicazioni.Entities {
                         IDVENDITEPF,
                         IDVENDITEPD,
                         IDVENDITEPT,
-                        VALOREUNITARIO};
+                        VALOREUNITARIO,
+                        CODVOCECOSTO,
+                        DESVOCECOSTO};
                 rowUSR_VENDITEPF_DIBACOSRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_VENDITEPF_DIBACOSRow);
                 return rowUSR_VENDITEPF_DIBACOSRow;
@@ -2608,6 +2632,8 @@ namespace Applicazioni.Entities {
                 this.columnIDVENDITEPD = base.Columns["IDVENDITEPD"];
                 this.columnIDVENDITEPT = base.Columns["IDVENDITEPT"];
                 this.columnVALOREUNITARIO = base.Columns["VALOREUNITARIO"];
+                this.columnCODVOCECOSTO = base.Columns["CODVOCECOSTO"];
+                this.columnDESVOCECOSTO = base.Columns["DESVOCECOSTO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2661,6 +2687,10 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnIDVENDITEPT);
                 this.columnVALOREUNITARIO = new global::System.Data.DataColumn("VALOREUNITARIO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVALOREUNITARIO);
+                this.columnCODVOCECOSTO = new global::System.Data.DataColumn("CODVOCECOSTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODVOCECOSTO);
+                this.columnDESVOCECOSTO = new global::System.Data.DataColumn("DESVOCECOSTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESVOCECOSTO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDVENDITEPFDIBACOS}, true));
                 this.columnIDVENDITEPFDIBACOS.AllowDBNull = false;
@@ -6512,6 +6542,10 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnTOTALEVENDITAMANUALET;
             
+            private global::System.Data.DataColumn columnCODPREVGRUPPO;
+            
+            private global::System.Data.DataColumn columnDESPREVGRUPPO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_VENDITEPF_GRUPPOTDataTable() {
@@ -6723,6 +6757,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODPREVGRUPPOColumn {
+                get {
+                    return this.columnCODPREVGRUPPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESPREVGRUPPOColumn {
+                get {
+                    return this.columnDESPREVGRUPPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6780,7 +6830,9 @@ namespace Applicazioni.Entities {
                         string UTENTE, 
                         decimal TOTALEVENDITACALCOLATO, 
                         decimal TOTALEVENDITAMANUALEG, 
-                        decimal TOTALEVENDITAMANUALET) {
+                        decimal TOTALEVENDITAMANUALET, 
+                        string CODPREVGRUPPO, 
+                        string DESPREVGRUPPO) {
                 USR_VENDITEPF_GRUPPOTRow rowUSR_VENDITEPF_GRUPPOTRow = ((USR_VENDITEPF_GRUPPOTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDVENDITEPFGRUPPOT,
@@ -6804,7 +6856,9 @@ namespace Applicazioni.Entities {
                         UTENTE,
                         TOTALEVENDITACALCOLATO,
                         TOTALEVENDITAMANUALEG,
-                        TOTALEVENDITAMANUALET};
+                        TOTALEVENDITAMANUALET,
+                        CODPREVGRUPPO,
+                        DESPREVGRUPPO};
                 rowUSR_VENDITEPF_GRUPPOTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_VENDITEPF_GRUPPOTRow);
                 return rowUSR_VENDITEPF_GRUPPOTRow;
@@ -6856,6 +6910,8 @@ namespace Applicazioni.Entities {
                 this.columnTOTALEVENDITACALCOLATO = base.Columns["TOTALEVENDITACALCOLATO"];
                 this.columnTOTALEVENDITAMANUALEG = base.Columns["TOTALEVENDITAMANUALEG"];
                 this.columnTOTALEVENDITAMANUALET = base.Columns["TOTALEVENDITAMANUALET"];
+                this.columnCODPREVGRUPPO = base.Columns["CODPREVGRUPPO"];
+                this.columnDESPREVGRUPPO = base.Columns["DESPREVGRUPPO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6905,6 +6961,10 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnTOTALEVENDITAMANUALEG);
                 this.columnTOTALEVENDITAMANUALET = new global::System.Data.DataColumn("TOTALEVENDITAMANUALET", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTOTALEVENDITAMANUALET);
+                this.columnCODPREVGRUPPO = new global::System.Data.DataColumn("CODPREVGRUPPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODPREVGRUPPO);
+                this.columnDESPREVGRUPPO = new global::System.Data.DataColumn("DESPREVGRUPPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESPREVGRUPPO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDVENDITEPFGRUPPOT}, true));
                 this.columnIDVENDITEPFGRUPPOT.AllowDBNull = false;
@@ -9115,6 +9175,38 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODVOCECOSTO {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_VENDITEPF_DIBACOS.CODVOCECOSTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODVOCECOSTO\' in table \'USR_VENDITEPF_DIBACOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_VENDITEPF_DIBACOS.CODVOCECOSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESVOCECOSTO {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_VENDITEPF_DIBACOS.DESVOCECOSTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESVOCECOSTO\' in table \'USR_VENDITEPF_DIBACOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_VENDITEPF_DIBACOS.DESVOCECOSTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDVENDITEPFDIBANull() {
                 return this.IsNull(this.tableUSR_VENDITEPF_DIBACOS.IDVENDITEPFDIBAColumn);
             }
@@ -9255,6 +9347,30 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDVENDITEPTNull() {
                 this[this.tableUSR_VENDITEPF_DIBACOS.IDVENDITEPTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODVOCECOSTONull() {
+                return this.IsNull(this.tableUSR_VENDITEPF_DIBACOS.CODVOCECOSTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODVOCECOSTONull() {
+                this[this.tableUSR_VENDITEPF_DIBACOS.CODVOCECOSTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESVOCECOSTONull() {
+                return this.IsNull(this.tableUSR_VENDITEPF_DIBACOS.DESVOCECOSTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESVOCECOSTONull() {
+                this[this.tableUSR_VENDITEPF_DIBACOS.DESVOCECOSTOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -13213,6 +13329,38 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODPREVGRUPPO {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_VENDITEPF_GRUPPOT.CODPREVGRUPPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODPREVGRUPPO\' in table \'USR_VENDITEPF_GRUPPOT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_VENDITEPF_GRUPPOT.CODPREVGRUPPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESPREVGRUPPO {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_VENDITEPF_GRUPPOT.DESPREVGRUPPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESPREVGRUPPO\' in table \'USR_VENDITEPF_GRUPPOT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_VENDITEPF_GRUPPOT.DESPREVGRUPPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDVENDITEPFNull() {
                 return this.IsNull(this.tableUSR_VENDITEPF_GRUPPOT.IDVENDITEPFColumn);
             }
@@ -13305,6 +13453,30 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetUTENTENull() {
                 this[this.tableUSR_VENDITEPF_GRUPPOT.UTENTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODPREVGRUPPONull() {
+                return this.IsNull(this.tableUSR_VENDITEPF_GRUPPOT.CODPREVGRUPPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODPREVGRUPPONull() {
+                this[this.tableUSR_VENDITEPF_GRUPPOT.CODPREVGRUPPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESPREVGRUPPONull() {
+                return this.IsNull(this.tableUSR_VENDITEPF_GRUPPOT.DESPREVGRUPPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESPREVGRUPPONull() {
+                this[this.tableUSR_VENDITEPF_GRUPPOT.DESPREVGRUPPOColumn] = global::System.Convert.DBNull;
             }
         }
         

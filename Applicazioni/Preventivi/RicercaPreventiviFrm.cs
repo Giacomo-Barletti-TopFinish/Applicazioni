@@ -18,6 +18,8 @@ namespace Preventivi
         private string _filtroCliente;
         private string _etichettaCliente;
         private string _riferimento;
+        public PreventiviDS.USR_VENDITEPFRow USR_VENDITEPF { get; private set; }
+        public PreventiviDS.USR_VENDITEPDRow USR_VENDITEPD { get; private set; }
 
         private PreventiviDS _ds = new PreventiviDS();
         private AnagraficaDS _dsAnagrafica = new AnagraficaDS();
@@ -47,6 +49,8 @@ namespace Preventivi
                     else
                     {
                         dgvArticoli.DataSource = _ds;
+                        if (dgvArticoli.Rows.Count > 0)
+                            caricaGrigliaArticoliDettaglio(0);
                     }
                 }
             }
@@ -56,12 +60,11 @@ namespace Preventivi
             }
         }
 
-        private void dgvArticoli_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void caricaGrigliaArticoliDettaglio(int indiceRiga)
         {
-            if (e.RowIndex == -1) return;
             try
             {
-                string IDVENDITEPT = (string)dgvArticoli.Rows[e.RowIndex].Cells[0].Value;
+                string IDVENDITEPT = (string)dgvArticoli.Rows[indiceRiga].Cells[0].Value;
                 if (IDVENDITEPT == string.Empty)
                 {
                     throw new ArgumentException("Valore IDVENDITEPT non trovato. Impossibile trovare il preventivo richiesto.");
@@ -75,12 +78,65 @@ namespace Preventivi
                     }
                 }
                 dgvArticoliDettaglio.DataSource = _ds.USR_VENDITEPD.Where(x => x.IDVENDITEPT == IDVENDITEPT).ToArray();
+                if (dgvArticoliDettaglio.Rows.Count > 0)
+                    caricaGrigliaScaglioni(0);
 
             }
             catch (Exception ex)
             {
                 MostraEccezione(ex, "ERRORE IN RICERCA PREVENTIVI");
             }
+        }
+
+        private void dgvArticoli_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+            caricaGrigliaArticoliDettaglio(e.RowIndex);
+        }
+
+        private void dgvArticoliDettaglio_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+            caricaGrigliaScaglioni(e.RowIndex);
+        }
+
+        private void caricaGrigliaScaglioni(int indiceRiga)
+        {
+            try
+            {
+                string IDVENDITEPD = (string)dgvArticoliDettaglio.Rows[indiceRiga].Cells[0].Value;
+                if (IDVENDITEPD == string.Empty)
+                {
+                    throw new ArgumentException("Valore IDVENDITEPF non trovato. Impossibile trovare il preventivo richiesto.");
+                }
+
+                if (!_ds.USR_VENDITEPF.Any(x => x.IDVENDITEPD == IDVENDITEPD))
+                {
+                    using (PreventiviBusiness bPreventivi = new PreventiviBusiness())
+                    {
+                        bPreventivi.FillUSR_VENDITEPF(_ds, IDVENDITEPD);
+                    }
+                }
+                dgvScaglioni.DataSource = _ds.USR_VENDITEPF.Where(x => x.IDVENDITEPD == IDVENDITEPD).ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "ERRORE IN RICERCA PREVENTIVI");
+            }
+        }
+
+        private void dgvScaglioni_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            USR_VENDITEPF = null;
+            if (e.RowIndex == -1) return;
+            string IDVENDITEPF = (string)dgvScaglioni.Rows[e.RowIndex].Cells[0].Value;
+            USR_VENDITEPF = _ds.USR_VENDITEPF.Where(x => x.IDVENDITEPF == IDVENDITEPF).FirstOrDefault();
+
+            string IDVENDITEPD = (string)dgvScaglioni.Rows[e.RowIndex].Cells[1].Value;
+            USR_VENDITEPD = _ds.USR_VENDITEPD.Where(x => x.IDVENDITEPD == IDVENDITEPD).FirstOrDefault();
+
+            this.Close();
         }
     }
 }

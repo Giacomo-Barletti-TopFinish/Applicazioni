@@ -28,7 +28,6 @@ namespace Applicazioni.Data.Preventivi
             {
                 da.Fill(ds.USR_VENDITEPT);
             }
-
         }
 
         public void FillUSR_VENDITEPD(PreventiviDS ds, string IDVENDITEPT)
@@ -44,7 +43,108 @@ namespace Applicazioni.Data.Preventivi
             {
                 da.Fill(ds.USR_VENDITEPD);
             }
+        }
 
+        public void FillUSR_VENDITEPF(PreventiviDS ds, string IDVENDITEPD)
+        {
+            string select = @"SELECT VF.* FROM DITTA1.USR_VENDITEPF VF
+                                WHERE IDVENDITEPD = $P<IDVENDITEPD> ORDER BY QTA";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPD", DbType.String, IDVENDITEPD);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF);
+            }
+        }
+
+        public void FillUSR_VENDITEPF_DIBA(PreventiviDS ds, string IDVENDITEPF)
+        {
+            string select = @"SELECT VF.* FROM DITTA1.USR_VENDITEPF_DIBA VF
+                                WHERE IDVENDITEPF = $P<IDVENDITEPF> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPF", DbType.String, IDVENDITEPF);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF_DIBA);
+            }
+        }
+
+        public void FillUSR_VENDITEPF_DIBATREE(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            string select = @"SELECT VF.* FROM DITTA1.USR_VENDITEPF_DIBATREE VF
+                                WHERE IDVENDITEPFDIBA = $P<IDVENDITEPFDIBA> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPFDIBA", DbType.String, IDVENDITEPFDIBA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF_DIBATREE);
+            }
+        }
+
+        public void FillUSR_VENDITEPF_DIBACOS(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            string select = @"SELECT COS.*, VC.CODVOCECOSTO, VC.DESVOCECOSTO 
+                                FROM DITTA1.USR_VENDITEPF_DIBACOS COS 
+                                INNER JOIN GRUPPO.USR_TAB_VOCICOSTO VC ON VC.IDVOCECOSTO = COS.IDVOCECOSTO
+                                WHERE IDVENDITEPFDIBA = $P<IDVENDITEPFDIBA> ORDER BY COS.SEQUENZA";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPFDIBA", DbType.String, IDVENDITEPFDIBA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF_DIBACOS);
+            }
+        }
+
+        public void FillUSR_VENDITEPF_GRUPPOT(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            string select = @"SELECT VT.*,GR.CODPREVGRUPPO, GR.DESPREVGRUPPO 
+                                FROM DITTA1.USR_VENDITEPF_GRUPPOT VT 
+                                INNER JOIN GRUPPO.USR_PREV_GRUPPI GR ON GR.IDPREVGRUPPO = VT.IDPREVGRUPPO 
+                                WHERE IDVENDITEPFDIBA = $P<IDVENDITEPFDIBA> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPFDIBA", DbType.String, IDVENDITEPFDIBA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF_GRUPPOT);
+            }
+        }
+
+        public void FillUSR_VENDITEPF_GRUPPOD(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            string select = @"SELECT VF.* FROM DITTA1.USR_VENDITEPF_GRUPPOD VF
+                                WHERE IDVENDITEPFDIBA = $P<IDVENDITEPFDIBA> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPFDIBA", DbType.String, IDVENDITEPFDIBA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF_GRUPPOD);
+            }
+        }
+
+        public void FillUSR_VENDITEPF_TOTPREV(PreventiviDS ds, string IDVENDITEPFDIBA)
+        {
+            string select = @"SELECT VF.* FROM DITTA1.USR_VENDITEPF_TOTPREV VF
+                                WHERE IDVENDITEPFDIBA = $P<IDVENDITEPFDIBA> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPFDIBA", DbType.String, IDVENDITEPFDIBA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITEPF_TOTPREV);
+            }
         }
     }
 }
