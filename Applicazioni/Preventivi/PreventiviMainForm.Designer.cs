@@ -29,10 +29,14 @@
         private void InitializeComponent()
         {
             this.preventiviMenu = new System.Windows.Forms.MenuStrip();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.balenciagaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,20 +45,14 @@
             this.preventiviMenu.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.preventiviMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.balenciagaToolStripMenuItem});
+            this.balenciagaToolStripMenuItem,
+            this.finestreToolStripMenuItem});
             this.preventiviMenu.Location = new System.Drawing.Point(0, 0);
+            this.preventiviMenu.MdiWindowListItem = this.finestreToolStripMenuItem;
             this.preventiviMenu.Name = "preventiviMenu";
             this.preventiviMenu.Size = new System.Drawing.Size(1558, 25);
             this.preventiviMenu.TabIndex = 0;
             this.preventiviMenu.Text = "menuStrip1";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 763);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1558, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -67,7 +65,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -77,6 +75,45 @@
             this.balenciagaToolStripMenuItem.Size = new System.Drawing.Size(82, 21);
             this.balenciagaToolStripMenuItem.Text = "Balenciaga";
             this.balenciagaToolStripMenuItem.Click += new System.EventHandler(this.balenciagaToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 763);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1558, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // finestreToolStripMenuItem
+            // 
+            this.finestreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.disponiToolStripMenuItem});
+            this.finestreToolStripMenuItem.Name = "finestreToolStripMenuItem";
+            this.finestreToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
+            this.finestreToolStripMenuItem.Text = "Finestre";
+            // 
+            // disponiToolStripMenuItem
+            // 
+            this.disponiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cascataToolStripMenuItem,
+            this.organizzaToolStripMenuItem});
+            this.disponiToolStripMenuItem.Name = "disponiToolStripMenuItem";
+            this.disponiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disponiToolStripMenuItem.Text = "Disponi";
+            // 
+            // cascataToolStripMenuItem
+            // 
+            this.cascataToolStripMenuItem.Name = "cascataToolStripMenuItem";
+            this.cascataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cascataToolStripMenuItem.Text = "Cascata";
+            this.cascataToolStripMenuItem.Click += new System.EventHandler(this.cascataToolStripMenuItem_Click);
+            // 
+            // organizzaToolStripMenuItem
+            // 
+            this.organizzaToolStripMenuItem.Name = "organizzaToolStripMenuItem";
+            this.organizzaToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
+            this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
             // 
             // PreventiviMainForm
             // 
@@ -104,6 +141,10 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem balenciagaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem finestreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disponiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cascataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem organizzaToolStripMenuItem;
     }
 }
 

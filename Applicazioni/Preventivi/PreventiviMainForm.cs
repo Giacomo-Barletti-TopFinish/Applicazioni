@@ -70,5 +70,15 @@ namespace Preventivi
             ExceptionFrm frm = new ExceptionFrm(ex);
             frm.ShowDialog();
         }
+
+        private void cascataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void organizzaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
     }
 }

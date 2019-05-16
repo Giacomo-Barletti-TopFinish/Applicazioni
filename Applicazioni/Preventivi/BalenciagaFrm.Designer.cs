@@ -62,19 +62,6 @@
             this.nRicarico = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dgvGruppi = new System.Windows.Forms.DataGridView();
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODPREVGRUPPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DESPREVGRUPPO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDVENDITEPFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDVENDITEPDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDPREVGRUPPODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sEQUENZADataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tOTALECOSTIDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tOTALERICARICODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tOTALEVENDITACALCOLATODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tOTALEVENDITAMANUALETDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dgvGruppiDettaglio = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
@@ -414,18 +401,25 @@
             // nRicarico
             // 
             this.nRicarico.Location = new System.Drawing.Point(881, 101);
+            this.nRicarico.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nRicarico.Minimum = new decimal(new int[] {
-            100,
+            500,
             0,
             0,
             -2147483648});
             this.nRicarico.Name = "nRicarico";
             this.nRicarico.Size = new System.Drawing.Size(57, 22);
             this.nRicarico.TabIndex = 1;
+            this.nRicarico.ValueChanged += new System.EventHandler(this.nRicarico_ValueChanged);
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.dgvGruppi);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -443,24 +437,7 @@
             this.dgvGruppi.AllowUserToAddRows = false;
             this.dgvGruppi.AllowUserToDeleteRows = false;
             this.dgvGruppi.AllowUserToOrderColumns = true;
-            this.dgvGruppi.AutoGenerateColumns = false;
             this.dgvGruppi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGruppi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn,
-            this.CODPREVGRUPPO,
-            this.DESPREVGRUPPO,
-            this.iDVENDITEPFDataGridViewTextBoxColumn,
-            this.iDVENDITEPDDataGridViewTextBoxColumn,
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1,
-            this.iDPREVGRUPPODataGridViewTextBoxColumn,
-            this.sEQUENZADataGridViewTextBoxColumn1,
-            this.tOTALECOSTIDataGridViewTextBoxColumn,
-            this.tOTALERICARICODataGridViewTextBoxColumn,
-            this.tOTALEVENDITACALCOLATODataGridViewTextBoxColumn,
-            this.tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn,
-            this.tOTALEVENDITAMANUALETDataGridViewTextBoxColumn});
-            this.dgvGruppi.DataMember = "USR_VENDITEPF_GRUPPOT";
-            this.dgvGruppi.DataSource = this.preventiviDSBindingSource;
             this.dgvGruppi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGruppi.Location = new System.Drawing.Point(4, 19);
             this.dgvGruppi.Name = "dgvGruppi";
@@ -468,102 +445,6 @@
             this.dgvGruppi.Size = new System.Drawing.Size(1805, 263);
             this.dgvGruppi.TabIndex = 0;
             this.dgvGruppi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGruppi_CellClick);
-            // 
-            // iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn
-            // 
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn.DataPropertyName = "IDVENDITEPFGRUPPOT";
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn.HeaderText = "IDVENDITEPFGRUPPOT";
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn.Name = "iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn";
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // CODPREVGRUPPO
-            // 
-            this.CODPREVGRUPPO.DataPropertyName = "CODPREVGRUPPO";
-            this.CODPREVGRUPPO.HeaderText = "Gruppo";
-            this.CODPREVGRUPPO.Name = "CODPREVGRUPPO";
-            this.CODPREVGRUPPO.ReadOnly = true;
-            // 
-            // DESPREVGRUPPO
-            // 
-            this.DESPREVGRUPPO.DataPropertyName = "DESPREVGRUPPO";
-            this.DESPREVGRUPPO.HeaderText = "Descrizione gruppo";
-            this.DESPREVGRUPPO.Name = "DESPREVGRUPPO";
-            this.DESPREVGRUPPO.ReadOnly = true;
-            // 
-            // iDVENDITEPFDataGridViewTextBoxColumn
-            // 
-            this.iDVENDITEPFDataGridViewTextBoxColumn.DataPropertyName = "IDVENDITEPF";
-            this.iDVENDITEPFDataGridViewTextBoxColumn.HeaderText = "IDVENDITEPF";
-            this.iDVENDITEPFDataGridViewTextBoxColumn.Name = "iDVENDITEPFDataGridViewTextBoxColumn";
-            this.iDVENDITEPFDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDVENDITEPFDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // iDVENDITEPDDataGridViewTextBoxColumn
-            // 
-            this.iDVENDITEPDDataGridViewTextBoxColumn.DataPropertyName = "IDVENDITEPD";
-            this.iDVENDITEPDDataGridViewTextBoxColumn.HeaderText = "IDVENDITEPD";
-            this.iDVENDITEPDDataGridViewTextBoxColumn.Name = "iDVENDITEPDDataGridViewTextBoxColumn";
-            this.iDVENDITEPDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDVENDITEPDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // iDVENDITEPFDIBADataGridViewTextBoxColumn1
-            // 
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1.DataPropertyName = "IDVENDITEPFDIBA";
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1.HeaderText = "IDVENDITEPFDIBA";
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1.Name = "iDVENDITEPFDIBADataGridViewTextBoxColumn1";
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1.ReadOnly = true;
-            this.iDVENDITEPFDIBADataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // iDPREVGRUPPODataGridViewTextBoxColumn
-            // 
-            this.iDPREVGRUPPODataGridViewTextBoxColumn.DataPropertyName = "IDPREVGRUPPO";
-            this.iDPREVGRUPPODataGridViewTextBoxColumn.HeaderText = "IDPREVGRUPPO";
-            this.iDPREVGRUPPODataGridViewTextBoxColumn.Name = "iDPREVGRUPPODataGridViewTextBoxColumn";
-            this.iDPREVGRUPPODataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDPREVGRUPPODataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sEQUENZADataGridViewTextBoxColumn1
-            // 
-            this.sEQUENZADataGridViewTextBoxColumn1.DataPropertyName = "SEQUENZA";
-            this.sEQUENZADataGridViewTextBoxColumn1.HeaderText = "Sequenza";
-            this.sEQUENZADataGridViewTextBoxColumn1.Name = "sEQUENZADataGridViewTextBoxColumn1";
-            this.sEQUENZADataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // tOTALECOSTIDataGridViewTextBoxColumn
-            // 
-            this.tOTALECOSTIDataGridViewTextBoxColumn.DataPropertyName = "TOTALECOSTI";
-            this.tOTALECOSTIDataGridViewTextBoxColumn.HeaderText = "Totale costi";
-            this.tOTALECOSTIDataGridViewTextBoxColumn.Name = "tOTALECOSTIDataGridViewTextBoxColumn";
-            this.tOTALECOSTIDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tOTALERICARICODataGridViewTextBoxColumn
-            // 
-            this.tOTALERICARICODataGridViewTextBoxColumn.DataPropertyName = "TOTALERICARICO";
-            this.tOTALERICARICODataGridViewTextBoxColumn.HeaderText = "Totale ricarico";
-            this.tOTALERICARICODataGridViewTextBoxColumn.Name = "tOTALERICARICODataGridViewTextBoxColumn";
-            this.tOTALERICARICODataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tOTALEVENDITACALCOLATODataGridViewTextBoxColumn
-            // 
-            this.tOTALEVENDITACALCOLATODataGridViewTextBoxColumn.DataPropertyName = "TOTALEVENDITACALCOLATO";
-            this.tOTALEVENDITACALCOLATODataGridViewTextBoxColumn.HeaderText = "Totale vendita calcolato";
-            this.tOTALEVENDITACALCOLATODataGridViewTextBoxColumn.Name = "tOTALEVENDITACALCOLATODataGridViewTextBoxColumn";
-            this.tOTALEVENDITACALCOLATODataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn
-            // 
-            this.tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn.DataPropertyName = "TOTALEVENDITAMANUALEG";
-            this.tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn.HeaderText = "Totale vendita manuale gruppi";
-            this.tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn.Name = "tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn";
-            this.tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tOTALEVENDITAMANUALETDataGridViewTextBoxColumn
-            // 
-            this.tOTALEVENDITAMANUALETDataGridViewTextBoxColumn.DataPropertyName = "TOTALEVENDITAMANUALET";
-            this.tOTALEVENDITAMANUALETDataGridViewTextBoxColumn.HeaderText = "Totale vendita manuale tot.";
-            this.tOTALEVENDITAMANUALETDataGridViewTextBoxColumn.Name = "tOTALEVENDITAMANUALETDataGridViewTextBoxColumn";
-            this.tOTALEVENDITAMANUALETDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // groupBox5
             // 
@@ -660,19 +541,6 @@
         private System.Windows.Forms.NumericUpDown nRicarico;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DataGridView dgvGruppi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDVENDITEPFGRUPPOTDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CODPREVGRUPPO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DESPREVGRUPPO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDVENDITEPFDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDVENDITEPDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDVENDITEPFDIBADataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDPREVGRUPPODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sEQUENZADataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tOTALECOSTIDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tOTALERICARICODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tOTALEVENDITACALCOLATODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tOTALEVENDITAMANUALEGDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tOTALEVENDITAMANUALETDataGridViewTextBoxColumn;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView dgvGruppiDettaglio;
     }

@@ -21,6 +21,7 @@ namespace Preventivi
 
         private DataSet _dsGrigliaDettaglio = new DataSet();
         private string _tabellaGrigliaDettaglio = "grigliaDettaglio";
+        private string _tabellaGrigliaGruppi = "grigliaGruppi";
 
         private string _IDVENDITEPFDIBA;
         private PreventiviDS _dsPreventivi = new PreventiviDS();
@@ -35,6 +36,7 @@ namespace Preventivi
         {
             txtRiferimento.Focus();
             CreaDSGrigliaDettaglio();
+            CreaDSGrigliagGruppi();
         }
 
         private void btnTrova_Click(object sender, EventArgs e)
@@ -85,7 +87,14 @@ namespace Preventivi
             txtScaglione.Text = _IDVENDITEPF.QTA.ToString();
             AnagraficaDS.MAGAZZRow magazz = anagrafica.GetMAGAZZ(_IDVENDITEPD.IDMAGAZZ);
             if (magazz != null)
+            {
                 txtModello.Text = magazz.MODELLO + " - " + magazz.DESMAGAZZ;
+                this.Text = String.Format("BALENCIAGA - {0} - {1}", magazz.MODELLO, txtScaglione.Text);
+            }
+            else
+            {
+                this.Text = "BALENCIAGA";
+            }
 
             PreventiviDS.USR_VENDITEPF_TOTPREVRow totali = _dsPreventivi.USR_VENDITEPF_TOTPREV.Where(x => x.IDVENDITEPF == _IDVENDITEPF.IDVENDITEPF).FirstOrDefault();
             if (totali != null)
@@ -99,14 +108,72 @@ namespace Preventivi
             }
 
             dgvCostiFissi.DataSource = _dsPreventivi;
-            dgvGruppi.DataSource = _dsPreventivi;
+            PopolaDSGrigliaGruppi();
+            CreaGrigliaGruppi();
         }
+        private enum colonneDettaglio
+        {
+            IDVENDITEPFGRUPPOD,
+            Sequenza,
+            Codice,
+            Descrizione,
+            ValoreCostoDistinta,
+            ValoreCostoFisso,
+            ValoreCosto,
+            Ricarico,
+            ValoreRicarico,
+            ValoreCalcolato,
+            ValoreManuale,
+            ValoreManualeTotale,
+            ValoreConRicarico
+        }
+
+        private enum colonneGruppo
+        {
+            IDVENDITEGRUPPOT,
+            GRUPPO,
+            DESCRIZIONEGRUPPO,
+            IDVENDITEPF,
+            IDVENDITEPD,
+            IDVENDITEPFDIBA,
+            IDPREVGRUPPO,
+            SEQUENZA,
+            TOTALECOSTI,
+            TOTALERICARICO,
+            TOTALEVENDITACALCOLATO,
+            TOTALEVENDITAMANUALETOTALE,
+            TOTALEVENDITAMANUALEGRUPPO,
+            TOTALECONRICARICO
+        }
+
+        private void CreaDSGrigliagGruppi()
+        {
+            DataTable dtGriglia = _dsGrigliaDettaglio.Tables.Add();
+            dtGriglia.TableName = _tabellaGrigliaGruppi;
+            dtGriglia.Columns.Add("IDVENDITEGRUPPOT", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("Gruppo", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("Descrizione gruppo", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("IDVENTITEPF", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("IDVENTITEPD", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("IDVENTITEPFDIBA", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("IDPREVGRUPPO", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("Sequenza", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Totale costi", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Totale ricarico", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Totale vendita calcolato", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Totale vendita manuale totale", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Totale vendita manuale gruppo", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Totale con ricarico", Type.GetType("System.Decimal"));
+        }
+
 
         private void CreaDSGrigliaDettaglio()
         {
             DataTable dtGriglia = _dsGrigliaDettaglio.Tables.Add();
             dtGriglia.TableName = _tabellaGrigliaDettaglio;
             dtGriglia.Columns.Add("IDVENDITEPFGRUPPOD", Type.GetType("System.String")).ReadOnly = true;
+            dtGriglia.Columns.Add("Sequenza", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Codice", Type.GetType("System.String")).ReadOnly = true;
             dtGriglia.Columns.Add("Descrizione", Type.GetType("System.String")).ReadOnly = true;
             dtGriglia.Columns.Add("Valore costo distinta", Type.GetType("System.Decimal")).ReadOnly = true;
             dtGriglia.Columns.Add("Valore costo fisso", Type.GetType("System.Decimal")).ReadOnly = true;
@@ -116,8 +183,7 @@ namespace Preventivi
             dtGriglia.Columns.Add("Valore calcolato", Type.GetType("System.Decimal")).ReadOnly = true;
             dtGriglia.Columns.Add("Valore manuale", Type.GetType("System.Decimal")).ReadOnly = true;
             dtGriglia.Columns.Add("Valore manuale totale", Type.GetType("System.Decimal")).ReadOnly = true;
-            dtGriglia.Columns.Add("Codice", Type.GetType("System.String")).ReadOnly = true;
-            dtGriglia.Columns.Add("Sequenza", Type.GetType("System.Decimal")).ReadOnly = true;
+            dtGriglia.Columns.Add("Valore con ricarico", Type.GetType("System.Decimal"));
         }
 
         private void CreaGrigliaDettaglio()
@@ -125,20 +191,43 @@ namespace Preventivi
             dgvGruppiDettaglio.DataSource = _dsGrigliaDettaglio;
             dgvGruppiDettaglio.DataMember = _tabellaGrigliaDettaglio;
 
-            dgvGruppiDettaglio.Columns[0].Visible = false;
-            dgvGruppiDettaglio.Columns[1].Width = 150;
-            dgvGruppiDettaglio.Columns[2].Width = 80;
-            dgvGruppiDettaglio.Columns[3].Width = 80;
-            dgvGruppiDettaglio.Columns[4].Width = 80;
-            dgvGruppiDettaglio.Columns[5].Width = 80;
-            dgvGruppiDettaglio.Columns[6].Width = 80;
-            dgvGruppiDettaglio.Columns[7].Width = 80;
-            dgvGruppiDettaglio.Columns[8].Width = 80;
-            dgvGruppiDettaglio.Columns[9].Width = 80;
-            dgvGruppiDettaglio.Columns[10].Width = 120;
-            dgvGruppiDettaglio.Columns[11].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.IDVENDITEPFGRUPPOD].Visible = false;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.Descrizione].Width = 150;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreCostoDistinta].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreCostoFisso].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreCosto].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.Ricarico].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreRicarico].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreCalcolato].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreManuale].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreManualeTotale].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.Codice].Width = 120;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.Sequenza].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreConRicarico].Width = 80;
+            dgvGruppiDettaglio.Columns[(int)colonneDettaglio.ValoreConRicarico].DefaultCellStyle.ForeColor = Color.Red;
         }
 
+        private void CreaGrigliaGruppi()
+        {
+            dgvGruppi.DataSource = _dsGrigliaDettaglio;
+            dgvGruppi.DataMember = _tabellaGrigliaGruppi;
+
+            dgvGruppi.Columns[(int)colonneGruppo.IDVENDITEGRUPPOT].Visible = false;
+            dgvGruppi.Columns[(int)colonneGruppo.IDVENDITEPF].Visible = false;
+            dgvGruppi.Columns[(int)colonneGruppo.IDVENDITEPD].Visible = false;
+            dgvGruppi.Columns[(int)colonneGruppo.IDVENDITEPFDIBA].Visible = false;
+            dgvGruppi.Columns[(int)colonneGruppo.IDPREVGRUPPO].Visible = false;
+            dgvGruppi.Columns[(int)colonneGruppo.SEQUENZA].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.GRUPPO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.DESCRIZIONEGRUPPO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALECOSTI].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALERICARICO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITACALCOLATO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALECONRICARICO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALECONRICARICO].DefaultCellStyle.ForeColor = Color.Red;
+        }
         private void PopolaDSGrigliaDettaglio(string IDVENDITEPFGRUPPOT)
         {
             DataTable dtGriglia = _dsGrigliaDettaglio.Tables[_tabellaGrigliaDettaglio];
@@ -147,31 +236,59 @@ namespace Preventivi
             {
                 DataRow riga = dtGriglia.NewRow();
 
-                riga[0] = dettaglio.IDVENDITEPFGRUPPOD;
+                riga[(int)colonneDettaglio.IDVENDITEPFGRUPPOD] = dettaglio.IDVENDITEPFGRUPPOD;
 
                 if (!dettaglio.IsIDORIGINENull())
                 {
                     PreventiviDS.USR_VENDITEPF_DIBATREERow diba = _dsPreventivi.USR_VENDITEPF_DIBATREE.Where(x => x.IDVENDITEPFDIBATREE == dettaglio.IDORIGINE).FirstOrDefault();
                     if (diba != null)
                     {
-                        riga[10] = diba.IsMODELLONull() ? string.Empty : diba.MODELLO;
-                        riga[1] = diba.IsDESMAGAZZNull() ? string.Empty : diba.DESMAGAZZ;
+                        riga[(int)colonneDettaglio.Codice] = diba.IsMODELLONull() ? string.Empty : diba.MODELLO;
+                        riga[(int)colonneDettaglio.Descrizione] = diba.IsDESMAGAZZNull() ? string.Empty : diba.DESMAGAZZ;
                     }
                 }
 
-                riga[2] = dettaglio.VALORECOSTODIBA;
-                riga[3] = dettaglio.VALORECOSTOFISSO;
-                riga[4] = dettaglio.VALORECOSTO;
-                riga[5] = dettaglio.PERCRICARICO;
-                riga[6] = dettaglio.VALORERICARICO;
-                riga[7] = dettaglio.VALORECALCOLATO;
-                riga[8] = dettaglio.VALOREMANUALE;
-                riga[9] = dettaglio.VALOREMANUALET;
-                riga[11] = dettaglio.SEQUENZA;
+                riga[(int)colonneDettaglio.ValoreCostoDistinta] = dettaglio.VALORECOSTODIBA;
+                riga[(int)colonneDettaglio.ValoreCostoFisso] = dettaglio.VALORECOSTOFISSO;
+                riga[(int)colonneDettaglio.ValoreCosto] = dettaglio.VALORECOSTO;
+                riga[(int)colonneDettaglio.Ricarico] = dettaglio.PERCRICARICO;
+                riga[(int)colonneDettaglio.ValoreRicarico] = dettaglio.VALORERICARICO;
+                riga[(int)colonneDettaglio.ValoreCalcolato] = dettaglio.VALORECALCOLATO;
+                riga[(int)colonneDettaglio.ValoreManuale] = dettaglio.VALOREMANUALE;
+                riga[(int)colonneDettaglio.ValoreManualeTotale] = dettaglio.VALOREMANUALET;
+                riga[(int)colonneDettaglio.Sequenza] = dettaglio.SEQUENZA;
+                decimal ricaricato = dettaglio.VALOREMANUALET * (1 + (nRicarico.Value / 100));
+                riga[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 2);
+                dtGriglia.Rows.Add(riga);
+            }
+        }
+
+        private void PopolaDSGrigliaGruppi()
+        {
+            DataTable dtGriglia = _dsGrigliaDettaglio.Tables[_tabellaGrigliaGruppi];
+            dtGriglia.Clear();
+            foreach (PreventiviDS.USR_VENDITEPF_GRUPPOTRow gruppo in _dsPreventivi.USR_VENDITEPF_GRUPPOT)
+            {
+                DataRow riga = dtGriglia.NewRow();
+
+                riga[(int)colonneGruppo.IDVENDITEGRUPPOT] = gruppo.IDVENDITEPFGRUPPOT;
+                riga[(int)colonneGruppo.IDVENDITEPF] = gruppo.IDVENDITEPF;
+                riga[(int)colonneGruppo.IDVENDITEPD] = gruppo.IDVENDITEPD;
+                riga[(int)colonneGruppo.IDVENDITEPFDIBA] = gruppo.IDVENDITEPFDIBA;
+                riga[(int)colonneGruppo.IDPREVGRUPPO] = gruppo.IDPREVGRUPPO;
+                riga[(int)colonneGruppo.GRUPPO] = gruppo.CODPREVGRUPPO;
+                riga[(int)colonneGruppo.DESCRIZIONEGRUPPO] = gruppo.DESPREVGRUPPO;
+                riga[(int)colonneGruppo.SEQUENZA] = gruppo.SEQUENZA;
+                riga[(int)colonneGruppo.TOTALECOSTI] = gruppo.TOTALECOSTI;
+                riga[(int)colonneGruppo.TOTALERICARICO] = gruppo.TOTALERICARICO;
+                riga[(int)colonneGruppo.TOTALEVENDITACALCOLATO] = gruppo.TOTALEVENDITACALCOLATO;
+                riga[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE] = gruppo.TOTALEVENDITAMANUALET;
+                riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO] = gruppo.TOTALEVENDITAMANUALEG;
+                decimal ricaricato = gruppo.TOTALEVENDITAMANUALEG * (1 + (nRicarico.Value / 100));
+                riga[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 2);
 
                 dtGriglia.Rows.Add(riga);
             }
-
         }
 
         private void dgvGruppi_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -181,6 +298,25 @@ namespace Preventivi
             string IDVENDITEPF_GRUPPOT = (string)dgvGruppi.Rows[e.RowIndex].Cells[0].Value;
             PopolaDSGrigliaDettaglio(IDVENDITEPF_GRUPPOT);
             CreaGrigliaDettaglio();
+        }
+
+        private void nRicarico_ValueChanged(object sender, EventArgs e)
+        {
+            DataTable dtGrigliaDettaglio = _dsGrigliaDettaglio.Tables[_tabellaGrigliaDettaglio];
+            foreach (DataRow dr in dtGrigliaDettaglio.Rows)
+            {
+                decimal valore = (decimal)dr[(int)colonneDettaglio.ValoreManualeTotale];
+                decimal ricaricato = valore * (1 + (nRicarico.Value / 100));
+                dr[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 2);
+            }
+
+            DataTable dtGrigliaGruppi = _dsGrigliaDettaglio.Tables[_tabellaGrigliaGruppi];
+            foreach (DataRow dr in dtGrigliaGruppi.Rows)
+            {
+                decimal valore = (decimal)dr[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO];
+                decimal ricaricato = valore * (1 + (nRicarico.Value / 100));
+                dr[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round( ricaricato,2);
+            }
         }
     }
 }
