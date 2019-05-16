@@ -34,6 +34,7 @@ namespace Preventivi
 
         private void BalenciagaFrm_Load(object sender, EventArgs e)
         {
+            lblPrezzo.Text = string.Empty;
             txtRiferimento.Focus();
             CreaDSGrigliaDettaglio();
             CreaDSGrigliagGruppi();
@@ -110,6 +111,7 @@ namespace Preventivi
             dgvCostiFissi.DataSource = _dsPreventivi;
             PopolaDSGrigliaGruppi();
             CreaGrigliaGruppi();
+            lblPrezzo.Text = CalcolaPrezzoUnitario().ToString();
         }
         private enum colonneDettaglio
         {
@@ -258,7 +260,7 @@ namespace Preventivi
                 riga[(int)colonneDettaglio.ValoreManualeTotale] = dettaglio.VALOREMANUALET;
                 riga[(int)colonneDettaglio.Sequenza] = dettaglio.SEQUENZA;
                 decimal ricaricato = dettaglio.VALOREMANUALET * (1 + (nRicarico.Value / 100));
-                riga[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 2);
+                riga[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 3);
                 dtGriglia.Rows.Add(riga);
             }
         }
@@ -285,7 +287,7 @@ namespace Preventivi
                 riga[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE] = gruppo.TOTALEVENDITAMANUALET;
                 riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO] = gruppo.TOTALEVENDITAMANUALEG;
                 decimal ricaricato = gruppo.TOTALEVENDITAMANUALEG * (1 + (nRicarico.Value / 100));
-                riga[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 2);
+                riga[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 3);
 
                 dtGriglia.Rows.Add(riga);
             }
@@ -307,7 +309,7 @@ namespace Preventivi
             {
                 decimal valore = (decimal)dr[(int)colonneDettaglio.ValoreManualeTotale];
                 decimal ricaricato = valore * (1 + (nRicarico.Value / 100));
-                dr[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 2);
+                dr[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 3);
             }
 
             DataTable dtGrigliaGruppi = _dsGrigliaDettaglio.Tables[_tabellaGrigliaGruppi];
@@ -315,8 +317,29 @@ namespace Preventivi
             {
                 decimal valore = (decimal)dr[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO];
                 decimal ricaricato = valore * (1 + (nRicarico.Value / 100));
-                dr[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round( ricaricato,2);
+                dr[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 3);
             }
+
+            lblPrezzo.Text= CalcolaPrezzoUnitario().ToString();
+        }
+
+        private decimal CalcolaPrezzoUnitario()
+        {
+            decimal prezzo = 0;
+            decimal scaglione = _IDVENDITEPF.QTA;
+
+            DataTable dtGrigliaGruppi = _dsGrigliaDettaglio.Tables[_tabellaGrigliaGruppi];
+            foreach (DataRow dr in dtGrigliaGruppi.Rows)
+                prezzo += (decimal)dr[(int)colonneGruppo.TOTALECONRICARICO];
+
+            prezzo += _dsPreventivi.USR_VENDITEPF_DIBACOS.Sum(x => x.VALOREFISSO) / (_IDVENDITEPF.QTA == 0 ? 1 : _IDVENDITEPF.QTA);
+
+            return prezzo;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
