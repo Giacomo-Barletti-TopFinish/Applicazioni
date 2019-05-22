@@ -73,5 +73,32 @@ namespace Applicazioni.Data.Preventivi
             a.FillUSR_VENDITEPF_TOTPREV(ds, IDVENDITEPFDIBA);
         }
 
+        [DataContext]
+        public void FillAP_PREVENTIVIC(PreventiviDS ds, string IDVENDITEPF)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillAP_PREVENTIVIC(ds, IDVENDITEPF);
+        }
+
+        [DataContext]
+        public void FillAP_PREVENTIVIG(PreventiviDS ds, string IDVENDITEPF)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillAP_PREVENTIVIG(ds, IDVENDITEPF);
+        }
+
+        [DataContext]
+        public void FillAP_PREVENTIVIT(PreventiviDS ds, string IDVENDITEPF)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.FillAP_PREVENTIVIT(ds, IDVENDITEPF);
+        }
+
+        [DataContext(true)]
+        public void UpdateTable(string tablename, PreventiviDS ds)
+        {
+            PreventiviAdapter a = new PreventiviAdapter(DbConnection, DbTransaction);
+            a.UpdateTable(tablename, ds);
+        }
     }
 }

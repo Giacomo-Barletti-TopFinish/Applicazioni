@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -144,6 +145,75 @@ namespace Applicazioni.Data.Preventivi
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_VENDITEPF_TOTPREV);
+            }
+        }
+
+        public void FillAP_PREVENTIVIT(PreventiviDS ds, string IDVENDITEPF)
+        {
+            string select = @"SELECT VF.* FROM AP_PREVENTIVIT VF
+                                WHERE IDVENDITEPF = $P<IDVENDITEPF> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPF", DbType.String, IDVENDITEPF);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.AP_PREVENTIVIT);
+            }
+        }
+
+        public void FillAP_PREVENTIVIC(PreventiviDS ds, string IDVENDITEPF)
+        {
+            string select = @"SELECT VF.* FROM AP_PREVENTIVIC VF
+                                WHERE IDVENDITEPF = $P<IDVENDITEPF> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPF", DbType.String, IDVENDITEPF);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.AP_PREVENTIVIC);
+            }
+        }
+
+        public void FillAP_PREVENTIVIG(PreventiviDS ds, string IDVENDITEPF)
+        {
+            string select = @"SELECT VF.* FROM AP_PREVENTIVIG VF
+                                WHERE IDVENDITEPF = $P<IDVENDITEPF> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDVENDITEPF", DbType.String, IDVENDITEPF);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.AP_PREVENTIVIG);
+            }
+        }
+
+        public void UpdateTable(string tablename, PreventiviDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                try
+                {
+                    a.ContinueUpdateOnError = false;
+                    DataTable dt = ds.Tables[tablename];
+                    DbCommandBuilder cmd = BuildCommandBuilder(a);
+                    a.UpdateCommand = cmd.GetUpdateCommand();
+                    a.DeleteCommand = cmd.GetDeleteCommand();
+                    a.InsertCommand = cmd.GetInsertCommand();
+                    a.Update(dt);
+                }
+                catch (DBConcurrencyException ex)
+                {
+
+                }
+                catch
+                {
+                    throw;
+                }
             }
         }
     }
