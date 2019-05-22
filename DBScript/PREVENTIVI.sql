@@ -73,3 +73,4 @@ select * from AP_PREVENTIVIG
 
 truncate table AP_PREVENTIVIc
 
+truncate table AP_PREVENTIVIg
