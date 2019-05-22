@@ -348,6 +348,7 @@
             // txtDescrizioneArticolo
             // 
             this.txtDescrizioneArticolo.Location = new System.Drawing.Point(1236, 109);
+            this.txtDescrizioneArticolo.MaxLength = 50;
             this.txtDescrizioneArticolo.Name = "txtDescrizioneArticolo";
             this.txtDescrizioneArticolo.Size = new System.Drawing.Size(479, 22);
             this.txtDescrizioneArticolo.TabIndex = 51;
@@ -355,6 +356,7 @@
             // txtFornitore
             // 
             this.txtFornitore.Location = new System.Drawing.Point(984, 112);
+            this.txtFornitore.MaxLength = 15;
             this.txtFornitore.Name = "txtFornitore";
             this.txtFornitore.Size = new System.Drawing.Size(93, 22);
             this.txtFornitore.TabIndex = 50;
@@ -378,6 +380,7 @@
             // txtCodiceGalvanica
             // 
             this.txtCodiceGalvanica.Location = new System.Drawing.Point(732, 109);
+            this.txtCodiceGalvanica.MaxLength = 15;
             this.txtCodiceGalvanica.Name = "txtCodiceGalvanica";
             this.txtCodiceGalvanica.Size = new System.Drawing.Size(152, 22);
             this.txtCodiceGalvanica.TabIndex = 49;
@@ -394,6 +397,7 @@
             // txtStagione
             // 
             this.txtStagione.Location = new System.Drawing.Point(143, 135);
+            this.txtStagione.MaxLength = 10;
             this.txtStagione.Name = "txtStagione";
             this.txtStagione.Size = new System.Drawing.Size(139, 22);
             this.txtStagione.TabIndex = 52;
@@ -401,6 +405,7 @@
             // txtCodiceDefinitivo
             // 
             this.txtCodiceDefinitivo.Location = new System.Drawing.Point(432, 109);
+            this.txtCodiceDefinitivo.MaxLength = 15;
             this.txtCodiceDefinitivo.Name = "txtCodiceDefinitivo";
             this.txtCodiceDefinitivo.Size = new System.Drawing.Size(139, 22);
             this.txtCodiceDefinitivo.TabIndex = 48;
@@ -408,6 +413,7 @@
             // txtPeso
             // 
             this.txtPeso.Location = new System.Drawing.Point(1300, 200);
+            this.txtPeso.MaxLength = 8;
             this.txtPeso.Name = "txtPeso";
             this.txtPeso.Size = new System.Drawing.Size(139, 22);
             this.txtPeso.TabIndex = 59;
@@ -442,13 +448,15 @@
             // txtSpessoreAu
             // 
             this.txtSpessoreAu.Location = new System.Drawing.Point(1011, 172);
+            this.txtSpessoreAu.MaxLength = 10;
             this.txtSpessoreAu.Name = "txtSpessoreAu";
             this.txtSpessoreAu.Size = new System.Drawing.Size(139, 22);
-            this.txtSpessoreAu.TabIndex = 55;
+            this.txtSpessoreAu.TabIndex = 56;
             // 
             // txtCodiceProvvisorio
             // 
             this.txtCodiceProvvisorio.Location = new System.Drawing.Point(143, 109);
+            this.txtCodiceProvvisorio.MaxLength = 15;
             this.txtCodiceProvvisorio.Name = "txtCodiceProvvisorio";
             this.txtCodiceProvvisorio.Size = new System.Drawing.Size(139, 22);
             this.txtCodiceProvvisorio.TabIndex = 47;
@@ -474,6 +482,7 @@
             // txtSuperficie
             // 
             this.txtSuperficie.Location = new System.Drawing.Point(1011, 200);
+            this.txtSuperficie.MaxLength = 8;
             this.txtSuperficie.Name = "txtSuperficie";
             this.txtSuperficie.Size = new System.Drawing.Size(139, 22);
             this.txtSuperficie.TabIndex = 58;
@@ -481,10 +490,11 @@
             // txtComposizioneMateriali
             // 
             this.txtComposizioneMateriali.Location = new System.Drawing.Point(169, 173);
+            this.txtComposizioneMateriali.MaxLength = 100;
             this.txtComposizioneMateriali.Multiline = true;
             this.txtComposizioneMateriali.Name = "txtComposizioneMateriali";
             this.txtComposizioneMateriali.Size = new System.Drawing.Size(728, 49);
-            this.txtComposizioneMateriali.TabIndex = 57;
+            this.txtComposizioneMateriali.TabIndex = 55;
             // 
             // label20
             // 
@@ -525,9 +535,10 @@
             // txtSpessorePd
             // 
             this.txtSpessorePd.Location = new System.Drawing.Point(1300, 172);
+            this.txtSpessorePd.MaxLength = 10;
             this.txtSpessorePd.Name = "txtSpessorePd";
             this.txtSpessorePd.Size = new System.Drawing.Size(139, 22);
-            this.txtSpessorePd.TabIndex = 56;
+            this.txtSpessorePd.TabIndex = 57;
             // 
             // label19
             // 
@@ -541,6 +552,7 @@
             // txtEvento
             // 
             this.txtEvento.Location = new System.Drawing.Point(432, 135);
+            this.txtEvento.MaxLength = 10;
             this.txtEvento.Name = "txtEvento";
             this.txtEvento.Size = new System.Drawing.Size(139, 22);
             this.txtEvento.TabIndex = 53;
