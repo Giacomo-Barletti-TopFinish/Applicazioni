@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\Applicazioni\Preventivi\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.2</MinimumRequiredVersion>
-    <ApplicationRevision>2</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -122,10 +122,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RicercaPreventiviFrm.resx">
       <DependentUpon>RicercaPreventiviFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Balenciaga.xlsx" />
     <None Include="packages.config" />
     <None Include="Preventivi_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\Applicazioni.Entities.PreventiviDS.datasource" />
@@ -158,6 +160,10 @@
     <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
       <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
       <Name>Applicazioni.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.Helpers\Applicazioni.Helpers.csproj">
+      <Project>{D5B7F1D5-AE8D-4BBE-B139-4255932718F6}</Project>
+      <Name>Applicazioni.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,12 +2,15 @@
 using Applicazioni.Data.Anagrafica;
 using Applicazioni.Data.Preventivi;
 using Applicazioni.Entities;
+using Applicazioni.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -159,7 +162,10 @@ namespace Preventivi
             TOTALEVENDITAMANUALETOTALE,
             TOTALEVENDITAMANUALEGRUPPO,
             TOTALECONRICARICO,
-            STAMPA
+            STAMPA,
+            DESCRIZIONE,
+            FORNITORE,
+            QUANTITA
         }
 
         private enum colonneCostiFissi
@@ -167,12 +173,13 @@ namespace Preventivi
             IDVENDITEPFDIBACOS,
             IDVENDITEPFDIBA,
             SEQUENZA,
-            VALOREFISSO,
             QTAFISSA,
             VALORENETTO,
             VOCECOSTO,
             DESCVOCECOSTO,
-            ATTREZZAGGIO
+            VALOREFISSO,
+            ATTREZZAGGIO,
+            TIPOCOSTO
         }
 
         private void CreaDSGrigliaGruppi()
@@ -194,6 +201,9 @@ namespace Preventivi
             dtGriglia.Columns.Add("Totale vendita manuale gruppo", Type.GetType("System.Decimal"));
             dtGriglia.Columns.Add("Totale con ricarico", Type.GetType("System.Decimal"));
             dtGriglia.Columns.Add("STAMPA", Type.GetType("System.String"));
+            dtGriglia.Columns.Add("Descrizione", Type.GetType("System.String"));
+            dtGriglia.Columns.Add("Fornitore", Type.GetType("System.String"));
+            dtGriglia.Columns.Add("Quantità", Type.GetType("System.Decimal"));
         }
 
         private void CreaDSGrigliaCosti()
@@ -203,12 +213,13 @@ namespace Preventivi
             dtGriglia.Columns.Add("IDVENDITEPFDIBACOS", Type.GetType("System.String"));
             dtGriglia.Columns.Add("IDVENDITEPFDIBA", Type.GetType("System.String"));
             dtGriglia.Columns.Add("Sequenza", Type.GetType("System.String"));
-            dtGriglia.Columns.Add("Valore fisso", Type.GetType("System.Decimal"));
             dtGriglia.Columns.Add("Quantità", Type.GetType("System.Decimal"));
             dtGriglia.Columns.Add("Valore netto", Type.GetType("System.Decimal"));
             dtGriglia.Columns.Add("Voce costo", Type.GetType("System.String"));
             dtGriglia.Columns.Add("Costo", Type.GetType("System.String"));
+            dtGriglia.Columns.Add("Valore fisso", Type.GetType("System.Decimal"));
             dtGriglia.Columns.Add("Attrezzaggio", Type.GetType("System.String"));
+            dtGriglia.Columns.Add("TIPOCOSTO", Type.GetType("System.String"));
         }
         private void CreaDSGrigliaDettaglio()
         {
@@ -268,6 +279,7 @@ namespace Preventivi
             dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITACALCOLATO].Width = 80;
             dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE].Width = 80;
             dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO].Width = 80;
+            dgvGruppi.Columns[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO].DefaultCellStyle.ForeColor = Color.Blue;
             dgvGruppi.Columns[(int)colonneGruppo.TOTALECONRICARICO].Width = 80;
             dgvGruppi.Columns[(int)colonneGruppo.TOTALECONRICARICO].DefaultCellStyle.ForeColor = Color.Red;
 
@@ -282,7 +294,7 @@ namespace Preventivi
                 col.FlatStyle = FlatStyle.Flat;
                 col.Items.AddRange(EtichetteGruppiReport.DISTINTABASE, EtichetteGruppiReport.INTERNE, EtichetteGruppiReport.ESTERNE, "Ignora");
             }
-            dgvGruppi.Columns.Add(col);
+            dgvGruppi.Columns.Insert((int)colonneGruppo.STAMPA, col);
         }
 
         private void CreaGrigliaCosti()
@@ -294,6 +306,7 @@ namespace Preventivi
             dgvCostiFissi.Columns[(int)colonneCostiFissi.IDVENDITEPFDIBA].Visible = false;
             dgvCostiFissi.Columns[(int)colonneCostiFissi.SEQUENZA].Width = 80;
             dgvCostiFissi.Columns[(int)colonneCostiFissi.VALOREFISSO].Width = 80;
+            dgvCostiFissi.Columns[(int)colonneCostiFissi.VALOREFISSO].DefaultCellStyle.ForeColor = Color.Red;
             dgvCostiFissi.Columns[(int)colonneCostiFissi.QTAFISSA].Width = 80;
             dgvCostiFissi.Columns[(int)colonneCostiFissi.VALORENETTO].Width = 80;
             dgvCostiFissi.Columns[(int)colonneCostiFissi.VOCECOSTO].Width = 80;
@@ -309,9 +322,23 @@ namespace Preventivi
                 col.Width = 90;
                 col.MaxDropDownItems = 3;
                 col.FlatStyle = FlatStyle.Flat;
-                col.Items.AddRange(EtichetteGruppiReport.PROTOTIPIA, EtichetteGruppiReport.PRODUZIONE, "Ignora");
+                col.Items.AddRange(EtichetteGruppiReport.PROTOTIPIA, EtichetteGruppiReport.PRODUZIONE, EtichetteGruppiReport.IGNORA);
             }
-            dgvCostiFissi.Columns.Add(col);
+            dgvCostiFissi.Columns.Insert((int)colonneCostiFissi.ATTREZZAGGIO, col);
+
+
+            dgvCostiFissi.Columns.RemoveAt((int)colonneCostiFissi.TIPOCOSTO);
+            DataGridViewComboBoxColumn col2 = new DataGridViewComboBoxColumn();
+            {
+                col2.DataPropertyName = "TIPOCOSTO";
+                col2.HeaderText = "Etichetta stampa";
+                col2.DropDownWidth = 100;
+                col2.Width = 100;
+                col2.MaxDropDownItems = 6;
+                col2.FlatStyle = FlatStyle.Flat;
+                col2.Items.AddRange(VOCECOSTODIBA.GOMMA, VOCECOSTODIBA.PRESSOFUSIONE, VOCECOSTODIBA.STAMPA3D, VOCECOSTODIBA.STAMPAGGIOCALDO, VOCECOSTODIBA.STAMPAGGIOFREDDO, VOCECOSTODIBA.IGNORA);
+            }
+            dgvCostiFissi.Columns.Insert((int)colonneCostiFissi.TIPOCOSTO, col2);
         }
         private void PopolaDSGrigliaDettaglio(string IDVENDITEPFGRUPPOT)
         {
@@ -362,9 +389,9 @@ namespace Preventivi
                     riga[(int)colonneGruppo.IDVENDITEPF] = gruppo.IDVENDITEPF;
                     riga[(int)colonneGruppo.IDVENDITEPD] = gruppo.IDVENDITEPD;
                     riga[(int)colonneGruppo.IDVENDITEPFDIBA] = gruppo.IDVENDITEPFDIBA;
-                    riga[(int)colonneGruppo.IDPREVGRUPPO] = gruppo.IDPREVGRUPPO;
-                    riga[(int)colonneGruppo.GRUPPO] = gruppo.CODPREVGRUPPO;
-                    riga[(int)colonneGruppo.DESCRIZIONEGRUPPO] = gruppo.DESPREVGRUPPO;
+                    riga[(int)colonneGruppo.IDPREVGRUPPO] = gruppo.IsIDPREVGRUPPONull() ? string.Empty : gruppo.IDPREVGRUPPO;
+                    riga[(int)colonneGruppo.GRUPPO] = gruppo.IsCODPREVGRUPPONull() ? string.Empty : gruppo.CODPREVGRUPPO;
+                    riga[(int)colonneGruppo.DESCRIZIONEGRUPPO] = gruppo.IsDESPREVGRUPPONull() ? string.Empty : gruppo.DESPREVGRUPPO;
                     riga[(int)colonneGruppo.SEQUENZA] = gruppo.SEQUENZA;
                     riga[(int)colonneGruppo.TOTALECOSTI] = gruppo.TOTALECOSTI;
                     riga[(int)colonneGruppo.TOTALERICARICO] = gruppo.TOTALERICARICO;
@@ -373,7 +400,8 @@ namespace Preventivi
                     riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO] = gruppo.TOTALEVENDITAMANUALEG;
                     decimal ricaricato = gruppo.TOTALEVENDITAMANUALEG * (1 + (nRicarico.Value / 100));
                     riga[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 3);
-
+                    riga[(int)colonneGruppo.FORNITORE] = "METALPLUS";
+                    riga[(int)colonneGruppo.QUANTITA] = 1;
                     dtGriglia.Rows.Add(riga);
                 }
             }
@@ -388,10 +416,10 @@ namespace Preventivi
                     riga[(int)colonneGruppo.IDVENDITEPF] = gruppo.IDVENDITEPF;
                     riga[(int)colonneGruppo.IDVENDITEPD] = gruppo.IDVENDITEPD;
                     riga[(int)colonneGruppo.IDVENDITEPFDIBA] = gruppo.IDVENDITEPFDIBA;
-                    riga[(int)colonneGruppo.IDPREVGRUPPO] = gruppo.IsIDPREVGRUPPONull() ? string.Empty : gruppo.IDPREVGRUPPO; 
-                    riga[(int)colonneGruppo.GRUPPO] = gruppo.CODVOCECOSTO;
-                    riga[(int)colonneGruppo.DESCRIZIONEGRUPPO] = gruppo.DESVOCECOSTO;
-                    riga[(int)colonneGruppo.SEQUENZA] = gruppo.SEQUENZA;
+                    riga[(int)colonneGruppo.IDPREVGRUPPO] = gruppo.IsIDPREVGRUPPONull() ? string.Empty : gruppo.IDPREVGRUPPO;
+                    riga[(int)colonneGruppo.GRUPPO] = gruppo.IsCODVOCECOSTONull() ? string.Empty : gruppo.CODVOCECOSTO;
+                    riga[(int)colonneGruppo.DESCRIZIONEGRUPPO] = gruppo.IsDESVOCECOSTONull() ? string.Empty : gruppo.DESVOCECOSTO;
+                    riga[(int)colonneGruppo.SEQUENZA] = gruppo.IsSEQUENZANull() ? 0 : decimal.Parse(gruppo.SEQUENZA);
                     riga[(int)colonneGruppo.TOTALECOSTI] = gruppo.TOTALECOSTI;
                     riga[(int)colonneGruppo.TOTALERICARICO] = gruppo.TOTALERICARICO;
                     riga[(int)colonneGruppo.TOTALEVENDITACALCOLATO] = gruppo.TOTALEVENDITACALCOLATO;
@@ -399,7 +427,11 @@ namespace Preventivi
                     riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO] = gruppo.TOTALEVENDITAMANUALEG;
                     decimal ricaricato = gruppo.TOTALEVENDITAMANUALEG * (1 + (nRicarico.Value / 100));
                     riga[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 3);
-                    riga[(int)colonneGruppo.STAMPA] = gruppo.IsSTAMPENull()?string.Empty:gruppo.STAMPE;
+                    riga[(int)colonneGruppo.STAMPA] = gruppo.IsSTAMPENull() ? string.Empty : gruppo.STAMPE;
+                    riga[(int)colonneGruppo.FORNITORE] = gruppo.IsFORNITORENull() ? string.Empty : gruppo.FORNITORE;
+                    riga[(int)colonneGruppo.DESCRIZIONE] = gruppo.IsDESCRIZIONENull() ? string.Empty : gruppo.DESCRIZIONE;
+                    riga[(int)colonneGruppo.QUANTITA] = gruppo.IsQUANTITANull() ? 1 : gruppo.QUANTITA;
+
                     dtGriglia.Rows.Add(riga);
                 }
             }
@@ -426,6 +458,7 @@ namespace Preventivi
                     riga[(int)colonneCostiFissi.VOCECOSTO] = gruppo.CODVOCECOSTO;
                     riga[(int)colonneCostiFissi.VALOREFISSO] = gruppo.VALOREFISSO;
                     riga[(int)colonneCostiFissi.VALORENETTO] = gruppo.VALORENETTO;
+                    riga[(int)colonneCostiFissi.TIPOCOSTO] = string.Empty;
 
                     dtGriglia.Rows.Add(riga);
                 }
@@ -433,20 +466,20 @@ namespace Preventivi
             else
             {
                 DateTime ultimaDat = _dsPreventivi.AP_PREVENTIVIC.Max(x => x.DATA);
-                foreach (PreventiviDS.AP_PREVENTIVICRow gruppo in _dsPreventivi.AP_PREVENTIVIC)
+                foreach (PreventiviDS.AP_PREVENTIVICRow gruppo in _dsPreventivi.AP_PREVENTIVIC.Where(x => x.DATA == ultimaDat))
                 {
                     DataRow riga = dtGriglia.NewRow();
 
                     riga[(int)colonneCostiFissi.IDVENDITEPFDIBACOS] = gruppo.IDVENDITEPFDIBACOS;
                     riga[(int)colonneCostiFissi.IDVENDITEPFDIBA] = gruppo.IDVENDITEPFDIBA;
-                    riga[(int)colonneCostiFissi.SEQUENZA] = gruppo.SEQUENZA;
+                    riga[(int)colonneCostiFissi.SEQUENZA] = gruppo.IsSEQUENZANull() ? 0 : decimal.Parse(gruppo.SEQUENZA);
                     riga[(int)colonneCostiFissi.QTAFISSA] = gruppo.QTAFISSA;
-                    riga[(int)colonneCostiFissi.ATTREZZAGGIO] = string.Empty;
-                    riga[(int)colonneCostiFissi.DESCVOCECOSTO] = gruppo.DESVOCECOSTO;
-                    riga[(int)colonneCostiFissi.VOCECOSTO] = gruppo.CODVOCECOSTO;
+                    riga[(int)colonneCostiFissi.DESCVOCECOSTO] = gruppo.IsDESVOCECOSTONull() ? string.Empty : gruppo.DESVOCECOSTO;
+                    riga[(int)colonneCostiFissi.VOCECOSTO] = gruppo.IsCODVOCECOSTONull() ? string.Empty : gruppo.CODVOCECOSTO;
                     riga[(int)colonneCostiFissi.VALOREFISSO] = gruppo.VALOREFISSO;
                     riga[(int)colonneCostiFissi.VALORENETTO] = gruppo.VALORENETTO;
-                    riga[(int)colonneCostiFissi.ATTREZZAGGIO] = gruppo.IsATTREZZAGGIONull()?string.Empty:gruppo.ATTREZZAGGIO;
+                    riga[(int)colonneCostiFissi.ATTREZZAGGIO] = gruppo.IsATTREZZAGGIONull() ? string.Empty : gruppo.ATTREZZAGGIO;
+                    riga[(int)colonneCostiFissi.TIPOCOSTO] = gruppo.IsTIPOCOSTONull() ? string.Empty : gruppo.TIPOCOSTO;
 
                     dtGriglia.Rows.Add(riga);
                 }
@@ -478,9 +511,15 @@ namespace Preventivi
 
         private void nRicarico_ValueChanged(object sender, EventArgs e)
         {
+            AggiornaValoriConRicarico();
+        }
+
+        private void AggiornaValoriConRicarico()
+        {
             DataTable dtGrigliaDettaglio = _dsGrigliaDettaglio.Tables[_tabellaGrigliaDettaglio];
             foreach (DataRow dr in dtGrigliaDettaglio.Rows)
             {
+                if (dr[(int)colonneDettaglio.ValoreManualeTotale] == DBNull.Value) continue;
                 decimal valore = (decimal)dr[(int)colonneDettaglio.ValoreManualeTotale];
                 decimal ricaricato = valore * (1 + (nRicarico.Value / 100));
                 dr[(int)colonneDettaglio.ValoreConRicarico] = Math.Round(ricaricato, 3);
@@ -489,6 +528,7 @@ namespace Preventivi
             DataTable dtGrigliaGruppi = _dsGrigliaDettaglio.Tables[_tabellaGrigliaGruppi];
             foreach (DataRow dr in dtGrigliaGruppi.Rows)
             {
+                if (dr[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO] == DBNull.Value) continue;
                 decimal valore = (decimal)dr[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO];
                 decimal ricaricato = valore * (1 + (nRicarico.Value / 100));
                 dr[(int)colonneGruppo.TOTALECONRICARICO] = Math.Round(ricaricato, 3);
@@ -520,11 +560,14 @@ namespace Preventivi
             DataTable dtGrigliaCosti = _dsGrigliaDettaglio.Tables[_tabellaGrigliaCostiFissi];
             foreach (DataRow dr in dtGrigliaCosti.Rows)
             {
-                decimal qta = (decimal)dr[(int)colonneCostiFissi.QTAFISSA];
+                decimal qta = 1;
+                if (dr[(int)colonneCostiFissi.QTAFISSA] != DBNull.Value)
+                    qta = (decimal)dr[(int)colonneCostiFissi.QTAFISSA];
                 string str = dr[(int)colonneCostiFissi.ATTREZZAGGIO].ToString();
-                if (str == EtichetteGruppiReport.PRODUZIONE)
+                string TIPOCOSTO = dr[(int)colonneCostiFissi.TIPOCOSTO].ToString();
+                if (str == EtichetteGruppiReport.PRODUZIONE && TIPOCOSTO != VOCECOSTODIBA.IGNORA)
                     prezzoProduzione += qta * ((decimal)dr[(int)colonneCostiFissi.VALOREFISSO]);
-                else if (str == EtichetteGruppiReport.PROTOTIPIA)
+                else if (str == EtichetteGruppiReport.PROTOTIPIA && TIPOCOSTO != VOCECOSTODIBA.IGNORA)
                     prezzoPrototipo += qta * ((decimal)dr[(int)colonneCostiFissi.VALOREFISSO]);
             }
 
@@ -608,12 +651,25 @@ namespace Preventivi
                         costo.SEQUENZA = riga[(int)colonneCostiFissi.SEQUENZA].ToString().Length > 15 ? riga[(int)colonneCostiFissi.SEQUENZA].ToString().Substring(0, 15) : riga[(int)colonneCostiFissi.SEQUENZA].ToString();
 
                     costo.DATA = dtOra;
-                    costo.VALOREFISSO = (decimal)riga[(int)colonneCostiFissi.VALOREFISSO];
-                    costo.VALORENETTO = (decimal)riga[(int)colonneCostiFissi.VALORENETTO];
-                    costo.QTAFISSA = (decimal)riga[(int)colonneCostiFissi.QTAFISSA];
+                    if (riga[(int)colonneCostiFissi.VALOREFISSO] != DBNull.Value)
+                        costo.VALOREFISSO = (decimal)riga[(int)colonneCostiFissi.VALOREFISSO];
+                    else
+                        costo.VALOREFISSO = 0;
+
+                    if (riga[(int)colonneCostiFissi.VALORENETTO] != DBNull.Value)
+                        costo.VALORENETTO = (decimal)riga[(int)colonneCostiFissi.VALORENETTO];
+                    else
+                        costo.VALORENETTO = 0;
+
+                    if (riga[(int)colonneCostiFissi.QTAFISSA] != DBNull.Value)
+                        costo.QTAFISSA = (decimal)riga[(int)colonneCostiFissi.QTAFISSA];
+                    else
+                        costo.QTAFISSA = 1;
+
                     costo.ATTREZZAGGIO = riga[(int)colonneCostiFissi.ATTREZZAGGIO].ToString();
                     costo.DESVOCECOSTO = riga[(int)colonneCostiFissi.DESCVOCECOSTO].ToString();
                     costo.CODVOCECOSTO = riga[(int)colonneCostiFissi.VOCECOSTO].ToString();
+                    costo.TIPOCOSTO = riga[(int)colonneCostiFissi.TIPOCOSTO].ToString();
                     _dsPreventivi.AP_PREVENTIVIC.AddAP_PREVENTIVICRow(costo);
                 }
             }
@@ -645,17 +701,43 @@ namespace Preventivi
                     gruppo.IDPREVGRUPPO = riga[(int)colonneGruppo.IDPREVGRUPPO].ToString();
                     if (!string.IsNullOrEmpty(riga[(int)colonneGruppo.SEQUENZA].ToString()))
                         gruppo.SEQUENZA = riga[(int)colonneGruppo.SEQUENZA].ToString().Length > 15 ? riga[(int)colonneGruppo.SEQUENZA].ToString().Substring(0, 15) : riga[(int)colonneGruppo.SEQUENZA].ToString();
+                    if (riga[(int)colonneGruppo.TOTALECOSTI] != DBNull.Value)
+                        gruppo.TOTALECOSTI = (decimal)riga[(int)colonneGruppo.TOTALECOSTI];
+                    else
+                        gruppo.TOTALECOSTI = 0;
 
-                    gruppo.TOTALECOSTI = (decimal)riga[(int)colonneGruppo.TOTALECOSTI];
-                    gruppo.TOTALERICARICO = (decimal)riga[(int)colonneGruppo.TOTALERICARICO];
-                    gruppo.TOTALEVENDITACALCOLATO = (decimal)riga[(int)colonneGruppo.TOTALEVENDITACALCOLATO];
-                    gruppo.TOTALEVENDITAMANUALET = (decimal)riga[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE];
-                    gruppo.TOTALEVENDITAMANUALEG = (decimal)riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO];
+                    if (riga[(int)colonneGruppo.TOTALERICARICO] != DBNull.Value)
+                        gruppo.TOTALERICARICO = (decimal)riga[(int)colonneGruppo.TOTALERICARICO];
+                    else
+                        gruppo.TOTALERICARICO = 0;
+
+                    if (riga[(int)colonneGruppo.TOTALEVENDITACALCOLATO] != DBNull.Value)
+                        gruppo.TOTALEVENDITACALCOLATO = (decimal)riga[(int)colonneGruppo.TOTALEVENDITACALCOLATO];
+                    else
+                        gruppo.TOTALEVENDITACALCOLATO = 0;
+
+                    if (riga[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE] != DBNull.Value)
+                        gruppo.TOTALEVENDITAMANUALET = (decimal)riga[(int)colonneGruppo.TOTALEVENDITAMANUALETOTALE];
+                    else
+                        gruppo.TOTALEVENDITAMANUALET = 0;
+
+                    if (riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO] != DBNull.Value)
+                        gruppo.TOTALEVENDITAMANUALEG = (decimal)riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO];
+                    else
+                        gruppo.TOTALEVENDITAMANUALEG = 0;
+
                     gruppo.TOTALEVENDITA = 0;
                     gruppo.DATA = dtOra;
                     gruppo.STAMPE = riga[(int)colonneGruppo.STAMPA].ToString();
                     gruppo.CODVOCECOSTO = riga[(int)colonneGruppo.GRUPPO].ToString();
                     gruppo.DESVOCECOSTO = riga[(int)colonneGruppo.DESCRIZIONEGRUPPO].ToString();
+                    gruppo.DESCRIZIONE = riga[(int)colonneGruppo.DESCRIZIONE].ToString();
+                    gruppo.FORNITORE = riga[(int)colonneGruppo.FORNITORE].ToString();
+
+                    if (riga[(int)colonneGruppo.QUANTITA] != DBNull.Value)
+                        gruppo.QUANTITA = (decimal)riga[(int)colonneGruppo.QUANTITA];
+                    else
+                        gruppo.QUANTITA = 1;
                     _dsPreventivi.AP_PREVENTIVIG.AddAP_PREVENTIVIGRow(gruppo);
 
                 }
@@ -718,7 +800,7 @@ namespace Preventivi
         {
             if (e.RowIndex == -1) return;
 
-            AggiornaPrezzi();
+            AggiornaValoriConRicarico();
         }
 
 
@@ -743,7 +825,8 @@ namespace Preventivi
 
         private void Column_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
                 e.Handled = true;
             }
@@ -765,8 +848,151 @@ namespace Preventivi
                 }
             }
         }
-    }
 
+        private void excelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            sfd.DefaultExt = "xlsx";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog() == DialogResult.Cancel) return;
+            try
+            {
+                string filename = sfd.FileName;
+                //       string template = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "balenciaga.xlsx");
+
+                var assembly = Assembly.GetExecutingAssembly();
+                var resourceName = "Preventivi.Balenciaga.xlsx";
+
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string result = reader.ReadToEnd();
+                    using (var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write))
+                    {
+                        stream.Position = 0;
+                        stream.CopyTo(fileStream);
+                        fileStream.Flush();
+                        fileStream.Close();
+                    }
+                }
+
+                //   File.Copy(template, filename, true);
+                CreaFileExcel(filename);
+                if (MessageBox.Show("Excel creato con successo. Vuoi aprire il file ?", "INFORMAZIONE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(filename);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in creazione excel");
+            }
+        }
+
+        private void CreaFileExcel(string filename)
+        {
+            ExcelHelper.InsertText(filename, "A", 11, txtCodiceProvvisorio.Text, false);
+            ExcelHelper.InsertText(filename, "C", 11, txtCodiceDefinitivo.Text, false);
+            ExcelHelper.InsertText(filename, "E", 11, txtCodiceGalvanica.Text, false);
+            ExcelHelper.InsertText(filename, "I", 11, txtFornitore.Text, false);
+            ExcelHelper.InsertText(filename, "M", 11, txtDescrizioneArticolo.Text, false);
+            ExcelHelper.InsertText(filename, "A", 16, txtStagione.Text, false);
+            ExcelHelper.InsertText(filename, "C", 16, txtEvento.Text, false);
+            ExcelHelper.InsertText(filename, "F", 16, dtData.Value.ToShortDateString(), false);
+            ExcelHelper.InsertText(filename, "A", 21, txtSpessoreAu.Text, false);
+            ExcelHelper.InsertText(filename, "C", 21, txtSpessorePd.Text, false);
+            ExcelHelper.InsertText(filename, "E", 21, txtSuperficie.Text, false);
+            ExcelHelper.InsertText(filename, "F", 22, txtPeso.Text, false);
+            ExcelHelper.InsertText(filename, "A", 26, txtComposizioneMateriali.Text, false);
+
+            DataTable dtGriglia = _dsGrigliaDettaglio.Tables[_tabellaGrigliaGruppi];
+            int indiceRigaDiba = 0;
+            int indiceRigaLavInterna = 0;
+            int indiceRigaLavEsterna = 0;
+            foreach (DataRow riga in dtGriglia.Rows)
+            {
+                string descrizione = riga[(int)colonneGruppo.DESCRIZIONE].ToString().ToUpper();
+                string fornitore = riga[(int)colonneGruppo.FORNITORE].ToString().ToUpper();
+                string quantita = riga[(int)colonneGruppo.QUANTITA].ToString();
+                string prezzo = riga[(int)colonneGruppo.TOTALECONRICARICO].ToString();
+                string stampa = riga[(int)colonneGruppo.STAMPA].ToString();
+
+                int indiceRiga = 34;//distinta base
+                if (stampa == EtichetteGruppiReport.DISTINTABASE)
+                {
+                    ExcelHelper.InsertText(filename, "A", indiceRiga + indiceRigaDiba, string.Empty, false);
+                    ExcelHelper.InsertText(filename, "D", indiceRiga + indiceRigaDiba, descrizione, false);
+                    ExcelHelper.InsertText(filename, "L", indiceRiga + indiceRigaDiba, fornitore, false);
+                    ExcelHelper.InsertText(filename, "N", indiceRiga + indiceRigaDiba, prezzo, true);
+                    ExcelHelper.InsertText(filename, "O", indiceRiga + indiceRigaDiba, "0", true);
+                    ExcelHelper.InsertText(filename, "P", indiceRiga + indiceRigaDiba, quantita, true);
+                    indiceRigaDiba++;
+                }
+
+                indiceRiga = 55;//lavorazioni interne
+                if (stampa == EtichetteGruppiReport.INTERNE)
+                {
+                    ExcelHelper.InsertText(filename, "A", indiceRiga + indiceRigaLavInterna, string.Empty, false);
+                    ExcelHelper.InsertText(filename, "D", indiceRiga + indiceRigaLavInterna, descrizione, false);
+                    ExcelHelper.InsertText(filename, "L", indiceRiga + indiceRigaLavInterna, fornitore, false);
+                    ExcelHelper.InsertText(filename, "O", indiceRiga + indiceRigaLavInterna, prezzo, true);
+                    ExcelHelper.InsertText(filename, "P", indiceRiga + indiceRigaLavInterna, quantita, true);
+                    indiceRigaLavInterna++;
+                }
+
+                indiceRiga = 77;//lavorazioni esterne
+                if (stampa == EtichetteGruppiReport.ESTERNE)
+                {
+                    ExcelHelper.InsertText(filename, "A", indiceRiga + indiceRigaLavEsterna, string.Empty, false);
+                    ExcelHelper.InsertText(filename, "D", indiceRiga + indiceRigaLavEsterna, descrizione, false);
+                    ExcelHelper.InsertText(filename, "L", indiceRiga + indiceRigaLavEsterna, fornitore, false);
+                    ExcelHelper.InsertText(filename, "N", indiceRiga + indiceRigaLavEsterna, prezzo, true);
+                    ExcelHelper.InsertText(filename, "O", indiceRiga + indiceRigaLavEsterna, "0", true);
+                    ExcelHelper.InsertText(filename, "P", indiceRiga + indiceRigaLavEsterna, quantita, true);
+                    indiceRigaLavEsterna++;
+                }
+            }
+
+            DataTable dtGrigliaCostiFissi = _dsGrigliaDettaglio.Tables[_tabellaGrigliaCostiFissi];
+
+            foreach (DataRow riga in dtGrigliaCostiFissi.Rows)
+            {
+                string tipoCosto = riga[(int)colonneCostiFissi.TIPOCOSTO].ToString().ToUpper();
+                string attrezzaggio = riga[(int)colonneCostiFissi.ATTREZZAGGIO].ToString();
+                string prezzo = riga[(int)colonneCostiFissi.VALOREFISSO].ToString();
+
+                int indiceRiga = 0;
+                if (attrezzaggio == EtichetteGruppiReport.PROTOTIPIA)
+                    indiceRiga = 100;
+
+                if (attrezzaggio == EtichetteGruppiReport.PRODUZIONE)
+                    indiceRiga = 107;
+
+                if (attrezzaggio == EtichetteGruppiReport.IGNORA) continue;
+
+                switch (tipoCosto)
+                {
+                    case VOCECOSTODIBA.GOMMA:
+                        ExcelHelper.InsertText(filename, "C", indiceRiga, prezzo, true);
+                        break;
+                    case VOCECOSTODIBA.STAMPA3D:
+                        ExcelHelper.InsertText(filename, "A", indiceRiga, prezzo, true);
+                        break;
+                    case VOCECOSTODIBA.STAMPAGGIOCALDO:
+                        ExcelHelper.InsertText(filename, "E", indiceRiga, prezzo, true);
+                        break;
+                    case VOCECOSTODIBA.STAMPAGGIOFREDDO:
+                        ExcelHelper.InsertText(filename, "G", indiceRiga, prezzo, true);
+                        break;
+                    case VOCECOSTODIBA.PRESSOFUSIONE:
+                        ExcelHelper.InsertText(filename, "I", indiceRiga, prezzo, true);
+                        break;
+                }
+            }
+        }
+    }
 
     public static class EtichetteGruppiReport
     {
@@ -785,5 +1011,6 @@ namespace Preventivi
         public const string PRESSOFUSIONE = "STPRESS";
         public const string GOMMA = "GOMMA";
         public const string STAMPA3D = "ST3D";
+        public const string IGNORA = "Ignora";
     }
 }
