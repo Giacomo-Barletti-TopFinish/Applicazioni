@@ -62,11 +62,95 @@ namespace Preventivi
 
                 caricaPreventivo();
                 VisualizzaDatiPreventivo();
-                //  VisualizzaDatiReport();
+
+                AggiungiDatiStorici();
+
             }
             catch (Exception ex)
             {
                 MostraEccezione(ex, "ERRORE IN TROVA PREVENTIVO");
+            }
+        }
+
+        private void AggiungiDatiStorici()
+        {
+
+
+            int colonneCostiFissi = Enum.GetValues(typeof(colonneCostiFissi)).Length;
+
+            while (dgvCostiFissi.Columns.Count > colonneCostiFissi)
+            {
+                dgvCostiFissi.Columns.RemoveAt(colonneCostiFissi);
+            }
+
+            List<DateTime> dateInserite = _dsPreventivi.AP_PREVENTIVIC.Select(x => x.DATA).Distinct().OrderByDescending(x => x.Date).ToList();
+            if (dateInserite.Count >= 2)
+            {
+                int indiceColonna = colonneCostiFissi - 1;
+
+                for (int i = 1; i < dateInserite.Count; i++)
+                {
+                    indiceColonna++;
+                    DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
+                    col.Width = 80;
+                    col.HeaderText = dateInserite[i].ToShortDateString();
+                    col.DefaultCellStyle.BackColor = Color.LightYellow;
+                    dgvCostiFissi.Columns.Add(col);
+
+                    List<PreventiviDS.AP_PREVENTIVICRow> preventivi = _dsPreventivi.AP_PREVENTIVIC.Where(x => x.DATA == dateInserite[i]).ToList();
+                    foreach (DataGridViewRow dr in dgvCostiFissi.Rows)
+                    {
+                        if (dr.IsNewRow) continue;
+                        string IDVENDITEPFDIBACOS = dr.Cells[(int)BalenciagaFrm.colonneCostiFissi.IDVENDITEPFDIBACOS].Value.ToString();
+                        string IDVENDITEPFDIBA = dr.Cells[(int)BalenciagaFrm.colonneCostiFissi.IDVENDITEPFDIBA].Value.ToString();
+
+                        PreventiviDS.AP_PREVENTIVICRow prevc = preventivi.Where(x => x.IDVENDITEPFDIBA == IDVENDITEPFDIBA && x.IDVENDITEPFDIBACOS == IDVENDITEPFDIBACOS).FirstOrDefault();
+                        if (prevc != null)
+                        {
+                            decimal valoreFisso = prevc.VALOREFISSO;
+                            dr.Cells[indiceColonna].Value = valoreFisso.ToString();
+                        }
+                    }
+                }
+
+            }
+
+            int colonneGruppi = Enum.GetValues(typeof(colonneGruppo)).Length;
+
+            while (dgvGruppi.Columns.Count > colonneGruppi)
+            {
+                dgvGruppi.Columns.RemoveAt(colonneGruppi);
+            }
+
+            dateInserite = _dsPreventivi.AP_PREVENTIVIG.Select(x => x.DATA).Distinct().OrderByDescending(x => x.Date).ToList();
+            if (dateInserite.Count >= 2)
+            {
+                int indiceColonna = colonneGruppi - 1;
+
+                for (int i = 1; i < dateInserite.Count; i++)
+                {
+                    indiceColonna++;
+                    DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
+                    col.Width = 80;
+                    col.HeaderText = dateInserite[i].ToShortDateString();
+                    col.DefaultCellStyle.BackColor = Color.LightYellow;
+                    dgvGruppi.Columns.Add(col);
+
+                    List<PreventiviDS.AP_PREVENTIVIGRow> preventivi = _dsPreventivi.AP_PREVENTIVIG.Where(x => x.DATA == dateInserite[i]).ToList();
+                    foreach (DataGridViewRow dr in dgvGruppi.Rows)
+                    {
+                        if (dr.IsNewRow) continue;
+                        string IDVENDITEGRUPPOT = dr.Cells[(int)BalenciagaFrm.colonneGruppo.IDVENDITEGRUPPOT].Value.ToString();
+
+                        PreventiviDS.AP_PREVENTIVIGRow prevc = preventivi.Where(x => x.IDVENDITEPFGRUPPOT == IDVENDITEGRUPPOT).FirstOrDefault();
+                        if (prevc != null)
+                        {
+                            decimal valoreFisso = prevc.TOTALECONRICARICO;
+                            dr.Cells[indiceColonna].Value = valoreFisso.ToString();
+                        }
+                    }
+                }
+
             }
         }
 
@@ -725,6 +809,11 @@ namespace Preventivi
                         gruppo.TOTALEVENDITAMANUALEG = (decimal)riga[(int)colonneGruppo.TOTALEVENDITAMANUALEGRUPPO];
                     else
                         gruppo.TOTALEVENDITAMANUALEG = 0;
+
+                    if (riga[(int)colonneGruppo.TOTALECONRICARICO] != DBNull.Value)
+                        gruppo.TOTALECONRICARICO = (decimal)riga[(int)colonneGruppo.TOTALECONRICARICO];
+                    else
+                        gruppo.TOTALECONRICARICO = 0;
 
                     gruppo.TOTALEVENDITA = 0;
                     gruppo.DATA = dtOra;
