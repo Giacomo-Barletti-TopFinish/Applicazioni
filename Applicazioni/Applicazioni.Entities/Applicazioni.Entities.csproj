@@ -58,6 +58,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="TrasferimentiDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrasferimentiDS.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="AnagraficaDS.xsc">
@@ -86,6 +91,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TrasferimentiDS.xsc">
+      <DependentUpon>TrasferimentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="TrasferimentiDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TrasferimentiDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TrasferimentiDS.xss">
+      <DependentUpon>TrasferimentiDS.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

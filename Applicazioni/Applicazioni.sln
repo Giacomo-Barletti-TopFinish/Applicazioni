@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applicazioni.BLL", "Applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applicazioni.Helpers", "Applicazioni.Helpers\Applicazioni.Helpers.csproj", "{D5B7F1D5-AE8D-4BBE-B139-4255932718F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trasferimenti", "Trasferimenti\Trasferimenti.csproj", "{12CB20BB-2B80-4A3E-A063-DC0E45DD7C00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D5B7F1D5-AE8D-4BBE-B139-4255932718F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B7F1D5-AE8D-4BBE-B139-4255932718F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B7F1D5-AE8D-4BBE-B139-4255932718F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12CB20BB-2B80-4A3E-A063-DC0E45DD7C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12CB20BB-2B80-4A3E-A063-DC0E45DD7C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12CB20BB-2B80-4A3E-A063-DC0E45DD7C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12CB20BB-2B80-4A3E-A063-DC0E45DD7C00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
