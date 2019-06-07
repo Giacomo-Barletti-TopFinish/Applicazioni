@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Applicazioni.Data.Trasferimenti
 {
-    public class TrasferimentiAdapter: AdapterBase
+    public class TrasferimentiAdapter : AdapterBase
     {
         public TrasferimentiAdapter(System.Data.IDbConnection connection, IDbTransaction transaction) :
          base(connection, transaction)
@@ -33,13 +33,13 @@ namespace Applicazioni.Data.Trasferimenti
             ParamSet ps = new ParamSet();
             ps.AddParam("BARCODE", DbType.String, barcode);
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_PRD_MOVFASI);
             }
         }
 
-        public void FillAP_TTRASFERIMENTI(TrasferimentiDS ds, string barcode)
+        public void FillAP_TTRASFERIMENTIDaBarcodePartenza(TrasferimentiDS ds, string barcode)
         {
             string select = @"SELECT * FROM AP_TTRASFERIMENTI WHERE BARCODE_PARTENZA = $P{BARCODE} ";
 
@@ -52,7 +52,17 @@ namespace Applicazioni.Data.Trasferimenti
             }
         }
 
-        public void FillAP_DTRASFERIMENTI(TrasferimentiDS ds, decimal IDTRASFERIMENTO)
+        public void FillAP_TTRASFERIMENTIAttivi(TrasferimentiDS ds)
+        {
+            string select = @"SELECT * FROM AP_TTRASFERIMENTI WHERE attivo =1 ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.AP_TTRASFERIMENTI);
+            }
+        }
+
+        public void FillAP_DTRASFERIMENTIDaIDTRASFERIMENTO(TrasferimentiDS ds, decimal IDTRASFERIMENTO)
         {
             string select = @"SELECT * FROM AP_DTRASFERIMENTI WHERE IDTRASFERIMENTO = $P{IDTRASFERIMENTO}";
 
@@ -62,6 +72,30 @@ namespace Applicazioni.Data.Trasferimenti
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.AP_DTRASFERIMENTI);
+            }
+        }
+
+        public void FillAP_DTRASFERIMENTIAttivi(TrasferimentiDS ds )
+        {
+            string select = @"SELECT AD.* FROM AP_DTRASFERIMENTI AD INNER JOIN AP_TTRASFERIMENTI AT ON AT.IDTRASFERIMENTO=AD.IDTRASFERIMENTO WHERE ATTIVO = 1";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.AP_DTRASFERIMENTI);
+            }
+        }
+
+        public void FillUSR_PRD_FLUSSO_MOVFASIDaTrasferimentiAttivi(TrasferimentiDS ds)
+        {
+            string select = @"select fmf.*,ad.barcode_odl from usr_prd_flusso_movfasi fmf
+                                inner join usr_prd_movfasi mf on mf.idprdmovfase = fmf.idprdmovfase
+                                inner join AP_DTRASFERIMENTI ad on ad.barcode_odl = mf.barcode
+                                inner join AP_TTRASFERIMENTI  at on at.idtrasferimento = ad.idtrasferimento
+                                where at.attivo =1 and at.barcode_arrivo is not null";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_FLUSSO_MOVFASI);
             }
         }
 

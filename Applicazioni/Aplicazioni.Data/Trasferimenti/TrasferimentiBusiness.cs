@@ -23,16 +23,31 @@ namespace Applicazioni.Data.Trasferimenti
             a.FillUSR_PRD_MOVFASI(ds, barcode);
         }
         [DataContext]
-        public void FillAP_TTRASFERIMENTI(TrasferimentiDS ds, string barcode)
+        public void FillAP_TTRASFERIMENTIDaBarcodePartenza(TrasferimentiDS ds, string barcode)
         {
             TrasferimentiAdapter a = new TrasferimentiAdapter(DbConnection, DbTransaction);
-            a.FillAP_TTRASFERIMENTI(ds, barcode);
+            a.FillAP_TTRASFERIMENTIDaBarcodePartenza(ds, barcode);
+        }
+
+        [DataContext]
+        public void FillTRASFERIMENTIAttivi(TrasferimentiDS ds)
+        {
+            TrasferimentiAdapter a = new TrasferimentiAdapter(DbConnection, DbTransaction);
+            a.FillAP_TTRASFERIMENTIAttivi(ds);
+            a.FillAP_DTRASFERIMENTIAttivi(ds);
         }
         [DataContext]
-        public void FillAP_DTRASFERIMENTI(TrasferimentiDS ds, decimal IDTRASFERIMENTO)
+        public void FillAP_DTRASFERIMENTIDaIDTRASFERIMENTO(TrasferimentiDS ds, decimal IDTRASFERIMENTO)
         {
             TrasferimentiAdapter a = new TrasferimentiAdapter(DbConnection, DbTransaction);
-            a.FillAP_DTRASFERIMENTI(ds, IDTRASFERIMENTO);
+            a.FillAP_DTRASFERIMENTIDaIDTRASFERIMENTO(ds, IDTRASFERIMENTO);
+        }
+
+        [DataContext]
+        public void FillUSR_PRD_FLUSSO_MOVFASIDaTrasferimentiAttivi(TrasferimentiDS ds)
+        {
+            TrasferimentiAdapter a = new TrasferimentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_FLUSSO_MOVFASIDaTrasferimentiAttivi(ds);
         }
 
         [DataContext(true)]

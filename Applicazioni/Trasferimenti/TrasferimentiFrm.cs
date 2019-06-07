@@ -100,11 +100,18 @@ namespace Trasferimenti
                             }
                             else
                             {
+                                if(_trasferimentoInCorso.BARCODE_PARTENZA==barcode)
+                                {
+                                    lblMessaggi.Text = "IL BARCODE DI DESTINAZIONE E' LO STESSO DI QUELLO DI PARTENZA";
+                                    return;
+                                }
+
                                 if (VerificaEsistenzaTrasferimento(barcode))
                                 {
                                     ChiudiTrasferimento(barcode);
                                     lblMessaggi.Text = "TRASFERIMENTO REGISTRATO CON SUCCESSO";
                                     PulisciArchivi();
+                                    ImpostaInRicezione(false);
                                 }
                                 else
                                 {
@@ -114,7 +121,6 @@ namespace Trasferimenti
                         }
                         else
                         {
-                            ImpostaInRicezione(true);
                             PulisciArchivi();
                             CaricaTrasferimentoDaBarcodePartenza(barcode);
                         }
@@ -153,7 +159,7 @@ namespace Trasferimenti
         {
             using (TrasferimentiBusiness bTrasferimenti = new TrasferimentiBusiness())
             {
-                bTrasferimenti.FillAP_TTRASFERIMENTI(_ds, barcode);
+                bTrasferimenti.FillAP_TTRASFERIMENTIDaBarcodePartenza(_ds, barcode);
                 return !_ds.AP_TTRASFERIMENTI.Any(x => x.BARCODE_PARTENZA == barcode && x.IsBARCODE_ARRIVONull());
             }
         }
@@ -161,26 +167,29 @@ namespace Trasferimenti
         {
             using (TrasferimentiBusiness bTrasferimenti = new TrasferimentiBusiness())
             {
-                bTrasferimenti.FillAP_TTRASFERIMENTI(_ds, barcode);
+                bTrasferimenti.FillAP_TTRASFERIMENTIDaBarcodePartenza(_ds, barcode);
                 List<TrasferimentiDS.AP_TTRASFERIMENTIRow> trasferimenti = _ds.AP_TTRASFERIMENTI.Where(x => x.BARCODE_PARTENZA == barcode && x.IsBARCODE_ARRIVONull()).ToList();
                 if (trasferimenti.Count == 0)
                 {
                     lblMessaggi.Text = "NESSUN TRASFERIMENTO ATTIVO ASSOCIATO A QUESTO OPERATORE";
+                    ImpostaInRicezione(false);
                     return;
                 }
                 if (trasferimenti.Count > 1)
                 {
                     lblMessaggi.Text = "CI SONO DUE O PIU' TRASFERIMENTI ASSICIATI A QUESTO OPERATORE";
+                    ImpostaInRicezione(false);
                     return;
                 }
                 _trasferimentoInCorso = trasferimenti[0];
-                bTrasferimenti.FillAP_DTRASFERIMENTI(_ds, _trasferimentoInCorso.IDTRASFERIMENTO);
+                bTrasferimenti.FillAP_DTRASFERIMENTIDaIDTRASFERIMENTO(_ds, _trasferimentoInCorso.IDTRASFERIMENTO);
 
                 List<string> barcodeOdl = _ds.AP_DTRASFERIMENTI.Where(x => x.IDTRASFERIMENTO == _trasferimentoInCorso.IDTRASFERIMENTO).Select(x => x.BARCODE_ODL).ToList();
 
                 foreach (string odl in barcodeOdl)
                     CaricaODL(odl);
 
+                ImpostaInRicezione(true);
             }
         }
 
@@ -298,6 +307,8 @@ namespace Trasferimenti
         {
             _dsGriglia.Tables[_tabellaGriglia].Clear();
             _ds.USR_PRD_MOVFASI.Clear();
+            _ds.AP_TTRASFERIMENTI.Clear();
+            _ds.AP_DTRASFERIMENTI.Clear();
         }
     }
 }
