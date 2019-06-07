@@ -69,7 +69,9 @@ namespace TrasferimentiService
             try
             {
                 LogHelper.LogInfo("#### TRASFERIMENTI SERVICE IN FASE DI AVVIO ####");
-                _tmrAsync = new Timer(new TimerCallback(AsyncOperationCallback), null,5000, Settings.Default.Period * 1000);
+                LogHelper.LogInfo(string.Format("PERIOD IMPOSTATO {0} SECONDI", Settings.Default.Period));
+
+                _tmrAsync = new Timer(new TimerCallback(AsyncOperationCallback), null, 5000, Settings.Default.Period * 1000);
                 LogHelper.LogInfo("#### TRASFERIMENTI SERVICE AVVIATO ####");
             }
             catch (Exception ex)
@@ -80,7 +82,7 @@ namespace TrasferimentiService
 
         protected override void OnStop()
         {
-            LogHelper.LogInfo("#### SPC ASYNC OPERATION SERVICE FERMATO ####");
+            LogHelper.LogInfo("#### TRASFERIMENTI SERVICE FERMATO ####");
         }
         internal void OnStartAsApplication()
         {
