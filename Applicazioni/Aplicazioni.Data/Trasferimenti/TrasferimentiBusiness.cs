@@ -23,6 +23,12 @@ namespace Applicazioni.Data.Trasferimenti
             a.FillUSR_PRD_MOVFASI(ds, barcode);
         }
         [DataContext]
+        public void FillUSR_TRASF_RICH(TrasferimentiDS ds, string barcode)
+        {
+            TrasferimentiAdapter a = new TrasferimentiAdapter(DbConnection, DbTransaction);
+            a.FillUSR_TRASF_RICH(ds, barcode);
+        }
+        [DataContext]
         public void FillAP_TTRASFERIMENTIDaBarcodePartenza(TrasferimentiDS ds, string barcode)
         {
             TrasferimentiAdapter a = new TrasferimentiAdapter(DbConnection, DbTransaction);

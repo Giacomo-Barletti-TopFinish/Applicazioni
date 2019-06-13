@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Preventivi
 {
-    public partial class PreventiviMainForm : Form
+    public partial class PreventiviMainForm : BaseForm
     {
         private static readonly log4net.ILog _log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public PreventiviMainForm()
@@ -67,8 +67,7 @@ namespace Preventivi
         public void MostraEccezione(string messaggioLog, Exception ex)
         {
             LogScriviErrore(messaggioLog, ex);
-            ExceptionFrm frm = new ExceptionFrm(ex);
-            frm.ShowDialog();
+            base.MostraEccezione(ex, messaggioLog);
         }
 
         private void cascataToolStripMenuItem_Click(object sender, EventArgs e)

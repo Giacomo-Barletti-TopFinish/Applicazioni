@@ -31,6 +31,7 @@ namespace TrasferimentiService.Managers
 
                     foreach (TrasferimentiDS.AP_DTRASFERIMENTIRow dettaglio in dettagli)
                     {
+                        if (dettaglio.REPARTO == "MAGAZZINO") continue;
                         if (!dsTrasferimenti.USR_PRD_FLUSSO_MOVFASI.Any(x => x.BARCODE_ODL == dettaglio.BARCODE_ODL))
                             attivo = true;
                     }

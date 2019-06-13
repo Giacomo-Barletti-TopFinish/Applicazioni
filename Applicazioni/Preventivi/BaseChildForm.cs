@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Preventivi
 {
-    public partial class BaseChildForm : Form
+    public partial class BaseChildForm : BaseForm
     {
         public BaseChildForm()
         {
@@ -27,8 +27,7 @@ namespace Preventivi
                 (this.ParentForm as PreventiviMainForm).MostraEccezione(messaggioLog, ex);
             else
             {
-                ExceptionFrm frm = new ExceptionFrm(ex);
-                frm.ShowDialog();
+                base.MostraEccezione(ex, messaggioLog);
             }
         }
     }

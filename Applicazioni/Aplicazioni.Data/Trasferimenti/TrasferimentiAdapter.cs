@@ -39,6 +39,21 @@ namespace Applicazioni.Data.Trasferimenti
             }
         }
 
+        public void FillUSR_TRASF_RICH(TrasferimentiDS ds, string barcode)
+        {
+            string select = @"SELECT ri.*,RT.NUMRICHTRASFT FROM USR_TRASF_RICH ri 
+                                    inner join USR_TRASF_RICHT RT ON RT.IDRICHTRASFT = RI.IDRICHTRASFT
+                                    WHERE RI.BARCODE = $P{BARCODE}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_TRASF_RICH);
+            }
+        }
+
         public void FillAP_TTRASFERIMENTIDaBarcodePartenza(TrasferimentiDS ds, string barcode)
         {
             string select = @"SELECT * FROM AP_TTRASFERIMENTI WHERE BARCODE_PARTENZA = $P{BARCODE} ";

@@ -47,6 +47,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnagraficaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GalvanicaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="PreventiviDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,6 +82,17 @@
       <DependentUpon>AnagraficaDS.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
+    <None Include="GalvanicaDS.xsc">
+      <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
+    <None Include="GalvanicaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GalvanicaDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="GalvanicaDS.xss">
+      <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
     <None Include="PreventiviDS.xsc">
       <DependentUpon>PreventiviDS.xsd</DependentUpon>
     </None>

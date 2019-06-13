@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Trasferimenti
 {
-    public partial class TrasferimentiFrm : Form
+    public partial class TrasferimentiFrm : BaseForm
     {
         private bool _inRicezione;
 
@@ -38,11 +38,7 @@ namespace Trasferimenti
         {
             InitializeComponent();
         }
-        protected void MostraEccezione(Exception ex, string messaggioLog)
-        {
-            ExceptionFrm frm = new ExceptionFrm(ex);
-            frm.ShowDialog();
-        }
+
         private void TrasferimentiFrm_Load(object sender, EventArgs e)
         {
             txtBarcode.Focus();
@@ -74,6 +70,7 @@ namespace Trasferimenti
         {
             try
             {
+                lblMessaggi.Text = string.Empty;
                 string tipoBarcode = barcode.Substring(0, 3);
                 switch (tipoBarcode)
                 {
@@ -100,7 +97,7 @@ namespace Trasferimenti
                             }
                             else
                             {
-                                if(_trasferimentoInCorso.BARCODE_PARTENZA==barcode)
+                                if (_trasferimentoInCorso.BARCODE_PARTENZA == barcode)
                                 {
                                     lblMessaggi.Text = "IL BARCODE DI DESTINAZIONE E' LO STESSO DI QUELLO DI PARTENZA";
                                     return;
@@ -138,6 +135,15 @@ namespace Trasferimenti
                         }
                         if (VerificaBarcode(barcode))
                             CaricaODL(barcode);
+                        break;
+                    case "DRT":
+                        if (_inRicezione)
+                        {
+                            lblMessaggi.Text = "IN RICEZIONE TRASFERIMENTO non è possibile aggiungere TRASFERIMENTI";
+                            return;
+                        }
+                        if (VerificaBarcode(barcode))
+                            CaricaTrasferimento(barcode);
                         break;
                 }
                 txtBarcode.Focus();
@@ -187,7 +193,10 @@ namespace Trasferimenti
                 List<string> barcodeOdl = _ds.AP_DTRASFERIMENTI.Where(x => x.IDTRASFERIMENTO == _trasferimentoInCorso.IDTRASFERIMENTO).Select(x => x.BARCODE_ODL).ToList();
 
                 foreach (string odl in barcodeOdl)
+                {
                     CaricaODL(odl);
+                    CaricaTrasferimento(odl);
+                }
 
                 ImpostaInRicezione(true);
             }
@@ -227,6 +236,11 @@ namespace Trasferimenti
                 lblMessaggi.Text = "BARCODE GIA' INSERITO";
                 return false;
             }
+            if (_ds.USR_TRASF_RICH.Any(x => x.BARCODE == barcode))
+            {
+                lblMessaggi.Text = "BARCODE GIA' INSERITO";
+                return false;
+            }
             return true;
         }
         private void CaricaODL(string barcode)
@@ -258,6 +272,37 @@ namespace Trasferimenti
 
             }
         }
+
+        private void CaricaTrasferimento(string barcode)
+        {
+            using (TrasferimentiBusiness bTrasferimenti = new TrasferimentiBusiness())
+            {
+                if (!_ds.USR_TRASF_RICH.Any(x => x.BARCODE == barcode))
+                    bTrasferimenti.FillUSR_TRASF_RICH(_ds, barcode);
+
+                TrasferimentiDS.USR_TRASF_RICHRow trasferimento = _ds.USR_TRASF_RICH.Where(x => x.BARCODE == barcode).FirstOrDefault();
+                if (trasferimento == null)
+                {
+                    lblMessaggi.Text = "BARCODE NON TROVATO";
+                    return;
+                }
+                AnagraficaDS.MAGAZZRow articolo = _anagrafica.GetMAGAZZ(trasferimento.IDMAGAZZ);
+
+                DataTable dtGriglia = _dsGriglia.Tables[_tabellaGriglia];
+
+                DataRow riga = dtGriglia.NewRow();
+
+                riga[(int)colonneGriglia.BARCODE] = trasferimento.IsBARCODENull() ? string.Empty : trasferimento.BARCODE;
+                riga[(int)colonneGriglia.MODELLO] = articolo == null ? string.Empty : articolo.MODELLO;
+                riga[(int)colonneGriglia.NUMMOVFASE] = trasferimento.IsNUMRICHTRASFTNull() ? string.Empty : trasferimento.NUMRICHTRASFT;
+                riga[(int)colonneGriglia.REPARTO] = "MAGAZZINO";
+                riga[(int)colonneGriglia.QUANTITA] = trasferimento.QTA;
+
+                dtGriglia.Rows.Add(riga);
+
+            }
+        }
+
         enum colonneGriglia { BARCODE, NUMMOVFASE, REPARTO, MODELLO, QUANTITA }
         private void CreaDSGriglia()
         {
@@ -307,8 +352,27 @@ namespace Trasferimenti
         {
             _dsGriglia.Tables[_tabellaGriglia].Clear();
             _ds.USR_PRD_MOVFASI.Clear();
+            _ds.USR_TRASF_RICH.Clear();
             _ds.AP_TTRASFERIMENTI.Clear();
             _ds.AP_DTRASFERIMENTI.Clear();
+        }
+
+        private void dgvTrasferimenti_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            try
+            {
+                string barcode = (string)e.Row.Cells[(int)colonneGriglia.BARCODE].Value;
+
+                _ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == barcode).FirstOrDefault().Delete();
+                _ds.USR_TRASF_RICH.Where(x => x.BARCODE == barcode).FirstOrDefault().Delete();
+                _ds.AcceptChanges();
+                txtBarcode.Focus();
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in elabora barcode");
+            }
         }
     }
 }
