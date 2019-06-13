@@ -142,7 +142,7 @@ namespace GalvanicaFrm
 
         private void PopolaGriglia(GalvanicaDS.AP_GALVANICA_MODELLORow modelloRow, GalvanicaDS.USR_PRD_MOVFASIRow odl)
         {
-            GalvanicaDS.AP_GALVANICA_PIANORow riga = _ds.AP_GALVANICA_PIANO.Where(x => x.IDMAGAZZ == odl.IDMAGAZZ_LANCIO && x.IDMAGAZZ_WIP == odl.IDMAGAZZ_WIP).FirstOrDefault();
+            GalvanicaDS.AP_GALVANICA_PIANORow riga = _ds.AP_GALVANICA_PIANO.Where(x => x.IDMAGAZZ == odl.IDMAGAZZ_LANCIO && x.IDMAGAZZ_WIP == odl.IDMAGAZZ_WIP && x.GALVANICA == modelloRow.GALVANICA).FirstOrDefault();
             if (riga == null)
             {
                 GalvanicaDS.FINITURA_ORDINERow ordine = _ds.FINITURA_ORDINE.Where(x => x.BRAND == modelloRow.BRAND && x.FINITURA == modelloRow.FINITURA).FirstOrDefault();

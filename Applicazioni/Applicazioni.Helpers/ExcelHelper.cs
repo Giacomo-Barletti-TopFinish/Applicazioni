@@ -19,7 +19,7 @@ namespace Applicazioni.Helpers
         {
             byte[] content;
             MemoryStream ms = new MemoryStream();
-            
+
             using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
             {
                 WorkbookPart workbookPart = document.AddWorkbookPart();
@@ -72,7 +72,7 @@ namespace Applicazioni.Helpers
 
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
-                foreach(GalvanicaDS.AP_GALVANICA_PIANORow riga in ds.AP_GALVANICA_PIANO)
+                foreach (GalvanicaDS.AP_GALVANICA_PIANORow riga in ds.AP_GALVANICA_PIANO.OrderBy(x => x.ORDINE))
                 {
                     Row rowDati = new Row();
                     for (int i = 0; i < numeroColonne; i++)
