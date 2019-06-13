@@ -20,5 +20,36 @@ namespace Applicazioni.Data.Galvanica
             }
         }
 
+        [DataContext]
+        public GalvanicaDS.AP_GALVANICA_MODELLORow GetAP_GALVANICA_MODELLO(GalvanicaDS ds, string IDMAGAZZ_Lancio, string IDMAGAZZ_WIP)
+        {
+            if (!ds.AP_GALVANICA_MODELLO.Any(x => x.IDMAGAZZ == IDMAGAZZ_Lancio && x.IDMAGAZZ_WIP == IDMAGAZZ_WIP))
+            {
+                GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+                a.FillAP_GALVANICA_MODELLO(ds, IDMAGAZZ_Lancio, IDMAGAZZ_WIP);
+            }
+            return ds.AP_GALVANICA_MODELLO.Where(x => x.IDMAGAZZ == IDMAGAZZ_Lancio && x.IDMAGAZZ_WIP == IDMAGAZZ_WIP).FirstOrDefault();
+        }
+
+        [DataContext(true)]
+        public void UpdateTable(string tablename, GalvanicaDS ds)
+        {
+            GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+            a.UpdateTable(tablename, ds);
+        }
+
+        [DataContext]
+        public void FillFINITURA_ORDINE(GalvanicaDS ds)
+        {
+            GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+            a.FillFINITURA_ORDINE(ds);
+        }
+
+        [DataContext]
+        public void FillAP_GALVANICA_PIANO(GalvanicaDS ds, DateTime data)
+        {
+            GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+            a.FillAP_GALVANICA_PIANO(ds, data);
+        }
     }
 }

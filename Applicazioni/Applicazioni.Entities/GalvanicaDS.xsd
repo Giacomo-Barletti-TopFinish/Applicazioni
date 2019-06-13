@@ -328,76 +328,6 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="AP_GALVANICA_MODELLO" msprop:Generator_TableClassName="AP_GALVANICA_MODELLODataTable" msprop:Generator_TableVarName="tableAP_GALVANICA_MODELLO" msprop:Generator_TablePropName="AP_GALVANICA_MODELLO" msprop:Generator_RowDeletingName="AP_GALVANICA_MODELLORowDeleting" msprop:Generator_RowChangingName="AP_GALVANICA_MODELLORowChanging" msprop:Generator_RowEvHandlerName="AP_GALVANICA_MODELLORowChangeEventHandler" msprop:Generator_RowDeletedName="AP_GALVANICA_MODELLORowDeleted" msprop:Generator_UserTableName="AP_GALVANICA_MODELLO" msprop:Generator_RowChangedName="AP_GALVANICA_MODELLORowChanged" msprop:Generator_RowEvArgName="AP_GALVANICA_MODELLORowChangeEvent" msprop:Generator_RowClassName="AP_GALVANICA_MODELLORow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="IDMAGAZZ_WIP" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ_WIP" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ_WIP" msprop:Generator_ColumnPropNameInTable="IDMAGAZZ_WIPColumn" msprop:Generator_UserColumnName="IDMAGAZZ_WIP">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="MODELLO" msprop:Generator_ColumnVarNameInTable="columnMODELLO" msprop:Generator_ColumnPropNameInRow="MODELLO" msprop:Generator_ColumnPropNameInTable="MODELLOColumn" msprop:Generator_UserColumnName="MODELLO">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="COMPONENTE" msprop:Generator_ColumnVarNameInTable="columnCOMPONENTE" msprop:Generator_ColumnPropNameInRow="COMPONENTE" msprop:Generator_ColumnPropNameInTable="COMPONENTEColumn" msprop:Generator_UserColumnName="COMPONENTE">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="BRAND" msprop:Generator_ColumnVarNameInTable="columnBRAND" msprop:Generator_ColumnPropNameInRow="BRAND" msprop:Generator_ColumnPropNameInTable="BRANDColumn" msprop:Generator_UserColumnName="BRAND">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="FINITURA" msprop:Generator_ColumnVarNameInTable="columnFINITURA" msprop:Generator_ColumnPropNameInRow="FINITURA" msprop:Generator_ColumnPropNameInTable="FINITURAColumn" msprop:Generator_UserColumnName="FINITURA">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="MATERIALE" msprop:Generator_ColumnVarNameInTable="columnMATERIALE" msprop:Generator_ColumnPropNameInRow="MATERIALE" msprop:Generator_ColumnPropNameInTable="MATERIALEColumn" msprop:Generator_UserColumnName="MATERIALE">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="PEZZIBARRA" msprop:Generator_ColumnVarNameInTable="columnPEZZIBARRA" msprop:Generator_ColumnPropNameInRow="PEZZIBARRA" msprop:Generator_ColumnPropNameInTable="PEZZIBARRAColumn" msprop:Generator_UserColumnName="PEZZIBARRA" type="xs:decimal" minOccurs="0" />
-              <xs:element name="SUPERFICIE" msprop:Generator_ColumnVarNameInTable="columnSUPERFICIE" msprop:Generator_ColumnPropNameInRow="SUPERFICIE" msprop:Generator_ColumnPropNameInTable="SUPERFICIEColumn" msprop:Generator_UserColumnName="SUPERFICIE" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="GALVANICA" msprop:Generator_ColumnVarNameInTable="columnGALVANICA" msprop:Generator_ColumnPropNameInRow="GALVANICA" msprop:Generator_ColumnPropNameInTable="GALVANICAColumn" msprop:Generator_UserColumnName="GALVANICA">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="AP_GALVANICA_PIANO" msprop:Generator_TableClassName="AP_GALVANICA_PIANODataTable" msprop:Generator_TableVarName="tableAP_GALVANICA_PIANO" msprop:Generator_TablePropName="AP_GALVANICA_PIANO" msprop:Generator_RowDeletingName="AP_GALVANICA_PIANORowDeleting" msprop:Generator_RowChangingName="AP_GALVANICA_PIANORowChanging" msprop:Generator_RowEvHandlerName="AP_GALVANICA_PIANORowChangeEventHandler" msprop:Generator_RowDeletedName="AP_GALVANICA_PIANORowDeleted" msprop:Generator_UserTableName="AP_GALVANICA_PIANO" msprop:Generator_RowChangedName="AP_GALVANICA_PIANORowChanged" msprop:Generator_RowEvArgName="AP_GALVANICA_PIANORowChangeEvent" msprop:Generator_RowClassName="AP_GALVANICA_PIANORow">
           <xs:complexType>
             <xs:sequence>
@@ -474,6 +404,107 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="AP_GALVANICA_MODELLO" msprop:Generator_TableClassName="AP_GALVANICA_MODELLODataTable" msprop:Generator_TableVarName="tableAP_GALVANICA_MODELLO" msprop:Generator_RowChangedName="AP_GALVANICA_MODELLORowChanged" msprop:Generator_TablePropName="AP_GALVANICA_MODELLO" msprop:Generator_RowDeletingName="AP_GALVANICA_MODELLORowDeleting" msprop:Generator_RowChangingName="AP_GALVANICA_MODELLORowChanging" msprop:Generator_RowEvHandlerName="AP_GALVANICA_MODELLORowChangeEventHandler" msprop:Generator_RowDeletedName="AP_GALVANICA_MODELLORowDeleted" msprop:Generator_RowClassName="AP_GALVANICA_MODELLORow" msprop:Generator_UserTableName="AP_GALVANICA_MODELLO" msprop:Generator_RowEvArgName="AP_GALVANICA_MODELLORowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDGALVAMODEL" msprop:Generator_ColumnVarNameInTable="columnIDGALVAMODEL" msprop:Generator_ColumnPropNameInRow="IDGALVAMODEL" msprop:Generator_ColumnPropNameInTable="IDGALVAMODELColumn" msprop:Generator_UserColumnName="IDGALVAMODEL" type="xs:decimal" />
+              <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDMAGAZZ_WIP" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ_WIP" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ_WIP" msprop:Generator_ColumnPropNameInTable="IDMAGAZZ_WIPColumn" msprop:Generator_UserColumnName="IDMAGAZZ_WIP">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODELLO" msprop:Generator_ColumnVarNameInTable="columnMODELLO" msprop:Generator_ColumnPropNameInRow="MODELLO" msprop:Generator_ColumnPropNameInTable="MODELLOColumn" msprop:Generator_UserColumnName="MODELLO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMPONENTE" msprop:Generator_ColumnVarNameInTable="columnCOMPONENTE" msprop:Generator_ColumnPropNameInRow="COMPONENTE" msprop:Generator_ColumnPropNameInTable="COMPONENTEColumn" msprop:Generator_UserColumnName="COMPONENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRAND" msprop:Generator_ColumnVarNameInTable="columnBRAND" msprop:Generator_ColumnPropNameInRow="BRAND" msprop:Generator_ColumnPropNameInTable="BRANDColumn" msprop:Generator_UserColumnName="BRAND">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FINITURA" msprop:Generator_ColumnVarNameInTable="columnFINITURA" msprop:Generator_ColumnPropNameInRow="FINITURA" msprop:Generator_ColumnPropNameInTable="FINITURAColumn" msprop:Generator_UserColumnName="FINITURA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MATERIALE" msprop:Generator_ColumnVarNameInTable="columnMATERIALE" msprop:Generator_ColumnPropNameInRow="MATERIALE" msprop:Generator_ColumnPropNameInTable="MATERIALEColumn" msprop:Generator_UserColumnName="MATERIALE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PEZZIBARRA" msprop:Generator_ColumnVarNameInTable="columnPEZZIBARRA" msprop:Generator_ColumnPropNameInRow="PEZZIBARRA" msprop:Generator_ColumnPropNameInTable="PEZZIBARRAColumn" msprop:Generator_UserColumnName="PEZZIBARRA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SUPERFICIE" msprop:Generator_ColumnVarNameInTable="columnSUPERFICIE" msprop:Generator_ColumnPropNameInRow="SUPERFICIE" msprop:Generator_ColumnPropNameInTable="SUPERFICIEColumn" msprop:Generator_UserColumnName="SUPERFICIE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GALVANICA" msprop:Generator_ColumnVarNameInTable="columnGALVANICA" msprop:Generator_ColumnPropNameInRow="GALVANICA" msprop:Generator_ColumnPropNameInTable="GALVANICAColumn" msprop:Generator_UserColumnName="GALVANICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FINITURA_ORDINE" msprop:Generator_TableClassName="FINITURA_ORDINEDataTable" msprop:Generator_TableVarName="tableFINITURA_ORDINE" msprop:Generator_TablePropName="FINITURA_ORDINE" msprop:Generator_RowDeletingName="FINITURA_ORDINERowDeleting" msprop:Generator_RowChangingName="FINITURA_ORDINERowChanging" msprop:Generator_RowEvHandlerName="FINITURA_ORDINERowChangeEventHandler" msprop:Generator_RowDeletedName="FINITURA_ORDINERowDeleted" msprop:Generator_UserTableName="FINITURA_ORDINE" msprop:Generator_RowChangedName="FINITURA_ORDINERowChanged" msprop:Generator_RowEvArgName="FINITURA_ORDINERowChangeEvent" msprop:Generator_RowClassName="FINITURA_ORDINERow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFINITURA" msprop:Generator_ColumnVarNameInTable="columnIDFINITURA" msprop:Generator_ColumnPropNameInRow="IDFINITURA" msprop:Generator_ColumnPropNameInTable="IDFINITURAColumn" msprop:Generator_UserColumnName="IDFINITURA" type="xs:decimal" />
+              <xs:element name="FINITURA" msprop:Generator_ColumnVarNameInTable="columnFINITURA" msprop:Generator_ColumnPropNameInRow="FINITURA" msprop:Generator_ColumnPropNameInTable="FINITURAColumn" msprop:Generator_UserColumnName="FINITURA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BRAND" msprop:Generator_ColumnVarNameInTable="columnBRAND" msprop:Generator_ColumnPropNameInRow="BRAND" msprop:Generator_ColumnPropNameInTable="BRANDColumn" msprop:Generator_UserColumnName="BRAND" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDGRUPPO" msprop:Generator_ColumnPropNameInRow="IDGRUPPO" msprop:Generator_ColumnPropNameInTable="IDGRUPPOColumn" msprop:Generator_UserColumnName="IDGRUPPO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ORDINE" msprop:Generator_ColumnVarNameInTable="columnORDINE" msprop:Generator_ColumnPropNameInRow="ORDINE" msprop:Generator_ColumnPropNameInTable="ORDINEColumn" msprop:Generator_UserColumnName="ORDINE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -483,6 +514,10 @@
     <xs:unique name="AP_GALVANICA_PIANO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:AP_GALVANICA_PIANO" />
       <xs:field xpath="mstns:IDGALVAPIANO" />
+    </xs:unique>
+    <xs:unique name="FINITURA_ORDINE_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FINITURA_ORDINE" />
+      <xs:field xpath="mstns:IDFINITURA" />
     </xs:unique>
   </xs:element>
 </xs:schema>

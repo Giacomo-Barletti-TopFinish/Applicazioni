@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml;
+﻿using Applicazioni.Entities;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System;
@@ -13,6 +14,88 @@ namespace Applicazioni.Helpers
 {
     public class ExcelHelper
     {
+
+        public byte[] CreaExcelPianificazioneGalvanica(GalvanicaDS ds)
+        {
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+            
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                Columns columns = new Columns();
+                for (int i = 0; i < 11; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 15;
+                    c.CustomWidth = true;
+
+                    columns.Append(c);
+                }
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Pianificazione" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+                List<int> colonneDaScartare = new List<int>(new int[] { 0, 1, 2, 13, 15 });
+                Row row = new Row();
+                int numeroColonne = ds.AP_GALVANICA_PIANO.Columns.Count;
+                for (int i = 0; i < numeroColonne; i++)
+                {
+                    if (colonneDaScartare.Contains(i)) continue;
+
+                    string etichetta = ds.AP_GALVANICA_PIANO.Columns[i].ColumnName;
+                    row.Append(ConstructCell(etichetta, CellValues.String, 2));
+                }
+
+                // Insert the header row to the Sheet Data
+                sheetData.AppendChild(row);
+                foreach(GalvanicaDS.AP_GALVANICA_PIANORow riga in ds.AP_GALVANICA_PIANO)
+                {
+                    Row rowDati = new Row();
+                    for (int i = 0; i < numeroColonne; i++)
+                    {
+                        if (colonneDaScartare.Contains(i)) continue;
+                        string valore = riga[i].ToString();
+                        rowDati.Append(ConstructCell(valore, CellValues.String, 1));
+                    }
+
+                    sheetData.AppendChild(rowDati);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+
+            return content;
+        }
+
         public static void InsertText(string docName, string colonna, int riga, string text, bool isNumeric)
         {
             // Open the document for editing.
@@ -44,7 +127,7 @@ namespace Applicazioni.Helpers
                 // Set the value of cell A1.
                 if (isNumeric)
                 {
-                    cell.CellValue = new CellValue(text.Replace(',','.'));
+                    cell.CellValue = new CellValue(text.Replace(',', '.'));
                     cell.DataType = new EnumValue<CellValues>(CellValues.Number);
                 }
                 else

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,72 @@ namespace Applicazioni.Data.Galvanica
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
+
+        public void FillAP_GALVANICA_MODELLO(GalvanicaDS ds, string IDMAGAZZ_Lancio, string IDMAGAZZ_WIP)
+        {
+            string select = @"  SELECT * FROM AP_GALVANICA_MODELLO WHERE IDMAGAZZ = $P{LANCIO} AND IDMAGAZZ_WIP = $P{IDMAGAZZ_WIP}";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("LANCIO", DbType.String, IDMAGAZZ_Lancio);
+            ps.AddParam("IDMAGAZZ_WIP", DbType.String, IDMAGAZZ_WIP);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.AP_GALVANICA_MODELLO);
+            }
+        }
+
+        public void FillFINITURA_ORDINE(GalvanicaDS ds)
+        {
+            string select = @"  SELECT * FROM FINITURA_ORDINE";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.FINITURA_ORDINE);
+            }
+        }
+        public void UpdateTable(string tablename, GalvanicaDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                try
+                {
+                    a.ContinueUpdateOnError = false;
+                    DataTable dt = ds.Tables[tablename];
+                    DbCommandBuilder cmd = BuildCommandBuilder(a);
+                    a.UpdateCommand = cmd.GetUpdateCommand();
+                    a.DeleteCommand = cmd.GetDeleteCommand();
+                    a.InsertCommand = cmd.GetInsertCommand();
+                    a.Update(dt);
+                }
+                catch (DBConcurrencyException ex)
+                {
+
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
+        public void FillAP_GALVANICA_PIANO(GalvanicaDS ds, DateTime data)
+        {
+            string select = @"  SELECT * FROM AP_GALVANICA_PIANO WHERE DATAGALVANICA >= to_date('{0}','DD/MM/YYYY HH24:MI:SS') AND DATAGALVANICA <= to_date('{1}','DD/MM/YYYY HH24:MI:SS')";
+
+            string dtInizio = data.ToString("dd/MM/yyyy");
+            dtInizio += " 00:00:00";
+            string dtFine = data.ToString("dd/MM/yyyy");
+            dtFine += " 23:59:59";
+            select = string.Format(select, dtInizio, dtFine);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.AP_GALVANICA_PIANO);
             }
         }
     }

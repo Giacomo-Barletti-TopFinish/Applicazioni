@@ -26,9 +26,11 @@ namespace Applicazioni.Entities {
         
         private USR_PRD_MOVFASIDataTable tableUSR_PRD_MOVFASI;
         
+        private AP_GALVANICA_PIANODataTable tableAP_GALVANICA_PIANO;
+        
         private AP_GALVANICA_MODELLODataTable tableAP_GALVANICA_MODELLO;
         
-        private AP_GALVANICA_PIANODataTable tableAP_GALVANICA_PIANO;
+        private FINITURA_ORDINEDataTable tableFINITURA_ORDINE;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -61,11 +63,14 @@ namespace Applicazioni.Entities {
                 if ((ds.Tables["USR_PRD_MOVFASI"] != null)) {
                     base.Tables.Add(new USR_PRD_MOVFASIDataTable(ds.Tables["USR_PRD_MOVFASI"]));
                 }
+                if ((ds.Tables["AP_GALVANICA_PIANO"] != null)) {
+                    base.Tables.Add(new AP_GALVANICA_PIANODataTable(ds.Tables["AP_GALVANICA_PIANO"]));
+                }
                 if ((ds.Tables["AP_GALVANICA_MODELLO"] != null)) {
                     base.Tables.Add(new AP_GALVANICA_MODELLODataTable(ds.Tables["AP_GALVANICA_MODELLO"]));
                 }
-                if ((ds.Tables["AP_GALVANICA_PIANO"] != null)) {
-                    base.Tables.Add(new AP_GALVANICA_PIANODataTable(ds.Tables["AP_GALVANICA_PIANO"]));
+                if ((ds.Tables["FINITURA_ORDINE"] != null)) {
+                    base.Tables.Add(new FINITURA_ORDINEDataTable(ds.Tables["FINITURA_ORDINE"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -99,6 +104,16 @@ namespace Applicazioni.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public AP_GALVANICA_PIANODataTable AP_GALVANICA_PIANO {
+            get {
+                return this.tableAP_GALVANICA_PIANO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public AP_GALVANICA_MODELLODataTable AP_GALVANICA_MODELLO {
             get {
                 return this.tableAP_GALVANICA_MODELLO;
@@ -109,9 +124,9 @@ namespace Applicazioni.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public AP_GALVANICA_PIANODataTable AP_GALVANICA_PIANO {
+        public FINITURA_ORDINEDataTable FINITURA_ORDINE {
             get {
-                return this.tableAP_GALVANICA_PIANO;
+                return this.tableFINITURA_ORDINE;
             }
         }
         
@@ -185,11 +200,14 @@ namespace Applicazioni.Entities {
                 if ((ds.Tables["USR_PRD_MOVFASI"] != null)) {
                     base.Tables.Add(new USR_PRD_MOVFASIDataTable(ds.Tables["USR_PRD_MOVFASI"]));
                 }
+                if ((ds.Tables["AP_GALVANICA_PIANO"] != null)) {
+                    base.Tables.Add(new AP_GALVANICA_PIANODataTable(ds.Tables["AP_GALVANICA_PIANO"]));
+                }
                 if ((ds.Tables["AP_GALVANICA_MODELLO"] != null)) {
                     base.Tables.Add(new AP_GALVANICA_MODELLODataTable(ds.Tables["AP_GALVANICA_MODELLO"]));
                 }
-                if ((ds.Tables["AP_GALVANICA_PIANO"] != null)) {
-                    base.Tables.Add(new AP_GALVANICA_PIANODataTable(ds.Tables["AP_GALVANICA_PIANO"]));
+                if ((ds.Tables["FINITURA_ORDINE"] != null)) {
+                    base.Tables.Add(new FINITURA_ORDINEDataTable(ds.Tables["FINITURA_ORDINE"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -230,16 +248,22 @@ namespace Applicazioni.Entities {
                     this.tableUSR_PRD_MOVFASI.InitVars();
                 }
             }
+            this.tableAP_GALVANICA_PIANO = ((AP_GALVANICA_PIANODataTable)(base.Tables["AP_GALVANICA_PIANO"]));
+            if ((initTable == true)) {
+                if ((this.tableAP_GALVANICA_PIANO != null)) {
+                    this.tableAP_GALVANICA_PIANO.InitVars();
+                }
+            }
             this.tableAP_GALVANICA_MODELLO = ((AP_GALVANICA_MODELLODataTable)(base.Tables["AP_GALVANICA_MODELLO"]));
             if ((initTable == true)) {
                 if ((this.tableAP_GALVANICA_MODELLO != null)) {
                     this.tableAP_GALVANICA_MODELLO.InitVars();
                 }
             }
-            this.tableAP_GALVANICA_PIANO = ((AP_GALVANICA_PIANODataTable)(base.Tables["AP_GALVANICA_PIANO"]));
+            this.tableFINITURA_ORDINE = ((FINITURA_ORDINEDataTable)(base.Tables["FINITURA_ORDINE"]));
             if ((initTable == true)) {
-                if ((this.tableAP_GALVANICA_PIANO != null)) {
-                    this.tableAP_GALVANICA_PIANO.InitVars();
+                if ((this.tableFINITURA_ORDINE != null)) {
+                    this.tableFINITURA_ORDINE.InitVars();
                 }
             }
         }
@@ -254,15 +278,23 @@ namespace Applicazioni.Entities {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableUSR_PRD_MOVFASI = new USR_PRD_MOVFASIDataTable();
             base.Tables.Add(this.tableUSR_PRD_MOVFASI);
-            this.tableAP_GALVANICA_MODELLO = new AP_GALVANICA_MODELLODataTable();
-            base.Tables.Add(this.tableAP_GALVANICA_MODELLO);
             this.tableAP_GALVANICA_PIANO = new AP_GALVANICA_PIANODataTable();
             base.Tables.Add(this.tableAP_GALVANICA_PIANO);
+            this.tableAP_GALVANICA_MODELLO = new AP_GALVANICA_MODELLODataTable();
+            base.Tables.Add(this.tableAP_GALVANICA_MODELLO);
+            this.tableFINITURA_ORDINE = new FINITURA_ORDINEDataTable();
+            base.Tables.Add(this.tableFINITURA_ORDINE);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeUSR_PRD_MOVFASI() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeAP_GALVANICA_PIANO() {
             return false;
         }
         
@@ -274,7 +306,7 @@ namespace Applicazioni.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeAP_GALVANICA_PIANO() {
+        private bool ShouldSerializeFINITURA_ORDINE() {
             return false;
         }
         
@@ -337,10 +369,13 @@ namespace Applicazioni.Entities {
         public delegate void USR_PRD_MOVFASIRowChangeEventHandler(object sender, USR_PRD_MOVFASIRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void AP_GALVANICA_PIANORowChangeEventHandler(object sender, AP_GALVANICA_PIANORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void AP_GALVANICA_MODELLORowChangeEventHandler(object sender, AP_GALVANICA_MODELLORowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void AP_GALVANICA_PIANORowChangeEventHandler(object sender, AP_GALVANICA_PIANORowChangeEvent e);
+        public delegate void FINITURA_ORDINERowChangeEventHandler(object sender, FINITURA_ORDINERowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1939,396 +1974,6 @@ namespace Applicazioni.Entities {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class AP_GALVANICA_MODELLODataTable : global::System.Data.TypedTableBase<AP_GALVANICA_MODELLORow> {
-            
-            private global::System.Data.DataColumn columnIDMAGAZZ;
-            
-            private global::System.Data.DataColumn columnIDMAGAZZ_WIP;
-            
-            private global::System.Data.DataColumn columnMODELLO;
-            
-            private global::System.Data.DataColumn columnCOMPONENTE;
-            
-            private global::System.Data.DataColumn columnBRAND;
-            
-            private global::System.Data.DataColumn columnFINITURA;
-            
-            private global::System.Data.DataColumn columnMATERIALE;
-            
-            private global::System.Data.DataColumn columnPEZZIBARRA;
-            
-            private global::System.Data.DataColumn columnSUPERFICIE;
-            
-            private global::System.Data.DataColumn columnGALVANICA;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_GALVANICA_MODELLODataTable() {
-                this.TableName = "AP_GALVANICA_MODELLO";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal AP_GALVANICA_MODELLODataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected AP_GALVANICA_MODELLODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDMAGAZZColumn {
-                get {
-                    return this.columnIDMAGAZZ;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDMAGAZZ_WIPColumn {
-                get {
-                    return this.columnIDMAGAZZ_WIP;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn MODELLOColumn {
-                get {
-                    return this.columnMODELLO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn COMPONENTEColumn {
-                get {
-                    return this.columnCOMPONENTE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn BRANDColumn {
-                get {
-                    return this.columnBRAND;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn FINITURAColumn {
-                get {
-                    return this.columnFINITURA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn MATERIALEColumn {
-                get {
-                    return this.columnMATERIALE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn PEZZIBARRAColumn {
-                get {
-                    return this.columnPEZZIBARRA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SUPERFICIEColumn {
-                get {
-                    return this.columnSUPERFICIE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn GALVANICAColumn {
-                get {
-                    return this.columnGALVANICA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_GALVANICA_MODELLORow this[int index] {
-                get {
-                    return ((AP_GALVANICA_MODELLORow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddAP_GALVANICA_MODELLORow(AP_GALVANICA_MODELLORow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_GALVANICA_MODELLORow AddAP_GALVANICA_MODELLORow(string IDMAGAZZ, string IDMAGAZZ_WIP, string MODELLO, string COMPONENTE, string BRAND, string FINITURA, string MATERIALE, decimal PEZZIBARRA, string SUPERFICIE, string GALVANICA) {
-                AP_GALVANICA_MODELLORow rowAP_GALVANICA_MODELLORow = ((AP_GALVANICA_MODELLORow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        IDMAGAZZ,
-                        IDMAGAZZ_WIP,
-                        MODELLO,
-                        COMPONENTE,
-                        BRAND,
-                        FINITURA,
-                        MATERIALE,
-                        PEZZIBARRA,
-                        SUPERFICIE,
-                        GALVANICA};
-                rowAP_GALVANICA_MODELLORow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowAP_GALVANICA_MODELLORow);
-                return rowAP_GALVANICA_MODELLORow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                AP_GALVANICA_MODELLODataTable cln = ((AP_GALVANICA_MODELLODataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new AP_GALVANICA_MODELLODataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal void InitVars() {
-                this.columnIDMAGAZZ = base.Columns["IDMAGAZZ"];
-                this.columnIDMAGAZZ_WIP = base.Columns["IDMAGAZZ_WIP"];
-                this.columnMODELLO = base.Columns["MODELLO"];
-                this.columnCOMPONENTE = base.Columns["COMPONENTE"];
-                this.columnBRAND = base.Columns["BRAND"];
-                this.columnFINITURA = base.Columns["FINITURA"];
-                this.columnMATERIALE = base.Columns["MATERIALE"];
-                this.columnPEZZIBARRA = base.Columns["PEZZIBARRA"];
-                this.columnSUPERFICIE = base.Columns["SUPERFICIE"];
-                this.columnGALVANICA = base.Columns["GALVANICA"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            private void InitClass() {
-                this.columnIDMAGAZZ = new global::System.Data.DataColumn("IDMAGAZZ", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDMAGAZZ);
-                this.columnIDMAGAZZ_WIP = new global::System.Data.DataColumn("IDMAGAZZ_WIP", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDMAGAZZ_WIP);
-                this.columnMODELLO = new global::System.Data.DataColumn("MODELLO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMODELLO);
-                this.columnCOMPONENTE = new global::System.Data.DataColumn("COMPONENTE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOMPONENTE);
-                this.columnBRAND = new global::System.Data.DataColumn("BRAND", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnBRAND);
-                this.columnFINITURA = new global::System.Data.DataColumn("FINITURA", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFINITURA);
-                this.columnMATERIALE = new global::System.Data.DataColumn("MATERIALE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMATERIALE);
-                this.columnPEZZIBARRA = new global::System.Data.DataColumn("PEZZIBARRA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPEZZIBARRA);
-                this.columnSUPERFICIE = new global::System.Data.DataColumn("SUPERFICIE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSUPERFICIE);
-                this.columnGALVANICA = new global::System.Data.DataColumn("GALVANICA", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnGALVANICA);
-                this.columnIDMAGAZZ.AllowDBNull = false;
-                this.columnIDMAGAZZ.MaxLength = 10;
-                this.columnIDMAGAZZ_WIP.AllowDBNull = false;
-                this.columnIDMAGAZZ_WIP.MaxLength = 10;
-                this.columnMODELLO.AllowDBNull = false;
-                this.columnMODELLO.MaxLength = 30;
-                this.columnCOMPONENTE.AllowDBNull = false;
-                this.columnCOMPONENTE.MaxLength = 30;
-                this.columnBRAND.AllowDBNull = false;
-                this.columnBRAND.MaxLength = 20;
-                this.columnFINITURA.AllowDBNull = false;
-                this.columnFINITURA.MaxLength = 20;
-                this.columnMATERIALE.AllowDBNull = false;
-                this.columnMATERIALE.MaxLength = 20;
-                this.columnSUPERFICIE.MaxLength = 10;
-                this.columnGALVANICA.AllowDBNull = false;
-                this.columnGALVANICA.MaxLength = 20;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_GALVANICA_MODELLORow NewAP_GALVANICA_MODELLORow() {
-                return ((AP_GALVANICA_MODELLORow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new AP_GALVANICA_MODELLORow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(AP_GALVANICA_MODELLORow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.AP_GALVANICA_MODELLORowChanged != null)) {
-                    this.AP_GALVANICA_MODELLORowChanged(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.AP_GALVANICA_MODELLORowChanging != null)) {
-                    this.AP_GALVANICA_MODELLORowChanging(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.AP_GALVANICA_MODELLORowDeleted != null)) {
-                    this.AP_GALVANICA_MODELLORowDeleted(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.AP_GALVANICA_MODELLORowDeleting != null)) {
-                    this.AP_GALVANICA_MODELLORowDeleting(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveAP_GALVANICA_MODELLORow(AP_GALVANICA_MODELLORow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                GalvanicaDS ds = new GalvanicaDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "AP_GALVANICA_MODELLODataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class AP_GALVANICA_PIANODataTable : global::System.Data.TypedTableBase<AP_GALVANICA_PIANORow> {
             
             private global::System.Data.DataColumn columnIDGALVAPIANO;
@@ -2785,6 +2430,743 @@ namespace Applicazioni.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "AP_GALVANICA_PIANODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class AP_GALVANICA_MODELLODataTable : global::System.Data.TypedTableBase<AP_GALVANICA_MODELLORow> {
+            
+            private global::System.Data.DataColumn columnIDGALVAMODEL;
+            
+            private global::System.Data.DataColumn columnIDMAGAZZ;
+            
+            private global::System.Data.DataColumn columnIDMAGAZZ_WIP;
+            
+            private global::System.Data.DataColumn columnMODELLO;
+            
+            private global::System.Data.DataColumn columnCOMPONENTE;
+            
+            private global::System.Data.DataColumn columnBRAND;
+            
+            private global::System.Data.DataColumn columnFINITURA;
+            
+            private global::System.Data.DataColumn columnMATERIALE;
+            
+            private global::System.Data.DataColumn columnPEZZIBARRA;
+            
+            private global::System.Data.DataColumn columnSUPERFICIE;
+            
+            private global::System.Data.DataColumn columnGALVANICA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public AP_GALVANICA_MODELLODataTable() {
+                this.TableName = "AP_GALVANICA_MODELLO";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal AP_GALVANICA_MODELLODataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected AP_GALVANICA_MODELLODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDGALVAMODELColumn {
+                get {
+                    return this.columnIDGALVAMODEL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDMAGAZZColumn {
+                get {
+                    return this.columnIDMAGAZZ;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDMAGAZZ_WIPColumn {
+                get {
+                    return this.columnIDMAGAZZ_WIP;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MODELLOColumn {
+                get {
+                    return this.columnMODELLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COMPONENTEColumn {
+                get {
+                    return this.columnCOMPONENTE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn BRANDColumn {
+                get {
+                    return this.columnBRAND;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn FINITURAColumn {
+                get {
+                    return this.columnFINITURA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MATERIALEColumn {
+                get {
+                    return this.columnMATERIALE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PEZZIBARRAColumn {
+                get {
+                    return this.columnPEZZIBARRA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SUPERFICIEColumn {
+                get {
+                    return this.columnSUPERFICIE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn GALVANICAColumn {
+                get {
+                    return this.columnGALVANICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public AP_GALVANICA_MODELLORow this[int index] {
+                get {
+                    return ((AP_GALVANICA_MODELLORow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event AP_GALVANICA_MODELLORowChangeEventHandler AP_GALVANICA_MODELLORowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddAP_GALVANICA_MODELLORow(AP_GALVANICA_MODELLORow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public AP_GALVANICA_MODELLORow AddAP_GALVANICA_MODELLORow(decimal IDGALVAMODEL, string IDMAGAZZ, string IDMAGAZZ_WIP, string MODELLO, string COMPONENTE, string BRAND, string FINITURA, string MATERIALE, decimal PEZZIBARRA, string SUPERFICIE, string GALVANICA) {
+                AP_GALVANICA_MODELLORow rowAP_GALVANICA_MODELLORow = ((AP_GALVANICA_MODELLORow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDGALVAMODEL,
+                        IDMAGAZZ,
+                        IDMAGAZZ_WIP,
+                        MODELLO,
+                        COMPONENTE,
+                        BRAND,
+                        FINITURA,
+                        MATERIALE,
+                        PEZZIBARRA,
+                        SUPERFICIE,
+                        GALVANICA};
+                rowAP_GALVANICA_MODELLORow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAP_GALVANICA_MODELLORow);
+                return rowAP_GALVANICA_MODELLORow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                AP_GALVANICA_MODELLODataTable cln = ((AP_GALVANICA_MODELLODataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new AP_GALVANICA_MODELLODataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDGALVAMODEL = base.Columns["IDGALVAMODEL"];
+                this.columnIDMAGAZZ = base.Columns["IDMAGAZZ"];
+                this.columnIDMAGAZZ_WIP = base.Columns["IDMAGAZZ_WIP"];
+                this.columnMODELLO = base.Columns["MODELLO"];
+                this.columnCOMPONENTE = base.Columns["COMPONENTE"];
+                this.columnBRAND = base.Columns["BRAND"];
+                this.columnFINITURA = base.Columns["FINITURA"];
+                this.columnMATERIALE = base.Columns["MATERIALE"];
+                this.columnPEZZIBARRA = base.Columns["PEZZIBARRA"];
+                this.columnSUPERFICIE = base.Columns["SUPERFICIE"];
+                this.columnGALVANICA = base.Columns["GALVANICA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDGALVAMODEL = new global::System.Data.DataColumn("IDGALVAMODEL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDGALVAMODEL);
+                this.columnIDMAGAZZ = new global::System.Data.DataColumn("IDMAGAZZ", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDMAGAZZ);
+                this.columnIDMAGAZZ_WIP = new global::System.Data.DataColumn("IDMAGAZZ_WIP", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDMAGAZZ_WIP);
+                this.columnMODELLO = new global::System.Data.DataColumn("MODELLO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMODELLO);
+                this.columnCOMPONENTE = new global::System.Data.DataColumn("COMPONENTE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOMPONENTE);
+                this.columnBRAND = new global::System.Data.DataColumn("BRAND", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBRAND);
+                this.columnFINITURA = new global::System.Data.DataColumn("FINITURA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFINITURA);
+                this.columnMATERIALE = new global::System.Data.DataColumn("MATERIALE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMATERIALE);
+                this.columnPEZZIBARRA = new global::System.Data.DataColumn("PEZZIBARRA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPEZZIBARRA);
+                this.columnSUPERFICIE = new global::System.Data.DataColumn("SUPERFICIE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSUPERFICIE);
+                this.columnGALVANICA = new global::System.Data.DataColumn("GALVANICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGALVANICA);
+                this.columnIDGALVAMODEL.AllowDBNull = false;
+                this.columnIDMAGAZZ.AllowDBNull = false;
+                this.columnIDMAGAZZ.MaxLength = 10;
+                this.columnIDMAGAZZ_WIP.AllowDBNull = false;
+                this.columnIDMAGAZZ_WIP.MaxLength = 10;
+                this.columnMODELLO.AllowDBNull = false;
+                this.columnMODELLO.MaxLength = 30;
+                this.columnCOMPONENTE.AllowDBNull = false;
+                this.columnCOMPONENTE.MaxLength = 30;
+                this.columnBRAND.AllowDBNull = false;
+                this.columnBRAND.MaxLength = 20;
+                this.columnFINITURA.AllowDBNull = false;
+                this.columnFINITURA.MaxLength = 20;
+                this.columnMATERIALE.AllowDBNull = false;
+                this.columnMATERIALE.MaxLength = 20;
+                this.columnSUPERFICIE.MaxLength = 10;
+                this.columnGALVANICA.AllowDBNull = false;
+                this.columnGALVANICA.MaxLength = 20;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public AP_GALVANICA_MODELLORow NewAP_GALVANICA_MODELLORow() {
+                return ((AP_GALVANICA_MODELLORow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new AP_GALVANICA_MODELLORow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(AP_GALVANICA_MODELLORow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.AP_GALVANICA_MODELLORowChanged != null)) {
+                    this.AP_GALVANICA_MODELLORowChanged(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.AP_GALVANICA_MODELLORowChanging != null)) {
+                    this.AP_GALVANICA_MODELLORowChanging(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.AP_GALVANICA_MODELLORowDeleted != null)) {
+                    this.AP_GALVANICA_MODELLORowDeleted(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.AP_GALVANICA_MODELLORowDeleting != null)) {
+                    this.AP_GALVANICA_MODELLORowDeleting(this, new AP_GALVANICA_MODELLORowChangeEvent(((AP_GALVANICA_MODELLORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveAP_GALVANICA_MODELLORow(AP_GALVANICA_MODELLORow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GalvanicaDS ds = new GalvanicaDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "AP_GALVANICA_MODELLODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class FINITURA_ORDINEDataTable : global::System.Data.TypedTableBase<FINITURA_ORDINERow> {
+            
+            private global::System.Data.DataColumn columnIDFINITURA;
+            
+            private global::System.Data.DataColumn columnFINITURA;
+            
+            private global::System.Data.DataColumn columnBRAND;
+            
+            private global::System.Data.DataColumn columnIDGRUPPO;
+            
+            private global::System.Data.DataColumn columnORDINE;
+            
+            private global::System.Data.DataColumn columnDESCRIZIONE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FINITURA_ORDINEDataTable() {
+                this.TableName = "FINITURA_ORDINE";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal FINITURA_ORDINEDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected FINITURA_ORDINEDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDFINITURAColumn {
+                get {
+                    return this.columnIDFINITURA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn FINITURAColumn {
+                get {
+                    return this.columnFINITURA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn BRANDColumn {
+                get {
+                    return this.columnBRAND;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDGRUPPOColumn {
+                get {
+                    return this.columnIDGRUPPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ORDINEColumn {
+                get {
+                    return this.columnORDINE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESCRIZIONEColumn {
+                get {
+                    return this.columnDESCRIZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FINITURA_ORDINERow this[int index] {
+                get {
+                    return ((FINITURA_ORDINERow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FINITURA_ORDINERowChangeEventHandler FINITURA_ORDINERowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FINITURA_ORDINERowChangeEventHandler FINITURA_ORDINERowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FINITURA_ORDINERowChangeEventHandler FINITURA_ORDINERowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FINITURA_ORDINERowChangeEventHandler FINITURA_ORDINERowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddFINITURA_ORDINERow(FINITURA_ORDINERow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FINITURA_ORDINERow AddFINITURA_ORDINERow(decimal IDFINITURA, string FINITURA, string BRAND, decimal IDGRUPPO, decimal ORDINE, string DESCRIZIONE) {
+                FINITURA_ORDINERow rowFINITURA_ORDINERow = ((FINITURA_ORDINERow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDFINITURA,
+                        FINITURA,
+                        BRAND,
+                        IDGRUPPO,
+                        ORDINE,
+                        DESCRIZIONE};
+                rowFINITURA_ORDINERow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowFINITURA_ORDINERow);
+                return rowFINITURA_ORDINERow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FINITURA_ORDINERow FindByIDFINITURA(decimal IDFINITURA) {
+                return ((FINITURA_ORDINERow)(this.Rows.Find(new object[] {
+                            IDFINITURA})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                FINITURA_ORDINEDataTable cln = ((FINITURA_ORDINEDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new FINITURA_ORDINEDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDFINITURA = base.Columns["IDFINITURA"];
+                this.columnFINITURA = base.Columns["FINITURA"];
+                this.columnBRAND = base.Columns["BRAND"];
+                this.columnIDGRUPPO = base.Columns["IDGRUPPO"];
+                this.columnORDINE = base.Columns["ORDINE"];
+                this.columnDESCRIZIONE = base.Columns["DESCRIZIONE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDFINITURA = new global::System.Data.DataColumn("IDFINITURA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDFINITURA);
+                this.columnFINITURA = new global::System.Data.DataColumn("FINITURA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFINITURA);
+                this.columnBRAND = new global::System.Data.DataColumn("BRAND", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBRAND);
+                this.columnIDGRUPPO = new global::System.Data.DataColumn("IDGRUPPO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDGRUPPO);
+                this.columnORDINE = new global::System.Data.DataColumn("ORDINE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDINE);
+                this.columnDESCRIZIONE = new global::System.Data.DataColumn("DESCRIZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESCRIZIONE);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnIDFINITURA}, true));
+                this.columnIDFINITURA.AllowDBNull = false;
+                this.columnIDFINITURA.Unique = true;
+                this.columnFINITURA.AllowDBNull = false;
+                this.columnFINITURA.MaxLength = 50;
+                this.columnBRAND.MaxLength = 20;
+                this.columnDESCRIZIONE.MaxLength = 150;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FINITURA_ORDINERow NewFINITURA_ORDINERow() {
+                return ((FINITURA_ORDINERow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new FINITURA_ORDINERow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(FINITURA_ORDINERow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.FINITURA_ORDINERowChanged != null)) {
+                    this.FINITURA_ORDINERowChanged(this, new FINITURA_ORDINERowChangeEvent(((FINITURA_ORDINERow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.FINITURA_ORDINERowChanging != null)) {
+                    this.FINITURA_ORDINERowChanging(this, new FINITURA_ORDINERowChangeEvent(((FINITURA_ORDINERow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.FINITURA_ORDINERowDeleted != null)) {
+                    this.FINITURA_ORDINERowDeleted(this, new FINITURA_ORDINERowChangeEvent(((FINITURA_ORDINERow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.FINITURA_ORDINERowDeleting != null)) {
+                    this.FINITURA_ORDINERowDeleting(this, new FINITURA_ORDINERowChangeEvent(((FINITURA_ORDINERow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveFINITURA_ORDINERow(FINITURA_ORDINERow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GalvanicaDS ds = new GalvanicaDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "FINITURA_ORDINEDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4596,165 +4978,6 @@ namespace Applicazioni.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class AP_GALVANICA_MODELLORow : global::System.Data.DataRow {
-            
-            private AP_GALVANICA_MODELLODataTable tableAP_GALVANICA_MODELLO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal AP_GALVANICA_MODELLORow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableAP_GALVANICA_MODELLO = ((AP_GALVANICA_MODELLODataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string IDMAGAZZ {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string IDMAGAZZ_WIP {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZ_WIPColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZ_WIPColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string MODELLO {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.MODELLOColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.MODELLOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string COMPONENTE {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.COMPONENTEColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.COMPONENTEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string BRAND {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.BRANDColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.BRANDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string FINITURA {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.FINITURAColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.FINITURAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string MATERIALE {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.MATERIALEColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.MATERIALEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal PEZZIBARRA {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PEZZIBARRA\' in table \'AP_GALVANICA_MODELLO\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string SUPERFICIE {
-                get {
-                    try {
-                        return ((string)(this[this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SUPERFICIE\' in table \'AP_GALVANICA_MODELLO\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string GALVANICA {
-                get {
-                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.GALVANICAColumn]));
-                }
-                set {
-                    this[this.tableAP_GALVANICA_MODELLO.GALVANICAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsPEZZIBARRANull() {
-                return this.IsNull(this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetPEZZIBARRANull() {
-                this[this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSUPERFICIENull() {
-                return this.IsNull(this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSUPERFICIENull() {
-                this[this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class AP_GALVANICA_PIANORow : global::System.Data.DataRow {
             
             private AP_GALVANICA_PIANODataTable tableAP_GALVANICA_PIANO;
@@ -5063,6 +5286,325 @@ namespace Applicazioni.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class AP_GALVANICA_MODELLORow : global::System.Data.DataRow {
+            
+            private AP_GALVANICA_MODELLODataTable tableAP_GALVANICA_MODELLO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal AP_GALVANICA_MODELLORow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableAP_GALVANICA_MODELLO = ((AP_GALVANICA_MODELLODataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDGALVAMODEL {
+                get {
+                    return ((decimal)(this[this.tableAP_GALVANICA_MODELLO.IDGALVAMODELColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.IDGALVAMODELColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDMAGAZZ {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IDMAGAZZ_WIP {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZ_WIPColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.IDMAGAZZ_WIPColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string MODELLO {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.MODELLOColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.MODELLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string COMPONENTE {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.COMPONENTEColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.COMPONENTEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string BRAND {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.BRANDColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.BRANDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string FINITURA {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.FINITURAColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.FINITURAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string MATERIALE {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.MATERIALEColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.MATERIALEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal PEZZIBARRA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PEZZIBARRA\' in table \'AP_GALVANICA_MODELLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string SUPERFICIE {
+                get {
+                    try {
+                        return ((string)(this[this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SUPERFICIE\' in table \'AP_GALVANICA_MODELLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string GALVANICA {
+                get {
+                    return ((string)(this[this.tableAP_GALVANICA_MODELLO.GALVANICAColumn]));
+                }
+                set {
+                    this[this.tableAP_GALVANICA_MODELLO.GALVANICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPEZZIBARRANull() {
+                return this.IsNull(this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPEZZIBARRANull() {
+                this[this.tableAP_GALVANICA_MODELLO.PEZZIBARRAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSUPERFICIENull() {
+                return this.IsNull(this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSUPERFICIENull() {
+                this[this.tableAP_GALVANICA_MODELLO.SUPERFICIEColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class FINITURA_ORDINERow : global::System.Data.DataRow {
+            
+            private FINITURA_ORDINEDataTable tableFINITURA_ORDINE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal FINITURA_ORDINERow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableFINITURA_ORDINE = ((FINITURA_ORDINEDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDFINITURA {
+                get {
+                    return ((decimal)(this[this.tableFINITURA_ORDINE.IDFINITURAColumn]));
+                }
+                set {
+                    this[this.tableFINITURA_ORDINE.IDFINITURAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string FINITURA {
+                get {
+                    return ((string)(this[this.tableFINITURA_ORDINE.FINITURAColumn]));
+                }
+                set {
+                    this[this.tableFINITURA_ORDINE.FINITURAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string BRAND {
+                get {
+                    try {
+                        return ((string)(this[this.tableFINITURA_ORDINE.BRANDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BRAND\' in table \'FINITURA_ORDINE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFINITURA_ORDINE.BRANDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDGRUPPO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableFINITURA_ORDINE.IDGRUPPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDGRUPPO\' in table \'FINITURA_ORDINE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFINITURA_ORDINE.IDGRUPPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal ORDINE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableFINITURA_ORDINE.ORDINEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORDINE\' in table \'FINITURA_ORDINE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFINITURA_ORDINE.ORDINEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESCRIZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableFINITURA_ORDINE.DESCRIZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESCRIZIONE\' in table \'FINITURA_ORDINE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFINITURA_ORDINE.DESCRIZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsBRANDNull() {
+                return this.IsNull(this.tableFINITURA_ORDINE.BRANDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetBRANDNull() {
+                this[this.tableFINITURA_ORDINE.BRANDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDGRUPPONull() {
+                return this.IsNull(this.tableFINITURA_ORDINE.IDGRUPPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDGRUPPONull() {
+                this[this.tableFINITURA_ORDINE.IDGRUPPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsORDINENull() {
+                return this.IsNull(this.tableFINITURA_ORDINE.ORDINEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetORDINENull() {
+                this[this.tableFINITURA_ORDINE.ORDINEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESCRIZIONENull() {
+                return this.IsNull(this.tableFINITURA_ORDINE.DESCRIZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESCRIZIONENull() {
+                this[this.tableFINITURA_ORDINE.DESCRIZIONEColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -5082,6 +5624,40 @@ namespace Applicazioni.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_PRD_MOVFASIRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class AP_GALVANICA_PIANORowChangeEvent : global::System.EventArgs {
+            
+            private AP_GALVANICA_PIANORow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public AP_GALVANICA_PIANORowChangeEvent(AP_GALVANICA_PIANORow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public AP_GALVANICA_PIANORow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5134,22 +5710,22 @@ namespace Applicazioni.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class AP_GALVANICA_PIANORowChangeEvent : global::System.EventArgs {
+        public class FINITURA_ORDINERowChangeEvent : global::System.EventArgs {
             
-            private AP_GALVANICA_PIANORow eventRow;
+            private FINITURA_ORDINERow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_GALVANICA_PIANORowChangeEvent(AP_GALVANICA_PIANORow row, global::System.Data.DataRowAction action) {
+            public FINITURA_ORDINERowChangeEvent(FINITURA_ORDINERow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_GALVANICA_PIANORow Row {
+            public FINITURA_ORDINERow Row {
                 get {
                     return this.eventRow;
                 }
