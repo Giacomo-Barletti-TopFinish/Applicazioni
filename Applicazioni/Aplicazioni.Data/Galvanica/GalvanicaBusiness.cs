@@ -51,5 +51,11 @@ namespace Applicazioni.Data.Galvanica
             GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
             a.FillAP_GALVANICA_PIANO(ds, data);
         }
+        [DataContext]
+        public void FillGALVANICA_CARICO(GalvanicaDS ds, DateTime data)
+        {
+            GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+            a.FillGALVANICA_CARICO(ds, data);
+        }
     }
 }

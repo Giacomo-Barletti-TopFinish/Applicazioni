@@ -28,26 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtBarcode = new System.Windows.Forms.TextBox();
             this.lblMessaggi = new System.Windows.Forms.Label();
             this.lblSettimana = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.dtGiorno = new System.Windows.Forms.DateTimePicker();
             this.dgvGriglia = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnGiornoSuccessivo = new System.Windows.Forms.Button();
             this.btnGiornoPrecedente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGriglia)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtBarcode
-            // 
-            this.txtBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBarcode.Location = new System.Drawing.Point(442, 17);
-            this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(226, 22);
-            this.txtBarcode.TabIndex = 1;
-            this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
             // 
             // lblMessaggi
             // 
@@ -99,20 +88,10 @@
             this.dgvGriglia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGriglia.Location = new System.Drawing.Point(12, 74);
             this.dgvGriglia.Name = "dgvGriglia";
-            this.dgvGriglia.ReadOnly = true;
             this.dgvGriglia.Size = new System.Drawing.Size(1100, 601);
             this.dgvGriglia.TabIndex = 5;
             this.dgvGriglia.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(379, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 16);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Barcode";
+            this.dgvGriglia.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGriglia_CellValueChanged);
             // 
             // btnGiornoSuccessivo
             // 
@@ -143,9 +122,7 @@
             this.ClientSize = new System.Drawing.Size(1124, 692);
             this.Controls.Add(this.btnGiornoPrecedente);
             this.Controls.Add(this.btnGiornoSuccessivo);
-            this.Controls.Add(this.txtBarcode);
             this.Controls.Add(this.lblMessaggi);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblSettimana);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.dtGiorno);
@@ -160,8 +137,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label lblMessaggi;
         private System.Windows.Forms.Label lblSettimana;
         private System.Windows.Forms.Button btnExport;
@@ -186,7 +161,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA5;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA6;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA7;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnGiornoSuccessivo;
         private System.Windows.Forms.Button btnGiornoPrecedente;
     }

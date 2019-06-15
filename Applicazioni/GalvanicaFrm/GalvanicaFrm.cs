@@ -27,14 +27,11 @@ namespace GalvanicaFrm
             InitializeComponent();
             lblMessaggi.Text = string.Empty;
             dtGiorno.Value = DateTime.Today;
-            txtBarcode.Focus();
         }
 
         private void dtGiorno_ValueChanged(object sender, EventArgs e)
         {
             ImpostaSettimana();
-            txtBarcode.Focus();
-
         }
         private void ImpostaSettimana()
         {
@@ -46,196 +43,80 @@ namespace GalvanicaFrm
             lblSettimana.Text = string.Format("Settimana {0}", settimana);
 
         }
-        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                lblMessaggi.Text = string.Empty;
-                string barcode = txtBarcode.Text;
-                txtBarcode.Text = string.Empty;
-                ElaboraBarcode(barcode);
-            }
-        }
 
-        private void ElaboraBarcode(string barcode)
+        private void AggiornaColoreRiga()
         {
-            try
+            foreach (DataGridViewRow riga in dgvGriglia.Rows)
             {
-                string tipoBarcode = barcode.Substring(0, 3);
-                switch (tipoBarcode)
+                if (riga.Cells[3].Value != DBNull.Value)
                 {
-                    case "ODP":
-                    case "ODL":
-                    case "ODU":
-                    case "RRF":
-                    case "ODM":
-                    case "ODS":
-                        using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
-                        {
-                            bGalvanica.FillUSR_PRD_MOVFASI(_ds, barcode);
-                            GalvanicaDS.USR_PRD_MOVFASIRow odl = _ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == barcode).FirstOrDefault();
-                            if (odl != null)
-                            {
-                                GalvanicaModelloComponenteFrm form = new GalvanicaModelloComponenteFrm(odl);
-                                GalvanicaDS.AP_GALVANICA_MODELLORow modelloRow = bGalvanica.GetAP_GALVANICA_MODELLO(_ds, odl.IDMAGAZZ_LANCIO, odl.IDMAGAZZ_WIP);
-                                if (modelloRow != null)
-                                {
-                                    form.Superficie = modelloRow.SUPERFICIE;
-                                    form.Brand = modelloRow.BRAND;
-                                    form.Finitura = modelloRow.FINITURA;
-                                    form.Galvanica = modelloRow.GALVANICA;
-                                    form.PezziBarra = modelloRow.PEZZIBARRA;
-                                    form.Materiale = modelloRow.MATERIALE;
-                                }
-                                else
-                                {
-                                    AnagraficaDS.MAGAZZRow articolo = _anagrafica.GetMAGAZZ(odl.IDMAGAZZ_WIP);
-                                    form.Superficie = articolo.SUPERFICIE.ToString();
-                                }
-
-                                if (form.ShowDialog() == DialogResult.Cancel)
-                                {
-                                    txtBarcode.Focus();
-                                    return;
-                                }
-
-                                if (modelloRow == null)
-                                {
-                                    modelloRow = _ds.AP_GALVANICA_MODELLO.NewAP_GALVANICA_MODELLORow();
-                                    modelloRow.IDGALVAMODEL = bGalvanica.GetID();
-                                    modelloRow.IDMAGAZZ = odl.IDMAGAZZ_LANCIO;
-                                    modelloRow.IDMAGAZZ_WIP = odl.IDMAGAZZ_WIP;
-                                    modelloRow.SUPERFICIE = form.Superficie;
-                                    modelloRow.BRAND = form.Brand;
-                                    modelloRow.FINITURA = form.Finitura;
-                                    modelloRow.GALVANICA = form.Galvanica;
-                                    modelloRow.PEZZIBARRA = form.PezziBarra;
-                                    modelloRow.MATERIALE = form.Materiale;
-                                    modelloRow.MODELLO = odl.MODELLO_LANCIO;
-                                    modelloRow.COMPONENTE = odl.MODELLO_WIP;
-                                    _ds.AP_GALVANICA_MODELLO.AddAP_GALVANICA_MODELLORow(modelloRow);
-                                }
-                                else
-                                {
-                                    modelloRow.SUPERFICIE = form.Superficie;
-                                    modelloRow.BRAND = form.Brand;
-                                    modelloRow.FINITURA = form.Finitura;
-                                    modelloRow.GALVANICA = form.Galvanica;
-                                    modelloRow.PEZZIBARRA = form.PezziBarra;
-                                    modelloRow.MATERIALE = form.Materiale;
-                                }
-                                bGalvanica.UpdateTable(_ds.AP_GALVANICA_MODELLO.TableName, _ds);
-
-                                PopolaGriglia(modelloRow, odl);
-                                bGalvanica.UpdateTable(_ds.AP_GALVANICA_PIANO.TableName, _ds);
-                            }
-                        }
-                        break;
+                    string reparto = (string)riga.Cells[3].Value;
+                    if (reparto != "INTERNO")
+                        riga.DefaultCellStyle.ForeColor = Color.Red;
                 }
-                txtBarcode.Focus();
-            }
-            catch (Exception ex)
-            {
-                MostraEccezione(ex, "Errore in elabora barcode");
-            }
-        }
-
-        private void PopolaGriglia(GalvanicaDS.AP_GALVANICA_MODELLORow modelloRow, GalvanicaDS.USR_PRD_MOVFASIRow odl)
-        {
-            GalvanicaDS.AP_GALVANICA_PIANORow riga = _ds.AP_GALVANICA_PIANO.Where(x => x.IDMAGAZZ == odl.IDMAGAZZ_LANCIO && x.IDMAGAZZ_WIP == odl.IDMAGAZZ_WIP && x.GALVANICA == modelloRow.GALVANICA).FirstOrDefault();
-            if (riga == null)
-            {
-                GalvanicaDS.FINITURA_ORDINERow ordine = _ds.FINITURA_ORDINE.Where(x => x.BRAND == modelloRow.BRAND && x.FINITURA == modelloRow.FINITURA).FirstOrDefault();
-                riga = _ds.AP_GALVANICA_PIANO.NewAP_GALVANICA_PIANORow();
-                using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
-                    riga.IDGALVAPIANO = bGalvanica.GetID();
-
-                riga.IDMAGAZZ = odl.IDMAGAZZ_LANCIO;
-                riga.IDMAGAZZ_WIP = odl.IDMAGAZZ_WIP;
-                riga.BRAND = modelloRow.BRAND;
-                riga.MODELLO = odl.MODELLO_LANCIO;
-                riga.COMPONENTE = odl.MODELLO_WIP;
-                riga.FINITURA = modelloRow.FINITURA;
-                riga.MATERIALE = modelloRow.MATERIALE;
-                riga.PEZZIBARRA = modelloRow.PEZZIBARRA;
-                riga.SUPERFICIE = modelloRow.SUPERFICIE;
-                riga.ORDINE = GeneraOrdineGalvanica(ordine, modelloRow);
-                riga.GALVANICA = modelloRow.GALVANICA;
-                riga.QUANTITA = odl.QTA;
-                PopolaQuantitaEBarre(riga);
-                riga.DATAGALVANICA = dtGiorno.Value;
-                _ds.AP_GALVANICA_PIANO.AddAP_GALVANICA_PIANORow(riga);
-            }
-            else
-            {
-                riga.QUANTITA = riga.QUANTITA + odl.QTA;
-                PopolaQuantitaEBarre(riga);
             }
 
+            dgvGriglia.Refresh();
         }
 
-        private decimal GeneraOrdineGalvanica(GalvanicaDS.FINITURA_ORDINERow ordine, GalvanicaDS.AP_GALVANICA_MODELLORow modelloRow)
-        {
-            if (ordine == null) return -1;
-            decimal aux = ordine.IDGRUPPO * 1000 + ordine.ORDINE;
-
-            if (modelloRow.MATERIALE == "OTTONE")
-                return aux;
-
-            if (modelloRow.MATERIALE == "ZAMA")
-                return aux + 10000000;
-
-            return -2;
-        }
-
-        private void PopolaQuantitaEBarre(GalvanicaDS.AP_GALVANICA_PIANORow riga)
-        {
-            decimal barre = 0;
-            if (riga.PEZZIBARRA != 0)
-                barre = Math.Round(riga.QUANTITA / riga.PEZZIBARRA, 1);
-            riga.BARRE = barre;
-        }
-
-        enum colonneGriglia { IDGALVAPIANO, IDMAGAZZ_LANCIO, IDMAGAZZ_WIP, MODELLO, COMPONENTE, BRAND, FINITURA, MATERIALE, PEZZIBARRA, SUPERFICIE, ORDINE, GALVANICA, QUANTITA, PIANIFICATO, BARRE, DATAGALVANICA }
+        enum colonne { IDMAGAZZ_LANCIO, IDMAGAZZ_WIP, IDGALVAPIANO, REPARTO, MODELLO_LANCIO, MODELLO_WIP, BRAND, FINITURA, ORDINE, GALVANICA, SUPERFICIE, MATERIALE, PEZZIBARRA, QTA, QTADATER, PIANIFICATO, BARRE };
 
         private void CreaGriglia()
         {
-            dgvGriglia.DataSource = _ds.AP_GALVANICA_PIANO;
 
-            dgvGriglia.Columns[(int)colonneGriglia.IDGALVAPIANO].Visible = false;
-            dgvGriglia.Columns[(int)colonneGriglia.IDMAGAZZ_LANCIO].Visible = false;
-            dgvGriglia.Columns[(int)colonneGriglia.IDMAGAZZ_WIP].Visible = false;
-            dgvGriglia.Columns[(int)colonneGriglia.PIANIFICATO].Visible = false;
-            dgvGriglia.Columns[(int)colonneGriglia.DATAGALVANICA].Visible = false;
-            dgvGriglia.Columns[(int)colonneGriglia.BRAND].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.MODELLO].Width = 160;
-            dgvGriglia.Columns[(int)colonneGriglia.COMPONENTE].Width = 160;
-            dgvGriglia.Columns[(int)colonneGriglia.FINITURA].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.MATERIALE].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.PEZZIBARRA].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.SUPERFICIE].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.ORDINE].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.GALVANICA].Width = 80;
-            dgvGriglia.Columns[(int)colonneGriglia.QUANTITA].Width = 80;
+            string[] selectedColumns = new[] {"IDMAGAZZ_LANCIO","IDMAGAZZ_WIP","IDGALVAPIANO", "REPARTO", "MODELLO_LANCIO", "MODELLO_WIP", "BRAND", "FINITURA", "ORDINE","GALVANICA", "SUPERFICIE", "MATERIALE",
+                "PEZZIBARRA", "QTA", "QTADATER", "PIANIFICATO","BARRE" };
+
+            DataTable dt = new DataView(_ds.GALVANICA_CARICO).ToTable(false, selectedColumns);
+
+            dgvGriglia.DataSource = dt;
+
+            dgvGriglia.Columns[(int)colonne.IDMAGAZZ_LANCIO].Visible = false;
+            dgvGriglia.Columns[(int)colonne.IDMAGAZZ_WIP].Visible = false;
+            dgvGriglia.Columns[(int)colonne.IDGALVAPIANO].Visible = false;
+            dgvGriglia.Columns[(int)colonne.REPARTO].Width = 100;
+            dgvGriglia.Columns[(int)colonne.MODELLO_LANCIO].Width = 200;
+            dgvGriglia.Columns[(int)colonne.MODELLO_WIP].Width = 200;
+            dgvGriglia.Columns[(int)colonne.BRAND].Width = 80;
+            dgvGriglia.Columns[(int)colonne.FINITURA].Width = 80;
+            dgvGriglia.Columns[(int)colonne.ORDINE].Width = 70;
+            dgvGriglia.Columns[(int)colonne.GALVANICA].Width = 80;
+            dgvGriglia.Columns[(int)colonne.SUPERFICIE].Width = 90;
+            dgvGriglia.Columns[(int)colonne.MATERIALE].Width = 90;
+            dgvGriglia.Columns[(int)colonne.PEZZIBARRA].Width = 80;
+            dgvGriglia.Columns[(int)colonne.QTA].Width = 80;
+            dgvGriglia.Columns[(int)colonne.QTADATER].Width = 80;
+            dgvGriglia.Columns[(int)colonne.PIANIFICATO].Width = 80;
+            dgvGriglia.Columns[(int)colonne.BARRE].Width = 80;
+
+
         }
 
         private void GalvanicaFrm_Load(object sender, EventArgs e)
         {
-            CreaGriglia();
-            txtBarcode.Focus();
-
-            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            try
             {
-                bGalvanica.FillFINITURA_ORDINE(_ds);
+                using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+                {
+                    bGalvanica.FillFINITURA_ORDINE(_ds);
+                }
+                CaricaPianificazione();
+                ImpostaSettimana();
+                CreaGriglia();
+                AggiornaColoreRiga();
             }
-            CaricaPianificazione();
-            ImpostaSettimana();
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in caricamento");
+            }
         }
 
         private void CaricaPianificazione()
         {
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
+                _ds.GALVANICA_CARICO.Clear();
+                bGalvanica.FillGALVANICA_CARICO(_ds, dtGiorno.Value);
                 _ds.AP_GALVANICA_PIANO.Clear();
                 bGalvanica.FillAP_GALVANICA_PIANO(_ds, dtGiorno.Value);
             }
@@ -244,14 +125,11 @@ namespace GalvanicaFrm
         private void btnGiornoSuccessivo_Click(object sender, EventArgs e)
         {
             AggiornaCalendario(+1);
-            txtBarcode.Focus();
         }
 
         private void btnGiornoPrecedente_Click(object sender, EventArgs e)
         {
             AggiornaCalendario(-1);
-
-            txtBarcode.Focus();
         }
 
         private void AggiornaCalendario(int aggiungiGiorno)
@@ -259,12 +137,12 @@ namespace GalvanicaFrm
             dtGiorno.Value = dtGiorno.Value.AddDays(aggiungiGiorno);
             CaricaPianificazione();
             ImpostaSettimana();
-            txtBarcode.Focus();
+            CreaGriglia();
+            AggiornaColoreRiga();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            txtBarcode.Focus();
             FileStream fs = null;
             if (_ds.AP_GALVANICA_PIANO.Rows.Count == 0)
             {
@@ -297,7 +175,198 @@ namespace GalvanicaFrm
             finally
             {
                 if (fs != null) fs.Close();
-                txtBarcode.Focus();
+            }
+        }
+
+        private void dgvGriglia_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dgvGriglia.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == DBNull.Value) return;
+                DataGridViewRow riga = dgvGriglia.Rows[e.RowIndex];
+
+                switch (e.ColumnIndex)
+                {
+                    case (int)colonne.PIANIFICATO:
+                        ElaboraModifichePianificato(riga);
+                        SalvaRigaAp_galva_piano(riga);
+                        break;
+                    case (int)colonne.MATERIALE:
+                    case (int)colonne.BRAND:
+                    case (int)colonne.FINITURA:
+                    case (int)colonne.PEZZIBARRA:
+                    case (int)colonne.SUPERFICIE:
+                    case (int)colonne.GALVANICA:
+                        SalvaRigaAp_galva_modello(riga);
+                        SalvaRigaAp_galva_piano(riga);
+                        break;
+                    default:
+                        return;
+                }
+                RiportaModificaInGriglia(e.ColumnIndex, riga);
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in Cell change value");
+            }
+        }
+
+        private void RiportaModificaInGriglia(int colonna, DataGridViewRow riga)
+        {
+            string IDMAGAZZ = (string)riga.Cells[(int)colonne.IDMAGAZZ_LANCIO].Value;
+            string IDMAGAZZ_WIP = (string)riga.Cells[(int)colonne.IDMAGAZZ_WIP].Value;
+
+            foreach (GalvanicaDS.GALVANICA_CARICORow row in _ds.GALVANICA_CARICO.Where(x => x.IDMAGAZZ_LANCIO == IDMAGAZZ && x.IDMAGAZZ_WIP == IDMAGAZZ_WIP))
+            {
+                switch (colonna)
+                {
+                    case (int)colonne.SUPERFICIE:
+                        row.SUPERFICIE = (string)riga.Cells[colonna].Value;
+                        break;
+                    case (int)colonne.PEZZIBARRA:
+                        row.PEZZIBARRA = (decimal)riga.Cells[colonna].Value;
+                        break;
+                    case (int)colonne.ORDINE:
+                        row.ORDINE = (decimal)riga.Cells[colonna].Value;
+                        break;
+                    case (int)colonne.MATERIALE:
+                        row.MATERIALE = (string)riga.Cells[colonna].Value;
+                        break;
+                    case (int)colonne.BRAND:
+                        row.BRAND = (string)riga.Cells[colonna].Value;
+                        break;
+                    case (int)colonne.FINITURA:
+                        row.FINITURA = (string)riga.Cells[colonna].Value;
+                        break;
+                }
+
+            }
+        }
+
+        private void SalvaRigaAp_galva_modello(DataGridViewRow riga)
+        {
+            string IDMAGAZZ = (string)riga.Cells[(int)colonne.IDMAGAZZ_LANCIO].Value;
+            string IDMAGAZZ_WIP = (string)riga.Cells[(int)colonne.IDMAGAZZ_WIP].Value;
+            string modello = (string)riga.Cells[(int)colonne.MODELLO_LANCIO].Value;
+            string componente = (string)riga.Cells[(int)colonne.MODELLO_WIP].Value;
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                GalvanicaDS.AP_GALVANICA_MODELLORow rigaModello = bGalvanica.GetAP_GALVANICA_MODELLO(_ds, IDMAGAZZ, IDMAGAZZ_WIP);
+                if (rigaModello == null)
+                {
+                    rigaModello = _ds.AP_GALVANICA_MODELLO.NewAP_GALVANICA_MODELLORow();
+                    rigaModello.IDGALVAMODEL = bGalvanica.GetID();
+                    rigaModello.IDMAGAZZ = IDMAGAZZ;
+                    rigaModello.IDMAGAZZ_WIP = IDMAGAZZ_WIP;
+                    rigaModello.MODELLO = modello;
+                    rigaModello.COMPONENTE = componente;
+                    if (riga.Cells[(int)colonne.BRAND].Value != DBNull.Value)
+                        rigaModello.BRAND = (string)riga.Cells[(int)colonne.BRAND].Value;
+                    if (riga.Cells[(int)colonne.FINITURA].Value != DBNull.Value)
+                        rigaModello.FINITURA = (string)riga.Cells[(int)colonne.FINITURA].Value;
+                    if (riga.Cells[(int)colonne.MATERIALE].Value != DBNull.Value)
+                        rigaModello.MATERIALE = (string)riga.Cells[(int)colonne.MATERIALE].Value;
+                    if (riga.Cells[(int)colonne.PEZZIBARRA].Value != DBNull.Value)
+                        rigaModello.PEZZIBARRA = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
+                    if (riga.Cells[(int)colonne.SUPERFICIE].Value != DBNull.Value)
+                        rigaModello.SUPERFICIE = (string)riga.Cells[(int)colonne.SUPERFICIE].Value;
+                    if (riga.Cells[(int)colonne.GALVANICA].Value != DBNull.Value)
+                        rigaModello.GALVANICA = (string)riga.Cells[(int)colonne.GALVANICA].Value;
+                    _ds.AP_GALVANICA_MODELLO.AddAP_GALVANICA_MODELLORow(rigaModello);
+                }
+                else
+                {
+                    if (riga.Cells[(int)colonne.BRAND].Value != DBNull.Value)
+                        rigaModello.BRAND = (string)riga.Cells[(int)colonne.BRAND].Value;
+                    if (riga.Cells[(int)colonne.FINITURA].Value != DBNull.Value)
+                        rigaModello.FINITURA = (string)riga.Cells[(int)colonne.FINITURA].Value;
+                    if (riga.Cells[(int)colonne.MATERIALE].Value != DBNull.Value)
+                        rigaModello.MATERIALE = (string)riga.Cells[(int)colonne.MATERIALE].Value;
+                    if (riga.Cells[(int)colonne.PEZZIBARRA].Value != DBNull.Value)
+                        rigaModello.PEZZIBARRA = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
+                    if (riga.Cells[(int)colonne.SUPERFICIE].Value != DBNull.Value)
+                        rigaModello.SUPERFICIE = (string)riga.Cells[(int)colonne.SUPERFICIE].Value;
+                    if (riga.Cells[(int)colonne.GALVANICA].Value != DBNull.Value)
+                        rigaModello.GALVANICA = (string)riga.Cells[(int)colonne.GALVANICA].Value;
+                }
+                bGalvanica.UpdateTable(_ds.AP_GALVANICA_MODELLO.TableName, _ds);
+                _ds.AP_GALVANICA_MODELLO.AcceptChanges();
+            }
+
+        }
+        private void ElaboraModifichePianificato(DataGridViewRow riga)
+        {
+            decimal pianificato = (decimal)riga.Cells[(int)colonne.PIANIFICATO].Value;
+            if (riga.Cells[(int)colonne.PEZZIBARRA].Value == DBNull.Value) return;
+            decimal pezziBarra = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
+
+            decimal barre = Math.Round(pianificato / pezziBarra, 1);
+            riga.Cells[(int)colonne.BARRE].Value = barre;
+        }
+
+        private void SalvaRigaAp_galva_piano(DataGridViewRow riga)
+        {
+            if (riga.Cells[(int)colonne.PIANIFICATO].Value == DBNull.Value) return;
+
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                decimal IDGALVAPIANO;
+                if (riga.Cells[(int)colonne.IDGALVAPIANO].Value == DBNull.Value)
+                {
+                    IDGALVAPIANO = bGalvanica.GetID();
+                    riga.Cells[(int)colonne.IDGALVAPIANO].Value = IDGALVAPIANO;
+                }
+                else
+                    IDGALVAPIANO = (decimal)riga.Cells[(int)colonne.IDGALVAPIANO].Value;
+
+                GalvanicaDS.AP_GALVANICA_PIANORow rigaPiano = _ds.AP_GALVANICA_PIANO.Where(x => x.IDGALVAPIANO == IDGALVAPIANO).FirstOrDefault();
+                if (rigaPiano == null)
+                {
+                    rigaPiano = _ds.AP_GALVANICA_PIANO.NewAP_GALVANICA_PIANORow();
+                    rigaPiano.IDGALVAPIANO = IDGALVAPIANO;
+                    rigaPiano.IDMAGAZZ = (string)riga.Cells[(int)colonne.IDMAGAZZ_LANCIO].Value;
+                    rigaPiano.IDMAGAZZ_WIP = (string)riga.Cells[(int)colonne.IDMAGAZZ_WIP].Value;
+                    rigaPiano.MODELLO = (string)riga.Cells[(int)colonne.MODELLO_LANCIO].Value;
+                    rigaPiano.COMPONENTE = (string)riga.Cells[(int)colonne.MODELLO_WIP].Value;
+                    if (riga.Cells[(int)colonne.BRAND].Value != DBNull.Value)
+                        rigaPiano.BRAND = (string)riga.Cells[(int)colonne.BRAND].Value;
+                    if (riga.Cells[(int)colonne.FINITURA].Value != DBNull.Value)
+                        rigaPiano.FINITURA = (string)riga.Cells[(int)colonne.FINITURA].Value;
+                    if (riga.Cells[(int)colonne.MATERIALE].Value != DBNull.Value)
+                        rigaPiano.MATERIALE = (string)riga.Cells[(int)colonne.MATERIALE].Value;
+                    if (riga.Cells[(int)colonne.PEZZIBARRA].Value != DBNull.Value)
+                        rigaPiano.PEZZIBARRA = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
+                    if (riga.Cells[(int)colonne.SUPERFICIE].Value != DBNull.Value)
+                        rigaPiano.SUPERFICIE = (string)riga.Cells[(int)colonne.SUPERFICIE].Value;
+                    if (riga.Cells[(int)colonne.ORDINE].Value != DBNull.Value)
+                        rigaPiano.ORDINE = (decimal)riga.Cells[(int)colonne.ORDINE].Value;
+                    if (riga.Cells[(int)colonne.GALVANICA].Value != DBNull.Value)
+                        rigaPiano.GALVANICA = (string)riga.Cells[(int)colonne.GALVANICA].Value;
+                    if (riga.Cells[(int)colonne.PIANIFICATO].Value != DBNull.Value)
+                        rigaPiano.PIANIFICATO = (decimal)riga.Cells[(int)colonne.PIANIFICATO].Value;
+                    if (riga.Cells[(int)colonne.BARRE].Value != DBNull.Value)
+                        rigaPiano.BARRE = (decimal)riga.Cells[(int)colonne.BARRE].Value;
+                    if (riga.Cells[(int)colonne.REPARTO].Value != DBNull.Value)
+                        rigaPiano.REPARTO = (string)riga.Cells[(int)colonne.REPARTO].Value;
+                    rigaPiano.DATAGALVANICA = dtGiorno.Value;
+
+                    _ds.AP_GALVANICA_PIANO.AddAP_GALVANICA_PIANORow(rigaPiano);
+                }
+                else
+                {
+                    rigaPiano.BRAND = (string)riga.Cells[(int)colonne.BRAND].Value;
+                    rigaPiano.FINITURA = (string)riga.Cells[(int)colonne.FINITURA].Value;
+                    rigaPiano.MATERIALE = (string)riga.Cells[(int)colonne.MATERIALE].Value;
+                    rigaPiano.PEZZIBARRA = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
+                    rigaPiano.SUPERFICIE = (string)riga.Cells[(int)colonne.SUPERFICIE].Value;
+                    rigaPiano.ORDINE = (decimal)riga.Cells[(int)colonne.ORDINE].Value;
+                    rigaPiano.GALVANICA = (string)riga.Cells[(int)colonne.GALVANICA].Value;
+                    rigaPiano.PIANIFICATO = (decimal)riga.Cells[(int)colonne.PIANIFICATO].Value;
+                    rigaPiano.BARRE = (decimal)riga.Cells[(int)colonne.BARRE].Value;
+                }
+                bGalvanica.UpdateTable(_ds.AP_GALVANICA_PIANO.TableName, _ds);
+                _ds.AP_GALVANICA_PIANO.AcceptChanges();
             }
         }
     }
