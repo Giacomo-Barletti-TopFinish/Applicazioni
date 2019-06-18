@@ -82,17 +82,10 @@ namespace Trasferimenti
                                 string messaggio = string.Format("Assegno questi documenti all'operatore con barcode {0}", barcode);
                                 if (MessageBox.Show(messaggio, "ASSEGNAZIONE DOCUMENTI", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                                 {
-                                    if (VerificaEsistenzaTrasferimento(barcode))
-                                    {
-                                        SalvaTrasferimento(barcode);
-                                        lblMessaggi.Text = "TRASFERIMENTO REGISTRATO CON SUCCESSO";
-                                        PulisciArchivi();
-                                        ImpostaInRicezione(false);
-                                    }
-                                    else
-                                    {
-                                        lblMessaggi.Text = "ESISTE GIA' UN TRASFERIMENTO ATTIVO PER QUESTO OPERATORE";
-                                    }
+                                    SalvaTrasferimento(barcode);
+                                    lblMessaggi.Text = "TRASFERIMENTO REGISTRATO CON SUCCESSO";
+                                    PulisciArchivi();
+                                    ImpostaInRicezione(false);
                                 }
                             }
                             else
@@ -363,8 +356,11 @@ namespace Trasferimenti
             {
                 string barcode = (string)e.Row.Cells[(int)colonneGriglia.BARCODE].Value;
 
-                _ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == barcode).FirstOrDefault().Delete();
-                _ds.USR_TRASF_RICH.Where(x => x.BARCODE == barcode).FirstOrDefault().Delete();
+                TrasferimentiDS.USR_PRD_MOVFASIRow movfase = _ds.USR_PRD_MOVFASI.Where(x => x.BARCODE == barcode).FirstOrDefault();
+                if (movfase != null) movfase.Delete();
+
+                TrasferimentiDS.USR_TRASF_RICHRow rich = _ds.USR_TRASF_RICH.Where(x => x.BARCODE == barcode).FirstOrDefault();
+                if (rich != null) rich.Delete();
                 _ds.AcceptChanges();
                 txtBarcode.Focus();
 

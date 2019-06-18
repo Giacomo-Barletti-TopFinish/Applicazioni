@@ -26,21 +26,18 @@ namespace GalvanicaFrm
         {
             InitializeComponent();
             lblMessaggi.Text = string.Empty;
-            dtGiorno.Value = DateTime.Today;
         }
 
-        private void dtGiorno_ValueChanged(object sender, EventArgs e)
-        {
-            ImpostaSettimana();
-        }
+
         private void ImpostaSettimana()
         {
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             Calendar cal = dfi.Calendar;
 
-            int settimana = cal.GetWeekOfYear(dtGiorno.Value, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            int settimana = cal.GetWeekOfYear(DateTime.Today, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
 
             lblSettimana.Text = string.Format("Settimana {0}", settimana);
+            this.Text = string.Format("Giorno: {0}  Settimana: {1}", DateTime.Today.ToShortDateString(), settimana);
 
         }
 
@@ -48,9 +45,9 @@ namespace GalvanicaFrm
         {
             foreach (DataGridViewRow riga in dgvGriglia.Rows)
             {
-                if (riga.Cells[3].Value != DBNull.Value)
+                if (riga.Cells[(int)colonne.REPARTO].Value != DBNull.Value)
                 {
-                    string reparto = (string)riga.Cells[3].Value;
+                    string reparto = (string)riga.Cells[(int)colonne.REPARTO].Value;
                     if (reparto != "INTERNO")
                         riga.DefaultCellStyle.ForeColor = Color.Red;
                 }
@@ -77,25 +74,93 @@ namespace GalvanicaFrm
             dgvGriglia.Columns[(int)colonne.REPARTO].Width = 100;
             dgvGriglia.Columns[(int)colonne.MODELLO_LANCIO].Width = 200;
             dgvGriglia.Columns[(int)colonne.MODELLO_WIP].Width = 200;
-            dgvGriglia.Columns[(int)colonne.BRAND].Width = 80;
-            dgvGriglia.Columns[(int)colonne.FINITURA].Width = 80;
-            dgvGriglia.Columns[(int)colonne.ORDINE].Width = 70;
-            dgvGriglia.Columns[(int)colonne.GALVANICA].Width = 80;
-            dgvGriglia.Columns[(int)colonne.SUPERFICIE].Width = 90;
-            dgvGriglia.Columns[(int)colonne.MATERIALE].Width = 90;
-            dgvGriglia.Columns[(int)colonne.PEZZIBARRA].Width = 80;
-            dgvGriglia.Columns[(int)colonne.QTA].Width = 80;
-            dgvGriglia.Columns[(int)colonne.QTADATER].Width = 80;
-            dgvGriglia.Columns[(int)colonne.PIANIFICATO].Width = 80;
-            dgvGriglia.Columns[(int)colonne.BARRE].Width = 80;
+            dgvGriglia.Columns[(int)colonne.BRAND].Width = 90;
+            dgvGriglia.Columns[(int)colonne.FINITURA].Width = 90;
+            dgvGriglia.Columns[(int)colonne.ORDINE].Width = 80;
+            dgvGriglia.Columns[(int)colonne.GALVANICA].Width = 90;
+            dgvGriglia.Columns[(int)colonne.SUPERFICIE].Width = 100;
+            dgvGriglia.Columns[(int)colonne.MATERIALE].Width = 100;
+            dgvGriglia.Columns[(int)colonne.PEZZIBARRA].Width = 100;
+            dgvGriglia.Columns[(int)colonne.QTA].Width = 90;
+            dgvGriglia.Columns[(int)colonne.QTADATER].Width = 90;
+            dgvGriglia.Columns[(int)colonne.PIANIFICATO].Width = 100;
+            dgvGriglia.Columns[(int)colonne.BARRE].Width = 90;
 
+            dgvGriglia.Columns.RemoveAt((int)colonne.BRAND);
+            List<string> brand = new List<string>();
+            brand.Add("YSL");
+            brand.Add("CHANEL");
+            brand.Add("BALENCIAGA");
+            brand.Add("GUCCI");
+            brand.Add("LOUIS VUITTON");
+            brand.Add("BOTTEGA VENETA");
+            brand.Add("TOM FORD");
+            brand.Add("FENDI");
+            brand.Add("MONTBLANC");
+            brand.Add("CELINE");
+            brand.Add("ALCE");
 
+            brand.Sort();
+
+            DataGridViewComboBoxColumn col = new DataGridViewComboBoxColumn();
+            {
+                col.DataPropertyName = "BRAND";
+                col.HeaderText = "BRAND";
+                col.DropDownWidth = 130;
+                col.Width = 130;
+                col.MaxDropDownItems = brand.Count;
+                col.FlatStyle = FlatStyle.Flat;
+                col.Items.AddRange(brand.ToArray());
+            }
+            dgvGriglia.Columns.Insert((int)colonne.BRAND, col);
+
+            dgvGriglia.Columns.RemoveAt((int)colonne.GALVANICA);
+            List<string> galvanica = new List<string>();
+            galvanica.Add("STATICA");
+            galvanica.Add("AUTOMATICA");
+            galvanica.Add("ROTO");
+
+            galvanica.Sort();
+
+            DataGridViewComboBoxColumn colGalvanica = new DataGridViewComboBoxColumn();
+            {
+                colGalvanica.DataPropertyName = "GALVANICA";
+                colGalvanica.HeaderText = "GALVANICA";
+                colGalvanica.DropDownWidth = 130;
+                colGalvanica.Width = 130;
+                colGalvanica.MaxDropDownItems = brand.Count;
+                colGalvanica.FlatStyle = FlatStyle.Flat;
+                colGalvanica.Items.AddRange(galvanica.ToArray());
+            }
+            dgvGriglia.Columns.Insert((int)colonne.GALVANICA, colGalvanica);
+
+            dgvGriglia.Columns.RemoveAt((int)colonne.MATERIALE);
+            List<string> materiale = new List<string>();
+            materiale.Add("OTTONE");
+            materiale.Add("ZAMA");
+            materiale.Add("ALTRO");
+
+            materiale.Sort();
+
+            DataGridViewComboBoxColumn colMateriale = new DataGridViewComboBoxColumn();
+            {
+                colMateriale.DataPropertyName = "MATERIALE";
+                colMateriale.HeaderText = "MATERIALE";
+                colMateriale.DropDownWidth = 130;
+                colMateriale.Width = 130;
+                colMateriale.MaxDropDownItems = brand.Count;
+                colMateriale.FlatStyle = FlatStyle.Flat;
+                colMateriale.Items.AddRange(materiale.ToArray());
+            }
+            dgvGriglia.Columns.Insert((int)colonne.MATERIALE, colMateriale);
         }
+
 
         private void GalvanicaFrm_Load(object sender, EventArgs e)
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
                 {
                     bGalvanica.FillFINITURA_ORDINE(_ds);
@@ -109,6 +174,10 @@ namespace GalvanicaFrm
             {
                 MostraEccezione(ex, "Errore in caricamento");
             }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void CaricaPianificazione()
@@ -116,35 +185,16 @@ namespace GalvanicaFrm
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
                 _ds.GALVANICA_CARICO.Clear();
-                bGalvanica.FillGALVANICA_CARICO(_ds, dtGiorno.Value);
+                bGalvanica.FillGALVANICA_CARICO(_ds, DateTime.Today);
                 _ds.AP_GALVANICA_PIANO.Clear();
-                bGalvanica.FillAP_GALVANICA_PIANO(_ds, dtGiorno.Value);
+                bGalvanica.FillAP_GALVANICA_PIANO(_ds, DateTime.Today);
             }
-        }
-
-        private void btnGiornoSuccessivo_Click(object sender, EventArgs e)
-        {
-            AggiornaCalendario(+1);
-        }
-
-        private void btnGiornoPrecedente_Click(object sender, EventArgs e)
-        {
-            AggiornaCalendario(-1);
-        }
-
-        private void AggiornaCalendario(int aggiungiGiorno)
-        {
-            dtGiorno.Value = dtGiorno.Value.AddDays(aggiungiGiorno);
-            CaricaPianificazione();
-            ImpostaSettimana();
-            CreaGriglia();
-            AggiornaColoreRiga();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
             FileStream fs = null;
-            if (_ds.AP_GALVANICA_PIANO.Rows.Count == 0)
+            if (_ds.GALVANICA_CARICO.Where(x => !x.IsPIANIFICATONull() && x.PIANIFICATO > 0).Count() == 0)
             {
                 MessageBox.Show("Non ci sono dati esportare", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -349,21 +399,30 @@ namespace GalvanicaFrm
                         rigaPiano.BARRE = (decimal)riga.Cells[(int)colonne.BARRE].Value;
                     if (riga.Cells[(int)colonne.REPARTO].Value != DBNull.Value)
                         rigaPiano.REPARTO = (string)riga.Cells[(int)colonne.REPARTO].Value;
-                    rigaPiano.DATAGALVANICA = dtGiorno.Value;
+                    rigaPiano.DATAGALVANICA = DateTime.Today;
 
                     _ds.AP_GALVANICA_PIANO.AddAP_GALVANICA_PIANORow(rigaPiano);
                 }
                 else
                 {
-                    rigaPiano.BRAND = (string)riga.Cells[(int)colonne.BRAND].Value;
-                    rigaPiano.FINITURA = (string)riga.Cells[(int)colonne.FINITURA].Value;
-                    rigaPiano.MATERIALE = (string)riga.Cells[(int)colonne.MATERIALE].Value;
-                    rigaPiano.PEZZIBARRA = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
-                    rigaPiano.SUPERFICIE = (string)riga.Cells[(int)colonne.SUPERFICIE].Value;
-                    rigaPiano.ORDINE = (decimal)riga.Cells[(int)colonne.ORDINE].Value;
-                    rigaPiano.GALVANICA = (string)riga.Cells[(int)colonne.GALVANICA].Value;
-                    rigaPiano.PIANIFICATO = (decimal)riga.Cells[(int)colonne.PIANIFICATO].Value;
-                    rigaPiano.BARRE = (decimal)riga.Cells[(int)colonne.BARRE].Value;
+                    if (riga.Cells[(int)colonne.BRAND].Value != DBNull.Value)
+                        rigaPiano.BRAND = (string)riga.Cells[(int)colonne.BRAND].Value;
+                    if (riga.Cells[(int)colonne.FINITURA].Value != DBNull.Value)
+                        rigaPiano.FINITURA = (string)riga.Cells[(int)colonne.FINITURA].Value;
+                    if (riga.Cells[(int)colonne.MATERIALE].Value != DBNull.Value)
+                        rigaPiano.MATERIALE = (string)riga.Cells[(int)colonne.MATERIALE].Value;
+                    if (riga.Cells[(int)colonne.PEZZIBARRA].Value != DBNull.Value)
+                        rigaPiano.PEZZIBARRA = (decimal)riga.Cells[(int)colonne.PEZZIBARRA].Value;
+                    if (riga.Cells[(int)colonne.SUPERFICIE].Value != DBNull.Value)
+                        rigaPiano.SUPERFICIE = (string)riga.Cells[(int)colonne.SUPERFICIE].Value;
+                    if (riga.Cells[(int)colonne.ORDINE].Value != DBNull.Value)
+                        rigaPiano.ORDINE = (decimal)riga.Cells[(int)colonne.ORDINE].Value;
+                    if (riga.Cells[(int)colonne.GALVANICA].Value != DBNull.Value)
+                        rigaPiano.GALVANICA = (string)riga.Cells[(int)colonne.GALVANICA].Value;
+                    if (riga.Cells[(int)colonne.PIANIFICATO].Value != DBNull.Value)
+                        rigaPiano.PIANIFICATO = (decimal)riga.Cells[(int)colonne.PIANIFICATO].Value;
+                    if (riga.Cells[(int)colonne.BARRE].Value != DBNull.Value)
+                        rigaPiano.BARRE = (decimal)riga.Cells[(int)colonne.BARRE].Value;
                 }
                 bGalvanica.UpdateTable(_ds.AP_GALVANICA_PIANO.TableName, _ds);
                 _ds.AP_GALVANICA_PIANO.AcceptChanges();

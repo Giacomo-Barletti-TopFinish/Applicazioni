@@ -10,7 +10,7 @@
     <Shape ID="DesignTable:FINITURA_ORDINE" ZOrder="4" X="363" Y="66" Height="143" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="187" />
     <Shape ID="DesignTable:USR_PRD_MOVFASI" ZOrder="3" X="99" Y="34" Height="467" Width="215" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="463" />
     <Shape ID="DesignTable:GALVANICA_CARICO" ZOrder="2" X="453" Y="503" Height="304" Width="187" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:AP_GALVANICA_PIANO" ZOrder="1" X="785" Y="187" Height="304" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
+    <Shape ID="DesignTable:AP_GALVANICA_PIANO" ZOrder="1" X="619" Y="75" Height="505" Width="202" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="501" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

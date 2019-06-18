@@ -24,9 +24,9 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\Applicazioni\Galvanica\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.3</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.4</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -83,6 +83,12 @@
     <Compile Include="GalvanicaFrm.Designer.cs">
       <DependentUpon>GalvanicaFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GalvanicaMdi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GalvanicaMdi.Designer.cs">
+      <DependentUpon>GalvanicaMdi.cs</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaModelloComponenteFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,8 +97,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoricoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoricoFrm.Designer.cs">
+      <DependentUpon>StoricoFrm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="GalvanicaFrm.resx">
       <DependentUpon>GalvanicaFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GalvanicaMdi.resx">
+      <DependentUpon>GalvanicaMdi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GalvanicaModelloComponenteFrm.resx">
       <DependentUpon>GalvanicaModelloComponenteFrm.cs</DependentUpon>
@@ -106,6 +121,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StoricoFrm.resx">
+      <DependentUpon>StoricoFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="GalvanicaFrm_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

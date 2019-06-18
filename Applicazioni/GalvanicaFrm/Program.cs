@@ -16,7 +16,7 @@ namespace GalvanicaFrm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GalvanicaFrm());
+            Application.Run(new GalvanicaMdi());
         }
     }
 }

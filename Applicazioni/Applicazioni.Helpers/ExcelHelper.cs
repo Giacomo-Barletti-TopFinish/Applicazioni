@@ -50,7 +50,7 @@ namespace Applicazioni.Helpers
 
                 Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
 
-                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Pianificazione" };
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Automatica" };
 
                 sheets.Append(sheet);
 
@@ -59,20 +59,20 @@ namespace Applicazioni.Helpers
                 SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
 
                 // Constructing header
-                List<int> colonneDaScartare = new List<int>(new int[] { 0, 1, 2, 13, 15 });
+                List<int> colonneDaScartare = new List<int>(new int[] { 0, 1, 2, 4, 9, 15, 16, 17 });
                 Row row = new Row();
-                int numeroColonne = ds.AP_GALVANICA_PIANO.Columns.Count;
+                int numeroColonne = ds.GALVANICA_CARICO.Columns.Count;
                 for (int i = 0; i < numeroColonne; i++)
                 {
                     if (colonneDaScartare.Contains(i)) continue;
 
-                    string etichetta = ds.AP_GALVANICA_PIANO.Columns[i].ColumnName;
+                    string etichetta = ds.GALVANICA_CARICO.Columns[i].ColumnName;
                     row.Append(ConstructCell(etichetta, CellValues.String, 2));
                 }
 
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
-                foreach (GalvanicaDS.AP_GALVANICA_PIANORow riga in ds.AP_GALVANICA_PIANO.OrderBy(x => x.ORDINE))
+                foreach (GalvanicaDS.GALVANICA_CARICORow riga in ds.GALVANICA_CARICO.Where(x => !x.IsPIANIFICATONull() && x.PIANIFICATO > 0).OrderBy(x => x.IsORDINENull() ? -1 : x.ORDINE))
                 {
                     Row rowDati = new Row();
                     for (int i = 0; i < numeroColonne; i++)

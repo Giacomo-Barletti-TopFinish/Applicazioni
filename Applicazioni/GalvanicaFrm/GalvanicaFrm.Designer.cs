@@ -31,11 +31,12 @@
             this.lblMessaggi = new System.Windows.Forms.Label();
             this.lblSettimana = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
-            this.dtGiorno = new System.Windows.Forms.DateTimePicker();
             this.dgvGriglia = new System.Windows.Forms.DataGridView();
-            this.btnGiornoSuccessivo = new System.Windows.Forms.Button();
-            this.btnGiornoPrecedente = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.analisiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.esportaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGriglia)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblMessaggi
@@ -43,7 +44,7 @@
             this.lblMessaggi.AutoSize = true;
             this.lblMessaggi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessaggi.ForeColor = System.Drawing.Color.Red;
-            this.lblMessaggi.Location = new System.Drawing.Point(252, 51);
+            this.lblMessaggi.Location = new System.Drawing.Point(252, 36);
             this.lblMessaggi.Name = "lblMessaggi";
             this.lblMessaggi.Size = new System.Drawing.Size(45, 16);
             this.lblMessaggi.TabIndex = 9;
@@ -53,7 +54,7 @@
             // 
             this.lblSettimana.AutoSize = true;
             this.lblSettimana.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSettimana.Location = new System.Drawing.Point(12, 51);
+            this.lblSettimana.Location = new System.Drawing.Point(12, 36);
             this.lblSettimana.Name = "lblSettimana";
             this.lblSettimana.Size = new System.Drawing.Size(45, 16);
             this.lblSettimana.TabIndex = 10;
@@ -62,21 +63,13 @@
             // btnExport
             // 
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.Location = new System.Drawing.Point(727, 18);
+            this.btnExport.Location = new System.Drawing.Point(726, 36);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(146, 23);
             this.btnExport.TabIndex = 7;
             this.btnExport.Text = "Export...";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // dtGiorno
-            // 
-            this.dtGiorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtGiorno.Location = new System.Drawing.Point(54, 16);
-            this.dtGiorno.Name = "dtGiorno";
-            this.dtGiorno.Size = new System.Drawing.Size(200, 22);
-            this.dtGiorno.TabIndex = 6;
             // 
             // dgvGriglia
             // 
@@ -93,44 +86,50 @@
             this.dgvGriglia.TabStop = false;
             this.dgvGriglia.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGriglia_CellValueChanged);
             // 
-            // btnGiornoSuccessivo
+            // menuStrip1
             // 
-            this.btnGiornoSuccessivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGiornoSuccessivo.Location = new System.Drawing.Point(260, 16);
-            this.btnGiornoSuccessivo.Name = "btnGiornoSuccessivo";
-            this.btnGiornoSuccessivo.Size = new System.Drawing.Size(23, 23);
-            this.btnGiornoSuccessivo.TabIndex = 11;
-            this.btnGiornoSuccessivo.Text = ">";
-            this.btnGiornoSuccessivo.UseVisualStyleBackColor = true;
-            this.btnGiornoSuccessivo.Click += new System.EventHandler(this.btnGiornoSuccessivo_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.analisiToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1124, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // btnGiornoPrecedente
+            // analisiToolStripMenuItem
             // 
-            this.btnGiornoPrecedente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGiornoPrecedente.Location = new System.Drawing.Point(25, 16);
-            this.btnGiornoPrecedente.Name = "btnGiornoPrecedente";
-            this.btnGiornoPrecedente.Size = new System.Drawing.Size(23, 23);
-            this.btnGiornoPrecedente.TabIndex = 12;
-            this.btnGiornoPrecedente.Text = "<";
-            this.btnGiornoPrecedente.UseVisualStyleBackColor = true;
-            this.btnGiornoPrecedente.Click += new System.EventHandler(this.btnGiornoPrecedente_Click);
+            this.analisiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.esportaToolStripMenuItem});
+            this.analisiToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.analisiToolStripMenuItem.Name = "analisiToolStripMenuItem";
+            this.analisiToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.analisiToolStripMenuItem.Text = "Analisi";
+            this.analisiToolStripMenuItem.Visible = false;
+            // 
+            // esportaToolStripMenuItem
+            // 
+            this.esportaToolStripMenuItem.Name = "esportaToolStripMenuItem";
+            this.esportaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.esportaToolStripMenuItem.Text = "Esporta";
             // 
             // GalvanicaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1124, 692);
-            this.Controls.Add(this.btnGiornoPrecedente);
-            this.Controls.Add(this.btnGiornoSuccessivo);
             this.Controls.Add(this.lblMessaggi);
             this.Controls.Add(this.lblSettimana);
             this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.dtGiorno);
             this.Controls.Add(this.dgvGriglia);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "GalvanicaFrm";
             this.Text = "Galvanica";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GalvanicaFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGriglia)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,7 +139,6 @@
         private System.Windows.Forms.Label lblMessaggi;
         private System.Windows.Forms.Label lblSettimana;
         private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.DateTimePicker dtGiorno;
         private System.Windows.Forms.DataGridView dgvGriglia;
         private System.Windows.Forms.DataGridViewTextBoxColumn BRAND;
         private System.Windows.Forms.DataGridViewButtonColumn MODELLO;
@@ -161,8 +159,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA5;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA6;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA7;
-        private System.Windows.Forms.Button btnGiornoSuccessivo;
-        private System.Windows.Forms.Button btnGiornoPrecedente;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem analisiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem esportaToolStripMenuItem;
     }
 }
 
