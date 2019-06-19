@@ -36,7 +36,7 @@ namespace GalvanicaFrm
 
             int settimana = cal.GetWeekOfYear(DateTime.Today, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
 
-            lblSettimana.Text = string.Format("Settimana {0}", settimana);
+            lblSettimana.Text = string.Format("Giorno: {1}  -  Settimana {0}", settimana, DateTime.Today.ToShortDateString());
             this.Text = string.Format("Giorno: {0}  Settimana: {1}", DateTime.Today.ToShortDateString(), settimana);
 
         }
@@ -425,7 +425,23 @@ namespace GalvanicaFrm
                         rigaPiano.BARRE = (decimal)riga.Cells[(int)colonne.BARRE].Value;
                 }
                 bGalvanica.UpdateTable(_ds.AP_GALVANICA_PIANO.TableName, _ds);
-                _ds.AP_GALVANICA_PIANO.AcceptChanges();
+            }
+            _ds.AP_GALVANICA_PIANO.AcceptChanges();
+        }
+
+        private void dgvGriglia_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (e.Row.Cells[(int)colonne.IDGALVAPIANO].Value != DBNull.Value)
+            {
+                using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+                {
+                    decimal idgalvapiano = (decimal)e.Row.Cells[(int)colonne.IDGALVAPIANO].Value;
+                    GalvanicaDS.AP_GALVANICA_PIANORow daEliminare = _ds.AP_GALVANICA_PIANO.Where(x => x.IDGALVAPIANO == idgalvapiano).FirstOrDefault();
+                    if (daEliminare != null) daEliminare.Delete();
+                    bGalvanica.UpdateTable(_ds.AP_GALVANICA_PIANO.TableName, _ds);
+                    _ds.AP_GALVANICA_PIANO.AcceptChanges();
+
+                }
             }
         }
     }

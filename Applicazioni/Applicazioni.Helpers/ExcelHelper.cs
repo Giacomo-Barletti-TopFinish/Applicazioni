@@ -33,8 +33,10 @@ namespace Applicazioni.Helpers
                 stylePart.Stylesheet = GenerateStylesheet();
                 stylePart.Stylesheet.Save();
 
+                int numeroColonne = ds.GALVANICA_CARICO.Columns.Count;
+                List<int> colonneDaScartare = new List<int>(new int[] { 0, 1, 2, 4, 15, 16 });
                 Columns columns = new Columns();
-                for (int i = 0; i < 11; i++)
+                for (int i = 0; i < (numeroColonne - colonneDaScartare.Count); i++)
                 {
                     Column c = new Column();
                     UInt32Value u = new UInt32Value((uint)(i + 1));
@@ -49,8 +51,9 @@ namespace Applicazioni.Helpers
                 worksheetPart.Worksheet.AppendChild(columns);
 
                 Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-
-                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Automatica" };
+                string nome = DateTime.Today.AddDays(1).ToShortDateString();
+                nome = nome.Replace('/', '.');
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = nome };
 
                 sheets.Append(sheet);
 
@@ -59,9 +62,9 @@ namespace Applicazioni.Helpers
                 SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
 
                 // Constructing header
-                List<int> colonneDaScartare = new List<int>(new int[] { 0, 1, 2, 4, 9, 15, 16, 17 });
+
                 Row row = new Row();
-                int numeroColonne = ds.GALVANICA_CARICO.Columns.Count;
+             
                 for (int i = 0; i < numeroColonne; i++)
                 {
                     if (colonneDaScartare.Contains(i)) continue;
@@ -72,7 +75,7 @@ namespace Applicazioni.Helpers
 
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
-                foreach (GalvanicaDS.GALVANICA_CARICORow riga in ds.GALVANICA_CARICO.Where(x => !x.IsPIANIFICATONull() && x.PIANIFICATO > 0).OrderBy(x => x.IsORDINENull() ? -1 : x.ORDINE))
+                foreach (GalvanicaDS.GALVANICA_CARICORow riga in ds.GALVANICA_CARICO.Where(x => !x.IsPIANIFICATONull() && x.PIANIFICATO > 0 ).OrderBy(x => x.IsORDINENull() ? -1 : x.ORDINE))
                 {
                     Row rowDati = new Row();
                     for (int i = 0; i < numeroColonne; i++)

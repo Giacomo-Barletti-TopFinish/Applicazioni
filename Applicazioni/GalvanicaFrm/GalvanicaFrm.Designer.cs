@@ -32,11 +32,7 @@
             this.lblSettimana = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.dgvGriglia = new System.Windows.Forms.DataGridView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.analisiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.esportaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGriglia)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblMessaggi
@@ -74,7 +70,6 @@
             // dgvGriglia
             // 
             this.dgvGriglia.AllowUserToAddRows = false;
-            this.dgvGriglia.AllowUserToDeleteRows = false;
             this.dgvGriglia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -85,32 +80,7 @@
             this.dgvGriglia.TabIndex = 5;
             this.dgvGriglia.TabStop = false;
             this.dgvGriglia.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGriglia_CellValueChanged);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.analisiToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1124, 24);
-            this.menuStrip1.TabIndex = 11;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // analisiToolStripMenuItem
-            // 
-            this.analisiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.esportaToolStripMenuItem});
-            this.analisiToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
-            this.analisiToolStripMenuItem.Name = "analisiToolStripMenuItem";
-            this.analisiToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.analisiToolStripMenuItem.Text = "Analisi";
-            this.analisiToolStripMenuItem.Visible = false;
-            // 
-            // esportaToolStripMenuItem
-            // 
-            this.esportaToolStripMenuItem.Name = "esportaToolStripMenuItem";
-            this.esportaToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.esportaToolStripMenuItem.Text = "Esporta";
+            this.dgvGriglia.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvGriglia_UserDeletingRow);
             // 
             // GalvanicaFrm
             // 
@@ -121,15 +91,11 @@
             this.Controls.Add(this.lblSettimana);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.dgvGriglia);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "GalvanicaFrm";
             this.Text = "Galvanica";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.GalvanicaFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGriglia)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,9 +125,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA5;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA6;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATA7;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem analisiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem esportaToolStripMenuItem;
     }
 }
 

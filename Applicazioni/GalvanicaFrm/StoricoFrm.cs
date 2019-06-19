@@ -1,10 +1,12 @@
-﻿using Applicazioni.Data.Galvanica;
+﻿using Applicazioni.Common;
+using Applicazioni.Data.Galvanica;
 using Applicazioni.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using System.Windows.Forms;
 
 namespace GalvanicaFrm
 {
-    public partial class StoricoFrm : Form
+    public partial class StoricoFrm : BaseForm
     {
         GalvanicaDS _ds = new GalvanicaDS();
         public StoricoFrm()
@@ -24,6 +26,18 @@ namespace GalvanicaFrm
         {
             dtGiorno.Value = DateTime.Today;
             CaricaStorico(dtGiorno.Value);
+            lblMessaggi.Text = string.Empty;
+            ImpostaSettimana(dtGiorno.Value);
+        }
+        private void ImpostaSettimana(DateTime dt)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            int settimana = cal.GetWeekOfYear(dt, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+
+            lblSettimana.Text = string.Format("Settimana {0}", settimana);
+
         }
 
         private void CaricaStorico(DateTime data)
@@ -41,7 +55,16 @@ namespace GalvanicaFrm
 
         private void dtGiorno_ValueChanged(object sender, EventArgs e)
         {
-            CaricaStorico(dtGiorno.Value);
+            try
+            {
+                CaricaStorico(dtGiorno.Value);
+                ImpostaSettimana(dtGiorno.Value);
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in elabora barcode");
+            }
+
         }
     }
 }
