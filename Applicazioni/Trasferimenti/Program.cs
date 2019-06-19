@@ -16,7 +16,7 @@ namespace Trasferimenti
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TrasferimentiFrm());
+            Application.Run(new MainForm());
         }
     }
 }

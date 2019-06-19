@@ -3095,6 +3095,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnQTA;
             
+            private global::System.Data.DataColumn columnCOLLI;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public AP_DTRASFERIMENTIDataTable() {
@@ -3186,6 +3188,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COLLIColumn {
+                get {
+                    return this.columnCOLLI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3221,7 +3231,7 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public AP_DTRASFERIMENTIRow AddAP_DTRASFERIMENTIRow(decimal IDDTRASFERIMENTO, decimal IDTRASFERIMENTO, string BARCODE_ODL, string NUMMOVFASE, string REPARTO, string MODELLO, decimal QTA) {
+            public AP_DTRASFERIMENTIRow AddAP_DTRASFERIMENTIRow(decimal IDDTRASFERIMENTO, decimal IDTRASFERIMENTO, string BARCODE_ODL, string NUMMOVFASE, string REPARTO, string MODELLO, decimal QTA, decimal COLLI) {
                 AP_DTRASFERIMENTIRow rowAP_DTRASFERIMENTIRow = ((AP_DTRASFERIMENTIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDDTRASFERIMENTO,
@@ -3230,7 +3240,8 @@ namespace Applicazioni.Entities {
                         NUMMOVFASE,
                         REPARTO,
                         MODELLO,
-                        QTA};
+                        QTA,
+                        COLLI};
                 rowAP_DTRASFERIMENTIRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAP_DTRASFERIMENTIRow);
                 return rowAP_DTRASFERIMENTIRow;
@@ -3260,6 +3271,7 @@ namespace Applicazioni.Entities {
                 this.columnREPARTO = base.Columns["REPARTO"];
                 this.columnMODELLO = base.Columns["MODELLO"];
                 this.columnQTA = base.Columns["QTA"];
+                this.columnCOLLI = base.Columns["COLLI"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3279,6 +3291,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnMODELLO);
                 this.columnQTA = new global::System.Data.DataColumn("QTA", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQTA);
+                this.columnCOLLI = new global::System.Data.DataColumn("COLLI", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOLLI);
                 this.columnIDDTRASFERIMENTO.AllowDBNull = false;
                 this.columnIDTRASFERIMENTO.AllowDBNull = false;
                 this.columnBARCODE_ODL.AllowDBNull = false;
@@ -7713,6 +7727,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal COLLI {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableAP_DTRASFERIMENTI.COLLIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COLLI\' in table \'AP_DTRASFERIMENTI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAP_DTRASFERIMENTI.COLLIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsMODELLONull() {
                 return this.IsNull(this.tableAP_DTRASFERIMENTI.MODELLOColumn);
             }
@@ -7733,6 +7763,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetQTANull() {
                 this[this.tableAP_DTRASFERIMENTI.QTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOLLINull() {
+                return this.IsNull(this.tableAP_DTRASFERIMENTI.COLLIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOLLINull() {
+                this[this.tableAP_DTRASFERIMENTI.COLLIColumn] = global::System.Convert.DBNull;
             }
         }
         
