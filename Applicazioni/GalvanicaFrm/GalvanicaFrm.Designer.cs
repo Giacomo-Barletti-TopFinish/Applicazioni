@@ -79,6 +79,7 @@
             this.dgvGriglia.Size = new System.Drawing.Size(1100, 601);
             this.dgvGriglia.TabIndex = 5;
             this.dgvGriglia.TabStop = false;
+            this.dgvGriglia.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGriglia_CellFormatting);
             this.dgvGriglia.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGriglia_CellValueChanged);
             this.dgvGriglia.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvGriglia_UserDeletingRow);
             // 

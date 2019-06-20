@@ -41,21 +41,6 @@ namespace GalvanicaFrm
 
         }
 
-        private void AggiornaColoreRiga()
-        {
-            foreach (DataGridViewRow riga in dgvGriglia.Rows)
-            {
-                if (riga.Cells[(int)colonne.REPARTO].Value != DBNull.Value)
-                {
-                    string reparto = (string)riga.Cells[(int)colonne.REPARTO].Value;
-                    if (reparto != "INTERNO")
-                        riga.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
-
-            dgvGriglia.Refresh();
-        }
-
         enum colonne { IDMAGAZZ_LANCIO, IDMAGAZZ_WIP, IDGALVAPIANO, REPARTO, MODELLO_LANCIO, MODELLO_WIP, BRAND, FINITURA, ORDINE, GALVANICA, SUPERFICIE, MATERIALE, PEZZIBARRA, QTA, QTADATER, PIANIFICATO, BARRE };
 
         private void CreaGriglia()
@@ -168,7 +153,6 @@ namespace GalvanicaFrm
                 CaricaPianificazione();
                 ImpostaSettimana();
                 CreaGriglia();
-                AggiornaColoreRiga();
             }
             catch (Exception ex)
             {
@@ -442,6 +426,29 @@ namespace GalvanicaFrm
                     _ds.AP_GALVANICA_PIANO.AcceptChanges();
 
                 }
+            }
+        }
+
+        private void dgvGriglia_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.ColumnIndex == (int)colonne.REPARTO)
+            {
+                DataGridViewRow riga = dgvGriglia.Rows[e.RowIndex];
+                string reparto = (string)riga.Cells[(int)colonne.REPARTO].Value;
+                if (reparto != "INTERNO")
+                    riga.DefaultCellStyle.ForeColor = Color.Red;
+            }
+
+            if (e.ColumnIndex == (int)colonne.PIANIFICATO)
+            {
+                DataGridViewRow riga = dgvGriglia.Rows[e.RowIndex];
+                if(riga.Cells[(int)colonne.PIANIFICATO].Value==DBNull.Value)return;
+                decimal pianificato = (decimal)riga.Cells[(int)colonne.PIANIFICATO].Value;
+                decimal qtadater = (decimal)riga.Cells[(int)colonne.QTADATER].Value;
+                if (pianificato == qtadater)
+                    riga.DefaultCellStyle.BackColor = Color.LightGreen;
+
             }
         }
     }
