@@ -29,3 +29,9 @@ REPARTO 	VARCHAR2(10 BYTE) NOT NULL,
 
 
 select * from AP_TTRASFERIMENTI
+
+select * from gruppo.tabmag where codicemag = 'GRE\SAL8'
+
+select * from gruppo.usr_prd_resourcesf where codresourcef like 'GIAC%'
+
+
