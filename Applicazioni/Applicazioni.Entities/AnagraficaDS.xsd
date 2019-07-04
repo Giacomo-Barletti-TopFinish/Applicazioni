@@ -1307,6 +1307,63 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="USR_PDM_FILES" msprop:Generator_TableClassName="USR_PDM_FILESDataTable" msprop:Generator_TableVarName="tableUSR_PDM_FILES" msprop:Generator_RowChangedName="USR_PDM_FILESRowChanged" msprop:Generator_TablePropName="USR_PDM_FILES" msprop:Generator_RowDeletingName="USR_PDM_FILESRowDeleting" msprop:Generator_RowChangingName="USR_PDM_FILESRowChanging" msprop:Generator_RowEvHandlerName="USR_PDM_FILESRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PDM_FILESRowDeleted" msprop:Generator_RowClassName="USR_PDM_FILESRow" msprop:Generator_UserTableName="USR_PDM_FILES" msprop:Generator_RowEvArgName="USR_PDM_FILESRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDPDMFILE" msprop:Generator_ColumnVarNameInTable="columnIDPDMFILE" msprop:Generator_ColumnPropNameInRow="IDPDMFILE" msprop:Generator_ColumnPropNameInTable="IDPDMFILEColumn" msprop:Generator_UserColumnName="IDPDMFILE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ORIGINEFILE" msprop:Generator_ColumnVarNameInTable="columnORIGINEFILE" msprop:Generator_ColumnPropNameInRow="ORIGINEFILE" msprop:Generator_ColumnPropNameInTable="ORIGINEFILEColumn" msprop:Generator_UserColumnName="ORIGINEFILE" type="xs:decimal" />
+              <xs:element name="IDPDMPATH" msprop:Generator_ColumnVarNameInTable="columnIDPDMPATH" msprop:Generator_ColumnPropNameInRow="IDPDMPATH" msprop:Generator_ColumnPropNameInTable="IDPDMPATHColumn" msprop:Generator_UserColumnName="IDPDMPATH" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOMEFILE" msprop:Generator_ColumnVarNameInTable="columnNOMEFILE" msprop:Generator_ColumnPropNameInRow="NOMEFILE" msprop:Generator_ColumnPropNameInTable="NOMEFILEColumn" msprop:Generator_UserColumnName="NOMEFILE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TIPOFILE" msprop:Generator_ColumnVarNameInTable="columnTIPOFILE" msprop:Generator_ColumnPropNameInRow="TIPOFILE" msprop:Generator_ColumnPropNameInTable="TIPOFILEColumn" msprop:Generator_UserColumnName="TIPOFILE" type="xs:decimal" />
+              <xs:element name="DIMREALISN" msprop:Generator_ColumnVarNameInTable="columnDIMREALISN" msprop:Generator_ColumnPropNameInRow="DIMREALISN" msprop:Generator_ColumnPropNameInTable="DIMREALISNColumn" msprop:Generator_UserColumnName="DIMREALISN" type="xs:decimal" />
+              <xs:element name="TRIDIMENSIONALESN" msprop:Generator_ColumnVarNameInTable="columnTRIDIMENSIONALESN" msprop:Generator_ColumnPropNameInRow="TRIDIMENSIONALESN" msprop:Generator_ColumnPropNameInTable="TRIDIMENSIONALESNColumn" msprop:Generator_UserColumnName="TRIDIMENSIONALESN" type="xs:decimal" />
+              <xs:element name="DESFILE" msprop:Generator_ColumnVarNameInTable="columnDESFILE" msprop:Generator_ColumnPropNameInRow="DESFILE" msprop:Generator_ColumnPropNameInTable="DESFILEColumn" msprop:Generator_UserColumnName="DESFILE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="254" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTEFILE" msprop:Generator_ColumnVarNameInTable="columnNOTEFILE" msprop:Generator_ColumnPropNameInRow="NOTEFILE" msprop:Generator_ColumnPropNameInTable="NOTEFILEColumn" msprop:Generator_UserColumnName="NOTEFILE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATACR" msprop:Generator_ColumnVarNameInTable="columnDATACR" msprop:Generator_ColumnPropNameInRow="DATACR" msprop:Generator_ColumnPropNameInTable="DATACRColumn" msprop:Generator_UserColumnName="DATACR" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DATAVR" msprop:Generator_ColumnVarNameInTable="columnDATAVR" msprop:Generator_ColumnPropNameInRow="DATAVR" msprop:Generator_ColumnPropNameInTable="DATAVRColumn" msprop:Generator_UserColumnName="DATAVR" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COLLEGSN" msprop:Generator_ColumnVarNameInTable="columnCOLLEGSN" msprop:Generator_ColumnPropNameInRow="COLLEGSN" msprop:Generator_ColumnPropNameInTable="COLLEGSNColumn" msprop:Generator_UserColumnName="COLLEGSN" type="xs:decimal" />
+              <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ" type="xs:string" minOccurs="0" />
+              <xs:element name="PDMPATH" msprop:Generator_ColumnVarNameInTable="columnPDMPATH" msprop:Generator_ColumnPropNameInRow="PDMPATH" msprop:Generator_ColumnPropNameInTable="PDMPATHColumn" msprop:Generator_UserColumnName="PDMPATH" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">

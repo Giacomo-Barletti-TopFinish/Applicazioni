@@ -57,5 +57,23 @@ namespace Applicazioni.Data.Anagrafica
                 da.Fill(ds.USR_PRD_CDDIBA);
             }
         }
+
+        public void FillUSR_PDM_FILES(AnagraficaDS ds, List<string> IDMAGAZZ)
+        {
+            string inCOndition = ConvertToStringForInCondition(IDMAGAZZ);
+
+            string select = @"  select FI.*, IM.IDMAGAZZ,PA.PDMPATH  from gruppo.USR_PDM_FILES FI
+            INNER JOIN GRUPPO.USR_PDM_IMG_MAGAZZ IM ON IM.IDPDMFILE = FI.IDPDMFILE
+            INNER JOIN GRUPPO.USR_PDM_PATHS PA ON PA.IDPDMPATH = FI.IDPDMPATH
+            where IM.idmagazz in ( {0} )";
+
+            select = string.Format(select, inCOndition);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PDM_FILES);
+            }
+        }
+
     }
 }

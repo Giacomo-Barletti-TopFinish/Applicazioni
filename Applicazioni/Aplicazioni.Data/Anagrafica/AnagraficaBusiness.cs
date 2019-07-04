@@ -31,6 +31,7 @@ namespace Applicazioni.Data.Anagrafica
                     articoliMancanti.RemoveRange(0, articoliMancanti.Count);
                 }
                 a.FillMAGAZZ(ds, articoliDaCaricare);
+                a.FillUSR_PDM_FILES(ds, articoliDaCaricare);
             }
         }
 

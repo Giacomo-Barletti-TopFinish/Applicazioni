@@ -60,6 +60,8 @@
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Preventivi\PreventiviAdapter.cs" />
     <Compile Include="Preventivi\PreventiviBusiness.cs" />
+    <Compile Include="Produzione\ProduzioneAdapter.cs" />
+    <Compile Include="Produzione\ProduzioneBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trasferimenti\TrasferimentiAdapter.cs" />
     <Compile Include="Trasferimenti\TrasferimentiBusiness.cs" />
