@@ -2,6 +2,7 @@
 using Applicazioni.Common;
 using Applicazioni.Entities;
 using Applicazioni.Models;
+using Applicazioni.Proxies.Temera;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,8 +24,14 @@ namespace AACPGFrm
         public AACPGFrm()
         {
             InitializeComponent();
+            ScriviLogInfo("avvio");
         }
 
+        protected override void MostraEccezione(Exception ex, string messaggioLog)
+        {
+            ScriviLogErrore(messaggioLog, ex);
+            base.MostraEccezione(ex, messaggioLog);
+        }
         private void btnCancella_Click(object sender, EventArgs e)
         {
             try
@@ -36,14 +43,14 @@ namespace AACPGFrm
             {
                 MostraEccezione(ex, "Erroe in cancella tutto");
             }
-
         }
 
         private void CancellaTutto()
         {
             txtODL.Text = string.Empty;
             txtTelaio.Text = string.Empty;
-
+            txtToken.Text = string.Empty;
+            txtMessage.Text = string.Empty;
         }
 
         private void txtODL_KeyDown(object sender, KeyEventArgs e)
@@ -89,7 +96,7 @@ namespace AACPGFrm
             finally
             {
                 Cursor.Current = Cursors.Default;
-              
+
             }
         }
 
@@ -149,6 +156,7 @@ namespace AACPGFrm
                     string barcode = txtTelaio.Text;
                     txtTelaio.Text = string.Empty;
                     VerificaCodiceTelaio(barcode);
+                    txtODL.Focus();
                 }
             }
             catch (Exception ex)
@@ -158,8 +166,113 @@ namespace AACPGFrm
             finally
             {
                 Cursor.Current = Cursors.Default;
-                txtODL.Focus();
             }
+        }
+
+        private string GetTokenConnessione()
+        {
+            if (string.IsNullOrEmpty(txtToken.Text))
+            {
+                try
+                {
+
+                    using (TemeraTmr proxy = new TemeraTmr())
+                    {
+                        ScriviLogInfo("Richiesta token .....");
+                        txtMessage.InserisciRichiesta("Richiesta token .....");
+                        string token = proxy.GetToken(Properties.Settings.Default.User, Properties.Settings.Default.Password, Properties.Settings.Default.Server);
+                        txtToken.Text = token;
+                        txtMessage.InserisciRisposta("Token: " + token);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MostraEccezione(ex, "Errore in get token");
+                }
+
+            }
+
+            return txtToken.Text;
+        }
+
+        private void btnAvvia_Click(object sender, EventArgs e)
+        {
+            lblMessaggi.Text = string.Empty;
+            if (string.IsNullOrEmpty(txtTelaio.Text))
+            {
+                lblMessaggi.Text += "Specificare il telaio";
+            }
+
+            if (string.IsNullOrEmpty(txtOrdineLavoro.Text))
+            {
+                lblMessaggi.Text += " Specificare l'ODL";
+            }
+
+            if (string.IsNullOrEmpty(txtModello.Text))
+            {
+                lblMessaggi.Text += " Specificare il modello";
+            }
+
+            int quantita = 0;
+            if (string.IsNullOrEmpty(txtQuantita.Text))
+            {
+                lblMessaggi.Text += " Specificare la quantità";
+            }
+            else
+            {
+                if (!int.TryParse(txtQuantita.Text, out quantita))
+                    lblMessaggi.Text += " La quantità no sembra essere un numero";
+            }
+
+
+            if (!string.IsNullOrEmpty(lblMessaggi.Text)) return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string token = GetTokenConnessione();
+
+                txtMessage.InserisciRichiesta("Invio dati .....");
+
+                using (TemeraTmr proxy = new TemeraTmr())
+                {
+                    string json = proxy.AssociazioneTelaio(txtODL.Text, txtModello.Text, txtTelaio.Text, quantita, 1, Properties.Settings.Default.Server, token);
+                    txtMessage.InserisciRisposta(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in avvia galvanica");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+        }
+    }
+
+    public static class RichTextBoxExtensions
+    {
+        public static void AppendText(this RichTextBox box, string text, Color color)
+        {
+            text = Environment.NewLine + text;
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
+        }
+
+        public static void InserisciRichiesta(this RichTextBox box, string messaggio)
+        {
+            box.AppendText(messaggio, Color.Blue);
+        }
+
+        public static void InserisciRisposta(this RichTextBox box, string messaggio)
+        {
+            box.AppendText(messaggio, Color.Red);
         }
     }
 }

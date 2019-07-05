@@ -100,6 +100,10 @@
       <Project>{AC6DBB31-E034-48B9-A242-EF174F575B0D}</Project>
       <Name>Applicazioni.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.Proxies\Applicazioni.Proxies.csproj">
+      <Project>{8192714C-2470-434E-91D2-52BD58D84758}</Project>
+      <Name>Applicazioni.Proxies</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
