@@ -42,6 +42,44 @@ create TABLE AP_GALVANICA_PIANO
    
       CREATE INDEX IDX_AP_AP_GALVANICA_PIANO ON AP_GALVANICA_PIANO(DATAGALVANICA);
 
+
+ CREATE TABLE AP_GALVANICA_SPESSORI 
+   (	
+    IDGALVASPESSORI NUMBER NOT NULL,
+      BRAND	VARCHAR2(20 BYTE) NULL,
+      FINITURA	VARCHAR2(20 BYTE)  NOT NULL,  
+      MATERIALE VARCHAR2(20 BYTE)  NOT NULL, 
+      ETICHETTA VARCHAR(10) NOT NULL,
+      SEQUENZA NUMBER(3)  NOT NULL,
+      primary key (IDGALVASPESSORI)
+   );
+
+  CREATE INDEX IDX_AP_GALVANICA_SPESSORI ON AP_GALVANICA_SPESSORI(BRAND,FINITURA,MATERIALE);
+
+
+ CREATE TABLE AP_CERTIX
+   (	
+    IDMISURECERTIX NUMBER NOT NULL,
+      BARCODE	VARCHAR2(30 BYTE) NULL,
+      IDLINE	NUMBER(3)  NOT NULL,  
+      DATAMISURA DATE NOT NULL, 
+      IDMAGAZZ VARCHAR2(10 BYTE) NOT NULL, 
+      IDMAGAZZ_WIP VARCHAR2(10 BYTE) NOT NULL,
+      primary key (IDMISURECERTIX)
+   );
+
+
+ CREATE TABLE AP_CERTIX_DETTAGLIO
+   (	
+      IDMISURECERTIXDET NUMBER NOT NULL,
+      IDMISURECERTIX NUMBER NOT NULL,
+      ETICHETTA VARCHAR(10) NOT NULL,
+      SEQUENZA NUMBER(3)  NOT NULL,
+      VALORE FLOAT  NOT NULL,
+      DATAINSERIMENTO DATE NOT NULL,
+      primary key (IDMISURECERTIXDET)
+   );
+   
 create table GALVANICA_CARICO AS
 select sum(mf.qta) QTA,sum(mf.qtadater)QTADATER,
             MODLAN.IDMAGAZZ AS IDMAGAZZ_LANCIO,
@@ -136,3 +174,9 @@ group by  modlan.idmagazz,
             gp.pianificato,
             gp.datagalvanica,
             gp.idgalvapiano;
+
+
+
+select sp.* from ap_galvanica_spessori sp
+inner join ap_galvanica_modello mo on mo.brand = sp.brand and mo.finitura = sp.finitura
+where mo.idmagazz = jjj and mo.idmagazz_wip = ggg
