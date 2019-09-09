@@ -70,7 +70,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Valorizzazioni\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
       <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>

@@ -84,6 +84,9 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TrasferimentiService.resx">
+      <DependentUpon>TrasferimentiService.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplicazioni.Data\Applicazioni.Data.csproj">
