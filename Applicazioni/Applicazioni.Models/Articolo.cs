@@ -13,5 +13,6 @@ namespace Applicazioni.Models
         public string IdMagazz;
         public string Immagine;
         public decimal Superficie;
+        public decimal Peso;
     }
 }

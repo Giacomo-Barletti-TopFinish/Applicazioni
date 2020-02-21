@@ -55,5 +55,25 @@ namespace Applicazioni.Data.Anagrafica
             AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
             a.FillUSR_TAB_VOCICOSTO(ds);
         }
+
+
+        [DataContext]
+        public void FillCLIFO(AnagraficaDS ds)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillCLIFO(ds);
+        }
+        [DataContext]
+        public void FillTABFAS(AnagraficaDS ds)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillTABFAS(ds);
+        }
+        [DataContext]
+        public void FillMAGAZZ(AnagraficaDS ds)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillMAGAZZ(ds);
+        }
     }
 }

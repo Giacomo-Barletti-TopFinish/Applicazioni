@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anagrafica.cs" />
+    <Compile Include="DiBa.cs" />
+    <Compile Include="Inventario.cs" />
     <Compile Include="Produzione.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

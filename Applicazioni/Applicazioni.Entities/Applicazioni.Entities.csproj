@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TrasferimentiDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ValorizzazioneDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValorizzazioneDS.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="AnagraficaDS.xsc">
@@ -134,6 +139,17 @@
     </None>
     <None Include="TrasferimentiDS.xss">
       <DependentUpon>TrasferimentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="ValorizzazioneDS.xsc">
+      <DependentUpon>ValorizzazioneDS.xsd</DependentUpon>
+    </None>
+    <None Include="ValorizzazioneDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ValorizzazioneDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ValorizzazioneDS.xss">
+      <DependentUpon>ValorizzazioneDS.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

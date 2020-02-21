@@ -75,5 +75,35 @@ namespace Applicazioni.Data.Anagrafica
             }
         }
 
+        public void FillCLIFO(AnagraficaDS ds)
+        {
+            string select = @"SELECT * FROM gruppo.CLIFO ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.CLIFO);
+            }
+        }
+
+        public void FillTABFAS(AnagraficaDS ds)
+        {
+            string select = @"SELECT * FROM gruppo.tabfas ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TABFAS);
+            }
+        }
+
+        public void FillMAGAZZ(AnagraficaDS ds)
+        {
+            string select = @"SELECT * FROM gruppo.MAGAZZ ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
+
     }
 }

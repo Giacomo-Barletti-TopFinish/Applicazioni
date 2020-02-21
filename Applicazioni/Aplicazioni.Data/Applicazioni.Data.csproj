@@ -65,14 +65,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trasferimenti\TrasferimentiAdapter.cs" />
     <Compile Include="Trasferimenti\TrasferimentiBusiness.cs" />
+    <Compile Include="Valorizzazioni\ValorizzazioneAdapter.cs" />
+    <Compile Include="Valorizzazioni\ValorizzazioniBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Valorizzazioni\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
       <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
