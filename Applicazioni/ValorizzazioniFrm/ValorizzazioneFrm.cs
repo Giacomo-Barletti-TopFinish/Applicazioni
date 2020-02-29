@@ -136,6 +136,14 @@ namespace ValorizzazioniFrm
             }
             diba.FillTABFAS();
 
+            worker.ReportProgress(0, "Carica listino fasi");
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            diba.FillUSR_LIS_FASE();
+
             if (worker.CancellationPending)
             {
                 e.Cancel = true;
@@ -143,6 +151,14 @@ namespace ValorizzazioniFrm
             }
             worker.ReportProgress(0, "Carica TDIBA");
             diba.CaricaTDiba();
+
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+            worker.ReportProgress(0, "Carica TDIBA DEFAULT");
+            diba.CaricaTDibaDefaut();
 
             if (worker.CancellationPending)
             {

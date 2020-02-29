@@ -29,6 +29,12 @@ namespace Applicazioni.Data.Valorizzazioni
             a.FillUSR_PRD_TDIBA(ds);
         }
         [DataContext]
+        public void FillUSR_PRD_TDIBA_DEFAULT(ValorizzazioneDS ds)
+        {
+            ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);
+            a.FillUSR_PRD_TDIBA_DEFAULT(ds);
+        }
+        [DataContext]
         public void FillUSR_PRD_TDIBA_DEFAULTS(ValorizzazioneDS ds)
         {
             ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);
@@ -125,5 +131,11 @@ namespace Applicazioni.Data.Valorizzazioni
             a.FillUSR_LIS_VEN(ds);
         }
 
+        [DataContext]
+        public void FillUSR_LIS_FASE(ValorizzazioneDS ds)
+        {
+            ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);
+            a.FillUSR_LIS_FASE(ds);
+        }
     }
 }

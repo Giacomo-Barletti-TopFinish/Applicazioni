@@ -77,6 +77,14 @@ namespace Applicazioni.BLL
                 bValorizzazioni.FillUSR_LIS_VEN(_ds);
             }
         }
+
+        public void FillUSR_LIS_FASE()
+        {
+            using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
+            {
+                bValorizzazioni.FillUSR_LIS_FASE(_ds);
+            }
+        }
         public void FillUSR_INVENTARIOD(string idInventarioT)
         {
             using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
@@ -106,7 +114,14 @@ namespace Applicazioni.BLL
                 bValorizzazioni.FillUSR_PRD_TDIBA(_ds);
             }
         }
-        public void CaricaTDibaDefault()
+        public void CaricaTDibaDefaut()
+        {
+            using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
+            {
+                bValorizzazioni.FillUSR_PRD_TDIBA_DEFAULT(_ds);
+            }
+        }
+        public void CaricaTDibaDefaults()
         {
             using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
             {
@@ -145,7 +160,7 @@ namespace Applicazioni.BLL
                 int livello = 0;
                 worker.ReportProgress(i);
                 string prodottoFinito = tdiba.IDMAGAZZ;
-                //                    if (prodottoFinito != "0000010963") continue;
+                //                if (prodottoFinito != "0000044581") continue;
                 int ramo = 1;
                 EstraiDiba(idInventarioT, _ds, tdiba, livello, prodottoFinito, 1, ref ramo);
 
@@ -179,6 +194,9 @@ namespace Applicazioni.BLL
         {
             List<string> idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
             int i = 1;
+
+ //           idmagazz = new List<string>(new string[] { "0000092567" });
+
             foreach (string articolo in idmagazz)
             {
 
@@ -187,78 +205,40 @@ namespace Applicazioni.BLL
                     e.Cancel = true;
                     return;
                 }
-
                 worker.ReportProgress(i);
+                ValorizzazioneDS.USR_PRD_TDIBA_DEFAULTRow tdibaArticolo = _ds.USR_PRD_TDIBA_DEFAULT.Where(x => x.IDMAGAZZ == articolo).FirstOrDefault();
+                if (tdibaArticolo == null)
+                    CalcolaCosto(string.Empty, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
+                //                RegistraCostoArticolo(0, 0, 0, tdibaArticolo, inventarioT.IdInventarioT, articolo, "TDIBA non definita", string.Empty);
+                else
+                    CalcolaCosto(tdibaArticolo.IDTDIBA, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
 
-                CalcolaCosto(articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
                 i++;
             }
 
         }
 
-        private decimal CalcolaCosto(string idmagazz, Testata InventarioT, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish)
+        private decimal CalcolaCosto(string idtdiba, string idmagazz, Testata InventarioT, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish)
         {
-            StringBuilder nota = new StringBuilder();
 
             ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == InventarioT.IdInventarioT && x.IDMAGAZZ == idmagazz).FirstOrDefault();
             if (costoArticolo != null)
                 return costoArticolo.COSTOFASE + costoArticolo.COSTOFIGLI + costoArticolo.COSTOMATERIALE;
+
+            StringBuilder nota = new StringBuilder();
+            ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == idtdiba).FirstOrDefault();
+            if (tdibaArticolo == null)
+                nota.AppendLine("Diba non definita");
 
             decimal costoFigli = 0;
             decimal costoMateriale = 0;
             decimal costoFase = 0;
             //            decimal costoListino = 0;
 
-            ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo = null;
-            List<ValorizzazioneDS.USR_PRD_TDIBARow> tdibaArticoli = _ds.USR_PRD_TDIBA.Where(x => x.IDMAGAZZ == idmagazz).ToList();
             Articolo articolo = _anagrafica.GetArticolo(idmagazz);
 
-            if (tdibaArticoli.Count == 0) nota.AppendLine("Diba non definita");
-
-            if (tdibaArticoli.Count == 1)
-                tdibaArticolo = tdibaArticoli[0];
-
-            if (tdibaArticoli.Count > 1)
-            {
-                tdibaArticolo = tdibaArticoli.Where(x => x.ACTIVESN == "S").FirstOrDefault();
-                if (tdibaArticolo == null)
-                    tdibaArticolo = tdibaArticoli[0];
-            }
             string idListino = string.Empty;
-            List<ValorizzazioneDS.USR_LIS_ACQRow> listini = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
-                && x.VALIDITA <= InventarioT.DataFine
-                && x.FINEVALIDITA >= InventarioT.DataInizio
-                && x.AZIENDA == "MP").OrderBy(x => x.COSTOUNI).ToList();
-            if (listini.Count > 0)
-            {
-
-                costoFase = ValutaCostoListino(articolo.Peso, listini, out idListino);
-
-                //RegistraCostoArticolo(costoListino, 0, 0, tdibaArticolo, InventarioT.IdInventarioT, idmagazz, nota.ToString(), idListino);
-                //return costoListino;
-            }
-            else
-            {
-                List<ValorizzazioneDS.USR_LIS_VENRow> listiniVendita = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
-                    && x.VALIDITA <= InventarioT.DataFine
-                    && x.FINEVALIDITA >= InventarioT.DataInizio
-                    && x.AZIENDA == "TF").OrderBy(x => x.PREZZOUNI).ToList();
-
-                if (listiniVendita.Count > 0)
-                {
-                    costoFase = ValutaCostoListino(articolo.Peso, listiniVendita, out idListino);
-
-                    //RegistraCostoArticolo(costoListino, 0, 0, tdibaArticolo, InventarioT.IdInventarioT, idmagazz, nota.ToString(), idListino);
-                    //return costoListino;
-                }
-                else
-                {
-                    if (tdibaArticolo != null && (_anagrafica.FaseDaCostificare(tdibaArticolo.IDTABFAS) || consideraTutteLeFasi))
-                    {
-                        costoFase = EstraiCostoFase(tdibaArticolo.IDTABFAS, InventarioT.DataFine, InventarioT.DataInizio, articolo.Peso);
-                    }
-                }
-            }
+            costoFase = CalcolaCostoListinoArticolo(articolo, InventarioT, tdibaArticolo, out idListino);
 
             if (tdibaArticolo == null)
             {
@@ -266,10 +246,36 @@ namespace Applicazioni.BLL
                 return costoFase;
             }
 
+            if (costoFase == 0 && string.IsNullOrEmpty(idListino) && (_anagrafica.FaseDaCostificare(tdibaArticolo.IDTABFAS) || consideraTutteLeFasi))
+                costoFase = EstraiCostoFase(tdibaArticolo.IDTABFAS, InventarioT.DataFine, InventarioT.DataInizio, articolo.Peso);
+
             foreach (ValorizzazioneDS.USR_PRD_RDIBARow rdiba in _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == tdibaArticolo.IDTDIBA).OrderBy(x => x.SEQUENZA))
             {
+                decimal costoFiglio = 0;
+                if (!rdiba.IsIDTDIBAIFFASENull())
+                    costoFiglio = CalcolaCosto(rdiba.IDTDIBAIFFASE, rdiba.IDMAGAZZ, InventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
+                else
+                {
+                    ValorizzazioneDS.COSTI_ARTICOLIRow costoArticoloMateriale = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == InventarioT.IdInventarioT && x.IDMAGAZZ == rdiba.IDMAGAZZ).FirstOrDefault();
+                    if (costoArticoloMateriale != null)
+                        costoFiglio = costoArticoloMateriale.COSTOFASE + costoArticoloMateriale.COSTOFIGLI + costoArticoloMateriale.COSTOMATERIALE;
+                    else
+                    {
+                        List<ValorizzazioneDS.USR_LIS_ACQRow> listiniMateriale = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == rdiba.IDMAGAZZ
+                            && x.VALIDITA <= InventarioT.DataFine
+                            //  && x.FINEVALIDITA >= InventarioT.DataInizio
+                            && x.FINEVALIDITA >= InventarioT.DataFine
+                            && x.AZIENDA == "MP").ToList();
+                        if (listiniMateriale.Count > 0)
+                        {
+                            string idListinoMateriale;
+                            costoFiglio = ValutaCostoListino(articolo.Peso, listiniMateriale, out idListinoMateriale);
+                            RegistraCostoArticolo(costoFiglio, 0, 0, null, InventarioT.IdInventarioT, rdiba.IDMAGAZZ, string.Empty, idListinoMateriale);
+                            //return costoListino;
+                        }
+                    }
 
-                decimal costoFiglio = CalcolaCosto(rdiba.IDMAGAZZ, InventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
+                }
                 costoFigli = costoFigli + costoFiglio * rdiba.QTACONSUMO;
             }
 
@@ -277,16 +283,82 @@ namespace Applicazioni.BLL
             return costoFase + costoFigli + costoMateriale;
         }
 
+        private decimal CalcolaCostoListinoArticolo(Articolo articolo, Testata InventarioT, ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo, out string idListino)
+        {
+            idListino = string.Empty;
+            List<ValorizzazioneDS.USR_LIS_ACQRow> listiniAquistiInterni = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == articolo.IdMagazz
+                && x.VALIDITA <= InventarioT.DataFine
+                //&& x.FINEVALIDITA >= InventarioT.DataInizio
+                && x.FINEVALIDITA >= InventarioT.DataFine
+                && !x.IsCODICECLIFONull()
+                && x.CODICECLIFO.Substring(0, 1) != "0"
+                && x.AZIENDA == "MP").ToList();
+
+            if (tdibaArticolo != null && !tdibaArticolo.IsIDDIBAMETHODNull())
+            {
+                List<ValorizzazioneDS.USR_LIS_ACQRow> listiniAquistiInterniPerVersioneDiba = listiniAquistiInterni.Where(x => !x.IsIDDIBAMETHODNull() && x.IDDIBAMETHOD == tdibaArticolo.IDDIBAMETHOD).ToList();
+                if (listiniAquistiInterniPerVersioneDiba.Count > 0)
+                    return ValutaCostoListino(articolo.Peso, listiniAquistiInterniPerVersioneDiba, out idListino);
+            }
+
+            if (listiniAquistiInterni.Count > 0)
+                return ValutaCostoListino(articolo.Peso, listiniAquistiInterni, out idListino);
+
+            List<ValorizzazioneDS.USR_LIS_ACQRow> listiniAquistiEsterni = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == articolo.IdMagazz
+                && x.VALIDITA <= InventarioT.DataFine
+                //&& x.FINEVALIDITA >= InventarioT.DataInizio
+                && x.FINEVALIDITA >= InventarioT.DataFine
+                && x.AZIENDA == "MP").ToList();
+
+            if (tdibaArticolo != null && !tdibaArticolo.IsIDDIBAMETHODNull())
+            {
+                List<ValorizzazioneDS.USR_LIS_ACQRow> listiniAquistiEsterniPerVersioneDiba = listiniAquistiEsterni.Where(x => !x.IsIDDIBAMETHODNull() && x.IDDIBAMETHOD == tdibaArticolo.IDDIBAMETHOD).ToList();
+                if (listiniAquistiEsterniPerVersioneDiba.Count > 0)
+                    return ValutaCostoListino(articolo.Peso, listiniAquistiEsterniPerVersioneDiba, out idListino);
+            }
+
+            if (listiniAquistiEsterni.Count > 0)
+                return ValutaCostoListino(articolo.Peso, listiniAquistiEsterni, out idListino);
+
+
+            List<ValorizzazioneDS.USR_LIS_VENRow> listiniVendita = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == articolo.IdMagazz
+                   && x.VALIDITA <= InventarioT.DataFine
+                   && x.FINEVALIDITA >= InventarioT.DataFine
+                   //                    && x.FINEVALIDITA >= InventarioT.DataInizio
+                   && x.AZIENDA == "TF").ToList();
+
+            if (listiniVendita.Count > 0)
+                return ValutaCostoListino(articolo.Peso, listiniVendita, out idListino);
+
+            return 0;
+        }
+
         private decimal EstraiCostoFase(string idtabfas, DateTime dataFine, DateTime dataInizio, decimal pesoInGrammi)
         {
             string idListino = string.Empty;
+
+            List<ValorizzazioneDS.USR_LIS_FASERow> listiniFaseInterno = _ds.USR_LIS_FASE.Where(x => !x.IsIDTABFASNull()
+                && x.IDTABFAS == idtabfas
+                && x.VALIDITA <= dataFine
+                //                && x.FINEVALIDITA >= dataInizio
+                && x.FINEVALIDITA >= dataFine
+                //                && x.CODICECLIFO.Substring(0, 1) != "0"
+                ).ToList();
+
+            if (listiniFaseInterno.Count > 0)
+            {
+                return ValutaCostoListino(pesoInGrammi, listiniFaseInterno, out idListino);
+            }
+
+
             List<ValorizzazioneDS.USR_LIS_ACQRow> listiniFase = _ds.USR_LIS_ACQ.Where(x => x.IsIDMAGAZZNull()
                 && !x.IsIDTABFASNull()
                 && x.IDTABFAS == idtabfas
                 && x.VALIDITA <= dataFine
-                && x.FINEVALIDITA >= dataInizio
+                //                && x.FINEVALIDITA >= dataInizio
+                && x.FINEVALIDITA >= dataFine
                 //                && x.CODICECLIFO.Substring(0, 1) != "0"
-                ).OrderBy(x => x.COSTOUNI).ToList();
+                ).ToList();
             return ValutaCostoListino(pesoInGrammi, listiniFase, out idListino);
         }
 
@@ -294,52 +366,85 @@ namespace Applicazioni.BLL
         {
             idListino = string.Empty;
             decimal costoListino = 0;
+            DateTime dataInizioValidità = new DateTime(1980, 1, 1);
+
+            if (listini.Count > 0)
+            {
+                costoListino = listini[0].COSTOUNI;
+                dataInizioValidità = listini[0].VALIDITA;
+            }
             foreach (ValorizzazioneDS.USR_LIS_ACQRow listino in listini)
             {
                 switch (listino.IDTABUNIMI)
                 {
+                    default:
                     case "0000000011":  //numero
-                        if (costoListino < listino.COSTOUNI)
+                                        //      if (costoListino > listino.COSTOUNI)
+                        if (dataInizioValidità < listino.VALIDITA)
                         {
                             costoListino = listino.COSTOUNI;
                             idListino = listino.IDLISACQ;
                         }
                         break;
-                    case "0000000004":  //kg
-                        {
-                            decimal aux = pesoInGrammi * (listino.COSTOUNI) / 1000;
-                            if (costoListino < aux)
-                            {
-                                costoListino = aux;
-                                idListino = listino.IDLISACQ;
-                            }
-                        }
-                        break;
-                    case "0000000012":  //gr
-                        {
-                            decimal aux = pesoInGrammi * listino.COSTOUNI;
-                            if (costoListino < aux)
-                            {
-                                costoListino = aux;
-                                idListino = listino.IDLISACQ;
-                            }
-                        }
-                        break;
+                        //case "0000000004":  //kg
+                        //    {
+                        //        decimal aux = pesoInGrammi * (listino.COSTOUNI) / 1000;
+                        //        if (costoListino < aux)
+                        //        {
+                        //            costoListino = aux;
+                        //            idListino = listino.IDLISACQ;
+                        //        }
+                        //    }
+                        //    break;
+                        //case "0000000012":  //gr
+                        //    {
+                        //        decimal aux = pesoInGrammi * listino.COSTOUNI;
+                        //        if (costoListino < aux)
+                        //        {
+                        //            costoListino = aux;
+                        //            idListino = listino.IDLISACQ;
+                        //        }
+                        //    }
+                        //    break;
                 }
             }
             return costoListino;
         }
 
+        private decimal ValutaCostoListino(decimal pesoInGrammi, List<ValorizzazioneDS.USR_LIS_FASERow> listini, out string idListino)
+        {
+            idListino = string.Empty;
+            decimal costoListino = 0;
+            DateTime dataInizioValidità = new DateTime(1980, 1, 1);
+
+            if (listini.Count > 0)
+            {
+                costoListino = listini[0].COSTOUNI;
+                dataInizioValidità = listini[0].VALIDITA;
+            }
+            foreach (ValorizzazioneDS.USR_LIS_FASERow listino in listini)
+            {
+                if (dataInizioValidità < listino.VALIDITA)
+                {
+                    costoListino = listino.COSTOUNI;
+                    idListino = listino.IDLISFASE.ToString();
+                }
+            }
+
+            return costoListino;
+        }
         private decimal ValutaCostoListino(decimal pesoInGrammi, List<ValorizzazioneDS.USR_LIS_VENRow> listini, out string idListino)
         {
             idListino = string.Empty;
             decimal costoListino = 0;
+            if (listini.Count > 0)
+                costoListino = listini[0].PREZZOUNI;
             foreach (ValorizzazioneDS.USR_LIS_VENRow listino in listini)
             {
                 switch (listino.IDTABUNIMI)
                 {
                     case "0000000011":  //numero
-                        if (costoListino < listino.PREZZOUNI)
+                        if (costoListino > listino.PREZZOUNI)
                         {
                             costoListino = listino.PREZZOUNI;
                             idListino = listino.IDLISVEN;

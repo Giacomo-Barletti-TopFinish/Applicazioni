@@ -80,13 +80,12 @@ namespace Applicazioni.Data.Valorizzazioni
 
         public void FillUSR_PRD_TDIBA(ValorizzazioneDS ds)
         {
-            string select = @"select *from ditta1.usr_prd_tdiba td
-                                    inner join ditta1.USR_PRD_TDIBA_DEFAULTS tdd on tdd.idtdiba = td.idtdiba";
-          //  string select = @"SELECT 'METALPLUS' as AZIENDA,TD.* FROM DITTA1.USR_PRD_TDIBA TD
-          //  --INNER JOIN DITTA1.USR_PRD_TDIBA_DEFAULTS DF ON DF.IDTDIBA = TD.IDTDIBA
-          //--  UNION ALL
-          //                  --SELECT 'TOPFINISH' as AZIENDA,TD.* FROM DITTA2.USR_PRD_TDIBA TD
-          //                   --INNER JOIN DITTA2.USR_PRD_TDIBA_DEFAULTS DF ON DF.IDTDIBA = TD.IDTDIBA";
+            string select = @"select *from ditta1.usr_prd_tdiba td";
+            //  string select = @"SELECT 'METALPLUS' as AZIENDA,TD.* FROM DITTA1.USR_PRD_TDIBA TD
+            //  --INNER JOIN DITTA1.USR_PRD_TDIBA_DEFAULTS DF ON DF.IDTDIBA = TD.IDTDIBA
+            //--  UNION ALL
+            //                  --SELECT 'TOPFINISH' as AZIENDA,TD.* FROM DITTA2.USR_PRD_TDIBA TD
+            //                   --INNER JOIN DITTA2.USR_PRD_TDIBA_DEFAULTS DF ON DF.IDTDIBA = TD.IDTDIBA";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
@@ -94,6 +93,21 @@ namespace Applicazioni.Data.Valorizzazioni
             }
         }
 
+        public void FillUSR_PRD_TDIBA_DEFAULT(ValorizzazioneDS ds)
+        {
+            string select = @"select *from ditta1.usr_prd_tdiba td
+                                    inner join ditta1.USR_PRD_TDIBA_DEFAULT tdd on tdd.idtdiba = td.idtdiba";
+            //  string select = @"SELECT 'METALPLUS' as AZIENDA,TD.* FROM DITTA1.USR_PRD_TDIBA TD
+            //  --INNER JOIN DITTA1.USR_PRD_TDIBA_DEFAULTS DF ON DF.IDTDIBA = TD.IDTDIBA
+            //--  UNION ALL
+            //                  --SELECT 'TOPFINISH' as AZIENDA,TD.* FROM DITTA2.USR_PRD_TDIBA TD
+            //                   --INNER JOIN DITTA2.USR_PRD_TDIBA_DEFAULTS DF ON DF.IDTDIBA = TD.IDTDIBA";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_PRD_TDIBA_DEFAULT);
+            }
+        }
         public void FillCOSTI_ARTICOLI(ValorizzazioneDS ds, String idInventarioT)
         {
             string select = @"SELECT * from COSTI_ARTICOLI WHERE IDINVENTARIOT = $T<IDINVENTARIOT>";
@@ -136,6 +150,16 @@ namespace Applicazioni.Data.Valorizzazioni
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.USR_LIS_VEN);
+            }
+        }
+
+        public void FillUSR_LIS_FASE(ValorizzazioneDS ds)
+        {
+            string select = @"SELECT * FROM USR_LIS_FASE ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_LIS_FASE);
             }
         }
         public long DeleteCostiArticoli(string IdInventarioT)
