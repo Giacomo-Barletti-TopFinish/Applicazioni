@@ -190,12 +190,12 @@ namespace Applicazioni.BLL
             }
         }
 
-        public void CalcolaCostiArticolo(Testata inventarioT, BackgroundWorker worker, DoWorkEventArgs e, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish)
+        public void CalcolaCostiArticolo(Testata inventarioT, BackgroundWorker worker, DoWorkEventArgs e, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, bool usaDiBaNonDefault)
         {
             List<string> idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
             int i = 1;
 
- //           idmagazz = new List<string>(new string[] { "0000092567" });
+            //           idmagazz = new List<string>(new string[] { "0000092567" });
 
             foreach (string articolo in idmagazz)
             {
@@ -207,18 +207,24 @@ namespace Applicazioni.BLL
                 }
                 worker.ReportProgress(i);
                 ValorizzazioneDS.USR_PRD_TDIBA_DEFAULTRow tdibaArticolo = _ds.USR_PRD_TDIBA_DEFAULT.Where(x => x.IDMAGAZZ == articolo).FirstOrDefault();
-                if (tdibaArticolo == null)
-                    CalcolaCosto(string.Empty, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
-                //                RegistraCostoArticolo(0, 0, 0, tdibaArticolo, inventarioT.IdInventarioT, articolo, "TDIBA non definita", string.Empty);
+                ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticoloNonDefault = _ds.USR_PRD_TDIBA.Where(x => x.IDMAGAZZ == articolo).FirstOrDefault();
+                if (tdibaArticolo != null)
+                {
+                    CalcolaCosto(tdibaArticolo.IDTDIBA, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,"DiBa default");
+                }
+                else if (usaDiBaNonDefault && tdibaArticoloNonDefault != null)
+                {
+                    CalcolaCosto(tdibaArticoloNonDefault.IDTDIBA, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,"DiBa non default");
+                }
                 else
-                    CalcolaCosto(tdibaArticolo.IDTDIBA, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
-
+                    CalcolaCosto(string.Empty, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,string.Empty);
+                //                RegistraCostoArticolo(0, 0, 0, tdibaArticolo, inventarioT.IdInventarioT, articolo, "TDIBA non definita", string.Empty);
                 i++;
             }
 
         }
 
-        private decimal CalcolaCosto(string idtdiba, string idmagazz, Testata InventarioT, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish)
+        private decimal CalcolaCosto(string idtdiba, string idmagazz, Testata InventarioT, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, string notaEsterna)
         {
 
             ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == InventarioT.IdInventarioT && x.IDMAGAZZ == idmagazz).FirstOrDefault();
@@ -226,6 +232,8 @@ namespace Applicazioni.BLL
                 return costoArticolo.COSTOFASE + costoArticolo.COSTOFIGLI + costoArticolo.COSTOMATERIALE;
 
             StringBuilder nota = new StringBuilder();
+            nota.Append(notaEsterna);
+
             ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == idtdiba).FirstOrDefault();
             if (tdibaArticolo == null)
                 nota.AppendLine("Diba non definita");
@@ -253,7 +261,7 @@ namespace Applicazioni.BLL
             {
                 decimal costoFiglio = 0;
                 if (!rdiba.IsIDTDIBAIFFASENull())
-                    costoFiglio = CalcolaCosto(rdiba.IDTDIBAIFFASE, rdiba.IDMAGAZZ, InventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish);
+                    costoFiglio = CalcolaCosto(rdiba.IDTDIBAIFFASE, rdiba.IDMAGAZZ, InventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,string.Empty);
                 else
                 {
                     ValorizzazioneDS.COSTI_ARTICOLIRow costoArticoloMateriale = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == InventarioT.IdInventarioT && x.IDMAGAZZ == rdiba.IDMAGAZZ).FirstOrDefault();

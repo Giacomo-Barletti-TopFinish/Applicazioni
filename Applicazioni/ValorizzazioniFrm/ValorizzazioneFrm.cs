@@ -185,7 +185,7 @@ namespace ValorizzazioniFrm
             worker.ReportProgress(diba.CostiDaCalcolare, string.Format("Prodotti Finiti: {0}", diba.CostiDaCalcolare));
 
             worker.ReportProgress(0, "Inizio Calcolo Costi");
-            diba.CalcolaCostiArticolo(inventarioT, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish);
+            diba.CalcolaCostiArticolo(inventarioT, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish, dto.usaDiBaNonDiDefault);
             worker.ReportProgress(diba.CostiDaCalcolare, string.Format("Salvataggio dati in corso...", diba.CostiDaCalcolare));
             diba.SalvaCostiArticolo();
 
@@ -340,6 +340,7 @@ namespace ValorizzazioniFrm
                     dto.testata = testata;
                     dto.consideraTutteLeFasi = chkConsideraTutteLeFasi.Checked;
                     dto.consideraListiniTopFinish = chkVenditaTopFinish.Checked;
+                    dto.usaDiBaNonDiDefault = chkUsaDiBaNonDefault.Checked;
                     _bgwCosto.RunWorkerAsync(dto);
                     return;
                 }
@@ -361,5 +362,6 @@ namespace ValorizzazioniFrm
         public bool consideraTutteLeFasi { get; set; }
         public Testata testata { get; set; }
         public bool consideraListiniTopFinish { get; set; }
+        public bool usaDiBaNonDiDefault { get; set; }
     }
 }

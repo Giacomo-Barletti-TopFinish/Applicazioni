@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chkConsideraTutteLeFasi = new System.Windows.Forms.CheckBox();
             this.chkVenditaTopFinish = new System.Windows.Forms.CheckBox();
+            this.chkUsaDiBaNonDefault = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // ddlInventario
@@ -146,18 +147,29 @@
             // chkVenditaTopFinish
             // 
             this.chkVenditaTopFinish.AutoSize = true;
-            this.chkVenditaTopFinish.Location = new System.Drawing.Point(36, 177);
+            this.chkVenditaTopFinish.Location = new System.Drawing.Point(36, 184);
             this.chkVenditaTopFinish.Name = "chkVenditaTopFinish";
             this.chkVenditaTopFinish.Size = new System.Drawing.Size(274, 20);
             this.chkVenditaTopFinish.TabIndex = 13;
             this.chkVenditaTopFinish.Text = "Considera anche listini vendita Top Finish";
             this.chkVenditaTopFinish.UseVisualStyleBackColor = true;
             // 
+            // chkUsaDiBaNonDefault
+            // 
+            this.chkUsaDiBaNonDefault.AutoSize = true;
+            this.chkUsaDiBaNonDefault.Location = new System.Drawing.Point(36, 217);
+            this.chkUsaDiBaNonDefault.Name = "chkUsaDiBaNonDefault";
+            this.chkUsaDiBaNonDefault.Size = new System.Drawing.Size(352, 20);
+            this.chkUsaDiBaNonDefault.TabIndex = 14;
+            this.chkUsaDiBaNonDefault.Text = "Usa anche DiBa non di default per articoli da inventario";
+            this.chkUsaDiBaNonDefault.UseVisualStyleBackColor = true;
+            // 
             // ValorizzazioneFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 554);
+            this.Controls.Add(this.chkUsaDiBaNonDefault);
             this.Controls.Add(this.chkVenditaTopFinish);
             this.Controls.Add(this.chkConsideraTutteLeFasi);
             this.Controls.Add(this.lblCostoMax);
@@ -195,6 +207,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkConsideraTutteLeFasi;
         private System.Windows.Forms.CheckBox chkVenditaTopFinish;
+        private System.Windows.Forms.CheckBox chkUsaDiBaNonDefault;
     }
 }
 
