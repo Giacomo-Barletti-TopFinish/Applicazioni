@@ -56,6 +56,7 @@
     <Compile Include="BaseService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ContestoBase.cs" />
     <Compile Include="ExceptionFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExceptionFrm.resx">
       <DependentUpon>ExceptionFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\it2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Applicazioni.Security\Applicazioni.Security.csproj">
+      <Project>{ADD30CDE-2A62-465B-8542-D109E09B97A4}</Project>
+      <Name>Applicazioni.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,6 @@
+﻿Questo programma è una prima bozza di calcolatore per l'aggiornamento automatico dei preventivi.
+L'idea era quella di accedere al preventivatore di RVL per recuperare i dati ed usarli per aggiornare i preventivi mandati ai clienti.
+Purtroppo il preventivatore di RVL è costruito su un database poco consistente e quindi di difficile utilizzo, l'applicazione che ne è derivata è poco utile e comunque complessa da usare
+E' anche impossibile automatizzare la rigenerazione dei costi in quanto comportano sempre un intervento umano
+
+Resta comunque una base utile per capire come funziona la parte di database associata ai preventivi

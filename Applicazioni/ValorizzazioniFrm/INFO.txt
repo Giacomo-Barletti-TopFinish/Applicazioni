@@ -1,0 +1,31 @@
+﻿Questa applicazione stima il costo degli articoli a magazzino.
+
+Per essere utilizzata occorre che in RVL venga prima creato un inventario.
+Una volta creato l'inventario l'applicazione legge la lista degli articoli presenti in inventario e per ogni articolo costrisce il costo secondo
+il seguente algoritmo:
+
+1 - inizialmente l'applicazione carica in memoriale tabelle di anagrafica,listini e distinte base per non dover continuamente accedere al database
+2 - viene cancellato dalla tabella costi_articoli ogni riferimento alla testata che si sta andando a rivalorizzare
+3 - Per ogni articolo nella tabella dettaglio inventario che condivide la testata di inventario selezionata nella drop down list
+3.1 - si cerca una diba standard per qusto articolo. Se la diba esiste si procede con il calcolo del costo altrimenti ,se il checkbox "usa anche diba non di defualt..." è selezionato si cerca una diba non standard, 
+3.1.1 - si cerca un listino per l'articolo selezionato, se c'è si prende il prezzo del listino più recente, se non c'è e se è selezionato il checkbox "Cosnidera anche listini TF" si cerca in un listino di vendita top finish, se non c'è si mette zero
+3.1.2 - se non si è trovato un listino di acquisto/vendita e se è stata trovata una diba per questo articolo ai punti precedenti si cerca un listino di fase. se si trova prende il costo da listino.
+3.1.3 - se c'è una diba si verifica se la diba ha dei figli se ce ne sono per ogni figlio trovato 
+3.1.3.1 - si calcola il costo rientrando al punto 3.1.1
+3.1.3.2 - in base alla quantità riportata in distinta base si conta il costo dei figli come somma dei costi dei figli moltiplicati per le relative quantità in diba
+3.1.4 - si salva in tabella il costo dell'articolo come costo della fase + costo dei figli
+4 - si consolidano i costi nel databse
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Il significato dei checkbox è:
+'Considera anche le fasi escluse da RVL' : in RVL alcune fasi sono escluse dal conteggio, nel senso che il loro costo è impostato sempre a zero. 
+	L'applicazione si comporta come RVL escludendo le stesse fasi, a meno che questo checkbox non venga selezionato. In questo caso anche le fasi escluse da RVL vengono valorizzate alzando il costo dell'articolo
+
+'Considera anche listini vendita Top Finish': per gli articoli dati in conto lavoro da metal a top può non esistere il listino di acquisto in metal, ma esiste il listino di vendita in top necessario per fare le fatture.
+Se il checkbox è selezionato il programma verifica se esiste un listino di acquisto in metal, se non esiste, e solo in questo caso, verifica se c'è un listino di vendita in top ed eventualmente ne prende il prezzo
+
+'Usa anche DiBa non di default per articoli da inventario': in linea di principio per ogni articolo esiste la sua distinta di default. Se la distinta di default non esiste e se il check è selezionato il programma
+	prende la prima distinta non di default per fare l'esplosione delle fasi e provare a costificare l'articolo
+

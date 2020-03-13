@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applicazioni.Proxies", "App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValorizzazioniFrm", "ValorizzazioniFrm\ValorizzazioniFrm.csproj", "{05089BFB-FD4A-416E-8998-F32F947D6A99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Preventivatore", "Preventivatore\Preventivatore.csproj", "{A6D55645-3D7D-40DF-9578-69E39CD70ED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applicazioni.Security", "Applicazioni.Security\Applicazioni.Security.csproj", "{ADD30CDE-2A62-465B-8542-D109E09B97A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{05089BFB-FD4A-416E-8998-F32F947D6A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05089BFB-FD4A-416E-8998-F32F947D6A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05089BFB-FD4A-416E-8998-F32F947D6A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D55645-3D7D-40DF-9578-69E39CD70ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D55645-3D7D-40DF-9578-69E39CD70ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D55645-3D7D-40DF-9578-69E39CD70ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D55645-3D7D-40DF-9578-69E39CD70ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
