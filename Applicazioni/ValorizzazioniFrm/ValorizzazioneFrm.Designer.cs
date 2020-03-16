@@ -41,6 +41,7 @@
             this.chkConsideraTutteLeFasi = new System.Windows.Forms.CheckBox();
             this.chkVenditaTopFinish = new System.Windows.Forms.CheckBox();
             this.chkUsaDiBaNonDefault = new System.Windows.Forms.CheckBox();
+            this.chkProdottiFiniti = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // ddlInventario
@@ -164,6 +165,17 @@
             this.chkUsaDiBaNonDefault.Text = "Usa anche DiBa non di default per articoli da inventario";
             this.chkUsaDiBaNonDefault.UseVisualStyleBackColor = true;
             // 
+            // chkProdottiFiniti
+            // 
+            this.chkProdottiFiniti.AutoSize = true;
+            this.chkProdottiFiniti.Location = new System.Drawing.Point(550, 31);
+            this.chkProdottiFiniti.Name = "chkProdottiFiniti";
+            this.chkProdottiFiniti.Size = new System.Drawing.Size(131, 20);
+            this.chkProdottiFiniti.TabIndex = 13;
+            this.chkProdottiFiniti.Text = "Tutti i prodotti finiti";
+            this.chkProdottiFiniti.UseVisualStyleBackColor = true;
+            this.chkProdottiFiniti.CheckedChanged += new System.EventHandler(this.chkProdottiFiniti_CheckedChanged);
+            // 
             // ValorizzazioneFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -171,6 +183,7 @@
             this.ClientSize = new System.Drawing.Size(793, 554);
             this.Controls.Add(this.chkUsaDiBaNonDefault);
             this.Controls.Add(this.chkVenditaTopFinish);
+            this.Controls.Add(this.chkProdottiFiniti);
             this.Controls.Add(this.chkConsideraTutteLeFasi);
             this.Controls.Add(this.lblCostoMax);
             this.Controls.Add(this.lblCostoCur);
@@ -208,6 +221,7 @@
         private System.Windows.Forms.CheckBox chkConsideraTutteLeFasi;
         private System.Windows.Forms.CheckBox chkVenditaTopFinish;
         private System.Windows.Forms.CheckBox chkUsaDiBaNonDefault;
+        private System.Windows.Forms.CheckBox chkProdottiFiniti;
     }
 }
 

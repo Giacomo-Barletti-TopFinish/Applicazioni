@@ -93,13 +93,20 @@ namespace ValorizzazioniFrm
             Testata inventarioT = dto.testata;
 
             DiBa diba = new DiBa();
-            worker.ReportProgress(0, string.Format("Cancella costi vecchi inventario {0} del {1}", inventarioT.Codice, inventarioT.DataFine.ToShortDateString()));
+            if (!dto.tuttiProdottiFiniti)
+                worker.ReportProgress(0, string.Format("Cancella costi vecchi inventario {0} del {1}", inventarioT.Codice, inventarioT.DataFine.ToShortDateString()));
+            else
+                worker.ReportProgress(0, string.Format("Cancella costi vecchi inventario {0} del {1}", "*** TUTTI PRODOTTI FINITI ***", DateTime.Today.ToShortDateString()));
+
             if (worker.CancellationPending)
             {
                 e.Cancel = true;
                 return;
             }
-            diba.DeleteCostiArticoli(inventarioT.IdInventarioT);
+            if (dto.tuttiProdottiFiniti)
+                diba.DeleteCostiArticoli("PRODOTTIFINITI");
+            else
+                diba.DeleteCostiArticoli(inventarioT.IdInventarioT);
 
             worker.ReportProgress(0, "Carica anagrafica articoli");
             if (worker.CancellationPending)
@@ -173,8 +180,11 @@ namespace ValorizzazioniFrm
                 e.Cancel = true;
                 return;
             }
-            worker.ReportProgress(0, string.Format("Carica INVENTARIOD PER L'INVENTARIO {0}", inventarioT.Codice));
-            diba.FillUSR_INVENTARIOD(inventarioT.IdInventarioT);
+            if (!dto.tuttiProdottiFiniti)
+            {
+                worker.ReportProgress(0, string.Format("Carica INVENTARIOD PER L'INVENTARIO {0}", inventarioT.Codice));
+                diba.FillUSR_INVENTARIOD(inventarioT.IdInventarioT);
+            }
 
             if (worker.CancellationPending)
             {
@@ -182,11 +192,19 @@ namespace ValorizzazioniFrm
                 return;
             }
 
-            worker.ReportProgress(diba.CostiDaCalcolare, string.Format("Prodotti Finiti: {0}", diba.CostiDaCalcolare));
+            worker.ReportProgress(diba.CostiDaCalcolare(dto.tuttiProdottiFiniti), string.Format("Prodotti Finiti: {0}", diba.CostiDaCalcolare(dto.tuttiProdottiFiniti)));
 
+            DateTime DataFine = DateTime.Today;
+            string IdTestata = "PRODOTTIFINITI";
+
+            if (!dto.tuttiProdottiFiniti)
+            {
+                IdTestata = inventarioT.IdInventarioT;
+                DataFine = inventarioT.DataFine;
+            }
             worker.ReportProgress(0, "Inizio Calcolo Costi");
-            diba.CalcolaCostiArticolo(inventarioT, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish, dto.usaDiBaNonDiDefault);
-            worker.ReportProgress(diba.CostiDaCalcolare, string.Format("Salvataggio dati in corso...", diba.CostiDaCalcolare));
+            diba.CalcolaCostiArticolo(IdTestata, DataFine, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish, dto.usaDiBaNonDiDefault, dto.tuttiProdottiFiniti);
+            worker.ReportProgress(diba.CostiDaCalcolare(dto.tuttiProdottiFiniti), string.Format("Salvataggio dati in corso...", diba.CostiDaCalcolare(dto.tuttiProdottiFiniti)));
             diba.SalvaCostiArticolo();
 
         }
@@ -323,12 +341,14 @@ namespace ValorizzazioniFrm
         {
             if (btnStart.Text == etichettaStart)
             {
-                if (ddlInventario.SelectedIndex == -1)
+                Testata testata = null;
+                if (!chkProdottiFiniti.Checked && ddlInventario.SelectedIndex == -1)
                 {
                     MessageBox.Show("Selezionare un inventario", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                Testata testata = (Testata)ddlInventario.SelectedItem;
+                if (ddlInventario.SelectedIndex != -1)
+                    testata = (Testata)ddlInventario.SelectedItem;
                 _start = DateTime.Now;
 
                 btnStart.Text = etichettaStop;
@@ -341,6 +361,8 @@ namespace ValorizzazioniFrm
                     dto.consideraTutteLeFasi = chkConsideraTutteLeFasi.Checked;
                     dto.consideraListiniTopFinish = chkVenditaTopFinish.Checked;
                     dto.usaDiBaNonDiDefault = chkUsaDiBaNonDefault.Checked;
+                    dto.tuttiProdottiFiniti = chkProdottiFiniti.Checked;
+
                     _bgwCosto.RunWorkerAsync(dto);
                     return;
                 }
@@ -355,6 +377,12 @@ namespace ValorizzazioniFrm
                 btnStart.Text = etichettaStart;
             }
         }
+
+        private void chkProdottiFiniti_CheckedChanged(object sender, EventArgs e)
+        {
+            ddlInventario.Enabled = !chkProdottiFiniti.Checked;
+            ddlInventario.SelectedIndex = -1;
+        }
     }
 
     public class CostiDTO
@@ -363,5 +391,6 @@ namespace ValorizzazioniFrm
         public Testata testata { get; set; }
         public bool consideraListiniTopFinish { get; set; }
         public bool usaDiBaNonDiDefault { get; set; }
+        public bool tuttiProdottiFiniti { get; set; }
     }
 }

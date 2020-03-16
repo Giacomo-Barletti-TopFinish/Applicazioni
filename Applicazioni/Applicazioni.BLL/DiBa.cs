@@ -93,12 +93,12 @@ namespace Applicazioni.BLL
             }
         }
 
-        public int CostiDaCalcolare
+        public int CostiDaCalcolare(bool tuttiProdotti)
         {
-            get
-            {
+            if (tuttiProdotti)
+                return _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().Count();
+            else
                 return _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().Count();
-            }
         }
         public void DeleteCostiArticoli(string idInventarioT)
         {
@@ -190,10 +190,14 @@ namespace Applicazioni.BLL
             }
         }
 
-        public void CalcolaCostiArticolo(Testata inventarioT, BackgroundWorker worker, DoWorkEventArgs e, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, bool usaDiBaNonDefault)
+        public void CalcolaCostiArticolo(string IdInventarioT, DateTime DataFine, BackgroundWorker worker, DoWorkEventArgs e, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, bool usaDiBaNonDefault, bool tuttiProdottiFiniti)
         {
-            List<string> idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
+            List<string> idmagazz = new List<string>();
             int i = 1;
+            if (tuttiProdottiFiniti)
+                idmagazz = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
+            else
+                idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
 
             //           idmagazz = new List<string>(new string[] { "0000092567" });
 
@@ -210,24 +214,24 @@ namespace Applicazioni.BLL
                 ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticoloNonDefault = _ds.USR_PRD_TDIBA.Where(x => x.IDMAGAZZ == articolo).FirstOrDefault();
                 if (tdibaArticolo != null)
                 {
-                    CalcolaCosto(tdibaArticolo.IDTDIBA, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,"DiBa default");
+                    CalcolaCosto(tdibaArticolo.IDTDIBA, articolo, IdInventarioT, DataFine, consideraTutteLeFasi, consideraListiniVenditaTopFinish, "DiBa default");
                 }
                 else if (usaDiBaNonDefault && tdibaArticoloNonDefault != null)
                 {
-                    CalcolaCosto(tdibaArticoloNonDefault.IDTDIBA, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,"DiBa non default");
+                    CalcolaCosto(tdibaArticoloNonDefault.IDTDIBA, articolo, IdInventarioT, DataFine, consideraTutteLeFasi, consideraListiniVenditaTopFinish, "DiBa non default");
                 }
                 else
-                    CalcolaCosto(string.Empty, articolo, inventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,string.Empty);
+                    CalcolaCosto(string.Empty, articolo, IdInventarioT, DataFine, consideraTutteLeFasi, consideraListiniVenditaTopFinish, string.Empty);
                 //                RegistraCostoArticolo(0, 0, 0, tdibaArticolo, inventarioT.IdInventarioT, articolo, "TDIBA non definita", string.Empty);
                 i++;
             }
 
         }
 
-        private decimal CalcolaCosto(string idtdiba, string idmagazz, Testata InventarioT, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, string notaEsterna)
+        private decimal CalcolaCosto(string idtdiba, string idmagazz, string IdInventarioT, DateTime DataFine, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, string notaEsterna)
         {
 
-            ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == InventarioT.IdInventarioT && x.IDMAGAZZ == idmagazz).FirstOrDefault();
+            ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == IdInventarioT && x.IDMAGAZZ == idmagazz).FirstOrDefault();
             if (costoArticolo != null)
                 return costoArticolo.COSTOFASE + costoArticolo.COSTOFIGLI + costoArticolo.COSTOMATERIALE;
 
@@ -246,39 +250,39 @@ namespace Applicazioni.BLL
             Articolo articolo = _anagrafica.GetArticolo(idmagazz);
 
             string idListino = string.Empty;
-            costoFase = CalcolaCostoListinoArticolo(articolo, InventarioT, tdibaArticolo, out idListino);
+            costoFase = CalcolaCostoListinoArticolo(articolo, IdInventarioT, DataFine, tdibaArticolo, out idListino);
 
             if (tdibaArticolo == null)
             {
-                RegistraCostoArticolo(costoFase, costoFigli, costoMateriale, tdibaArticolo, InventarioT.IdInventarioT, idmagazz, nota.ToString(), idListino);
+                RegistraCostoArticolo(costoFase, costoFigli, costoMateriale, tdibaArticolo, IdInventarioT, idmagazz, nota.ToString(), idListino);
                 return costoFase;
             }
 
             if (costoFase == 0 && string.IsNullOrEmpty(idListino) && (_anagrafica.FaseDaCostificare(tdibaArticolo.IDTABFAS) || consideraTutteLeFasi))
-                costoFase = EstraiCostoFase(tdibaArticolo.IDTABFAS, InventarioT.DataFine, InventarioT.DataInizio, articolo.Peso);
+                costoFase = EstraiCostoFase(tdibaArticolo.IDTABFAS, DataFine, articolo.Peso);
 
             foreach (ValorizzazioneDS.USR_PRD_RDIBARow rdiba in _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == tdibaArticolo.IDTDIBA).OrderBy(x => x.SEQUENZA))
             {
                 decimal costoFiglio = 0;
                 if (!rdiba.IsIDTDIBAIFFASENull())
-                    costoFiglio = CalcolaCosto(rdiba.IDTDIBAIFFASE, rdiba.IDMAGAZZ, InventarioT, consideraTutteLeFasi, consideraListiniVenditaTopFinish,string.Empty);
+                    costoFiglio = CalcolaCosto(rdiba.IDTDIBAIFFASE, rdiba.IDMAGAZZ, IdInventarioT, DataFine, consideraTutteLeFasi, consideraListiniVenditaTopFinish, string.Empty);
                 else
                 {
-                    ValorizzazioneDS.COSTI_ARTICOLIRow costoArticoloMateriale = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == InventarioT.IdInventarioT && x.IDMAGAZZ == rdiba.IDMAGAZZ).FirstOrDefault();
+                    ValorizzazioneDS.COSTI_ARTICOLIRow costoArticoloMateriale = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == IdInventarioT && x.IDMAGAZZ == rdiba.IDMAGAZZ).FirstOrDefault();
                     if (costoArticoloMateriale != null)
                         costoFiglio = costoArticoloMateriale.COSTOFASE + costoArticoloMateriale.COSTOFIGLI + costoArticoloMateriale.COSTOMATERIALE;
                     else
                     {
                         List<ValorizzazioneDS.USR_LIS_ACQRow> listiniMateriale = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == rdiba.IDMAGAZZ
-                            && x.VALIDITA <= InventarioT.DataFine
+                            && x.VALIDITA <= DataFine
                             //  && x.FINEVALIDITA >= InventarioT.DataInizio
-                            && x.FINEVALIDITA >= InventarioT.DataFine
+                            && x.FINEVALIDITA >= DataFine
                             && x.AZIENDA == "MP").ToList();
                         if (listiniMateriale.Count > 0)
                         {
                             string idListinoMateriale;
                             costoFiglio = ValutaCostoListino(articolo.Peso, listiniMateriale, out idListinoMateriale);
-                            RegistraCostoArticolo(costoFiglio, 0, 0, null, InventarioT.IdInventarioT, rdiba.IDMAGAZZ, string.Empty, idListinoMateriale);
+                            RegistraCostoArticolo(costoFiglio, 0, 0, null, IdInventarioT, rdiba.IDMAGAZZ, string.Empty, idListinoMateriale);
                             //return costoListino;
                         }
                     }
@@ -287,17 +291,17 @@ namespace Applicazioni.BLL
                 costoFigli = costoFigli + costoFiglio * rdiba.QTACONSUMO;
             }
 
-            RegistraCostoArticolo(costoFase, costoFigli, costoMateriale, tdibaArticolo, InventarioT.IdInventarioT, idmagazz, nota.ToString(), idListino);
+            RegistraCostoArticolo(costoFase, costoFigli, costoMateriale, tdibaArticolo, IdInventarioT, idmagazz, nota.ToString(), idListino);
             return costoFase + costoFigli + costoMateriale;
         }
 
-        private decimal CalcolaCostoListinoArticolo(Articolo articolo, Testata InventarioT, ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo, out string idListino)
+        private decimal CalcolaCostoListinoArticolo(Articolo articolo, string IdInventarioT, DateTime DataFine, ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo, out string idListino)
         {
             idListino = string.Empty;
             List<ValorizzazioneDS.USR_LIS_ACQRow> listiniAquistiInterni = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == articolo.IdMagazz
-                && x.VALIDITA <= InventarioT.DataFine
+                && x.VALIDITA <= DataFine
                 //&& x.FINEVALIDITA >= InventarioT.DataInizio
-                && x.FINEVALIDITA >= InventarioT.DataFine
+                && x.FINEVALIDITA >= DataFine
                 && !x.IsCODICECLIFONull()
                 && x.CODICECLIFO.Substring(0, 1) != "0"
                 && x.AZIENDA == "MP").ToList();
@@ -313,9 +317,9 @@ namespace Applicazioni.BLL
                 return ValutaCostoListino(articolo.Peso, listiniAquistiInterni, out idListino);
 
             List<ValorizzazioneDS.USR_LIS_ACQRow> listiniAquistiEsterni = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == articolo.IdMagazz
-                && x.VALIDITA <= InventarioT.DataFine
+                && x.VALIDITA <= DataFine
                 //&& x.FINEVALIDITA >= InventarioT.DataInizio
-                && x.FINEVALIDITA >= InventarioT.DataFine
+                && x.FINEVALIDITA >= DataFine
                 && x.AZIENDA == "MP").ToList();
 
             if (tdibaArticolo != null && !tdibaArticolo.IsIDDIBAMETHODNull())
@@ -330,8 +334,8 @@ namespace Applicazioni.BLL
 
 
             List<ValorizzazioneDS.USR_LIS_VENRow> listiniVendita = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == articolo.IdMagazz
-                   && x.VALIDITA <= InventarioT.DataFine
-                   && x.FINEVALIDITA >= InventarioT.DataFine
+                   && x.VALIDITA <= DataFine
+                   && x.FINEVALIDITA >= DataFine
                    //                    && x.FINEVALIDITA >= InventarioT.DataInizio
                    && x.AZIENDA == "TF").ToList();
 
@@ -341,16 +345,14 @@ namespace Applicazioni.BLL
             return 0;
         }
 
-        private decimal EstraiCostoFase(string idtabfas, DateTime dataFine, DateTime dataInizio, decimal pesoInGrammi)
+        private decimal EstraiCostoFase(string idtabfas, DateTime dataFine, decimal pesoInGrammi)
         {
             string idListino = string.Empty;
 
             List<ValorizzazioneDS.USR_LIS_FASERow> listiniFaseInterno = _ds.USR_LIS_FASE.Where(x => !x.IsIDTABFASNull()
                 && x.IDTABFAS == idtabfas
                 && x.VALIDITA <= dataFine
-                //                && x.FINEVALIDITA >= dataInizio
                 && x.FINEVALIDITA >= dataFine
-                //                && x.CODICECLIFO.Substring(0, 1) != "0"
                 ).ToList();
 
             if (listiniFaseInterno.Count > 0)
