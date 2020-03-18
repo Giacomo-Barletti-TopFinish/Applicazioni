@@ -42,6 +42,10 @@
             this.chkVenditaTopFinish = new System.Windows.Forms.CheckBox();
             this.chkUsaDiBaNonDefault = new System.Windows.Forms.CheckBox();
             this.chkProdottiFiniti = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtDataFine = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ddlInventario
@@ -67,10 +71,10 @@
             this.txtNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNote.Location = new System.Drawing.Point(15, 244);
+            this.txtNote.Location = new System.Drawing.Point(15, 334);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(755, 298);
+            this.txtNote.Size = new System.Drawing.Size(755, 366);
             this.txtNote.TabIndex = 5;
             // 
             // btnStart
@@ -86,7 +90,7 @@
             // lblCostoMax
             // 
             this.lblCostoMax.AutoSize = true;
-            this.lblCostoMax.Location = new System.Drawing.Point(618, 68);
+            this.lblCostoMax.Location = new System.Drawing.Point(610, 135);
             this.lblCostoMax.Name = "lblCostoMax";
             this.lblCostoMax.Size = new System.Drawing.Size(33, 16);
             this.lblCostoMax.TabIndex = 10;
@@ -95,7 +99,7 @@
             // lblCostoCur
             // 
             this.lblCostoCur.AutoSize = true;
-            this.lblCostoCur.Location = new System.Drawing.Point(386, 68);
+            this.lblCostoCur.Location = new System.Drawing.Point(378, 135);
             this.lblCostoCur.Name = "lblCostoCur";
             this.lblCostoCur.Size = new System.Drawing.Size(26, 16);
             this.lblCostoCur.TabIndex = 11;
@@ -104,7 +108,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(166, 68);
+            this.label5.Location = new System.Drawing.Point(158, 135);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(15, 16);
             this.label5.TabIndex = 12;
@@ -113,7 +117,7 @@
             // lblTempoCosto
             // 
             this.lblTempoCosto.AutoSize = true;
-            this.lblTempoCosto.Location = new System.Drawing.Point(693, 90);
+            this.lblTempoCosto.Location = new System.Drawing.Point(685, 157);
             this.lblTempoCosto.Name = "lblTempoCosto";
             this.lblTempoCosto.Size = new System.Drawing.Size(45, 16);
             this.lblTempoCosto.TabIndex = 9;
@@ -121,7 +125,7 @@
             // 
             // prgCosto
             // 
-            this.prgCosto.Location = new System.Drawing.Point(166, 87);
+            this.prgCosto.Location = new System.Drawing.Point(158, 154);
             this.prgCosto.Name = "prgCosto";
             this.prgCosto.Size = new System.Drawing.Size(485, 23);
             this.prgCosto.TabIndex = 8;
@@ -129,7 +133,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 90);
+            this.label2.Location = new System.Drawing.Point(25, 157);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 16);
             this.label2.TabIndex = 9;
@@ -138,7 +142,7 @@
             // chkConsideraTutteLeFasi
             // 
             this.chkConsideraTutteLeFasi.AutoSize = true;
-            this.chkConsideraTutteLeFasi.Location = new System.Drawing.Point(36, 151);
+            this.chkConsideraTutteLeFasi.Location = new System.Drawing.Point(28, 218);
             this.chkConsideraTutteLeFasi.Name = "chkConsideraTutteLeFasi";
             this.chkConsideraTutteLeFasi.Size = new System.Drawing.Size(262, 20);
             this.chkConsideraTutteLeFasi.TabIndex = 13;
@@ -148,7 +152,7 @@
             // chkVenditaTopFinish
             // 
             this.chkVenditaTopFinish.AutoSize = true;
-            this.chkVenditaTopFinish.Location = new System.Drawing.Point(36, 184);
+            this.chkVenditaTopFinish.Location = new System.Drawing.Point(28, 251);
             this.chkVenditaTopFinish.Name = "chkVenditaTopFinish";
             this.chkVenditaTopFinish.Size = new System.Drawing.Size(274, 20);
             this.chkVenditaTopFinish.TabIndex = 13;
@@ -158,7 +162,7 @@
             // chkUsaDiBaNonDefault
             // 
             this.chkUsaDiBaNonDefault.AutoSize = true;
-            this.chkUsaDiBaNonDefault.Location = new System.Drawing.Point(36, 217);
+            this.chkUsaDiBaNonDefault.Location = new System.Drawing.Point(28, 284);
             this.chkUsaDiBaNonDefault.Name = "chkUsaDiBaNonDefault";
             this.chkUsaDiBaNonDefault.Size = new System.Drawing.Size(352, 20);
             this.chkUsaDiBaNonDefault.TabIndex = 14;
@@ -168,7 +172,7 @@
             // chkProdottiFiniti
             // 
             this.chkProdottiFiniti.AutoSize = true;
-            this.chkProdottiFiniti.Location = new System.Drawing.Point(550, 31);
+            this.chkProdottiFiniti.Location = new System.Drawing.Point(21, 30);
             this.chkProdottiFiniti.Name = "chkProdottiFiniti";
             this.chkProdottiFiniti.Size = new System.Drawing.Size(131, 20);
             this.chkProdottiFiniti.TabIndex = 13;
@@ -176,14 +180,43 @@
             this.chkProdottiFiniti.UseVisualStyleBackColor = true;
             this.chkProdottiFiniti.CheckedChanged += new System.EventHandler(this.chkProdottiFiniti_CheckedChanged);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.dtDataFine);
+            this.groupBox1.Controls.Add(this.chkProdottiFiniti);
+            this.groupBox1.Location = new System.Drawing.Point(552, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(229, 128);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Prodotti finiti";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 71);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(172, 16);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Data fine periodo per i listini";
+            // 
+            // dtDataFine
+            // 
+            this.dtDataFine.Location = new System.Drawing.Point(12, 91);
+            this.dtDataFine.Name = "dtDataFine";
+            this.dtDataFine.Size = new System.Drawing.Size(200, 22);
+            this.dtDataFine.TabIndex = 14;
+            this.dtDataFine.Value = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
+            // 
             // ValorizzazioneFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 554);
+            this.ClientSize = new System.Drawing.Size(793, 712);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkUsaDiBaNonDefault);
             this.Controls.Add(this.chkVenditaTopFinish);
-            this.Controls.Add(this.chkProdottiFiniti);
             this.Controls.Add(this.chkConsideraTutteLeFasi);
             this.Controls.Add(this.lblCostoMax);
             this.Controls.Add(this.lblCostoCur);
@@ -201,6 +234,9 @@
             this.MinimizeBox = false;
             this.Name = "ValorizzazioneFrm";
             this.Text = "Valorizzazione";
+            this.Load += new System.EventHandler(this.ValorizzazioneFrm_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,6 +258,9 @@
         private System.Windows.Forms.CheckBox chkVenditaTopFinish;
         private System.Windows.Forms.CheckBox chkUsaDiBaNonDefault;
         private System.Windows.Forms.CheckBox chkProdottiFiniti;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtDataFine;
     }
 }
 

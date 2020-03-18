@@ -90,23 +90,21 @@ namespace ValorizzazioniFrm
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             CostiDTO dto = (CostiDTO)e.Argument;
-            Testata inventarioT = dto.testata;
+
+            string IdTestata = dto.IdDTestata;
+            DateTime DataFine = dto.DataFine;
+            string codiceTestata = dto.CodiceTestata;
 
             DiBa diba = new DiBa();
-            if (!dto.tuttiProdottiFiniti)
-                worker.ReportProgress(0, string.Format("Cancella costi vecchi inventario {0} del {1}", inventarioT.Codice, inventarioT.DataFine.ToShortDateString()));
-            else
-                worker.ReportProgress(0, string.Format("Cancella costi vecchi inventario {0} del {1}", "*** TUTTI PRODOTTI FINITI ***", DateTime.Today.ToShortDateString()));
+            worker.ReportProgress(0, string.Format("Cancella costi vecchi inventario {0} del {1}", codiceTestata, DataFine.ToShortDateString()));
 
             if (worker.CancellationPending)
             {
                 e.Cancel = true;
                 return;
             }
-            if (dto.tuttiProdottiFiniti)
-                diba.DeleteCostiArticoli("PRODOTTIFINITI");
-            else
-                diba.DeleteCostiArticoli(inventarioT.IdInventarioT);
+
+            diba.DeleteCostiArticoli(IdTestata);
 
             worker.ReportProgress(0, "Carica anagrafica articoli");
             if (worker.CancellationPending)
@@ -182,8 +180,8 @@ namespace ValorizzazioniFrm
             }
             if (!dto.tuttiProdottiFiniti)
             {
-                worker.ReportProgress(0, string.Format("Carica INVENTARIOD PER L'INVENTARIO {0}", inventarioT.Codice));
-                diba.FillUSR_INVENTARIOD(inventarioT.IdInventarioT);
+                worker.ReportProgress(0, string.Format("Carica INVENTARIOD PER L'INVENTARIO {0}", codiceTestata));
+                diba.FillUSR_INVENTARIOD(IdTestata);
             }
 
             if (worker.CancellationPending)
@@ -194,14 +192,6 @@ namespace ValorizzazioniFrm
 
             worker.ReportProgress(diba.CostiDaCalcolare(dto.tuttiProdottiFiniti), string.Format("Prodotti Finiti: {0}", diba.CostiDaCalcolare(dto.tuttiProdottiFiniti)));
 
-            DateTime DataFine = DateTime.Today;
-            string IdTestata = "PRODOTTIFINITI";
-
-            if (!dto.tuttiProdottiFiniti)
-            {
-                IdTestata = inventarioT.IdInventarioT;
-                DataFine = inventarioT.DataFine;
-            }
             worker.ReportProgress(0, "Inizio Calcolo Costi");
             diba.CalcolaCostiArticolo(IdTestata, DataFine, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish, dto.usaDiBaNonDiDefault, dto.tuttiProdottiFiniti);
             worker.ReportProgress(diba.CostiDaCalcolare(dto.tuttiProdottiFiniti), string.Format("Salvataggio dati in corso...", diba.CostiDaCalcolare(dto.tuttiProdottiFiniti)));
@@ -339,16 +329,25 @@ namespace ValorizzazioniFrm
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            string IdTestata = "PRODOTTIFINITI";
+            string codiceTestata = "*** PRODOTTI FINITI ***";
+            DateTime DataFine = dtDataFine.Value;
             if (btnStart.Text == etichettaStart)
             {
-                Testata testata = null;
+
                 if (!chkProdottiFiniti.Checked && ddlInventario.SelectedIndex == -1)
                 {
                     MessageBox.Show("Selezionare un inventario", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (ddlInventario.SelectedIndex != -1)
-                    testata = (Testata)ddlInventario.SelectedItem;
+
+                if (!chkProdottiFiniti.Checked)
+                {
+                    Testata testata = (Testata)ddlInventario.SelectedItem;
+                    IdTestata = testata.IdInventarioT;
+                    DataFine = testata.DataFine;
+                    codiceTestata = testata.Codice;
+                }
                 _start = DateTime.Now;
 
                 btnStart.Text = etichettaStop;
@@ -357,7 +356,8 @@ namespace ValorizzazioniFrm
                 {
                     // Start the asynchronous operation.
                     CostiDTO dto = new CostiDTO();
-                    dto.testata = testata;
+                    dto.IdDTestata = IdTestata;
+                    dto.DataFine = DataFine;
                     dto.consideraTutteLeFasi = chkConsideraTutteLeFasi.Checked;
                     dto.consideraListiniTopFinish = chkVenditaTopFinish.Checked;
                     dto.usaDiBaNonDiDefault = chkUsaDiBaNonDefault.Checked;
@@ -383,12 +383,19 @@ namespace ValorizzazioniFrm
             ddlInventario.Enabled = !chkProdottiFiniti.Checked;
             ddlInventario.SelectedIndex = -1;
         }
+
+        private void ValorizzazioneFrm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class CostiDTO
     {
         public bool consideraTutteLeFasi { get; set; }
-        public Testata testata { get; set; }
+        public string IdDTestata { get; set; }
+        public string CodiceTestata { get; set; }
+        public DateTime DataFine { get; set; }
         public bool consideraListiniTopFinish { get; set; }
         public bool usaDiBaNonDiDefault { get; set; }
         public bool tuttiProdottiFiniti { get; set; }

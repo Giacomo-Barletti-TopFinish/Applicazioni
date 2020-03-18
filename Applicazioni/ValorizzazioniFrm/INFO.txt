@@ -29,3 +29,9 @@ Se il checkbox è selezionato il programma verifica se esiste un listino di acqu
 'Usa anche DiBa non di default per articoli da inventario': in linea di principio per ogni articolo esiste la sua distinta di default. Se la distinta di default non esiste e se il check è selezionato il programma
 	prende la prima distinta non di default per fare l'esplosione delle fasi e provare a costificare l'articolo
 
+---------------------------------------------------------------------------------------------------------------------------------
+17.3.2019
+è stato aggiunto il blocco Prodotti Finiti per calcolare il costo di tutti i prodotti finiti.
+Per prodotti finiti si intende ogni articolo che ha una voce nei listini di vendita, e quindi che è stato venduto ad almeno un cliente.
+Per il calcolo del costo è necessario avere la data di fine periodo in modo da avere un riferimento temporale di validità per i listini, per questo motivo viene richiesto l'inserimento di una data
+Inizialmente questa data è impostata al 31/12/2019 in modo da poter confrontare i costi calcolati con questo programma con i costi di RVL.
