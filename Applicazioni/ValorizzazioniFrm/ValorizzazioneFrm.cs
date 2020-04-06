@@ -183,6 +183,12 @@ namespace ValorizzazioniFrm
                 worker.ReportProgress(0, string.Format("Carica INVENTARIOD PER L'INVENTARIO {0}", codiceTestata));
                 diba.FillUSR_INVENTARIOD(IdTestata);
             }
+            else
+            {
+                string anno = "2019"; 
+                worker.ReportProgress(0, string.Format("Carica VENDITE l'anno {0}", anno));
+                diba.FillUSR_VENDITED(anno);
+            }
 
             if (worker.CancellationPending)
             {

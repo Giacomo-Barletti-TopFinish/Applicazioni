@@ -23,6 +23,12 @@ namespace Applicazioni.Data.Valorizzazioni
             a.FillUSR_INVENTARIOD(ds, idInventarioT);
         }
         [DataContext]
+        public void FillUSR_VENDITED(ValorizzazioneDS ds, string anno)
+        {
+            ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);
+            a.FillUSR_VENDITED(ds, anno);
+        }
+        [DataContext]
         public void FillUSR_PRD_TDIBA(ValorizzazioneDS ds)
         {
             ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);

@@ -37,6 +37,20 @@ namespace Applicazioni.Data.Valorizzazioni
             }
         }
 
+        public void FillUSR_VENDITED(ValorizzazioneDS ds, string anno)
+        {
+            string select = @" SELECT vd.* FROM usr_vendited vd 
+        inner join usr_venditet vt on vt.idvenditet = vd.idvenditet
+        where vt.annodoc = $P<ANNO> and vt.IDTABTIPDOC = '0000000022'";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("ANNO", DbType.String, anno);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_VENDITED);
+            }
+        }
+
         public void FillUSR_PRD_RDIBA(ValorizzazioneDS ds)
         {
             string select = @"SELECT 'METALPLUS'as AZIENDA,TD.* FROM DITTA1.USR_PRD_RDIBA TD 
