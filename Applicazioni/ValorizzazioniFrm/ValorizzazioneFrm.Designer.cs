@@ -45,7 +45,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dtDataFine = new System.Windows.Forms.DateTimePicker();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCalcolaCostiGalvanica = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtFineListiniCostoGalvanica = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ddlInventario
@@ -142,6 +147,8 @@
             // chkConsideraTutteLeFasi
             // 
             this.chkConsideraTutteLeFasi.AutoSize = true;
+            this.chkConsideraTutteLeFasi.Checked = true;
+            this.chkConsideraTutteLeFasi.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConsideraTutteLeFasi.Location = new System.Drawing.Point(28, 218);
             this.chkConsideraTutteLeFasi.Name = "chkConsideraTutteLeFasi";
             this.chkConsideraTutteLeFasi.Size = new System.Drawing.Size(262, 20);
@@ -152,6 +159,8 @@
             // chkVenditaTopFinish
             // 
             this.chkVenditaTopFinish.AutoSize = true;
+            this.chkVenditaTopFinish.Checked = true;
+            this.chkVenditaTopFinish.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVenditaTopFinish.Location = new System.Drawing.Point(28, 251);
             this.chkVenditaTopFinish.Name = "chkVenditaTopFinish";
             this.chkVenditaTopFinish.Size = new System.Drawing.Size(274, 20);
@@ -162,6 +171,8 @@
             // chkUsaDiBaNonDefault
             // 
             this.chkUsaDiBaNonDefault.AutoSize = true;
+            this.chkUsaDiBaNonDefault.Checked = true;
+            this.chkUsaDiBaNonDefault.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUsaDiBaNonDefault.Location = new System.Drawing.Point(28, 284);
             this.chkUsaDiBaNonDefault.Name = "chkUsaDiBaNonDefault";
             this.chkUsaDiBaNonDefault.Size = new System.Drawing.Size(352, 20);
@@ -209,11 +220,51 @@
             this.dtDataFine.TabIndex = 14;
             this.dtDataFine.Value = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.dtFineListiniCostoGalvanica);
+            this.groupBox2.Controls.Add(this.btnCalcolaCostiGalvanica);
+            this.groupBox2.Location = new System.Drawing.Point(552, 183);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(229, 128);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Costi galvanica";
+            // 
+            // btnCalcolaCostiGalvanica
+            // 
+            this.btnCalcolaCostiGalvanica.Location = new System.Drawing.Point(12, 82);
+            this.btnCalcolaCostiGalvanica.Name = "btnCalcolaCostiGalvanica";
+            this.btnCalcolaCostiGalvanica.Size = new System.Drawing.Size(200, 39);
+            this.btnCalcolaCostiGalvanica.TabIndex = 0;
+            this.btnCalcolaCostiGalvanica.Text = "Calcola costi galvanica";
+            this.btnCalcolaCostiGalvanica.UseVisualStyleBackColor = true;
+            this.btnCalcolaCostiGalvanica.Click += new System.EventHandler(this.btnCalcolaCostiGalvanica_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(172, 16);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Data fine periodo per i listini";
+            // 
+            // dtFineListiniCostoGalvanica
+            // 
+            this.dtFineListiniCostoGalvanica.Location = new System.Drawing.Point(14, 55);
+            this.dtFineListiniCostoGalvanica.Name = "dtFineListiniCostoGalvanica";
+            this.dtFineListiniCostoGalvanica.Size = new System.Drawing.Size(200, 22);
+            this.dtFineListiniCostoGalvanica.TabIndex = 16;
+            this.dtFineListiniCostoGalvanica.Value = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
+            // 
             // ValorizzazioneFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 712);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkUsaDiBaNonDefault);
             this.Controls.Add(this.chkVenditaTopFinish);
@@ -237,6 +288,8 @@
             this.Load += new System.EventHandler(this.ValorizzazioneFrm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,6 +314,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtDataFine;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnCalcolaCostiGalvanica;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dtFineListiniCostoGalvanica;
     }
 }
 

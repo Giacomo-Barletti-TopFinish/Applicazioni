@@ -109,6 +109,13 @@ namespace Applicazioni.Data.Valorizzazioni
             return a.DeleteCostiArticoli(IdInventarioT);
         }
 
+        [DataContext]
+        public long DeleteCostiGalvanica()
+        {
+            ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);
+            return a.DeleteCostiGalvanica();
+        }
+
         [DataContext(true)]
         public void UpdateTable(string tablename, ValorizzazioneDS ds)
         {

@@ -114,6 +114,13 @@ namespace Applicazioni.BLL
                 bValorizzazioni.DeleteCostiArticoli(idInventarioT);
             }
         }
+        public void DeleteCostiGalvanica()
+        {
+            using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
+            {
+                bValorizzazioni.DeleteCostiGalvanica();
+            }
+        }
         public void CaricaTDiba()
         {
             using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
@@ -197,6 +204,13 @@ namespace Applicazioni.BLL
             }
         }
 
+        public void SalvaCostiGalvanica()
+        {
+            using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())
+            {
+                bValorizzazioni.UpdateTable(_ds.COSTI_GALVANICA.TableName, _ds);
+            }
+        }
         public void CalcolaCostiArticolo(string IdInventarioT, DateTime DataFine, BackgroundWorker worker, DoWorkEventArgs e, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, bool usaDiBaNonDefault, bool tuttiProdottiFiniti)
         {
             List<string> idmagazz = new List<string>();
@@ -206,8 +220,9 @@ namespace Applicazioni.BLL
                 idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
             else
                 idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
-        //    bool m = idmagazz.Contains("0000096837");
-            //idmagazz = new List<string>(new string[] { "0000096837" });
+            //    bool m = idmagazz.Contains("0000096837");
+           // idmagazz = new List<string>(new string[] { "0000085010" });
+
 
             foreach (string articolo in idmagazz)
             {
@@ -236,6 +251,41 @@ namespace Applicazioni.BLL
 
         }
 
+        public void CalcolaCostiGalvanica(DateTime DataFine, BackgroundWorker worker, DoWorkEventArgs e)
+        {
+            List<string> idmagazz = new List<string>();
+            int i = 1;
+//            idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
+            idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
+            //    bool m = idmagazz.Contains("0000096837");
+            idmagazz = new List<string>(new string[] { "0000131250" });
+
+            foreach (string articolo in idmagazz)
+            {
+
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                worker.ReportProgress(i);
+                ValorizzazioneDS.USR_PRD_TDIBA_DEFAULTRow tdibaArticolo = _ds.USR_PRD_TDIBA_DEFAULT.Where(x => x.IDMAGAZZ == articolo).FirstOrDefault();
+                ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticoloNonDefault = _ds.USR_PRD_TDIBA.Where(x => x.IDMAGAZZ == articolo).FirstOrDefault();
+                if (tdibaArticolo != null)
+                {
+                    CalcolaCostoGalvanica(tdibaArticolo.IDTDIBA, articolo, DataFine, "DiBa default", articolo);
+                }
+                else if (tdibaArticoloNonDefault != null)
+                {
+                    CalcolaCostoGalvanica(tdibaArticoloNonDefault.IDTDIBA, articolo, DataFine, "DiBa non default", articolo);
+                }
+                else
+                    CalcolaCostoGalvanica(string.Empty, articolo, DataFine, string.Empty, articolo);
+                i++;
+            }
+
+        }
+
         private decimal CalcolaCosto(string idtdiba, string idmagazz, string IdInventarioT, DateTime DataFine, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, string notaEsterna, string idProdottoFinito)
         {
 
@@ -256,9 +306,9 @@ namespace Applicazioni.BLL
             //            decimal costoListino = 0;
 
             Articolo articolo = _anagrafica.GetArticolo(idmagazz);
-            if(articolo==null)
+            if (articolo == null)
             {
-                nota.AppendLine("Articolo non trovato "+idmagazz);
+                nota.AppendLine("Articolo non trovato " + idmagazz);
                 return 0;
             }
             string idListino = string.Empty;
@@ -305,6 +355,57 @@ namespace Applicazioni.BLL
 
             RegistraCostoArticolo(costoFase, costoFigli, costoMateriale, tdibaArticolo, IdInventarioT, idmagazz, nota.ToString(), idListino, idProdottoFinito);
             return costoFase + costoFigli + costoMateriale;
+        }
+
+        private decimal CalcolaCostoGalvanica(string idtdiba, string idmagazz, DateTime DataFine, string notaEsterna, string idProdottoFinito)
+        {
+            //if (idmagazz == "0000131250")
+            //    System.Diagnostics.Debugger.Break();
+            ValorizzazioneDS.COSTI_GALVANICARow costoGalvanica = _ds.COSTI_GALVANICA.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
+            if (costoGalvanica != null)
+                return costoGalvanica.COSTOMATERIALE;
+
+            ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == idtdiba).FirstOrDefault();
+
+            decimal costoMateriale = 0;
+
+            string idListino = string.Empty;
+
+            List<ValorizzazioneDS.USR_LIS_VENRow> listini = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
+              && x.VALIDITA <= DataFine
+              && x.FINEVALIDITA >= DataFine
+              && !x.IsCODICECLIFONull()
+              && x.CODICECLIFO.Trim() == "01631"
+              && x.AZIENDA == "TF").ToList();
+
+            if (listini.Count > 0)
+            {
+                costoMateriale = ValutaCostoListino(0, listini, out idListino);
+            }
+
+            if (tdibaArticolo == null)
+            {
+                RegistraCostoGalvanica(costoMateriale, idmagazz, idListino);
+                return costoMateriale;
+            }
+            decimal costoFigli = 0;
+            foreach (ValorizzazioneDS.USR_PRD_RDIBARow rdiba in _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == tdibaArticolo.IDTDIBA).OrderBy(x => x.SEQUENZA))
+            {
+                decimal costoFiglio = 0;
+                if (!rdiba.IsIDTDIBAIFFASENull())
+                    costoFiglio = CalcolaCostoGalvanica(rdiba.IDTDIBAIFFASE, rdiba.IDMAGAZZ, DataFine, string.Empty, idProdottoFinito);
+                else
+                {
+                    ValorizzazioneDS.COSTI_GALVANICARow costoGalvanicaFiglio = _ds.COSTI_GALVANICA.Where(x => x.IDMAGAZZ == rdiba.IDMAGAZZ).FirstOrDefault();
+                    if (costoGalvanicaFiglio != null)
+                        costoFiglio = costoGalvanicaFiglio.COSTOMATERIALE;
+
+                }
+                costoFigli = costoFigli + costoFiglio * rdiba.QTACONSUMO;
+            }
+
+            RegistraCostoGalvanica(costoMateriale + costoFigli, idmagazz, idListino);
+            return costoMateriale + costoFigli;
         }
 
         private decimal CalcolaCostoListinoArticolo(Articolo articolo, string IdInventarioT, DateTime DataFine, ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo, out string idListino)
@@ -496,7 +597,7 @@ namespace Applicazioni.BLL
             }
             return costoListino;
         }
-        private void RegistraCostoArticolo(decimal costoFase, decimal costoFigli, decimal costoMateriale, ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo, 
+        private void RegistraCostoArticolo(decimal costoFase, decimal costoFigli, decimal costoMateriale, ValorizzazioneDS.USR_PRD_TDIBARow tdibaArticolo,
             string idInventarioT, string idmagazz, String nota, string idListino, string idProdottoFinito)
         {
             ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.NewCOSTI_ARTICOLIRow();
@@ -517,6 +618,14 @@ namespace Applicazioni.BLL
             _ds.COSTI_ARTICOLI.AddCOSTI_ARTICOLIRow(costoArticolo);
         }
 
+        private void RegistraCostoGalvanica(decimal costoMateriale, string idmagazz, string idListino)
+        {
+            ValorizzazioneDS.COSTI_GALVANICARow costoGalvanca = _ds.COSTI_GALVANICA.NewCOSTI_GALVANICARow();
+            costoGalvanca.COSTOMATERIALE = costoMateriale;
+            costoGalvanca.IDMAGAZZ = idmagazz;
+            costoGalvanca.IDLISACQ = idListino;
+            _ds.COSTI_GALVANICA.AddCOSTI_GALVANICARow(costoGalvanca);
+        }
         public void CaricaCostiArticoli(string idInventarioT)
         {
             using (ValorizzazioniBusiness bValorizzazioni = new ValorizzazioniBusiness())

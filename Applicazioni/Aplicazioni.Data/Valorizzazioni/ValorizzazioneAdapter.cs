@@ -186,6 +186,15 @@ namespace Applicazioni.Data.Valorizzazioni
             }
         }
 
+        public long DeleteCostiGalvanica()
+        {
+            string select = @" DELETE FROM COSTI_GALVANICA ";
+            using (IDbCommand da = BuildCommand(select))
+            {
+                long lnNextVal = Convert.ToInt64(da.ExecuteNonQuery());
+                return lnNextVal;
+            }
+        }
         public void UpdateTable(string tablename, ValorizzazioneDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
