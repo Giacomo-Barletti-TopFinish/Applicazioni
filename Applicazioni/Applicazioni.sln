@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Preventivatore", "Preventiv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applicazioni.Security", "Applicazioni.Security\Applicazioni.Security.csproj", "{ADD30CDE-2A62-465B-8542-D109E09B97A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalisiOrdiniVendita", "AnalisiOrdiniVendita\AnalisiOrdiniVendita.csproj", "{90D6F77E-4E32-453A-B04F-25078141F618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADD30CDE-2A62-465B-8542-D109E09B97A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D6F77E-4E32-453A-B04F-25078141F618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D6F77E-4E32-453A-B04F-25078141F618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D6F77E-4E32-453A-B04F-25078141F618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D6F77E-4E32-453A-B04F-25078141F618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

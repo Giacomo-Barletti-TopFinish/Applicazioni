@@ -48,6 +48,8 @@
     <Compile Include="AdapterBase.cs" />
     <Compile Include="Anagrafica\AnagraficaAdapter.cs" />
     <Compile Include="Anagrafica\AnagraficaBusiness.cs" />
+    <Compile Include="AnalisiOrdiniVendita\AnalisiOrdiniVenditaAdapter.cs" />
+    <Compile Include="AnalisiOrdiniVendita\AnalisiOrdiniVenditaBusiness.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="Core\AdapterBase.cs" />
     <Compile Include="Core\BusinessBase.cs" />

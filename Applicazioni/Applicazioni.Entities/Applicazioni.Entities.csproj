@@ -47,6 +47,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnagraficaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="AnalisiOrdiniVenditaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,6 +95,17 @@
     </None>
     <None Include="AnagraficaDS.xss">
       <DependentUpon>AnagraficaDS.xsd</DependentUpon>
+    </None>
+    <None Include="AnalisiOrdiniVenditaDS.xsc">
+      <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
+    </None>
+    <None Include="AnalisiOrdiniVenditaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AnalisiOrdiniVenditaDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="AnalisiOrdiniVenditaDS.xss">
+      <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
     <None Include="GalvanicaDS.xsc">
