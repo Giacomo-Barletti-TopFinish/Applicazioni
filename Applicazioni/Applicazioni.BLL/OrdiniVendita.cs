@@ -58,8 +58,15 @@ namespace Applicazioni.BLL
             }
             return string.Empty;
         }
-
-        private AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow GetODL(AnalisiOrdiniVenditaDS ds, string idPrdMovFase)
+        public void CaricaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
+            {
+                aovb.GetUSR_PRD_FASIDaLancio(ds, idLancioD);
+                aovb.GetUSR_PRD_MOVFASIDaLancio(ds, idLancioD);
+            }
+        }
+        public AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow GetODL(AnalisiOrdiniVenditaDS ds, string idPrdMovFase)
         {
             AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow odl = ds.USR_PRD_MOVFASI.Where(x => x.IDPRDMOVFASE == idPrdMovFase).FirstOrDefault();
             if (odl == null)
@@ -75,7 +82,7 @@ namespace Applicazioni.BLL
             return odl;
         }
 
-        private AnalisiOrdiniVenditaDS.USR_PRD_FASIRow GetFase(AnalisiOrdiniVenditaDS ds, string idPrdFase)
+        public AnalisiOrdiniVenditaDS.USR_PRD_FASIRow GetFase(AnalisiOrdiniVenditaDS ds, string idPrdFase)
         {
             AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == idPrdFase).FirstOrDefault();
             if (fase == null)
@@ -83,6 +90,8 @@ namespace Applicazioni.BLL
                 using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
                 {
                     aovb.GetUSR_PRD_FASI(ds, idPrdFase);
+                    aovb.GetUSR_PRD_MOVFASIAperte(ds, idPrdFase);
+                    aovb.GetUSR_CHECKQ_T(ds, idPrdFase);
                     fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == idPrdFase).FirstOrDefault();
                 }
 
@@ -91,6 +100,20 @@ namespace Applicazioni.BLL
             return fase;
         }
 
+        public List<AnalisiOrdiniVenditaDS.USR_CHECKQ_SRow> GetSeguito(AnalisiOrdiniVenditaDS ds, string idcheckqt)
+        {
+            List<AnalisiOrdiniVenditaDS.USR_CHECKQ_SRow> seguito = ds.USR_CHECKQ_S.Where(x => x.IDCHECKQT == idcheckqt).ToList();
+            if (seguito.Count == 0)
+            {
+                using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
+                {
+                    aovb.FillUSR_CHECKQ_S(ds, idcheckqt);
+                    seguito = ds.USR_CHECKQ_S.Where(x => x.IDCHECKQT == idcheckqt).ToList();
+                }
+            }
+
+            return seguito;
+        }
         public string GetModello(AnalisiOrdiniVenditaDS ds, string idMagazz)
         {
             AnalisiOrdiniVenditaDS.MAGAZZRow magazz = ds.MAGAZZ.Where(x => x.IDMAGAZZ == idMagazz).FirstOrDefault();
@@ -107,6 +130,20 @@ namespace Applicazioni.BLL
             return magazz.MODELLO;
         }
 
+        public string GetDescrizioneSeguito(AnalisiOrdiniVenditaDS ds, string IDSEGUITOCHECKQ)
+        {
+            AnalisiOrdiniVenditaDS.USR_TAB_SEGUITICHECKQRow seguitoTab = ds.USR_TAB_SEGUITICHECKQ.Where(x => x.IDSEGUITOCHECKQ == IDSEGUITOCHECKQ).FirstOrDefault();
+            if (seguitoTab == null)
+            {
+                using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
+                {
+                    aovb.FillUSR_TAB_SEGUITICHECKQ(ds);
+                    seguitoTab = ds.USR_TAB_SEGUITICHECKQ.Where(x => x.IDSEGUITOCHECKQ == IDSEGUITOCHECKQ).FirstOrDefault();
+                }
+
+            }
+            return seguitoTab.DESSEGUITOCHECKQ;
+        }
         public string GetMagazzino(AnalisiOrdiniVenditaDS ds, string idTabMag)
         {
             AnalisiOrdiniVenditaDS.TABMAGRow tabmag = ds.TABMAG.Where(x => x.IDTABMAG == idTabMag).FirstOrDefault();

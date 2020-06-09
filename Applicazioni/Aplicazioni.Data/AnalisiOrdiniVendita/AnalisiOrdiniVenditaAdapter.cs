@@ -97,15 +97,72 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             }
         }
 
+        public void GetUSR_PRD_MOVFASIAperte(AnalisiOrdiniVenditaDS ds, string IdPrdFase)
+        {
+            string select = @"   SELECT * FROM DITTA1.USR_PRD_movFASI mf
+                                    inner join DITTA1.USR_PRD_FASI fa on fa.idprdfase = mf.idprdfase
+                                    WHERE fa.idlanciod = (select idlanciod from DITTA1.USR_PRD_FASI where idprdfase =  $P<IDPRDFASE> ) 
+                                    and mf.qtadater>0";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRDFASE", DbType.String, IdPrdFase);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
+
+        public void GetUSR_PRD_MOVFASIDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            string select = @"   SELECT * FROM DITTA1.USR_PRD_movFASI mf
+                                    inner join DITTA1.USR_PRD_FASI fa on fa.idprdfase = mf.idprdfase
+                                    WHERE fa.idlanciod = $P<IDLANCIOD>  
+                                    and mf.qtadater>0";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD", DbType.String, idLancioD);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
         public void GetUSR_PRD_FASI(AnalisiOrdiniVenditaDS ds, string IdPrdFase)
         {
-            string select = @"   select * from DITTA1.USR_PRD_FASI WHERE IDPRDFASE = $P<IDPRDFASE>";
+            string select = @" SELECT * FROM DITTA1.USR_PRD_FASI WHERE idlanciod = (select idlanciod from DITTA1.USR_PRD_FASI where idprdfase =  $P<IDPRDFASE> ) ";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDPRDFASE", DbType.String, IdPrdFase);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+
+        public void GetUSR_PRD_FASIDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            string select = @" SELECT * FROM DITTA1.USR_PRD_FASI WHERE idlanciod = $P<IDLANCIOD> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD", DbType.String, idLancioD);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+        public void GetUSR_CHECKQ_T(AnalisiOrdiniVenditaDS ds, string IdPrdFase)
+        {
+            string select = @" SELECT mf.IDPRDMOVFASE, cq.* FROM ditta1.usr_checkq_t cq
+                        inner join ditta1.usr_prd_flusso_movfasi fmf on fmf.idflussomovfase = cq.idorigine_ril and origine_ril = 2
+                        inner join DITTA1.USR_PRD_movFASI mf on mf.idprdmovfase = fmf.idprdmovfase
+                        inner join DITTA1.USR_PRD_FASI fa on fa.idprdfase = mf.idprdfase
+                        WHERE fa.idlanciod = (select idlanciod from DITTA1.USR_PRD_FASI where idprdfase = $P<IDPRDFASE> ) 
+                        and mf.qtadater>0   ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRDFASE", DbType.String, IdPrdFase);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_CHECKQ_T);
             }
         }
         public void GetTabMag(AnalisiOrdiniVenditaDS ds, string idTabMag)
@@ -120,6 +177,17 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             }
         }
 
+        public void FillUSR_CHECKQ_S(AnalisiOrdiniVenditaDS ds, string idcheckqt)
+        {
+            string select = @" select * from ditta1.usr_checkq_s where IDCHECKQT = $P<IDCHECKQT>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDCHECKQT", DbType.String, idcheckqt);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_CHECKQ_S);
+            }
+        }
         public void FillTabFas(AnalisiOrdiniVenditaDS ds)
         {
             string select = @"   select * from gruppo.tabfas ";
@@ -127,6 +195,16 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.TABFAS);
+            }
+        }
+
+        public void FillUSR_TAB_SEGUITICHECKQ(AnalisiOrdiniVenditaDS ds)
+        {
+            string select = @"   select * from gruppo.USR_TAB_SEGUITICHECKQ ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.USR_TAB_SEGUITICHECKQ);
             }
         }
     }

@@ -70,8 +70,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrdineDiLavoroUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OrdineDiLavoroUC.Designer.cs">
+      <DependentUpon>OrdineDiLavoroUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeguitoUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SeguitoUC.Designer.cs">
+      <DependentUpon>SeguitoUC.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AccantonatoConsegnaUC.resx">
       <DependentUpon>AccantonatoConsegnaUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +96,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrdineDiLavoroUC.resx">
+      <DependentUpon>OrdineDiLavoroUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -93,6 +108,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SeguitoUC.resx">
+      <DependentUpon>SeguitoUC.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

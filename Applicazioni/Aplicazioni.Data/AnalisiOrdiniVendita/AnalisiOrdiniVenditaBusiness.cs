@@ -64,10 +64,48 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             a.GetUSR_PRD_FASI(ds, idPrdfase);
         }
         [DataContext]
+        public void GetUSR_PRD_FASIDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_FASIDaLancio(ds, idLancioD);
+        }
+        [DataContext]
+        public void GetUSR_PRD_MOVFASIAperte(AnalisiOrdiniVenditaDS ds, string idPrdfase)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_MOVFASIAperte(ds, idPrdfase);
+        }
+        [DataContext]
+        public void GetUSR_PRD_MOVFASIDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_MOVFASIDaLancio(ds, idLancioD);
+        }
+        [DataContext]
         public void FillTabFas(AnalisiOrdiniVenditaDS ds)
         {
             AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
             a.FillTabFas(ds);
+        }
+        [DataContext]
+        public void GetUSR_CHECKQ_T(AnalisiOrdiniVenditaDS ds, string idPrdfase)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_CHECKQ_T(ds, idPrdfase);
+        }
+
+        [DataContext]
+        public void FillUSR_CHECKQ_S(AnalisiOrdiniVenditaDS ds, string idcheckqt)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.FillUSR_CHECKQ_S(ds, idcheckqt);
+        }
+
+        [DataContext]
+        public void FillUSR_TAB_SEGUITICHECKQ(AnalisiOrdiniVenditaDS ds)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.FillUSR_TAB_SEGUITICHECKQ(ds);
         }
     }
 }
