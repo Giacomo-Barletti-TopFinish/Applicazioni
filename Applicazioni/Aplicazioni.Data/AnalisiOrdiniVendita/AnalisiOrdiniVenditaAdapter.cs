@@ -15,7 +15,7 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
        base(connection, transaction)
         { }
 
-        public void FillOC_APERTI(AnalisiOrdiniVenditaDS ds)
+        public void FillOC_APERTI(AnalisiOrdiniVenditaDS ds, string riferimento, string fullnumdoc, string modello)
         {
             string select = @"    select trim(seg.ragionesoc) as segnalatore,td.destabtipdoc tipodocumento, vt.annodoc,vt.datdoc,vt.numdoc,trim(vt.riferimento)riferimento,
                                         vt.datarif,vt.fullnumdoc ,
@@ -27,6 +27,15 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
                                         inner join gruppo.clifo seg on seg.codice=vt.segnalatore
                                         inner join gruppo.tabtipdoc td on td.idtabtipdoc = vt.idtabtipdoc
                                         where qtanospe > 0";
+
+            if (!string.IsNullOrEmpty(riferimento))
+                select += string.Format("  and trim(vt.riferimento) like '%{0}%' ", riferimento);
+
+            if (!string.IsNullOrEmpty(fullnumdoc))
+                select += string.Format("  and vt.fullnumdoc like '%{0}%' ", fullnumdoc);
+
+            if (!string.IsNullOrEmpty(modello))
+                select += string.Format("  and ma.modello like '%{0}%' ", modello);
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
@@ -48,6 +57,38 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             }
         }
 
+        public void FillFasiInfragruppo(AnalisiOrdiniVenditaDS ds, string idPrdFaseOrigine)
+        {
+            string select = @"   select fa3.* 
+                                   from SIGLAPP.USR_INFRA_FASE_TO_FASE f2f 
+                                    inner join ditta2.usr_prd_fasi fa2 on fa2.idprdfase = f2f.IDPRDFASE_to
+                                    inner join ditta2.usr_prd_fasi fa3 on fa2.idlanciod = fa3.idlanciod
+                                    where f2f.IDPRDFASE_FROM = $P<IDPRDFASE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRDFASE", DbType.String, idPrdFaseOrigine);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+
+        public void FillODLInfragruppo(AnalisiOrdiniVenditaDS ds, string idPrdFaseOrigine)
+        {
+            string select = @"   select fam3.* 
+                            from SIGLAPP.USR_INFRA_FASE_TO_FASE f2f 
+                            inner join ditta2.usr_prd_fasi fa2 on fa2.idprdfase = f2f.IDPRDFASE_to
+                            inner join ditta2.usr_prd_fasi fa3 on fa2.idlanciod = fa3.idlanciod
+                            inner join ditta2.usr_prd_movfasi fam3 on fam3.idprdfase = fa3.idprdfase
+                            where f2f.IDPRDFASE_FROM = $P<IDPRDFASE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRDFASE", DbType.String, idPrdFaseOrigine);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
         public void FillAccantonatoConsegnaPerOrigine(AnalisiOrdiniVenditaDS ds, string idOrigine, decimal tipoOrigine)
         {
             string select = @"   select * from ditta1.USR_ACCTO_CON WHERE IDORIGINE = $P<IDORIGINE> AND ORIGINE = $P<ORIGINE>";
@@ -114,8 +155,8 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
 
         public void GetUSR_PRD_MOVFASIDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
         {
-            string select = @"   SELECT * FROM DITTA1.USR_PRD_movFASI mf
-                                    inner join DITTA1.USR_PRD_FASI fa on fa.idprdfase = mf.idprdfase
+            string select = @"   SELECT * FROM USR_PRD_movFASI mf
+                                    inner join USR_PRD_FASI fa on fa.idprdfase = mf.idprdfase
                                     WHERE fa.idlanciod = $P<IDLANCIOD>  
                                     and mf.qtadater>0";
 
@@ -138,9 +179,10 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             }
         }
 
+
         public void GetUSR_PRD_FASIDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
         {
-            string select = @" SELECT * FROM DITTA1.USR_PRD_FASI WHERE idlanciod = $P<IDLANCIOD> ";
+            string select = @" SELECT * FROM USR_PRD_FASI WHERE idlanciod = $P<IDLANCIOD> ";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDLANCIOD", DbType.String, idLancioD);
@@ -149,6 +191,19 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
                 da.Fill(ds.USR_PRD_FASI);
             }
         }
+
+        public void GetUSR_PRD_MATEDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            string select = @" SELECT * FROM USR_PRD_MATE WHERE idlanciod = $P<IDLANCIOD> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD", DbType.String, idLancioD);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MATE);
+            }
+        }
+
         public void GetUSR_CHECKQ_T(AnalisiOrdiniVenditaDS ds, string IdPrdFase)
         {
             string select = @" SELECT mf.IDPRDMOVFASE, cq.* FROM ditta1.usr_checkq_t cq
@@ -163,6 +218,41 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_CHECKQ_T);
+            }
+        }
+
+        public void GetUSR_CHECKQ_TInfragruppo(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            string select = @" select fam3.IDPRDMOVFASE, cq.* 
+                            from ditta2.usr_prd_fasi fa3 
+                            inner join ditta2.usr_prd_movfasi fam3 on fam3.idprdfase = fa3.idprdfase
+                            inner join ditta2.usr_prd_flusso_movfasi fmf on fmf.idprdmovfase = fam3.idprdmovfase
+                            inner join ditta2.usr_checkq_t cq on fmf.idflussomovfase = cq.idorigine_ril and origine_ril = 2
+                            where fa3.idlanciod =  $P<IDLANCIOD>   ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD", DbType.String, idLancioD);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_CHECKQ_T);
+            }
+        }
+
+        public void GetUSR_CHECKQ_SInfragruppo(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            string select = @" select cqs.* 
+                            from ditta2.usr_prd_fasi fa3 
+                            inner join ditta2.usr_prd_movfasi fam3 on fam3.idprdfase = fa3.idprdfase
+                            inner join ditta2.usr_prd_flusso_movfasi fmf on fmf.idprdmovfase = fam3.idprdmovfase
+                            inner join ditta2.usr_checkq_t cq on fmf.idflussomovfase = cq.idorigine_ril and origine_ril = 2
+                            inner join ditta2.usr_checkq_s cqs on cqs.idcheckqt= cq.idcheckqt
+                            where fa3.idlanciod =  $P<IDLANCIOD>   ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDLANCIOD", DbType.String, idLancioD);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_CHECKQ_S);
             }
         }
         public void GetTabMag(AnalisiOrdiniVenditaDS ds, string idTabMag)

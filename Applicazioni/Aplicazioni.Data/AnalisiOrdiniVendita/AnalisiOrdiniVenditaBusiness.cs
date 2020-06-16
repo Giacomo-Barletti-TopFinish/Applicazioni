@@ -11,10 +11,10 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
     public class AnalisiOrdiniVenditaBusiness : BusinessBase
     {
         [DataContext]
-        public void FillOC_APERTI(AnalisiOrdiniVenditaDS ds)
+        public void FillOC_APERTI(AnalisiOrdiniVenditaDS ds, string riferimento, string fullnumdoc, string modello)
         {
             AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
-            a.FillOC_APERTI(ds);
+            a.FillOC_APERTI(ds, riferimento, fullnumdoc, modello);
         }
 
         [DataContext]
@@ -22,6 +22,20 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
         {
             AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
             a.FillAccantonatoEsistenzaPerOrigine(ds, idOrigine, tipoOrigine);
+        }
+
+        [DataContext]
+        public void FillFasiInfragruppo(AnalisiOrdiniVenditaDS ds, string idPrdFaseOrigine)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.FillFasiInfragruppo(ds, idPrdFaseOrigine);
+        }
+
+        [DataContext]
+        public void FillODLInfragruppo(AnalisiOrdiniVenditaDS ds, string idPrdFaseOrigine)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.FillODLInfragruppo(ds, idPrdFaseOrigine);
         }
 
         [DataContext]
@@ -70,6 +84,12 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             a.GetUSR_PRD_FASIDaLancio(ds, idLancioD);
         }
         [DataContext]
+        public void GetUSR_PRD_MATEDaLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_MATEDaLancio(ds, idLancioD);
+        }
+        [DataContext]
         public void GetUSR_PRD_MOVFASIAperte(AnalisiOrdiniVenditaDS ds, string idPrdfase)
         {
             AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
@@ -93,7 +113,18 @@ namespace Applicazioni.Data.AnalisiOrdiniVendita
             AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
             a.GetUSR_CHECKQ_T(ds, idPrdfase);
         }
-
+        [DataContext]
+        public void GetUSR_CHECKQ_TInfragruppo(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_CHECKQ_TInfragruppo(ds, idLancioD);
+        }
+        [DataContext]
+        public void GetUSR_CHECKQ_SInfragruppo(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            AnalisiOrdiniVenditaAdapter a = new AnalisiOrdiniVenditaAdapter(DbConnection, DbTransaction);
+            a.GetUSR_CHECKQ_SInfragruppo(ds, idLancioD);
+        }
         [DataContext]
         public void FillUSR_CHECKQ_S(AnalisiOrdiniVenditaDS ds, string idcheckqt)
         {

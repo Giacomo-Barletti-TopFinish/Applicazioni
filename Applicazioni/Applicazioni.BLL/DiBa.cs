@@ -221,7 +221,7 @@ namespace Applicazioni.BLL
             else
                 idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
             //    bool m = idmagazz.Contains("0000096837");
-           // idmagazz = new List<string>(new string[] { "0000085010" });
+            // idmagazz = new List<string>(new string[] { "0000085010" });
 
 
             foreach (string articolo in idmagazz)
@@ -255,10 +255,10 @@ namespace Applicazioni.BLL
         {
             List<string> idmagazz = new List<string>();
             int i = 1;
-//            idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
+            //            idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
             idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
             //    bool m = idmagazz.Contains("0000096837");
-            idmagazz = new List<string>(new string[] { "0000131250" });
+    //        idmagazz = new List<string>(new string[] { "0000046402" });
 
             foreach (string articolo in idmagazz)
             {
@@ -381,7 +381,21 @@ namespace Applicazioni.BLL
             if (listini.Count > 0)
             {
                 costoMateriale = ValutaCostoListino(0, listini, out idListino);
+            }else
+            {
+                List<ValorizzazioneDS.USR_LIS_ACQRow> listiniA = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
+                  && x.VALIDITA <= DataFine
+                  && x.FINEVALIDITA >= DataFine
+                  && !x.IsCODICECLIFONull()
+                  && x.CODICECLIFO.Trim() == "02350"
+                  && x.AZIENDA == "MP").ToList();
+
+                if (listiniA.Count > 0)
+                {
+                    costoMateriale = ValutaCostoListino(0, listiniA, out idListino);
+                }
             }
+
 
             if (tdibaArticolo == null)
             {

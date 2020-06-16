@@ -10,11 +10,50 @@ namespace Applicazioni.BLL
 {
     public class OrdiniVendita
     {
-        public void EstraiOC(AnalisiOrdiniVenditaDS ds)
+        public void EstraiOC(AnalisiOrdiniVenditaDS ds, string riferimento, string fullnumdoc, string modello)
         {
             using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
             {
-                aovb.FillOC_APERTI(ds);
+                aovb.FillOC_APERTI(ds, riferimento, fullnumdoc, modello);
+            }
+        }
+        public string CaricaFasiInfragruppo(AnalisiOrdiniVenditaDS ds, string idPrdFaseOrigine)
+        {
+            using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
+            {
+                aovb.FillFasiInfragruppo(ds, idPrdFaseOrigine);
+                aovb.FillODLInfragruppo(ds, idPrdFaseOrigine);
+                AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fase = ds.USR_PRD_FASI.FirstOrDefault();
+                if (fase != null)
+                {
+                    aovb.GetUSR_CHECKQ_TInfragruppo(ds, fase.IDLANCIOD);
+                    aovb.GetUSR_CHECKQ_SInfragruppo(ds, fase.IDLANCIOD);
+                    aovb.GetUSR_PRD_MATEDaLancio(ds, fase.IDLANCIOD);
+                    return fase.IDLANCIOD;
+                }
+                return string.Empty;
+            }
+        }
+        public List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow> OrdinaFasiLancio(AnalisiOrdiniVenditaDS ds, string idLancioD)
+        {
+            List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow> fasiOrdinate = new List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow>();
+
+            List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow> fasiRoot = ds.USR_PRD_FASI.Where(x => x.IDLANCIOD == idLancioD && x.IsIDPRDFASEPADRENull()).ToList();
+            if (fasiRoot.Count == 0) return fasiOrdinate;
+
+            foreach (AnalisiOrdiniVenditaDS.USR_PRD_FASIRow faseRoot in fasiRoot)
+            {
+                ordinaFasi(ds, faseRoot, idLancioD, fasiOrdinate);
+            }
+            return fasiOrdinate;
+        }
+
+        private void ordinaFasi(AnalisiOrdiniVenditaDS ds, AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fasePadre, string idLancioD, List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow> fasiOrdinate)
+        {
+            fasiOrdinate.Add(fasePadre);
+            foreach (AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fase in ds.USR_PRD_FASI.Where(x => x.IDLANCIOD == idLancioD && !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == fasePadre.IDPRDFASE))
+            {
+                ordinaFasi(ds, fase, idLancioD, fasiOrdinate);
             }
         }
 
@@ -63,6 +102,7 @@ namespace Applicazioni.BLL
             using (AnalisiOrdiniVenditaBusiness aovb = new AnalisiOrdiniVenditaBusiness())
             {
                 aovb.GetUSR_PRD_FASIDaLancio(ds, idLancioD);
+                aovb.GetUSR_PRD_MATEDaLancio(ds, idLancioD);
                 aovb.GetUSR_PRD_MOVFASIDaLancio(ds, idLancioD);
             }
         }
@@ -93,6 +133,8 @@ namespace Applicazioni.BLL
                     aovb.GetUSR_PRD_MOVFASIAperte(ds, idPrdFase);
                     aovb.GetUSR_CHECKQ_T(ds, idPrdFase);
                     fase = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == idPrdFase).FirstOrDefault();
+                    if (fase != null)
+                        aovb.GetUSR_PRD_MATEDaLancio(ds, fase.IDLANCIOD);
                 }
 
             }
@@ -173,7 +215,7 @@ namespace Applicazioni.BLL
 
             }
             if (tabfas == null) return string.Empty;
-            return tabfas.CODICEFASE + tabfas.DESTABFAS.Trim();
+            return string.Format("{0} {1}", tabfas.CODICEFASE, tabfas.DESTABFAS.Trim());
         }
     }
 

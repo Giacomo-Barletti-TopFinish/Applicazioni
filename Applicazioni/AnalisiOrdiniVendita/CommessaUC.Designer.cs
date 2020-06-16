@@ -75,13 +75,13 @@
             this.txtModello.Location = new System.Drawing.Point(134, 21);
             this.txtModello.Name = "txtModello";
             this.txtModello.ReadOnly = true;
-            this.txtModello.Size = new System.Drawing.Size(120, 20);
+            this.txtModello.Size = new System.Drawing.Size(160, 20);
             this.txtModello.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(281, 5);
+            this.label3.Location = new System.Drawing.Point(313, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 0;
@@ -89,7 +89,7 @@
             // 
             // txtRiga
             // 
-            this.txtRiga.Location = new System.Drawing.Point(284, 21);
+            this.txtRiga.Location = new System.Drawing.Point(316, 21);
             this.txtRiga.Name = "txtRiga";
             this.txtRiga.ReadOnly = true;
             this.txtRiga.Size = new System.Drawing.Size(100, 20);
@@ -98,7 +98,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(425, 5);
+            this.label4.Location = new System.Drawing.Point(457, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 0;
@@ -106,7 +106,7 @@
             // 
             // txtDataRichiesta
             // 
-            this.txtDataRichiesta.Location = new System.Drawing.Point(428, 21);
+            this.txtDataRichiesta.Location = new System.Drawing.Point(460, 21);
             this.txtDataRichiesta.Name = "txtDataRichiesta";
             this.txtDataRichiesta.ReadOnly = true;
             this.txtDataRichiesta.Size = new System.Drawing.Size(100, 20);
@@ -115,7 +115,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(568, 5);
+            this.label5.Location = new System.Drawing.Point(600, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 13);
             this.label5.TabIndex = 0;
@@ -123,7 +123,7 @@
             // 
             // txtDataConcordata
             // 
-            this.txtDataConcordata.Location = new System.Drawing.Point(571, 21);
+            this.txtDataConcordata.Location = new System.Drawing.Point(603, 21);
             this.txtDataConcordata.Name = "txtDataConcordata";
             this.txtDataConcordata.ReadOnly = true;
             this.txtDataConcordata.Size = new System.Drawing.Size(100, 20);
@@ -132,7 +132,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(717, 5);
+            this.label6.Location = new System.Drawing.Point(749, 5);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 0;
@@ -140,7 +140,7 @@
             // 
             // txtQta
             // 
-            this.txtQta.Location = new System.Drawing.Point(720, 21);
+            this.txtQta.Location = new System.Drawing.Point(752, 21);
             this.txtQta.Name = "txtQta";
             this.txtQta.ReadOnly = true;
             this.txtQta.Size = new System.Drawing.Size(100, 20);
@@ -149,7 +149,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(833, 5);
+            this.label7.Location = new System.Drawing.Point(865, 5);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(121, 13);
             this.label7.TabIndex = 0;
@@ -157,7 +157,7 @@
             // 
             // txtQtaDaCons
             // 
-            this.txtQtaDaCons.Location = new System.Drawing.Point(836, 21);
+            this.txtQtaDaCons.Location = new System.Drawing.Point(868, 21);
             this.txtQtaDaCons.Name = "txtQtaDaCons";
             this.txtQtaDaCons.ReadOnly = true;
             this.txtQtaDaCons.Size = new System.Drawing.Size(100, 20);

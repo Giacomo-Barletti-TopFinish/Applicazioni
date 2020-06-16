@@ -17,6 +17,7 @@ namespace AnalisiOrdiniVendita
         public string ControlloQualita { set { lblControlloQualita.Text = value; } }
         public string Seguito { set { txtSeguito.Text = value; } }
         public string DataSeguito { set { txtDataSeguito.Text = value; } }
+        public string Quantita { set { txtQuantita.Text = value; } }
         private int documenti = 0;
         public SeguitoUC()
         {

@@ -58,17 +58,29 @@
     <Compile Include="AccantonatoEsistenzaUC.Designer.cs">
       <DependentUpon>AccantonatoEsistenzaUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommessaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommessaForm.Designer.cs">
+      <DependentUpon>CommessaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CommessaUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CommessaUC.Designer.cs">
       <DependentUpon>CommessaUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="RicercaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RicercaForm.Designer.cs">
+      <DependentUpon>RicercaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MDIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIForm.Designer.cs">
+      <DependentUpon>MDIForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OrdineDiLavoroUC.cs">
       <SubType>UserControl</SubType>
@@ -90,11 +102,17 @@
     <EmbeddedResource Include="AccantonatoEsistenzaUC.resx">
       <DependentUpon>AccantonatoEsistenzaUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CommessaForm.resx">
+      <DependentUpon>CommessaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommessaUC.resx">
       <DependentUpon>CommessaUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="RicercaForm.resx">
+      <DependentUpon>RicercaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDIForm.resx">
+      <DependentUpon>MDIForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrdineDiLavoroUC.resx">
       <DependentUpon>OrdineDiLavoroUC.cs</DependentUpon>

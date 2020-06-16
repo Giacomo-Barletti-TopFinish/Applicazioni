@@ -41,7 +41,7 @@
             // 
             // txtQtaDestinazione
             // 
-            this.txtQtaDestinazione.Location = new System.Drawing.Point(842, 16);
+            this.txtQtaDestinazione.Location = new System.Drawing.Point(880, 14);
             this.txtQtaDestinazione.Name = "txtQtaDestinazione";
             this.txtQtaDestinazione.ReadOnly = true;
             this.txtQtaDestinazione.Size = new System.Drawing.Size(100, 20);
@@ -50,7 +50,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(839, 0);
+            this.label7.Location = new System.Drawing.Point(877, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(109, 13);
             this.label7.TabIndex = 2;
@@ -58,7 +58,7 @@
             // 
             // txtQtaOrigine
             // 
-            this.txtQtaOrigine.Location = new System.Drawing.Point(726, 16);
+            this.txtQtaOrigine.Location = new System.Drawing.Point(764, 14);
             this.txtQtaOrigine.Name = "txtQtaOrigine";
             this.txtQtaOrigine.ReadOnly = true;
             this.txtQtaOrigine.Size = new System.Drawing.Size(100, 20);
@@ -67,7 +67,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(723, 0);
+            this.label6.Location = new System.Drawing.Point(761, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(81, 13);
             this.label6.TabIndex = 3;
@@ -75,10 +75,10 @@
             // 
             // txtModello
             // 
-            this.txtModello.Location = new System.Drawing.Point(134, 16);
+            this.txtModello.Location = new System.Drawing.Point(134, 14);
             this.txtModello.Name = "txtModello";
             this.txtModello.ReadOnly = true;
-            this.txtModello.Size = new System.Drawing.Size(120, 20);
+            this.txtModello.Size = new System.Drawing.Size(160, 20);
             this.txtModello.TabIndex = 14;
             // 
             // label2
@@ -92,7 +92,7 @@
             // 
             // txtDestinazione
             // 
-            this.txtDestinazione.Location = new System.Drawing.Point(277, 16);
+            this.txtDestinazione.Location = new System.Drawing.Point(315, 14);
             this.txtDestinazione.Name = "txtDestinazione";
             this.txtDestinazione.ReadOnly = true;
             this.txtDestinazione.Size = new System.Drawing.Size(304, 20);
@@ -101,7 +101,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(277, 0);
+            this.label5.Location = new System.Drawing.Point(315, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 4;
@@ -110,7 +110,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 19);
+            this.label1.Location = new System.Drawing.Point(17, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 15;
@@ -131,7 +131,7 @@
             this.Controls.Add(this.txtModello);
             this.Controls.Add(this.label2);
             this.Name = "AccantonatoEsistenzaUC";
-            this.Size = new System.Drawing.Size(1220, 43);
+            this.Size = new System.Drawing.Size(1220, 35);
             this.Load += new System.EventHandler(this.AccantonatoEsistenzaUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

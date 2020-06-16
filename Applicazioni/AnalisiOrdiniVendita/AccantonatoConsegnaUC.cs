@@ -79,5 +79,10 @@ namespace AnalisiOrdiniVendita
 
 
         }
+
+        private void AccantonatoConsegnaUC_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
