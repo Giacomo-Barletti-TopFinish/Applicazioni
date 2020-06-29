@@ -78,7 +78,6 @@ namespace AnalisiOrdiniVendita
                     aggiungiAccantonatoEsistenza(esistenza);
             }
 
-            List<string> idcheckq_T = new List<string>();
             List<AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow> documentiAccantonato = new List<AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow>();
 
             ov.FillAccantonatoConsegnaPerOrigine(_ds, idVendited, (decimal)OrigineAccantonato.OrdineCliente);
@@ -117,23 +116,28 @@ namespace AnalisiOrdiniVendita
                         if (nascondiAnnullate && fase.QTA == fase.QTAANN && fase.QTATER == 0) continue;
                         if (nascondiCompletate && fase.QTA == fase.QTATER && fase.QTADATER == 0) continue;
 
-                        OrdineDiLavoroUC odlUC = new OrdineDiLavoroUC(false);
-                        odlUC.Modello = ov.GetModello(_ds, fase.IDMAGAZZ);
-                        odlUC.Quantita = fase.QTA.ToString();
-                        odlUC.QuantitaDaTerminare = fase.QTADATER.ToString();
-                        odlUC.QuantitaOK = fase.QTATER.ToString();
-                        odlUC.QuantitaDifettosa = string.Empty;
-                        odlUC.QuantitaNonLavorata = string.Empty;
-                        odlUC.QuanatitaAnnullata = fase.QTAANN.ToString();
-                        odlUC.Fase = string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS));
+                        BaseUC uc = new BaseUC(TipoControllo.Fase,
+                            ov.GetModello(_ds, fase.IDMAGAZZ),
+                            string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS)),
+                            string.Empty,
+                            fase.QTA,
+                            fase.QTADATER,
+                            fase.QTATER,
+                            0,
+                            0,
+                            fase.QTAANN,
+                            string.Empty);
+                        pannello.Controls.Add(uc);
 
                         foreach (AnalisiOrdiniVenditaDS.USR_PRD_MATERow materiale in _ds.USR_PRD_MATE.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
-                            odlUC.AggiungiMateriale(ov.GetModello(_ds,materiale.IDMAGAZZ), materiale.FABBIACCECOM, materiale.FABBIACCOCOM, materiale.FABBITOTCOM);
+                        {
+                            uc.AggiungiMateriale(ov.GetModello(_ds, materiale.IDMAGAZZ), materiale.FABBIACCECOM, materiale.FABBIACCOCOM, materiale.FABBITOTCOM);
+                        }
 
 
                         if (fase.CODICECLIFO.Trim() == "02350")
                         {
-                            inserisciInfragruppo(fase.IDPRDFASE, nascondiAnnullate, nascondiCompletate);
+                            inserisciInfragruppo(fase.IDPRDFASE, nascondiAnnullate, nascondiCompletate, uc);
                         }
                         else
                         {
@@ -143,79 +147,65 @@ namespace AnalisiOrdiniVendita
                                 AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt = _ds.USR_CHECKQ_T.Where(x => x.IDPRDMOVFASE == odl.IDPRDMOVFASE).FirstOrDefault();
                                 if (cqt != null)
                                 {
-                                    idcheckq_T.Add(cqt.IDCHECKQT);
                                     testata = cqt.NUMCHECKQT;
                                 }
-                                odlUC.AggiungiDocumento(odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN, testata);
+                                uc.AggiungiODL(TipoControllo.Fase,odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN, testata);
+
+                                if(cqt!=null)
+                                    inserisciSeguiti(_ds, cqt,uc);
                             }
                         }
-                        pannello.Controls.Add(odlUC);
-
-
-
-
                     }
                 }
             }
-
-
-            foreach (string idcheckqT in idcheckq_T)
-            {
-                AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt = _ds.USR_CHECKQ_T.Where(x => x.IDCHECKQT == idcheckqT).FirstOrDefault();
-                if (cqt == null) continue;
-
-                inserisciSeguiti(_ds, cqt);
-
-            }
         }
 
-        private void inserisciSeguiti(AnalisiOrdiniVenditaDS ds, AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt)
+        private void inserisciSeguiti(AnalisiOrdiniVenditaDS ds, AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt, BaseUC uc)
         {
             OrdiniVendita ov = new OrdiniVendita();
             AnalisiOrdiniVenditaDS dsSeguiti = new AnalisiOrdiniVenditaDS();
             List<AnalisiOrdiniVenditaDS.USR_CHECKQ_SRow> seguiti = ov.GetSeguito(ds, cqt.IDCHECKQT);
             foreach (AnalisiOrdiniVenditaDS.USR_CHECKQ_SRow seguito in seguiti)
             {
-                SeguitoUC suc = new SeguitoUC();
-                suc.Modello = ov.GetModello(_ds, cqt.IDMAGAZZ);
-                suc.Seguito = ov.GetDescrizioneSeguito(_ds, seguito.IDSEGUITOCHECKQ);
-                suc.DataSeguito = seguito.DATASEGUITOCHECKQ.ToShortDateString();
-                suc.ControlloQualita = cqt.IsNUMCHECKQTNull() ? string.Empty : cqt.NUMCHECKQT;
-                suc.Quantita = seguito.QTA.ToString();
+                uc.AggiungiDescrizioneSeguito(cqt.IsNUMCHECKQTNull() ? string.Empty : cqt.NUMCHECKQT,
+                    ov.GetDescrizioneSeguito(_ds, seguito.IDSEGUITOCHECKQ),
+                    ov.GetModello(_ds, cqt.IDMAGAZZ),
+                    seguito.DATASEGUITOCHECKQ.ToShortDateString(),
+                    cqt.IsNUMCHECKQTNull() ? string.Empty : cqt.NUMCHECKQT);
                 if (!seguito.IsIDPRDMOVFASENull())
                 {
                     AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow odl = ov.GetODL(ds, seguito.IDPRDMOVFASE);
-                    suc.AggiungiDocumento(odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN);
+                    uc.AggiungiODL(TipoControllo.Qualita,odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN,string.Empty);
                 }
 
                 if (!seguito.IsIDLANCIODNull())
                 {
-                  
+
                     ov.CaricaLancio(dsSeguiti, seguito.IDLANCIOD);
                     foreach (AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fase in dsSeguiti.USR_PRD_FASI.Where(x => x.IDLANCIOD == seguito.IDLANCIOD).OrderBy(x => x.SEQFASE))
                     {
 
-                        if(dsSeguiti.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE).Count()>0)
+                        if (dsSeguiti.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE).Count() > 0)
                         {
                             foreach (AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow odl in dsSeguiti.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
                             {
                                 string faseStr = string.Format("{0} - {1} {2}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS), odl.NUMMOVFASE);
-                                suc.AggiungiDocumento(faseStr, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN);
+                                uc.AggiungiODL(TipoControllo.Qualita, faseStr, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN,string.Empty);
                             }
                         }
                         else
                         {
                             string faseStr = string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS));
-                            suc.AggiungiDocumento(faseStr, string.Empty, fase.QTA, fase.QTADATER, fase.QTATER, 0, 0, fase.QTAANN);
+                            uc.AggiungiODL(TipoControllo.Qualita, faseStr, string.Empty, fase.QTA, fase.QTADATER, fase.QTATER, 0, 0, fase.QTAANN, string.Empty);
 
                         }
                     }
                 }
-                pannello.Controls.Add(suc);
+//                pannello.Controls.Add(suc);
             }
         }
 
-        private void inserisciInfragruppo(string idPrdFaseOrigine, bool nascondiAnnullate, bool nascondiCompletate)
+        private void inserisciInfragruppo(string idPrdFaseOrigine, bool nascondiAnnullate, bool nascondiCompletate,BaseUC ucPadre)
         {
             AnalisiOrdiniVenditaDS dsInfragruppo = new AnalisiOrdiniVenditaDS();
             OrdiniVendita ov = new OrdiniVendita();
@@ -230,36 +220,36 @@ namespace AnalisiOrdiniVendita
                 if (nascondiAnnullate && fase.QTA == fase.QTAANN && fase.QTATER == 0) continue;
                 if (nascondiCompletate && fase.QTA == fase.QTATER && fase.QTADATER == 0) continue;
 
-                OrdineDiLavoroUC odlUC = new OrdineDiLavoroUC(true);
-                odlUC.Modello = ov.GetModello(_ds, fase.IDMAGAZZ);
-                odlUC.Quantita = fase.QTA.ToString();
-                odlUC.QuantitaDaTerminare = fase.QTADATER.ToString();
-                odlUC.QuantitaOK = fase.QTATER.ToString();
-                odlUC.QuantitaDifettosa = string.Empty;
-                odlUC.QuantitaNonLavorata = string.Empty;
-                odlUC.QuanatitaAnnullata = fase.QTAANN.ToString();
-                odlUC.Fase = string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS));
-                pannello.Controls.Add(odlUC);
-                foreach (AnalisiOrdiniVenditaDS.USR_PRD_MATERow materiale in dsInfragruppo.USR_PRD_MATE.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
-                    odlUC.AggiungiMateriale(ov.GetModello(_ds, materiale.IDMAGAZZ), materiale.FABBIACCECOM, materiale.FABBIACCOCOM, materiale.FABBITOTCOM);
+                BaseUC infragruppo = new BaseUC(TipoControllo.Infragruppo,
+                     ov.GetModello(_ds, fase.IDMAGAZZ),
+                            string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS)),
+                            string.Empty,
+                            fase.QTA,
+                            fase.QTADATER,
+                            fase.QTATER,
+                            0,
+                            0,
+                            fase.QTAANN,
+                            string.Empty);
+
                 foreach (AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow odl in dsInfragruppo.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
                 {
                     string testata = string.Empty;
                     AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt = dsInfragruppo.USR_CHECKQ_T.Where(x => x.IDPRDMOVFASE == odl.IDPRDMOVFASE).FirstOrDefault();
                     if (cqt != null)
                     {
-                        //     idcheckq_T.Add(cqt.IDCHECKQT);
                         testata = cqt.NUMCHECKQT;
                     }
-                    odlUC.AggiungiDocumento(odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN, testata);
+
+                    ucPadre.AggiungiODL(TipoControllo.Infragruppo,odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN, testata);
 
                     if (cqt != null)
                     {
-                        inserisciSeguiti(dsInfragruppo, cqt);
+                        inserisciSeguiti(dsInfragruppo, cqt,ucPadre);
 
                     }
                 }
-               
+
 
 
             }
@@ -267,12 +257,37 @@ namespace AnalisiOrdiniVendita
 
         private void chkNascondiAnnullate_CheckedChanged(object sender, EventArgs e)
         {
-            caricaCommessa(chkNascondiAnnullate.Checked, chkNascandiCompletate.Checked);
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                caricaCommessa(chkNascondiAnnullate.Checked, chkNascandiCompletate.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void chkNascandiCompletate_CheckedChanged(object sender, EventArgs e)
         {
-            caricaCommessa(chkNascondiAnnullate.Checked, chkNascandiCompletate.Checked);
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                caricaCommessa(chkNascondiAnnullate.Checked, chkNascandiCompletate.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+           
         }
     }
 }

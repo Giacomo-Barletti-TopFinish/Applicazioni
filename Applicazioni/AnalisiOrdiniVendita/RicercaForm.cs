@@ -56,17 +56,30 @@ namespace AnalisiOrdiniVendita
 
         private void dgvOC_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
-            if (e.StateChanged != DataGridViewElementStates.Selected)
-                return;
-            //            pannello.Controls.Clear();
-            string idvendited = (string)e.Row.Cells[10].Value;
-            AnalisiOrdiniVenditaDS.OC_APERTIRow dettaglio = _ds.OC_APERTI.Where(x => x.IDVENDITED == idvendited).FirstOrDefault();
-            //        idvendited = "0000000000000000001403575";
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                if (e.StateChanged != DataGridViewElementStates.Selected)
+                    return;
+                //            pannello.Controls.Clear();
+                string idvendited = (string)e.Row.Cells[10].Value;
+                AnalisiOrdiniVenditaDS.OC_APERTIRow dettaglio = _ds.OC_APERTI.Where(x => x.IDVENDITED == idvendited).FirstOrDefault();
+                //        idvendited = "0000000000000000001403575";
 
-            CommessaForm form = new CommessaForm();
-            form.Dettaglio = dettaglio;
-            form.MdiParent = this.MdiParent;
-            form.Show();       
+                CommessaForm form = new CommessaForm();
+                form.Dettaglio = dettaglio;
+                form.MdiParent = this.MdiParent;
+                form.Show();
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
 
         }
 

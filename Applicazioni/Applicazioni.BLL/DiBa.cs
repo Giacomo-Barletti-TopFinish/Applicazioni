@@ -258,7 +258,7 @@ namespace Applicazioni.BLL
             //            idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
             idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
             //    bool m = idmagazz.Contains("0000096837");
-    //        idmagazz = new List<string>(new string[] { "0000046402" });
+            idmagazz = new List<string>(new string[] { "0000010919" });
 
             foreach (string articolo in idmagazz)
             {
@@ -370,38 +370,43 @@ namespace Applicazioni.BLL
             decimal costoMateriale = 0;
 
             string idListino = string.Empty;
-
-            List<ValorizzazioneDS.USR_LIS_VENRow> listini = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
-              && x.VALIDITA <= DataFine
-              && x.FINEVALIDITA >= DataFine
-              && !x.IsCODICECLIFONull()
-              && x.CODICECLIFO.Trim() == "01631"
-              && x.AZIENDA == "TF").ToList();
-
-            if (listini.Count > 0)
-            {
-                costoMateriale = ValutaCostoListino(0, listini, out idListino);
-            }else
-            {
-                List<ValorizzazioneDS.USR_LIS_ACQRow> listiniA = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
-                  && x.VALIDITA <= DataFine
-                  && x.FINEVALIDITA >= DataFine
-                  && !x.IsCODICECLIFONull()
-                  && x.CODICECLIFO.Trim() == "02350"
-                  && x.AZIENDA == "MP").ToList();
-
-                if (listiniA.Count > 0)
-                {
-                    costoMateriale = ValutaCostoListino(0, listiniA, out idListino);
-                }
-            }
-
-
             if (tdibaArticolo == null)
             {
                 RegistraCostoGalvanica(costoMateriale, idmagazz, idListino);
                 return costoMateriale;
             }
+            if (!tdibaArticolo.IsCODICECLIFOPRDNull() && tdibaArticolo.CODICECLIFOPRD.Trim()=="02350")
+            {
+                List<ValorizzazioneDS.USR_LIS_VENRow> listini = _ds.USR_LIS_VEN.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
+                  && x.VALIDITA <= DataFine
+                  && x.FINEVALIDITA >= DataFine
+                  && !x.IsCODICECLIFONull()
+                  && x.CODICECLIFO.Trim() == "01631"
+                  && x.AZIENDA == "TF").ToList();
+
+                if (listini.Count > 0)
+                {
+                    costoMateriale = ValutaCostoListino(0, listini, out idListino);
+                }
+                else
+                {
+                    List<ValorizzazioneDS.USR_LIS_ACQRow> listiniA = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == idmagazz
+                      && x.VALIDITA <= DataFine
+                      && x.FINEVALIDITA >= DataFine
+                      && !x.IsCODICECLIFONull()
+                      && x.CODICECLIFO.Trim() == "02350"
+                      && x.AZIENDA == "MP").ToList();
+
+                    if (listiniA.Count > 0)
+                    {
+                        costoMateriale = ValutaCostoListino(0, listiniA, out idListino);
+                    }
+                }
+            }
+
+
+
+      
             decimal costoFigli = 0;
             foreach (ValorizzazioneDS.USR_PRD_RDIBARow rdiba in _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == tdibaArticolo.IDTDIBA).OrderBy(x => x.SEQUENZA))
             {

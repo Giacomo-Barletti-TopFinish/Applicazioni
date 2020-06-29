@@ -12,6 +12,24 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Temp\Publish\AnalisiOrdiniVendita\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\srv-webservices\Publish\Applicazioni\AnalisiOrdiniVendita\</InstallUrl>
+    <MinimumRequiredVersion>1.0.0.3</MinimumRequiredVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +49,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>324CDCC55E39FF5814EB6D0413E739F410E04B1E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>AnalisiOrdiniVendita_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -57,6 +87,12 @@
     </Compile>
     <Compile Include="AccantonatoEsistenzaUC.Designer.cs">
       <DependentUpon>AccantonatoEsistenzaUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseUC.Designer.cs">
+      <DependentUpon>BaseUC.cs</DependentUpon>
     </Compile>
     <Compile Include="CommessaForm.cs">
       <SubType>Form</SubType>
@@ -102,6 +138,9 @@
     <EmbeddedResource Include="AccantonatoEsistenzaUC.resx">
       <DependentUpon>AccantonatoEsistenzaUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BaseUC.resx">
+      <DependentUpon>BaseUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CommessaForm.resx">
       <DependentUpon>CommessaForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +168,7 @@
     <EmbeddedResource Include="SeguitoUC.resx">
       <DependentUpon>SeguitoUC.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="AnalisiOrdiniVendita_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -155,6 +195,18 @@
       <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
       <Name>Applicazioni.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
