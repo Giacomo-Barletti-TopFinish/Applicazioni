@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Applicazioni.Security", "Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalisiOrdiniVendita", "AnalisiOrdiniVendita\AnalisiOrdiniVendita.csproj", "{90D6F77E-4E32-453A-B04F-25078141F618}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrasferimentiWeb", "TrasferimentiWeb\TrasferimentiWeb.csproj", "{158709E9-4A2C-4712-BB99-D773F4DB7455}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{90D6F77E-4E32-453A-B04F-25078141F618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90D6F77E-4E32-453A-B04F-25078141F618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90D6F77E-4E32-453A-B04F-25078141F618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158709E9-4A2C-4712-BB99-D773F4DB7455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158709E9-4A2C-4712-BB99-D773F4DB7455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158709E9-4A2C-4712-BB99-D773F4DB7455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158709E9-4A2C-4712-BB99-D773F4DB7455}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
