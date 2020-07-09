@@ -60,103 +60,111 @@ namespace AnalisiOrdiniVendita
 
         private void caricaCommessa(bool nascondiAnnullate, bool nascondiCompletate)
         {
-            pannello.Controls.Clear();
-            //            AnalisiOrdiniVenditaDS.OC_APERTIRow dettaglio = _ds.OC_APERTI.Where(x => x.IDVENDITED == idVendited).FirstOrDefault();
-            if (Dettaglio == null)
-                MessageBox.Show("Impossibile trovare i dati di dettaglio", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            string idVendited = Dettaglio.IDVENDITED;
-
-            aggiungiCommessa(Dettaglio);
-
-            OrdiniVendita ov = new OrdiniVendita();
-            ov.FillAccantonatoEsistenzaPerOrigine(_ds, idVendited, (decimal)OrigineAccantonato.OrdineCliente);
-
-            if (_ds.USR_ACCTO_ESI.Count > 0)
+            try
             {
-                foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_ESIRow esistenza in _ds.USR_ACCTO_ESI)
-                    aggiungiAccantonatoEsistenza(esistenza);
-            }
+                SuspendLayout();
+                pannello.Controls.Clear();
+                //            AnalisiOrdiniVenditaDS.OC_APERTIRow dettaglio = _ds.OC_APERTI.Where(x => x.IDVENDITED == idVendited).FirstOrDefault();
+                if (Dettaglio == null)
+                    MessageBox.Show("Impossibile trovare i dati di dettaglio", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            List<AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow> documentiAccantonato = new List<AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow>();
+                string idVendited = Dettaglio.IDVENDITED;
 
-            ov.FillAccantonatoConsegnaPerOrigine(_ds, idVendited, (decimal)OrigineAccantonato.OrdineCliente);
+                aggiungiCommessa(Dettaglio);
 
-            if (_ds.USR_ACCTO_CON.Count > 0)
-            {
-                foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_CONRow consegna in _ds.USR_ACCTO_CON)
+                OrdiniVendita ov = new OrdiniVendita();
+                ov.FillAccantonatoEsistenzaPerOrigine(_ds, idVendited, (decimal)OrigineAccantonato.OrdineCliente);
+
+                if (_ds.USR_ACCTO_ESI.Count > 0)
                 {
-                    AccantonatoConsegnaUC uc = new AccantonatoConsegnaUC();
-                    uc.Modello = ov.GetModello(_ds, consegna.IDMAGAZZ_ORI);
-                    uc.Destinazione = string.Format("{0} {1}", ov.GetMagazzino(_ds, consegna.IDMAGAZZ_DEST), consegna.IsCODICECLIFO_DESTNull() ? string.Empty : consegna.CODICECLIFO_DEST);
-                    uc.QuantitaOrigine = consegna.QUANTITA_ORI.ToString();
-                    uc.QuantitaDestinazione = consegna.QUANTITA_DEST.ToString();
-                    uc.DataConsegna = consegna.DATACONSEGNA_DEST.ToShortDateString();
-                    foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow documento in _ds.USR_ACCTO_CON_DOC.Where(x => x.IDACCTOCON == consegna.IDACCTOCON))
-                    {
-                        uc.AggiungiDocumento(documento.DESTINAZIONE, ov.GetNumeroDocumento(_ds, documento.DESTINAZIONE, documento.IDDESTINAZIONE), documento.QUANTITA_DOC.ToString(), documento.QUANTITA_DOC_ARR.ToString());
-                        documentiAccantonato.Add(documento);
-                    }
-                    pannello.Controls.Add(uc);
-
-
+                    foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_ESIRow esistenza in _ds.USR_ACCTO_ESI)
+                        aggiungiAccantonatoEsistenza(esistenza);
                 }
-            }
 
+                List<AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow> documentiAccantonato = new List<AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow>();
 
-            foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow documento in documentiAccantonato)
-            {
+                ov.FillAccantonatoConsegnaPerOrigine(_ds, idVendited, (decimal)OrigineAccantonato.OrdineCliente);
 
-                if (documento.DESTINAZIONE == (decimal)DestinazioneAccantonato.FaseDiCommessa)
+                if (_ds.USR_ACCTO_CON.Count > 0)
                 {
-                    AnalisiOrdiniVenditaDS.USR_PRD_FASIRow faseDestinazione = ov.GetFase(_ds, documento.IDDESTINAZIONE);
-                    List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow> fasiLancio = ov.OrdinaFasiLancio(_ds, faseDestinazione.IDLANCIOD);
-                    foreach (AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fase in fasiLancio)
+                    foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_CONRow consegna in _ds.USR_ACCTO_CON)
                     {
-                        if (nascondiAnnullate && fase.QTA == fase.QTAANN && fase.QTATER == 0) continue;
-                        if (nascondiCompletate && fase.QTA == fase.QTATER && fase.QTADATER == 0) continue;
-
-                        BaseUC uc = new BaseUC(TipoControllo.Fase,
-                            ov.GetModello(_ds, fase.IDMAGAZZ),
-                            string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS)),
-                            string.Empty,
-                            fase.QTA,
-                            fase.QTADATER,
-                            fase.QTATER,
-                            0,
-                            0,
-                            fase.QTAANN,
-                            string.Empty);
+                        AccantonatoConsegnaUC uc = new AccantonatoConsegnaUC();
+                        uc.Modello = ov.GetModello(_ds, consegna.IDMAGAZZ_ORI);
+                        uc.Destinazione = string.Format("{0} {1}", ov.GetMagazzino(_ds, consegna.IDMAGAZZ_DEST), consegna.IsCODICECLIFO_DESTNull() ? string.Empty : consegna.CODICECLIFO_DEST);
+                        uc.QuantitaOrigine = consegna.QUANTITA_ORI.ToString();
+                        uc.QuantitaDestinazione = consegna.QUANTITA_DEST.ToString();
+                        uc.DataConsegna = consegna.DATACONSEGNA_DEST.ToShortDateString();
+                        foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow documento in _ds.USR_ACCTO_CON_DOC.Where(x => x.IDACCTOCON == consegna.IDACCTOCON))
+                        {
+                            uc.AggiungiDocumento(documento.DESTINAZIONE, ov.GetNumeroDocumento(_ds, documento.DESTINAZIONE, documento.IDDESTINAZIONE), documento.QUANTITA_DOC.ToString(), documento.QUANTITA_DOC_ARR.ToString());
+                            documentiAccantonato.Add(documento);
+                        }
                         pannello.Controls.Add(uc);
 
-                        foreach (AnalisiOrdiniVenditaDS.USR_PRD_MATERow materiale in _ds.USR_PRD_MATE.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
-                        {
-                            uc.AggiungiMateriale(ov.GetModello(_ds, materiale.IDMAGAZZ), materiale.FABBIACCECOM, materiale.FABBIACCOCOM, materiale.FABBITOTCOM);
-                        }
+
+                    }
+                }
 
 
-                        if (fase.CODICECLIFO.Trim() == "02350")
+                foreach (AnalisiOrdiniVenditaDS.USR_ACCTO_CON_DOCRow documento in documentiAccantonato)
+                {
+
+                    if (documento.DESTINAZIONE == (decimal)DestinazioneAccantonato.FaseDiCommessa)
+                    {
+                        AnalisiOrdiniVenditaDS.USR_PRD_FASIRow faseDestinazione = ov.GetFase(_ds, documento.IDDESTINAZIONE);
+                        List<AnalisiOrdiniVenditaDS.USR_PRD_FASIRow> fasiLancio = ov.OrdinaFasiLancio(_ds, faseDestinazione.IDLANCIOD);
+                        foreach (AnalisiOrdiniVenditaDS.USR_PRD_FASIRow fase in fasiLancio)
                         {
-                            inserisciInfragruppo(fase.IDPRDFASE, nascondiAnnullate, nascondiCompletate, uc);
-                        }
-                        else
-                        {
-                            foreach (AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow odl in _ds.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
+                            if (nascondiAnnullate && fase.QTA == fase.QTAANN && fase.QTATER == 0) continue;
+                            if (nascondiCompletate && fase.QTA == fase.QTATER && fase.QTADATER == 0) continue;
+
+                            BaseUC uc = new BaseUC(TipoControllo.Fase,
+                                ov.GetModello(_ds, fase.IDMAGAZZ),
+                                string.Format("{0} - {1}", fase.CODICECLIFO, ov.GetDescrizioneFase(_ds, fase.IDTABFAS)),
+                                string.Empty,
+                                fase.QTA,
+                                fase.QTADATER,
+                                fase.QTATER,
+                                0,
+                                0,
+                                fase.QTAANN,
+                                string.Empty);
+                            pannello.Controls.Add(uc);
+
+                            foreach (AnalisiOrdiniVenditaDS.USR_PRD_MATERow materiale in _ds.USR_PRD_MATE.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
                             {
-                                string testata = string.Empty;
-                                AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt = _ds.USR_CHECKQ_T.Where(x => x.IDPRDMOVFASE == odl.IDPRDMOVFASE).FirstOrDefault();
-                                if (cqt != null)
-                                {
-                                    testata = cqt.NUMCHECKQT;
-                                }
-                                uc.AggiungiODL(TipoControllo.Fase,odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN, testata);
+                                uc.AggiungiMateriale(ov.GetModello(_ds, materiale.IDMAGAZZ), materiale.FABBIACCECOM, materiale.FABBIACCOCOM, materiale.FABBITOTCOM);
+                            }
 
-                                if(cqt!=null)
-                                    inserisciSeguiti(_ds, cqt,uc);
+
+                            if (fase.CODICECLIFO.Trim() == "02350")
+                            {
+                                inserisciInfragruppo(fase.IDPRDFASE, nascondiAnnullate, nascondiCompletate, uc);
+                            }
+                            else
+                            {
+                                foreach (AnalisiOrdiniVenditaDS.USR_PRD_MOVFASIRow odl in _ds.USR_PRD_MOVFASI.Where(x => x.IDPRDFASE == fase.IDPRDFASE))
+                                {
+                                    string testata = string.Empty;
+                                    AnalisiOrdiniVenditaDS.USR_CHECKQ_TRow cqt = _ds.USR_CHECKQ_T.Where(x => x.IDPRDMOVFASE == odl.IDPRDMOVFASE).FirstOrDefault();
+                                    if (cqt != null)
+                                    {
+                                        testata = cqt.NUMCHECKQT;
+                                    }
+                                    uc.AggiungiODL(TipoControllo.Fase, odl.NUMMOVFASE, odl.DATAFINE.ToShortDateString(), odl.QTA, odl.QTADATER, odl.QTATER_OK, odl.QTATER_DF, odl.QTATER_NL, odl.QTAANN, testata);
+
+                                    if (cqt != null)
+                                        inserisciSeguiti(_ds, cqt, uc);
+                                }
                             }
                         }
                     }
                 }
+            }
+            finally
+            {
+                ResumeLayout();
             }
         }
 
