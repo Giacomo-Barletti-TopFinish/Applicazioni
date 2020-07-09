@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Applicazioni.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,18 +14,15 @@ namespace TrasferimentiWeb.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult CaricaScheda(string Barcode)
         {
-            ViewBag.Message = "Your application description page.";
+            ElaboraBarcode eb = new ElaboraBarcode();
+            Applicazioni.Models.BarcodeModel bm = eb.Elabora(Barcode);
+            return Json(bm);
+//            return PartialView("CaricaScheda", bm);
 
-            return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
     }
 }
