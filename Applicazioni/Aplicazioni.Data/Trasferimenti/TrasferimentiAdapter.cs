@@ -67,6 +67,32 @@ namespace Applicazioni.Data.Trasferimenti
             }
         }
 
+        public void FillGRUPPOModello(TrasferimentiDS ds, string barcode)
+        {
+            string select = @"select * from gruppo.clifo = $P{MODELLO} ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.AP_TTRASFERIMENTI);
+            }
+        }
+
+        public void FillGRUPPOReparto(TrasferimentiDS ds, string barcode)
+        {
+            string select = @"select * from gruppo.magazz  = $P{RAGIONESOC} ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.AP_TTRASFERIMENTI);
+            }
+        }
+
         public void FillAP_TTRASFERIMENTIAttivi(TrasferimentiDS ds)
         {
             string select = @"SELECT * FROM AP_TTRASFERIMENTI WHERE attivo =1 ";

@@ -1,28 +1,31 @@
 ﻿
 
 <div class="content-top">
-    
+
 
     <div class="col-sm-1">
         <label>Barcode</label>
         <input type="text" id="txtBarcode" />
     </div>
+
     <div class="col-sm-12">
         <div id="divScheda">
-           @Html <table id="bctable">
-                     <thead>
-                         <tr>
-                             <th width="20%">Barcode</th>
-                             <th width="20%">Odl</th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                        
-                     </tbody>
+            <label for="tic">In trasferimento</label>
+            <input type="color" id="tic" value="#06E50D">
+            <table id="bctable">
+                <thead>
+                    <tr>
+
+                        <th width="20%">Barcode</th>
+                        <th width="20%">Odl</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
 
 
 
-                 </table>
+            </table>
         </div>
     </div>
 </div>
@@ -43,12 +46,95 @@
                 $(this).focus();
 
                 CaricaScheda(barcode);
+                $("#txtBarcode").focus();
             }
         });
     });
 
+    function VerificaBarcodeLetto(barcode)
+    {
+        debugger;
+        var tds = $('.clsBarcode');
+        if (tds.length == 0) return true;
+
+        for (i = 0; i < tds.length;i++)
+        {
+            if (tds[i].textContent == barcode)
+            {
+                alert("Barcode già letto");
+                //<label for="bgl"> Barcode già letto </label>
+                //    <input type="text" value="#E51506">
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function VerificaBarcodeOperatore(barcode)
+    {
+        if (barcode.substring(0, 2) == "RSF") return true;
+        return false;
+    }
+
+
+
     function CaricaScheda(barcode)
     {
+
+        if (VerificaBarcodeOperatore(barcode))
+        {
+            debugger;
+            var odl = [];
+            var tds = $('.clsBarcode');
+            if (tds.length == 0) return true;
+
+            for (i = 0; i < tds.length; i++)
+                odl.push(tds[i].textContent);
+
+            var odlJSON = JSON.stringify(odl);
+
+
+
+        var url = '@Url.Action("SalvaTrasferimento", "Home")';
+        $.ajax({
+
+            url: url,
+
+            data: {
+                Barcode: barcode,
+                OdlJSON: odlJSON
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == 'OPERATORENONVALIDO') {
+                    ALERT('oPERATORE NON VALIDO PER IL TRASFERIMENTO');
+                    return;
+                }
+
+                if (data == 'OK') {
+                    alert('trasferimento salvato');
+                
+                
+                    function Svuotatabella (barcode)
+                  //$('#bctable')
+
+                }
+
+                $("#txtBarcode").focus();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });            return;
+        }
+
+        if (!VerificaBarcodeLetto(barcode)) return;
+
         var url = '@Url.Action("CaricaScheda", "Home")';
         $.ajax({
 
@@ -58,15 +144,15 @@
             cache: false,
             type: "POST",
             success: function (data)
-            
+
 
             {
                 debugger;
-                var riga = "<tr><td>" + data.Barcode+"</td><td>" + data.Nummovfase + "</td></tr>";
+                var riga = "<tr><td class ='clsBarcode'>" + data.Barcode+"</td><td>" + data.Nummovfase + "</td></tr>";
 
             $('#bctable tr:last').after(riga);
 
-
+                $("#txtBarcode").focus();
              //   $('#divScheda').html(data).show();
             },
             error: function (response)
@@ -84,7 +170,7 @@
         $('#txtBarcode').focus();
     }
 
-    function Salva() 
+    function Salva()
     {
 
         var barcode = $('#hdBarcode').val();
@@ -154,4 +240,5 @@
         });
         $('#txtBarcode').focus();
     }
+
 </script>

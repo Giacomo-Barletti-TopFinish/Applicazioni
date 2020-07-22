@@ -197,6 +197,10 @@
       <Project>{1A2FF071-6851-4CED-8851-976E881E9E9D}</Project>
       <Name>Applicazioni.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.BLL\Applicazioni.BLL.csproj">
+      <Project>{EE28EE16-BE7B-4D2B-972B-4C0607376ADE}</Project>
+      <Name>Applicazioni.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
       <Project>{269b87b7-7ce6-4441-a66b-93b60c78b8c9}</Project>
       <Name>Applicazioni.Entities</Name>

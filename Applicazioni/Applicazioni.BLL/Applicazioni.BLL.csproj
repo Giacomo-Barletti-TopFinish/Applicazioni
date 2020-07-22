@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +48,7 @@
     <Compile Include="Inventario.cs" />
     <Compile Include="Produzione.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trasferimenti.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aplicazioni.Data\Applicazioni.Data.csproj">
@@ -56,6 +58,10 @@
     <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
       <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
       <Name>Applicazioni.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.Helpers\Applicazioni.Helpers.csproj">
+      <Project>{D5B7F1D5-AE8D-4BBE-B139-4255932718F6}</Project>
+      <Name>Applicazioni.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Applicazioni.Models\Applicazioni.Models.csproj">
       <Project>{AC6DBB31-E034-48B9-A242-EF174F575B0D}</Project>
