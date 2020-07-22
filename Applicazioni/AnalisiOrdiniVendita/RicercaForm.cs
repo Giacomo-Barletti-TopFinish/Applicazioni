@@ -66,7 +66,8 @@ namespace AnalisiOrdiniVendita
                 AnalisiOrdiniVenditaDS.OC_APERTIRow dettaglio = _ds.OC_APERTI.Where(x => x.IDVENDITED == idvendited).FirstOrDefault();
                 //        idvendited = "0000000000000000001403575";
 
-                CommessaForm form = new CommessaForm();
+                //                CommessaForm form = new CommessaForm();
+                GrigliaForm form = new GrigliaForm();
                 form.Dettaglio = dettaglio;
                 form.MdiParent = this.MdiParent;
                 form.Show();

@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\Applicazioni\AnalisiOrdiniVendita\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.3</MinimumRequiredVersion>
-    <ApplicationRevision>3</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.8</MinimumRequiredVersion>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -106,6 +106,13 @@
     <Compile Include="CommessaUC.Designer.cs">
       <DependentUpon>CommessaUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="FaseModel.cs" />
+    <Compile Include="GrigliaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GrigliaForm.Designer.cs">
+      <DependentUpon>GrigliaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RicercaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommessaUC.resx">
       <DependentUpon>CommessaUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GrigliaForm.resx">
+      <DependentUpon>GrigliaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RicercaForm.resx">
       <DependentUpon>RicercaForm.cs</DependentUpon>
