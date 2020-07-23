@@ -76,7 +76,7 @@ namespace Applicazioni.Data.Trasferimenti
 
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
-                da.Fill(ds.AP_TTRASFERIMENTI);
+                da.Fill(ds.CLIFO);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Applicazioni.Data.Trasferimenti
 
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
-                da.Fill(ds.AP_TTRASFERIMENTI);
+                da.Fill(ds.MAGAZZ);
             }
         }
 

@@ -50,7 +50,7 @@
             }
         });
     });
-
+    
     function VerificaBarcodeLetto(barcode)
     {
         debugger;
@@ -72,7 +72,7 @@
 
     function VerificaBarcodeOperatore(barcode)
     {
-        if (barcode.substring(0, 2) == "RSF") return true;
+        if (barcode.substring(0, 3) == "RSF") return true;
         return false;
     }
 
@@ -80,7 +80,7 @@
 
     function CaricaScheda(barcode)
     {
-
+        debugger;
         if (VerificaBarcodeOperatore(barcode))
         {
             debugger;
@@ -108,6 +108,7 @@
             type: "POST",
             success: function (data)
             {
+                debugger;
                 if (data == 'OPERATORENONVALIDO') {
                     ALERT('oPERATORE NON VALIDO PER IL TRASFERIMENTO');
                     return;
@@ -115,22 +116,27 @@
 
                 if (data == 'OK') {
                     alert('trasferimento salvato');
+                }
+                else
+                {
+                    alert(data);
+                }
                 
                 
-                    function Svuotatabella (barcode)
-                  //$('#bctable')
-
+                   
                 }
 
                 $("#txtBarcode").focus();
             },
             error: function (response)
             {
+                debugger;
                 document.open();
                 document.write(response.responseText);
                 document.close();
             }
-        });            return;
+        });
+            return;
         }
 
         if (!VerificaBarcodeLetto(barcode)) return;
@@ -147,13 +153,8 @@
 
 
             {
-<<<<<<< HEAD
                 debugger;
                 var riga = "<tr><td class ='clsBarcode'>" + data.Barcode+"</td><td>" + data.Nummovfase + "</td></tr>";
-=======
-                
-                var riga = "<tr><td>" + data.Barcode+"</td><td>" + data.Nummovfase + "</td></tr>";
->>>>>>> c9ef8b2866c97a168df1989d573b16d44d436304
 
             $('#bctable tr:last').after(riga);
 
@@ -162,6 +163,7 @@
             },
             error: function (response)
             {
+                debugger;
                 document.open();
                 document.write(response.responseText);
                 document.close();
