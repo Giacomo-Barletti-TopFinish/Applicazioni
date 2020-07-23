@@ -65,6 +65,8 @@
     <Compile Include="Produzione\ProduzioneAdapter.cs" />
     <Compile Include="Produzione\ProduzioneBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spedizioni\SpedizioniAdapter.cs" />
+    <Compile Include="Spedizioni\SpedizioniBusiness.cs" />
     <Compile Include="Trasferimenti\TrasferimentiAdapter.cs" />
     <Compile Include="Trasferimenti\TrasferimentiBusiness.cs" />
     <Compile Include="Valorizzazioni\ValorizzazioneAdapter.cs" />

@@ -14,6 +14,10 @@ namespace Applicazioni.Security
         public bool PreventivatoreCosti { get; private set; }
         public bool PreventivatoreAnagrafiche { get; private set; }
 
+        public bool SpedizioniMagazzino { get; private set; }
+        public bool SpedizioniSaldi { get; private set; }
+
+
         public string DisplayName { get; private set; }
         public string FULLNAMEUSER { get; private set; }
 
@@ -26,6 +30,9 @@ namespace Applicazioni.Security
             PreventivatoreAnagrafiche = false;
             PreventivatoreCosti = false;
             PreventivatoreDistinteBase = false;
+
+            SpedizioniSaldi = false;
+            SpedizioniMagazzino = false;
 
             FULLNAMEUSER = "Sconosciuto";
             DisplayName = "Sconosciuto";
@@ -41,6 +48,9 @@ namespace Applicazioni.Security
                 PreventivatoreAnagrafiche = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.PreventivatoreAnagrafiche);
                 PreventivatoreCosti = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.PreventivatoreCosti);
                 PreventivatoreDistinteBase = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.PreventivatoreDistinteBase);
+
+                SpedizioniMagazzino = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.SpedizioniMagazzino);
+                SpedizioniSaldi = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.SpedizioniSaldi);
 
                 FULLNAMEUSER = userPrincipal.DisplayName.Length > 50 ? userPrincipal.DisplayName.Substring(0, 50) : userPrincipal.DisplayName;
                 IDUSER = userPrincipal.UserPrincipalName;

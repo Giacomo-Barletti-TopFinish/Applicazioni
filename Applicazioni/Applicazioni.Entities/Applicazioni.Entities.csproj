@@ -73,6 +73,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SpedizioniDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpedizioniDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TrasferimentiDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +149,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SpedizioniDS.xsc">
+      <DependentUpon>SpedizioniDS.xsd</DependentUpon>
+    </None>
+    <None Include="SpedizioniDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SpedizioniDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SpedizioniDS.xss">
+      <DependentUpon>SpedizioniDS.xsd</DependentUpon>
     </None>
     <None Include="TrasferimentiDS.xsc">
       <DependentUpon>TrasferimentiDS.xsd</DependentUpon>

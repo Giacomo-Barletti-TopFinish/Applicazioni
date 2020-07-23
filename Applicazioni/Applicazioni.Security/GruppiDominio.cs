@@ -11,5 +11,9 @@ namespace Applicazioni.Security
         public static readonly string PreventivatoreAnagrafiche = "PreventivatoreAnagrafiche";
         public static readonly string PreventivatoreDistinteBase = "PreventivatoreDistinteBase";
         public static readonly string PreventivatoreCosti = "PreventivatoreCosti";
+
+        public static readonly string SpedizioniMagazzino = "SpedizioniMagazzino";
+        public static readonly string SpedizioniSaldi = "SpedizioniSaldi";
+
     }
 }
