@@ -89,9 +89,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aplicazioni.Data\Applicazioni.Data.csproj">
+      <Project>{1A2FF071-6851-4CED-8851-976E881E9E9D}</Project>
+      <Name>Applicazioni.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.BLL\Applicazioni.BLL.csproj">
+      <Project>{EE28EE16-BE7B-4D2B-972B-4C0607376ADE}</Project>
+      <Name>Applicazioni.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Applicazioni.Common\Applicazioni.Common.csproj">
       <Project>{54F6C463-9F23-4199-B679-07E1E099AAE6}</Project>
       <Name>Applicazioni.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.Entities\Applicazioni.Entities.csproj">
+      <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
+      <Name>Applicazioni.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Applicazioni.Security\Applicazioni.Security.csproj">
       <Project>{add30cde-2a62-465b-8542-d109e09b97a4}</Project>
