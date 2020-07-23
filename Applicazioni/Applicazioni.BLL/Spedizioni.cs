@@ -46,5 +46,35 @@ namespace Applicazioni.BLL
 
             }
         }
+
+        public void FillUbicazioni(SpedizioniDS ds, bool soloNonCancellati)
+        {
+            using(SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                bSpedizioni.FillSPUBICAZIONI(ds, soloNonCancellati);
+            }
+        }
+
+        public void SalvaUbicazione(string codice, string descrizione, string utente)
+        {
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                long id = bSpedizioni.GetID();
+                string identificativo = id.ToString().PadLeft(10, '0');
+                string barcode = string.Format("{0}{1}", BarcodeHelper.TipoUbicazione, identificativo);
+
+                SpedizioniDS.SPUBICAZIONIRow ubicazione = ds.SPUBICAZIONI.NewSPUBICAZIONIRow();
+                ubicazione.BARCODE = barcode;
+                ubicazione.CODICE = codice;
+                ubicazione.DESCRIZIONE = descrizione;
+                ubicazione.CANCELLATO = "N";
+                ubicazione.DATAMODIFICA = DateTime.Now;
+                ubicazione.UTENTEMODIFICA = utente;
+
+                ds.SPUBICAZIONI.AddSPUBICAZIONIRow(ubicazione);
+
+                bSpedizioni.SalvaUbicazioni(ds);
+            }
+        }
     }
 }

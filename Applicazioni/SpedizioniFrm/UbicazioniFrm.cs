@@ -16,23 +16,26 @@ namespace SpedizioniFrm
 {
     public partial class UbicazioniFrm : ChildBaseForm
     {
-        private SpedizioniDS _ds;
+        private SpedizioniDS _ds = new SpedizioniDS();
         private DataSet _dsGriglia = new DataSet();
         private string _tabellaGriglia = "Griglia";
         public UbicazioniFrm()
-        
+
         {
             InitializeComponent();
         }
 
         private void UbicazioniFrm_Load(object sender, EventArgs e)
         {
+            dgvUbicazioni.AutoGenerateColumns = false;
             foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
             {
                 ddlStampanti.Items.Add(printer);
             }
             if (ddlStampanti.Items.Count > 0)
                 ddlStampanti.SelectedIndex = 0;
+
+            CreaGriglia();
         }
 
         //private bool CaricaSpedizioni(string barcode, decimal IdUbicazione)
@@ -56,7 +59,7 @@ namespace SpedizioniFrm
         //        riga[(int)colonneGriglia.CODICE] = spedizioni.IsCODICENull() ? string.Empty : spedizioni.CODICE;
         //        riga[(int)colonneGriglia.DESCRIZIONE] = spedizioni.IsDESCRIZIONENull() ? string.Empty : spedizioni.DESCRIZIONE;
         //        riga[(int)colonneGriglia.BARCODE] = spedizioni.ISBARCODENull() ? string.Empty : spedizioni.BARCODE;
-                
+
 
         //        dtGriglia.Rows.Add(riga);
 
@@ -64,7 +67,7 @@ namespace SpedizioniFrm
         //    return true;
         //}
 
-        enum colonneGriglia {IDUBICAZIONE,CODICE,DESCRIZIONE,BARCODE }
+        enum colonneGriglia { IDUBICAZIONE, CODICE, DESCRIZIONE, BARCODE }
         private void CreaDSGriglia()
         {
             DataTable dtGriglia = _dsGriglia.Tables.Add();
@@ -92,16 +95,63 @@ namespace SpedizioniFrm
             }
         }
 
-        //private void CreaGriglia()
-        //{
-        //    dgvTrasferimenti.DataSource = _dsGriglia;
-        //    dgvTrasferimenti.DataMember = _tabellaGriglia;
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtCodiceUbicazione.Text))
+                {
+                    MessageBox.Show("Inserire il codice dell'ubicazione", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-        //    dgvTrasferimenti.Columns[(int)colonneGriglia.IDUBICAZIONE].Width = 150;
-        //    dgvTrasferimenti.Columns[(int)colonneGriglia.CODICE].Width = 150;
-        //    dgvTrasferimenti.Columns[(int)colonneGriglia.DESCRIZIONE].Width = 120;
-        //    dgvTrasferimenti.Columns[(int)colonneGriglia.BARCODE].Width = 200;
+                if (string.IsNullOrEmpty(txtDescrizioneUbicazione.Text))
+                {
+                    MessageBox.Show("Inserire la descrizione dell'ubicazione", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-        //}
+                string codice = txtCodiceUbicazione.Text.ToUpper();
+                string descrizione = txtDescrizioneUbicazione.Text.ToUpper();
+
+                Spedizioni spedizioni = new Spedizioni();
+
+                SpedizioniDS ds = new SpedizioniDS();
+                spedizioni.FillUbicazioni(ds, false);
+
+                if (_ds.SPUBICAZIONI.Any(x => x.CODICE == codice))
+                {
+                    MessageBox.Show("Esiste già un'ubicazione con questo codice", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                spedizioni.SalvaUbicazione(codice, descrizione, _utenteConnesso);
+                CreaGriglia();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore nel salvataggio dell'ubicazione", ex);
+            }
+
+        }
+
+
+
+        private void CreaGriglia()
+        {
+            _ds.SPUBICAZIONI.Clear();
+            Spedizioni spedizioni = new Spedizioni();
+            spedizioni.FillUbicazioni(_ds,true);
+
+            dgvUbicazioni.DataSource = _ds;
+            dgvUbicazioni.DataMember = _ds.SPUBICAZIONI.TableName;
+
+            dgvUbicazioni.Refresh();
+            //dgvTrasferimenti.Columns[(int)colonneGriglia.IDUBICAZIONE].Width = 150;
+            //dgvTrasferimenti.Columns[(int)colonneGriglia.CODICE].Width = 150;
+            //dgvTrasferimenti.Columns[(int)colonneGriglia.DESCRIZIONE].Width = 120;
+            //dgvTrasferimenti.Columns[(int)colonneGriglia.BARCODE].Width = 200;
+
+        }
     }
 }
