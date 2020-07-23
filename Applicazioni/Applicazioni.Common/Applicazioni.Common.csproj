@@ -56,6 +56,12 @@
     <Compile Include="BaseService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ChildBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildBaseForm.Designer.cs">
+      <DependentUpon>ChildBaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContestoBase.cs" />
     <Compile Include="ExceptionFrm.cs">
       <SubType>Form</SubType>

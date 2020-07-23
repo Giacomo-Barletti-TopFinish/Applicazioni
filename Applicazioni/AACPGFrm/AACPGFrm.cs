@@ -27,7 +27,7 @@ namespace AACPGFrm
             ScriviLogInfo("avvio");
         }
 
-        protected override void MostraEccezione(Exception ex, string messaggioLog)
+        public override void MostraEccezione( Exception ex, string messaggioLog)
         {
             ScriviLogErrore(messaggioLog, ex);
             base.MostraEccezione(ex, messaggioLog);

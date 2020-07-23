@@ -17,7 +17,7 @@ namespace SpedizioniFrm
         {
             InitializeComponent();
             AbilitaMenu();
-            stUser.Text = _contesto.Utente.DisplayName;
+            stUser.Text = Contesto.Utente.DisplayName;
         }
 
         private void AbilitaMenu()
@@ -26,8 +26,8 @@ namespace SpedizioniFrm
             fileToolStripMenuItem.Enabled = true;
             finestreToolStripMenuItem.Enabled = true;
 
-            magazzinoToolStripMenuItem.Enabled = _contesto.Utente.SpedizioniMagazzino;
-            saldiToolStripMenuItem.Enabled = _contesto.Utente.SpedizioniSaldi;
+            magazzinoToolStripMenuItem.Enabled = Contesto.Utente.SpedizioniMagazzino;
+            saldiToolStripMenuItem.Enabled = Contesto.Utente.SpedizioniSaldi;
 
         }
 
@@ -80,6 +80,22 @@ namespace SpedizioniFrm
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ubicazioniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form figlio in this.MdiChildren)
+            {
+                if (figlio is UbicazioniFrm)
+                {
+                    figlio.Focus();
+                    return;
+                }
+            }
+
+            UbicazioniFrm form = new UbicazioniFrm();
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }

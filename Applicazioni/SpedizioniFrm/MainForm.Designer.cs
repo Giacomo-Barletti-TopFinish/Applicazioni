@@ -58,7 +58,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.MdiWindowListItem = this.finestreToolStripMenuItem;
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1157, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -130,6 +130,7 @@
             this.ubicazioniToolStripMenuItem.Name = "ubicazioniToolStripMenuItem";
             this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ubicazioniToolStripMenuItem.Text = "Ubicazioni";
+            this.ubicazioniToolStripMenuItem.Click += new System.EventHandler(this.ubicazioniToolStripMenuItem_Click);
             // 
             // movimentiToolStripMenuItem
             // 
@@ -149,9 +150,9 @@
             this.lblUserLoggato,
             this.lblStatusBar,
             this.stUser});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 762);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1157, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "cdcStatus";
             // 
@@ -175,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1157, 784);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;

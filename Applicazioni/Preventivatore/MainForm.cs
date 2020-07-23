@@ -17,7 +17,7 @@ namespace Preventivatore
         {
             InitializeComponent();
             AbilitaMenu();
-            stUser.Text = _contesto.Utente.DisplayName;
+            stUser.Text = Contesto.Utente.DisplayName;
         }
 
         private void loginToolStripMenuItem_Click(object sender, EventArgs e)
@@ -39,9 +39,9 @@ namespace Preventivatore
             exitToolStripMenuItem.Enabled = true;
             fileToolStripMenuItem.Enabled = true;
 
-            anagraficaToolStripMenuItem.Enabled = _contesto.Utente.PreventivatoreAnagrafiche;
-            distintaBaseToolStripMenuItem.Enabled = _contesto.Utente.PreventivatoreDistinteBase;
-            costiToolStripMenuItem.Enabled = _contesto.Utente.PreventivatoreCosti;
+            anagraficaToolStripMenuItem.Enabled = Contesto.Utente.PreventivatoreAnagrafiche;
+            distintaBaseToolStripMenuItem.Enabled = Contesto.Utente.PreventivatoreDistinteBase;
+            costiToolStripMenuItem.Enabled = Contesto.Utente.PreventivatoreCosti;
 
         }
 

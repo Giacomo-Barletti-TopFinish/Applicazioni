@@ -13,7 +13,7 @@ namespace Applicazioni.Common
 {
     public partial class BaseForm : Form
     {
-        protected ContestoBase _contesto;
+        public ContestoBase Contesto;
         private bool _daSalvare = false;
         protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public BaseForm()
@@ -21,7 +21,7 @@ namespace Applicazioni.Common
             try
             {
                 InitializeComponent();
-                _contesto = ContestoBase.CreaContesto();
+                Contesto = ContestoBase.CreaContesto();
             }
             catch (Exception ex)
             {
@@ -29,7 +29,7 @@ namespace Applicazioni.Common
             }
         }
 
-        protected virtual void MostraEccezione(Exception ex, string messaggioLog)
+        public virtual void MostraEccezione(Exception ex, string messaggioLog)
         {
             ScriviLogErrore(messaggioLog, ex);
             ExceptionFrm frm = new ExceptionFrm(ex);
