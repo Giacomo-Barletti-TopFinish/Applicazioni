@@ -25,5 +25,21 @@ namespace Applicazioni.Data.Spedizioni
             a.UpdateTable(ds.SPUBICAZIONI.TableName, ds);           
         }
 
+        [DataContext]
+        public void FillSPSALDI(SpedizioniDS ds, bool soloNonCancellati)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.FillSPSALDI(ds, soloNonCancellati);
+        }
+
+        [DataContext(true)]
+        public void SalvaSaldi(SpedizioniDS ds)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.UpdateTable(ds.SPSALDI.TableName, ds);
+        }
+
     }
+
+
 }

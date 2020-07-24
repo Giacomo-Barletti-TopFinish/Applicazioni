@@ -153,5 +153,7 @@ namespace SpedizioniFrm
             //dgvTrasferimenti.Columns[(int)colonneGriglia.BARCODE].Width = 200;
 
         }
+
+       
     }
 }

@@ -27,6 +27,20 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.SPUBICAZIONI);
             }
         }
+
+        public void FillSPSALDI(SpedizioniDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPSALDI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+
+            select += "ORDER BY CODICE ";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.SPSALDI);
+            }
+        }
+
         public void UpdateTable(string tablename, SpedizioniDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

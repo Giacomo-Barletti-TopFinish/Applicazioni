@@ -76,5 +76,31 @@ namespace Applicazioni.BLL
                 bSpedizioni.SalvaUbicazioni(ds);
             }
         }
+
+        public void FillSaldi(SpedizioniDS ds, bool soloNonCancellati)
+        {
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                bSpedizioni.FillSPSALDI(ds, soloNonCancellati);
+            }
+        }
+
+        public void SalvaSaldo(decimal IdUbicazione, string IdMagazz, string utente)
+        {
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+
+                SpedizioniDS.SPSALDIRow saldo = ds.SPSALDI.NewSPSALDIRow();
+                saldo.IDUBICAZIONE = IdUbicazione;
+                saldo.IDMAGAZZ = IdMagazz;
+                saldo.DATAMODIFICA = DateTime.Now;
+                saldo.UTENTEMODIFICA = utente;
+
+                ds.SPSALDI.AddSPSALDIRow(saldo);
+
+                bSpedizioni.SalvaSaldi(ds);
+            }
+        }
+
     }
 }
