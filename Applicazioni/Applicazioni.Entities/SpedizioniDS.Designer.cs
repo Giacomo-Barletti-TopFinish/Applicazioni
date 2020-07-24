@@ -5342,7 +5342,7 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSALDIRow AddSPSALDIRow(decimal IDSALDO, decimal IDUBICAZIONE, string IDMAGAZZ, string QUANTITA, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPSALDIRow AddSPSALDIRow(decimal IDSALDO, decimal IDUBICAZIONE, string IDMAGAZZ, decimal QUANTITA, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
                 SPSALDIRow rowSPSALDIRow = ((SPSALDIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDSALDO,
@@ -5390,7 +5390,7 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnIDUBICAZIONE);
                 this.columnIDMAGAZZ = new global::System.Data.DataColumn("IDMAGAZZ", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDMAGAZZ);
-                this.columnQUANTITA = new global::System.Data.DataColumn("QUANTITA", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnQUANTITA = new global::System.Data.DataColumn("QUANTITA", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQUANTITA);
                 this.columnDATAMODIFICA = new global::System.Data.DataColumn("DATAMODIFICA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATAMODIFICA);
@@ -5399,7 +5399,7 @@ namespace Applicazioni.Entities {
                 this.columnIDUBICAZIONE.AllowDBNull = false;
                 this.columnIDMAGAZZ.AllowDBNull = false;
                 this.columnIDMAGAZZ.MaxLength = 10;
-                this.columnQUANTITA.MaxLength = 30;
+                this.columnQUANTITA.AllowDBNull = false;
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
@@ -5676,7 +5676,7 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPMOVIMENTIRow AddSPMOVIMENTIRow(decimal IDMOVIMENTO, decimal IDSALDO, string QUANTITA, string TIPOMOVIMENTO, string CAUSALE, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPMOVIMENTIRow AddSPMOVIMENTIRow(decimal IDMOVIMENTO, decimal IDSALDO, decimal QUANTITA, string TIPOMOVIMENTO, string CAUSALE, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
                 SPMOVIMENTIRow rowSPMOVIMENTIRow = ((SPMOVIMENTIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDMOVIMENTO,
@@ -5724,7 +5724,7 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnIDMOVIMENTO);
                 this.columnIDSALDO = new global::System.Data.DataColumn("IDSALDO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDSALDO);
-                this.columnQUANTITA = new global::System.Data.DataColumn("QUANTITA", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnQUANTITA = new global::System.Data.DataColumn("QUANTITA", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQUANTITA);
                 this.columnTIPOMOVIMENTO = new global::System.Data.DataColumn("TIPOMOVIMENTO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTIPOMOVIMENTO);
@@ -5736,7 +5736,6 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnUTENTEMODIFICA);
                 this.columnIDSALDO.AllowDBNull = false;
                 this.columnQUANTITA.AllowDBNull = false;
-                this.columnQUANTITA.MaxLength = 30;
                 this.columnTIPOMOVIMENTO.AllowDBNull = false;
                 this.columnTIPOMOVIMENTO.MaxLength = 50;
                 this.columnCAUSALE.AllowDBNull = false;
@@ -11474,14 +11473,9 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string QUANTITA {
+            public decimal QUANTITA {
                 get {
-                    try {
-                        return ((string)(this[this.tableSPSALDI.QUANTITAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'QUANTITA\' in table \'SPSALDI\' is DBNull.", e);
-                    }
+                    return ((decimal)(this[this.tableSPSALDI.QUANTITAColumn]));
                 }
                 set {
                     this[this.tableSPSALDI.QUANTITAColumn] = value;
@@ -11520,18 +11514,6 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDSALDONull() {
                 this[this.tableSPSALDI.IDSALDOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsQUANTITANull() {
-                return this.IsNull(this.tableSPSALDI.QUANTITAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetQUANTITANull() {
-                this[this.tableSPSALDI.QUANTITAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -11578,9 +11560,9 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string QUANTITA {
+            public decimal QUANTITA {
                 get {
-                    return ((string)(this[this.tableSPMOVIMENTI.QUANTITAColumn]));
+                    return ((decimal)(this[this.tableSPMOVIMENTI.QUANTITAColumn]));
                 }
                 set {
                     this[this.tableSPMOVIMENTI.QUANTITAColumn] = value;

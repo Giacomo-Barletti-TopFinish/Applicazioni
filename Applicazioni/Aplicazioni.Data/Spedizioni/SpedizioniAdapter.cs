@@ -27,6 +27,29 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.SPUBICAZIONI);
             }
         }
+
+        public void GetUSR_PRD_RESOURCESF(SpedizioniDS ds, string BARCODE)
+        {
+            string select = @"SELECT * FROM GRUPPO.USR_PRD_RESOURCESF WHERE BARCODE = $P<BARCODE> ";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, BARCODE);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_RESOURCESF);
+            }
+        }
+
+        public void GetSaldo(SpedizioniDS ds, decimal idUbicazione, string idmagazz)
+        {
+            string select = @"select * from spsaldi where idubicazione = $P<IDUBICAZIONE> and idmagazz = $P<IDMAGAZZ>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDUBICAZIONE", DbType.Decimal, idUbicazione);
+            ps.AddParam("IDMAGAZZ", DbType.String, idmagazz);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPSALDI);
+            }
+        }
         public void UpdateTable(string tablename, SpedizioniDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

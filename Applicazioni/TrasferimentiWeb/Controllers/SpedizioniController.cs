@@ -23,7 +23,18 @@ namespace TrasferimentiWeb.Controllers
                 Spedizioni spedizioni = new Spedizioni();
                 risposta = spedizioni.LeggiBarcode(Barcode);
             }
-            return PartialView("LeggiBarcode",risposta);
+            return PartialView("LeggiBarcode", risposta);
+        }
+
+        public ActionResult Inserisci(string BarcodeODL, string BarcodeUbicazione, string BarcodeOperatore)
+        {
+            string risposta = "Barcode vuoto";
+            if (!string.IsNullOrEmpty(BarcodeODL) || !string.IsNullOrEmpty(BarcodeUbicazione) || !string.IsNullOrEmpty(BarcodeOperatore))
+            {
+                Spedizioni spedizioni = new Spedizioni();
+                risposta = spedizioni.Inserisci(BarcodeODL, BarcodeUbicazione, BarcodeOperatore);
+            }
+            return PartialView("Inserisci", risposta);
         }
     }
 }

@@ -11,8 +11,8 @@
     <Shape ID="DesignTable:USR_USER" ZOrder="5" X="325" Y="28" Height="304" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:USR_PRD_RESOURCESF" ZOrder="4" X="836" Y="30" Height="524" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="520" />
     <Shape ID="DesignTable:SPUBICAZIONI" ZOrder="3" X="164" Y="445" Height="162" Width="152" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="206" />
-    <Shape ID="DesignTable:SPSALDI" ZOrder="2" X="479" Y="487" Height="143" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
-    <Shape ID="DesignTable:SPMOVIMENTI" ZOrder="1" X="737" Y="609" Height="162" Width="153" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="206" />
+    <Shape ID="DesignTable:SPSALDI" ZOrder="1" X="588" Y="389" Height="143" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
+    <Shape ID="DesignTable:SPMOVIMENTI" ZOrder="2" X="372" Y="580" Height="162" Width="153" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

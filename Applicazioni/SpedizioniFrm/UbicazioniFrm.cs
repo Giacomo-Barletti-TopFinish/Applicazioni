@@ -2,6 +2,7 @@
 using Applicazioni.Common;
 using Applicazioni.Data.Spedizioni;
 using Applicazioni.Entities;
+using Applicazioni.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,35 +39,7 @@ namespace SpedizioniFrm
             CreaGriglia();
         }
 
-        //private bool CaricaSpedizioni(string barcode, decimal IdUbicazione)
-        //{
-        //    if (string.IsNullOrEmpty(barcode)) return false;
-
-        //    using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
-        //    {
-        //        if (!_ds.USR_PRD_MOVFASI.Any(x => x.BARCODE == barcode))
-        //            bSpedizioni.SPUBICAZIONI(_ds, barcode);
-
-        //        SpedizioniDS.USR_PRD_MOVFASIRow spedizioni = _ds.SPUBICAZIONI.Where(x => x.BARCODE == barcode).FirstOrDefault();
-
-        //        //Spedizioni.MAGAZZRow articolo = _anagrafica.GetMAGAZZ(spedizioni.IDMAGAZZ);
-
-        //        DataTable dtGriglia = _dsGriglia.Tables[_tabellaGriglia];
-
-        //        DataRow riga = dtGriglia.NewRow();
-
-        //        riga[(int)colonneGriglia.IDUBICAZIONE] = spedizioni.IsIDUBICAZIONENull() ? string.Empty : spedizioni.IDUBICAZIONE;
-        //        riga[(int)colonneGriglia.CODICE] = spedizioni.IsCODICENull() ? string.Empty : spedizioni.CODICE;
-        //        riga[(int)colonneGriglia.DESCRIZIONE] = spedizioni.IsDESCRIZIONENull() ? string.Empty : spedizioni.DESCRIZIONE;
-        //        riga[(int)colonneGriglia.BARCODE] = spedizioni.ISBARCODENull() ? string.Empty : spedizioni.BARCODE;
-
-
-        //        dtGriglia.Rows.Add(riga);
-
-        //    }
-        //    return true;
-        //}
-
+     
         enum colonneGriglia { IDUBICAZIONE, CODICE, DESCRIZIONE, BARCODE }
         private void CreaDSGriglia()
         {
@@ -147,11 +120,43 @@ namespace SpedizioniFrm
             dgvUbicazioni.DataMember = _ds.SPUBICAZIONI.TableName;
 
             dgvUbicazioni.Refresh();
-            //dgvTrasferimenti.Columns[(int)colonneGriglia.IDUBICAZIONE].Width = 150;
-            //dgvTrasferimenti.Columns[(int)colonneGriglia.CODICE].Width = 150;
-            //dgvTrasferimenti.Columns[(int)colonneGriglia.DESCRIZIONE].Width = 120;
-            //dgvTrasferimenti.Columns[(int)colonneGriglia.BARCODE].Width = 200;
 
+        }
+
+        private void dgvUbicazioni_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 4 || e.ColumnIndex > 5) return;
+            if (e.RowIndex < 0) return;
+            try
+            {
+                if (e.ColumnIndex == 4)
+                {
+                    decimal idUbicazione = (decimal)dgvUbicazioni.Rows[e.RowIndex].Cells[0].Value;
+                    Spedizioni spedizioni = new Spedizioni();
+                    spedizioni.CancellaUbicazione(idUbicazione, _utenteConnesso);
+                }
+
+                if (e.ColumnIndex == 5)
+                {
+
+                    if (ddlStampanti.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Selezionare una stampante", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    string PrinterName = ddlStampanti.SelectedItem.ToString();
+                    string codice = (string)dgvUbicazioni.Rows[e.RowIndex].Cells[1].Value;
+                    string descrizione = (string)dgvUbicazioni.Rows[e.RowIndex].Cells[2].Value;
+                    string barcode = (string)dgvUbicazioni.Rows[e.RowIndex].Cells[3].Value;
+
+                    ZebraHelper.StampaEtichettaUbicazione(PrinterName,codice, descrizione, barcode);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Impossibile eseguire l'operazione", ex);
+            }
         }
     }
 }
