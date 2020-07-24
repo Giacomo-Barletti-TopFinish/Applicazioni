@@ -133,6 +133,7 @@
             this.dgvUbicazioni.ReadOnly = true;
             this.dgvUbicazioni.Size = new System.Drawing.Size(910, 387);
             this.dgvUbicazioni.TabIndex = 9;
+            this.dgvUbicazioni.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUbicazioni_CellContentClick);
             // 
             // IDUBICAZIONE
             // 
@@ -145,16 +146,20 @@
             // CODICE
             // 
             this.CODICE.DataPropertyName = "CODICE";
+            this.CODICE.FillWeight = 80F;
             this.CODICE.HeaderText = "CODICE";
             this.CODICE.Name = "CODICE";
             this.CODICE.ReadOnly = true;
+            this.CODICE.Width = 80;
             // 
             // DESCRIZIONE
             // 
             this.DESCRIZIONE.DataPropertyName = "DESCRIZIONE";
+            this.DESCRIZIONE.FillWeight = 200F;
             this.DESCRIZIONE.HeaderText = "DESCRIZIONE";
             this.DESCRIZIONE.Name = "DESCRIZIONE";
             this.DESCRIZIONE.ReadOnly = true;
+            this.DESCRIZIONE.Width = 200;
             // 
             // BARCODE
             // 
@@ -169,6 +174,7 @@
             this.Cancella.Name = "Cancella";
             this.Cancella.ReadOnly = true;
             this.Cancella.Text = "Cancella";
+            this.Cancella.UseColumnTextForButtonValue = true;
             // 
             // Stampa
             // 
@@ -176,6 +182,7 @@
             this.Stampa.Name = "Stampa";
             this.Stampa.ReadOnly = true;
             this.Stampa.Text = "Stampa";
+            this.Stampa.UseColumnTextForButtonValue = true;
             // 
             // UbicazioniFrm
             // 

@@ -17,12 +17,33 @@ namespace Applicazioni.Data.Spedizioni
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
             a.FillSPUBICAZIONI(ds, soloNonCancellati);
         }
-     
+
+        [DataContext]
+        public void GetUSR_PRD_RESOURCESF(SpedizioniDS ds, string BARCODE)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_RESOURCESF(ds, BARCODE);
+        }
+
+        [DataContext]
+        public void GetSaldo(SpedizioniDS ds, decimal idUbicazione, string idmagazz)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.GetSaldo(ds, idUbicazione, idmagazz);
+        }
         [DataContext(true)]
         public void SalvaUbicazioni(SpedizioniDS ds)
         {
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
-            a.UpdateTable(ds.SPUBICAZIONI.TableName, ds);           
+            a.UpdateTable(ds.SPUBICAZIONI.TableName, ds);
+        }
+
+        [DataContext(true)]
+        public void SalvaInserimento(SpedizioniDS ds)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.UpdateTable(ds.SPSALDI.TableName, ds);
+            a.UpdateTable(ds.SPMOVIMENTI.TableName, ds);
         }
 
         [DataContext]

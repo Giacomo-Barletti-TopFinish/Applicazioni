@@ -177,6 +177,7 @@
     <Content Include="Views\Home\CaricaScheda.cshtml" />
     <Content Include="Views\Spedizioni\Index.cshtml" />
     <Content Include="Views\Spedizioni\LeggiBarcode.cshtml" />
+    <Content Include="Views\Spedizioni\Inserisci.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
