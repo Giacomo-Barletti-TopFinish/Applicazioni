@@ -101,7 +101,7 @@ namespace Applicazioni.BLL
                     else
                         quantitaSaldo = saldo.QUANTITA - quantita;
 
-                    saldo.QUANTITA = quantita;
+                    saldo.QUANTITA = quantitaSaldo;
                     saldo.UTENTEMODIFICA = utenza;
 
 

@@ -28,6 +28,8 @@ namespace SpedizioniFrm
             TXTQUANTITASALDO.Text = saldo.QUANTITA.ToString();
             ddlTipoMovimento.SelectedIndex = -1;
             numQuta.Maximum = saldo.QUANTITA;
+
+            this.Text = string.Format("MOVIMENTA {0}   ARTICOLO {1}",saldo.CODICE,saldo.MODELLO);
         }
 
         private void BTNANNULLA_Click(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace SpedizioniFrm
             }
 
             Spedizioni spedizioni = new Spedizioni();
-            string esito = spedizioni.Movimenta(_saldo.IDSALDO, numQuta.Value, TXTCAUSALE.Text, ddlTipoMovimento.SelectedText, _utente);
+            string esito = spedizioni.Movimenta(_saldo.IDSALDO, numQuta.Value, TXTCAUSALE.Text, (string)ddlTipoMovimento.SelectedItem, _utente);
             if(esito == "COMPLETATA")
             {
                 MessageBox.Show("Operazione eseguita con successo", "INFORMAZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
