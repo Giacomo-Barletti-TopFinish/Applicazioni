@@ -28,16 +28,25 @@ namespace Applicazioni.Data.Spedizioni
             }
         }
 
-        public void FillSPSALDI(SpedizioniDS ds, bool soloNonCancellati)
+        public void FillSPSALDI(SpedizioniDS ds,String UBICAZIONE, String MODELLO)
         {
-            string select = @"SELECT * FROM SPSALDI ";
-            if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 'N'";
+            ds.SPSALDIEXT.Clear();
+            string select = @"select sa.*,ub.codice, ub.descrizione,ma.modello 
+                                    from spsaldi sa
+                                    inner join spubicazioni ub on ub.idubicazione = sa.idubicazione
+                                    inner join gruppo.magazz ma on ma.idmagazz = sa.idmagazz
+                                    where 1=1 ";
 
-            select += "ORDER BY CODICE ";
+            if (!string.IsNullOrEmpty(UBICAZIONE))
+                select += string.Format("and ub.codice like '%{0}%'",UBICAZIONE.ToUpper());
+
+            if (!string.IsNullOrEmpty(MODELLO))
+                select += string.Format("and ma.modello like '%{0}%'", MODELLO.ToUpper());
+
+            select += "ORDER BY ub.codice,ma.modello ";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
-                da.Fill(ds.SPSALDI);
+                da.Fill(ds.SPSALDIEXT);
             }
         }
         public void GetUSR_PRD_RESOURCESF(SpedizioniDS ds, string BARCODE)

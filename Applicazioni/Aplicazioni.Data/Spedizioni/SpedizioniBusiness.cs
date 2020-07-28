@@ -47,10 +47,10 @@ namespace Applicazioni.Data.Spedizioni
         }
 
         [DataContext]
-        public void FillSPSALDI(SpedizioniDS ds, bool soloNonCancellati)
+        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
         {
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
-            a.FillSPSALDI(ds, soloNonCancellati);
+            a.FillSPSALDI(ds, UBICAZIONE,MODELLO);
         }
 
         [DataContext(true)]

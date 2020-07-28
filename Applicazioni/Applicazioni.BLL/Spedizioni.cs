@@ -167,11 +167,11 @@ namespace Applicazioni.BLL
         }
 
 
-        public void FillSaldi(SpedizioniDS ds, bool soloNonCancellati)
+        public void FillSaldi(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
         {
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
             {
-                bSpedizioni.FillSPSALDI(ds, soloNonCancellati);
+                bSpedizioni.FillSPSALDI(ds, UBICAZIONE,MODELLO);
             }
         }
 
