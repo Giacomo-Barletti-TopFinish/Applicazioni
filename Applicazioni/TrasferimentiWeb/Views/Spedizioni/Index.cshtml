@@ -2,8 +2,8 @@
 
 <div class="content-top">
     <div class="row">
-        <div class="col-sm-1">
-            <input type="button" onclick="Cancella();" class="btn btn-primary" value="Cancella" />
+        <div class="col-sm-2">
+            <input type="button" onclick="CancellaOperatore();" class="btn btn-primary" value="Cancella operatore" />
         </div>
     </div>
 
@@ -14,12 +14,31 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-sm-1">
+            <input type="button" onclick="Leggi(3);" class="btn btn-primary" value="Leggi operatore" />
+        </div>
+    </div>
+    <div class="row">
+        <div id="divOperatore">
+        </div>
+    </div>
+    <div class="row">
+       <hr />
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <input type="button" onclick="Cancella();" class="btn btn-primary" value="Cancella" />
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-2">
             <label>Barcode ODL</label>
             <input class="form-control input-sm" type="text" id="txtBarcodeODL" maxlength="13" />
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-1">
-            <input type="button" onclick="Leggi(1);" class="btn btn-primary" value="Leggi" />
+            <input type="button" onclick="Leggi(1);" class="btn btn-primary" value="Leggi ODL" />
         </div>
     </div>
     <div class="row">
@@ -31,8 +50,10 @@
             <label>Barcode Ubicazione</label>
             <input class="form-control input-sm" type="text" id="txtBarcodeUbicazione" maxlength="13" />
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-1">
-            <input type="button" onclick="Leggi(2);" class="btn btn-primary" value="Leggi" />
+            <input type="button" onclick="Leggi(2);" class="btn btn-primary" value="Leggi UBI" />
         </div>
     </div>
     <div class="row">
@@ -40,10 +61,12 @@
         </div>
     </div>
     <div class="row">
+        <label></label>
+    </div>
+    <div class="row">
         <div class="col-sm-1">
-            <input type="button" onclick="Conferma();" class="btn btn-primary" value="Conferma" />
+            <input type="button" onclick="Conferma();" class="btn btn-primary" value="Esegui operazione" />
         </div>
-
     </div>
     <div class="row">
         <div id="divEsito">
@@ -51,11 +74,10 @@
     </div>
 </div>
 
-<script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript">
     $(function ()
     {
-        debugger;
-        $("#txtBarcodeODL").focus();
+        $("#txtBarcodeOperatore").focus();
     });
 
     function Cancella() {
@@ -66,6 +88,11 @@
         $("#txtBarcodeUbicazione").val('');
         $("#txtBarcodeODL").focus();
     }
+
+        function CancellaOperatore() {
+            $("#txtBarcodeOperatore").val('');
+            $("#txtBarcodeOperatore").focus();
+        }
 
     function Leggi(tipo) {
         var url = '@Url.Action("LeggiBarcode", "Spedizioni")';
@@ -97,6 +124,31 @@
             });
         }
 
+        if (tipo == 3) {
+            barcode = $("#txtBarcodeOperatore").val();
+            if (barcode == '') return;
+
+            $.ajax({
+                url: url,
+                data: {
+                    Barcode: barcode
+                },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    $('#divOperatore').html(data).show();
+                    $("#txtBarcodeODL").focus();
+                    $('#divUbicazione').html('').show();
+                    $('#divArticolo').html('').show();
+                    $('#divEsito').html('').show();
+                },
+                error: function (response) {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+        }
             barcode = $("#txtBarcodeUbicazione").val();
         if (barcode == '') return;
         $.ajax({
@@ -160,4 +212,4 @@
         });
     }
 
-</script>
+    </script>

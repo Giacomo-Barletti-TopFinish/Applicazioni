@@ -13,6 +13,8 @@ namespace Applicazioni.Common
     public partial class ChildBaseForm : Form
     {
         protected string _utenteConnesso { get { return (MdiParent as BaseForm).Contesto.Utente.DisplayName; } }
+        protected ContestoBase Contesto{ get { return (MdiParent as BaseForm).Contesto; } }
+
         protected bool _disabilitaEdit = false;
         protected void MostraEccezione(string messagioLog, Exception ex)
         {

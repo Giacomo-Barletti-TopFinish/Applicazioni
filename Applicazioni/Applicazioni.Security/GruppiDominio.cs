@@ -14,6 +14,6 @@ namespace Applicazioni.Security
 
         public static readonly string SpedizioniMagazzino = "SpedizioniMagazzino";
         public static readonly string SpedizioniSaldi = "SpedizioniSaldi";
-
+        public static readonly string SpedizioniMovimenta = "SpedizioniMovimenta";
     }
 }

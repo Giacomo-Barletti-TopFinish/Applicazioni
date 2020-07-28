@@ -40,11 +40,11 @@
             this.QUANTITA = new System.Windows.Forms.Label();
             this.BTNOK = new System.Windows.Forms.Button();
             this.BTNANNULLA = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.ddlTipoMovimento = new System.Windows.Forms.ComboBox();
+            this.numQuta = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.TXTQUANTITASALDO = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuta)).BeginInit();
             this.SuspendLayout();
             // 
             // TXTCODICE
@@ -143,6 +143,7 @@
             this.BTNOK.TabIndex = 3;
             this.BTNOK.Text = "OK";
             this.BTNOK.UseVisualStyleBackColor = true;
+            this.BTNOK.Click += new System.EventHandler(this.BTNOK_Click);
             // 
             // BTNANNULLA
             // 
@@ -152,25 +153,26 @@
             this.BTNANNULLA.TabIndex = 4;
             this.BTNANNULLA.Text = "ANNULLA";
             this.BTNANNULLA.UseVisualStyleBackColor = true;
+            this.BTNANNULLA.Click += new System.EventHandler(this.BTNANNULLA_Click);
             // 
-            // comboBox1
+            // ddlTipoMovimento
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.ddlTipoMovimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlTipoMovimento.FormattingEnabled = true;
+            this.ddlTipoMovimento.Items.AddRange(new object[] {
             "VERSAMENTO",
             "PRELIEVO"});
-            this.comboBox1.Location = new System.Drawing.Point(133, 214);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(185, 21);
-            this.comboBox1.TabIndex = 0;
+            this.ddlTipoMovimento.Location = new System.Drawing.Point(133, 214);
+            this.ddlTipoMovimento.Name = "ddlTipoMovimento";
+            this.ddlTipoMovimento.Size = new System.Drawing.Size(185, 21);
+            this.ddlTipoMovimento.TabIndex = 0;
             // 
-            // numericUpDown1
+            // numQuta
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(133, 379);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 2;
+            this.numQuta.Location = new System.Drawing.Point(133, 379);
+            this.numQuta.Name = "numQuta";
+            this.numQuta.Size = new System.Drawing.Size(120, 20);
+            this.numQuta.TabIndex = 2;
             // 
             // label1
             // 
@@ -194,8 +196,8 @@
             this.ClientSize = new System.Drawing.Size(827, 564);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TXTQUANTITASALDO);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.numQuta);
+            this.Controls.Add(this.ddlTipoMovimento);
             this.Controls.Add(this.BTNANNULLA);
             this.Controls.Add(this.BTNOK);
             this.Controls.Add(this.QUANTITA);
@@ -211,8 +213,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MovimentiFrm";
-           
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,8 +233,8 @@
         private System.Windows.Forms.Label QUANTITA;
         private System.Windows.Forms.Button BTNOK;
         private System.Windows.Forms.Button BTNANNULLA;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox ddlTipoMovimento;
+        private System.Windows.Forms.NumericUpDown numQuta;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TXTQUANTITASALDO;
     }

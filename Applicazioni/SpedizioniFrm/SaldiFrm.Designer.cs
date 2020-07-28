@@ -39,6 +39,7 @@
             this.IDMAGAZZ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MOVIMENTA = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.IDSALDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaldi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,7 +98,8 @@
             this.DESCRIZIONE,
             this.IDMAGAZZ,
             this.QUANTITA,
-            this.MOVIMENTA});
+            this.MOVIMENTA,
+            this.IDSALDO});
             this.dgvSaldi.Location = new System.Drawing.Point(-2, 106);
             this.dgvSaldi.Name = "dgvSaldi";
             this.dgvSaldi.ReadOnly = true;
@@ -148,6 +150,14 @@
             this.MOVIMENTA.ReadOnly = true;
             this.MOVIMENTA.UseColumnTextForButtonValue = true;
             // 
+            // IDSALDO
+            // 
+            this.IDSALDO.DataPropertyName = "IDSALDO";
+            this.IDSALDO.HeaderText = "IDSALDO";
+            this.IDSALDO.Name = "IDSALDO";
+            this.IDSALDO.ReadOnly = true;
+            this.IDSALDO.Visible = false;
+            // 
             // SaldiFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,5 +189,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDMAGAZZ;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
         private System.Windows.Forms.DataGridViewButtonColumn MOVIMENTA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDSALDO;
     }
 }

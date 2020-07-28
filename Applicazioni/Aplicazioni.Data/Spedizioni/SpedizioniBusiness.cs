@@ -24,6 +24,12 @@ namespace Applicazioni.Data.Spedizioni
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
             a.GetUSR_PRD_RESOURCESF(ds, BARCODE);
         }
+        [DataContext]
+        public void GetSaldo(SpedizioniDS ds, decimal idSaldo)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.GetSaldo(ds, idSaldo);
+        }
 
         [DataContext]
         public void GetSaldo(SpedizioniDS ds, decimal idUbicazione, string idmagazz)

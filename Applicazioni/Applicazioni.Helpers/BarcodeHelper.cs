@@ -9,5 +9,6 @@ namespace Applicazioni.Helpers
     public class BarcodeHelper
     {
         public const string TipoUbicazione= "UBI";
+        public const string RisorsaFisica = "RSF";
     }
 }

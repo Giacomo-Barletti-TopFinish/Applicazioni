@@ -71,6 +71,17 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.SPSALDI);
             }
         }
+
+        public void GetSaldo(SpedizioniDS ds, decimal idSaldo)
+        {
+            string select = @"select * from spsaldi where idsaldo = $P<IDSALDO>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSALDO", DbType.Decimal, idSaldo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPSALDI);
+            }
+        }
         public void UpdateTable(string tablename, SpedizioniDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

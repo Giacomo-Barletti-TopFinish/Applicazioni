@@ -16,6 +16,7 @@ namespace Applicazioni.Security
 
         public bool SpedizioniMagazzino { get; private set; }
         public bool SpedizioniSaldi { get; private set; }
+        public bool SpedizioniMovimenta { get; private set; }
 
 
         public string DisplayName { get; private set; }
@@ -33,6 +34,7 @@ namespace Applicazioni.Security
 
             SpedizioniSaldi = false;
             SpedizioniMagazzino = false;
+            SpedizioniMovimenta = false;
 
             FULLNAMEUSER = "Sconosciuto";
             DisplayName = "Sconosciuto";
@@ -51,6 +53,7 @@ namespace Applicazioni.Security
 
                 SpedizioniMagazzino = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.SpedizioniMagazzino);
                 SpedizioniSaldi = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.SpedizioniSaldi);
+                SpedizioniMovimenta = userPrincipal.IsMemberOf(domainctx, IdentityType.Name, GruppiDominio.SpedizioniMovimenta);
 
                 FULLNAMEUSER = userPrincipal.DisplayName.Length > 50 ? userPrincipal.DisplayName.Substring(0, 50) : userPrincipal.DisplayName;
                 IDUSER = userPrincipal.UserPrincipalName;

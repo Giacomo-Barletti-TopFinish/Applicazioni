@@ -80,7 +80,52 @@ namespace Applicazioni.BLL
             return "COMPLETATA";
         }
 
+        public string Movimenta(decimal idsaldo, decimal quantita, string causale, string tipoOperazione, string utenza)
+        {
 
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                try
+                {
+                    bSpedizioni.GetSaldo(ds, idsaldo);
+                    SpedizioniDS.SPSALDIRow saldo = ds.SPSALDI.Where(x => x.IDSALDO == idsaldo).FirstOrDefault();
+                    DateTime data = DateTime.Now;
+                    if (saldo == null)
+                        return "Impossibile trovare il saldo";
+
+
+                    saldo.DATAMODIFICA = data;
+                    decimal quantitaSaldo = saldo.QUANTITA;
+                    if (tipoOperazione == "VERSAMENTO")
+                        quantitaSaldo = saldo.QUANTITA + quantita;
+                    else
+                        quantitaSaldo = saldo.QUANTITA - quantita;
+
+                    saldo.QUANTITA = quantita;
+                    saldo.UTENTEMODIFICA = utenza;
+
+
+                    SpedizioniDS.SPMOVIMENTIRow movimento = ds.SPMOVIMENTI.NewSPMOVIMENTIRow();
+                    movimento.CAUSALE = causale;
+                    movimento.DATAMODIFICA = data;
+                    movimento.IDSALDO = idsaldo;
+                    movimento.QUANTITA = quantita;
+                    movimento.TIPOMOVIMENTO = tipoOperazione;
+                    movimento.UTENTEMODIFICA = utenza;
+                    ds.SPMOVIMENTI.AddSPMOVIMENTIRow(movimento);
+
+                    bSpedizioni.SalvaInserimento(ds);
+
+                }
+                catch (Exception ex)
+                {
+                    bSpedizioni.Rollback();
+                    return "ERRORE IMPOSSIBILE PROCEDERE";
+                }
+            }
+
+            return "COMPLETATA";
+        }
         private string LeggiUtenza(string barcodeOperatore)
         {
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
@@ -123,6 +168,15 @@ namespace Applicazioni.BLL
                     return "Ubicazione sconosciuta";
 
                 return string.Format("{0} - {1}", ubicazione.CODICE, ubicazione.DESCRIZIONE);
+            }
+
+            if (tipo == BarcodeHelper.RisorsaFisica)
+            {
+                string utenza = LeggiUtenza(barcode);
+                if (string.IsNullOrEmpty(utenza))
+                    return "Ubicazione sconosciuta";
+
+                return utenza;
             }
 
             TrasferimentiDS.USR_PRD_MOVFASIRow odl = LeggiODL(barcode);
@@ -171,7 +225,7 @@ namespace Applicazioni.BLL
         {
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
             {
-                bSpedizioni.FillSPSALDI(ds, UBICAZIONE,MODELLO);
+                bSpedizioni.FillSPSALDI(ds, UBICAZIONE, MODELLO);
             }
         }
 
