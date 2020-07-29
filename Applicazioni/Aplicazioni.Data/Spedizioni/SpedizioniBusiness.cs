@@ -56,7 +56,7 @@ namespace Applicazioni.Data.Spedizioni
         public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
         {
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
-            a.FillSPSALDI(ds, UBICAZIONE,MODELLO);
+            a.FillSPSALDI(ds, UBICAZIONE, MODELLO);
         }
 
         [DataContext(true)]
@@ -67,10 +67,10 @@ namespace Applicazioni.Data.Spedizioni
         }
 
         [DataContext]
-        public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO, DateTime dtInizo, DateTime dtFine)
         {
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
-            a.FillMovimenti(ds, UBICAZIONE, MODELLO);
+            a.FillMovimenti(ds, UBICAZIONE, MODELLO, dtInizo, dtFine);
         }
 
     }

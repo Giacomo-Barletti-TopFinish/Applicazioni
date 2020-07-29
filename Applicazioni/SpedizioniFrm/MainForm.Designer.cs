@@ -102,17 +102,10 @@
             // 
             // saldiToolStripMenuItem
             // 
-            this.saldiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saldiToolStripMenuItem1});
             this.saldiToolStripMenuItem.Name = "saldiToolStripMenuItem";
             this.saldiToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.saldiToolStripMenuItem.Text = "Saldi";
-            // 
-            // saldiToolStripMenuItem1
-            // 
-            this.saldiToolStripMenuItem1.Name = "saldiToolStripMenuItem1";
-            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
-            this.saldiToolStripMenuItem1.Text = "Saldi";
+            this.saldiToolStripMenuItem.Click += new System.EventHandler(this.saldiToolStripMenuItem_Click);
             // 
             // finestreToolStripMenuItem
             // 

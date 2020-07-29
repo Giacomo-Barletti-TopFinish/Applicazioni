@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtUbicazione = new System.Windows.Forms.TextBox();
+            this.txtArticolo = new System.Windows.Forms.TextBox();
             this.btncerca = new System.Windows.Forms.Button();
             this.Ubicazione = new System.Windows.Forms.Label();
             this.Articolo = new System.Windows.Forms.Label();
@@ -46,19 +46,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvlistamovimenti)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtUbicazione
             // 
-            this.textBox1.Location = new System.Drawing.Point(49, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 20);
-            this.textBox1.TabIndex = 0;
+            this.txtUbicazione.Location = new System.Drawing.Point(49, 30);
+            this.txtUbicazione.Name = "txtUbicazione";
+            this.txtUbicazione.Size = new System.Drawing.Size(200, 20);
+            this.txtUbicazione.TabIndex = 0;
             // 
-            // textBox2
+            // txtArticolo
             // 
-            this.textBox2.Location = new System.Drawing.Point(305, 30);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 20);
-            this.textBox2.TabIndex = 1;
+            this.txtArticolo.Location = new System.Drawing.Point(305, 30);
+            this.txtArticolo.Name = "txtArticolo";
+            this.txtArticolo.Size = new System.Drawing.Size(200, 20);
+            this.txtArticolo.TabIndex = 1;
             // 
             // btncerca
             // 
@@ -90,6 +90,8 @@
             // 
             // dgvlistamovimenti
             // 
+            this.dgvlistamovimenti.AllowUserToAddRows = false;
+            this.dgvlistamovimenti.AllowUserToDeleteRows = false;
             this.dgvlistamovimenti.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -100,8 +102,9 @@
             this.ARTICOLO_,
             this.QUANTITA_,
             this.DATAMODIFICA});
-            this.dgvlistamovimenti.Location = new System.Drawing.Point(0, 123);
+            this.dgvlistamovimenti.Location = new System.Drawing.Point(0, 122);
             this.dgvlistamovimenti.Name = "dgvlistamovimenti";
+            this.dgvlistamovimenti.ReadOnly = true;
             this.dgvlistamovimenti.Size = new System.Drawing.Size(820, 451);
             this.dgvlistamovimenti.TabIndex = 5;
             // 
@@ -139,29 +142,44 @@
             // 
             // IDUBICAZIONE_
             // 
+            this.IDUBICAZIONE_.DataPropertyName = "IDUBICAZIONE";
             this.IDUBICAZIONE_.HeaderText = "IDUBICAZIONE";
             this.IDUBICAZIONE_.Name = "IDUBICAZIONE_";
+            this.IDUBICAZIONE_.ReadOnly = true;
             this.IDUBICAZIONE_.Visible = false;
+            this.IDUBICAZIONE_.Width = 20;
             // 
             // UBICAZIONE_
             // 
+            this.UBICAZIONE_.DataPropertyName = "CODICE";
             this.UBICAZIONE_.HeaderText = "UBICAZIONE";
             this.UBICAZIONE_.Name = "UBICAZIONE_";
+            this.UBICAZIONE_.ReadOnly = true;
+            this.UBICAZIONE_.Width = 170;
             // 
             // ARTICOLO_
             // 
+            this.ARTICOLO_.DataPropertyName = "MODELLO";
             this.ARTICOLO_.HeaderText = "ARTICOLO";
             this.ARTICOLO_.Name = "ARTICOLO_";
+            this.ARTICOLO_.ReadOnly = true;
+            this.ARTICOLO_.Width = 170;
             // 
             // QUANTITA_
             // 
+            this.QUANTITA_.DataPropertyName = "QUANTITA";
             this.QUANTITA_.HeaderText = "QUANTITA";
             this.QUANTITA_.Name = "QUANTITA_";
+            this.QUANTITA_.ReadOnly = true;
+            this.QUANTITA_.Width = 170;
             // 
             // DATAMODIFICA
             // 
+            this.DATAMODIFICA.DataPropertyName = "DATAMODIFICA";
             this.DATAMODIFICA.HeaderText = "DATA MODIFICA";
             this.DATAMODIFICA.Name = "DATAMODIFICA";
+            this.DATAMODIFICA.ReadOnly = true;
+            this.DATAMODIFICA.Width = 170;
             // 
             // ListamovimentiFrm
             // 
@@ -176,8 +194,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Ubicazione);
             this.Controls.Add(this.btncerca);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtArticolo);
+            this.Controls.Add(this.txtUbicazione);
             this.Name = "ListamovimentiFrm";
             this.Text = "ListamovimentiFrm";
             this.Load += new System.EventHandler(this.ListamovimentiFrm_Load);
@@ -189,8 +207,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtUbicazione;
+        private System.Windows.Forms.TextBox txtArticolo;
         private System.Windows.Forms.Button btncerca;
         private System.Windows.Forms.Label Ubicazione;
         private System.Windows.Forms.Label Articolo;

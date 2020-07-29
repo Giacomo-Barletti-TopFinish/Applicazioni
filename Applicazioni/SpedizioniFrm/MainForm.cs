@@ -98,16 +98,9 @@ namespace SpedizioniFrm
             form.Show();
         }
 
-        private void saldiToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void saldiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //foreach (Form figlio in this.MdiChildren)
-            //{
-            //    if (figlio is SaldiFrm)
-            //    {
-            //        figlio.Focus();
-            //        return;
-            //    }
-            //}
+          
 
             SaldiFrm form = new SaldiFrm();
             form.MdiParent = this;

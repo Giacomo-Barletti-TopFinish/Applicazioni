@@ -101,7 +101,7 @@ namespace Applicazioni.BLL
                     else
                     {
                         quantitaSaldo = saldo.QUANTITA - quantita;
-                        if(quantitaSaldo<0)
+                        if (quantitaSaldo < 0)
                             return "Saldo negativo operazione non ammessa";
                     }
 
@@ -269,11 +269,11 @@ namespace Applicazioni.BLL
             }
         }
 
-      public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO, DateTime dtInizo, DateTime dtFine)
         {
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
             {
-                bSpedizioni.FillMovimenti(ds, UBICAZIONE, MODELLO);
+                bSpedizioni.FillMovimenti(ds, UBICAZIONE, MODELLO, dtInizo, dtFine);
             }
         }
 

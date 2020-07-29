@@ -1,4 +1,5 @@
-﻿using Applicazioni.Common;
+﻿using Applicazioni.BLL;
+using Applicazioni.Common;
 using Applicazioni.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace SpedizioniFrm
     {
         private SpedizioniDS _ds = new SpedizioniDS();
         private DataSet _dsGriglia = new DataSet();
-        private string _tabellaGriglia = "Griglia";
+
         public ListamovimentiFrm()
         {
             InitializeComponent();
@@ -35,7 +36,6 @@ namespace SpedizioniFrm
 
         private void CreaGriglia()
         {
-            _ds.SPMOVIMENTI.Clear();
 
             dgvlistamovimenti.AutoGenerateColumns = false;
             dgvlistamovimenti.DataSource = _ds;
@@ -43,6 +43,8 @@ namespace SpedizioniFrm
 
             dgvlistamovimenti.Refresh();
         }
+
+      
 
         private void btncerca_Click(object sender, EventArgs e)
         {
@@ -53,9 +55,14 @@ namespace SpedizioniFrm
             if (inizio > fine)
                 return;
 
+            _ds.SPMOVIMENTIEXT.Clear();
+            Spedizioni spedizioni = new Spedizioni();
+            spedizioni.FillMovimenti(_ds, txtUbicazione.Text.ToUpper(), txtArticolo.Text.ToUpper(), inizio, fine);
+
             CreaGriglia();
 
         }
 
+       
     }
 }
