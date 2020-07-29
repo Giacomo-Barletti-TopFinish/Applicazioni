@@ -40,11 +40,9 @@ namespace Applicazioni.Entities {
         
         private SPSALDIEXTDataTable tableSPSALDIEXT;
         
-<<<<<<< HEAD
-        private SPOPERADataTable tableSPOPERA;
-=======
         private SPMOVIMENTIEXTDataTable tableSPMOVIMENTIEXT;
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+        
+        private SPOPERADataTable tableSPOPERA;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -98,13 +96,11 @@ namespace Applicazioni.Entities {
                 if ((ds.Tables["SPSALDIEXT"] != null)) {
                     base.Tables.Add(new SPSALDIEXTDataTable(ds.Tables["SPSALDIEXT"]));
                 }
-<<<<<<< HEAD
-                if ((ds.Tables["SPOPERA"] != null)) {
-                    base.Tables.Add(new SPOPERADataTable(ds.Tables["SPOPERA"]));
-=======
                 if ((ds.Tables["SPMOVIMENTIEXT"] != null)) {
                     base.Tables.Add(new SPMOVIMENTIEXTDataTable(ds.Tables["SPMOVIMENTIEXT"]));
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+                }
+                if ((ds.Tables["SPOPERA"] != null)) {
+                    base.Tables.Add(new SPOPERADataTable(ds.Tables["SPOPERA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -205,30 +201,27 @@ namespace Applicazioni.Entities {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SPMOVIMENTIEXTDataTable SPMOVIMENTIEXT {
+            get {
+                return this.tableSPMOVIMENTIEXT;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public SPOPERADataTable SPOPERA {
             get {
                 return this.tableSPOPERA;
-=======
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public SPMOVIMENTIEXTDataTable SPMOVIMENTIEXT {
-            get {
-                return this.tableSPMOVIMENTIEXT;
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-=======
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -318,13 +311,11 @@ namespace Applicazioni.Entities {
                 if ((ds.Tables["SPSALDIEXT"] != null)) {
                     base.Tables.Add(new SPSALDIEXTDataTable(ds.Tables["SPSALDIEXT"]));
                 }
-<<<<<<< HEAD
-                if ((ds.Tables["SPOPERA"] != null)) {
-                    base.Tables.Add(new SPOPERADataTable(ds.Tables["SPOPERA"]));
-=======
                 if ((ds.Tables["SPMOVIMENTIEXT"] != null)) {
                     base.Tables.Add(new SPMOVIMENTIEXTDataTable(ds.Tables["SPMOVIMENTIEXT"]));
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+                }
+                if ((ds.Tables["SPOPERA"] != null)) {
+                    base.Tables.Add(new SPOPERADataTable(ds.Tables["SPOPERA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -407,17 +398,16 @@ namespace Applicazioni.Entities {
                     this.tableSPSALDIEXT.InitVars();
                 }
             }
-<<<<<<< HEAD
-            this.tableSPOPERA = ((SPOPERADataTable)(base.Tables["SPOPERA"]));
-            if ((initTable == true)) {
-                if ((this.tableSPOPERA != null)) {
-                    this.tableSPOPERA.InitVars();
-=======
             this.tableSPMOVIMENTIEXT = ((SPMOVIMENTIEXTDataTable)(base.Tables["SPMOVIMENTIEXT"]));
             if ((initTable == true)) {
                 if ((this.tableSPMOVIMENTIEXT != null)) {
                     this.tableSPMOVIMENTIEXT.InitVars();
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+                }
+            }
+            this.tableSPOPERA = ((SPOPERADataTable)(base.Tables["SPOPERA"]));
+            if ((initTable == true)) {
+                if ((this.tableSPOPERA != null)) {
+                    this.tableSPOPERA.InitVars();
                 }
             }
         }
@@ -446,13 +436,10 @@ namespace Applicazioni.Entities {
             base.Tables.Add(this.tableSPMOVIMENTI);
             this.tableSPSALDIEXT = new SPSALDIEXTDataTable();
             base.Tables.Add(this.tableSPSALDIEXT);
-<<<<<<< HEAD
-            this.tableSPOPERA = new SPOPERADataTable();
-            base.Tables.Add(this.tableSPOPERA);
-=======
             this.tableSPMOVIMENTIEXT = new SPMOVIMENTIEXTDataTable();
             base.Tables.Add(this.tableSPMOVIMENTIEXT);
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+            this.tableSPOPERA = new SPOPERADataTable();
+            base.Tables.Add(this.tableSPOPERA);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -504,22 +491,19 @@ namespace Applicazioni.Entities {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeSPOPERA() {
-=======
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializeSPMOVIMENTIEXT() {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-=======
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+        private bool ShouldSerializeSPOPERA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -597,13 +581,11 @@ namespace Applicazioni.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void SPSALDIEXTRowChangeEventHandler(object sender, SPSALDIEXTRowChangeEvent e);
         
-<<<<<<< HEAD
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void SPMOVIMENTIEXTRowChangeEventHandler(object sender, SPMOVIMENTIEXTRowChangeEvent e);
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void SPOPERARowChangeEventHandler(object sender, SPOPERARowChangeEvent e);
-=======
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void SPMOVIMENTIEXTRowChangeEventHandler(object sender, SPMOVIMENTIEXTRowChangeEvent e);
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -6018,12 +6000,7 @@ namespace Applicazioni.Entities {
             private global::System.Data.DataColumn columnMODELLO;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSALDIEXTDataTable() {
-                this.TableName = "SPSALDIEXT";
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public SPSALDIEXTDataTable() {
                 this.TableName = "SPSALDIEXT";
                 this.BeginInit();
@@ -6032,7 +6009,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal SPSALDIEXTDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
@@ -6049,14 +6026,14 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected SPSALDIEXTDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn IDSALDOColumn {
                 get {
                     return this.columnIDSALDO;
@@ -6064,7 +6041,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn IDUBICAZIONEColumn {
                 get {
                     return this.columnIDUBICAZIONE;
@@ -6072,7 +6049,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn IDMAGAZZColumn {
                 get {
                     return this.columnIDMAGAZZ;
@@ -6080,7 +6057,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn QUANTITAColumn {
                 get {
                     return this.columnQUANTITA;
@@ -6088,7 +6065,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn DATAMODIFICAColumn {
                 get {
                     return this.columnDATAMODIFICA;
@@ -6096,7 +6073,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn UTENTEMODIFICAColumn {
                 get {
                     return this.columnUTENTEMODIFICA;
@@ -6104,7 +6081,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn CODICEColumn {
                 get {
                     return this.columnCODICE;
@@ -6112,7 +6089,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn DESCRIZIONEColumn {
                 get {
                     return this.columnDESCRIZIONE;
@@ -6120,7 +6097,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn MODELLOColumn {
                 get {
                     return this.columnMODELLO;
@@ -6128,7 +6105,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6137,33 +6114,33 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPSALDIEXTRow this[int index] {
                 get {
                     return ((SPSALDIEXTRow)(this.Rows[index]));
                 }
             }
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowChanging;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowChanged;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowDeleting;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void AddSPSALDIEXTRow(SPSALDIEXTRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPSALDIEXTRow AddSPSALDIEXTRow(decimal IDSALDO, decimal IDUBICAZIONE, string IDMAGAZZ, decimal QUANTITA, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string CODICE, string DESCRIZIONE, string MODELLO) {
                 SPSALDIEXTRow rowSPSALDIEXTRow = ((SPSALDIEXTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -6182,7 +6159,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 SPSALDIEXTDataTable cln = ((SPSALDIEXTDataTable)(base.Clone()));
                 cln.InitVars();
@@ -6190,13 +6167,13 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
                 return new SPSALDIEXTDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnIDSALDO = base.Columns["IDSALDO"];
                 this.columnIDUBICAZIONE = base.Columns["IDUBICAZIONE"];
@@ -6210,7 +6187,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
                 this.columnIDSALDO = new global::System.Data.DataColumn("IDSALDO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDSALDO);
@@ -6240,25 +6217,25 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPSALDIEXTRow NewSPSALDIEXTRow() {
                 return ((SPSALDIEXTRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new SPSALDIEXTRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
                 return typeof(SPSALDIEXTRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
                 if ((this.SPSALDIEXTRowChanged != null)) {
@@ -6267,7 +6244,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
                 if ((this.SPSALDIEXTRowChanging != null)) {
@@ -6276,7 +6253,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
                 if ((this.SPSALDIEXTRowDeleted != null)) {
@@ -6285,7 +6262,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
                 if ((this.SPSALDIEXTRowDeleting != null)) {
@@ -6294,13 +6271,13 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void RemoveSPSALDIEXTRow(SPSALDIEXTRow row) {
                 this.Rows.Remove(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
@@ -6389,23 +6366,17 @@ namespace Applicazioni.Entities {
             private global::System.Data.DataColumn columnMODELLO;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPMOVIMENTIEXTDataTable() {
                 this.TableName = "SPMOVIMENTIEXT";
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal SPSALDIEXTDataTable(global::System.Data.DataTable table) {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal SPMOVIMENTIEXTDataTable(global::System.Data.DataTable table) {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -6421,22 +6392,14 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected SPSALDIEXTDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected SPMOVIMENTIEXTDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn IDMOVIMENTOColumn {
                 get {
                     return this.columnIDMOVIMENTO;
@@ -6444,8 +6407,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn IDSALDOColumn {
                 get {
                     return this.columnIDSALDO;
@@ -6453,39 +6415,24 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDUBICAZIONEColumn {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn QUANTITAColumn {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 get {
                     return this.columnQUANTITA;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDMAGAZZColumn {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn TIPOMOVIMENTOColumn {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 get {
                     return this.columnTIPOMOVIMENTO;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn QUANTITAColumn {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn CAUSALEColumn {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 get {
                     return this.columnCAUSALE;
                 }
@@ -6516,19 +6463,7 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn DESCRIZIONEColumn {
-                get {
-                    return this.columnDESCRIZIONE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
             public global::System.Data.DataColumn MODELLOColumn {
                 get {
                     return this.columnMODELLO;
@@ -6545,64 +6480,35 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSALDIEXTRow this[int index] {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public SPMOVIMENTIEXTRow this[int index] {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 get {
                     return ((SPMOVIMENTIEXTRow)(this.Rows[index]));
                 }
             }
             
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event SPSALDIEXTRowChangeEventHandler SPSALDIEXTRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddSPSALDIEXTRow(SPSALDIEXTRow row) {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public event SPMOVIMENTIEXTRowChangeEventHandler SPMOVIMENTIEXTRowChanging;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPMOVIMENTIEXTRowChangeEventHandler SPMOVIMENTIEXTRowChanged;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPMOVIMENTIEXTRowChangeEventHandler SPMOVIMENTIEXTRowDeleting;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public event SPMOVIMENTIEXTRowChangeEventHandler SPMOVIMENTIEXTRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void AddSPMOVIMENTIEXTRow(SPMOVIMENTIEXTRow row) {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSALDIEXTRow AddSPSALDIEXTRow(decimal IDSALDO, decimal IDUBICAZIONE, string IDMAGAZZ, decimal QUANTITA, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string CODICE, string DESCRIZIONE, string MODELLO) {
-                SPSALDIEXTRow rowSPSALDIEXTRow = ((SPSALDIEXTRow)(this.NewRow()));
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public SPMOVIMENTIEXTRow AddSPMOVIMENTIEXTRow(decimal IDMOVIMENTO, decimal IDSALDO, decimal QUANTITA, string TIPOMOVIMENTO, string CAUSALE, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string CODICE, string MODELLO) {
                 SPMOVIMENTIEXTRow rowSPMOVIMENTIEXTRow = ((SPMOVIMENTIEXTRow)(this.NewRow()));
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 object[] columnValuesArray = new object[] {
                         IDMOVIMENTO,
                         IDSALDO,
@@ -6679,15 +6585,9 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSALDIEXTRow NewSPSALDIEXTRow() {
-                return ((SPSALDIEXTRow)(this.NewRow()));
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public SPMOVIMENTIEXTRow NewSPMOVIMENTIEXTRow() {
                 return ((SPMOVIMENTIEXTRow)(this.NewRow()));
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6739,13 +6639,8 @@ namespace Applicazioni.Entities {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-<<<<<<< HEAD
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveSPSALDIEXTRow(SPSALDIEXTRow row) {
-=======
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void RemoveSPMOVIMENTIEXTRow(SPMOVIMENTIEXTRow row) {
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
                 this.Rows.Remove(row);
             }
             
@@ -13326,6 +13221,171 @@ namespace Applicazioni.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
+        public partial class SPMOVIMENTIEXTRow : global::System.Data.DataRow {
+            
+            private SPMOVIMENTIEXTDataTable tableSPMOVIMENTIEXT;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal SPMOVIMENTIEXTRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSPMOVIMENTIEXT = ((SPMOVIMENTIEXTDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDMOVIMENTO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDMOVIMENTO\' in table \'SPMOVIMENTIEXT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDSALDO {
+                get {
+                    return ((decimal)(this[this.tableSPMOVIMENTIEXT.IDSALDOColumn]));
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.IDSALDOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal QUANTITA {
+                get {
+                    return ((decimal)(this[this.tableSPMOVIMENTIEXT.QUANTITAColumn]));
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.QUANTITAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string TIPOMOVIMENTO {
+                get {
+                    return ((string)(this[this.tableSPMOVIMENTIEXT.TIPOMOVIMENTOColumn]));
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.TIPOMOVIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CAUSALE {
+                get {
+                    return ((string)(this[this.tableSPMOVIMENTIEXT.CAUSALEColumn]));
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.CAUSALEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAMODIFICA {
+                get {
+                    return ((global::System.DateTime)(this[this.tableSPMOVIMENTIEXT.DATAMODIFICAColumn]));
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.DATAMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENTEMODIFICA {
+                get {
+                    return ((string)(this[this.tableSPMOVIMENTIEXT.UTENTEMODIFICAColumn]));
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.UTENTEMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICE {
+                get {
+                    try {
+                        return ((string)(this[this.tableSPMOVIMENTIEXT.CODICEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICE\' in table \'SPMOVIMENTIEXT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.CODICEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string MODELLO {
+                get {
+                    try {
+                        return ((string)(this[this.tableSPMOVIMENTIEXT.MODELLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MODELLO\' in table \'SPMOVIMENTIEXT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPMOVIMENTIEXT.MODELLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDMOVIMENTONull() {
+                return this.IsNull(this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDMOVIMENTONull() {
+                this[this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODICENull() {
+                return this.IsNull(this.tableSPMOVIMENTIEXT.CODICEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODICENull() {
+                this[this.tableSPMOVIMENTIEXT.CODICEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMODELLONull() {
+                return this.IsNull(this.tableSPMOVIMENTIEXT.MODELLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMODELLONull() {
+                this[this.tableSPMOVIMENTIEXT.MODELLOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
         public partial class SPOPERARow : global::System.Data.DataRow {
             
             private SPOPERADataTable tableSPOPERA;
@@ -13956,171 +14016,6 @@ namespace Applicazioni.Entities {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class SPMOVIMENTIEXTRow : global::System.Data.DataRow {
-            
-            private SPMOVIMENTIEXTDataTable tableSPMOVIMENTIEXT;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal SPMOVIMENTIEXTRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableSPMOVIMENTIEXT = ((SPMOVIMENTIEXTDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal IDMOVIMENTO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IDMOVIMENTO\' in table \'SPMOVIMENTIEXT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal IDSALDO {
-                get {
-                    return ((decimal)(this[this.tableSPMOVIMENTIEXT.IDSALDOColumn]));
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.IDSALDOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal QUANTITA {
-                get {
-                    return ((decimal)(this[this.tableSPMOVIMENTIEXT.QUANTITAColumn]));
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.QUANTITAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string TIPOMOVIMENTO {
-                get {
-                    return ((string)(this[this.tableSPMOVIMENTIEXT.TIPOMOVIMENTOColumn]));
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.TIPOMOVIMENTOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string CAUSALE {
-                get {
-                    return ((string)(this[this.tableSPMOVIMENTIEXT.CAUSALEColumn]));
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.CAUSALEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime DATAMODIFICA {
-                get {
-                    return ((global::System.DateTime)(this[this.tableSPMOVIMENTIEXT.DATAMODIFICAColumn]));
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.DATAMODIFICAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string UTENTEMODIFICA {
-                get {
-                    return ((string)(this[this.tableSPMOVIMENTIEXT.UTENTEMODIFICAColumn]));
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.UTENTEMODIFICAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string CODICE {
-                get {
-                    try {
-                        return ((string)(this[this.tableSPMOVIMENTIEXT.CODICEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CODICE\' in table \'SPMOVIMENTIEXT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.CODICEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string MODELLO {
-                get {
-                    try {
-                        return ((string)(this[this.tableSPMOVIMENTIEXT.MODELLOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MODELLO\' in table \'SPMOVIMENTIEXT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSPMOVIMENTIEXT.MODELLOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsIDMOVIMENTONull() {
-                return this.IsNull(this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetIDMOVIMENTONull() {
-                this[this.tableSPMOVIMENTIEXT.IDMOVIMENTOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCODICENull() {
-                return this.IsNull(this.tableSPMOVIMENTIEXT.CODICEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCODICENull() {
-                this[this.tableSPMOVIMENTIEXT.CODICEColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsMODELLONull() {
-                return this.IsNull(this.tableSPMOVIMENTIEXT.MODELLOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetMODELLONull() {
-                this[this.tableSPMOVIMENTIEXT.MODELLOColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -14396,6 +14291,40 @@ namespace Applicazioni.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class SPMOVIMENTIEXTRowChangeEvent : global::System.EventArgs {
+            
+            private SPMOVIMENTIEXTRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPMOVIMENTIEXTRowChangeEvent(SPMOVIMENTIEXTRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPMOVIMENTIEXTRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public class SPOPERARowChangeEvent : global::System.EventArgs {
             
             private SPOPERARow eventRow;
@@ -14419,40 +14348,6 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class SPMOVIMENTIEXTRowChangeEvent : global::System.EventArgs {
-            
-            private SPMOVIMENTIEXTRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SPMOVIMENTIEXTRowChangeEvent(SPMOVIMENTIEXTRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SPMOVIMENTIEXTRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;

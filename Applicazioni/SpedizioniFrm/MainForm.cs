@@ -108,14 +108,12 @@ namespace SpedizioniFrm
 
         }
 
-<<<<<<< HEAD
         private void ySLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OperaFrm form = new OperaFrm("YSL");
             form.MdiParent = this;
             form.Show();
         }
-=======
         private void movimentiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -126,6 +124,5 @@ namespace SpedizioniFrm
         }
 
         
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
     }
 }

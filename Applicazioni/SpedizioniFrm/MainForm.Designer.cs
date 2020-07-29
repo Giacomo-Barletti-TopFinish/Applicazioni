@@ -108,17 +108,13 @@
             this.saldiToolStripMenuItem.Name = "saldiToolStripMenuItem";
             this.saldiToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.saldiToolStripMenuItem.Text = "Saldi";
-<<<<<<< HEAD
             // 
             // saldiToolStripMenuItem1
             // 
             this.saldiToolStripMenuItem1.Name = "saldiToolStripMenuItem1";
             this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.saldiToolStripMenuItem1.Text = "Saldi";
-            this.saldiToolStripMenuItem1.Click += new System.EventHandler(this.saldiToolStripMenuItem1_Click);
-=======
             this.saldiToolStripMenuItem.Click += new System.EventHandler(this.saldiToolStripMenuItem_Click);
->>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
             // 
             // finestreToolStripMenuItem
             // 
