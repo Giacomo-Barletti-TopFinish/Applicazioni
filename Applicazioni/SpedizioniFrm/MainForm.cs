@@ -98,16 +98,9 @@ namespace SpedizioniFrm
             form.Show();
         }
 
-        private void saldiToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void saldiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //foreach (Form figlio in this.MdiChildren)
-            //{
-            //    if (figlio is SaldiFrm)
-            //    {
-            //        figlio.Focus();
-            //        return;
-            //    }
-            //}
+          
 
             SaldiFrm form = new SaldiFrm();
             form.MdiParent = this;
@@ -115,11 +108,24 @@ namespace SpedizioniFrm
 
         }
 
+<<<<<<< HEAD
         private void ySLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OperaFrm form = new OperaFrm("YSL");
             form.MdiParent = this;
             form.Show();
         }
+=======
+        private void movimentiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+            ListamovimentiFrm form = new ListamovimentiFrm();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        
+>>>>>>> a671f2c51133f3725f32064d76a87d42c4e324a1
     }
 }

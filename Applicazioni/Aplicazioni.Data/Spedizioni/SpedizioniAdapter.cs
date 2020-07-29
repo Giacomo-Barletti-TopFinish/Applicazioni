@@ -28,7 +28,7 @@ namespace Applicazioni.Data.Spedizioni
             }
         }
 
-        public void FillSPSALDI(SpedizioniDS ds,String UBICAZIONE, String MODELLO)
+        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String  MODELLO)
         {
             ds.SPSALDIEXT.Clear();
             string select = @"select sa.*,ub.codice, ub.descrizione,ma.modello 
@@ -37,8 +37,9 @@ namespace Applicazioni.Data.Spedizioni
                                     inner join gruppo.magazz ma on ma.idmagazz = sa.idmagazz
                                     where 1=1 ";
 
+
             if (!string.IsNullOrEmpty(UBICAZIONE))
-                select += string.Format("and ub.codice like '%{0}%'",UBICAZIONE.ToUpper());
+                select += string.Format("and ub.codice like '%{0}%'", UBICAZIONE.ToUpper());
 
             if (!string.IsNullOrEmpty(MODELLO))
                 select += string.Format("and ma.modello like '%{0}%'", MODELLO.ToUpper());
@@ -49,6 +50,36 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.SPSALDIEXT);
             }
         }
+        
+        public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO, DateTime dtInizo, DateTime dtFine)
+        {
+            string inizio = dtInizo.ToString("dd/MM/yyyy");
+            string fine = dtFine.ToString("dd/MM/yyyy");
+            ds.SPSALDIEXT.Clear();
+            string select = @"select sm.*,ub.codice, ma.modello 
+                                    from  spmovimenti sm
+                                    inner join spsaldi sa on sa.idsaldo = sm.idsaldo
+                                    inner join spubicazioni ub on ub.idubicazione = sa.idubicazione
+                                    inner join gruppo.magazz ma on ma.idmagazz = sa.idmagazz
+                                    where sm.datamodifica >= to_date('{0} 00:00:00','dd/mm/yyyy HH24:MI:ss') 
+                                    and sm.datamodifica <= to_date('{1} 23:59:59','dd/mm/yyyy HH24:MI:ss')";
+
+            select = string.Format(select, inizio,fine);
+
+            if (!string.IsNullOrEmpty(UBICAZIONE))
+                select += string.Format("and ub.codice like '%{0}%'", UBICAZIONE.ToUpper());
+
+            if (!string.IsNullOrEmpty(MODELLO))
+                select += string.Format("and ma.modello like '%{0}%'", MODELLO.ToUpper());
+
+            select += " ORDER BY sm.datamodifica";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.SPMOVIMENTIEXT);
+            }
+        }
+
+
         public void GetUSR_PRD_RESOURCESF(SpedizioniDS ds, string BARCODE)
         {
             string select = @"SELECT * FROM GRUPPO.USR_PRD_RESOURCESF WHERE BARCODE = $P<BARCODE> ";
