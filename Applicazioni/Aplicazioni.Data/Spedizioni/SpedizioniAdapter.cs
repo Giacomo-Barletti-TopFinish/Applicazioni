@@ -28,17 +28,20 @@ namespace Applicazioni.Data.Spedizioni
             }
         }
 
-        public void FillSPSALDI(SpedizioniDS ds,String UBICAZIONE, String MODELLO)
+        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String  MODELLO)
         {
             ds.SPSALDIEXT.Clear();
-            string select = @"select sa.*,ub.codice, ub.descrizione,ma.modello 
-                                    from spsaldi sa
+            string select = @"select sa.*,ub.codice, ub.descrizione,ma.modello ,sm.* , sm.datamodifica
+                                    from  spmovimenti sm
+                                    inner join spsaldi sa on sa.idsaldo = sm.idsaldo
                                     inner join spubicazioni ub on ub.idubicazione = sa.idubicazione
                                     inner join gruppo.magazz ma on ma.idmagazz = sa.idmagazz
-                                    where 1=1 ";
+                                    where sm.datamodifica >= to_date('22/07/2020 00:00:00','dd/mm/yyyy HH24:MI:ss') 
+                                    and sm.datamodifica <= to_date('23/07/2020 23:59:59','dd/mm/yyyy HH24:MI:ss')" ;
+
 
             if (!string.IsNullOrEmpty(UBICAZIONE))
-                select += string.Format("and ub.codice like '%{0}%'",UBICAZIONE.ToUpper());
+                select += string.Format("and ub.codice like '%{0}%'", UBICAZIONE.ToUpper());
 
             if (!string.IsNullOrEmpty(MODELLO))
                 select += string.Format("and ma.modello like '%{0}%'", MODELLO.ToUpper());
@@ -49,6 +52,30 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.SPSALDIEXT);
             }
         }
+        
+        public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        {
+            ds.SPSALDIEXT.Clear();
+            string select = @"select sa.*,ub.codice, ub.descrizione,ma.modello 
+                                    from spsaldi sa
+                                    inner join spubicazioni ub on ub.idubicazione = sa.idubicazione
+                                    inner join gruppo.magazz ma on ma.idmagazz = sa.idmagazz
+                                    where 1=1 ";
+
+            if (!string.IsNullOrEmpty(UBICAZIONE))
+                select += string.Format("and ub.codice like '%{0}%'", UBICAZIONE.ToUpper());
+
+            if (!string.IsNullOrEmpty(MODELLO))
+                select += string.Format("and ma.modello like '%{0}%'", MODELLO.ToUpper());
+
+            select += "ORDER BY ub.codice,ma.modello ";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.SPMOVIMENTIEXT);
+            }
+        }
+
+
         public void GetUSR_PRD_RESOURCESF(SpedizioniDS ds, string BARCODE)
         {
             string select = @"SELECT * FROM GRUPPO.USR_PRD_RESOURCESF WHERE BARCODE = $P<BARCODE> ";

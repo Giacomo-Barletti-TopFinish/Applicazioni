@@ -66,6 +66,13 @@ namespace Applicazioni.Data.Spedizioni
             a.UpdateTable(ds.SPSALDI.TableName, ds);
         }
 
+        [DataContext]
+        public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.FillMovimenti(ds, UBICAZIONE, MODELLO);
+        }
+
     }
 
 

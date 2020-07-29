@@ -265,5 +265,13 @@ namespace Applicazioni.BLL
             }
         }
 
+      public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        {
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                bSpedizioni.FillMovimenti(ds, UBICAZIONE, MODELLO);
+            }
+        }
+
     }
 }

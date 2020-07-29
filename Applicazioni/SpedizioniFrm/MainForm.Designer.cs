@@ -89,15 +89,16 @@
             // ubicazioniToolStripMenuItem
             // 
             this.ubicazioniToolStripMenuItem.Name = "ubicazioniToolStripMenuItem";
-            this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ubicazioniToolStripMenuItem.Text = "Ubicazioni";
             this.ubicazioniToolStripMenuItem.Click += new System.EventHandler(this.ubicazioniToolStripMenuItem_Click);
             // 
             // movimentiToolStripMenuItem
             // 
             this.movimentiToolStripMenuItem.Name = "movimentiToolStripMenuItem";
-            this.movimentiToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.movimentiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.movimentiToolStripMenuItem.Text = "Movimenti";
+            this.movimentiToolStripMenuItem.Click += new System.EventHandler(this.movimentiToolStripMenuItem_Click);
             // 
             // saldiToolStripMenuItem
             // 
@@ -110,9 +111,8 @@
             // saldiToolStripMenuItem1
             // 
             this.saldiToolStripMenuItem1.Name = "saldiToolStripMenuItem1";
-            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.saldiToolStripMenuItem1.Text = "Saldi";
-            this.saldiToolStripMenuItem1.Click += new System.EventHandler(this.saldiToolStripMenuItem1_Click);
             // 
             // finestreToolStripMenuItem
             // 

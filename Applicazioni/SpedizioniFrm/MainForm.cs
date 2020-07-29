@@ -114,5 +114,16 @@ namespace SpedizioniFrm
             form.Show();
 
         }
+
+        private void movimentiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
+            ListamovimentiFrm form = new ListamovimentiFrm();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        
     }
 }

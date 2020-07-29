@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListamovimentiFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListamovimentiFrm.Designer.cs">
+      <DependentUpon>ListamovimentiFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MovimentiFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     <Compile Include="UbicazioniFrm.Designer.cs">
       <DependentUpon>UbicazioniFrm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ListamovimentiFrm.resx">
+      <DependentUpon>ListamovimentiFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MovimentiFrm.resx">
       <DependentUpon>MovimentiFrm.cs</DependentUpon>
     </EmbeddedResource>
