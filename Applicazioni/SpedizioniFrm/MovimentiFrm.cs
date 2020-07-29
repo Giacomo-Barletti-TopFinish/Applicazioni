@@ -27,7 +27,7 @@ namespace SpedizioniFrm
             TXTMODELLO.Text = saldo.MODELLO;
             TXTQUANTITASALDO.Text = saldo.QUANTITA.ToString();
             ddlTipoMovimento.SelectedIndex = -1;
-            numQuta.Maximum = saldo.QUANTITA;
+            numQuta.Maximum = 1000000;
 
             this.Text = string.Format("MOVIMENTA {0}   ARTICOLO {1}",saldo.CODICE,saldo.MODELLO);
         }

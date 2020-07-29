@@ -99,7 +99,11 @@ namespace Applicazioni.BLL
                     if (tipoOperazione == "VERSAMENTO")
                         quantitaSaldo = saldo.QUANTITA + quantita;
                     else
+                    {
                         quantitaSaldo = saldo.QUANTITA - quantita;
+                        if(quantitaSaldo<0)
+                            return "Saldo negativo operazione non ammessa";
+                    }
 
                     saldo.QUANTITA = quantitaSaldo;
                     saldo.UTENTEMODIFICA = utenza;
