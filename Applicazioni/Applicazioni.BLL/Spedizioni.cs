@@ -4,6 +4,7 @@ using Applicazioni.Entities;
 using Applicazioni.Helpers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,34 @@ namespace Applicazioni.BLL
     public class Spedizioni
     {
         private SpedizioniDS ds = new SpedizioniDS();
+
+        public bool LeggiFileExcelOpera(SpedizioniDS ds, string filePath, string brand, out string messaggioErrore)
+        {
+            messaggioErrore = string.Empty;
+            using (FileStream fs = new FileStream(filePath, FileMode.Open))
+            {
+                ds.SPOPERA.Clear();
+
+
+                ExcelHelper excel = new ExcelHelper();
+                if (!excel.LeggiFileExcelOpera(fs, ds, out messaggioErrore))
+                {
+                    ds.SPOPERA.Clear();
+                    return false;
+                }
+
+                if (ds.SPOPERA.Count == 0)
+                {
+                    messaggioErrore = "Il file excel risulta essere vuoto";
+                    return false;
+                }
+
+                fs.Close();
+            }
+            return true;
+        }
+
+
         public string Inserisci(string BarcodeODL, string BarcodeUbicazione, string BarcodeOperatore)
         {
             SpedizioniDS.SPUBICAZIONIRow ubicazione = LeggiUbicazione(BarcodeUbicazione);
@@ -101,7 +130,7 @@ namespace Applicazioni.BLL
                     else
                     {
                         quantitaSaldo = saldo.QUANTITA - quantita;
-                        if(quantitaSaldo<0)
+                        if (quantitaSaldo < 0)
                             return "Saldo negativo operazione non ammessa";
                     }
 

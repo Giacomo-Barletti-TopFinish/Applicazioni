@@ -28,7 +28,7 @@ namespace SpedizioniFrm
 
             magazzinoToolStripMenuItem.Enabled = Contesto.Utente.SpedizioniMagazzino;
             saldiToolStripMenuItem.Enabled = Contesto.Utente.SpedizioniSaldi;
-
+            operaToolStripMenuItem.Enabled = Contesto.Utente.SpedizioniOpera;
         }
 
         private void DisabilitaElementiMenu(ToolStripItemCollection elementi, bool abilita)
@@ -113,6 +113,13 @@ namespace SpedizioniFrm
             form.MdiParent = this;
             form.Show();
 
+        }
+
+        private void ySLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaFrm form = new OperaFrm("YSL");
+            form.MdiParent = this;
+            form.Show();
         }
     }
 }

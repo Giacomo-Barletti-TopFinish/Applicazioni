@@ -44,6 +44,8 @@
             this.lblUserLoggato = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatusBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.stUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.operaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ySLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +56,7 @@
             this.fileToolStripMenuItem,
             this.magazzinoToolStripMenuItem,
             this.saldiToolStripMenuItem,
+            this.operaToolStripMenuItem,
             this.finestreToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.MdiWindowListItem = this.finestreToolStripMenuItem;
@@ -110,7 +113,7 @@
             // saldiToolStripMenuItem1
             // 
             this.saldiToolStripMenuItem1.Name = "saldiToolStripMenuItem1";
-            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.saldiToolStripMenuItem1.Text = "Saldi";
             this.saldiToolStripMenuItem1.Click += new System.EventHandler(this.saldiToolStripMenuItem1_Click);
             // 
@@ -173,6 +176,21 @@
             this.stUser.Size = new System.Drawing.Size(118, 17);
             this.stUser.Text = "toolStripStatusLabel1";
             // 
+            // operaToolStripMenuItem
+            // 
+            this.operaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ySLToolStripMenuItem});
+            this.operaToolStripMenuItem.Name = "operaToolStripMenuItem";
+            this.operaToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.operaToolStripMenuItem.Text = "Opera";
+            // 
+            // ySLToolStripMenuItem
+            // 
+            this.ySLToolStripMenuItem.Name = "ySLToolStripMenuItem";
+            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ySLToolStripMenuItem.Text = "YSL";
+            this.ySLToolStripMenuItem.Click += new System.EventHandler(this.ySLToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,6 +230,8 @@
         private System.Windows.Forms.ToolStripStatusLabel lblUserLoggato;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusBar;
         private System.Windows.Forms.ToolStripStatusLabel stUser;
+        private System.Windows.Forms.ToolStripMenuItem operaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ySLToolStripMenuItem;
     }
 }
 

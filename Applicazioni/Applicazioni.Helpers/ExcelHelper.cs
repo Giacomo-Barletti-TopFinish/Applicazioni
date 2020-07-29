@@ -64,7 +64,7 @@ namespace Applicazioni.Helpers
                 // Constructing header
 
                 Row row = new Row();
-             
+
                 for (int i = 0; i < numeroColonne; i++)
                 {
                     if (colonneDaScartare.Contains(i)) continue;
@@ -75,7 +75,7 @@ namespace Applicazioni.Helpers
 
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
-                foreach (GalvanicaDS.GALVANICA_CARICORow riga in ds.GALVANICA_CARICO.Where(x => !x.IsPIANIFICATONull() && x.PIANIFICATO > 0 ).OrderBy(x => x.IsORDINENull() ? -1 : x.ORDINE))
+                foreach (GalvanicaDS.GALVANICA_CARICORow riga in ds.GALVANICA_CARICO.Where(x => !x.IsPIANIFICATONull() && x.PIANIFICATO > 0).OrderBy(x => x.IsORDINENull() ? -1 : x.ORDINE))
                 {
                     Row rowDati = new Row();
                     for (int i = 0; i < numeroColonne; i++)
@@ -298,6 +298,295 @@ namespace Applicazioni.Helpers
             styleSheet = new Stylesheet(fonts, fills, borders, cellFormats);
 
             return styleSheet;
+        }
+
+        private Sheet EstraiSheetPerNome(WorkbookPart wbPart, string nomeDaTrovare)
+        {
+            Sheets fogliExcel = wbPart.Workbook.Sheets;
+            foreach (Sheet foglio in fogliExcel)
+            {
+                if (foglio.Name == nomeDaTrovare) return foglio;
+            }
+            return null;
+        }
+
+        private string EstraiValoreCella(Cell cell, SharedStringTable sharedStringTable, CellFormats cellFormats, NumberingFormats numberingFormats)
+        {
+            CellValue cellValue = cell.CellValue;
+            if (cellValue != null)
+            {
+                if (cell.DataType != null)
+                {
+                    switch (cell.DataType.Value)
+                    {
+                        case CellValues.SharedString:
+                            return sharedStringTable.ElementAt(Int32.Parse(cell.InnerText)).InnerText;
+
+                        case CellValues.Date:
+                            double oaDateAsDouble;
+                            if (double.TryParse(cell.InnerText, out oaDateAsDouble)) //this line is Culture dependent!
+                            {
+                                DateTime dateTime = DateTime.FromOADate(oaDateAsDouble);
+                                return dateTime.ToShortDateString();
+                            }
+                            return string.Empty;
+
+
+                        default:
+                            return cell.InnerText;
+                    }
+                }
+                else
+                {
+                    if (cell.StyleIndex != null)
+                    {
+                        var cellFormat = (CellFormat)cellFormats.ElementAt((int)cell.StyleIndex.Value);
+                        if (cellFormat.NumberFormatId != null)
+                        {
+                            if (numberingFormats == null) return cell.InnerText;
+
+                            var numberFormatId = cellFormat.NumberFormatId.Value;
+                            var numberingFormat = numberingFormats.Cast<NumberingFormat>()
+                                .SingleOrDefault(f => f.NumberFormatId.Value == numberFormatId);
+
+                            // Here's yer string! Example: $#,##0.00_);[Red]($#,##0.00)
+                            if (numberingFormat != null && (numberingFormat.FormatCode.Value.Contains("yyyy-mm-dd") || numberingFormat.FormatCode.Value.Contains("yyyy\\-mm\\-dd")))
+                            {
+                                string formatString = numberingFormat.FormatCode.Value;
+                                double oaDateAsDouble;
+                                if (double.TryParse(cell.InnerText, out oaDateAsDouble)) //this line is Culture dependent!
+                                {
+                                    DateTime dateTime = DateTime.FromOADate(oaDateAsDouble);
+                                    return dateTime.ToShortDateString();
+                                }
+                                else
+                                    return string.Empty;
+                            }
+                            else
+                                return cell.InnerText;
+                        }
+                    }
+                    else
+                        return cell.InnerText;
+                }
+
+            }
+
+            return string.Empty;
+
+        }
+
+        private string EstraiStringaDaCella(string cella, int lunghezzaMassimaConsentita)
+        {
+            return cella.Length > lunghezzaMassimaConsentita ? cella.Substring(0, lunghezzaMassimaConsentita) : cella;
+        }
+        private bool EstraiValoreCellaDecimal(string cella, string colonna, SpedizioniDS.SPOPERARow dettaglio, out string messaggioErrore)
+        {
+            messaggioErrore = string.Empty;
+            decimal aux;
+            if (!decimal.TryParse(cella, out aux))
+            {
+                messaggioErrore = string.Format("Errore lettura colonna ID {0} il valore non è un numero", colonna);
+                return false;
+            }
+            else
+            {
+                dettaglio[colonna] = aux;
+
+            }
+            return true;
+        }
+
+        private bool EstraiValoreCellaDatetime(string cella, string colonna, SpedizioniDS.SPOPERARow dettaglio, out string messaggioErrore)
+        {
+            messaggioErrore = string.Empty;
+            DateTime aux;
+            if (!DateTime.TryParse(cella, out aux))
+            {
+                messaggioErrore = string.Format("Errore lettura colonna ID {0} il valore non è una data", colonna);
+                return false;
+            }
+            else
+            {
+                dettaglio[colonna] = aux;
+
+            }
+            return true;
+        }
+
+        private string GetColumnReference(Cell cell)
+        {
+            List<char> numeri = new List<char>(new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' });
+            string reference = cell.CellReference;
+            string colonna = string.Empty;
+            foreach (char ch in reference.ToCharArray())
+            {
+                if (!numeri.Contains(ch))
+                {
+                    colonna = colonna + ch;
+                }
+            }
+            return colonna;
+        }
+
+        public bool LeggiFileExcelOpera(Stream stream, SpedizioniDS ds, out string messaggioErrore)
+
+        {
+            messaggioErrore = string.Empty;
+            SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
+            SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
+
+            WorkbookPart wbPart = document.WorkbookPart;
+
+            Sheet foglio = EstraiSheetPerNome(wbPart, "Sheet");
+            WorksheetPart worksheetPart = (WorksheetPart)wbPart.GetPartById(foglio.Id);
+            SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            CellFormats cellFormats = wbPart.WorkbookStylesPart.Stylesheet.CellFormats;
+            NumberingFormats numberingFormats = wbPart.WorkbookStylesPart.Stylesheet.NumberingFormats;
+
+            int rowCount = sheetData.Elements<Row>().Count();
+
+            int scartaRighe = 1;
+            int indiceRighe = 0;
+
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                if (indiceRighe < scartaRighe)
+                {
+                    indiceRighe++;
+                    continue;
+                }
+                bool esito = true;
+
+                if (r.FirstChild.InnerText == string.Empty) continue;
+
+                SpedizioniDS.SPOPERARow operaRow = ds.SPOPERA.NewSPOPERARow();
+
+                string elemento = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    cella = cella.Trim();
+                    string colonna = GetColumnReference(cell);
+                    switch (colonna)
+                    {
+                        case "A":
+                            if (string.IsNullOrEmpty(cella))
+                                continue;
+                            operaRow.BRAND = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[0].MaxLength);
+
+                            //esito = EstraiValoreCellaDecimal(cella, "IDPRENOTAZIONE", cPiombo, out messaggioErrore);
+                            break;
+                        case "B":
+                            {
+                                operaRow.RAGIONE_SOCIALE_RIGA = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[1].MaxLength);
+                            }
+                            break;
+                        case "C":
+                            {
+                                operaRow.STAGIONE_DESCRIZIONE_TESTATA = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[2].MaxLength);
+                            }
+                            break;
+                        case "D":
+                            {
+                                operaRow.RIFERIMENTO_TESTATA = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[3].MaxLength);
+                            }
+                            break;
+                        case "E":
+                            {
+                                operaRow.NUMERO_RIGA = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[4].MaxLength);
+                            }
+                            break;
+                        case "F":
+                            {
+                                double aux;
+                                if (double.TryParse(cella.Replace('.', ','), out aux))
+                                {
+                                    DateTime dt = DateTime.FromOADate(aux);
+                                    operaRow.DATA_RICHIESTA = dt;
+                                }
+                                //        esito = EstraiValoreCellaDatetime(cella, "DATA_RICHIESTA", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "G":
+                            {
+                                double aux;
+                                if (double.TryParse(cella.Replace('.', ','), out aux))
+                                {
+                                    DateTime dt = DateTime.FromOADate(aux);
+                                    operaRow.DATA_CREAZIONE = dt;
+                                }
+                                //                                esito = EstraiValoreCellaDatetime(cella, "DATA_CREAZIONE", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "H":
+                            {
+                                operaRow.MODELLO_CODICE = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[7].MaxLength);
+                            }
+                            break;
+                        case "I":
+                            {
+                                operaRow.DESMODELLO = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[8].MaxLength);
+                            }
+                            break;
+                        case "J":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTANOSPE", operaRow, out messaggioErrore);
+                                break;
+                            }
+                        case "K":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "PREZZO_UNITARIO", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "L":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTAACCESI", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "M":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTAEST", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "N":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTATOT", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "O":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTAACCCON", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "P":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTANOACC", operaRow, out messaggioErrore);
+                            }
+                            break;
+                        case "Q":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTASPE", operaRow, out messaggioErrore);
+                            }
+                            break;
+
+                    }
+                    if (!esito)
+                        return false;
+                }
+                ds.SPOPERA.AddSPOPERARow(operaRow);
+            }
+
+            return true;
         }
     }
 }
