@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaricaODLFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CaricaODLFrm.Designer.cs">
+      <DependentUpon>CaricaODLFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListamovimentiFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     <Compile Include="UbicazioniFrm.Designer.cs">
       <DependentUpon>UbicazioniFrm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CaricaODLFrm.resx">
+      <DependentUpon>CaricaODLFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListamovimentiFrm.resx">
       <DependentUpon>ListamovimentiFrm.cs</DependentUpon>
     </EmbeddedResource>

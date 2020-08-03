@@ -123,6 +123,13 @@ namespace SpedizioniFrm
             form.Show();
         }
 
-        
+
+        private void caricaODLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            CaricaODLFrm form = new CaricaODLFrm();
+            form.MdiParent = this;
+            form.Show();
+
+        }
     }
 }
