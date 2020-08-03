@@ -35,17 +35,18 @@
             this.ubicazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saldiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saldiToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.operaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ySLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orizzontaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saldiToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserLoggato = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatusBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.stUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.operaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ySLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.caricaODLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +85,8 @@
             // 
             this.magazzinoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ubicazioniToolStripMenuItem,
-            this.movimentiToolStripMenuItem});
+            this.movimentiToolStripMenuItem,
+            this.caricaODLToolStripMenuItem1});
             this.magazzinoToolStripMenuItem.Name = "magazzinoToolStripMenuItem";
             this.magazzinoToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.magazzinoToolStripMenuItem.Text = "Magazzino";
@@ -108,13 +110,22 @@
             this.saldiToolStripMenuItem.Name = "saldiToolStripMenuItem";
             this.saldiToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.saldiToolStripMenuItem.Text = "Saldi";
-            // 
-            // saldiToolStripMenuItem1
-            // 
-            this.saldiToolStripMenuItem1.Name = "saldiToolStripMenuItem1";
-            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
-            this.saldiToolStripMenuItem1.Text = "Saldi";
             this.saldiToolStripMenuItem.Click += new System.EventHandler(this.saldiToolStripMenuItem_Click);
+            // 
+            // operaToolStripMenuItem
+            // 
+            this.operaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ySLToolStripMenuItem});
+            this.operaToolStripMenuItem.Name = "operaToolStripMenuItem";
+            this.operaToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.operaToolStripMenuItem.Text = "Opera";
+            // 
+            // ySLToolStripMenuItem
+            // 
+            this.ySLToolStripMenuItem.Name = "ySLToolStripMenuItem";
+            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.ySLToolStripMenuItem.Text = "YSL";
+            this.ySLToolStripMenuItem.Click += new System.EventHandler(this.ySLToolStripMenuItem_Click);
             // 
             // finestreToolStripMenuItem
             // 
@@ -147,6 +158,12 @@
             this.orizzontaleToolStripMenuItem.Text = "Orizzontale";
             this.orizzontaleToolStripMenuItem.Click += new System.EventHandler(this.orizzontaleToolStripMenuItem_Click_1);
             // 
+            // saldiToolStripMenuItem1
+            // 
+            this.saldiToolStripMenuItem1.Name = "saldiToolStripMenuItem1";
+            this.saldiToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
+            this.saldiToolStripMenuItem1.Text = "Saldi";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -175,20 +192,12 @@
             this.stUser.Size = new System.Drawing.Size(118, 17);
             this.stUser.Text = "toolStripStatusLabel1";
             // 
-            // operaToolStripMenuItem
+            // caricaODLToolStripMenuItem1
             // 
-            this.operaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ySLToolStripMenuItem});
-            this.operaToolStripMenuItem.Name = "operaToolStripMenuItem";
-            this.operaToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.operaToolStripMenuItem.Text = "Opera";
-            // 
-            // ySLToolStripMenuItem
-            // 
-            this.ySLToolStripMenuItem.Name = "ySLToolStripMenuItem";
-            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ySLToolStripMenuItem.Text = "YSL";
-            this.ySLToolStripMenuItem.Click += new System.EventHandler(this.ySLToolStripMenuItem_Click);
+            this.caricaODLToolStripMenuItem1.Name = "caricaODLToolStripMenuItem1";
+            this.caricaODLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.caricaODLToolStripMenuItem1.Text = "Carica ODL";
+            this.caricaODLToolStripMenuItem1.Click += new System.EventHandler(this.caricaODLToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -231,6 +240,7 @@
         private System.Windows.Forms.ToolStripStatusLabel stUser;
         private System.Windows.Forms.ToolStripMenuItem operaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ySLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem caricaODLToolStripMenuItem1;
     }
 }
 

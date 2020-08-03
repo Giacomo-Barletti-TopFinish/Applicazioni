@@ -109,6 +109,70 @@ namespace Applicazioni.BLL
             return "COMPLETATA";
         }
 
+        public string UbicaDaODL(string BarcodeODL, string BarcodeUbicazione, string utenza)
+        {
+            SpedizioniDS.SPUBICAZIONIRow ubicazione = LeggiUbicazione(BarcodeUbicazione);
+            if (ubicazione == null) return "UBICAZIONE NON TROVATA";
+
+            TrasferimentiDS.USR_PRD_MOVFASIRow odl = LeggiODL(BarcodeODL);
+            if (odl == null)
+                return "ARTICOLO NON TROVATO";
+
+            Anagrafica _anagrafica = new Anagrafica();
+            AnagraficaDS.MAGAZZRow articolo = _anagrafica.GetMAGAZZ(odl.IDMAGAZZ);
+            if (articolo == null) return "ARTICOLO NON TROVATO";
+
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                try
+                {
+                    bSpedizioni.GetSaldo(ds, ubicazione.IDUBICAZIONE, articolo.IDMAGAZZ);
+                    SpedizioniDS.SPSALDIRow saldo = ds.SPSALDI.Where(x => x.IDUBICAZIONE == ubicazione.IDUBICAZIONE && x.IDMAGAZZ == articolo.IDMAGAZZ).FirstOrDefault();
+                    DateTime data = DateTime.Now;
+                    decimal idsaldo = bSpedizioni.GetID(); ;
+                    if (saldo == null)
+                    {
+                        saldo = ds.SPSALDI.NewSPSALDIRow();
+                        saldo.IDSALDO = idsaldo;
+                        saldo.IDMAGAZZ = articolo.IDMAGAZZ;
+                        saldo.DATAMODIFICA = data;
+                        saldo.IDUBICAZIONE = ubicazione.IDUBICAZIONE;
+                        saldo.QUANTITA = odl.QTA;
+                        saldo.UTENTEMODIFICA = utenza;
+                        ds.SPSALDI.AddSPSALDIRow(saldo);
+                    }
+                    else
+                    {
+                        idsaldo = saldo.IDSALDO;
+                        saldo.DATAMODIFICA = data;
+                        decimal quantita = saldo.QUANTITA + odl.QTA;
+                        saldo.QUANTITA = quantita;
+                        saldo.UTENTEMODIFICA = utenza;
+
+                    }
+
+                    SpedizioniDS.SPMOVIMENTIRow movimento = ds.SPMOVIMENTI.NewSPMOVIMENTIRow();
+                    movimento.CAUSALE = odl.IsNUMMOVFASENull() ? "ODL" : odl.NUMMOVFASE;
+                    movimento.DATAMODIFICA = DateTime.Now;
+                    movimento.IDSALDO = idsaldo;
+                    movimento.QUANTITA = odl.QTA;
+                    movimento.TIPOMOVIMENTO = "VERSAMENTO";
+                    movimento.UTENTEMODIFICA = utenza;
+                    ds.SPMOVIMENTI.AddSPMOVIMENTIRow(movimento);
+
+                    bSpedizioni.SalvaInserimento(ds);
+
+                }
+                catch (Exception ex)
+                {
+                    bSpedizioni.Rollback();
+                    return "ERRORE IMPOSSIBILE PROCEDERE";
+                }
+            }
+
+            return "COMPLETATA";
+        }
+
         public string Movimenta(decimal idsaldo, decimal quantita, string causale, string tipoOperazione, string utenza)
         {
 
