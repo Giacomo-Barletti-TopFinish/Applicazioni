@@ -34,6 +34,7 @@
             this.btnLeggiFile = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
             this.dgvExcelCaricato = new System.Windows.Forms.DataGridView();
+            this.btnSimula = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExcelCaricato)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +87,7 @@
             // 
             // dgvExcelCaricato
             // 
+            this.dgvExcelCaricato.AllowUserToAddRows = false;
             this.dgvExcelCaricato.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -95,11 +97,22 @@
             this.dgvExcelCaricato.Size = new System.Drawing.Size(1248, 771);
             this.dgvExcelCaricato.TabIndex = 7;
             // 
+            // btnSimula
+            // 
+            this.btnSimula.Location = new System.Drawing.Point(499, 69);
+            this.btnSimula.Name = "btnSimula";
+            this.btnSimula.Size = new System.Drawing.Size(75, 23);
+            this.btnSimula.TabIndex = 8;
+            this.btnSimula.Text = "Simula";
+            this.btnSimula.UseVisualStyleBackColor = true;
+            this.btnSimula.Click += new System.EventHandler(this.btnSimula_Click);
+            // 
             // OperaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 894);
+            this.Controls.Add(this.btnSimula);
             this.Controls.Add(this.dgvExcelCaricato);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnLeggiFile);
@@ -124,5 +137,6 @@
         private System.Windows.Forms.Button btnLeggiFile;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.DataGridView dgvExcelCaricato;
+        private System.Windows.Forms.Button btnSimula;
     }
 }

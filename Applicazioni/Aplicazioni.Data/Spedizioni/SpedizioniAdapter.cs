@@ -50,7 +50,22 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.SPSALDIEXT);
             }
         }
-        
+
+        public void GetMagazz(SpedizioniDS ds, String MODELLO)
+        {
+            string select = @"select ma.*
+                                    from gruppo.magazz ma 
+                                    where ma.modello = $P<MODELLO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("MODELLO", DbType.String, MODELLO);
+
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
         public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO, DateTime dtInizo, DateTime dtFine)
         {
             string inizio = dtInizo.ToString("dd/MM/yyyy");

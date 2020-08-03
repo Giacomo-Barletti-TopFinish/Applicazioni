@@ -1225,6 +1225,7 @@
               <xs:element name="QTAUBI" msprop:Generator_ColumnVarNameInTable="columnQTAUBI" msprop:Generator_ColumnPropNameInRow="QTAUBI" msprop:Generator_ColumnPropNameInTable="QTAUBIColumn" msprop:Generator_UserColumnName="QTAUBI" type="xs:decimal" minOccurs="0" />
               <xs:element name="QTAUBIUTIL" msprop:Generator_ColumnVarNameInTable="columnQTAUBIUTIL" msprop:Generator_ColumnPropNameInRow="QTAUBIUTIL" msprop:Generator_ColumnPropNameInTable="QTAUBIUTILColumn" msprop:Generator_UserColumnName="QTAUBIUTIL" type="xs:decimal" minOccurs="0" />
               <xs:element name="QTAUBIRES" msprop:Generator_ColumnVarNameInTable="columnQTAUBIRES" msprop:Generator_ColumnPropNameInRow="QTAUBIRES" msprop:Generator_ColumnPropNameInTable="QTAUBIRESColumn" msprop:Generator_UserColumnName="QTAUBIRES" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SEQUENZA" msprop:Generator_ColumnVarNameInTable="columnSEQUENZA" msprop:Generator_ColumnPropNameInRow="SEQUENZA" msprop:Generator_ColumnPropNameInTable="SEQUENZAColumn" msprop:Generator_UserColumnName="SEQUENZA" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -6759,6 +6759,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnQTAUBIRES;
             
+            private global::System.Data.DataColumn columnSEQUENZA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPOPERADataTable() {
@@ -6970,6 +6972,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SEQUENZAColumn {
+                get {
+                    return this.columnSEQUENZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7027,7 +7037,8 @@ namespace Applicazioni.Entities {
                         string CODICE, 
                         decimal QTAUBI, 
                         decimal QTAUBIUTIL, 
-                        decimal QTAUBIRES) {
+                        decimal QTAUBIRES, 
+                        decimal SEQUENZA) {
                 SPOPERARow rowSPOPERARow = ((SPOPERARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         BRAND,
@@ -7051,7 +7062,8 @@ namespace Applicazioni.Entities {
                         CODICE,
                         QTAUBI,
                         QTAUBIUTIL,
-                        QTAUBIRES};
+                        QTAUBIRES,
+                        SEQUENZA};
                 rowSPOPERARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSPOPERARow);
                 return rowSPOPERARow;
@@ -7096,6 +7108,7 @@ namespace Applicazioni.Entities {
                 this.columnQTAUBI = base.Columns["QTAUBI"];
                 this.columnQTAUBIUTIL = base.Columns["QTAUBIUTIL"];
                 this.columnQTAUBIRES = base.Columns["QTAUBIRES"];
+                this.columnSEQUENZA = base.Columns["SEQUENZA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7145,6 +7158,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnQTAUBIUTIL);
                 this.columnQTAUBIRES = new global::System.Data.DataColumn("QTAUBIRES", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQTAUBIRES);
+                this.columnSEQUENZA = new global::System.Data.DataColumn("SEQUENZA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEQUENZA);
                 this.columnBRAND.MaxLength = 254;
                 this.columnRAGIONE_SOCIALE_RIGA.MaxLength = 50;
                 this.columnSTAGIONE_DESCRIZIONE_TESTATA.MaxLength = 7;
@@ -13752,6 +13767,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal SEQUENZA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSPOPERA.SEQUENZAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SEQUENZA\' in table \'SPOPERA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPOPERA.SEQUENZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsBRANDNull() {
                 return this.IsNull(this.tableSPOPERA.BRANDColumn);
             }
@@ -14012,6 +14043,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetQTAUBIRESNull() {
                 this[this.tableSPOPERA.QTAUBIRESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSEQUENZANull() {
+                return this.IsNull(this.tableSPOPERA.SEQUENZAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSEQUENZANull() {
+                this[this.tableSPOPERA.SEQUENZAColumn] = global::System.Convert.DBNull;
             }
         }
         

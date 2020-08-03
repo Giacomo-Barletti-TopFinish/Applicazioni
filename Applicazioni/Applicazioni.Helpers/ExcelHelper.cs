@@ -462,6 +462,7 @@ namespace Applicazioni.Helpers
                 if (r.FirstChild.InnerText == string.Empty) continue;
 
                 SpedizioniDS.SPOPERARow operaRow = ds.SPOPERA.NewSPOPERARow();
+                operaRow.SEQUENZA = 1;
 
                 string elemento = string.Empty;
                 foreach (Cell cell in r.Elements<Cell>())

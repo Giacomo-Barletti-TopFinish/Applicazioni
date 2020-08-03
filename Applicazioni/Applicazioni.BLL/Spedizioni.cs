@@ -253,6 +253,19 @@ namespace Applicazioni.BLL
             }
         }
 
+        public SpedizioniDS.MAGAZZRow GetMagazz(SpedizioniDS ds, string modello)
+        {
+            SpedizioniDS.MAGAZZRow magazz = ds.MAGAZZ.Where(x => x.MODELLO == modello).FirstOrDefault();
+            if (magazz == null)
+            {
+                using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+                {
+                    bSpedizioni.GetMagazz(ds, modello);
+                    magazz = ds.MAGAZZ.Where(x => x.MODELLO == modello).FirstOrDefault();
+                }
+            }
+            return magazz;
+        }
 
         public void FillSaldi(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
         {
@@ -262,7 +275,7 @@ namespace Applicazioni.BLL
             }
         }
 
-        public void SalvaSaldo(decimal IdUbicazione, string IdMagazz, string utente)
+        public void SalvaSaldo(decimal IdUbicazione, string IdMagazz, decimal quantita, string utente)
         {
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
             {
@@ -272,6 +285,7 @@ namespace Applicazioni.BLL
                 saldo.IDMAGAZZ = IdMagazz;
                 saldo.DATAMODIFICA = DateTime.Now;
                 saldo.UTENTEMODIFICA = utente;
+                saldo.QUANTITA = quantita;
 
                 ds.SPSALDI.AddSPSALDIRow(saldo);
 

@@ -58,6 +58,12 @@ namespace Applicazioni.Data.Spedizioni
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
             a.FillSPSALDI(ds, UBICAZIONE, MODELLO);
         }
+        [DataContext]
+        public void GetMagazz(SpedizioniDS ds, String MODELLO)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.GetMagazz(ds,  MODELLO);
+        }
 
         [DataContext(true)]
         public void SalvaSaldi(SpedizioniDS ds)
