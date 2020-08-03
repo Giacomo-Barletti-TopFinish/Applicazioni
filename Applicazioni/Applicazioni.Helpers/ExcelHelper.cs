@@ -463,6 +463,7 @@ namespace Applicazioni.Helpers
 
                 SpedizioniDS.SPOPERARow operaRow = ds.SPOPERA.NewSPOPERARow();
                 operaRow.SEQUENZA = 1;
+                operaRow.VALIDATA = false;
 
                 string elemento = string.Empty;
                 foreach (Cell cell in r.Elements<Cell>())

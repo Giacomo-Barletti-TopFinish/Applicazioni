@@ -34,15 +34,16 @@
             this.Ubicazione = new System.Windows.Forms.Label();
             this.Articolo = new System.Windows.Forms.Label();
             this.dgvlistamovimenti = new System.Windows.Forms.DataGridView();
+            this.dtInizio = new System.Windows.Forms.DateTimePicker();
+            this.dtFine = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.IDUBICAZIONE_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UBICAZIONE_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ARTICOLO_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITA_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DATAMODIFICA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtInizio = new System.Windows.Forms.DateTimePicker();
-            this.dtFine = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.UTENTE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlistamovimenti)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,16 +102,50 @@
             this.UBICAZIONE_,
             this.ARTICOLO_,
             this.QUANTITA_,
-            this.DATAMODIFICA});
+            this.DATAMODIFICA,
+            this.UTENTE});
             this.dgvlistamovimenti.Location = new System.Drawing.Point(0, 122);
             this.dgvlistamovimenti.Name = "dgvlistamovimenti";
             this.dgvlistamovimenti.ReadOnly = true;
-            this.dgvlistamovimenti.Size = new System.Drawing.Size(820, 451);
+            this.dgvlistamovimenti.Size = new System.Drawing.Size(899, 475);
             this.dgvlistamovimenti.TabIndex = 5;
+            // 
+            // dtInizio
+            // 
+            this.dtInizio.Location = new System.Drawing.Point(49, 78);
+            this.dtInizio.Name = "dtInizio";
+            this.dtInizio.Size = new System.Drawing.Size(200, 20);
+            this.dtInizio.TabIndex = 6;
+            // 
+            // dtFine
+            // 
+            this.dtFine.Location = new System.Drawing.Point(305, 78);
+            this.dtFine.Name = "dtFine";
+            this.dtFine.Size = new System.Drawing.Size(200, 20);
+            this.dtFine.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(49, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Data inizio";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(305, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Data fine";
             // 
             // IDUBICAZIONE_
             // 
             this.IDUBICAZIONE_.DataPropertyName = "IDUBICAZIONE";
+            this.IDUBICAZIONE_.FillWeight = 170F;
             this.IDUBICAZIONE_.HeaderText = "IDUBICAZIONE";
             this.IDUBICAZIONE_.Name = "IDUBICAZIONE_";
             this.IDUBICAZIONE_.ReadOnly = true;
@@ -149,43 +184,19 @@
             this.DATAMODIFICA.ReadOnly = true;
             this.DATAMODIFICA.Width = 170;
             // 
-            // dtInizio
+            // UTENTE
             // 
-            this.dtInizio.Location = new System.Drawing.Point(49, 78);
-            this.dtInizio.Name = "dtInizio";
-            this.dtInizio.Size = new System.Drawing.Size(200, 20);
-            this.dtInizio.TabIndex = 6;
-            // 
-            // dtFine
-            // 
-            this.dtFine.Location = new System.Drawing.Point(305, 78);
-            this.dtFine.Name = "dtFine";
-            this.dtFine.Size = new System.Drawing.Size(200, 20);
-            this.dtFine.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Data inizio";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(305, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Data fine";
+            this.UTENTE.DataPropertyName = "UTENTEMODIFICA";
+            this.UTENTE.HeaderText = "UTENTE";
+            this.UTENTE.Name = "UTENTE";
+            this.UTENTE.ReadOnly = true;
+            this.UTENTE.Width = 170;
             // 
             // ListamovimentiFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 570);
+            this.ClientSize = new System.Drawing.Size(911, 592);
             this.Controls.Add(this.dtFine);
             this.Controls.Add(this.dtInizio);
             this.Controls.Add(this.dgvlistamovimenti);
@@ -222,5 +233,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ARTICOLO_;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA_;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATAMODIFICA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UTENTE;
     }
 }

@@ -33,8 +33,8 @@
             this.btnCerca = new System.Windows.Forms.Button();
             this.btnLeggiFile = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
-            this.dgvExcelCaricato = new System.Windows.Forms.DataGridView();
             this.btnSimula = new System.Windows.Forms.Button();
+            this.dgvExcelCaricato = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExcelCaricato)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,18 +85,6 @@
             this.lblMessage.TabIndex = 6;
             this.lblMessage.Text = "message";
             // 
-            // dgvExcelCaricato
-            // 
-            this.dgvExcelCaricato.AllowUserToAddRows = false;
-            this.dgvExcelCaricato.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvExcelCaricato.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvExcelCaricato.Location = new System.Drawing.Point(12, 111);
-            this.dgvExcelCaricato.Name = "dgvExcelCaricato";
-            this.dgvExcelCaricato.Size = new System.Drawing.Size(1248, 771);
-            this.dgvExcelCaricato.TabIndex = 7;
-            // 
             // btnSimula
             // 
             this.btnSimula.Location = new System.Drawing.Point(499, 69);
@@ -106,6 +94,19 @@
             this.btnSimula.Text = "Simula";
             this.btnSimula.UseVisualStyleBackColor = true;
             this.btnSimula.Click += new System.EventHandler(this.btnSimula_Click);
+            // 
+            // dgvExcelCaricato
+            // 
+            this.dgvExcelCaricato.AllowUserToAddRows = false;
+            this.dgvExcelCaricato.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvExcelCaricato.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvExcelCaricato.Location = new System.Drawing.Point(25, 98);
+            this.dgvExcelCaricato.Name = "dgvExcelCaricato";
+            this.dgvExcelCaricato.Size = new System.Drawing.Size(1248, 771);
+            this.dgvExcelCaricato.TabIndex = 7;
+            this.dgvExcelCaricato.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExcelCaricato_CellValidated);
             // 
             // OperaFrm
             // 
@@ -136,7 +137,7 @@
         private System.Windows.Forms.Button btnCerca;
         private System.Windows.Forms.Button btnLeggiFile;
         private System.Windows.Forms.Label lblMessage;
-        private System.Windows.Forms.DataGridView dgvExcelCaricato;
         private System.Windows.Forms.Button btnSimula;
+        private System.Windows.Forms.DataGridView dgvExcelCaricato;
     }
 }
