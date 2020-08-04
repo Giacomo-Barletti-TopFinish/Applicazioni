@@ -179,6 +179,9 @@ namespace SpedizioniFrm
                         decimal quantitaImpegnata = 0;
                         decimal sequenza = 0;
                         List<SpedizioniDS.SPSALDIEXTRow> saldi = _ds.SPSALDIEXT.Where(x => x.QUANTITA > 0 && x.IDMAGAZZ == magazz.IDMAGAZZ).OrderBy(x => x.QUANTITA).ToList();
+
+
+
                         while (quantitaImpegnata < quantitaDaSpedire && saldi.Count > 0)
                         {
                             sequenza++;
@@ -289,11 +292,13 @@ namespace SpedizioniFrm
             SpedizioniDS.MAGAZZRow magazz = spedizioni.GetMagazz(_ds, modello);
             if (magazz == null) return;
 
+            DateTime dataRichiesta = (DateTime)dgvExcelCaricato.Rows[e.RowIndex].Cells[5].Value;
+
             decimal idUbicazione = (decimal)dgvExcelCaricato.Rows[e.RowIndex].Cells[17].Value;
             SpedizioniDS.SPSALDIEXTRow saldo = _ds.SPSALDIEXT.Where(x => x.IDMAGAZZ == magazz.IDMAGAZZ && x.IDUBICAZIONE == idUbicazione).FirstOrDefault();
             if (saldo == null) return;
 
-
+            SpedizioniDS dsAlternativo = new SpedizioniDS();
 
             if (e.ColumnIndex == 20)
             {
@@ -327,10 +332,129 @@ namespace SpedizioniFrm
             if (saldo.QUANTITA < 0)
             {
                 // c'è da rivedere la simulazione
+                List<SpedizioniDS.SPOPERARow> altreUbicazioni = _ds.SPOPERA.Where(x => !x.IsIDUBICAZIONENull() && x.IDUBICAZIONE == idUbicazione && x.MODELLO_CODICE == modello && x.DATA_RICHIESTA != dataRichiesta && !x.VALIDATA).ToList();
+                if (altreUbicazioni.Count == 0) return;
 
+                foreach (SpedizioniDS.SPOPERARow altraUbicazione in altreUbicazioni)
+                {
+                    decimal quantitaImpegnata = 0;
+                    decimal quantitaDaSpedire = altraUbicazione.QTANOSPE;
+                    decimal quantitaNecessaria = quantitaDaSpedire - quantitaImpegnata;
+                    List<SpedizioniDS.SPOPERARow> fratelli = _ds.SPOPERA.Where(x => x.MODELLO_CODICE == modello && x.DATA_RICHIESTA == altraUbicazione.DATA_RICHIESTA).ToList();
+                    for (int i = 0; i < fratelli.Count; i++)
+                    {
+                        if (fratelli[i].SEQUENZA < altraUbicazione.SEQUENZA)
+                        {
+                            quantitaImpegnata += fratelli[i].QTAUBIUTIL;
+                            quantitaNecessaria = quantitaDaSpedire - quantitaImpegnata;
+                        }
 
+                        if (fratelli[i].SEQUENZA == altraUbicazione.SEQUENZA && !fratelli[i].VALIDATA)
+                        {
 
+                            saldo.QUANTITA += fratelli[i].QTAUBIUTIL;
+                            fratelli[i].QTAUBI = saldo.QUANTITA;
 
+                            if (quantitaNecessaria > saldo.QUANTITA)
+                            {
+                                fratelli[i].QTAUBIUTIL = saldo.QUANTITA;
+                                quantitaImpegnata += saldo.QUANTITA;
+                                fratelli[i].QTAUBIRES = 0;
+                                saldo.QUANTITA = 0;
+                            }
+                            else
+                            {
+                                fratelli[i].QTAUBIUTIL = quantitaNecessaria;
+                                quantitaImpegnata += quantitaNecessaria;
+                                fratelli[i].QTAUBIRES = saldo.QUANTITA - quantitaNecessaria;
+                                saldo.QUANTITA = saldo.QUANTITA - quantitaNecessaria;
+                            }
+                        }
+
+                        if (fratelli[i].SEQUENZA > altraUbicazione.SEQUENZA && !fratelli[i].VALIDATA)
+                        {
+                            SpedizioniDS.SPSALDIEXTRow saldoRiga = _ds.SPSALDIEXT.Where(x => x.IDUBICAZIONE == fratelli[i].IDUBICAZIONE && x.IDMAGAZZ == magazz.IDMAGAZZ).FirstOrDefault();
+                            if (saldoRiga == null) return;
+
+                            saldoRiga.QUANTITA += fratelli[i].QTAUBIUTIL;
+                            fratelli[i].QTAUBI = saldoRiga.QUANTITA;
+
+                            if (quantitaNecessaria > saldoRiga.QUANTITA)
+                            {
+                                fratelli[i].QTAUBIUTIL = saldoRiga.QUANTITA;
+                                quantitaImpegnata += saldoRiga.QUANTITA;
+                                fratelli[i].QTAUBIRES = 0;
+                                saldoRiga.QUANTITA = 0;
+                            }
+                            else
+                            {
+                                fratelli[i].QTAUBIUTIL = quantitaNecessaria;
+                                quantitaImpegnata += quantitaNecessaria;
+                                fratelli[i].QTAUBIRES = saldoRiga.QUANTITA - quantitaNecessaria;
+                                saldoRiga.QUANTITA = saldoRiga.QUANTITA - quantitaNecessaria;
+                            }
+                        }
+                    }
+                    int sequenza = fratelli.Count;
+
+                    if(quantitaImpegnata < quantitaDaSpedire)
+                    {
+                        List<SpedizioniDS.SPSALDIEXTRow> saldi = _ds.SPSALDIEXT.Where(x => x.QUANTITA > 0 && x.IDMAGAZZ == magazz.IDMAGAZZ).OrderBy(x => x.QUANTITA).ToList();
+                        while (quantitaImpegnata < quantitaDaSpedire && saldi.Count > 0)
+                        {
+                            sequenza++;
+                            
+                            SpedizioniDS.SPOPERARow nuovaRiga = dsAlternativo.SPOPERA.NewSPOPERARow();
+                            nuovaRiga.BRAND = string.Empty;// (string)riga.Cells[0].Value;
+                            nuovaRiga.RAGIONE_SOCIALE_RIGA = string.Empty;//riga.Cells[1].Value == DBNull.Value ? string.Empty : (string)riga.Cells[1].Value;
+                            nuovaRiga.STAGIONE_DESCRIZIONE_TESTATA = string.Empty;//(string)riga.Cells[2].Value;
+                            nuovaRiga.RIFERIMENTO_TESTATA = string.Empty;//(string)riga.Cells[3].Value;
+                            nuovaRiga.NUMERO_RIGA = string.Empty;//(string)riga.Cells[4].Value;
+                            nuovaRiga.DATA_RICHIESTA = altraUbicazione.DATA_RICHIESTA;
+                            nuovaRiga.DATA_CREAZIONE = altraUbicazione.DATA_CREAZIONE;
+                            nuovaRiga.MODELLO_CODICE = altraUbicazione.MODELLO_CODICE;
+                            nuovaRiga.DESMODELLO = altraUbicazione.DESMODELLO;
+                            nuovaRiga.QTANOSPE = altraUbicazione.QTANOSPE;
+                            nuovaRiga.PREZZO_UNITARIO = altraUbicazione.PREZZO_UNITARIO;
+                            nuovaRiga.QTAACCESI = altraUbicazione.QTAACCESI;
+                            nuovaRiga.QTAEST = altraUbicazione.QTAEST;
+                            nuovaRiga.QTATOT = altraUbicazione.QTATOT;
+                            nuovaRiga.QTAACCCON = altraUbicazione.QTAACCCON;
+                            nuovaRiga.QTANOACC = altraUbicazione.QTANOACC;
+                            nuovaRiga.QTASPE = altraUbicazione.QTASPE;
+
+                            nuovaRiga.IDUBICAZIONE = saldi[0].IDUBICAZIONE;
+                            string codiceUbicazione = _ds.SPUBICAZIONI.Where(x => x.IDUBICAZIONE == saldi[0].IDUBICAZIONE).Select(x => x.CODICE).FirstOrDefault();
+                            nuovaRiga.CODICE = codiceUbicazione;
+                            nuovaRiga.QTAUBI = saldi[0].QUANTITA;
+                            nuovaRiga.SEQUENZA = sequenza;
+                            nuovaRiga.VALIDATA = false;
+
+                            if (quantitaNecessaria > saldi[0].QUANTITA)
+                            {
+                                nuovaRiga.QTAUBIUTIL = saldi[0].QUANTITA;
+                                quantitaImpegnata += saldi[0].QUANTITA;
+                                nuovaRiga.QTAUBIRES = 0;
+                                saldi[0].QUANTITA = 0;
+                            }
+                            else
+                            {
+                                nuovaRiga.QTAUBIUTIL = quantitaNecessaria;
+                                quantitaImpegnata += quantitaNecessaria;
+                                nuovaRiga.QTAUBIRES = saldi[0].QUANTITA - quantitaNecessaria;
+                                saldi[0].QUANTITA = saldi[0].QUANTITA - quantitaNecessaria;
+                            }
+                            dsAlternativo.SPOPERA.AddSPOPERARow(nuovaRiga);
+                            //aggiungi riga
+                        }
+                    }
+
+                    foreach (SpedizioniDS.SPOPERARow riga in dsAlternativo.SPOPERA)
+                        _ds.SPOPERA.ImportRow(riga);
+
+                    caricaGriglia();
+
+                }
 
             }
 
