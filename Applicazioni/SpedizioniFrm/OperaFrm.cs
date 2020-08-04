@@ -189,7 +189,7 @@ namespace SpedizioniFrm
                             if (!primariga)
                             {
 
-                                SpedizioniDS.SPOPERARow nuovaRiga = _ds.SPOPERA.NewSPOPERARow();
+                                SpedizioniDS.SPOPERARow nuovaRiga = dsAlternativo.SPOPERA.NewSPOPERARow();
                                 nuovaRiga.BRAND = string.Empty;// (string)riga.Cells[0].Value;
                                 nuovaRiga.RAGIONE_SOCIALE_RIGA = string.Empty;//riga.Cells[1].Value == DBNull.Value ? string.Empty : (string)riga.Cells[1].Value;
                                 nuovaRiga.STAGIONE_DESCRIZIONE_TESTATA = string.Empty;//(string)riga.Cells[2].Value;
