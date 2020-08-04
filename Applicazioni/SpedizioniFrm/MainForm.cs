@@ -131,5 +131,21 @@ namespace SpedizioniFrm
             form.Show();
 
         }
+
+        private void balenciagaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaFrm form = new OperaFrm("Balenciaga");
+            form.MdiParent = this;
+            form.Show();
+
+        }
+
+        private void gucciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaFrm form = new OperaFrm("Gucci");
+            form.MdiParent = this;
+            form.Show();
+
+        }
     }
 }
