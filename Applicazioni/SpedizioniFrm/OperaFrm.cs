@@ -146,12 +146,16 @@ namespace SpedizioniFrm
                 spedizioni.FillSaldi(_ds, string.Empty, string.Empty);
                 spedizioni.FillUbicazioni(_ds, false);
 
+                SpedizioniDS dsAlternativo = new SpedizioniDS();
+
                 int totaleRighe = dgvExcelCaricato.Rows.Count;
                 for (int indiceRighe = 0; indiceRighe < totaleRighe; indiceRighe++)
                 {
                     DataGridViewRow riga = dgvExcelCaricato.Rows[indiceRighe];
                     string modello = (string)riga.Cells[7].Value;
                     decimal quantitaDaSpedire = (decimal)riga.Cells[9].Value;
+                    DateTime dataRichiesta = (DateTime)riga.Cells[5].Value;
+                    int righe = dgvExcelCaricato.Rows.Count;
 
                     SpedizioniDS.MAGAZZRow magazz = spedizioni.GetMagazz(_ds, modello);
                     if (magazz == null) continue;
@@ -224,7 +228,7 @@ namespace SpedizioniFrm
                                     nuovaRiga.QTAUBIRES = saldo.QUANTITA - quantitaNecessaria;
                                     saldo.QUANTITA = saldo.QUANTITA - quantitaNecessaria;
                                 }
-                                _ds.SPOPERA.AddSPOPERARow(nuovaRiga);
+                                dsAlternativo.SPOPERA.AddSPOPERARow(nuovaRiga);
                                 //aggiungi riga
                             }
                             else
@@ -255,6 +259,9 @@ namespace SpedizioniFrm
                     }
 
                 }
+                foreach (SpedizioniDS.SPOPERARow riga in dsAlternativo.SPOPERA)
+                    _ds.SPOPERA.ImportRow(riga);
+
                 caricaGriglia();
             }
             finally
@@ -280,7 +287,7 @@ namespace SpedizioniFrm
             Spedizioni spedizioni = new Spedizioni();
             string modello = (string)dgvExcelCaricato.Rows[e.RowIndex].Cells[7].Value;
             SpedizioniDS.MAGAZZRow magazz = spedizioni.GetMagazz(_ds, modello);
-            if (magazz == null) return; 
+            if (magazz == null) return;
 
             decimal idUbicazione = (decimal)dgvExcelCaricato.Rows[e.RowIndex].Cells[17].Value;
             SpedizioniDS.SPSALDIEXTRow saldo = _ds.SPSALDIEXT.Where(x => x.IDMAGAZZ == magazz.IDMAGAZZ && x.IDUBICAZIONE == idUbicazione).FirstOrDefault();
@@ -317,9 +324,14 @@ namespace SpedizioniFrm
             dgvExcelCaricato.Rows[e.RowIndex].Cells[20].Value = valoreUtilizzato;
             dgvExcelCaricato.Rows[e.RowIndex].Cells[21].Value = valoreResiduo;
 
-            if(saldo.QUANTITA<0)
+            if (saldo.QUANTITA < 0)
             {
                 // c'è da rivedere la simulazione
+
+
+
+
+
             }
 
         }
