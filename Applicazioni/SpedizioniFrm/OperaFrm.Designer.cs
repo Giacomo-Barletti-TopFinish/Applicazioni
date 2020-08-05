@@ -35,6 +35,7 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnSimula = new System.Windows.Forms.Button();
             this.dgvExcelCaricato = new System.Windows.Forms.DataGridView();
+            this.btnCreaOpera = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExcelCaricato)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             // 
             this.btnCerca.Location = new System.Drawing.Point(499, 25);
             this.btnCerca.Name = "btnCerca";
-            this.btnCerca.Size = new System.Drawing.Size(75, 23);
+            this.btnCerca.Size = new System.Drawing.Size(96, 23);
             this.btnCerca.TabIndex = 2;
             this.btnCerca.Text = "Cerca";
             this.btnCerca.UseVisualStyleBackColor = true;
@@ -68,7 +69,7 @@
             // 
             this.btnLeggiFile.Location = new System.Drawing.Point(623, 25);
             this.btnLeggiFile.Name = "btnLeggiFile";
-            this.btnLeggiFile.Size = new System.Drawing.Size(75, 23);
+            this.btnLeggiFile.Size = new System.Drawing.Size(96, 23);
             this.btnLeggiFile.TabIndex = 2;
             this.btnLeggiFile.Text = "Leggi file";
             this.btnLeggiFile.UseVisualStyleBackColor = true;
@@ -87,9 +88,9 @@
             // 
             // btnSimula
             // 
-            this.btnSimula.Location = new System.Drawing.Point(499, 69);
+            this.btnSimula.Location = new System.Drawing.Point(748, 26);
             this.btnSimula.Name = "btnSimula";
-            this.btnSimula.Size = new System.Drawing.Size(75, 23);
+            this.btnSimula.Size = new System.Drawing.Size(96, 23);
             this.btnSimula.TabIndex = 8;
             this.btnSimula.Text = "Simula";
             this.btnSimula.UseVisualStyleBackColor = true;
@@ -102,17 +103,28 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvExcelCaricato.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvExcelCaricato.Location = new System.Drawing.Point(25, 98);
+            this.dgvExcelCaricato.Location = new System.Drawing.Point(25, 88);
             this.dgvExcelCaricato.Name = "dgvExcelCaricato";
-            this.dgvExcelCaricato.Size = new System.Drawing.Size(1248, 771);
+            this.dgvExcelCaricato.Size = new System.Drawing.Size(1248, 781);
             this.dgvExcelCaricato.TabIndex = 7;
             this.dgvExcelCaricato.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExcelCaricato_CellValidated);
+            // 
+            // btnCreaOpera
+            // 
+            this.btnCreaOpera.Location = new System.Drawing.Point(876, 24);
+            this.btnCreaOpera.Name = "btnCreaOpera";
+            this.btnCreaOpera.Size = new System.Drawing.Size(96, 23);
+            this.btnCreaOpera.TabIndex = 9;
+            this.btnCreaOpera.Text = "Crea Opera";
+            this.btnCreaOpera.UseVisualStyleBackColor = true;
+            this.btnCreaOpera.Click += new System.EventHandler(this.btnCreaOpera_Click);
             // 
             // OperaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 894);
+            this.Controls.Add(this.btnCreaOpera);
             this.Controls.Add(this.btnSimula);
             this.Controls.Add(this.dgvExcelCaricato);
             this.Controls.Add(this.lblMessage);
@@ -139,5 +151,6 @@
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnSimula;
         private System.Windows.Forms.DataGridView dgvExcelCaricato;
+        private System.Windows.Forms.Button btnCreaOpera;
     }
 }

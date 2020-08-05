@@ -14,6 +14,93 @@ namespace Applicazioni.Helpers
 {
     public class ExcelHelper
     {
+        public byte[] CreaExcelOpera(List<SpedizioniDS.SPOPERARow> righeDaSalvare)
+        {
+            byte[] content;
+
+            if (righeDaSalvare.Count == 0) return null;
+
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                int numeroColonne = righeDaSalvare[0].Table.Columns.Count;
+                List<int> colonneDaScartare = new List<int>(new int[] { 6,10,11,12,14,15,16,17});
+                Columns columns = new Columns();
+                for (int i = 0; i < (numeroColonne - colonneDaScartare.Count); i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 15;
+                    c.CustomWidth = true;
+
+                    columns.Append(c);
+                }
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                string nome = DateTime.Today.AddDays(1).ToShortDateString();
+                nome = nome.Replace('/', '.');
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = nome };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+
+                Row row = new Row();
+
+                for (int i = 0; i < numeroColonne; i++)
+                {
+                    if (colonneDaScartare.Contains(i)) continue;
+
+                    string etichetta = righeDaSalvare[0].Table.Columns[i].ColumnName;
+                    row.Append(ConstructCell(etichetta, CellValues.String, 2));
+                }
+
+                // Insert the header row to the Sheet Data
+                sheetData.AppendChild(row);
+                foreach (SpedizioniDS.SPOPERARow riga in righeDaSalvare)
+                {
+                    Row rowDati = new Row();
+                    for (int i = 0; i < numeroColonne; i++)
+                    {
+                        if (colonneDaScartare.Contains(i)) continue;
+                        string valore = riga[i].ToString();
+                        rowDati.Append(ConstructCell(valore, CellValues.String, 1));
+                    }
+
+                    sheetData.AppendChild(rowDati);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+
+            return content;
+        }
+        
 
         public byte[] CreaExcelPianificazioneGalvanica(GalvanicaDS ds)
         {

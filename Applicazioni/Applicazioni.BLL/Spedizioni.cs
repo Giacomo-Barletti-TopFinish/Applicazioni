@@ -173,6 +173,57 @@ namespace Applicazioni.BLL
             return "COMPLETATA";
         }
 
+        public string Movimenta(SpedizioniDS dsSpedizioni,decimal idsaldo, decimal quantita, string causale, string tipoOperazione, string utenza)
+        {
+
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                try
+                {
+                    bSpedizioni.GetSaldo(dsSpedizioni, idsaldo);
+                    SpedizioniDS.SPSALDIRow saldo = dsSpedizioni.SPSALDI.Where(x => x.IDSALDO == idsaldo).FirstOrDefault();
+                    DateTime data = DateTime.Now;
+                    if (saldo == null)
+                        return "Impossibile trovare il saldo";
+
+
+                    saldo.DATAMODIFICA = data;
+                    decimal quantitaSaldo = saldo.QUANTITA;
+                    if (tipoOperazione == "VERSAMENTO")
+                        quantitaSaldo = saldo.QUANTITA + quantita;
+                    else
+                    {
+                        quantitaSaldo = saldo.QUANTITA - quantita;
+                        if (quantitaSaldo < 0)
+                            return "Saldo negativo operazione non ammessa";
+                    }
+
+                    saldo.QUANTITA = quantitaSaldo;
+                    saldo.UTENTEMODIFICA = utenza;
+
+
+                    SpedizioniDS.SPMOVIMENTIRow movimento = dsSpedizioni.SPMOVIMENTI.NewSPMOVIMENTIRow();
+                    movimento.CAUSALE = causale;
+                    movimento.DATAMODIFICA = data;
+                    movimento.IDSALDO = idsaldo;
+                    movimento.QUANTITA = quantita;
+                    movimento.TIPOMOVIMENTO = tipoOperazione;
+                    movimento.UTENTEMODIFICA = utenza;
+                    dsSpedizioni.SPMOVIMENTI.AddSPMOVIMENTIRow(movimento);
+
+                    bSpedizioni.SalvaInserimento(dsSpedizioni);
+
+                }
+                catch (Exception ex)
+                {
+                    bSpedizioni.Rollback();
+                    return "ERRORE IMPOSSIBILE PROCEDERE";
+                }
+            }
+
+            return "COMPLETATA";
+        }
+
         public string Movimenta(decimal idsaldo, decimal quantita, string causale, string tipoOperazione, string utenza)
         {
 
