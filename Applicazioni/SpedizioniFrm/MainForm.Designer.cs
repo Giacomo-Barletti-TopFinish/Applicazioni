@@ -34,6 +34,7 @@
             this.magazzinoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ubicazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.caricaODLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saldiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ySLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,8 @@
             this.lblUserLoggato = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatusBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.stUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.caricaODLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.balenciagaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gucciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -94,16 +96,23 @@
             // ubicazioniToolStripMenuItem
             // 
             this.ubicazioniToolStripMenuItem.Name = "ubicazioniToolStripMenuItem";
-            this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.ubicazioniToolStripMenuItem.Text = "Ubicazioni";
             this.ubicazioniToolStripMenuItem.Click += new System.EventHandler(this.ubicazioniToolStripMenuItem_Click);
             // 
             // movimentiToolStripMenuItem
             // 
             this.movimentiToolStripMenuItem.Name = "movimentiToolStripMenuItem";
-            this.movimentiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.movimentiToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.movimentiToolStripMenuItem.Text = "Movimenti";
             this.movimentiToolStripMenuItem.Click += new System.EventHandler(this.movimentiToolStripMenuItem_Click);
+            // 
+            // caricaODLToolStripMenuItem1
+            // 
+            this.caricaODLToolStripMenuItem1.Name = "caricaODLToolStripMenuItem1";
+            this.caricaODLToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.caricaODLToolStripMenuItem1.Text = "Carica ODL";
+            this.caricaODLToolStripMenuItem1.Click += new System.EventHandler(this.caricaODLToolStripMenuItem1_Click);
             // 
             // saldiToolStripMenuItem
             // 
@@ -115,7 +124,9 @@
             // operaToolStripMenuItem
             // 
             this.operaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ySLToolStripMenuItem});
+            this.ySLToolStripMenuItem,
+            this.balenciagaToolStripMenuItem,
+            this.gucciToolStripMenuItem});
             this.operaToolStripMenuItem.Name = "operaToolStripMenuItem";
             this.operaToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.operaToolStripMenuItem.Text = "Opera";
@@ -123,7 +134,7 @@
             // ySLToolStripMenuItem
             // 
             this.ySLToolStripMenuItem.Name = "ySLToolStripMenuItem";
-            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ySLToolStripMenuItem.Text = "YSL";
             this.ySLToolStripMenuItem.Click += new System.EventHandler(this.ySLToolStripMenuItem_Click);
             // 
@@ -192,12 +203,19 @@
             this.stUser.Size = new System.Drawing.Size(118, 17);
             this.stUser.Text = "toolStripStatusLabel1";
             // 
-            // caricaODLToolStripMenuItem1
+            // balenciagaToolStripMenuItem
             // 
-            this.caricaODLToolStripMenuItem1.Name = "caricaODLToolStripMenuItem1";
-            this.caricaODLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.caricaODLToolStripMenuItem1.Text = "Carica ODL";
-            this.caricaODLToolStripMenuItem1.Click += new System.EventHandler(this.caricaODLToolStripMenuItem1_Click);
+            this.balenciagaToolStripMenuItem.Name = "balenciagaToolStripMenuItem";
+            this.balenciagaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.balenciagaToolStripMenuItem.Text = "Balenciaga";
+            this.balenciagaToolStripMenuItem.Click += new System.EventHandler(this.balenciagaToolStripMenuItem_Click);
+            // 
+            // gucciToolStripMenuItem
+            // 
+            this.gucciToolStripMenuItem.Name = "gucciToolStripMenuItem";
+            this.gucciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gucciToolStripMenuItem.Text = "Gucci";
+            this.gucciToolStripMenuItem.Click += new System.EventHandler(this.gucciToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -241,6 +259,8 @@
         private System.Windows.Forms.ToolStripMenuItem operaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ySLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem caricaODLToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem balenciagaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gucciToolStripMenuItem;
     }
 }
 
