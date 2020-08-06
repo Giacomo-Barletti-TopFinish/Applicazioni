@@ -134,7 +134,7 @@ namespace SpedizioniFrm
 
         private void balenciagaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaFrm form = new OperaFrm("Balenciaga");
+            OperaFrm form = new OperaFrm("BALENCIAGA");
             form.MdiParent = this;
             form.Show();
 
@@ -142,7 +142,7 @@ namespace SpedizioniFrm
 
         private void gucciToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaFrm form = new OperaFrm("Gucci");
+            OperaFrm form = new OperaFrm("GUCCI");
             form.MdiParent = this;
             form.Show();
 
