@@ -506,27 +506,39 @@ namespace SpedizioniFrm
                 SpedizioniDS.SPSALDIEXTRow saldo = dsSalvataggi.SPSALDIEXT.Where(x => x.IDUBICAZIONE == rigaDaSalvare.IDUBICAZIONE && x.IDMAGAZZ == magazz.IDMAGAZZ).FirstOrDefault();
                 if (saldo == null)
                 {
-                    string message = string.Format("Errore nell'estrazione del saldo. CODICE = {0} MODELLO = {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    sb.AppendLine(message);
-                    MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    rigaDaSalvare.NOTE = string.Format("Errore nell'estrazione del saldo. CODICE = {0} MODELLO = {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
+                    //sb.AppendLine(message);
+                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     continue;
                 }
+               //string note = rigaDaSalvare.NOTE;
+                if (saldo.QUANTITA < rigaDaSalvare.QTAUBIUTIL)
+                {
+                    rigaDaSalvare.NOTE = string.Format("Errore quantità in saldo non sufficiente. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
+                    //sb.AppendLine(message);
+                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    continue;
+                }
+
+
+
+
 
                 decimal quantitaUtilizzata = rigaDaSalvare.QTAUBIUTIL;
                 if (saldo.QUANTITA < quantitaUtilizzata)
                 {
                     string message = string.Format("Errore quantità in saldo non sufficiente. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    sb.AppendLine(message);
-                    MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //sb.AppendLine(message);
+                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     continue;
                 }
 
                 string causale = string.Format("OPERA {0} - {1}", _brand, rigaDaSalvare.DATA_RICHIESTA.ToShortDateString());
                 if (spedizioni.Movimenta(dsSalvataggi, saldo.IDSALDO, quantitaUtilizzata, causale, "PRELIEVO", _utenteConnesso) != "COMPLETATA")
                 {
-                    string message = string.Format("Errore nel salvataggio. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    sb.AppendLine(message);
-                    MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    rigaDaSalvare.NOTE = string.Format("Errore nel salvataggio. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
+                    //sb.AppendLine(message);
+                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     continue;
                 }
             }
