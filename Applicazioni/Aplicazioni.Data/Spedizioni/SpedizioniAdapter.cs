@@ -28,7 +28,7 @@ namespace Applicazioni.Data.Spedizioni
             }
         }
 
-        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String  MODELLO)
+        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String MODELLO, bool nascondiSaldiAZero)
         {
             ds.SPSALDIEXT.Clear();
             string select = @"select sa.*,ub.codice, ub.descrizione,ma.modello 
@@ -43,6 +43,8 @@ namespace Applicazioni.Data.Spedizioni
 
             if (!string.IsNullOrEmpty(MODELLO))
                 select += string.Format("and ma.modello like '%{0}%'", MODELLO.ToUpper());
+            if (nascondiSaldiAZero)
+                select += "and sa.quantita > 0";
 
             select += "ORDER BY ub.codice,ma.modello ";
             using (DbDataAdapter da = BuildDataAdapter(select))
@@ -61,7 +63,7 @@ namespace Applicazioni.Data.Spedizioni
             ps.AddParam("MODELLO", DbType.String, MODELLO);
 
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.MAGAZZ);
             }
@@ -79,7 +81,7 @@ namespace Applicazioni.Data.Spedizioni
                                     where sm.datamodifica >= to_date('{0} 00:00:00','dd/mm/yyyy HH24:MI:ss') 
                                     and sm.datamodifica <= to_date('{1} 23:59:59','dd/mm/yyyy HH24:MI:ss')";
 
-            select = string.Format(select, inizio,fine);
+            select = string.Format(select, inizio, fine);
 
             if (!string.IsNullOrEmpty(UBICAZIONE))
                 select += string.Format("and ub.codice like '%{0}%'", UBICAZIONE.ToUpper());

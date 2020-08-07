@@ -53,10 +53,10 @@ namespace Applicazioni.Data.Spedizioni
         }
 
         [DataContext]
-        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String MODELLO, bool nascondiSaldiAZero)
         {
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
-            a.FillSPSALDI(ds, UBICAZIONE, MODELLO);
+            a.FillSPSALDI(ds, UBICAZIONE, MODELLO,nascondiSaldiAZero);
         }
         [DataContext]
         public void GetMagazz(SpedizioniDS ds, String MODELLO)

@@ -40,6 +40,7 @@
             this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MOVIMENTA = new System.Windows.Forms.DataGridViewButtonColumn();
             this.IDSALDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkNascondiSaldiAZero = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaldi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,10 +159,24 @@
             this.IDSALDO.ReadOnly = true;
             this.IDSALDO.Visible = false;
             // 
+            // chkNascondiSaldiAZero
+            // 
+            this.chkNascondiSaldiAZero.AutoSize = true;
+            this.chkNascondiSaldiAZero.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkNascondiSaldiAZero.Checked = true;
+            this.chkNascondiSaldiAZero.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkNascondiSaldiAZero.Location = new System.Drawing.Point(552, 66);
+            this.chkNascondiSaldiAZero.Name = "chkNascondiSaldiAZero";
+            this.chkNascondiSaldiAZero.Size = new System.Drawing.Size(127, 17);
+            this.chkNascondiSaldiAZero.TabIndex = 6;
+            this.chkNascondiSaldiAZero.Text = "Nascondi saldi a zero";
+            this.chkNascondiSaldiAZero.UseVisualStyleBackColor = true;
+            // 
             // SaldiFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(713, 560);
+            this.Controls.Add(this.chkNascondiSaldiAZero);
             this.Controls.Add(this.dgvSaldi);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -190,5 +205,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
         private System.Windows.Forms.DataGridViewButtonColumn MOVIMENTA;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDSALDO;
+        private System.Windows.Forms.CheckBox chkNascondiSaldiAZero;
     }
 }

@@ -69,7 +69,7 @@ namespace SpedizioniFrm
         {
             this.Text = string.Format("SALDI {0} - {1}", txtubicazione.Text, txtarticolo.Text);
             Spedizioni spedizioni = new Spedizioni();
-            spedizioni.FillSaldi(_ds, txtubicazione.Text, txtarticolo.Text);
+            spedizioni.FillSaldi(_ds, txtubicazione.Text, txtarticolo.Text,chkNascondiSaldiAZero.Checked);
             CreaGriglia();
 
         }

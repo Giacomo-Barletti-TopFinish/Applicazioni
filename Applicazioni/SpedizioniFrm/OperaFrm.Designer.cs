@@ -108,6 +108,7 @@
             this.dgvExcelCaricato.Size = new System.Drawing.Size(1248, 781);
             this.dgvExcelCaricato.TabIndex = 7;
             this.dgvExcelCaricato.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExcelCaricato_CellValidated);
+            this.dgvExcelCaricato.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvExcelCaricato_RowPrePaint);
             // 
             // btnCreaOpera
             // 

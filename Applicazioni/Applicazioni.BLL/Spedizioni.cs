@@ -388,11 +388,11 @@ namespace Applicazioni.BLL
             return magazz;
         }
 
-        public void FillSaldi(SpedizioniDS ds, String UBICAZIONE, String MODELLO)
+        public void FillSaldi(SpedizioniDS ds, String UBICAZIONE, String MODELLO, bool nascondiSaldiAZero)
         {
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
             {
-                bSpedizioni.FillSPSALDI(ds, UBICAZIONE, MODELLO);
+                bSpedizioni.FillSPSALDI(ds, UBICAZIONE, MODELLO,nascondiSaldiAZero);
             }
         }
 

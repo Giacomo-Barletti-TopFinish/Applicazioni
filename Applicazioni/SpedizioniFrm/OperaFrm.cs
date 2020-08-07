@@ -160,7 +160,7 @@ namespace SpedizioniFrm
                 }
 
                 Spedizioni spedizioni = new Spedizioni();
-                spedizioni.FillSaldi(_ds, string.Empty, string.Empty);
+                spedizioni.FillSaldi(_ds, string.Empty, string.Empty,true);
                 spedizioni.FillUbicazioni(_ds, false);
 
                 SpedizioniDS dsAlternativo = new SpedizioniDS();
@@ -538,7 +538,7 @@ namespace SpedizioniFrm
                 foreach (SpedizioniDS.SPOPERARow rigaDaSalvare in righeDaSalvare)
                 {
                     dsSalvataggi.SPSALDI.Clear();
-                    spedizioni.FillSaldi(dsSalvataggi, rigaDaSalvare.CODICE, rigaDaSalvare.MODELLO_CODICE);
+                    spedizioni.FillSaldi(dsSalvataggi, rigaDaSalvare.CODICE, rigaDaSalvare.MODELLO_CODICE,true);
                     SpedizioniDS.MAGAZZRow magazz = spedizioni.GetMagazz(_ds, rigaDaSalvare.MODELLO_CODICE);
 
                     SpedizioniDS.SPSALDIEXTRow saldo = dsSalvataggi.SPSALDIEXT.Where(x => x.IDUBICAZIONE == rigaDaSalvare.IDUBICAZIONE && x.IDMAGAZZ == magazz.IDMAGAZZ).FirstOrDefault();
@@ -603,5 +603,12 @@ namespace SpedizioniFrm
 
         }
 
+        private void dgvExcelCaricato_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (string.IsNullOrEmpty(dgvExcelCaricato.Rows[e.RowIndex].Cells[18].Value as string))
+                dgvExcelCaricato.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+            else
+                dgvExcelCaricato.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+        }
     }
 }
