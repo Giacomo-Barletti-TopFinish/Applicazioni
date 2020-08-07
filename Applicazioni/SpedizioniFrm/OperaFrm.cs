@@ -54,6 +54,8 @@ namespace SpedizioniFrm
         {
             try
             {
+                btnSimula.Enabled = true;
+
                 _inSimulazione = true;
                 _ds = new SpedizioniDS();
                 lblMessage.Text = string.Empty;
@@ -72,6 +74,7 @@ namespace SpedizioniFrm
                 Spedizioni spedizioni = new Spedizioni();
 
                 string messaggioErrore;
+
                 if (!spedizioni.LeggiFileExcelOpera(_ds, txtFile.Text, _brand, out messaggioErrore))
                 {
                     string messaggio = string.Format("Errore nel caricamento del file excel. Errore: {0}", messaggioErrore);
@@ -128,6 +131,7 @@ namespace SpedizioniFrm
             for (int i = 0; i < dgvExcelCaricato.Columns.Count; i++)
                 dgvExcelCaricato.Columns[i].ReadOnly = true;
 
+            dgvExcelCaricato.Columns[5].ReadOnly = false;
             dgvExcelCaricato.Columns[20].ReadOnly = false;
             dgvExcelCaricato.Columns[21].ReadOnly = false;
             dgvExcelCaricato.Columns[23].ReadOnly = false;
@@ -143,10 +147,17 @@ namespace SpedizioniFrm
         {
             try
             {
+                btnSimula.Enabled = false;
                 Cursor.Current = Cursors.WaitCursor;
-                leggiFile_click(null, null);
 
                 _inSimulazione = true;
+
+                if (_ds.SPOPERA.Any(x => x.IsDATA_RICHIESTANull()))
+                {
+                    MessageBox.Show("Ci sono righe con data richiesta non valorizzata. Impossibile procedere", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnSimula.Enabled = true;
+                    return;
+                }
 
                 Spedizioni spedizioni = new Spedizioni();
                 spedizioni.FillSaldi(_ds, string.Empty, string.Empty);
@@ -185,6 +196,9 @@ namespace SpedizioniFrm
                         decimal quantitaImpegnata = 0;
                         decimal sequenza = 0;
                         List<SpedizioniDS.SPSALDIEXTRow> saldi = _ds.SPSALDIEXT.Where(x => x.QUANTITA > 0 && x.IDMAGAZZ == magazz.IDMAGAZZ).OrderBy(x => x.QUANTITA).ToList();
+
+                        //if (saldi == 0)
+                        //riga.Cells[24].Value = "Nessun articolo in giacenza";
 
 
 
@@ -273,6 +287,14 @@ namespace SpedizioniFrm
 
                 caricaGriglia();
             }
+            catch (Exception ex)
+            {
+                ExceptionFrm frm = new ExceptionFrm(ex);
+                frm.ShowDialog();
+                btnSimula.Enabled = true;
+
+            }
+
             finally
             {
                 Cursor.Current = Cursors.Default;
@@ -363,6 +385,12 @@ namespace SpedizioniFrm
 
                 //  }
             }
+            catch (Exception ex)
+            {
+                ExceptionFrm frm = new ExceptionFrm(ex);
+                frm.ShowDialog();
+            }
+
             finally
             {
                 _inSimulazione = false;
@@ -494,74 +522,60 @@ namespace SpedizioniFrm
 
         private void btnCreaOpera_Click(object sender, EventArgs e)
         {
-
-            List<SpedizioniDS.SPOPERARow> righeDaSalvare = _ds.SPOPERA.Where(x => x.VALIDATA && !x.IsIDUBICAZIONENull()).ToList();
-
-            if (righeDaSalvare.Count == 0)
+            try
             {
-                MessageBox.Show("NESSUNA RIGA VALIDATA. Non ci sono righe da salvare.", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                List<SpedizioniDS.SPOPERARow> righeDaSalvare = _ds.SPOPERA.Where(x => x.VALIDATA && !x.IsIDUBICAZIONENull()).ToList();
+
+                if (righeDaSalvare.Count == 0)
+                {
+                    MessageBox.Show("NESSUNA RIGA VALIDATA. Non ci sono righe da salvare.", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                SpedizioniDS dsSalvataggi = new SpedizioniDS();
+                Spedizioni spedizioni = new Spedizioni();
+
+                foreach (SpedizioniDS.SPOPERARow rigaDaSalvare in righeDaSalvare)
+                {
+                    dsSalvataggi.SPSALDI.Clear();
+                    spedizioni.FillSaldi(dsSalvataggi, rigaDaSalvare.CODICE, rigaDaSalvare.MODELLO_CODICE);
+                    SpedizioniDS.MAGAZZRow magazz = spedizioni.GetMagazz(_ds, rigaDaSalvare.MODELLO_CODICE);
+
+                    SpedizioniDS.SPSALDIEXTRow saldo = dsSalvataggi.SPSALDIEXT.Where(x => x.IDUBICAZIONE == rigaDaSalvare.IDUBICAZIONE && x.IDMAGAZZ == magazz.IDMAGAZZ).FirstOrDefault();
+                    if (saldo == null)
+                    {
+                        rigaDaSalvare.NOTE = string.Format("Errore nell'estrazione del saldo. CODICE = {0} MODELLO = {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
+                        continue;
+                    }
+
+                    if (saldo.QUANTITA < rigaDaSalvare.QTAUBIUTIL)
+                    {
+                        rigaDaSalvare.NOTE = string.Format("Errore quantità in saldo non sufficiente. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
+
+                        continue;
+                    }
+
+                    decimal quantitaUtilizzata = rigaDaSalvare.QTAUBIUTIL;
+                    if (saldo.QUANTITA < quantitaUtilizzata)
+                    {
+                        rigaDaSalvare.NOTE = string.Format("Errore quantità in saldo non sufficiente. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
+                        continue;
+                    }
+
+                    string causale = string.Format("OPERA {0} - {1}", _brand, rigaDaSalvare.DATA_RICHIESTA.ToShortDateString());
+                    rigaDaSalvare.NOTE = spedizioni.Movimenta(dsSalvataggi, saldo.IDSALDO, quantitaUtilizzata, causale, "PRELIEVO", _utenteConnesso);
+                }
+
+                if (righeDaSalvare.Count > 0)
+                    CreaFileExcelOpera(righeDaSalvare);
+            }
+            catch (Exception ex)
+            {
+                ExceptionFrm frm = new ExceptionFrm(ex);
+                frm.ShowDialog();
             }
 
-            SpedizioniDS dsSalvataggi = new SpedizioniDS();
-            Spedizioni spedizioni = new Spedizioni();
-
-            StringBuilder sb = new StringBuilder();
-            foreach (SpedizioniDS.SPOPERARow rigaDaSalvare in righeDaSalvare)
-            {
-                dsSalvataggi.SPSALDI.Clear();
-                spedizioni.FillSaldi(dsSalvataggi, rigaDaSalvare.CODICE, rigaDaSalvare.MODELLO_CODICE);
-                SpedizioniDS.MAGAZZRow magazz = spedizioni.GetMagazz(_ds, rigaDaSalvare.MODELLO_CODICE);
-
-                SpedizioniDS.SPSALDIEXTRow saldo = dsSalvataggi.SPSALDIEXT.Where(x => x.IDUBICAZIONE == rigaDaSalvare.IDUBICAZIONE && x.IDMAGAZZ == magazz.IDMAGAZZ).FirstOrDefault();
-                if (saldo == null)
-                {
-                    rigaDaSalvare.NOTE = string.Format("Errore nell'estrazione del saldo. CODICE = {0} MODELLO = {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    //sb.AppendLine(message);
-                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    continue;
-                }
-               //string note = rigaDaSalvare.NOTE;
-                if (saldo.QUANTITA < rigaDaSalvare.QTAUBIUTIL)
-                {
-                    rigaDaSalvare.NOTE = string.Format("Errore quantità in saldo non sufficiente. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    //sb.AppendLine(message);
-                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    continue;
-                }
-
-
-
-
-
-                decimal quantitaUtilizzata = rigaDaSalvare.QTAUBIUTIL;
-                if (saldo.QUANTITA < quantitaUtilizzata)
-                {
-                    string message = string.Format("Errore quantità in saldo non sufficiente. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    //sb.AppendLine(message);
-                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    continue;
-                }
-
-                string causale = string.Format("OPERA {0} - {1}", _brand, rigaDaSalvare.DATA_RICHIESTA.ToShortDateString());
-                if (spedizioni.Movimenta(dsSalvataggi, saldo.IDSALDO, quantitaUtilizzata, causale, "PRELIEVO", _utenteConnesso) != "COMPLETATA")
-                {
-                    rigaDaSalvare.NOTE = string.Format("Errore nel salvataggio. CODICE = {0} MODELLO= {1}", rigaDaSalvare.CODICE, magazz.MODELLO);
-                    //sb.AppendLine(message);
-                    //MessageBox.Show(message, "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    continue;
-                }
-            }
-
-            if (righeDaSalvare.Count > 0)
-                CreaFileExcelOpera(righeDaSalvare);
-
-            if (sb.Length > 0)
-            {
-                MessageBox.Show(sb.ToString(), "NOTA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
-
         private void CreaFileExcelOpera(List<SpedizioniDS.SPOPERARow> righeDaSalvare)
         {
             SaveFileDialog sfd = new SaveFileDialog();

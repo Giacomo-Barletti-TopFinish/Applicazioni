@@ -36,7 +36,7 @@ namespace Applicazioni.Helpers
                 stylePart.Stylesheet.Save();
 
                 int numeroColonne = righeDaSalvare[0].Table.Columns.Count;
-                List<int> colonneDaScartare = new List<int>(new int[] { 6,10,11,12,14,15,16,17});
+                List<int> colonneDaScartare = new List<int>(new int[] { 6, 10, 11, 12, 14, 15, 16, 17 });
                 Columns columns = new Columns();
                 for (int i = 0; i < (numeroColonne - colonneDaScartare.Count); i++)
                 {
@@ -100,7 +100,7 @@ namespace Applicazioni.Helpers
 
             return content;
         }
-        
+
 
         public byte[] CreaExcelPianificazioneGalvanica(GalvanicaDS ds)
         {
@@ -668,6 +668,119 @@ namespace Applicazioni.Helpers
                             }
                             break;
 
+                    }
+                    if (!esito)
+                        return false;
+                }
+                ds.SPOPERA.AddSPOPERARow(operaRow);
+            }
+
+            return true;
+        }
+
+        private string estraiStringaLughezzaFissa(string stringa, int lunghezza)
+        {
+            if (stringa.Length == lunghezza) return stringa;
+
+            if (stringa.Length > lunghezza) return stringa.Substring(stringa.Length - lunghezza);
+
+            return stringa.PadLeft(lunghezza, '0');
+        }
+
+        public bool LeggiFileExcelOperaGucci(Stream stream, SpedizioniDS ds, out string messaggioErrore)
+
+        {
+            messaggioErrore = string.Empty;
+            SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
+            SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
+
+            WorkbookPart wbPart = document.WorkbookPart;
+
+            Sheet foglio = EstraiSheetPerNome(wbPart, "Foglio1");
+            WorksheetPart worksheetPart = (WorksheetPart)wbPart.GetPartById(foglio.Id);
+            SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            CellFormats cellFormats = wbPart.WorkbookStylesPart.Stylesheet.CellFormats;
+            NumberingFormats numberingFormats = wbPart.WorkbookStylesPart.Stylesheet.NumberingFormats;
+
+            int rowCount = sheetData.Elements<Row>().Count();
+
+            int scartaRighe = 1;
+            int indiceRighe = 0;
+
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                string prefisso = string.Empty;
+                string parte = string.Empty;
+                string colore = string.Empty;
+                string fase = string.Empty;
+                if (indiceRighe < scartaRighe)
+                {
+                    indiceRighe++;
+                    continue;
+                }
+                bool esito = true;
+
+                if (r.FirstChild.InnerText == string.Empty) continue;
+
+                SpedizioniDS.SPOPERARow operaRow = ds.SPOPERA.NewSPOPERARow();
+                operaRow.SEQUENZA = 1;
+                operaRow.VALIDATA = false;
+
+                string elemento = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    cella = cella.Trim();
+                    string colonna = GetColumnReference(cell);
+                    switch (colonna)
+                    {
+                        case "A":
+                            if (string.IsNullOrEmpty(cella))
+                                continue;
+                            prefisso = estraiStringaLughezzaFissa(cella, 3);
+                            //esito = EstraiValoreCellaDecimal(cella, "IDPRENOTAZIONE", cPiombo, out messaggioErrore);
+                            break;
+                        case "B":
+                            {
+                                parte = estraiStringaLughezzaFissa(cella, 5);
+                            }
+                            break;
+                        case "C":
+                            {
+                                colore = estraiStringaLughezzaFissa(cella, 4);
+                            }
+                            break;
+                        case "D":
+                            {
+                                operaRow.RIFERIMENTO_TESTATA = EstraiStringaDaCella(cella, ds.SPOPERA.Columns[3].MaxLength);
+                            }
+                            break;
+                        case "E":
+                            {
+                                fase = estraiStringaLughezzaFissa(cella, 4);
+                                string modello = string.Format("{0}-{1}-{2}-{3}", prefisso, parte, colore, fase);
+                                operaRow.MODELLO_CODICE = modello;
+                            }
+                            break;
+                        case "F":
+                            {
+                                if (!string.IsNullOrEmpty(cella))
+                                    esito = EstraiValoreCellaDecimal(cella, "QTANOSPE", operaRow, out messaggioErrore);
+                                break;
+                            }
+                        case "G":
+                        case "H":
+                        case "I":
+                        case "J":
+                        case "K":
+                        case "L":
+                        case "M":
+                        case "N":
+                        case "O":
+                        case "P":
+                        case "Q":
+                            break;
                     }
                     if (!esito)
                         return false;

@@ -23,8 +23,14 @@ namespace Applicazioni.BLL
                 ds.SPOPERA.Clear();
 
 
+                bool esito = false;
                 ExcelHelper excel = new ExcelHelper();
-                if (!excel.LeggiFileExcelOpera(fs, ds, out messaggioErrore))
+                if (brand == "GUCCI")
+                    esito = excel.LeggiFileExcelOperaGucci(fs, ds, out messaggioErrore);
+                else
+                    esito = excel.LeggiFileExcelOpera(fs, ds, out messaggioErrore);
+
+                if (!esito)
                 {
                     ds.SPOPERA.Clear();
                     return false;
@@ -173,7 +179,7 @@ namespace Applicazioni.BLL
             return "COMPLETATA";
         }
 
-        public string Movimenta(SpedizioniDS dsSpedizioni,decimal idsaldo, decimal quantita, string causale, string tipoOperazione, string utenza)
+        public string Movimenta(SpedizioniDS dsSpedizioni, decimal idsaldo, decimal quantita, string causale, string tipoOperazione, string utenza)
         {
 
             using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
