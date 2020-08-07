@@ -28,6 +28,11 @@ namespace Applicazioni.Data.Spedizioni
             }
         }
 
+        public void FillArticoli(SpedizioniDS ds, decimal IDMAGAZZ , String MODELLO, decimal QUANTITA)
+        {
+            string select = @"SELECT * from GRUPPO.MAGAZZ where Modello like '%01%'";
+        }
+
         public void FillSPSALDI(SpedizioniDS ds, String UBICAZIONE, String MODELLO, bool nascondiSaldiAZero)
         {
             ds.SPSALDIEXT.Clear();
@@ -68,6 +73,24 @@ namespace Applicazioni.Data.Spedizioni
                 da.Fill(ds.MAGAZZ);
             }
         }
+
+        public void FillMagazz(SpedizioniDS ds, String filtro)
+        {
+            string select = @"select ma.*
+                                    from gruppo.magazz ma 
+                                    where ma.modello like  $P<MODELLO>";
+
+            string modello = string.Format("%{0}%",filtro);
+            ParamSet ps = new ParamSet();
+            ps.AddParam("MODELLO", DbType.String, modello);
+
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
+
         public void FillMovimenti(SpedizioniDS ds, String UBICAZIONE, String MODELLO, DateTime dtInizo, DateTime dtFine)
         {
             string inizio = dtInizo.ToString("dd/MM/yyyy");

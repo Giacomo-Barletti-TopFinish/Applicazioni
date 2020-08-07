@@ -79,6 +79,22 @@ namespace Applicazioni.Data.Spedizioni
             a.FillMovimenti(ds, UBICAZIONE, MODELLO, dtInizo, dtFine);
         }
 
+        [DataContext]
+        public void FillMagazz(SpedizioniDS ds, String filtro)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.FillMagazz(ds, filtro);
+        }
+
+        [DataContext]
+        public void FillArticoli(SpedizioniDS ds, decimal IDMAGAZZ, string MODELLO, decimal QUANTITA)
+        {
+            SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
+            a.FillArticoli(ds, IDMAGAZZ, MODELLO, QUANTITA);
+        }
+
+
+
     }
 
 

@@ -440,6 +440,13 @@ namespace Applicazioni.BLL
                 bSpedizioni.FillMovimenti(ds, UBICAZIONE, MODELLO, dtInizo, dtFine);
             }
         }
+        public void FillMagazz(SpedizioniDS ds, String filtro)
+        {
+            using (SpedizioniBusiness bSpedizioni = new SpedizioniBusiness())
+            {
+                bSpedizioni.FillMagazz(ds, filtro);
+            }
+        }
 
     }
 }

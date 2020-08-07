@@ -38,6 +38,8 @@
             this.saldiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ySLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.balenciagaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gucciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,8 +49,7 @@
             this.lblUserLoggato = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatusBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.stUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.balenciagaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gucciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.caricaArticoloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +89,8 @@
             this.magazzinoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ubicazioniToolStripMenuItem,
             this.movimentiToolStripMenuItem,
-            this.caricaODLToolStripMenuItem1});
+            this.caricaODLToolStripMenuItem1,
+            this.caricaArticoloToolStripMenuItem});
             this.magazzinoToolStripMenuItem.Name = "magazzinoToolStripMenuItem";
             this.magazzinoToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.magazzinoToolStripMenuItem.Text = "Magazzino";
@@ -96,21 +98,21 @@
             // ubicazioniToolStripMenuItem
             // 
             this.ubicazioniToolStripMenuItem.Name = "ubicazioniToolStripMenuItem";
-            this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.ubicazioniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ubicazioniToolStripMenuItem.Text = "Ubicazioni";
             this.ubicazioniToolStripMenuItem.Click += new System.EventHandler(this.ubicazioniToolStripMenuItem_Click);
             // 
             // movimentiToolStripMenuItem
             // 
             this.movimentiToolStripMenuItem.Name = "movimentiToolStripMenuItem";
-            this.movimentiToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.movimentiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.movimentiToolStripMenuItem.Text = "Movimenti";
             this.movimentiToolStripMenuItem.Click += new System.EventHandler(this.movimentiToolStripMenuItem_Click);
             // 
             // caricaODLToolStripMenuItem1
             // 
             this.caricaODLToolStripMenuItem1.Name = "caricaODLToolStripMenuItem1";
-            this.caricaODLToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.caricaODLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.caricaODLToolStripMenuItem1.Text = "Carica ODL";
             this.caricaODLToolStripMenuItem1.Click += new System.EventHandler(this.caricaODLToolStripMenuItem1_Click);
             // 
@@ -137,6 +139,20 @@
             this.ySLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ySLToolStripMenuItem.Text = "YSL";
             this.ySLToolStripMenuItem.Click += new System.EventHandler(this.ySLToolStripMenuItem_Click);
+            // 
+            // balenciagaToolStripMenuItem
+            // 
+            this.balenciagaToolStripMenuItem.Name = "balenciagaToolStripMenuItem";
+            this.balenciagaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.balenciagaToolStripMenuItem.Text = "Balenciaga";
+            this.balenciagaToolStripMenuItem.Click += new System.EventHandler(this.balenciagaToolStripMenuItem_Click);
+            // 
+            // gucciToolStripMenuItem
+            // 
+            this.gucciToolStripMenuItem.Name = "gucciToolStripMenuItem";
+            this.gucciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gucciToolStripMenuItem.Text = "Gucci";
+            this.gucciToolStripMenuItem.Click += new System.EventHandler(this.gucciToolStripMenuItem_Click);
             // 
             // finestreToolStripMenuItem
             // 
@@ -203,19 +219,12 @@
             this.stUser.Size = new System.Drawing.Size(118, 17);
             this.stUser.Text = "toolStripStatusLabel1";
             // 
-            // balenciagaToolStripMenuItem
+            // caricaArticoloToolStripMenuItem
             // 
-            this.balenciagaToolStripMenuItem.Name = "balenciagaToolStripMenuItem";
-            this.balenciagaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.balenciagaToolStripMenuItem.Text = "Balenciaga";
-            this.balenciagaToolStripMenuItem.Click += new System.EventHandler(this.balenciagaToolStripMenuItem_Click);
-            // 
-            // gucciToolStripMenuItem
-            // 
-            this.gucciToolStripMenuItem.Name = "gucciToolStripMenuItem";
-            this.gucciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.gucciToolStripMenuItem.Text = "Gucci";
-            this.gucciToolStripMenuItem.Click += new System.EventHandler(this.gucciToolStripMenuItem_Click);
+            this.caricaArticoloToolStripMenuItem.Name = "caricaArticoloToolStripMenuItem";
+            this.caricaArticoloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.caricaArticoloToolStripMenuItem.Text = "Carica Articolo";
+            this.caricaArticoloToolStripMenuItem.Click += new System.EventHandler(this.caricaArticoloToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -261,6 +270,7 @@
         private System.Windows.Forms.ToolStripMenuItem caricaODLToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem balenciagaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gucciToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem caricaArticoloToolStripMenuItem;
     }
 }
 

@@ -107,8 +107,17 @@ namespace SpedizioniFrm
             form.Show();
 
         }
+        private void  caricaArticoloToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+          
 
-        private void ySLToolStripMenuItem_Click(object sender, EventArgs e)
+            CaricaArticoloFrm form = new CaricaArticoloFrm();
+            form.MdiParent = this;
+            form.Show();
+
+         }
+
+    private void ySLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OperaFrm form = new OperaFrm("YSL");
             form.MdiParent = this;
