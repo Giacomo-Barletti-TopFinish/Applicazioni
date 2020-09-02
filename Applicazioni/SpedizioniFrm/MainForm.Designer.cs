@@ -35,6 +35,7 @@
             this.ubicazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.caricaODLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.caricaArticoloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saldiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ySLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,6 @@
             this.lblUserLoggato = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatusBar = new System.Windows.Forms.ToolStripStatusLabel();
             this.stUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.caricaArticoloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -116,6 +116,13 @@
             this.caricaODLToolStripMenuItem1.Text = "Carica ODL";
             this.caricaODLToolStripMenuItem1.Click += new System.EventHandler(this.caricaODLToolStripMenuItem1_Click);
             // 
+            // caricaArticoloToolStripMenuItem
+            // 
+            this.caricaArticoloToolStripMenuItem.Name = "caricaArticoloToolStripMenuItem";
+            this.caricaArticoloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.caricaArticoloToolStripMenuItem.Text = "Carica Articolo";
+            this.caricaArticoloToolStripMenuItem.Click += new System.EventHandler(this.caricaArticoloToolStripMenuItem_Click);
+            // 
             // saldiToolStripMenuItem
             // 
             this.saldiToolStripMenuItem.Name = "saldiToolStripMenuItem";
@@ -136,21 +143,21 @@
             // ySLToolStripMenuItem
             // 
             this.ySLToolStripMenuItem.Name = "ySLToolStripMenuItem";
-            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ySLToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.ySLToolStripMenuItem.Text = "YSL";
             this.ySLToolStripMenuItem.Click += new System.EventHandler(this.ySLToolStripMenuItem_Click);
             // 
             // balenciagaToolStripMenuItem
             // 
             this.balenciagaToolStripMenuItem.Name = "balenciagaToolStripMenuItem";
-            this.balenciagaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.balenciagaToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.balenciagaToolStripMenuItem.Text = "Balenciaga";
             this.balenciagaToolStripMenuItem.Click += new System.EventHandler(this.balenciagaToolStripMenuItem_Click);
             // 
             // gucciToolStripMenuItem
             // 
             this.gucciToolStripMenuItem.Name = "gucciToolStripMenuItem";
-            this.gucciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gucciToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.gucciToolStripMenuItem.Text = "Gucci";
             this.gucciToolStripMenuItem.Click += new System.EventHandler(this.gucciToolStripMenuItem_Click);
             // 
@@ -218,13 +225,6 @@
             this.stUser.Name = "stUser";
             this.stUser.Size = new System.Drawing.Size(118, 17);
             this.stUser.Text = "toolStripStatusLabel1";
-            // 
-            // caricaArticoloToolStripMenuItem
-            // 
-            this.caricaArticoloToolStripMenuItem.Name = "caricaArticoloToolStripMenuItem";
-            this.caricaArticoloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.caricaArticoloToolStripMenuItem.Text = "Carica Articolo";
-            this.caricaArticoloToolStripMenuItem.Click += new System.EventHandler(this.caricaArticoloToolStripMenuItem_Click);
             // 
             // MainForm
             // 

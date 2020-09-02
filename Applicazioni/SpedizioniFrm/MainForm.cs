@@ -107,6 +107,7 @@ namespace SpedizioniFrm
             form.Show();
 
         }
+
         private void  caricaArticoloToolStripMenuItem_Click(object sender, EventArgs e)
         { 
           

@@ -49,7 +49,7 @@ namespace Applicazioni.Data.Spedizioni
         {
             SpedizioniAdapter a = new SpedizioniAdapter(DbConnection, DbTransaction);
             a.UpdateTable(ds.SPSALDI.TableName, ds);
-            a.UpdateTable(ds.SPMOVIMENTI.TableName, ds);
+            a.UpdateTable(ds.SPMOVIMENTI.TableName, ds);            
         }
 
         [DataContext]

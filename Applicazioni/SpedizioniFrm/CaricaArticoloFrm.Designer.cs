@@ -31,14 +31,15 @@
             this.txtarticolo = new System.Windows.Forms.TextBox();
             this.btnricerca = new System.Windows.Forms.Button();
             this.lblarticolo = new System.Windows.Forms.Label();
-            this.txtmodello = new System.Windows.Forms.TextBox();
-            this.txtquantita = new System.Windows.Forms.TextBox();
+            this.txtUbicazione = new System.Windows.Forms.TextBox();
             this.lblmodello = new System.Windows.Forms.Label();
             this.lblquantita = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCausale = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblEsito = new System.Windows.Forms.Label();
+            this.nQuantita = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nQuantita)).BeginInit();
             this.SuspendLayout();
             // 
             // txtarticolo
@@ -51,7 +52,7 @@
             // 
             // btnricerca
             // 
-            this.btnricerca.Location = new System.Drawing.Point(232, 50);
+            this.btnricerca.Location = new System.Drawing.Point(232, 53);
             this.btnricerca.Name = "btnricerca";
             this.btnricerca.Size = new System.Drawing.Size(75, 23);
             this.btnricerca.TabIndex = 2;
@@ -68,19 +69,13 @@
             this.lblarticolo.TabIndex = 4;
             this.lblarticolo.Text = "Articolo";
             // 
-            // txtmodello
+            // txtUbicazione
             // 
-            this.txtmodello.Location = new System.Drawing.Point(57, 120);
-            this.txtmodello.Name = "txtmodello";
-            this.txtmodello.Size = new System.Drawing.Size(100, 20);
-            this.txtmodello.TabIndex = 6;
-            // 
-            // txtquantita
-            // 
-            this.txtquantita.Location = new System.Drawing.Point(242, 120);
-            this.txtquantita.Name = "txtquantita";
-            this.txtquantita.Size = new System.Drawing.Size(100, 20);
-            this.txtquantita.TabIndex = 7;
+            this.txtUbicazione.Location = new System.Drawing.Point(57, 120);
+            this.txtUbicazione.MaxLength = 5;
+            this.txtUbicazione.Name = "txtUbicazione";
+            this.txtUbicazione.Size = new System.Drawing.Size(100, 20);
+            this.txtUbicazione.TabIndex = 6;
             // 
             // lblmodello
             // 
@@ -109,13 +104,13 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Causale";
             // 
-            // textBox1
+            // txtCausale
             // 
-            this.textBox1.Location = new System.Drawing.Point(56, 203);
-            this.textBox1.MaxLength = 50;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(170, 20);
-            this.textBox1.TabIndex = 11;
+            this.txtCausale.Location = new System.Drawing.Point(56, 203);
+            this.txtCausale.MaxLength = 50;
+            this.txtCausale.Name = "txtCausale";
+            this.txtCausale.Size = new System.Drawing.Size(170, 20);
+            this.txtCausale.TabIndex = 11;
             // 
             // button1
             // 
@@ -125,7 +120,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Salva";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnricerca_Click_1);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblEsito
             // 
@@ -136,18 +131,30 @@
             this.lblEsito.TabIndex = 12;
             this.lblEsito.Text = "Esito";
             // 
+            // nQuantita
+            // 
+            this.nQuantita.Location = new System.Drawing.Point(232, 121);
+            this.nQuantita.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nQuantita.Name = "nQuantita";
+            this.nQuantita.Size = new System.Drawing.Size(100, 20);
+            this.nQuantita.TabIndex = 13;
+            // 
             // CaricaArticoloFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 450);
+            this.Controls.Add(this.nQuantita);
             this.Controls.Add(this.lblEsito);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCausale);
             this.Controls.Add(this.lblquantita);
             this.Controls.Add(this.lblmodello);
-            this.Controls.Add(this.txtquantita);
-            this.Controls.Add(this.txtmodello);
+            this.Controls.Add(this.txtUbicazione);
             this.Controls.Add(this.lblarticolo);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnricerca);
@@ -155,6 +162,7 @@
             this.Name = "CaricaArticoloFrm";
             this.Text = "CaricaArticolo";
             this.Load += new System.EventHandler(this.CaricaArticoloFrm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nQuantita)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,13 +173,13 @@
         private System.Windows.Forms.TextBox txtarticolo;
         private System.Windows.Forms.Button btnricerca;
         private System.Windows.Forms.Label lblarticolo;
-        private System.Windows.Forms.TextBox txtmodello;
-        private System.Windows.Forms.TextBox txtquantita;
+        private System.Windows.Forms.TextBox txtUbicazione;
         private System.Windows.Forms.Label lblmodello;
         private System.Windows.Forms.Label lblquantita;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCausale;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblEsito;
+        private System.Windows.Forms.NumericUpDown nQuantita;
     }
 }
