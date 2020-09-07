@@ -47,7 +47,7 @@ namespace SpedizioniFrm
 
         private void dgvRisultati_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex == 0) return;
+            if (e.RowIndex < 0) return;
             IDMAGAZZ = (string)dgvRisultati.Rows[e.RowIndex].Cells[0].Value;
             Modello= (string)dgvRisultati.Rows[e.RowIndex].Cells[1].Value;
             DialogResult= DialogResult.OK;
