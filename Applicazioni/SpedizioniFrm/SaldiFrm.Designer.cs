@@ -34,33 +34,34 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvSaldi = new System.Windows.Forms.DataGridView();
+            this.chkNascondiSaldiAZero = new System.Windows.Forms.CheckBox();
             this.IDUBICAZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESCRIZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDMAGAZZ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MOVIMENTA = new System.Windows.Forms.DataGridViewButtonColumn();
             this.IDSALDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkNascondiSaldiAZero = new System.Windows.Forms.CheckBox();
+            this.btnexport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaldi)).BeginInit();
             this.SuspendLayout();
             // 
             // txtubicazione
             // 
-            this.txtubicazione.Location = new System.Drawing.Point(44, 63);
+            this.txtubicazione.Location = new System.Drawing.Point(44, 66);
             this.txtubicazione.Name = "txtubicazione";
             this.txtubicazione.Size = new System.Drawing.Size(130, 20);
             this.txtubicazione.TabIndex = 0;
             // 
             // txtarticolo
             // 
-            this.txtarticolo.Location = new System.Drawing.Point(237, 63);
+            this.txtarticolo.Location = new System.Drawing.Point(237, 66);
             this.txtarticolo.Name = "txtarticolo";
             this.txtarticolo.Size = new System.Drawing.Size(130, 20);
             this.txtarticolo.TabIndex = 1;
             // 
             // btnCerca
             // 
-            this.btnCerca.Location = new System.Drawing.Point(416, 63);
+            this.btnCerca.Location = new System.Drawing.Point(416, 65);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(75, 23);
             this.btnCerca.TabIndex = 2;
@@ -101,12 +102,25 @@
             this.QUANTITA,
             this.MOVIMENTA,
             this.IDSALDO});
-            this.dgvSaldi.Location = new System.Drawing.Point(-2, 106);
+            this.dgvSaldi.Location = new System.Drawing.Point(-1, 104);
             this.dgvSaldi.Name = "dgvSaldi";
             this.dgvSaldi.ReadOnly = true;
-            this.dgvSaldi.Size = new System.Drawing.Size(715, 455);
+            this.dgvSaldi.Size = new System.Drawing.Size(816, 455);
             this.dgvSaldi.TabIndex = 5;
             this.dgvSaldi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSaldi_CellContentClick);
+            // 
+            // chkNascondiSaldiAZero
+            // 
+            this.chkNascondiSaldiAZero.AutoSize = true;
+            this.chkNascondiSaldiAZero.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkNascondiSaldiAZero.Checked = true;
+            this.chkNascondiSaldiAZero.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkNascondiSaldiAZero.Location = new System.Drawing.Point(629, 68);
+            this.chkNascondiSaldiAZero.Name = "chkNascondiSaldiAZero";
+            this.chkNascondiSaldiAZero.Size = new System.Drawing.Size(127, 17);
+            this.chkNascondiSaldiAZero.TabIndex = 6;
+            this.chkNascondiSaldiAZero.Text = "Nascondi saldi a zero";
+            this.chkNascondiSaldiAZero.UseVisualStyleBackColor = true;
             // 
             // IDUBICAZIONE
             // 
@@ -159,23 +173,21 @@
             this.IDSALDO.ReadOnly = true;
             this.IDSALDO.Visible = false;
             // 
-            // chkNascondiSaldiAZero
+            // btnexport
             // 
-            this.chkNascondiSaldiAZero.AutoSize = true;
-            this.chkNascondiSaldiAZero.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkNascondiSaldiAZero.Checked = true;
-            this.chkNascondiSaldiAZero.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkNascondiSaldiAZero.Location = new System.Drawing.Point(552, 66);
-            this.chkNascondiSaldiAZero.Name = "chkNascondiSaldiAZero";
-            this.chkNascondiSaldiAZero.Size = new System.Drawing.Size(127, 17);
-            this.chkNascondiSaldiAZero.TabIndex = 6;
-            this.chkNascondiSaldiAZero.Text = "Nascondi saldi a zero";
-            this.chkNascondiSaldiAZero.UseVisualStyleBackColor = true;
+            this.btnexport.Location = new System.Drawing.Point(518, 65);
+            this.btnexport.Name = "btnexport";
+            this.btnexport.Size = new System.Drawing.Size(75, 23);
+            this.btnexport.TabIndex = 7;
+            this.btnexport.Text = "Export";
+            this.btnexport.UseVisualStyleBackColor = true;
+            this.btnexport.Click += new System.EventHandler(this.btnexport_Click);
             // 
             // SaldiFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(713, 560);
+            this.ClientSize = new System.Drawing.Size(812, 560);
+            this.Controls.Add(this.btnexport);
             this.Controls.Add(this.chkNascondiSaldiAZero);
             this.Controls.Add(this.dgvSaldi);
             this.Controls.Add(this.label2);
@@ -199,12 +211,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvSaldi;
+        private System.Windows.Forms.CheckBox chkNascondiSaldiAZero;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDUBICAZIONE;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIZIONE;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDMAGAZZ;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
         private System.Windows.Forms.DataGridViewButtonColumn MOVIMENTA;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDSALDO;
-        private System.Windows.Forms.CheckBox chkNascondiSaldiAZero;
+        private System.Windows.Forms.Button btnexport;
     }
 }

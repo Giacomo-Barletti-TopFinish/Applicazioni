@@ -101,6 +101,88 @@ namespace Applicazioni.Helpers
             return content;
         }
 
+        public byte[] CreaExcelSpedizioni(SpedizioniDS ds)
+        {
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                int numeroColonne = ds.SPSALDIEXT.Columns.Count;
+                List<int> colonneDaScartare = new List<int>(new int[] { 0, 1, 2, 4, 5 });
+                List<int> colonneDaVisualizzare = new List<int>(new int[] { 6, 7, 8, 3 });
+                Columns columns = new Columns();
+                for (int i = 0; i < (colonneDaVisualizzare.Count); i++)
+                //                    for (int i = 0; i < (numeroColonne - colonneDaScartare.Count);  i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 15;
+                    c.CustomWidth = true;
+
+                    columns.Append(c);
+                }
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                string nome = DateTime.Today.AddDays(1).ToShortDateString();
+                nome = nome.Replace('/', '.');
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = nome };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                Row row = new Row();
+
+                for (int i = 0; i < colonneDaVisualizzare.Count; i++)
+                {
+                    //                    if (colonneDaScartare.Contains(i)) continue;
+                    string etichetta = ds.SPSALDIEXT.Columns[colonneDaVisualizzare[i]].ColumnName;
+                    row.Append(ConstructCell(etichetta, CellValues.String, 2));
+                }
+
+                sheetData.AppendChild(row);
+                foreach (SpedizioniDS.SPSALDIEXTRow riga in ds.SPSALDIEXT)   //.Where(x => !x.IsQUANTITANull() && x.QUANTITA > 0).OrderBy(x => x.IsIDUBICAZIONENull() ? -1 : x.IDUBICAZIONE))
+                {
+                    Row rowDati = new Row();
+                    for (int i = 0; i < colonneDaVisualizzare.Count; i++)
+                    {
+                     //   if (colonneDaScartare.Contains(i)) continue;
+                        string valore = riga[colonneDaVisualizzare[i]].ToString();
+                        rowDati.Append(ConstructCell(valore, CellValues.String, 1));
+                    }
+
+                    sheetData.AppendChild(rowDati);
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+
+            return content;
+        }
+
 
         public byte[] CreaExcelPianificazioneGalvanica(GalvanicaDS ds)
         {

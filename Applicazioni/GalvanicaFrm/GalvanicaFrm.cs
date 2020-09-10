@@ -211,7 +211,7 @@ namespace GalvanicaFrm
                 if (fs != null) fs.Close();
             }
         }
-
+   
         private void dgvGriglia_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try

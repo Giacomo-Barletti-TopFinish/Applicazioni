@@ -1,11 +1,13 @@
 ﻿using Applicazioni.BLL;
 using Applicazioni.Common;
 using Applicazioni.Entities;
+using Applicazioni.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,6 +74,43 @@ namespace SpedizioniFrm
             spedizioni.FillSaldi(_ds, txtubicazione.Text, txtarticolo.Text,chkNascondiSaldiAZero.Checked);
             CreaGriglia();
 
+        }
+
+        private void btnexport_Click(object sender, EventArgs e)
+        {
+            FileStream fs = null;
+            if (_ds.SPSALDIEXT.Count() < 0)
+            {
+                MessageBox.Show("Non ci sono dati esportare", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            SaveFileDialog d = new SaveFileDialog();
+            d.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            d.DefaultExt = "xlsx";
+            d.AddExtension = true;
+            if (d.ShowDialog() == DialogResult.Cancel) return;
+            try
+            {
+                ExcelHelper hExcel = new ExcelHelper();
+                byte[] fileExcel = hExcel.CreaExcelSpedizioni(_ds);
+
+                if (File.Exists(d.FileName)) File.Delete(d.FileName);
+
+                fs = new FileStream(d.FileName, FileMode.Create);
+                fs.Write(fileExcel, 0, fileExcel.Length);
+                fs.Flush();
+
+                MessageBox.Show("Export to excel terminato con successo", "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Diagnostics.Process.Start(d.FileName);
+            }
+            catch (Exception ex)
+            {
+                 MostraEccezione( "ERRORE IN ESPORTA EXCEL", ex);
+            }
+            finally
+            {
+                if (fs != null) fs.Close();
+            }
         }
     }
 

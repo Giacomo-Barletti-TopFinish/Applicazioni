@@ -27,6 +27,8 @@ namespace Applicazioni.Common
             InitializeComponent();
         }
 
+        
+
         protected void Numeric_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar)
