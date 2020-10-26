@@ -52,11 +52,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EDIFornitoriDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ParametriEDIFornitori.cs" />
     <Compile Include="PreventiviDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +119,17 @@
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
+    <None Include="EDIFornitoriDS.xsc">
+      <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
+    </None>
+    <None Include="EDIFornitoriDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EDIFornitoriDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EDIFornitoriDS.xss">
+      <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
+    </None>
     <None Include="GalvanicaDS.xsc">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </None>

@@ -58,6 +58,8 @@
     <Compile Include="Core\DaoExtensor.cs" />
     <Compile Include="Core\DataContextAttribute.cs" />
     <Compile Include="Core\Exceptions.cs" />
+    <Compile Include="EDIFornitori\EDIFornitoriAdapter.cs" />
+    <Compile Include="EDIFornitori\EDIFornitoriBusiness.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Preventivi\PreventiviAdapter.cs" />
