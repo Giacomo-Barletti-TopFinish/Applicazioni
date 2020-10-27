@@ -38,12 +38,16 @@
             this.dgvRisultati = new System.Windows.Forms.DataGridView();
             this.btnCreaFiles = new System.Windows.Forms.Button();
             this.SELEZIONATA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DOCUMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NUMERO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATDOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ACCESSORISTA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DESTINAZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CODICETIPOO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESTABTIPOO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CODICECAUTR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESTABCAUTR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDVENDITET = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATDOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RAGIONESOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUMERORIGHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RIFERIMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +57,7 @@
             // rbMetal
             // 
             this.rbMetal.AutoSize = true;
+            this.rbMetal.Checked = true;
             this.rbMetal.Location = new System.Drawing.Point(12, 25);
             this.rbMetal.Name = "rbMetal";
             this.rbMetal.Size = new System.Drawing.Size(134, 17);
@@ -68,7 +73,6 @@
             this.rbTopFinish.Name = "rbTopFinish";
             this.rbTopFinish.Size = new System.Drawing.Size(130, 17);
             this.rbTopFinish.TabIndex = 0;
-            this.rbTopFinish.TabStop = true;
             this.rbTopFinish.Text = "TOP FINISH (465861)";
             this.rbTopFinish.UseVisualStyleBackColor = true;
             // 
@@ -102,7 +106,7 @@
             this.dtAl.Location = new System.Drawing.Point(220, 56);
             this.dtAl.Name = "dtAl";
             this.dtAl.Size = new System.Drawing.Size(200, 20);
-            this.dtAl.TabIndex = 1;
+            this.dtAl.TabIndex = 2;
             // 
             // btnTrova
             // 
@@ -124,18 +128,22 @@
             this.dgvRisultati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRisultati.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SELEZIONATA,
+            this.DOCUMENTO,
+            this.NUMERO,
+            this.DATDOC,
+            this.ACCESSORISTA,
+            this.DESTINAZIONE,
             this.CODICETIPOO,
             this.DESTABTIPOO,
             this.CODICECAUTR,
             this.DESTABCAUTR,
             this.IDVENDITET,
-            this.DATDOC,
             this.RAGIONESOC,
             this.NUMERORIGHE,
             this.RIFERIMENTO});
             this.dgvRisultati.Location = new System.Drawing.Point(12, 96);
             this.dgvRisultati.Name = "dgvRisultati";
-            this.dgvRisultati.Size = new System.Drawing.Size(1152, 591);
+            this.dgvRisultati.Size = new System.Drawing.Size(1626, 591);
             this.dgvRisultati.TabIndex = 4;
             // 
             // btnCreaFiles
@@ -143,7 +151,7 @@
             this.btnCreaFiles.Location = new System.Drawing.Point(634, 28);
             this.btnCreaFiles.Name = "btnCreaFiles";
             this.btnCreaFiles.Size = new System.Drawing.Size(92, 48);
-            this.btnCreaFiles.TabIndex = 3;
+            this.btnCreaFiles.TabIndex = 4;
             this.btnCreaFiles.Text = "Crea files";
             this.btnCreaFiles.UseVisualStyleBackColor = true;
             this.btnCreaFiles.Click += new System.EventHandler(this.btnCreaFiles_Click);
@@ -154,6 +162,42 @@
             this.SELEZIONATA.HeaderText = "";
             this.SELEZIONATA.Name = "SELEZIONATA";
             this.SELEZIONATA.Width = 70;
+            // 
+            // DOCUMENTO
+            // 
+            this.DOCUMENTO.DataPropertyName = "FULLNUMDOC";
+            this.DOCUMENTO.FillWeight = 150F;
+            this.DOCUMENTO.HeaderText = "DOCUMENTO";
+            this.DOCUMENTO.Name = "DOCUMENTO";
+            this.DOCUMENTO.Width = 150;
+            // 
+            // NUMERO
+            // 
+            this.NUMERO.DataPropertyName = "NUMDOC";
+            this.NUMERO.HeaderText = "NUMERO";
+            this.NUMERO.Name = "NUMERO";
+            // 
+            // DATDOC
+            // 
+            this.DATDOC.DataPropertyName = "DATDOC";
+            this.DATDOC.HeaderText = "DATA DOC";
+            this.DATDOC.Name = "DATDOC";
+            // 
+            // ACCESSORISTA
+            // 
+            this.ACCESSORISTA.DataPropertyName = "ACCESSORISTA";
+            this.ACCESSORISTA.FillWeight = 80F;
+            this.ACCESSORISTA.HeaderText = "ACCESSORISTA";
+            this.ACCESSORISTA.Name = "ACCESSORISTA";
+            this.ACCESSORISTA.Width = 80;
+            // 
+            // DESTINAZIONE
+            // 
+            this.DESTINAZIONE.DataPropertyName = "DESTINAZIONE";
+            this.DESTINAZIONE.FillWeight = 150F;
+            this.DESTINAZIONE.HeaderText = "DESTINAZIONE";
+            this.DESTINAZIONE.Name = "DESTINAZIONE";
+            this.DESTINAZIONE.Width = 150;
             // 
             // CODICETIPOO
             // 
@@ -192,17 +236,11 @@
             this.IDVENDITET.Name = "IDVENDITET";
             this.IDVENDITET.Visible = false;
             // 
-            // DATDOC
-            // 
-            this.DATDOC.DataPropertyName = "DATDOC";
-            this.DATDOC.HeaderText = "DATA DOC";
-            this.DATDOC.Name = "DATDOC";
-            // 
             // RAGIONESOC
             // 
             this.RAGIONESOC.DataPropertyName = "RAGIONESOC";
             this.RAGIONESOC.FillWeight = 150F;
-            this.RAGIONESOC.HeaderText = "DESTINAZIONE";
+            this.RAGIONESOC.HeaderText = "CLIENTE";
             this.RAGIONESOC.Name = "RAGIONESOC";
             this.RAGIONESOC.Width = 150;
             // 
@@ -224,7 +262,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 689);
+            this.ClientSize = new System.Drawing.Size(1650, 689);
             this.Controls.Add(this.dgvRisultati);
             this.Controls.Add(this.btnCreaFiles);
             this.Controls.Add(this.btnTrova);
@@ -236,6 +274,8 @@
             this.Controls.Add(this.rbMetal);
             this.Name = "EdiFornitoriForm";
             this.Text = "EDI Fornitori";
+            this.Load += new System.EventHandler(this.EdiFornitoriForm_Load);
+            this.Shown += new System.EventHandler(this.EdiFornitoriForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -254,12 +294,16 @@
         private System.Windows.Forms.DataGridView dgvRisultati;
         private System.Windows.Forms.Button btnCreaFiles;
         private System.Windows.Forms.DataGridViewCheckBoxColumn SELEZIONATA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DOCUMENTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NUMERO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATDOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ACCESSORISTA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DESTINAZIONE;
         private System.Windows.Forms.DataGridViewTextBoxColumn CODICETIPOO;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESTABTIPOO;
         private System.Windows.Forms.DataGridViewTextBoxColumn CODICECAUTR;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESTABCAUTR;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDVENDITET;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DATDOC;
         private System.Windows.Forms.DataGridViewTextBoxColumn RAGIONESOC;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUMERORIGHE;
         private System.Windows.Forms.DataGridViewTextBoxColumn RIFERIMENTO;

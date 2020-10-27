@@ -760,10 +760,12 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="DESTINAZIONE" msprop:Generator_ColumnVarNameInTable="columnDESTINAZIONE" msprop:Generator_ColumnPropNameInRow="DESTINAZIONE" msprop:Generator_ColumnPropNameInTable="DESTINAZIONEColumn" msprop:Generator_UserColumnName="DESTINAZIONE" type="xs:string" minOccurs="0" />
+              <xs:element name="ACCESSORISTA" msprop:Generator_ColumnVarNameInTable="columnACCESSORISTA" msprop:Generator_ColumnPropNameInRow="ACCESSORISTA" msprop:Generator_ColumnPropNameInTable="ACCESSORISTAColumn" msprop:Generator_UserColumnName="ACCESSORISTA" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ACCESSORISTI" msprop:Generator_TableClassName="ACCESSORISTIDataTable" msprop:Generator_TableVarName="tableACCESSORISTI" msprop:Generator_TablePropName="ACCESSORISTI" msprop:Generator_RowDeletingName="ACCESSORISTIRowDeleting" msprop:Generator_RowChangingName="ACCESSORISTIRowChanging" msprop:Generator_RowEvHandlerName="ACCESSORISTIRowChangeEventHandler" msprop:Generator_RowDeletedName="ACCESSORISTIRowDeleted" msprop:Generator_UserTableName="ACCESSORISTI" msprop:Generator_RowChangedName="ACCESSORISTIRowChanged" msprop:Generator_RowEvArgName="ACCESSORISTIRowChangeEvent" msprop:Generator_RowClassName="ACCESSORISTIRow">
+        <xs:element name="ACCESSORISTI" msprop:Generator_TableClassName="ACCESSORISTIDataTable" msprop:Generator_TableVarName="tableACCESSORISTI" msprop:Generator_RowChangedName="ACCESSORISTIRowChanged" msprop:Generator_TablePropName="ACCESSORISTI" msprop:Generator_RowDeletingName="ACCESSORISTIRowDeleting" msprop:Generator_RowChangingName="ACCESSORISTIRowChanging" msprop:Generator_RowEvHandlerName="ACCESSORISTIRowChangeEventHandler" msprop:Generator_RowDeletedName="ACCESSORISTIRowDeleted" msprop:Generator_RowClassName="ACCESSORISTIRow" msprop:Generator_UserTableName="ACCESSORISTI" msprop:Generator_RowEvArgName="ACCESSORISTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE" minOccurs="0">
@@ -773,17 +775,17 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="FORNITORE" msprop:Generator_ColumnVarNameInTable="columnFORNITORE" msprop:Generator_ColumnPropNameInRow="FORNITORE" msprop:Generator_ColumnPropNameInTable="FORNITOREColumn" msprop:Generator_UserColumnName="FORNITORE" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="18" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="CODICECLIFO" msprop:Generator_ColumnVarNameInTable="columnCODICECLIFO" msprop:Generator_ColumnPropNameInRow="CODICECLIFO" msprop:Generator_ColumnPropNameInTable="CODICECLIFOColumn" msprop:Generator_UserColumnName="CODICECLIFO" minOccurs="0">
+              <xs:element name="CODCF" msprop:Generator_ColumnVarNameInTable="columnCODCF" msprop:Generator_ColumnPropNameInRow="CODCF" msprop:Generator_ColumnPropNameInTable="CODCFColumn" msprop:Generator_UserColumnName="CODCF" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CODIND" msprop:Generator_ColumnVarNameInTable="columnCODIND" msprop:Generator_ColumnPropNameInRow="CODIND" msprop:Generator_ColumnPropNameInTable="CODINDColumn" msprop:Generator_UserColumnName="CODIND" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

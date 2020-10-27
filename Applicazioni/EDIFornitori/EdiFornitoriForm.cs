@@ -196,17 +196,13 @@ namespace EDIFornitori
             string dataDocumento = "00000000";
 
             string codiceGucciAccessorista = "      ";
+            AccessoristaNonTrovato = String.Empty;
 
-            EDIFornitoriDS.ACCESSORISTIRow accessorista = ds.ACCESSORISTI.Where(x => !x.IsCODICECLIFONull() && x.CODICECLIFO.Trim() == dettaglio.CODICECLIFO.Trim()).FirstOrDefault();
+            EDIFornitoriDS.ACCESSORISTIRow accessorista = ds.ACCESSORISTI.Where(x => x.CODCF == dettaglio.CODICECLIFO && x.CODIND == dettaglio.CODINDSP).FirstOrDefault();
             if (accessorista != null)
-            {
                 codiceGucciAccessorista = accessorista.CODICE;
-                AccessoristaNonTrovato = string.Empty;
-            }
             else
-            {
-                AccessoristaNonTrovato = string.Format("ACCESSORISTA NON TROVATO {0} - {1}", dettaglio.CODICECLIFO, dettaglio.RAGIONESOC);
-            }
+                AccessoristaNonTrovato = string.Format("CLIFO:{0} IND:{1}", dettaglio.CODICECLIFO, dettaglio.CODINDSP);
 
             string EnteCommessaGucci = "    ";
             string AnnoCommessaGucci = "    ";
@@ -256,7 +252,7 @@ namespace EDIFornitori
                 FaseCommessaGucci = "00";
                 OperazioneCommessaGucci = "000";
 
-                string[] ente = dettaglio.RIFERIMENTO.Split(' ');
+                string[] ente = dettaglio.RIFERIMENTO.Trim().Split(' ');
                 if (ente.Length == 3)
                 {
                     EnteOrdineFornitore = aggiustaStringa(ente[0], 4, 'X');
@@ -288,7 +284,7 @@ namespace EDIFornitori
                 //string FaseCommessaGucci = "00";
                 //string OperazioneCommessaGucci = "000";
 
-                string[] ente = dettaglio.RIFERIMENTO.Split(' ');
+                string[] ente = dettaglio.RIFERIMENTO.Trim().Split(' ');
                 if (ente.Length == 3)
                 {
                     EnteCommessaGucci = aggiustaStringa(ente[0], 4, 'X');
@@ -353,7 +349,7 @@ namespace EDIFornitori
                 RigaCommessaGucci,
                 AvanzamentoCommessaGucci,
                 FaseCommessaGucci,
-                NumeroCommessaGucci,
+                OperazioneCommessaGucci,
                 EnteOrdineFornitore,
                 AnnoOrdineFornitore,
                 NumeroOrdineFornitore,
@@ -424,6 +420,17 @@ namespace EDIFornitori
                         return "    ";
                 }
             }
+        }
+
+        private void EdiFornitoriForm_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void EdiFornitoriForm_Shown(object sender, EventArgs e)
+        {
+            rbMetal.Checked = true;
+            rbTopFinish.Checked = false;
+
         }
     }
 }

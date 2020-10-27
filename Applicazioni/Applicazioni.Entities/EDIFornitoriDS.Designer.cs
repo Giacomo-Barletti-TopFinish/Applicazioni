@@ -2324,6 +2324,10 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnRIFERIMENTO;
             
+            private global::System.Data.DataColumn columnDESTINAZIONE;
+            
+            private global::System.Data.DataColumn columnACCESSORISTA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BOLLE_VENDITADataTable() {
@@ -2759,6 +2763,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESTINAZIONEColumn {
+                get {
+                    return this.columnDESTINAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ACCESSORISTAColumn {
+                get {
+                    return this.columnACCESSORISTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2844,7 +2864,9 @@ namespace Applicazioni.Entities {
                         System.DateTime DATARIF_OC, 
                         System.DateTime DATACR_OC, 
                         System.DateTime DATAVR_OC, 
-                        string RIFERIMENTO) {
+                        string RIFERIMENTO, 
+                        string DESTINAZIONE, 
+                        string ACCESSORISTA) {
                 BOLLE_VENDITARow rowBOLLE_VENDITARow = ((BOLLE_VENDITARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         AZIENDA,
@@ -2896,7 +2918,9 @@ namespace Applicazioni.Entities {
                         DATARIF_OC,
                         DATACR_OC,
                         DATAVR_OC,
-                        RIFERIMENTO};
+                        RIFERIMENTO,
+                        DESTINAZIONE,
+                        ACCESSORISTA};
                 rowBOLLE_VENDITARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBOLLE_VENDITARow);
                 return rowBOLLE_VENDITARow;
@@ -2969,6 +2993,8 @@ namespace Applicazioni.Entities {
                 this.columnDATACR_OC = base.Columns["DATACR_OC"];
                 this.columnDATAVR_OC = base.Columns["DATAVR_OC"];
                 this.columnRIFERIMENTO = base.Columns["RIFERIMENTO"];
+                this.columnDESTINAZIONE = base.Columns["DESTINAZIONE"];
+                this.columnACCESSORISTA = base.Columns["ACCESSORISTA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3074,6 +3100,10 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnDATAVR_OC);
                 this.columnRIFERIMENTO = new global::System.Data.DataColumn("RIFERIMENTO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRIFERIMENTO);
+                this.columnDESTINAZIONE = new global::System.Data.DataColumn("DESTINAZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESTINAZIONE);
+                this.columnACCESSORISTA = new global::System.Data.DataColumn("ACCESSORISTA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnACCESSORISTA);
                 this.columnAZIENDA.MaxLength = 10;
                 this.columnDESTABTIPDOC.MaxLength = 50;
                 this.columnCODICETIPDOC.MaxLength = 3;
@@ -3239,9 +3269,9 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnCODICE;
             
-            private global::System.Data.DataColumn columnFORNITORE;
+            private global::System.Data.DataColumn columnCODCF;
             
-            private global::System.Data.DataColumn columnCODICECLIFO;
+            private global::System.Data.DataColumn columnCODIND;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -3286,17 +3316,17 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn FORNITOREColumn {
+            public global::System.Data.DataColumn CODCFColumn {
                 get {
-                    return this.columnFORNITORE;
+                    return this.columnCODCF;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn CODICECLIFOColumn {
+            public global::System.Data.DataColumn CODINDColumn {
                 get {
-                    return this.columnCODICECLIFO;
+                    return this.columnCODIND;
                 }
             }
             
@@ -3337,12 +3367,12 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ACCESSORISTIRow AddACCESSORISTIRow(string CODICE, string FORNITORE, string CODICECLIFO) {
+            public ACCESSORISTIRow AddACCESSORISTIRow(string CODICE, string CODCF, string CODIND) {
                 ACCESSORISTIRow rowACCESSORISTIRow = ((ACCESSORISTIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CODICE,
-                        FORNITORE,
-                        CODICECLIFO};
+                        CODCF,
+                        CODIND};
                 rowACCESSORISTIRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowACCESSORISTIRow);
                 return rowACCESSORISTIRow;
@@ -3366,8 +3396,8 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnCODICE = base.Columns["CODICE"];
-                this.columnFORNITORE = base.Columns["FORNITORE"];
-                this.columnCODICECLIFO = base.Columns["CODICECLIFO"];
+                this.columnCODCF = base.Columns["CODCF"];
+                this.columnCODIND = base.Columns["CODIND"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3375,13 +3405,13 @@ namespace Applicazioni.Entities {
             private void InitClass() {
                 this.columnCODICE = new global::System.Data.DataColumn("CODICE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCODICE);
-                this.columnFORNITORE = new global::System.Data.DataColumn("FORNITORE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFORNITORE);
-                this.columnCODICECLIFO = new global::System.Data.DataColumn("CODICECLIFO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCODICECLIFO);
+                this.columnCODCF = new global::System.Data.DataColumn("CODCF", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODCF);
+                this.columnCODIND = new global::System.Data.DataColumn("CODIND", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODIND);
                 this.columnCODICE.MaxLength = 6;
-                this.columnFORNITORE.MaxLength = 18;
-                this.columnCODICECLIFO.MaxLength = 10;
+                this.columnCODCF.MaxLength = 10;
+                this.columnCODIND.MaxLength = 3;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7279,6 +7309,38 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESTINAZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableBOLLE_VENDITA.DESTINAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESTINAZIONE\' in table \'BOLLE_VENDITA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBOLLE_VENDITA.DESTINAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ACCESSORISTA {
+                get {
+                    try {
+                        return ((string)(this[this.tableBOLLE_VENDITA.ACCESSORISTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ACCESSORISTA\' in table \'BOLLE_VENDITA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBOLLE_VENDITA.ACCESSORISTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsAZIENDANull() {
                 return this.IsNull(this.tableBOLLE_VENDITA.AZIENDAColumn);
             }
@@ -7876,6 +7938,30 @@ namespace Applicazioni.Entities {
             public void SetRIFERIMENTONull() {
                 this[this.tableBOLLE_VENDITA.RIFERIMENTOColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESTINAZIONENull() {
+                return this.IsNull(this.tableBOLLE_VENDITA.DESTINAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESTINAZIONENull() {
+                this[this.tableBOLLE_VENDITA.DESTINAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsACCESSORISTANull() {
+                return this.IsNull(this.tableBOLLE_VENDITA.ACCESSORISTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetACCESSORISTANull() {
+                this[this.tableBOLLE_VENDITA.ACCESSORISTAColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -7910,33 +7996,33 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string FORNITORE {
+            public string CODCF {
                 get {
                     try {
-                        return ((string)(this[this.tableACCESSORISTI.FORNITOREColumn]));
+                        return ((string)(this[this.tableACCESSORISTI.CODCFColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FORNITORE\' in table \'ACCESSORISTI\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODCF\' in table \'ACCESSORISTI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableACCESSORISTI.FORNITOREColumn] = value;
+                    this[this.tableACCESSORISTI.CODCFColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string CODICECLIFO {
+            public string CODIND {
                 get {
                     try {
-                        return ((string)(this[this.tableACCESSORISTI.CODICECLIFOColumn]));
+                        return ((string)(this[this.tableACCESSORISTI.CODINDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CODICECLIFO\' in table \'ACCESSORISTI\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODIND\' in table \'ACCESSORISTI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableACCESSORISTI.CODICECLIFOColumn] = value;
+                    this[this.tableACCESSORISTI.CODINDColumn] = value;
                 }
             }
             
@@ -7954,26 +8040,26 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsFORNITORENull() {
-                return this.IsNull(this.tableACCESSORISTI.FORNITOREColumn);
+            public bool IsCODCFNull() {
+                return this.IsNull(this.tableACCESSORISTI.CODCFColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetFORNITORENull() {
-                this[this.tableACCESSORISTI.FORNITOREColumn] = global::System.Convert.DBNull;
+            public void SetCODCFNull() {
+                this[this.tableACCESSORISTI.CODCFColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsCODICECLIFONull() {
-                return this.IsNull(this.tableACCESSORISTI.CODICECLIFOColumn);
+            public bool IsCODINDNull() {
+                return this.IsNull(this.tableACCESSORISTI.CODINDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetCODICECLIFONull() {
-                this[this.tableACCESSORISTI.CODICECLIFOColumn] = global::System.Convert.DBNull;
+            public void SetCODINDNull() {
+                this[this.tableACCESSORISTI.CODINDColumn] = global::System.Convert.DBNull;
             }
         }
         

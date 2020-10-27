@@ -7,8 +7,8 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="0" ViewPortY="0" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:USR_VENDITET" ZOrder="3" X="550" Y="271" Height="304" Width="161" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:BOLLE_VENDITA" ZOrder="2" X="120" Y="149" Height="296" Width="247" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="292" />
-    <Shape ID="DesignTable:ACCESSORISTI" ZOrder="1" X="892" Y="192" Height="86" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="130" />
+    <Shape ID="DesignTable:BOLLE_VENDITA" ZOrder="2" X="120" Y="149" Height="657" Width="161" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="653" />
+    <Shape ID="DesignTable:ACCESSORISTI" ZOrder="1" X="1068" Y="203" Height="86" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="130" />
   </Shapes>
   <Connectors />
 </DiagramLayout>
