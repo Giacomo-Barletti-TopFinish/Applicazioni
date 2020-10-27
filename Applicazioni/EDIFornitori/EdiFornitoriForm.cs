@@ -133,7 +133,7 @@ namespace EDIFornitori
                         try
                         {
                             string AccessoristaNonTrovato;
-                            string riga = creaRigaFile(codiceFornitore, dettaglio, out AccessoristaNonTrovato);
+                            string riga = creaRigaFile(codiceFornitore, dettaglio, ds, out AccessoristaNonTrovato);
                             sw.WriteLine(riga);
 
                             sbMessaggio.AppendLine(AccessoristaNonTrovato);
@@ -151,7 +151,7 @@ namespace EDIFornitori
                     }
                 }
 
-                if (sbMessaggio.Length > 0)
+                if (sbMessaggio.ToString().Trim().Length > 0)
                 {
                     sbMessaggio.Insert(0, @"I seguenti ACCESSORISTI non sono stati trovati: " + Environment.NewLine);
                     MessageBox.Show(sbMessaggio.ToString().Trim());
@@ -178,16 +178,16 @@ namespace EDIFornitori
             if (numeroDDT.Length > 8) throw new ArgumentException("Numero DDT più lungo di 8 caratteri");
             if (codiceFornitore.Length > 6) throw new ArgumentException("Codice fornitore più lungo di 8 caratteri");
 
-            string fornitore = codiceFornitore.PadLeft(6, 'X');
-            string ddt = numeroDDT.PadLeft(8, 'X');
+            string fornitore = codiceFornitore.PadLeft(6, '0');
+            string ddt = numeroDDT.PadLeft(8, '0');
 
             return string.Format("{0}{1}{2}{3}{4}{5}{6}{7}.txt", fornitore, day, month, year, hh, mm, ss, ddt);
         }
 
-        private string creaRigaFile(string codiceFornitore, EDIFornitoriDS.BOLLE_VENDITARow dettaglio, out string AccessoristaNonTrovato)
+        private string creaRigaFile(string codiceFornitore, EDIFornitoriDS.BOLLE_VENDITARow dettaglio, EDIFornitoriDS ds, out string AccessoristaNonTrovato)
         {
             string codiceAzienda = "06";
-            string fornitore = aggiustaStringa(codiceFornitore, 6, 'X');
+            string fornitore = aggiustaStringa(codiceFornitore, 6, '0');
             string documentoRiferimento = aggiustaStringa(dettaglio.NUMDOC, 10, '0');
             string dataDocumentoRiferimento = dettaglio.DATDOC.ToString("ddMMyyyy");
             string codiceMagazzinoDestinazione = EstraiCodiceMagazzinoDestinazione(dettaglio);
@@ -197,7 +197,7 @@ namespace EDIFornitori
 
             string codiceGucciAccessorista = "      ";
 
-            EDIFornitoriDS.ACCESSORISTIRow accessorista = _ds.ACCESSORISTI.Where(x => x.CODICECLIFO.Trim() == dettaglio.CODICECLIFO.Trim()).FirstOrDefault();
+            EDIFornitoriDS.ACCESSORISTIRow accessorista = ds.ACCESSORISTI.Where(x => !x.IsCODICECLIFONull() && x.CODICECLIFO.Trim() == dettaglio.CODICECLIFO.Trim()).FirstOrDefault();
             if (accessorista != null)
             {
                 codiceGucciAccessorista = accessorista.CODICE;
@@ -236,7 +236,7 @@ namespace EDIFornitori
             string codicefornitore = "      ";
             string pezza = "00000";
             string quantita = "00000000000";
-            string stringaTaglie = "  ";
+            string stringaTaglie = "00";
             string progressivoTaglie = " ";
             string posizioneTaglia = "00";
             string filler = "    ";
