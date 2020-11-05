@@ -57,6 +57,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FlussoFattureDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FlussoFattureDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,6 +134,17 @@
     </None>
     <None Include="EDIFornitoriDS.xss">
       <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
+    </None>
+    <None Include="FlussoFattureDS.xsc">
+      <DependentUpon>FlussoFattureDS.xsd</DependentUpon>
+    </None>
+    <None Include="FlussoFattureDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FlussoFattureDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="FlussoFattureDS.xss">
+      <DependentUpon>FlussoFattureDS.xsd</DependentUpon>
     </None>
     <None Include="GalvanicaDS.xsc">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>

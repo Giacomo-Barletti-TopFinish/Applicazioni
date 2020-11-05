@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpedizioniFrm", "Spedizioni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDIFornitori", "EDIFornitori\EDIFornitori.csproj", "{1FF496E8-9FAE-454E-B8D2-069EF8628098}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlussoFatture", "FlussoFatture\FlussoFatture.csproj", "{EBE5B2A9-5CCD-4FD8-9308-4FA9C7DA3C75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{1FF496E8-9FAE-454E-B8D2-069EF8628098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF496E8-9FAE-454E-B8D2-069EF8628098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF496E8-9FAE-454E-B8D2-069EF8628098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE5B2A9-5CCD-4FD8-9308-4FA9C7DA3C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE5B2A9-5CCD-4FD8-9308-4FA9C7DA3C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE5B2A9-5CCD-4FD8-9308-4FA9C7DA3C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE5B2A9-5CCD-4FD8-9308-4FA9C7DA3C75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,6 +14,127 @@ namespace Applicazioni.Helpers
 {
     public class ExcelHelper
     {
+        public byte[] CreaFlussoFatture(List<string> idTestata, FlussoFattureDS ds, out string errori)
+        {
+            errori = string.Empty;
+            StringBuilder sb = new StringBuilder();
+
+            byte[] content;
+
+            if (idTestata.Count == 0) return null;
+
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart wsTestata = workbookPart.AddNewPart<WorksheetPart>();
+                wsTestata.Worksheet = new Worksheet();
+
+                WorksheetPart wsDettaglio = workbookPart.AddNewPart<WorksheetPart>();
+                wsDettaglio.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+
+                Columns colonneTestata = new Columns();
+                for (int i = 0; i < 5; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonneTestata.Append(c);
+                }
+
+                Columns colonneDettaglio = new Columns();
+                for (int i = 0; i < 5; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonneDettaglio.Append(c);
+                }
+
+                wsTestata.Worksheet.AppendChild(colonneTestata);
+                wsDettaglio.Worksheet.AppendChild(colonneDettaglio);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sTestata = new Sheet() { Id = workbookPart.GetIdOfPart(wsTestata), SheetId = 1, Name = "Headers" };
+                Sheet sDettaglio = new Sheet() { Id = workbookPart.GetIdOfPart(wsDettaglio), SheetId = 2, Name = "Lines" };
+
+                sheets.Append(sTestata);
+                sheets.Append(sDettaglio);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetDataTestata = wsTestata.Worksheet.AppendChild(new SheetData());
+                SheetData sheetDataDettaglio = wsDettaglio.Worksheet.AppendChild(new SheetData());
+
+
+                foreach (string documento in idTestata)
+                {
+                    FlussoFattureDS.BC_FLUSSO_TESTATARow testata = ds.BC_FLUSSO_TESTATA.Where(x => x.FULLNUMDOC == documento).FirstOrDefault();
+                    if (testata == null)
+                    {
+                        string messaggio = string.Format("Bolla non trovata: {0}", documento);
+                        sb.AppendLine(messaggio);
+                        continue;
+                    }
+                    List<FlussoFattureDS.BC_FLUSSO_DETTAGLIORow> dettagli = ds.BC_FLUSSO_DETTAGLIO.Where(x => x.FULLNUMDOC == documento).ToList();
+                    if (dettagli.Count == 0)
+                    {
+                        string messaggio = string.Format("Dettaglio bolla non trovati: {0}", documento);
+                        sb.AppendLine(messaggio);
+                        continue;
+                    }
+
+                    Row rowTestata = new Row();
+                    rowTestata.Append(ConstructCell(testata.SPEDIZIONE, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.FATTURAZIONE, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.CODICETIPOO, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.FULLNUMDOC, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    sheetDataTestata.AppendChild(rowTestata);
+
+                    foreach (FlussoFattureDS.BC_FLUSSO_DETTAGLIORow dettaglio in dettagli)
+                    {
+                        Row rowDettaglio = new Row();
+                        rowDettaglio.Append(ConstructCell(dettaglio.FULLNUMDOC, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.CONTOCG, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.MODELLO, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.QTATOT.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.PREZZOTOT.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.CODIVARIGA, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.PSCONTO1.ToString(), CellValues.String, 1));
+
+                        sheetDataDettaglio.AppendChild(rowDettaglio);
+                    }
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+            errori = sb.ToString().Trim();
+            return content;
+        }
+
         public byte[] CreaExcelOpera(List<SpedizioniDS.SPOPERARow> righeDaSalvare)
         {
             byte[] content;
@@ -164,7 +285,7 @@ namespace Applicazioni.Helpers
                     Row rowDati = new Row();
                     for (int i = 0; i < colonneDaVisualizzare.Count; i++)
                     {
-                     //   if (colonneDaScartare.Contains(i)) continue;
+                        //   if (colonneDaScartare.Contains(i)) continue;
                         string valore = riga[colonneDaVisualizzare[i]].ToString();
                         rowDati.Append(ConstructCell(valore, CellValues.String, 1));
                     }
