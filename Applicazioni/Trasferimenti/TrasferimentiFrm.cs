@@ -29,6 +29,7 @@ namespace Trasferimenti
         private string _tabellaGriglia = "Griglia";
         TrasferimentiDS.AP_TTRASFERIMENTIRow _trasferimentoInCorso;
         private Anagrafica _anagrafica = new Anagrafica();
+        private int _index = 0;
 
         private void ImpostaInRicezione(bool valore)
         {
@@ -85,24 +86,24 @@ namespace Trasferimenti
             float leftMargin = e.MarginBounds.Left;
             float topMargin = e.MarginBounds.Top;
             String line = null;
-
+           
             // Calculate the number of lines per page.
             linesPerPage = e.MarginBounds.Height /
                printFont.GetHeight(e.Graphics);
-            int index = 0;
+            
             // Iterate over the file, printing each line.
-            while (count < linesPerPage && index < _daStampare.Count)
+            while (count < linesPerPage && _index < _daStampare.Count)
             {
-                line = _daStampare[index];
+                line = _daStampare[_index];
                 yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
                 e.Graphics.DrawString(line, printFont, Brushes.Black,
                    leftMargin, yPos, new StringFormat());
                 count++;
-                index++;
+                _index++;
             }
 
             // If more lines exist, print another page.
-            if (index < _daStampare.Count)
+            if (_index < _daStampare.Count)
                 e.HasMorePages = true;
             else
                 e.HasMorePages = false;
@@ -589,6 +590,7 @@ namespace Trasferimenti
 
                 if (pd.ShowDialog() == DialogResult.OK)
                 {
+                    _index = 0;
                     docToPrint.Print();
                 }
             }
