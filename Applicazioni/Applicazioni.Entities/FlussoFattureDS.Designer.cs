@@ -1378,6 +1378,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnPSCONTO1;
             
+            private global::System.Data.DataColumn columnPESO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BC_FLUSSO_DETTAGLIODataTable() {
@@ -1477,6 +1479,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PESOColumn {
+                get {
+                    return this.columnPESO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1512,7 +1522,7 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public BC_FLUSSO_DETTAGLIORow AddBC_FLUSSO_DETTAGLIORow(string FULLNUMDOC, System.DateTime DATDOC, string CONTOCG, string MODELLO, decimal QTATOT, decimal PREZZOTOT, string CODIVARIGA, decimal PSCONTO1) {
+            public BC_FLUSSO_DETTAGLIORow AddBC_FLUSSO_DETTAGLIORow(string FULLNUMDOC, System.DateTime DATDOC, string CONTOCG, string MODELLO, decimal QTATOT, decimal PREZZOTOT, string CODIVARIGA, decimal PSCONTO1, decimal PESO) {
                 BC_FLUSSO_DETTAGLIORow rowBC_FLUSSO_DETTAGLIORow = ((BC_FLUSSO_DETTAGLIORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FULLNUMDOC,
@@ -1522,7 +1532,8 @@ namespace Applicazioni.Entities {
                         QTATOT,
                         PREZZOTOT,
                         CODIVARIGA,
-                        PSCONTO1};
+                        PSCONTO1,
+                        PESO};
                 rowBC_FLUSSO_DETTAGLIORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBC_FLUSSO_DETTAGLIORow);
                 return rowBC_FLUSSO_DETTAGLIORow;
@@ -1553,6 +1564,7 @@ namespace Applicazioni.Entities {
                 this.columnPREZZOTOT = base.Columns["PREZZOTOT"];
                 this.columnCODIVARIGA = base.Columns["CODIVARIGA"];
                 this.columnPSCONTO1 = base.Columns["PSCONTO1"];
+                this.columnPESO = base.Columns["PESO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1574,6 +1586,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnCODIVARIGA);
                 this.columnPSCONTO1 = new global::System.Data.DataColumn("PSCONTO1", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPSCONTO1);
+                this.columnPESO = new global::System.Data.DataColumn("PESO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPESO);
                 this.columnFULLNUMDOC.MaxLength = 100;
                 this.columnCONTOCG.MaxLength = 10;
                 this.columnMODELLO.AllowDBNull = false;
@@ -3555,6 +3569,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal PESO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableBC_FLUSSO_DETTAGLIO.PESOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PESO\' in table \'BC_FLUSSO_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_FLUSSO_DETTAGLIO.PESOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsFULLNUMDOCNull() {
                 return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.FULLNUMDOCColumn);
             }
@@ -3599,6 +3629,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCODIVARIGANull() {
                 this[this.tableBC_FLUSSO_DETTAGLIO.CODIVARIGAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPESONull() {
+                return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.PESOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPESONull() {
+                this[this.tableBC_FLUSSO_DETTAGLIO.PESOColumn] = global::System.Convert.DBNull;
             }
         }
         

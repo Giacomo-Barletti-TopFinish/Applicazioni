@@ -100,7 +100,9 @@ namespace FlussoFatture
                 fs.Close();
 
                 if (errori.Trim().Length > 0)
-                    MessageBox.Show(errori.Trim());
+                    MessageBox.Show(errori.Trim(),"Attenzione",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                else
+                    MessageBox.Show("Operazione conclusa con successo", "OERAZIONE TERMINATA", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

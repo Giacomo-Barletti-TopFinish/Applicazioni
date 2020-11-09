@@ -56,7 +56,7 @@ namespace Applicazioni.Helpers
                 }
 
                 Columns colonneDettaglio = new Columns();
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     Column c = new Column();
                     UInt32Value u = new UInt32Value((uint)(i + 1));
@@ -119,6 +119,7 @@ namespace Applicazioni.Helpers
                         rowDettaglio.Append(ConstructCell(dettaglio.PREZZOTOT.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CODIVARIGA, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.PSCONTO1.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.IsPESONull() ? string.Empty : dettaglio.PESO.ToString(), CellValues.String, 1));
 
                         sheetDataDettaglio.AppendChild(rowDettaglio);
                     }
