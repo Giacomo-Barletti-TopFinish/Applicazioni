@@ -84,6 +84,26 @@ namespace Applicazioni.Helpers
                 SheetData sheetDataDettaglio = wsDettaglio.Worksheet.AppendChild(new SheetData());
 
 
+                Row rowHeaderTestata = new Row();
+                rowHeaderTestata.Append(ConstructCell("BC_SPEDIZIONE", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("BC_FATTURAREA", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("CODICETIPOO", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("FULLNUMDOC", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("DATDOC", CellValues.String, 2));
+                sheetDataTestata.AppendChild(rowHeaderTestata);
+
+                Row rowHeaderDettaglio = new Row();
+                rowHeaderDettaglio.Append(ConstructCell("FULLNUMDOC", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("CONTOCG", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("MODELLO", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("QTATOT", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("PREZZOTOT", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("CODIVARIGA", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("PSCONTO1", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("PESO", CellValues.String, 2));
+
+                sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
+
                 foreach (string documento in idTestata)
                 {
                     FlussoFattureDS.BC_FLUSSO_TESTATARow testata = ds.BC_FLUSSO_TESTATA.Where(x => x.FULLNUMDOC == documento).FirstOrDefault();
