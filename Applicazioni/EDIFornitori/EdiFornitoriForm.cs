@@ -258,7 +258,7 @@ namespace EDIFornitori
                     EnteOrdineFornitore = aggiustaStringa(ente[0], 4, 'X');
                     AnnoOrdineFornitore = aggiustaStringa(ente[1], 4, 'X');
                     NumeroOrdineFornitore = aggiustaStringa(ente[2], 5, '0');
-                    RigaOrdineFornitore = aggiustaStringa(dettaglio.NRRIGA, 3, '0');
+                    RigaOrdineFornitore = aggiustaStringa(dettaglio.RIFERIMENTORIGA, 3, '0');
                 }
 
                 string[] articolo = dettaglio.MODELLO.Split('-');
@@ -290,7 +290,7 @@ namespace EDIFornitori
                     EnteCommessaGucci = aggiustaStringa(ente[0], 4, 'X');
                     AnnoCommessaGucci = aggiustaStringa(ente[1], 4, 'X');
                     NumeroCommessaGucci = aggiustaStringa(ente[2], 5, '0');
-                    RigaCommessaGucci = aggiustaStringa(dettaglio.NRRIGA, 1, '0');
+                    RigaCommessaGucci = aggiustaStringa(dettaglio.RIFERIMENTORIGA, 1, '0');
                 }
 
                 if (ente.Length > 3)
@@ -305,7 +305,7 @@ namespace EDIFornitori
                         FaseCommessaGucci = ente[3].Substring(1, 2);
                         OperazioneCommessaGucci = ente[3].Substring(3, 3);
                     }
-                    RigaCommessaGucci = aggiustaStringa(dettaglio.NRRIGA, 1, '0');
+                    RigaCommessaGucci = aggiustaStringa(dettaglio.RIFERIMENTORIGA, 1, '0');
                 }
 
                 EnteOrdineFornitore = "    ";

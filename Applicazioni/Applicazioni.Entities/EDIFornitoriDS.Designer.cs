@@ -2328,6 +2328,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnACCESSORISTA;
             
+            private global::System.Data.DataColumn columnRIFERIMENTORIGA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BOLLE_VENDITADataTable() {
@@ -2779,6 +2781,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RIFERIMENTORIGAColumn {
+                get {
+                    return this.columnRIFERIMENTORIGA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2866,7 +2876,8 @@ namespace Applicazioni.Entities {
                         System.DateTime DATAVR_OC, 
                         string RIFERIMENTO, 
                         string DESTINAZIONE, 
-                        string ACCESSORISTA) {
+                        string ACCESSORISTA, 
+                        string RIFERIMENTORIGA) {
                 BOLLE_VENDITARow rowBOLLE_VENDITARow = ((BOLLE_VENDITARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         AZIENDA,
@@ -2920,7 +2931,8 @@ namespace Applicazioni.Entities {
                         DATAVR_OC,
                         RIFERIMENTO,
                         DESTINAZIONE,
-                        ACCESSORISTA};
+                        ACCESSORISTA,
+                        RIFERIMENTORIGA};
                 rowBOLLE_VENDITARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBOLLE_VENDITARow);
                 return rowBOLLE_VENDITARow;
@@ -2995,6 +3007,7 @@ namespace Applicazioni.Entities {
                 this.columnRIFERIMENTO = base.Columns["RIFERIMENTO"];
                 this.columnDESTINAZIONE = base.Columns["DESTINAZIONE"];
                 this.columnACCESSORISTA = base.Columns["ACCESSORISTA"];
+                this.columnRIFERIMENTORIGA = base.Columns["RIFERIMENTORIGA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3104,6 +3117,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnDESTINAZIONE);
                 this.columnACCESSORISTA = new global::System.Data.DataColumn("ACCESSORISTA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnACCESSORISTA);
+                this.columnRIFERIMENTORIGA = new global::System.Data.DataColumn("RIFERIMENTORIGA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRIFERIMENTORIGA);
                 this.columnAZIENDA.MaxLength = 10;
                 this.columnDESTABTIPDOC.MaxLength = 50;
                 this.columnCODICETIPDOC.MaxLength = 3;
@@ -7341,6 +7356,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string RIFERIMENTORIGA {
+                get {
+                    try {
+                        return ((string)(this[this.tableBOLLE_VENDITA.RIFERIMENTORIGAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RIFERIMENTORIGA\' in table \'BOLLE_VENDITA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBOLLE_VENDITA.RIFERIMENTORIGAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsAZIENDANull() {
                 return this.IsNull(this.tableBOLLE_VENDITA.AZIENDAColumn);
             }
@@ -7961,6 +7992,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetACCESSORISTANull() {
                 this[this.tableBOLLE_VENDITA.ACCESSORISTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRIFERIMENTORIGANull() {
+                return this.IsNull(this.tableBOLLE_VENDITA.RIFERIMENTORIGAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRIFERIMENTORIGANull() {
+                this[this.tableBOLLE_VENDITA.RIFERIMENTORIGAColumn] = global::System.Convert.DBNull;
             }
         }
         
