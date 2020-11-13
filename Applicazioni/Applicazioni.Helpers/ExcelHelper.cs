@@ -109,21 +109,34 @@ namespace Applicazioni.Helpers
                     FlussoFattureDS.BC_FLUSSO_TESTATARow testata = ds.BC_FLUSSO_TESTATA.Where(x => x.FULLNUMDOC == documento).FirstOrDefault();
                     if (testata == null)
                     {
-                        string messaggio = string.Format("Bolla non trovata: {0}", documento);
+                        string messaggio = string.Format("Bolla non trovata: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
                         sb.AppendLine(messaggio);
                         continue;
                     }
                     List<FlussoFattureDS.BC_FLUSSO_DETTAGLIORow> dettagli = ds.BC_FLUSSO_DETTAGLIO.Where(x => x.FULLNUMDOC == documento).ToList();
                     if (dettagli.Count == 0)
                     {
-                        string messaggio = string.Format("Dettaglio bolla non trovati: {0}", documento);
+                        string messaggio = string.Format("Dettaglio bolla non trovati: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
                         sb.AppendLine(messaggio);
                         continue;
                     }
 
+                    if (testata.IsSPEDIZIONENull())
+                    {
+                        string messaggio = string.Format("Codice cliente spedizione non trovato FULLNUMDOC: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
+                        sb.AppendLine(messaggio);
+                        continue;
+                    }
+
+                    if (testata.IsFATTURAZIONENull())
+                    {
+                        string messaggio = string.Format("Codice cliente fatturazione non trovato FULLNUMDOC: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
+                        sb.AppendLine(messaggio);
+                        continue;
+                    }
                     Row rowTestata = new Row();
-                    rowTestata.Append(ConstructCell(testata.SPEDIZIONE, CellValues.String, 1));
-                    rowTestata.Append(ConstructCell(testata.FATTURAZIONE, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.IsSPEDIZIONENull() ? string.Empty : testata.SPEDIZIONE, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.IsFATTURAZIONENull() ? string.Empty : testata.FATTURAZIONE, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.CODICETIPOO, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.FULLNUMDOC, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));

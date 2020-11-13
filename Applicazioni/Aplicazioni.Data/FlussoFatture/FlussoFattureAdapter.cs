@@ -47,8 +47,8 @@ namespace Applicazioni.Data.FlussoFatture
 
             string select = @"  select csped.BC_CODE SPEDIZIONE,cfat.BC_CODE FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc 
                                         from ditta1.usr_venditet vt
-                                        left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo 
-                                        left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA 
+                                        left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo AND csped.AZIENDA='MP'
+                                        left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA AND cfat.AZIENDA='MP'
                                         inner join gruppo.tabtipoo oo on oo.IDTABTIPOO = vt.IDTABTIPOO
                                         WHERE datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                                         AND datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
@@ -56,8 +56,8 @@ namespace Applicazioni.Data.FlussoFatture
                                         union all
                                         select csped.BC_CODE,cfat.BC_CODE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc 
                                         from ditta2.usr_venditet vt
-                                        left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo 
-                                        left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA 
+                                        left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo  AND csped.AZIENDA='TF'
+                                        left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA  AND cfat.AZIENDA='TF'
                                         inner join gruppo.tabtipoo oo on oo.IDTABTIPOO = vt.IDTABTIPOO
                                         WHERE datdoc >=to_date('{2} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                                         AND datdoc <=to_date('{3} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
