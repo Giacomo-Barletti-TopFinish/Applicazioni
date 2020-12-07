@@ -28,7 +28,7 @@ namespace FlussoFatture
         {
             try
             {
-
+                Cursor.Current = Cursors.WaitCursor;
                 if (dtDal.Value.Date > dtAl.Value.Date)
                 {
                     MessageBox.Show("Attenzione la data DAL è successiva alla data AL", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -46,6 +46,10 @@ namespace FlussoFatture
             catch (Exception ex)
             {
                 MostraEccezione(ex, "Errore in trova bolle");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
         }
 

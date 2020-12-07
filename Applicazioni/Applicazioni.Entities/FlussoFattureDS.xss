@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:BOLLE_VENDITA" ZOrder="3" X="182" Y="99" Height="304" Width="161" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:BC_FLUSSO_DETTAGLIO" ZOrder="1" X="498" Y="139" Height="258" Width="204" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:BC_FLUSSO_TESTATA" ZOrder="2" X="1088" Y="254" Height="124" Width="189" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="168" />
+    <Shape ID="DesignTable:BC_FLUSSO_TESTATA" ZOrder="2" X="1088" Y="254" Height="162" Width="189" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

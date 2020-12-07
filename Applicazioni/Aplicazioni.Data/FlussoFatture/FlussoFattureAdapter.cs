@@ -22,9 +22,9 @@ namespace Applicazioni.Data.FlussoFatture
 
             string select = @"  select DISTINCT AZIENDA, DESTABTIPDOC, CODICETIPDOC, CODICETIPOO, DESTABTIPOO, CODICECAUTR, DESTABCAUTR, 
                 IDVENDITET, FATTURARE_SN, CONFERMATO_SN, DEFINITIVO_SN, FULLNUMDOC, DATDOC, ANNODOC, NUMDOC, CODICECLIFO, TRIM(RAGIONESOC) RAGIONESOC, CODINDSP, 
-                FATTURAREA, FATTURAREALTER, SEGNALATORE, TRIM(SEGNALATORE_RS) SEGNALATORE_RS, NUMERORIGHE,RIFERIMENTO,trim(ind.ragsoc) DESTINAZIONE
+                FATTURAREA, FATTURAREALTER, SEGNALATORE, TRIM(SEGNALATORE_RS) SEGNALATORE_RS, NUMERORIGHE,RIFERIMENTO,trim(ind.ragsoc) DESTINAZIONE, NAZIONE
                 from bolle_vendita bv
-                INNER JOIN GRUPPO.INDSPED IND ON IND.CODCF=BV.CODICECLIFO AND IND.CODIND=BV.CODINDSP                
+                LEFT OUTER JOIN GRUPPO.INDSPED IND ON IND.CODCF=BV.CODICECLIFO AND IND.CODIND=BV.CODINDSP                
                 where 1=1
 
                 and datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
@@ -45,7 +45,7 @@ namespace Applicazioni.Data.FlussoFatture
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
 
-            string select = @"  select csped.BC_CODE SPEDIZIONE,cfat.BC_CODE FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc 
+            string select = @"  select csped.BC_CODE SPEDIZIONE,cfat.BC_CODE FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc, vt.pesonetto, vt.pesolordo 
                                         from ditta1.usr_venditet vt
                                         left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo AND csped.AZIENDA='MP'
                                         left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA AND cfat.AZIENDA='MP'
@@ -54,7 +54,7 @@ namespace Applicazioni.Data.FlussoFatture
                                         AND datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
                                        
                                         union all
-                                        select csped.BC_CODE,cfat.BC_CODE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc 
+                                        select csped.BC_CODE,cfat.BC_CODE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc , vt.pesonetto, vt.pesolordo 
                                         from ditta2.usr_venditet vt
                                         left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo  AND csped.AZIENDA='TF'
                                         left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA  AND cfat.AZIENDA='TF'
@@ -77,24 +77,26 @@ namespace Applicazioni.Data.FlussoFatture
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
 
-            string select = @"  select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO
+            string select = @"  select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, OC.RIFERIMENTO RIFERIMENTO
                                     from ditta1.usr_venditet vt
                                     INNER JOIN DITTA1.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ
                                     LEFT OUTER JOIN GRUPPO.TABTIPMOV TM ON TM.IDTABTIPMOV=MA.IDTABTIPMOVVEN
                                     LEFT OUTER JOIN BC_TRASCODIFICA_PIANO_CONTI PC ON PC.VECCHIO = TM.CODICETIPMOV AND PC.AZIENDA = 'MP'
-                                        WHERE datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
-                                        AND datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
+                                     LEFT JOIN DITTA1.USR_VENDITET OC ON OC.IDVENDITET = vd.IDVENDITET_PREC
+                                    WHERE vt.datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
+                                        AND vt.datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
                                    
                                     UNION ALL
-                                    select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO
+                                    select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, OC.RIFERIMENTO 
                                     from ditta2.usr_venditet vt
                                     INNER JOIN DITTA2.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ
                                     LEFT OUTER JOIN GRUPPO.TABTIPMOV TM ON TM.IDTABTIPMOV=MA.IDTABTIPMOVVEN
                                     LEFT OUTER JOIN BC_TRASCODIFICA_PIANO_CONTI PC ON PC.VECCHIO = TM.CODICETIPMOV AND PC.AZIENDA = 'TP'
-                                        WHERE datdoc >=to_date('{2} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
-                                        AND datdoc <=to_date('{3} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
+                                     LEFT JOIN DITTA2.USR_VENDITET OC ON OC.IDVENDITET = vd.IDVENDITET_PREC
+                                        WHERE vt.datdoc >=to_date('{2} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
+                                        AND vt.datdoc <=to_date('{3} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
 
                                     order by fullnumdoc ";
 

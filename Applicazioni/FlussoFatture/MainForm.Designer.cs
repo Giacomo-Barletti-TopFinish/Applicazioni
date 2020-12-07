@@ -46,6 +46,7 @@
             this.DESTABCAUTR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDVENDITET = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RAGIONESOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NAZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUMERORIGHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RIFERIMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).BeginInit();
@@ -123,6 +124,7 @@
             this.DESTABCAUTR,
             this.IDVENDITET,
             this.RAGIONESOC,
+            this.NAZIONE,
             this.NUMERORIGHE,
             this.RIFERIMENTO});
             this.dgvRisultati.Location = new System.Drawing.Point(10, 97);
@@ -210,6 +212,12 @@
             this.RAGIONESOC.Name = "RAGIONESOC";
             this.RAGIONESOC.Width = 150;
             // 
+            // NAZIONE
+            // 
+            this.NAZIONE.DataPropertyName = "NAZIONE";
+            this.NAZIONE.HeaderText = "NAZIONE";
+            this.NAZIONE.Name = "NAZIONE";
+            // 
             // NUMERORIGHE
             // 
             this.NUMERORIGHE.DataPropertyName = "NUMERORIGHE";
@@ -264,6 +272,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DESTABCAUTR;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDVENDITET;
         private System.Windows.Forms.DataGridViewTextBoxColumn RAGIONESOC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NAZIONE;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUMERORIGHE;
         private System.Windows.Forms.DataGridViewTextBoxColumn RIFERIMENTO;
     }

@@ -43,7 +43,7 @@ namespace Applicazioni.Helpers
 
 
                 Columns colonneTestata = new Columns();
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     Column c = new Column();
                     UInt32Value u = new UInt32Value((uint)(i + 1));
@@ -56,7 +56,7 @@ namespace Applicazioni.Helpers
                 }
 
                 Columns colonneDettaglio = new Columns();
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     Column c = new Column();
                     UInt32Value u = new UInt32Value((uint)(i + 1));
@@ -90,6 +90,8 @@ namespace Applicazioni.Helpers
                 rowHeaderTestata.Append(ConstructCell("CODICETIPOO", CellValues.String, 2));
                 rowHeaderTestata.Append(ConstructCell("FULLNUMDOC", CellValues.String, 2));
                 rowHeaderTestata.Append(ConstructCell("DATDOC", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("PESOLORDO", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("PESONETTO", CellValues.String, 2));
                 sheetDataTestata.AppendChild(rowHeaderTestata);
 
                 Row rowHeaderDettaglio = new Row();
@@ -97,10 +99,11 @@ namespace Applicazioni.Helpers
                 rowHeaderDettaglio.Append(ConstructCell("CONTOCG", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("MODELLO", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("QTATOT", CellValues.String, 2));
-                rowHeaderDettaglio.Append(ConstructCell("PREZZOTOT", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("PREZZOUNI", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("CODIVARIGA", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("PSCONTO1", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("PESO", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("RIFERIMENTO", CellValues.String, 2));
 
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
@@ -140,6 +143,8 @@ namespace Applicazioni.Helpers
                     rowTestata.Append(ConstructCell(testata.CODICETIPOO, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.FULLNUMDOC, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.IsPESOLORDONull() ? string.Empty : testata.PESOLORDO.ToString(), CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.IsPESONETTONull() ? string.Empty : testata.PESONETTO.ToString(), CellValues.String, 1));
                     sheetDataTestata.AppendChild(rowTestata);
 
                     foreach (FlussoFattureDS.BC_FLUSSO_DETTAGLIORow dettaglio in dettagli)
@@ -153,6 +158,7 @@ namespace Applicazioni.Helpers
                         rowDettaglio.Append(ConstructCell(dettaglio.CODIVARIGA, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.PSCONTO1.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsPESONull() ? string.Empty : dettaglio.PESO.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.IsRIFERIMENTONull() ? string.Empty : dettaglio.RIFERIMENTO.ToString(), CellValues.String, 1));
 
                         sheetDataDettaglio.AppendChild(rowDettaglio);
                     }
