@@ -1397,6 +1397,10 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnRIFERIMENTO;
             
+            private global::System.Data.DataColumn columnRIFERIMENTORIGA;
+            
+            private global::System.Data.DataColumn columnNRRIGA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BC_FLUSSO_DETTAGLIODataTable() {
@@ -1512,6 +1516,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RIFERIMENTORIGAColumn {
+                get {
+                    return this.columnRIFERIMENTORIGA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn NRRIGAColumn {
+                get {
+                    return this.columnNRRIGA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1547,7 +1567,7 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public BC_FLUSSO_DETTAGLIORow AddBC_FLUSSO_DETTAGLIORow(string FULLNUMDOC, System.DateTime DATDOC, string CONTOCG, string MODELLO, decimal QTATOT, decimal PREZZOTOT, string CODIVARIGA, decimal PSCONTO1, decimal PESO, string RIFERIMENTO) {
+            public BC_FLUSSO_DETTAGLIORow AddBC_FLUSSO_DETTAGLIORow(string FULLNUMDOC, System.DateTime DATDOC, string CONTOCG, string MODELLO, decimal QTATOT, decimal PREZZOTOT, string CODIVARIGA, decimal PSCONTO1, decimal PESO, string RIFERIMENTO, string RIFERIMENTORIGA, string NRRIGA) {
                 BC_FLUSSO_DETTAGLIORow rowBC_FLUSSO_DETTAGLIORow = ((BC_FLUSSO_DETTAGLIORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FULLNUMDOC,
@@ -1559,7 +1579,9 @@ namespace Applicazioni.Entities {
                         CODIVARIGA,
                         PSCONTO1,
                         PESO,
-                        RIFERIMENTO};
+                        RIFERIMENTO,
+                        RIFERIMENTORIGA,
+                        NRRIGA};
                 rowBC_FLUSSO_DETTAGLIORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBC_FLUSSO_DETTAGLIORow);
                 return rowBC_FLUSSO_DETTAGLIORow;
@@ -1592,6 +1614,8 @@ namespace Applicazioni.Entities {
                 this.columnPSCONTO1 = base.Columns["PSCONTO1"];
                 this.columnPESO = base.Columns["PESO"];
                 this.columnRIFERIMENTO = base.Columns["RIFERIMENTO"];
+                this.columnRIFERIMENTORIGA = base.Columns["RIFERIMENTORIGA"];
+                this.columnNRRIGA = base.Columns["NRRIGA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1617,6 +1641,10 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnPESO);
                 this.columnRIFERIMENTO = new global::System.Data.DataColumn("RIFERIMENTO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRIFERIMENTO);
+                this.columnRIFERIMENTORIGA = new global::System.Data.DataColumn("RIFERIMENTORIGA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRIFERIMENTORIGA);
+                this.columnNRRIGA = new global::System.Data.DataColumn("NRRIGA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNRRIGA);
                 this.columnFULLNUMDOC.MaxLength = 100;
                 this.columnCONTOCG.MaxLength = 10;
                 this.columnMODELLO.AllowDBNull = false;
@@ -3686,6 +3714,38 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string RIFERIMENTORIGA {
+                get {
+                    try {
+                        return ((string)(this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTORIGAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RIFERIMENTORIGA\' in table \'BC_FLUSSO_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTORIGAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string NRRIGA {
+                get {
+                    try {
+                        return ((string)(this[this.tableBC_FLUSSO_DETTAGLIO.NRRIGAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NRRIGA\' in table \'BC_FLUSSO_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_FLUSSO_DETTAGLIO.NRRIGAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsFULLNUMDOCNull() {
                 return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.FULLNUMDOCColumn);
             }
@@ -3754,6 +3814,30 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetRIFERIMENTONull() {
                 this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRIFERIMENTORIGANull() {
+                return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTORIGAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRIFERIMENTORIGANull() {
+                this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTORIGAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsNRRIGANull() {
+                return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.NRRIGAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetNRRIGANull() {
+                this[this.tableBC_FLUSSO_DETTAGLIO.NRRIGAColumn] = global::System.Convert.DBNull;
             }
         }
         
