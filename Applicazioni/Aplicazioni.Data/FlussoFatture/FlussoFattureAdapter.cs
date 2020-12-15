@@ -78,7 +78,7 @@ namespace Applicazioni.Data.FlussoFatture
             string AlStr = Al.ToString("dd/MM/yyyy");
 
             string select = @"  select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, 
-                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA
+                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI
                                     from ditta1.usr_venditet vt
                                     INNER JOIN DITTA1.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ
@@ -86,12 +86,14 @@ namespace Applicazioni.Data.FlussoFatture
                                     LEFT OUTER JOIN BC_TRASCODIFICA_PIANO_CONTI PC ON PC.VECCHIO = TM.CODICETIPMOV AND PC.AZIENDA = 'MP'
                                      LEFT JOIN DITTA1.USR_VENDITET OC ON OC.IDVENDITET = vd.IDVENDITET_PREC
                                      LEFT JOIN DITTA1.USR_VENDITED OCR ON OCR.IDVENDITED = vd.IDVENDITED_PREC
+                                     LEFT OUTER JOIN GRUPPO.TABTIPM MAT ON MAT.IDTABTIPM = MA.IDTABTIPM
+                                     LEFT OUTER JOIN GRUPPO.TABUNIMI UNI ON UNI.IDTABUNIMI=VD.IDTABUNIMI
                                     WHERE vt.datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                                         AND vt.datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
                                    
                                     UNION ALL
                                     select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, 
-                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA
+                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI
                                     from ditta2.usr_venditet vt
                                     INNER JOIN DITTA2.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ
@@ -99,6 +101,8 @@ namespace Applicazioni.Data.FlussoFatture
                                     LEFT OUTER JOIN BC_TRASCODIFICA_PIANO_CONTI PC ON PC.VECCHIO = TM.CODICETIPMOV AND PC.AZIENDA = 'TP'
                                      LEFT JOIN DITTA2.USR_VENDITET OC ON OC.IDVENDITET = vd.IDVENDITET_PREC
                                      LEFT JOIN DITTA1.USR_VENDITED OCR ON OCR.IDVENDITED = vd.IDVENDITED_PREC
+                                     LEFT OUTER JOIN GRUPPO.TABTIPM MAT ON MAT.IDTABTIPM = MA.IDTABTIPM
+                                     LEFT OUTER JOIN GRUPPO.TABUNIMI UNI ON UNI.IDTABUNIMI=VD.IDTABUNIMI
                                         WHERE vt.datdoc >=to_date('{2} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                                         AND vt.datdoc <=to_date('{3} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
 
