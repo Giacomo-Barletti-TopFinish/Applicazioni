@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCreaFiles = new System.Windows.Forms.Button();
             this.btnTrova = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,12 +51,16 @@
             this.NAZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUMERORIGHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RIFERIMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rbTutti = new System.Windows.Forms.RadioButton();
+            this.rbSoloItalia = new System.Windows.Forms.RadioButton();
+            this.rbEstero = new System.Windows.Forms.RadioButton();
+            this.chkSelezionaTutto = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCreaFiles
             // 
-            this.btnCreaFiles.Location = new System.Drawing.Point(455, 23);
+            this.btnCreaFiles.Location = new System.Drawing.Point(618, 25);
             this.btnCreaFiles.Name = "btnCreaFiles";
             this.btnCreaFiles.Size = new System.Drawing.Size(92, 48);
             this.btnCreaFiles.TabIndex = 10;
@@ -64,7 +70,7 @@
             // 
             // btnTrova
             // 
-            this.btnTrova.Location = new System.Drawing.Point(285, 22);
+            this.btnTrova.Location = new System.Drawing.Point(474, 25);
             this.btnTrova.Name = "btnTrova";
             this.btnTrova.Size = new System.Drawing.Size(92, 48);
             this.btnTrova.TabIndex = 9;
@@ -107,10 +113,18 @@
             // dgvRisultati
             // 
             this.dgvRisultati.AllowUserToAddRows = false;
-            this.dgvRisultati.AllowUserToDeleteRows = false;
+            this.dgvRisultati.AllowUserToResizeRows = false;
             this.dgvRisultati.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRisultati.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRisultati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRisultati.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SELEZIONATA,
@@ -127,9 +141,17 @@
             this.NAZIONE,
             this.NUMERORIGHE,
             this.RIFERIMENTO});
-            this.dgvRisultati.Location = new System.Drawing.Point(10, 97);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRisultati.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvRisultati.Location = new System.Drawing.Point(18, 116);
             this.dgvRisultati.Name = "dgvRisultati";
-            this.dgvRisultati.Size = new System.Drawing.Size(1551, 605);
+            this.dgvRisultati.Size = new System.Drawing.Size(1551, 586);
             this.dgvRisultati.TabIndex = 11;
             // 
             // SELEZIONATA
@@ -232,11 +254,58 @@
             this.RIFERIMENTO.Name = "RIFERIMENTO";
             this.RIFERIMENTO.Width = 130;
             // 
+            // rbTutti
+            // 
+            this.rbTutti.AutoSize = true;
+            this.rbTutti.Checked = true;
+            this.rbTutti.Location = new System.Drawing.Point(295, 12);
+            this.rbTutti.Name = "rbTutti";
+            this.rbTutti.Size = new System.Drawing.Size(46, 17);
+            this.rbTutti.TabIndex = 12;
+            this.rbTutti.TabStop = true;
+            this.rbTutti.Text = "Tutti";
+            this.rbTutti.UseVisualStyleBackColor = true;
+            // 
+            // rbSoloItalia
+            // 
+            this.rbSoloItalia.AutoSize = true;
+            this.rbSoloItalia.Location = new System.Drawing.Point(295, 41);
+            this.rbSoloItalia.Name = "rbSoloItalia";
+            this.rbSoloItalia.Size = new System.Drawing.Size(82, 17);
+            this.rbSoloItalia.TabIndex = 12;
+            this.rbSoloItalia.Text = "Solo ITALIA";
+            this.rbSoloItalia.UseVisualStyleBackColor = true;
+            // 
+            // rbEstero
+            // 
+            this.rbEstero.AutoSize = true;
+            this.rbEstero.Location = new System.Drawing.Point(295, 70);
+            this.rbEstero.Name = "rbEstero";
+            this.rbEstero.Size = new System.Drawing.Size(69, 17);
+            this.rbEstero.TabIndex = 12;
+            this.rbEstero.Text = "ESTERO";
+            this.rbEstero.UseVisualStyleBackColor = true;
+            // 
+            // chkSelezionaTutto
+            // 
+            this.chkSelezionaTutto.AutoSize = true;
+            this.chkSelezionaTutto.Location = new System.Drawing.Point(41, 93);
+            this.chkSelezionaTutto.Name = "chkSelezionaTutto";
+            this.chkSelezionaTutto.Size = new System.Drawing.Size(168, 17);
+            this.chkSelezionaTutto.TabIndex = 13;
+            this.chkSelezionaTutto.Text = "Seleziona / Deseleziona tutoo";
+            this.chkSelezionaTutto.UseVisualStyleBackColor = true;
+            this.chkSelezionaTutto.CheckedChanged += new System.EventHandler(this.chkSelezionaTutto_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1573, 714);
+            this.Controls.Add(this.chkSelezionaTutto);
+            this.Controls.Add(this.rbEstero);
+            this.Controls.Add(this.rbSoloItalia);
+            this.Controls.Add(this.rbTutti);
             this.Controls.Add(this.dgvRisultati);
             this.Controls.Add(this.btnCreaFiles);
             this.Controls.Add(this.btnTrova);
@@ -275,6 +344,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NAZIONE;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUMERORIGHE;
         private System.Windows.Forms.DataGridViewTextBoxColumn RIFERIMENTO;
+        private System.Windows.Forms.RadioButton rbTutti;
+        private System.Windows.Forms.RadioButton rbSoloItalia;
+        private System.Windows.Forms.RadioButton rbEstero;
+        private System.Windows.Forms.CheckBox chkSelezionaTutto;
     }
 }
 

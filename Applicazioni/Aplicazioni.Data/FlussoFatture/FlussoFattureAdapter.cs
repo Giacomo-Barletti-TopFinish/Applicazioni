@@ -9,13 +9,20 @@ using System.Threading.Tasks;
 
 namespace Applicazioni.Data.FlussoFatture
 {
+    public class Etichette
+    {
+        public const string ESTERO = "ESTERO";
+        public const string ITALIA = "SOLO  ITALIA";
+        public const string TUTTI = "TUTTI";
+
+    }
     public class FlussoFattureAdapter: AdapterBase
     {
         public FlussoFattureAdapter(System.Data.IDbConnection connection, IDbTransaction transaction) :
           base(connection, transaction)
         { }
 
-        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al)
+        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al,string radioButton)
         {
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
@@ -29,6 +36,16 @@ namespace Applicazioni.Data.FlussoFatture
 
                 and datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                 and datdoc <to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')";
+
+            if(radioButton==Etichette.ESTERO)
+            {
+                select += " AND TRIM(NAZIONE) <>'ITALIA'";
+            }
+
+            if (radioButton == Etichette.ITALIA)
+            {
+                select += " AND TRIM(NAZIONE) ='ITALIA'";
+            }
 
             select = string.Format(select, DalStr, AlStr);
 

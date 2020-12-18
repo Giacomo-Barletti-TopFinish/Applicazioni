@@ -21,6 +21,10 @@ namespace FlussoFatture
         public MainForm()
         {
             InitializeComponent();
+            rbEstero.Text = Etichette.ESTERO;
+            rbSoloItalia.Text = Etichette.ITALIA;
+            rbTutti.Text = Etichette.TUTTI;
+
             dgvRisultati.AutoGenerateColumns = false;
         }
 
@@ -34,11 +38,25 @@ namespace FlussoFatture
                     MessageBox.Show("Attenzione la data DAL è successiva alla data AL", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                string radioButton=string.Empty;
+                foreach (Control control in this.Controls)
+                {
+                    if (control is RadioButton)
+                    {
+                        RadioButton radio = control as RadioButton;
+                        if (radio.Checked)
+                        {
+                            radioButton = radio.Text;
+                        }
+                    }
+                }
 
                 using (FlussoFattureBusiness bFlussoFatture = new FlussoFattureBusiness())
                 {
+
                     _ds = new FlussoFattureDS();
-                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value);
+                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButton);
+
                     dgvRisultati.DataSource = _ds;
                     dgvRisultati.DataMember = _ds.BOLLE_VENDITA.TableName;
                 }
@@ -104,13 +122,27 @@ namespace FlussoFatture
                 fs.Close();
 
                 if (errori.Trim().Length > 0)
-                    MessageBox.Show(errori.Trim(),"Attenzione",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                    MessageBox.Show(errori.Trim(), "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 else
                     MessageBox.Show("Operazione conclusa con successo", "OERAZIONE TERMINATA", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MostraEccezione(ex, "Errore in fase di creazione dei file");
+            }
+        }
+
+        private void chkSelezionaTutto_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (dgvRisultati.Rows.Count == 0) return;
+
+            foreach(DataGridViewRow riga in dgvRisultati.Rows)
+            {
+                DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
+                ch1 = (DataGridViewCheckBoxCell)riga.Cells[SELEZIONATA.Index];
+                ch1.Value = chkSelezionaTutto.Checked;
+                
             }
         }
     }

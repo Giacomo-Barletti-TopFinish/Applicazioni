@@ -11,10 +11,10 @@ namespace Applicazioni.Data.FlussoFatture
     public class FlussoFattureBusiness: BusinessBase
     {
         [DataContext]
-        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al)
+        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al,string radioButton)
         {
             FlussoFattureAdapter a = new FlussoFattureAdapter(DbConnection, DbTransaction);
-            a.FillBOLLE_VENDITATESTATA(ds, Dal, Al);
+            a.FillBOLLE_VENDITATESTATA(ds, Dal, Al, radioButton);
         }
         [DataContext]
         public void FillBC_FLUSSO_TESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al)
