@@ -119,35 +119,36 @@ namespace EDIFornitori
 
                 foreach (string testata in idTestate)
                 {
-                    foreach (EDIFornitoriDS.BOLLE_VENDITARow dettaglio in ds.BOLLE_VENDITA.Where(x => x.IDVENDITET == testata))
+                    EDIFornitoriDS.BOLLE_VENDITARow primoDettaglio = ds.BOLLE_VENDITA.Where(x => x.IDVENDITET == testata).FirstOrDefault();
+                    string numeroddt = primoDettaglio.NUMDOC;
+                    string nomefile = creaNomeFile(codiceFornitore, numeroddt);
+                    string pathCompleto = path + Path.DirectorySeparatorChar + nomefile;
+
+                    if (File.Exists(pathCompleto))
+                        File.Delete(pathCompleto);
+
+                    FileStream fs = new FileStream(pathCompleto, FileMode.Create);
+                    StreamWriter sw = new StreamWriter(fs);
+                    try
                     {
-                        string numeroddt = dettaglio.NUMDOC;
-                        string nomefile = creaNomeFile(codiceFornitore, numeroddt);
-                        string pathCompleto = path + Path.DirectorySeparatorChar + nomefile;
-
-                        if (File.Exists(pathCompleto))
-                            File.Delete(pathCompleto);
-
-                        FileStream fs = new FileStream(pathCompleto, FileMode.Create);
-                        StreamWriter sw = new StreamWriter(fs);
-                        try
+                        foreach (EDIFornitoriDS.BOLLE_VENDITARow dettaglio in ds.BOLLE_VENDITA.Where(x => x.IDVENDITET == testata))
                         {
                             string AccessoristaNonTrovato;
                             string riga = creaRigaFile(codiceFornitore, dettaglio, ds, out AccessoristaNonTrovato);
                             sw.WriteLine(riga);
-
                             sbMessaggio.AppendLine(AccessoristaNonTrovato);
+
                         }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                        finally
-                        {
-                            sw.Flush();
-                            fs.Flush();
-                            fs.Close();
-                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        sw.Flush();
+                        fs.Flush();
+                        fs.Close();
                     }
                 }
 
@@ -156,6 +157,8 @@ namespace EDIFornitori
                     sbMessaggio.Insert(0, @"I seguenti ACCESSORISTI non sono stati trovati: " + Environment.NewLine);
                     MessageBox.Show(sbMessaggio.ToString().Trim());
                 }
+                else
+                    MessageBox.Show("Operazione terminata correttamente", "INFORMAZIONI", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -267,6 +270,8 @@ namespace EDIFornitori
                     suffissoParte = aggiustaStringa(articolo[0], 6, '0');
                     codiceParte = aggiustaStringa(articolo[1], 5, '0');
                     codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ');
+                    if (codiceColoreParte.Trim() == "MOD")
+                        codiceColoreParte = "     ";
                 }
                 if (articolo.Length == 3)
                 {
@@ -320,6 +325,8 @@ namespace EDIFornitori
                     codiceModello = aggiustaStringa(articolo[0], 6, '0');
                     codiceParte = aggiustaStringa(articolo[1], 5, '0');
                     codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ');
+                    if (codiceColoreParte.Trim() == "MOD")
+                        codiceColoreParte = "     ";
                 }
                 if (articolo.Length == 3)
                 {
