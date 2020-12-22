@@ -116,6 +116,7 @@ namespace EDIFornitori
                 }
 
                 StringBuilder sbMessaggio = new StringBuilder();
+                idTestate = idTestate.Distinct().ToList();
 
                 foreach (string testata in idTestate)
                 {
@@ -269,7 +270,7 @@ namespace EDIFornitori
                 {
                     suffissoParte = aggiustaStringa(articolo[0], 6, '0');
                     codiceParte = aggiustaStringa(articolo[1], 5, '0');
-                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ');
+                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ',true);
                     if (codiceColoreParte.Trim() == "MOD")
                         codiceColoreParte = "     ";
                 }
@@ -324,7 +325,7 @@ namespace EDIFornitori
                     suffissoParte = "      ";
                     codiceModello = aggiustaStringa(articolo[0], 6, '0');
                     codiceParte = aggiustaStringa(articolo[1], 5, '0');
-                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ');
+                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ',true);
                     if (codiceColoreParte.Trim() == "MOD")
                         codiceColoreParte = "     ";
                 }
@@ -390,6 +391,15 @@ namespace EDIFornitori
             return stringa.PadLeft(lunghezza, riempimento);
         }
 
+        private string aggiustaStringa(string stringa, int lunghezza, char riempimento, bool aDestra)
+        {
+            if (stringa.Length > lunghezza) return stringa.Substring(0, lunghezza);
+            if (aDestra)
+                return stringa.PadRight(lunghezza, riempimento);
+
+            return aggiustaStringa(stringa, lunghezza, riempimento);
+
+        }
         private string EstraiCodiceMagazzinoDestinazione(EDIFornitoriDS.BOLLE_VENDITARow dettaglio)
         {
             if (dettaglio.CODICECAUTR.Trim() == "01")

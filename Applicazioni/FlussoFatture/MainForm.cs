@@ -38,7 +38,7 @@ namespace FlussoFatture
                     MessageBox.Show("Attenzione la data DAL è successiva alla data AL", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string radioButton=string.Empty;
+                string radioButton = string.Empty;
                 foreach (Control control in this.Controls)
                 {
                     if (control is RadioButton)
@@ -113,9 +113,10 @@ namespace FlussoFatture
                 }
 
                 string errori;
+                idTestate = idTestate.Distinct().ToList();
 
                 ExcelHelper hExcel = new ExcelHelper();
-                byte[] filedata = hExcel.CreaFlussoFatture(idTestate, ds, out errori);
+                byte[] filedata = hExcel.CreaFlussoFatture(idTestate.Distinct().ToList(), ds, out errori);
                 FileStream fs = new FileStream(sfd.FileName, FileMode.Create);
                 fs.Write(filedata, 0, filedata.Length);
                 fs.Flush();
@@ -137,12 +138,12 @@ namespace FlussoFatture
 
             if (dgvRisultati.Rows.Count == 0) return;
 
-            foreach(DataGridViewRow riga in dgvRisultati.Rows)
+            foreach (DataGridViewRow riga in dgvRisultati.Rows)
             {
                 DataGridViewCheckBoxCell ch1 = new DataGridViewCheckBoxCell();
                 ch1 = (DataGridViewCheckBoxCell)riga.Cells[SELEZIONATA.Index];
                 ch1.Value = chkSelezionaTutto.Checked;
-                
+
             }
         }
     }
