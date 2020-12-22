@@ -56,7 +56,7 @@ namespace Applicazioni.Helpers
                 }
 
                 Columns colonneDettaglio = new Columns();
-                for (int i = 0; i < 14; i++)
+                for (int i = 0; i < 15; i++)
                 {
                     Column c = new Column();
                     UInt32Value u = new UInt32Value((uint)(i + 1));
@@ -103,6 +103,7 @@ namespace Applicazioni.Helpers
                 rowHeaderDettaglio.Append(ConstructCell("CODIVARIGA", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("PSCONTO1", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("PESO", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("PESOLORDO", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("NRRIGA", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("RIFERIMENTO", CellValues.String, 2));
                 rowHeaderDettaglio.Append(ConstructCell("RIFERIMENTORIGA", CellValues.String, 2));
@@ -162,6 +163,7 @@ namespace Applicazioni.Helpers
                         rowDettaglio.Append(ConstructCell(dettaglio.PREZZOTOT.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CODIVARIGA, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.PSCONTO1.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.IsPESONull() ? string.Empty : dettaglio.PESO.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsPESONull() ? string.Empty : dettaglio.PESO.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsNRRIGANull() ? string.Empty : dettaglio.NRRIGA.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsRIFERIMENTONull() ? string.Empty : dettaglio.RIFERIMENTO.ToString(), CellValues.String, 1));
