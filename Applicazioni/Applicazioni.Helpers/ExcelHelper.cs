@@ -155,6 +155,9 @@ namespace Applicazioni.Helpers
 
                     foreach (FlussoFattureDS.BC_FLUSSO_DETTAGLIORow dettaglio in dettagli)
                     {
+                        string riferimento = dettaglio.IsRIFERIMENTONull() ? string.Empty : dettaglio.RIFERIMENTO.ToString();
+                        riferimento = riferimento.Replace(" ", "");
+
                         Row rowDettaglio = new Row();
                         rowDettaglio.Append(ConstructCell(dettaglio.FULLNUMDOC, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CONTOCG, CellValues.String, 1));
@@ -166,7 +169,7 @@ namespace Applicazioni.Helpers
                         rowDettaglio.Append(ConstructCell(dettaglio.IsPESONull() ? string.Empty : dettaglio.PESO.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsPESONull() ? string.Empty : dettaglio.PESO.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsNRRIGANull() ? string.Empty : dettaglio.NRRIGA.ToString(), CellValues.String, 1));
-                        rowDettaglio.Append(ConstructCell(dettaglio.IsRIFERIMENTONull() ? string.Empty : dettaglio.RIFERIMENTO.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(riferimento, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsRIFERIMENTORIGANull() ? string.Empty : dettaglio.RIFERIMENTORIGA.ToString(), CellValues.String, 1));
 
                         rowDettaglio.Append(ConstructCell(dettaglio.IsDESCRIZIONENull() ? string.Empty : dettaglio.DESCRIZIONE.ToString(), CellValues.String, 1));
