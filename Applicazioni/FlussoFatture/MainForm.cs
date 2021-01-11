@@ -25,6 +25,10 @@ namespace FlussoFatture
             rbSoloItalia.Text = Etichette.ITALIA;
             rbTutti.Text = Etichette.TUTTI;
 
+            rbMetal.Text = Etichette.METAL;
+            rbTop.Text = Etichette.TOP;
+            rbMetalTop.Text = Etichette.METALTOP;
+
             dgvRisultati.AutoGenerateColumns = false;
         }
 
@@ -38,15 +42,28 @@ namespace FlussoFatture
                     MessageBox.Show("Attenzione la data DAL è successiva alla data AL", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string radioButton = string.Empty;
-                foreach (Control control in this.Controls)
+                string radioButtonEstero = string.Empty;
+                foreach (Control control in grEstero.Controls)
                 {
                     if (control is RadioButton)
                     {
                         RadioButton radio = control as RadioButton;
                         if (radio.Checked)
                         {
-                            radioButton = radio.Text;
+                            radioButtonEstero = radio.Text;
+                        }
+                    }
+                }
+
+                string radioButtonAzienda= string.Empty;
+                foreach (Control control in grAzienda.Controls)
+                {
+                    if (control is RadioButton)
+                    {
+                        RadioButton radio = control as RadioButton;
+                        if (radio.Checked)
+                        {
+                            radioButtonAzienda = radio.Text;
                         }
                     }
                 }
@@ -55,7 +72,7 @@ namespace FlussoFatture
                 {
 
                     _ds = new FlussoFattureDS();
-                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButton);
+                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, radioButtonAzienda);
 
                     dgvRisultati.DataSource = _ds;
                     dgvRisultati.DataMember = _ds.BOLLE_VENDITA.TableName;

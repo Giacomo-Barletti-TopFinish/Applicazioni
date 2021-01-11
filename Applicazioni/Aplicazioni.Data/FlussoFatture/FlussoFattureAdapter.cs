@@ -15,6 +15,10 @@ namespace Applicazioni.Data.FlussoFatture
         public const string ITALIA = "SOLO  ITALIA";
         public const string TUTTI = "TUTTI";
 
+        public const string METAL = "METALPLUS";
+        public const string TOP = "TOPFINISH";
+        public const string METALTOP= "TUTTI";
+
     }
     public class FlussoFattureAdapter: AdapterBase
     {
@@ -22,7 +26,7 @@ namespace Applicazioni.Data.FlussoFatture
           base(connection, transaction)
         { }
 
-        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al,string radioButton)
+        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al,string radioEstero, string radioButtonAzienda)
         {
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
@@ -37,14 +41,24 @@ namespace Applicazioni.Data.FlussoFatture
                 and datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                 and datdoc <to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')";
 
-            if(radioButton==Etichette.ESTERO)
+            if(radioEstero==Etichette.ESTERO)
             {
                 select += " AND TRIM(NAZIONE) <>'ITALIA'";
             }
 
-            if (radioButton == Etichette.ITALIA)
+            if (radioEstero == Etichette.ITALIA)
             {
                 select += " AND TRIM(NAZIONE) ='ITALIA'";
+            }
+
+            if (radioButtonAzienda == Etichette.METAL)
+            {
+                select += " AND AZIENDA ='METALPLUS'";
+            }
+
+            if (radioButtonAzienda == Etichette.TOP)
+            {
+                select += " AND AZIENDA ='TOP FINISH'";
             }
 
             select = string.Format(select, DalStr, AlStr);
