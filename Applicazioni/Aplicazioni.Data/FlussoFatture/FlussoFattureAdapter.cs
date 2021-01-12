@@ -76,7 +76,7 @@ namespace Applicazioni.Data.FlussoFatture
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
 
-            string select = @"  select csped.BC_CODE SPEDIZIONE,cfat.BC_CODE FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc, vt.pesonetto, vt.pesolordo 
+            string select = @"  select csped.BC_CODE SPEDIZIONE,cfat.BC_CODE FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc, vt.pesonetto, vt.pesolordo, vt.numdoc
                                         from ditta1.usr_venditet vt
                                         left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo AND csped.AZIENDA='MP'
                                         left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA AND cfat.AZIENDA='MP'
@@ -85,7 +85,7 @@ namespace Applicazioni.Data.FlussoFatture
                                         AND datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
                                        
                                         union all
-                                        select csped.BC_CODE,cfat.BC_CODE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc , vt.pesonetto, vt.pesolordo 
+                                        select csped.BC_CODE,cfat.BC_CODE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc , vt.pesonetto, vt.pesolordo, vt.numdoc||'/TP' 
                                         from ditta2.usr_venditet vt
                                         left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo  AND csped.AZIENDA='TF'
                                         left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA  AND cfat.AZIENDA='TF'
@@ -109,7 +109,8 @@ namespace Applicazioni.Data.FlussoFatture
             string AlStr = Al.ToString("dd/MM/yyyy");
 
             string select = @"  select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, 
-                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI
+                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI,
+                                    vd.noteeprima nota, vt.numdoc 
                                     from ditta1.usr_venditet vt
                                     INNER JOIN DITTA1.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ
@@ -124,7 +125,8 @@ namespace Applicazioni.Data.FlussoFatture
                                    
                                     UNION ALL
                                     select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, 
-                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI
+                                    vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI,
+                                    vd.noteeprima nota, vt.numdoc||'7TP' as numdoc
                                     from ditta2.usr_venditet vt
                                     INNER JOIN DITTA2.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ

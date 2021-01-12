@@ -147,7 +147,7 @@ namespace Applicazioni.Helpers
                     rowTestata.Append(ConstructCell(testata.IsSPEDIZIONENull() ? string.Empty : testata.SPEDIZIONE, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsFATTURAZIONENull() ? string.Empty : testata.FATTURAZIONE, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.CODICETIPOO, CellValues.String, 1));
-                    rowTestata.Append(ConstructCell(testata.FULLNUMDOC, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(testata.NUMDOC, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsPESOLORDONull() ? string.Empty : testata.PESOLORDO.ToString(), CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsPESONETTONull() ? string.Empty : testata.PESONETTO.ToString(), CellValues.String, 1));
@@ -160,8 +160,21 @@ namespace Applicazioni.Helpers
 
                         if (riferimento.Length > 20) riferimento = riferimento.Substring(0, 20);
 
+                        string descrizione = dettaglio.IsDESCRIZIONENull() ? string.Empty : dettaglio.DESCRIZIONE.ToString();
+                        if (!dettaglio.IsNOTANull())
+                        {
+                            string nota = dettaglio.NOTA;
+                            int lunghezzaResidua = descrizione.Length + nota.Length + 4 - 250;
+                            if(lunghezzaResidua>0)
+                            {
+                                nota = nota.Substring(0, nota.Length - lunghezzaResidua);
+                            }
+                            descrizione = string.Format("{0} ({1})", descrizione,nota);
+                        }
+
+
                         Row rowDettaglio = new Row();
-                        rowDettaglio.Append(ConstructCell(dettaglio.FULLNUMDOC, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(dettaglio.NUMDOC, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CONTOCG, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.MODELLO, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.QTATOT.ToString(), CellValues.String, 1));
@@ -174,7 +187,7 @@ namespace Applicazioni.Helpers
                         rowDettaglio.Append(ConstructCell(riferimento, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsRIFERIMENTORIGANull() ? string.Empty : dettaglio.RIFERIMENTORIGA.ToString(), CellValues.String, 1));
 
-                        rowDettaglio.Append(ConstructCell(dettaglio.IsDESCRIZIONENull() ? string.Empty : dettaglio.DESCRIZIONE.ToString(), CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(descrizione, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsMATERIALENull() ? string.Empty : dettaglio.MATERIALE.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsUNIMINull() ? string.Empty : dettaglio.UNIMI.ToString(), CellValues.String, 1));
                         sheetDataDettaglio.AppendChild(rowDettaglio);
