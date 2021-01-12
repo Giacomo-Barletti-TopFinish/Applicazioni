@@ -158,6 +158,8 @@ namespace Applicazioni.Helpers
                         string riferimento = dettaglio.IsRIFERIMENTONull() ? string.Empty : dettaglio.RIFERIMENTO.ToString();
                         riferimento = riferimento.Replace(" ", "");
 
+                        if (riferimento.Length > 20) riferimento = riferimento.Substring(0, 20);
+
                         Row rowDettaglio = new Row();
                         rowDettaglio.Append(ConstructCell(dettaglio.FULLNUMDOC, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CONTOCG, CellValues.String, 1));
