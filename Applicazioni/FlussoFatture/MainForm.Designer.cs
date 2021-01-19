@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCreaFiles = new System.Windows.Forms.Button();
             this.btnTrova = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,10 +37,6 @@
             this.dtAl = new System.Windows.Forms.DateTimePicker();
             this.dtDal = new System.Windows.Forms.DateTimePicker();
             this.dgvRisultati = new System.Windows.Forms.DataGridView();
-            this.rbTutti = new System.Windows.Forms.RadioButton();
-            this.rbSoloItalia = new System.Windows.Forms.RadioButton();
-            this.rbEstero = new System.Windows.Forms.RadioButton();
-            this.chkSelezionaTutto = new System.Windows.Forms.CheckBox();
             this.SELEZIONATA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.AZIENDA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DOCUMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +52,10 @@
             this.NAZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUMERORIGHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RIFERIMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rbTutti = new System.Windows.Forms.RadioButton();
+            this.rbSoloItalia = new System.Windows.Forms.RadioButton();
+            this.rbEstero = new System.Windows.Forms.RadioButton();
+            this.chkSelezionaTutto = new System.Windows.Forms.CheckBox();
             this.rbMetalTop = new System.Windows.Forms.RadioButton();
             this.rbMetal = new System.Windows.Forms.RadioButton();
             this.rbTop = new System.Windows.Forms.RadioButton();
@@ -125,14 +125,14 @@
             this.dgvRisultati.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRisultati.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRisultati.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRisultati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRisultati.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SELEZIONATA,
@@ -150,61 +150,18 @@
             this.NAZIONE,
             this.NUMERORIGHE,
             this.RIFERIMENTO});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRisultati.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvRisultati.Location = new System.Drawing.Point(18, 116);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRisultati.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvRisultati.Location = new System.Drawing.Point(20, 116);
             this.dgvRisultati.Name = "dgvRisultati";
             this.dgvRisultati.Size = new System.Drawing.Size(1551, 586);
             this.dgvRisultati.TabIndex = 11;
-            // 
-            // rbTutti
-            // 
-            this.rbTutti.AutoSize = true;
-            this.rbTutti.Checked = true;
-            this.rbTutti.Location = new System.Drawing.Point(6, 17);
-            this.rbTutti.Name = "rbTutti";
-            this.rbTutti.Size = new System.Drawing.Size(46, 17);
-            this.rbTutti.TabIndex = 12;
-            this.rbTutti.TabStop = true;
-            this.rbTutti.Text = "Tutti";
-            this.rbTutti.UseVisualStyleBackColor = true;
-            // 
-            // rbSoloItalia
-            // 
-            this.rbSoloItalia.AutoSize = true;
-            this.rbSoloItalia.Location = new System.Drawing.Point(6, 46);
-            this.rbSoloItalia.Name = "rbSoloItalia";
-            this.rbSoloItalia.Size = new System.Drawing.Size(82, 17);
-            this.rbSoloItalia.TabIndex = 12;
-            this.rbSoloItalia.Text = "Solo ITALIA";
-            this.rbSoloItalia.UseVisualStyleBackColor = true;
-            // 
-            // rbEstero
-            // 
-            this.rbEstero.AutoSize = true;
-            this.rbEstero.Location = new System.Drawing.Point(6, 75);
-            this.rbEstero.Name = "rbEstero";
-            this.rbEstero.Size = new System.Drawing.Size(69, 17);
-            this.rbEstero.TabIndex = 12;
-            this.rbEstero.Text = "ESTERO";
-            this.rbEstero.UseVisualStyleBackColor = true;
-            // 
-            // chkSelezionaTutto
-            // 
-            this.chkSelezionaTutto.AutoSize = true;
-            this.chkSelezionaTutto.Location = new System.Drawing.Point(41, 93);
-            this.chkSelezionaTutto.Name = "chkSelezionaTutto";
-            this.chkSelezionaTutto.Size = new System.Drawing.Size(168, 17);
-            this.chkSelezionaTutto.TabIndex = 13;
-            this.chkSelezionaTutto.Text = "Seleziona / Deseleziona tutoo";
-            this.chkSelezionaTutto.UseVisualStyleBackColor = true;
-            this.chkSelezionaTutto.CheckedChanged += new System.EventHandler(this.chkSelezionaTutto_CheckedChanged);
             // 
             // SELEZIONATA
             // 
@@ -311,6 +268,49 @@
             this.RIFERIMENTO.HeaderText = "RIFERIMENTO";
             this.RIFERIMENTO.Name = "RIFERIMENTO";
             this.RIFERIMENTO.Width = 130;
+            // 
+            // rbTutti
+            // 
+            this.rbTutti.AutoSize = true;
+            this.rbTutti.Checked = true;
+            this.rbTutti.Location = new System.Drawing.Point(6, 17);
+            this.rbTutti.Name = "rbTutti";
+            this.rbTutti.Size = new System.Drawing.Size(46, 17);
+            this.rbTutti.TabIndex = 12;
+            this.rbTutti.TabStop = true;
+            this.rbTutti.Text = "Tutti";
+            this.rbTutti.UseVisualStyleBackColor = true;
+            // 
+            // rbSoloItalia
+            // 
+            this.rbSoloItalia.AutoSize = true;
+            this.rbSoloItalia.Location = new System.Drawing.Point(6, 46);
+            this.rbSoloItalia.Name = "rbSoloItalia";
+            this.rbSoloItalia.Size = new System.Drawing.Size(82, 17);
+            this.rbSoloItalia.TabIndex = 12;
+            this.rbSoloItalia.Text = "Solo ITALIA";
+            this.rbSoloItalia.UseVisualStyleBackColor = true;
+            // 
+            // rbEstero
+            // 
+            this.rbEstero.AutoSize = true;
+            this.rbEstero.Location = new System.Drawing.Point(6, 75);
+            this.rbEstero.Name = "rbEstero";
+            this.rbEstero.Size = new System.Drawing.Size(69, 17);
+            this.rbEstero.TabIndex = 12;
+            this.rbEstero.Text = "ESTERO";
+            this.rbEstero.UseVisualStyleBackColor = true;
+            // 
+            // chkSelezionaTutto
+            // 
+            this.chkSelezionaTutto.AutoSize = true;
+            this.chkSelezionaTutto.Location = new System.Drawing.Point(41, 93);
+            this.chkSelezionaTutto.Name = "chkSelezionaTutto";
+            this.chkSelezionaTutto.Size = new System.Drawing.Size(168, 17);
+            this.chkSelezionaTutto.TabIndex = 13;
+            this.chkSelezionaTutto.Text = "Seleziona / Deseleziona tutoo";
+            this.chkSelezionaTutto.UseVisualStyleBackColor = true;
+            this.chkSelezionaTutto.CheckedChanged += new System.EventHandler(this.chkSelezionaTutto_CheckedChanged);
             // 
             // rbMetalTop
             // 

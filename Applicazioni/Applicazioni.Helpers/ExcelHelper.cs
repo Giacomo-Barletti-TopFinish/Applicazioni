@@ -113,9 +113,13 @@ namespace Applicazioni.Helpers
 
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
-                foreach (string documento in idTestata)
+                List<FlussoFattureDS.BC_FLUSSO_TESTATARow> righeTestate = ds.BC_FLUSSO_TESTATA.Where(x => idTestata.Contains(x.FULLNUMDOC)).ToList();
+                righeTestate = righeTestate.OrderBy(x => x.FATTURAZIONE).ToList();
+
+                foreach (FlussoFattureDS.BC_FLUSSO_TESTATARow testata in righeTestate)
                 {
-                    FlussoFattureDS.BC_FLUSSO_TESTATARow testata = ds.BC_FLUSSO_TESTATA.Where(x => x.FULLNUMDOC == documento).FirstOrDefault();
+                    string documento = testata.FULLNUMDOC;
+
                     if (testata == null)
                     {
                         string messaggio = string.Format("Bolla non trovata: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
@@ -165,11 +169,11 @@ namespace Applicazioni.Helpers
                         {
                             string nota = dettaglio.NOTA;
                             int lunghezzaResidua = descrizione.Length + nota.Length + 4 - 250;
-                            if(lunghezzaResidua>0)
+                            if (lunghezzaResidua > 0)
                             {
                                 nota = nota.Substring(0, nota.Length - lunghezzaResidua);
                             }
-                            descrizione = string.Format("{0} ({1})", descrizione,nota);
+                            descrizione = string.Format("{0} ({1})", descrizione, nota);
                         }
 
 
