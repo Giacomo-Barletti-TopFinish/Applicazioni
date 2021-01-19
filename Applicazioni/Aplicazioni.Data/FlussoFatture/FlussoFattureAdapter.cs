@@ -126,7 +126,7 @@ namespace Applicazioni.Data.FlussoFatture
                                     UNION ALL
                                     select vt.fullnumdoc,vt.datdoc,PC.NUOVO AS CONTOCG,MA.MODELLO,VD.QTATOT,VD.PREZZOTOT,VD.CODIVARIGA,VD.PSCONTO1, MA.PESO, 
                                     vd.NRRIGA, OC.RIFERIMENTO RIFERIMENTO,  OCR.NRRIGA AS RIFERIMENTORIGA,MA.DESMAGAZZ DESCRIZIONE,MAT.DESTABTIPM MATERIALE, UNI.CODICEUNIMI UNIMI,
-                                    vd.noteeprima nota, vt.numdoc||'7TP' as numdoc
+                                    vd.noteeprima nota, vt.numdoc||'/TP' as numdoc
                                     from ditta2.usr_venditet vt
                                     INNER JOIN DITTA2.USR_VENDITED VD ON VD.IDVENDITET = VT.IDVENDITET
                                     INNER JOIN GRUPPO.MAGAZZ MA ON MA.IDMAGAZZ = VD.IDMAGAZZ
