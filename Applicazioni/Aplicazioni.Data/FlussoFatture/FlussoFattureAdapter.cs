@@ -76,7 +76,7 @@ namespace Applicazioni.Data.FlussoFatture
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
 
-            string select = @"  select csped.BC_CODE SPEDIZIONE,cfat.BC_CODE FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc, vt.pesonetto, vt.pesolordo, vt.numdoc
+            string select = @"  select csped.BC_CODE SPEDIZIONE,nvl(cfat.BC_CODE,csped.BC_CODE) FATTURAZIONE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc, vt.pesonetto, vt.pesolordo, vt.numdoc
                                         from ditta1.usr_venditet vt
                                         left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo AND csped.AZIENDA='MP'
                                         left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA AND cfat.AZIENDA='MP'
@@ -85,7 +85,7 @@ namespace Applicazioni.Data.FlussoFatture
                                         AND datdoc <=to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
                                        
                                         union all
-                                        select csped.BC_CODE,cfat.BC_CODE,oo.codicetipoo,vt.fullnumdoc,vt.datdoc , vt.pesonetto, vt.pesolordo, vt.numdoc||'/TP' 
+                                        select csped.BC_CODE,nvl(cfat.BC_CODE,csped.BC_CODE),oo.codicetipoo,vt.fullnumdoc,vt.datdoc , vt.pesonetto, vt.pesolordo, vt.numdoc||'/TP' 
                                         from ditta2.usr_venditet vt
                                         left outer join v_converti_cliente csped on csped.codiceclifo=VT.codiceclifo  AND csped.AZIENDA='TF'
                                         left outer join v_converti_cliente cfat on cfat.codiceclifo=VT.FATTURAREA  AND cfat.AZIENDA='TF'
@@ -93,7 +93,7 @@ namespace Applicazioni.Data.FlussoFatture
                                         WHERE datdoc >=to_date('{2} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                                         AND datdoc <=to_date('{3} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
                                        
-                                        order by fullnumdoc ";
+                                        order by FATTURAZIONE ";
 
             select = string.Format(select, DalStr, AlStr, DalStr, AlStr);
 
