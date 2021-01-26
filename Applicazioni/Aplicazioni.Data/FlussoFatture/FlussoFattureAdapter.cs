@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,16 +18,16 @@ namespace Applicazioni.Data.FlussoFatture
 
         public const string METAL = "METALPLUS";
         public const string TOP = "TOPFINISH";
-        public const string METALTOP= "TUTTI";
+        public const string METALTOP = "TUTTI";
 
     }
-    public class FlussoFattureAdapter: AdapterBase
+    public class FlussoFattureAdapter : AdapterBase
     {
         public FlussoFattureAdapter(System.Data.IDbConnection connection, IDbTransaction transaction) :
           base(connection, transaction)
         { }
 
-        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al,string radioEstero, string radioButtonAzienda)
+        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al, string radioEstero, string radioButtonAzienda)
         {
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
@@ -41,7 +42,7 @@ namespace Applicazioni.Data.FlussoFatture
                 and datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
                 and datdoc <to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')";
 
-            if(radioEstero==Etichette.ESTERO)
+            if (radioEstero == Etichette.ESTERO)
             {
                 select += " AND TRIM(NAZIONE) <>'ITALIA'";
             }
@@ -63,7 +64,7 @@ namespace Applicazioni.Data.FlussoFatture
 
             select = string.Format(select, DalStr, AlStr);
 
-           
+
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
@@ -146,6 +147,44 @@ namespace Applicazioni.Data.FlussoFatture
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.BC_FLUSSO_DETTAGLIO);
+            }
+        }
+
+        public void FillMATERIALIMAMI(FlussoFattureDS ds)
+        {
+
+            string select = @"  select * from MATERIALIMAMI";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MATERIALIMAMI);
+            }
+        }
+
+        public void UpdateTable(string tablename, FlussoFattureDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                try
+                {
+                    a.ContinueUpdateOnError = false;
+                    DataTable dt = ds.Tables[tablename];
+                    DbCommandBuilder cmd = BuildCommandBuilder(a);
+                    a.UpdateCommand = cmd.GetUpdateCommand();
+                    a.DeleteCommand = cmd.GetDeleteCommand();
+                    a.InsertCommand = cmd.GetInsertCommand();
+                    a.Update(dt);
+                }
+                catch (DBConcurrencyException ex)
+                {
+
+                }
+                catch
+                {
+                    throw;
+                }
             }
         }
     }

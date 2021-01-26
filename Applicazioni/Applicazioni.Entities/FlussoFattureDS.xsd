@@ -336,7 +336,33 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="MATERIALIMAMI" msprop:Generator_TableClassName="MATERIALIMAMIDataTable" msprop:Generator_TableVarName="tableMATERIALIMAMI" msprop:Generator_TablePropName="MATERIALIMAMI" msprop:Generator_RowDeletingName="MATERIALIMAMIRowDeleting" msprop:Generator_RowChangingName="MATERIALIMAMIRowChanging" msprop:Generator_RowEvHandlerName="MATERIALIMAMIRowChangeEventHandler" msprop:Generator_RowDeletedName="MATERIALIMAMIRowDeleted" msprop:Generator_UserTableName="MATERIALIMAMI" msprop:Generator_RowChangedName="MATERIALIMAMIRowChanged" msprop:Generator_RowEvArgName="MATERIALIMAMIRowChangeEvent" msprop:Generator_RowClassName="MATERIALIMAMIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDMATERIALIMAMI" msprop:Generator_ColumnVarNameInTable="columnIDMATERIALIMAMI" msprop:Generator_ColumnPropNameInRow="IDMATERIALIMAMI" msprop:Generator_ColumnPropNameInTable="IDMATERIALIMAMIColumn" msprop:Generator_UserColumnName="IDMATERIALIMAMI" type="xs:decimal" />
+              <xs:element name="DESTABTIPM" msprop:Generator_ColumnVarNameInTable="columnDESTABTIPM" msprop:Generator_ColumnPropNameInRow="DESTABTIPM" msprop:Generator_ColumnPropNameInTable="DESTABTIPMColumn" msprop:Generator_UserColumnName="DESTABTIPM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INFATTURA" msprop:Generator_ColumnVarNameInTable="columnINFATTURA" msprop:Generator_ColumnPropNameInRow="INFATTURA" msprop:Generator_ColumnPropNameInTable="INFATTURAColumn" msprop:Generator_UserColumnName="INFATTURA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PREZZO" msprop:Generator_ColumnVarNameInTable="columnPREZZO" msprop:Generator_ColumnPropNameInRow="PREZZO" msprop:Generator_ColumnPropNameInTable="PREZZOColumn" msprop:Generator_UserColumnName="PREZZO" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MATERIALIMAMI" />
+      <xs:field xpath="mstns:IDMATERIALIMAMI" />
+    </xs:unique>
   </xs:element>
 </xs:schema>

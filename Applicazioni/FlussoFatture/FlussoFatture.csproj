@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\Applicazioni\FlussoFatture\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.16</MinimumRequiredVersion>
-    <ApplicationRevision>16</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.18</MinimumRequiredVersion>
+    <ApplicationRevision>18</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -76,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmModificaPrezziMAMI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModificaPrezziMAMI.Designer.cs">
+      <DependentUpon>FrmModificaPrezziMAMI.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmModificaPrezziMAMI.resx">
+      <DependentUpon>FrmModificaPrezziMAMI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

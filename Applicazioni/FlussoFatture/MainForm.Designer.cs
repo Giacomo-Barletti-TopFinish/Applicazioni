@@ -61,6 +61,7 @@
             this.rbTop = new System.Windows.Forms.RadioButton();
             this.grEstero = new System.Windows.Forms.GroupBox();
             this.grAzienda = new System.Windows.Forms.GroupBox();
+            this.btnModificaPrezziMami = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).BeginInit();
             this.grEstero.SuspendLayout();
             this.grAzienda.SuspendLayout();
@@ -368,11 +369,22 @@
             this.grAzienda.TabStop = false;
             this.grAzienda.Text = "Metalplus / Topfinish";
             // 
+            // btnModificaPrezziMami
+            // 
+            this.btnModificaPrezziMami.Location = new System.Drawing.Point(1243, 25);
+            this.btnModificaPrezziMami.Name = "btnModificaPrezziMami";
+            this.btnModificaPrezziMami.Size = new System.Drawing.Size(208, 48);
+            this.btnModificaPrezziMami.TabIndex = 19;
+            this.btnModificaPrezziMami.Text = "Modifica Prezzi MAMI";
+            this.btnModificaPrezziMami.UseVisualStyleBackColor = true;
+            this.btnModificaPrezziMami.Click += new System.EventHandler(this.btnModificaPrezziMami_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1573, 714);
+            this.Controls.Add(this.btnModificaPrezziMami);
             this.Controls.Add(this.grAzienda);
             this.Controls.Add(this.grEstero);
             this.Controls.Add(this.chkSelezionaTutto);
@@ -428,6 +440,7 @@
         private System.Windows.Forms.RadioButton rbTop;
         private System.Windows.Forms.GroupBox grEstero;
         private System.Windows.Forms.GroupBox grAzienda;
+        private System.Windows.Forms.Button btnModificaPrezziMami;
     }
 }
 

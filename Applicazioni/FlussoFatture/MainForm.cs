@@ -55,7 +55,7 @@ namespace FlussoFatture
                     }
                 }
 
-                string radioButtonAzienda= string.Empty;
+                string radioButtonAzienda = string.Empty;
                 foreach (Control control in grAzienda.Controls)
                 {
                     if (control is RadioButton)
@@ -125,6 +125,7 @@ namespace FlussoFatture
 
                 using (FlussoFattureBusiness bFlussoFatture = new FlussoFattureBusiness())
                 {
+                    bFlussoFatture.FillMATERIALIMAMI(ds);
                     bFlussoFatture.FillBC_FLUSSO_TESTATA(ds, dtDal.Value, dtAl.Value);
                     bFlussoFatture.FillBC_FLUSSO_DETTAGLIO(ds, dtDal.Value, dtAl.Value);
                 }
@@ -162,6 +163,12 @@ namespace FlussoFatture
                 ch1.Value = chkSelezionaTutto.Checked;
 
             }
+        }
+
+        private void btnModificaPrezziMami_Click(object sender, EventArgs e)
+        {
+            FrmModificaPrezziMAMI frm = new FrmModificaPrezziMAMI();
+            frm.ShowDialog();
         }
     }
 }

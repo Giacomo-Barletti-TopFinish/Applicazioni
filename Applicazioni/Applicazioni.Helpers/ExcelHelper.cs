@@ -195,6 +195,36 @@ namespace Applicazioni.Helpers
                         rowDettaglio.Append(ConstructCell(dettaglio.IsMATERIALENull() ? string.Empty : dettaglio.MATERIALE.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.IsUNIMINull() ? string.Empty : dettaglio.UNIMI.ToString(), CellValues.String, 1));
                         sheetDataDettaglio.AppendChild(rowDettaglio);
+
+                        if (testata.FATTURAZIONE == "C00044" && !dettaglio.IsMATERIALENull())
+                        {
+                            FlussoFattureDS.MATERIALIMAMIRow materiale = ds.MATERIALIMAMI.Where(x => x.DESTABTIPM == dettaglio.MATERIALE).FirstOrDefault();
+
+                            if (materiale == null || materiale.INFATTURA == "N") continue;
+
+                            decimal peso = dettaglio.PESO * dettaglio.QTATOT;
+                            peso = peso/1000;
+
+                            Row rowDettaglioMami = new Row();
+                            rowDettaglioMami.Append(ConstructCell(dettaglio.NUMDOC, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell("0400007", CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(dettaglio.MATERIALE, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(peso.ToString(), CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(materiale.PREZZO.ToString(), CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell("022", CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell("-", CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell("KG", CellValues.String, 1));
+                            sheetDataDettaglio.AppendChild(rowDettaglioMami);
+                        }
+
                     }
                 }
 
