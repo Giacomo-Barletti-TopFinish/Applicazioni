@@ -92,6 +92,7 @@ namespace FlussoFatture
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 List<string> idTestate = new List<string>();
                 foreach (DataGridViewRow riga in dgvRisultati.Rows)
                 {
@@ -149,6 +150,7 @@ namespace FlussoFatture
             {
                 MostraEccezione(ex, "Errore in fase di creazione dei file");
             }
+            finally { Cursor.Current = Cursors.Default; }
         }
 
         private void chkSelezionaTutto_CheckedChanged(object sender, EventArgs e)
