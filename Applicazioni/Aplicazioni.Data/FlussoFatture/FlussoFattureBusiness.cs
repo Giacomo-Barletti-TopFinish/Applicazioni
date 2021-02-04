@@ -42,5 +42,12 @@ namespace Applicazioni.Data.FlussoFatture
             FlussoFattureAdapter a = new FlussoFattureAdapter(DbConnection, DbTransaction);
             a.UpdateTable(tablename, ds);
         }
+
+        [DataContext(true)]
+        public void BloccaBolla(string FULLNUMDOC)
+        {
+            FlussoFattureAdapter a = new FlussoFattureAdapter(DbConnection, DbTransaction);
+            a.BloccaBolla(FULLNUMDOC);
+        }
     }
 }

@@ -133,6 +133,11 @@ namespace FlussoFatture
 
                 string errori;
                 idTestate = idTestate.Distinct().ToList();
+                using (FlussoFattureBusiness bFlussoFatture = new FlussoFattureBusiness())
+                {
+                    foreach (string fullnumdoc in idTestate)
+                        bFlussoFatture.BloccaBolla(fullnumdoc);
+                }
 
                 ExcelHelper hExcel = new ExcelHelper();
                 byte[] filedata = hExcel.CreaFlussoFatture(idTestate.Distinct().ToList(), ds, out errori);

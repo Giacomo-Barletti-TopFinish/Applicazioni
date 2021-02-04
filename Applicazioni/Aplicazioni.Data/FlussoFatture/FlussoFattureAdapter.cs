@@ -161,6 +161,24 @@ namespace Applicazioni.Data.FlussoFatture
             }
         }
 
+        public void BloccaBolla(string FULLNUMDOC)
+        {
+            string query1 = @"UPDATE DITTA1.USR_VENDITET SET DOCFISC_SN = 1 WHERE FULLNUMDOC = $P{FULLNUMDOC} AND IDTABTIPDOC='0000000028'";
+            string query2 = @"UPDATE DITTA2.USR_VENDITET SET DOCFISC_SN = 1 WHERE FULLNUMDOC = $P{FULLNUMDOC} AND IDTABTIPDOC='0000000028'";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("FULLNUMDOC", DbType.String, FULLNUMDOC);
+
+            using (DbCommand cmd = BuildCommand(query1, ps))
+            {
+                cmd.ExecuteScalar();
+            }
+            using (DbCommand cmd = BuildCommand(query2, ps))
+            {
+                cmd.ExecuteScalar();
+            }
+        }
+
         public void UpdateTable(string tablename, FlussoFattureDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
