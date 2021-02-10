@@ -413,6 +413,7 @@ namespace EDIFornitori
                     case "EACP":
                     case "EAMP":
                     case "EMFS":
+                    case "EMFW":
                     case "EACS":
                         return "TERZ";
                     case "EAGV":
@@ -431,6 +432,7 @@ namespace EDIFornitori
                         return "TERO";
                     case "EACP":
                     case "EMFS":
+                    case "EMFW":
                     case "EACS":
                         return "TERZ";
                     case "EAGV":

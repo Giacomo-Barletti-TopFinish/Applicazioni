@@ -329,7 +329,7 @@ namespace ValorizzazioniFrm
             }
             else
             {
-                string anno = "2019";
+                string anno = "2020";
                 worker.ReportProgress(0, string.Format("Carica VENDITE l'anno {0}", anno));
                 diba.FillUSR_VENDITED(anno);
             }
