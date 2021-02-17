@@ -72,7 +72,7 @@ namespace FlussoFatture
                 {
 
                     _ds = new FlussoFattureDS();
-                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, radioButtonAzienda);
+                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, radioButtonAzienda,chkIgnoraMetal.Checked);
 
                     dgvRisultati.DataSource = _ds;
                     dgvRisultati.DataMember = _ds.BOLLE_VENDITA.TableName;
@@ -176,6 +176,11 @@ namespace FlussoFatture
         {
             FrmModificaPrezziMAMI frm = new FrmModificaPrezziMAMI();
             frm.ShowDialog();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

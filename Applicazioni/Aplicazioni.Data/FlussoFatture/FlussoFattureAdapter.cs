@@ -27,7 +27,7 @@ namespace Applicazioni.Data.FlussoFatture
           base(connection, transaction)
         { }
 
-        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al, string radioEstero, string radioButtonAzienda)
+        public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al, string radioEstero, string radioButtonAzienda, bool ignoraMetalplus)
         {
             string DalStr = Dal.ToString("dd/MM/yyyy");
             string AlStr = Al.ToString("dd/MM/yyyy");
@@ -64,7 +64,11 @@ namespace Applicazioni.Data.FlussoFatture
 
             select = string.Format(select, DalStr, AlStr);
 
+            if(ignoraMetalplus)
+            {
+                select += " AND CODICECLIFO <>'01631'";
 
+            }
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {

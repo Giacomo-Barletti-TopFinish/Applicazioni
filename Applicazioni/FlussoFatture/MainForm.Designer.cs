@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCreaFiles = new System.Windows.Forms.Button();
             this.btnTrova = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,6 +62,7 @@
             this.grEstero = new System.Windows.Forms.GroupBox();
             this.grAzienda = new System.Windows.Forms.GroupBox();
             this.btnModificaPrezziMami = new System.Windows.Forms.Button();
+            this.chkIgnoraMetal = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).BeginInit();
             this.grEstero.SuspendLayout();
             this.grAzienda.SuspendLayout();
@@ -126,14 +127,14 @@
             this.dgvRisultati.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRisultati.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRisultati.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRisultati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRisultati.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SELEZIONATA,
@@ -151,14 +152,14 @@
             this.NAZIONE,
             this.NUMERORIGHE,
             this.RIFERIMENTO});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRisultati.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRisultati.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvRisultati.Location = new System.Drawing.Point(20, 116);
             this.dgvRisultati.Name = "dgvRisultati";
             this.dgvRisultati.Size = new System.Drawing.Size(1551, 586);
@@ -379,11 +380,25 @@
             this.btnModificaPrezziMami.UseVisualStyleBackColor = true;
             this.btnModificaPrezziMami.Click += new System.EventHandler(this.btnModificaPrezziMami_Click);
             // 
+            // chkIgnoraMetal
+            // 
+            this.chkIgnoraMetal.AutoSize = true;
+            this.chkIgnoraMetal.Checked = true;
+            this.chkIgnoraMetal.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIgnoraMetal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIgnoraMetal.Location = new System.Drawing.Point(601, 89);
+            this.chkIgnoraMetal.Name = "chkIgnoraMetal";
+            this.chkIgnoraMetal.Size = new System.Drawing.Size(158, 19);
+            this.chkIgnoraMetal.TabIndex = 20;
+            this.chkIgnoraMetal.Text = "Ignora bolle a Metalplus";
+            this.chkIgnoraMetal.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1573, 714);
+            this.Controls.Add(this.chkIgnoraMetal);
             this.Controls.Add(this.btnModificaPrezziMami);
             this.Controls.Add(this.grAzienda);
             this.Controls.Add(this.grEstero);
@@ -397,6 +412,7 @@
             this.Controls.Add(this.dtDal);
             this.Name = "MainForm";
             this.Text = "Flusso fatture per Business Central";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).EndInit();
             this.grEstero.ResumeLayout(false);
             this.grEstero.PerformLayout();
@@ -441,6 +457,7 @@
         private System.Windows.Forms.GroupBox grEstero;
         private System.Windows.Forms.GroupBox grAzienda;
         private System.Windows.Forms.Button btnModificaPrezziMami;
+        private System.Windows.Forms.CheckBox chkIgnoraMetal;
     }
 }
 
