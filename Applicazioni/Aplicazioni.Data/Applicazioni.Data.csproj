@@ -58,6 +58,8 @@
     <Compile Include="Core\DaoExtensor.cs" />
     <Compile Include="Core\DataContextAttribute.cs" />
     <Compile Include="Core\Exceptions.cs" />
+    <Compile Include="CorreggiDateListini\CorreggiDateListiniAdapter.cs" />
+    <Compile Include="CorreggiDateListini\CorreggiDateListiniBusiness.cs" />
     <Compile Include="EDIFornitori\EDIFornitoriAdapter.cs" />
     <Compile Include="EDIFornitori\EDIFornitoriBusiness.cs" />
     <Compile Include="FlussoFatture\FlussoFattureAdapter.cs" />

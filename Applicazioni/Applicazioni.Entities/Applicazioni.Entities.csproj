@@ -52,6 +52,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CorreggiDateListiniDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CorreggiDateListiniDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EDIFornitoriDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +129,17 @@
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
+    <None Include="CorreggiDateListiniDS.xsc">
+      <DependentUpon>CorreggiDateListiniDS.xsd</DependentUpon>
+    </None>
+    <None Include="CorreggiDateListiniDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CorreggiDateListiniDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="CorreggiDateListiniDS.xss">
+      <DependentUpon>CorreggiDateListiniDS.xsd</DependentUpon>
+    </None>
     <None Include="EDIFornitoriDS.xsc">
       <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
     </None>
