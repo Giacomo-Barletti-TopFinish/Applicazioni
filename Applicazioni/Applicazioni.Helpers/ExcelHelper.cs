@@ -114,7 +114,7 @@ namespace Applicazioni.Helpers
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
                 List<FlussoFattureDS.BC_FLUSSO_TESTATARow> righeTestate = ds.BC_FLUSSO_TESTATA.Where(x => idTestata.Contains(x.FULLNUMDOC)).ToList();
-            //    righeTestate = righeTestate.OrderBy(x => x.FATTURAZIONE).ToList();
+                //    righeTestate = righeTestate.OrderBy(x => x.FATTURAZIONE).ToList();
 
                 foreach (FlussoFattureDS.BC_FLUSSO_TESTATARow testata in righeTestate)
                 {
@@ -165,9 +165,11 @@ namespace Applicazioni.Helpers
                         if (riferimento.Length > 20) riferimento = riferimento.Substring(0, 20);
 
                         string descrizione = dettaglio.IsDESCRIZIONENull() ? string.Empty : dettaglio.DESCRIZIONE.ToString();
-                        if (!dettaglio.IsNOTANull())
+                        string riferimento2 = dettaglio.IsRIFERIMENTO2Null() ? string.Empty : dettaglio.RIFERIMENTO2;
+                        if (!dettaglio.IsNOTANull() || !dettaglio.IsRIFERIMENTO2Null())
                         {
-                            string nota = dettaglio.NOTA;
+                            string nota = dettaglio.IsNOTANull() ? string.Empty : dettaglio.NOTA;
+                            nota = string.Format("{0} {1}", riferimento2, nota).Trim();
                             int lunghezzaResidua = descrizione.Length + nota.Length + 4 - 250;
                             if (lunghezzaResidua > 0)
                             {
@@ -203,7 +205,7 @@ namespace Applicazioni.Helpers
                             if (materiale == null || materiale.INFATTURA == "N") continue;
 
                             decimal peso = dettaglio.PESO * dettaglio.QTATOT;
-                            peso = peso/1000;
+                            peso = peso / 1000;
 
                             Row rowDettaglioMami = new Row();
                             rowDettaglioMami.Append(ConstructCell(dettaglio.NUMDOC, CellValues.String, 1));

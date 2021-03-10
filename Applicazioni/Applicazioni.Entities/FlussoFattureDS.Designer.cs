@@ -1446,6 +1446,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnNUMDOC;
             
+            private global::System.Data.DataColumn columnRIFERIMENTO2;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BC_FLUSSO_DETTAGLIODataTable() {
@@ -1617,6 +1619,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RIFERIMENTO2Column {
+                get {
+                    return this.columnRIFERIMENTO2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1669,7 +1679,8 @@ namespace Applicazioni.Entities {
                         string MATERIALE, 
                         string UNIMI, 
                         string NOTA, 
-                        string NUMDOC) {
+                        string NUMDOC, 
+                        string RIFERIMENTO2) {
                 BC_FLUSSO_DETTAGLIORow rowBC_FLUSSO_DETTAGLIORow = ((BC_FLUSSO_DETTAGLIORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FULLNUMDOC,
@@ -1688,7 +1699,8 @@ namespace Applicazioni.Entities {
                         MATERIALE,
                         UNIMI,
                         NOTA,
-                        NUMDOC};
+                        NUMDOC,
+                        RIFERIMENTO2};
                 rowBC_FLUSSO_DETTAGLIORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBC_FLUSSO_DETTAGLIORow);
                 return rowBC_FLUSSO_DETTAGLIORow;
@@ -1728,6 +1740,7 @@ namespace Applicazioni.Entities {
                 this.columnUNIMI = base.Columns["UNIMI"];
                 this.columnNOTA = base.Columns["NOTA"];
                 this.columnNUMDOC = base.Columns["NUMDOC"];
+                this.columnRIFERIMENTO2 = base.Columns["RIFERIMENTO2"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1767,6 +1780,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnNOTA);
                 this.columnNUMDOC = new global::System.Data.DataColumn("NUMDOC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNUMDOC);
+                this.columnRIFERIMENTO2 = new global::System.Data.DataColumn("RIFERIMENTO2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRIFERIMENTO2);
                 this.columnFULLNUMDOC.MaxLength = 100;
                 this.columnCONTOCG.MaxLength = 10;
                 this.columnMODELLO.AllowDBNull = false;
@@ -4264,6 +4279,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string RIFERIMENTO2 {
+                get {
+                    try {
+                        return ((string)(this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTO2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RIFERIMENTO2\' in table \'BC_FLUSSO_DETTAGLIO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTO2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsFULLNUMDOCNull() {
                 return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.FULLNUMDOCColumn);
             }
@@ -4416,6 +4447,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetNUMDOCNull() {
                 this[this.tableBC_FLUSSO_DETTAGLIO.NUMDOCColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRIFERIMENTO2Null() {
+                return this.IsNull(this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTO2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRIFERIMENTO2Null() {
+                this[this.tableBC_FLUSSO_DETTAGLIO.RIFERIMENTO2Column] = global::System.Convert.DBNull;
             }
         }
         
