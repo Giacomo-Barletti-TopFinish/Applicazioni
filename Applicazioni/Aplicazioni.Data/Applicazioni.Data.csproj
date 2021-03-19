@@ -66,6 +66,8 @@
     <Compile Include="FlussoFatture\FlussoFattureBusiness.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
+    <Compile Include="MigrazioneDiBa\MigrazioneDiBaAdapter.cs" />
+    <Compile Include="MigrazioneDiBa\MigrazioneDiBaBusiness.cs" />
     <Compile Include="Preventivi\PreventiviAdapter.cs" />
     <Compile Include="Preventivi\PreventiviBusiness.cs" />
     <Compile Include="Produzione\ProduzioneAdapter.cs" />

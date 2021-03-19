@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlussoFatture", "FlussoFatt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorreggiDateListini", "CorreggiDateListini\CorreggiDateListini.csproj", "{F30EE18E-0080-4221-BEFC-1A9130E33CDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrazione DiBaRVL", "Migrazione DiBaRVL\Migrazione DiBaRVL.csproj", "{DD6DE603-1DF0-4EAF-9DD6-4AEAA3A42BD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{F30EE18E-0080-4221-BEFC-1A9130E33CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F30EE18E-0080-4221-BEFC-1A9130E33CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F30EE18E-0080-4221-BEFC-1A9130E33CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6DE603-1DF0-4EAF-9DD6-4AEAA3A42BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6DE603-1DF0-4EAF-9DD6-4AEAA3A42BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6DE603-1DF0-4EAF-9DD6-4AEAA3A42BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6DE603-1DF0-4EAF-9DD6-4AEAA3A42BD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

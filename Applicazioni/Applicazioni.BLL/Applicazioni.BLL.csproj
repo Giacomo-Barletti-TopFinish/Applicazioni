@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anagrafica.cs" />
+    <Compile Include="MigrazioneDiBABLL.cs" />
     <Compile Include="OrdiniVendita.cs" />
     <Compile Include="DiBa.cs" />
     <Compile Include="Inventario.cs" />

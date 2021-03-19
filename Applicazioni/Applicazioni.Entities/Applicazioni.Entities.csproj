@@ -72,6 +72,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MigrazioneDiBaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ParametriEDIFornitori.cs" />
     <Compile Include="PreventiviDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -172,6 +177,17 @@
     </None>
     <None Include="GalvanicaDS.xss">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
+    <None Include="MigrazioneDiBaDS.xsc">
+      <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
+    </None>
+    <None Include="MigrazioneDiBaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MigrazioneDiBaDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MigrazioneDiBaDS.xss">
+      <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
     </None>
     <None Include="PreventiviDS.xsc">
       <DependentUpon>PreventiviDS.xsd</DependentUpon>

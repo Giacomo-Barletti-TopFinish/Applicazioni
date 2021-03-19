@@ -8,12 +8,16 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Applicazioni.Helpers
 {
+    public enum TipoExcel { Sconosciuto, IdMagazz, RVL }
+
     public class ExcelHelper
     {
+        private string _etichettaIDMAGAZZ = "IDMAGAZZ";
         public byte[] CreaFlussoFatture(List<string> idTestata, FlussoFattureDS ds, out string errori)
         {
             errori = string.Empty;
@@ -716,6 +720,7 @@ namespace Applicazioni.Helpers
                     switch (cell.DataType.Value)
                     {
                         case CellValues.SharedString:
+                            if (string.IsNullOrEmpty(cell.InnerText)) return string.Empty;
                             return sharedStringTable.ElementAt(Int32.Parse(cell.InnerText)).InnerText;
 
                         case CellValues.Date:
@@ -987,6 +992,283 @@ namespace Applicazioni.Helpers
             return true;
         }
 
+        public TipoExcel AggiungiColonIdentificaTipoFIleExcelneExcelDibaRVL(Stream stream)
+        {
+            SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
+            SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
+
+            WorkbookPart wbPart = document.WorkbookPart;
+
+            Sheet foglio = EstraiSheetPerNome(wbPart, "Sheet");
+            WorksheetPart worksheetPart = (WorksheetPart)wbPart.GetPartById(foglio.Id);
+            SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            CellFormats cellFormats = wbPart.WorkbookStylesPart.Stylesheet.CellFormats;
+            NumberingFormats numberingFormats = wbPart.WorkbookStylesPart.Stylesheet.NumberingFormats;
+
+
+            bool articoloDescrizione = false;
+            bool idMagazz = false;
+
+
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    if (cella.Trim() == "Articolo Descrizione")
+                        articoloDescrizione = true;
+
+                    if (cella.Trim() == _etichettaIDMAGAZZ)
+                        idMagazz = true;
+
+                }
+                break;
+            }
+            if (idMagazz) return TipoExcel.IdMagazz;
+            if (articoloDescrizione) return TipoExcel.RVL;
+
+            return TipoExcel.Sconosciuto;
+        }
+
+
+        public bool AggiungiColonneExcelDibaRVL(MigrazioneDiBaDS ds, Stream stream, out string messaggioErrore)
+
+        {
+            messaggioErrore = string.Empty;
+            SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
+            SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
+
+            WorkbookPart wbPart = document.WorkbookPart;
+
+            Sheet foglio = EstraiSheetPerNome(wbPart, "Sheet");
+            WorksheetPart worksheetPart = (WorksheetPart)wbPart.GetPartById(foglio.Id);
+            SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            CellFormats cellFormats = wbPart.WorkbookStylesPart.Stylesheet.CellFormats;
+            NumberingFormats numberingFormats = wbPart.WorkbookStylesPart.Stylesheet.NumberingFormats;
+
+            int indiceColonna = 0;
+            int posizioneNuovaColonna = 0;
+            string ultimoriferimentocolonna = string.Empty;
+
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    if (cella.Trim() == "Articolo Descrizione")
+                    {
+                        posizioneNuovaColonna = indiceColonna;
+                    }
+                    ultimoriferimentocolonna = GetColumnReference(cell);
+                    indiceColonna++;
+                }
+                break;
+            }
+
+            bool primaRiga = true;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                r.Append(ConstructCell(string.Empty, CellValues.String, primaRiga ? (uint)1 : (uint)0));
+                primaRiga = false;
+            }
+
+            int indiceRiga = 0;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                string valorePrecedente = string.Empty;
+                string idmagazz = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string valoreAttuale = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+
+                    if (indiceColonna == (posizioneNuovaColonna))
+                    {
+                        if (indiceRiga > 0)
+                        {
+                            idmagazz = ds.MAGAZZ.Where(x => x.DESMAGAZZ == valoreAttuale).Select(XmlCellProperties => XmlCellProperties.IDMAGAZZ).FirstOrDefault();
+                        }
+                    }
+                    if (indiceColonna == (posizioneNuovaColonna + 1))
+                    {
+                        if (indiceRiga == 0)
+                        {
+                            cell.CellValue = new CellValue(_etichettaIDMAGAZZ);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                        else
+                        {
+                            cell.CellValue = new CellValue(idmagazz);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                    }
+                    if (indiceColonna > (posizioneNuovaColonna + 1))
+                    {
+                        cell.CellValue = new CellValue(valorePrecedente);
+                        cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                    }
+                    indiceColonna++;
+                    valorePrecedente = valoreAttuale;
+                }
+
+                indiceRiga++;
+
+            }
+
+
+            primaRiga = true;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                r.Append(ConstructCell(string.Empty, CellValues.String, primaRiga ? (uint)1 : (uint)0));
+                primaRiga = false;
+            }
+
+            indiceRiga = 0;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                string valorePrecedente = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string valoreAttuale = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+
+                    if (indiceColonna == (posizioneNuovaColonna + 1))
+                    {
+                        if (indiceRiga == 0)
+                        {
+                            cell.CellValue = new CellValue("CODICE CICLO");
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                        else
+                        {
+                            cell.CellValue = new CellValue(string.Empty);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                    }
+                    if (indiceColonna > (posizioneNuovaColonna + 1))
+                    {
+                        cell.CellValue = new CellValue(valorePrecedente);
+                        cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                    }
+                    indiceColonna++;
+                    valorePrecedente = valoreAttuale;
+                }
+
+                indiceRiga++;
+
+            }
+
+            primaRiga = true;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                r.Append(ConstructCell(string.Empty, CellValues.String, primaRiga ? (uint)1 : (uint)0));
+                primaRiga = false;
+            }
+            indiceRiga = 0;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                string valorePrecedente = string.Empty;
+                string idmagazz = string.Empty;
+                string bc = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string valoreAttuale = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    if (indiceColonna == (posizioneNuovaColonna))
+                    {
+                        if (indiceRiga > 0)
+                        {
+                            idmagazz = ds.MAGAZZ.Where(x => x.DESMAGAZZ == valoreAttuale).Select(XmlCellProperties => XmlCellProperties.IDMAGAZZ).FirstOrDefault();
+                            bc = ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == idmagazz).Select(x => x.BC).FirstOrDefault();
+                        }
+                    }
+                    if (indiceColonna == (posizioneNuovaColonna + 1))
+                    {
+                        if (indiceRiga == 0)
+                        {
+                            cell.CellValue = new CellValue("ANAGRAFICA");
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                        else
+                        {
+                            cell.CellValue = new CellValue(string.IsNullOrEmpty(bc) ? string.Empty : bc);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                    }
+                    if (indiceColonna > (posizioneNuovaColonna + 1))
+                    {
+                        cell.CellValue = new CellValue(valorePrecedente);
+                        cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                    }
+                    indiceColonna++;
+                    valorePrecedente = valoreAttuale;
+                }
+
+                indiceRiga++;
+
+            }
+
+            worksheetPart.Worksheet.Save();
+            wbPart.Workbook.Save();
+            document.Save();
+            document.Close();
+            return true;
+        }
+
+        private int GetRowReference(Cell c)
+        {
+            string refer = c.CellReference.Value;
+            return Convert.ToInt32(Regex.Replace(refer, @"[^\d]*", ""));
+        }
+        private Cell InsertCell(uint rowIndex, uint columnIndex, Worksheet worksheet)
+        {
+            Row row = null;
+            var sheetData = worksheet.GetFirstChild<SheetData>();
+
+            // Check if the worksheet contains a row with the specified row index.
+            row = sheetData.Elements<Row>().FirstOrDefault(r => r.RowIndex == rowIndex);
+            if (row == null)
+            {
+                row = new Row() { RowIndex = rowIndex };
+                sheetData.Append(row);
+            }
+
+            // Convert column index to column name for cell reference.
+            var columnName = GetExcelColumnName((int)columnIndex);
+            var cellReference = columnName + rowIndex;      // e.g. A1
+
+            // Check if the row contains a cell with the specified column name.
+            var cell = row.Elements<Cell>()
+                       .FirstOrDefault(c => c.CellReference.Value == cellReference);
+            if (cell == null)
+            {
+                cell = new Cell() { CellReference = cellReference };
+                if (row.ChildElements.Count < columnIndex)
+                    row.AppendChild(cell);
+                else
+                    row.InsertAt(cell, (int)columnIndex);
+            }
+
+            return cell;
+        }
+        private string GetExcelColumnName(int columnNumber)
+        {
+            int dividend = columnNumber;
+            string columnName = String.Empty;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                columnName = Convert.ToChar(65 + modulo).ToString() + columnName;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+
+            return columnName;
+        }
         private string estraiStringaLughezzaFissa(string stringa, int lunghezza)
         {
             if (stringa.Length == lunghezza) return stringa;
