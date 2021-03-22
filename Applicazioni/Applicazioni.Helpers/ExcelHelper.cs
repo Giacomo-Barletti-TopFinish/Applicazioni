@@ -656,6 +656,16 @@ namespace Applicazioni.Helpers
             };
         }
 
+        public Cell ConstructCell(string value, CellValues dataType, string riferimento, uint styleIndex = 0)
+        {
+            return new Cell()
+            {
+                CellValue = new CellValue(value),
+                DataType = new EnumValue<CellValues>(dataType),
+                StyleIndex = styleIndex,
+                CellReference = riferimento
+            };
+        }
         public Stylesheet GenerateStylesheet()
         {
             Stylesheet styleSheet = null;
@@ -820,6 +830,7 @@ namespace Applicazioni.Helpers
             List<char> numeri = new List<char>(new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' });
             string reference = cell.CellReference;
             string colonna = string.Empty;
+            if (reference == null) return colonna;
             foreach (char ch in reference.ToCharArray())
             {
                 if (!numeri.Contains(ch))
@@ -992,7 +1003,21 @@ namespace Applicazioni.Helpers
             return true;
         }
 
-        public TipoExcel AggiungiColonIdentificaTipoFIleExcelneExcelDibaRVL(Stream stream)
+        public TipoExcel IdentificaTipoFIleExcelneExcelDibaRVL(string filePath)
+        {
+            TipoExcel tipoExcel;
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite))
+            {
+                MemoryStream ms = new MemoryStream();
+                byte[] dati = new byte[fs.Length];
+                fs.Read(dati, 0, (int)fs.Length);
+                tipoExcel = IdentificaTipoFIleExcelneExcelDibaRVL(fs);
+                fs.Close();
+            }
+            return tipoExcel;
+        }
+
+        public TipoExcel IdentificaTipoFIleExcelneExcelDibaRVL(Stream stream)
         {
             SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
             SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
@@ -1031,6 +1056,162 @@ namespace Applicazioni.Helpers
             return TipoExcel.Sconosciuto;
         }
 
+        public bool LeggiFileExcelTipoIDMAGAZ(Stream stream, MigrazioneDiBaDS ds, out string messaggioErrore)
+
+        {
+            messaggioErrore = string.Empty;
+            SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
+            SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
+
+            WorkbookPart wbPart = document.WorkbookPart;
+
+            Sheet foglio = EstraiSheetPerNome(wbPart, "Sheet");
+            WorksheetPart worksheetPart = (WorksheetPart)wbPart.GetPartById(foglio.Id);
+            SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+            CellFormats cellFormats = wbPart.WorkbookStylesPart.Stylesheet.CellFormats;
+            NumberingFormats numberingFormats = wbPart.WorkbookStylesPart.Stylesheet.NumberingFormats;
+
+            int rowCount = sheetData.Elements<Row>().Count();
+
+            string rifMODELLO = string.Empty;
+            string rifDESCRIZIONE = string.Empty;
+            string rifIDMAGAZZ = string.Empty;
+            string rifANAGRAFICA = string.Empty;
+            string rifCODICECICLO = string.Empty;
+            string rifCODICEFASE = string.Empty;
+            string rifREPARTO = string.Empty;
+            string rifQUANTITA = string.Empty;
+            string rifUM = string.Empty;
+            string rifNOTA = string.Empty;
+            string rifPESO = string.Empty;
+            string rifSUPERFICIE = string.Empty;
+
+            int indiceColonna = 0;
+            string ultimoriferimentocolonna = string.Empty;
+            int indiceUltimaColonna = 0;
+            int indicePrimoRiferimento = 100;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    switch (cella.Trim())
+                    {
+                        case "Articolo Descrizione":
+                            rifDESCRIZIONE = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "ANAGRAFICA":
+                            rifANAGRAFICA = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "CODICE CICLO":
+                            rifCODICECICLO = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "IDMAGAZZ":
+                            rifIDMAGAZZ = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "Fase Codice":
+                            rifCODICEFASE = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "Reparto Codice":
+                            rifREPARTO = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "Q.tà Consumo":
+                            rifQUANTITA = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "U.m. Codice":
+                            rifUM = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "Note Tecniche se Wip":
+                            rifNOTA = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "Peso in gr.^":
+                            rifPESO = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case "([]) Superficie in mm^":
+                            rifSUPERFICIE = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                    }
+                    ultimoriferimentocolonna = GetColumnReference(cell);
+                    indiceColonna++;
+                }
+                break;
+            }
+            indiceUltimaColonna = indiceColonna;
+
+            int scartaRighe = 1;
+            int indiceRighe = 0;
+            indiceColonna = 0;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                if (indiceRighe < scartaRighe)
+                {
+                    indiceRighe++;
+                    continue;
+                }
+
+                MigrazioneDiBaDS.DATIEXCELRow rigaDatiExcel = ds.DATIEXCEL.NewDATIEXCELRow();
+                rigaDatiExcel.IDDATAEXCEL = indiceRighe;
+                indiceRighe++;
+
+                string elemento = string.Empty;
+                decimal aux;
+                int avanti = 0;
+                int dietro = 0;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+                    cella = cella.Trim();
+                    string colonna = GetColumnReference(cell);
+
+                    if (colonna == rifMODELLO) rigaDatiExcel.MODELLO = cella;
+                    if (colonna == rifDESCRIZIONE) rigaDatiExcel.DESCRIZIONE = cella;
+                    if (colonna == rifIDMAGAZZ) rigaDatiExcel.IDMAGAZZ = cella;
+                    if (colonna == rifANAGRAFICA) rigaDatiExcel.ANAGRAFICA = cella;
+                    if (colonna == rifCODICECICLO) rigaDatiExcel.CODICECICLO = cella;
+                    if (colonna == rifCODICEFASE) rigaDatiExcel.CODICEFASE = cella;
+                    if (colonna == rifREPARTO) rigaDatiExcel.REPARTO = cella;
+                    if (colonna == rifQUANTITA) rigaDatiExcel.QUANTITA = decimal.TryParse(cella, out aux) ? aux : 0;
+                    if (colonna == rifUM) rigaDatiExcel.ANAGRAFICA = cella;
+                    if (colonna == rifNOTA) rigaDatiExcel.ANAGRAFICA = cella;
+                    if (colonna == rifPESO) rigaDatiExcel.PESO = decimal.TryParse(cella, out aux) ? aux : 0;
+                    if (colonna == rifSUPERFICIE) rigaDatiExcel.SUPERFICIE = decimal.TryParse(cella, out aux) ? aux : 0;
+
+
+                    if (indiceColonna < indicePrimoRiferimento)
+                    {
+                        if (string.IsNullOrEmpty(cella))
+                        {
+                            avanti++;
+                            dietro++;
+                        }
+                        else
+                        {
+                            rigaDatiExcel.AVANTI = avanti;
+                            rigaDatiExcel.MODELLO = cella;
+                            dietro = 0;
+                        }
+                    }
+                    if (indiceColonna == indicePrimoRiferimento) rigaDatiExcel.DIETRO = dietro;
+
+                }
+                ds.DATIEXCEL.AddDATIEXCELRow(rigaDatiExcel);
+            }
+
+            return true;
+        }
 
         public bool AggiungiColonneExcelDibaRVL(MigrazioneDiBaDS ds, Stream stream, out string messaggioErrore)
 
@@ -1051,7 +1232,7 @@ namespace Applicazioni.Helpers
             int indiceColonna = 0;
             int posizioneNuovaColonna = 0;
             string ultimoriferimentocolonna = string.Empty;
-
+            int indiceUltimaColonna = 0;
             foreach (Row r in sheetData.Elements<Row>())
             {
                 indiceColonna = 0;
@@ -1067,13 +1248,11 @@ namespace Applicazioni.Helpers
                 }
                 break;
             }
+            indiceUltimaColonna = indiceColonna;
 
-            bool primaRiga = true;
-            foreach (Row r in sheetData.Elements<Row>())
-            {
-                r.Append(ConstructCell(string.Empty, CellValues.String, primaRiga ? (uint)1 : (uint)0));
-                primaRiga = false;
-            }
+            indiceUltimaColonna++;
+            AggiungiColonna(worksheetPart, indiceUltimaColonna);
+
 
             int indiceRiga = 0;
             foreach (Row r in sheetData.Elements<Row>())
@@ -1118,13 +1297,8 @@ namespace Applicazioni.Helpers
 
             }
 
-
-            primaRiga = true;
-            foreach (Row r in sheetData.Elements<Row>())
-            {
-                r.Append(ConstructCell(string.Empty, CellValues.String, primaRiga ? (uint)1 : (uint)0));
-                primaRiga = false;
-            }
+            indiceUltimaColonna++;
+            AggiungiColonna(worksheetPart, indiceUltimaColonna);
 
             indiceRiga = 0;
             foreach (Row r in sheetData.Elements<Row>())
@@ -1161,12 +1335,9 @@ namespace Applicazioni.Helpers
 
             }
 
-            primaRiga = true;
-            foreach (Row r in sheetData.Elements<Row>())
-            {
-                r.Append(ConstructCell(string.Empty, CellValues.String, primaRiga ? (uint)1 : (uint)0));
-                primaRiga = false;
-            }
+            indiceUltimaColonna++;
+            AggiungiColonna(worksheetPart, indiceUltimaColonna);
+
             indiceRiga = 0;
             foreach (Row r in sheetData.Elements<Row>())
             {
@@ -1216,6 +1387,32 @@ namespace Applicazioni.Helpers
             document.Save();
             document.Close();
             return true;
+        }
+
+        private void AggiungiColonna(WorksheetPart worksheetPart, int indiceColonnaDaInserire)
+        {
+            Columns colonne = worksheetPart.Worksheet.GetFirstChild<Columns>();
+            SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+            int numeroColonne = colonne.Count();
+            Column c = new Column();
+            UInt32Value u = new UInt32Value((uint)(numeroColonne + 1));
+            c.Min = u;
+            c.Max = u;
+            c.Width = 25;
+            c.CustomWidth = true;
+
+            colonne.Append(c);
+
+            bool primaRiga = true;
+            int indiceRiga = 1;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                string riferimentoColonna = GetExcelColumnName(indiceColonnaDaInserire);
+                string riferimento = riferimentoColonna + indiceRiga.ToString();
+                r.Append(ConstructCell(string.Empty, CellValues.String, riferimento, primaRiga ? (uint)1 : (uint)0));
+                primaRiga = false;
+                indiceRiga++;
+            }
         }
 
         private int GetRowReference(Cell c)

@@ -72,6 +72,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MigrazioneDiBaDS.cs">
+      <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MigrazioneDiBaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

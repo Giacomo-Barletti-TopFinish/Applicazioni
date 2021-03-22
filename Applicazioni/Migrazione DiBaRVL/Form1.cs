@@ -60,7 +60,7 @@ namespace Migrazione_DiBaRVL
 
         private void btnApri_Click(object sender, EventArgs e)
         {
-            TipoExcel tipoexcel = TipoExcel.Sconosciuto;
+            TipoExcel tipoExcel = TipoExcel.Sconosciuto;
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -79,18 +79,26 @@ namespace Migrazione_DiBaRVL
                     return;
                 }
 
-                FileInfo fi = new FileInfo(txtFile.Text);
-                string nomefile = fi.FullName.Replace(fi.Extension, string.Empty);
-                nomefile = string.Format("{0} v1.0{1}", nomefile, fi.Extension);
 
-                if (File.Exists(nomefile))
-                    File.Delete(nomefile);
-                File.Copy(txtFile.Text, nomefile);
+                ExcelHelper excel = new ExcelHelper();
+                tipoExcel = excel.IdentificaTipoFIleExcelneExcelDibaRVL(txtFile.Text);
+                string nomefile = txtFile.Text;
+
+                if (tipoExcel == TipoExcel.RVL)
+                {
+                    FileInfo fi = new FileInfo(txtFile.Text);
+                    nomefile = fi.FullName.Replace(fi.Extension, string.Empty);
+                    nomefile = string.Format("{0} v1.0{1}", nomefile, fi.Extension);
+
+                    if (File.Exists(nomefile))
+                        File.Delete(nomefile);
+                    File.Copy(txtFile.Text, nomefile);
+                }
 
                 CaricaMagazz();
                 CaricaBC_Anagrafica();
                 string messaggioErrore;
-                if (!LeggiExcel(_ds, nomefile, Contesto.Utente.FULLNAMEUSER, out messaggioErrore, out tipoexcel))
+                if (!LeggiExcel(_ds, nomefile, Contesto.Utente.FULLNAMEUSER, tipoExcel, out messaggioErrore))
                 {
                     string messaggio = string.Format("Errore nel caricamento del file excel. Errore: {0}", messaggioErrore);
                     MessageBox.Show(messaggio, "ERRORE LETTURA FILE", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -107,7 +115,7 @@ namespace Migrazione_DiBaRVL
             }
             finally
             {
-                switch (tipoexcel)
+                switch (tipoExcel)
                 {
                     case TipoExcel.IdMagazz:
                         txtRisultati.Text = "FILE DI TIPO IDMAGAZZ";
@@ -125,9 +133,8 @@ namespace Migrazione_DiBaRVL
             }
         }
 
-        private bool LeggiExcel(MigrazioneDiBaDS ds, string filePath, string utente, out string messaggioErrore, out TipoExcel tipoexcel)
+        private bool LeggiExcel(MigrazioneDiBaDS ds, string filePath, string utente, TipoExcel tipoExcel, out string messaggioErrore)
         {
-            tipoexcel = TipoExcel.Sconosciuto;
             messaggioErrore = string.Empty;
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite))
             {
@@ -138,10 +145,13 @@ namespace Migrazione_DiBaRVL
 
                 ExcelHelper excel = new ExcelHelper();
 
-                tipoexcel = excel.AggiungiColonIdentificaTipoFIleExcelneExcelDibaRVL(fs);
-                switch (tipoexcel)
+                switch (tipoExcel)
                 {
                     case TipoExcel.IdMagazz:
+                        if (!excel.LeggiFileExcelTipoIDMAGAZ(fs, _ds, out messaggioErrore))
+                        {
+                            return false;
+                        }
                         break;
                     case TipoExcel.RVL:
                         if (!excel.AggiungiColonneExcelDibaRVL(_ds, fs, out messaggioErrore))
