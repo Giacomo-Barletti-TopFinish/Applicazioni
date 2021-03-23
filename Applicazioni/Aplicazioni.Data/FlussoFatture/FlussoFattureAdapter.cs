@@ -7,20 +7,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Applicazioni.Helpers;
 
 namespace Applicazioni.Data.FlussoFatture
 {
-    public class Etichette
-    {
-        public const string ESTERO = "ESTERO";
-        public const string ITALIA = "SOLO  ITALIA";
-        public const string TUTTI = "TUTTI";
-
-        public const string METAL = "METALPLUS";
-        public const string TOP = "TOPFINISH";
-        public const string METALTOP = "TUTTI";
-
-    }
     public class FlussoFattureAdapter : AdapterBase
     {
         public FlussoFattureAdapter(System.Data.IDbConnection connection, IDbTransaction transaction) :

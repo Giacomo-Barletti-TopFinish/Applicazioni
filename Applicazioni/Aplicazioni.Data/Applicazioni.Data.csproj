@@ -90,6 +90,10 @@
       <Project>{269B87B7-7CE6-4441-A66B-93B60C78B8C9}</Project>
       <Name>Applicazioni.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.Helpers\Applicazioni.Helpers.csproj">
+      <Project>{d5b7f1d5-ae8d-4bbe-b139-4255932718f6}</Project>
+      <Name>Applicazioni.Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

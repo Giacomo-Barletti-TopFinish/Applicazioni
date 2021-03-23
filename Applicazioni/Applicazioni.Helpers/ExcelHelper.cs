@@ -15,9 +15,33 @@ namespace Applicazioni.Helpers
 {
     public enum TipoExcel { Sconosciuto, IdMagazz, RVL }
 
+    public class Etichette
+    {
+        public const string ESTERO = "ESTERO";
+        public const string ITALIA = "SOLO  ITALIA";
+        public const string TUTTI = "TUTTI";
+
+        public const string METAL = "METALPLUS";
+        public const string TOP = "TOPFINISH";
+        public const string METALTOP = "TUTTI";
+
+
+        public const string IDMAGAZZ = "IDMAGAZZ";
+        public const string ArticoloDescrizione = "Articolo Descrizione";
+        public const string Anagrafica = "ANAGRAFICA";
+        public const string CodiceCiclo = "CODICE CICLO";
+        public const string CodiceFase = "Fase Codice";
+        public const string CodiceReparto = "Reparto Codice^";
+        public const string Consumo = "Q.tà Consumo";
+        public const string UnitaMisura = "U.m. Codice";
+        public const string Note = "Note Tecniche se Wip";
+        public const string Peso = "Peso in gr.^";
+        public const string Superficie = "([]) Superficie in mm^";
+        public const string PezziOrari = "PEZZI ORARI";
+        public const string Collegamento = "COLLEGAMENTO";
+    }
     public class ExcelHelper
     {
-        private string _etichettaIDMAGAZZ = "IDMAGAZZ";
         public byte[] CreaFlussoFatture(List<string> idTestata, FlussoFattureDS ds, out string errori)
         {
             errori = string.Empty;
@@ -1041,10 +1065,10 @@ namespace Applicazioni.Helpers
                 foreach (Cell cell in r.Elements<Cell>())
                 {
                     string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
-                    if (cella.Trim() == "Articolo Descrizione")
+                    if (cella.Trim() == Etichette.ArticoloDescrizione)
                         articoloDescrizione = true;
 
-                    if (cella.Trim() == _etichettaIDMAGAZZ)
+                    if (cella.Trim() == Etichette.IDMAGAZZ)
                         idMagazz = true;
 
                 }
@@ -1057,8 +1081,8 @@ namespace Applicazioni.Helpers
         }
 
         public bool LeggiFileExcelTipoIDMAGAZ(Stream stream, MigrazioneDiBaDS ds, out string messaggioErrore)
-
         {
+            ds.DATIEXCEL.Clear();
             messaggioErrore = string.Empty;
             SpreadsheetDocument document = SpreadsheetDocument.Open(stream, true);
             SharedStringTable sharedStringTable = document.WorkbookPart.SharedStringTablePart.SharedStringTable;
@@ -1086,6 +1110,8 @@ namespace Applicazioni.Helpers
             string rifNOTA = string.Empty;
             string rifPESO = string.Empty;
             string rifSUPERFICIE = string.Empty;
+            string rifPEZZIORARI = string.Empty;
+            string rifCOLLEGAMENTO = string.Empty;
 
             int indiceColonna = 0;
             string ultimoriferimentocolonna = string.Empty;
@@ -1099,47 +1125,55 @@ namespace Applicazioni.Helpers
                     string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
                     switch (cella.Trim())
                     {
-                        case "Articolo Descrizione":
+                        case Etichette.PezziOrari:
+                            rifPEZZIORARI = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case Etichette.Collegamento:
+                            rifCOLLEGAMENTO = GetColumnReference(cell);
+                            if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
+                            break;
+                        case Etichette.ArticoloDescrizione:
                             rifDESCRIZIONE = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "ANAGRAFICA":
+                        case Etichette.Anagrafica:
                             rifANAGRAFICA = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "CODICE CICLO":
+                        case Etichette.CodiceCiclo:
                             rifCODICECICLO = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "IDMAGAZZ":
+                        case Etichette.IDMAGAZZ:
                             rifIDMAGAZZ = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "Fase Codice":
+                        case Etichette.CodiceFase:
                             rifCODICEFASE = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "Reparto Codice":
+                        case Etichette.CodiceReparto:
                             rifREPARTO = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "Q.tà Consumo":
+                        case Etichette.Consumo:
                             rifQUANTITA = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "U.m. Codice":
+                        case Etichette.UnitaMisura:
                             rifUM = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "Note Tecniche se Wip":
+                        case Etichette.Note:
                             rifNOTA = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "Peso in gr.^":
+                        case Etichette.Peso:
                             rifPESO = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
-                        case "([]) Superficie in mm^":
+                        case Etichette.Superficie:
                             rifSUPERFICIE = GetColumnReference(cell);
                             if (indicePrimoRiferimento > indiceColonna) indicePrimoRiferimento = indiceColonna;
                             break;
@@ -1153,7 +1187,6 @@ namespace Applicazioni.Helpers
 
             int scartaRighe = 1;
             int indiceRighe = 0;
-            indiceColonna = 0;
             foreach (Row r in sheetData.Elements<Row>())
             {
                 if (indiceRighe < scartaRighe)
@@ -1170,13 +1203,14 @@ namespace Applicazioni.Helpers
                 decimal aux;
                 int avanti = 0;
                 int dietro = 0;
+                indiceColonna = 0;
+
                 foreach (Cell cell in r.Elements<Cell>())
                 {
                     string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
                     cella = cella.Trim();
                     string colonna = GetColumnReference(cell);
 
-                    if (colonna == rifMODELLO) rigaDatiExcel.MODELLO = cella;
                     if (colonna == rifDESCRIZIONE) rigaDatiExcel.DESCRIZIONE = cella;
                     if (colonna == rifIDMAGAZZ) rigaDatiExcel.IDMAGAZZ = cella;
                     if (colonna == rifANAGRAFICA) rigaDatiExcel.ANAGRAFICA = cella;
@@ -1184,11 +1218,12 @@ namespace Applicazioni.Helpers
                     if (colonna == rifCODICEFASE) rigaDatiExcel.CODICEFASE = cella;
                     if (colonna == rifREPARTO) rigaDatiExcel.REPARTO = cella;
                     if (colonna == rifQUANTITA) rigaDatiExcel.QUANTITA = decimal.TryParse(cella, out aux) ? aux : 0;
-                    if (colonna == rifUM) rigaDatiExcel.ANAGRAFICA = cella;
-                    if (colonna == rifNOTA) rigaDatiExcel.ANAGRAFICA = cella;
+                    if (colonna == rifUM) rigaDatiExcel.UM = cella;
+                    if (colonna == rifNOTA) rigaDatiExcel.NOTA = cella;
                     if (colonna == rifPESO) rigaDatiExcel.PESO = decimal.TryParse(cella, out aux) ? aux : 0;
                     if (colonna == rifSUPERFICIE) rigaDatiExcel.SUPERFICIE = decimal.TryParse(cella, out aux) ? aux : 0;
-
+                    if (colonna == rifPEZZIORARI) rigaDatiExcel.PEZZIORARI = decimal.TryParse(cella, out aux) ? aux : 0;
+                    if (colonna == rifCOLLEGAMENTO) rigaDatiExcel.COLLEGAMENTO = cella;
 
                     if (indiceColonna < indicePrimoRiferimento)
                     {
@@ -1204,8 +1239,10 @@ namespace Applicazioni.Helpers
                             dietro = 0;
                         }
                     }
-                    if (indiceColonna == indicePrimoRiferimento) rigaDatiExcel.DIETRO = dietro;
+                    if (indiceColonna == indicePrimoRiferimento)
+                        rigaDatiExcel.DIETRO = dietro;
 
+                    indiceColonna++;
                 }
                 ds.DATIEXCEL.AddDATIEXCELRow(rigaDatiExcel);
             }
@@ -1239,7 +1276,7 @@ namespace Applicazioni.Helpers
                 foreach (Cell cell in r.Elements<Cell>())
                 {
                     string cella = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
-                    if (cella.Trim() == "Articolo Descrizione")
+                    if (cella.Trim() == Etichette.ArticoloDescrizione)
                     {
                         posizioneNuovaColonna = indiceColonna;
                     }
@@ -1275,7 +1312,7 @@ namespace Applicazioni.Helpers
                     {
                         if (indiceRiga == 0)
                         {
-                            cell.CellValue = new CellValue(_etichettaIDMAGAZZ);
+                            cell.CellValue = new CellValue(Etichette.IDMAGAZZ);
                             cell.DataType = new EnumValue<CellValues>(CellValues.String);
                         }
                         else
@@ -1313,7 +1350,7 @@ namespace Applicazioni.Helpers
                     {
                         if (indiceRiga == 0)
                         {
-                            cell.CellValue = new CellValue("CODICE CICLO");
+                            cell.CellValue = new CellValue(Etichette.CodiceCiclo);
                             cell.DataType = new EnumValue<CellValues>(CellValues.String);
                         }
                         else
@@ -1332,8 +1369,82 @@ namespace Applicazioni.Helpers
                 }
 
                 indiceRiga++;
-
             }
+
+            indiceUltimaColonna++;
+            AggiungiColonna(worksheetPart, indiceUltimaColonna);
+
+            indiceRiga = 0;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                string valorePrecedente = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string valoreAttuale = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+
+                    if (indiceColonna == (posizioneNuovaColonna + 1))
+                    {
+                        if (indiceRiga == 0)
+                        {
+                            cell.CellValue = new CellValue(Etichette.PezziOrari);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                        else
+                        {
+                            cell.CellValue = new CellValue(string.Empty);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                    }
+                    if (indiceColonna > (posizioneNuovaColonna + 1))
+                    {
+                        cell.CellValue = new CellValue(valorePrecedente);
+                        cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                    }
+                    indiceColonna++;
+                    valorePrecedente = valoreAttuale;
+                }
+
+                indiceRiga++;
+            }
+
+            indiceUltimaColonna++;
+            AggiungiColonna(worksheetPart, indiceUltimaColonna);
+
+            indiceRiga = 0;
+            foreach (Row r in sheetData.Elements<Row>())
+            {
+                indiceColonna = 0;
+                string valorePrecedente = string.Empty;
+                foreach (Cell cell in r.Elements<Cell>())
+                {
+                    string valoreAttuale = EstraiValoreCella(cell, sharedStringTable, cellFormats, numberingFormats);
+
+                    if (indiceColonna == (posizioneNuovaColonna + 1))
+                    {
+                        if (indiceRiga == 0)
+                        {
+                            cell.CellValue = new CellValue(Etichette.Collegamento);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                        else
+                        {
+                            cell.CellValue = new CellValue(string.Empty);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                        }
+                    }
+                    if (indiceColonna > (posizioneNuovaColonna + 1))
+                    {
+                        cell.CellValue = new CellValue(valorePrecedente);
+                        cell.DataType = new EnumValue<CellValues>(CellValues.String);
+                    }
+                    indiceColonna++;
+                    valorePrecedente = valoreAttuale;
+                }
+
+                indiceRiga++;
+            }
+
 
             indiceUltimaColonna++;
             AggiungiColonna(worksheetPart, indiceUltimaColonna);
@@ -1360,7 +1471,7 @@ namespace Applicazioni.Helpers
                     {
                         if (indiceRiga == 0)
                         {
-                            cell.CellValue = new CellValue("ANAGRAFICA");
+                            cell.CellValue = new CellValue(Etichette.Anagrafica);
                             cell.DataType = new EnumValue<CellValues>(CellValues.String);
                         }
                         else

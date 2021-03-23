@@ -2499,6 +2499,10 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnSUPERFICIE;
             
+            private global::System.Data.DataColumn columnPEZZIORARI;
+            
+            private global::System.Data.DataColumn columnCOLLEGAMENTO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DATIEXCELDataTable() {
@@ -2654,6 +2658,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PEZZIORARIColumn {
+                get {
+                    return this.columnPEZZIORARI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COLLEGAMENTOColumn {
+                get {
+                    return this.columnCOLLEGAMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2689,7 +2709,24 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DATIEXCELRow AddDATIEXCELRow(int IDDATAEXCEL, int AVANTI, int DIETRO, string MODELLO, string DESCRIZIONE, string IDMAGAZZ, string ANAGRAFICA, string CODICECICLO, string CODICEFASE, string REPARTO, decimal QUANTITA, string UM, string NOTA, decimal PESO, decimal SUPERFICIE) {
+            public DATIEXCELRow AddDATIEXCELRow(
+                        int IDDATAEXCEL, 
+                        int AVANTI, 
+                        int DIETRO, 
+                        string MODELLO, 
+                        string DESCRIZIONE, 
+                        string IDMAGAZZ, 
+                        string ANAGRAFICA, 
+                        string CODICECICLO, 
+                        string CODICEFASE, 
+                        string REPARTO, 
+                        decimal QUANTITA, 
+                        string UM, 
+                        string NOTA, 
+                        decimal PESO, 
+                        decimal SUPERFICIE, 
+                        decimal PEZZIORARI, 
+                        string COLLEGAMENTO) {
                 DATIEXCELRow rowDATIEXCELRow = ((DATIEXCELRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDDATAEXCEL,
@@ -2706,7 +2743,9 @@ namespace Applicazioni.Entities {
                         UM,
                         NOTA,
                         PESO,
-                        SUPERFICIE};
+                        SUPERFICIE,
+                        PEZZIORARI,
+                        COLLEGAMENTO};
                 rowDATIEXCELRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDATIEXCELRow);
                 return rowDATIEXCELRow;
@@ -2744,6 +2783,8 @@ namespace Applicazioni.Entities {
                 this.columnNOTA = base.Columns["NOTA"];
                 this.columnPESO = base.Columns["PESO"];
                 this.columnSUPERFICIE = base.Columns["SUPERFICIE"];
+                this.columnPEZZIORARI = base.Columns["PEZZIORARI"];
+                this.columnCOLLEGAMENTO = base.Columns["COLLEGAMENTO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2779,6 +2820,10 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnPESO);
                 this.columnSUPERFICIE = new global::System.Data.DataColumn("SUPERFICIE", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSUPERFICIE);
+                this.columnPEZZIORARI = new global::System.Data.DataColumn("PEZZIORARI", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPEZZIORARI);
+                this.columnCOLLEGAMENTO = new global::System.Data.DataColumn("COLLEGAMENTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOLLEGAMENTO);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5559,6 +5604,38 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal PEZZIORARI {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDATIEXCEL.PEZZIORARIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PEZZIORARI\' in table \'DATIEXCEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDATIEXCEL.PEZZIORARIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string COLLEGAMENTO {
+                get {
+                    try {
+                        return ((string)(this[this.tableDATIEXCEL.COLLEGAMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COLLEGAMENTO\' in table \'DATIEXCEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDATIEXCEL.COLLEGAMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDDATAEXCELNull() {
                 return this.IsNull(this.tableDATIEXCEL.IDDATAEXCELColumn);
             }
@@ -5735,6 +5812,30 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSUPERFICIENull() {
                 this[this.tableDATIEXCEL.SUPERFICIEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPEZZIORARINull() {
+                return this.IsNull(this.tableDATIEXCEL.PEZZIORARIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPEZZIORARINull() {
+                this[this.tableDATIEXCEL.PEZZIORARIColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOLLEGAMENTONull() {
+                return this.IsNull(this.tableDATIEXCEL.COLLEGAMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOLLEGAMENTONull() {
+                this[this.tableDATIEXCEL.COLLEGAMENTOColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -150,12 +150,14 @@ namespace Migrazione_DiBaRVL
                     case TipoExcel.IdMagazz:
                         if (!excel.LeggiFileExcelTipoIDMAGAZ(fs, _ds, out messaggioErrore))
                         {
+                            messaggioErrore = messaggioErrore + "Errore nella lettura del file ";
                             return false;
                         }
                         break;
                     case TipoExcel.RVL:
                         if (!excel.AggiungiColonneExcelDibaRVL(_ds, fs, out messaggioErrore))
                         {
+                            messaggioErrore = messaggioErrore + "Errore nella modifica del file ";
                             return false;
                         }
                         break;
