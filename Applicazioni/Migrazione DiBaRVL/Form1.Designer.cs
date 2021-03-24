@@ -33,6 +33,13 @@
             this.btnCercaFile = new System.Windows.Forms.Button();
             this.txtRisultati = new System.Windows.Forms.TextBox();
             this.btnApri = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtMsgAnagrafiche = new System.Windows.Forms.TextBox();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -63,11 +70,12 @@
             // 
             // txtRisultati
             // 
-            this.txtRisultati.Location = new System.Drawing.Point(110, 93);
+            this.txtRisultati.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRisultati.Location = new System.Drawing.Point(3, 3);
             this.txtRisultati.Multiline = true;
             this.txtRisultati.Name = "txtRisultati";
             this.txtRisultati.ReadOnly = true;
-            this.txtRisultati.Size = new System.Drawing.Size(752, 465);
+            this.txtRisultati.Size = new System.Drawing.Size(858, 423);
             this.txtRisultati.TabIndex = 3;
             // 
             // btnApri
@@ -80,13 +88,54 @@
             this.btnApri.UseVisualStyleBackColor = true;
             this.btnApri.Click += new System.EventHandler(this.btnApri_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(15, 125);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(872, 458);
+            this.tabControl1.TabIndex = 5;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.txtRisultati);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(864, 429);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Messaggi";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.txtMsgAnagrafiche);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(864, 429);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Anagrafiche";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txtMsgAnagrafiche
+            // 
+            this.txtMsgAnagrafiche.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMsgAnagrafiche.Location = new System.Drawing.Point(3, 3);
+            this.txtMsgAnagrafiche.Multiline = true;
+            this.txtMsgAnagrafiche.Name = "txtMsgAnagrafiche";
+            this.txtMsgAnagrafiche.Size = new System.Drawing.Size(858, 423);
+            this.txtMsgAnagrafiche.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 607);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnApri);
-            this.Controls.Add(this.txtRisultati);
             this.Controls.Add(this.btnCercaFile);
             this.Controls.Add(this.txtFile);
             this.Controls.Add(this.label1);
@@ -96,6 +145,11 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "Migrazione DiBa";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,6 +162,10 @@
         private System.Windows.Forms.Button btnCercaFile;
         private System.Windows.Forms.TextBox txtRisultati;
         private System.Windows.Forms.Button btnApri;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox txtMsgAnagrafiche;
     }
 }
 

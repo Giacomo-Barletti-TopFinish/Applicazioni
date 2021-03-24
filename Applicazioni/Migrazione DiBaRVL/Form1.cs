@@ -98,7 +98,7 @@ namespace Migrazione_DiBaRVL
                 CaricaMagazz();
                 CaricaBC_Anagrafica();
                 string messaggioErrore;
-                if (!LeggiExcel(_ds, nomefile, Contesto.Utente.FULLNAMEUSER, tipoExcel, out messaggioErrore))
+                if (!LeggiExcel(nomefile, Contesto.Utente.FULLNAMEUSER, tipoExcel, out messaggioErrore))
                 {
                     string messaggio = string.Format("Errore nel caricamento del file excel. Errore: {0}", messaggioErrore);
                     MessageBox.Show(messaggio, "ERRORE LETTURA FILE", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -133,7 +133,7 @@ namespace Migrazione_DiBaRVL
             }
         }
 
-        private bool LeggiExcel(MigrazioneDiBaDS ds, string filePath, string utente, TipoExcel tipoExcel, out string messaggioErrore)
+        private bool LeggiExcel(string filePath, string utente, TipoExcel tipoExcel, out string messaggioErrore)
         {
             messaggioErrore = string.Empty;
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite))
@@ -153,6 +153,12 @@ namespace Migrazione_DiBaRVL
                             messaggioErrore = messaggioErrore + "Errore nella lettura del file ";
                             return false;
                         }
+                        if (!ElaboraFileExcel())
+                        {
+                            messaggioErrore = messaggioErrore + "Errore nella lettura del file ";
+                            return false;
+                        }
+
                         break;
                     case TipoExcel.RVL:
                         if (!excel.AggiungiColonneExcelDibaRVL(_ds, fs, out messaggioErrore))
@@ -169,6 +175,66 @@ namespace Migrazione_DiBaRVL
                 fs.Close();
             }
             return true;
+        }
+
+        private bool ElaboraFileExcel()
+        {
+            MigrazioneDiBaBLL bll = new MigrazioneDiBaBLL();
+            _ds.DATIEXCEL.Where(x => x.IsMODELLONull()).ToList().ForEach(x => x.Delete());
+
+            List<MigrazioneDiBaDS.DATIEXCELRow> datiExcelConAnagrafica = _ds.DATIEXCEL.Where(x => !x.IsANAGRAFICANull() && !string.IsNullOrEmpty(x.ANAGRAFICA)).ToList();
+            List<string> anagraficheCensite = new List<string>();
+            List<string> anagraficheModificate = new List<string>();
+            List<string> anagraficheNuove = new List<string>();
+            foreach (MigrazioneDiBaDS.DATIEXCELRow datoExcelConAnagrafica in datiExcelConAnagrafica)
+            {
+                MigrazioneDiBaDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == datoExcelConAnagrafica.IDMAGAZZ).FirstOrDefault();
+                if (riga != null)
+                {
+                    if (riga.BC != datoExcelConAnagrafica.ANAGRAFICA)
+                    {
+                        anagraficheModificate.Add(string.Format("{2} associazione modificata {0} -> {1}", riga.BC, datoExcelConAnagrafica.ANAGRAFICA, datoExcelConAnagrafica.MODELLO));
+                        riga.BC = datoExcelConAnagrafica.ANAGRAFICA;
+                    }
+                    else
+                        anagraficheCensite.Add(riga.BC);
+                }
+                else
+                {
+                    MigrazioneDiBaDS.BC_ANAGRAFICARow nuovaRiga = _ds.BC_ANAGRAFICA.NewBC_ANAGRAFICARow();
+                    nuovaRiga.BC = datoExcelConAnagrafica.ANAGRAFICA;
+                    nuovaRiga.IDMAGAZZ = datoExcelConAnagrafica.IDMAGAZZ;
+                    _ds.BC_ANAGRAFICA.AddBC_ANAGRAFICARow(nuovaRiga);
+                    anagraficheNuove.Add(string.Format("{0} associata a {1}", datoExcelConAnagrafica.MODELLO, datoExcelConAnagrafica.ANAGRAFICA));
+                }
+            }
+            bll.SalvaBC_ANAGRAFICA(_ds);
+            ImpaginaMessaggioAnagrafiche(anagraficheCensite, anagraficheModificate, anagraficheNuove);
+
+
+
+            return true;
+        }
+
+        private void ImpaginaMessaggioAnagrafiche(List<string> anagraficheCensite, List<string> anagraficheModificate, List<string> anagraficheNuove)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("NUOVE ANAGRAFICHE");
+            sb.AppendLine("-----------------");
+            anagraficheNuove.ForEach(x => sb.AppendLine(x));
+            sb.AppendLine(string.Empty);
+
+            sb.AppendLine("NUOVE MODIFICATE");
+            sb.AppendLine("----------------");
+            anagraficheModificate.ForEach(x => sb.AppendLine(x));
+            sb.AppendLine(string.Empty);
+
+            sb.AppendLine("NUOVE CENSITE");
+            sb.AppendLine("-------------");
+            anagraficheCensite.ForEach(x => sb.AppendLine(x));
+            sb.AppendLine(string.Empty);
+
+            txtMsgAnagrafiche.Text = sb.ToString();
         }
     }
 }

@@ -24,5 +24,13 @@ namespace Applicazioni.BLL
                 bMigrazione.FillBC_ANAGRAFICA(ds);
             }
         }
+        public void SalvaBC_ANAGRAFICA(MigrazioneDiBaDS ds)
+        {
+            using (MigrazioneDiBaBusiness bMigrazione = new MigrazioneDiBaBusiness())
+            {
+                bMigrazione.UpdateTable(ds.BC_ANAGRAFICA.TableName, ds);
+                ds.BC_ANAGRAFICA.AcceptChanges();
+            }
+        }
     }
 }
