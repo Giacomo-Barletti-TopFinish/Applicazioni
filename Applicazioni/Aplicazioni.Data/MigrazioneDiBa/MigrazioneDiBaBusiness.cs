@@ -17,6 +17,12 @@ namespace Applicazioni.Data.MigrazioneDiBa
             a.FillMAGAZZ(ds);
         }
         [DataContext]
+        public void GetMagazzByDescrizione(MigrazioneDiBaDS ds, string descrizione)
+        {
+            MigrazioneDiBaAdapter a = new MigrazioneDiBaAdapter(DbConnection, DbTransaction);
+            a.GetMagazzByDescrizione(ds, descrizione);
+        }
+        [DataContext]
         public void FillBC_ANAGRAFICA(MigrazioneDiBaDS ds)
         {
             MigrazioneDiBaAdapter a = new MigrazioneDiBaAdapter(DbConnection, DbTransaction);

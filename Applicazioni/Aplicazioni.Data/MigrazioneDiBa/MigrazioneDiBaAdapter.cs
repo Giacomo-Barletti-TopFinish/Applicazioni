@@ -26,7 +26,19 @@ namespace Applicazioni.Data.MigrazioneDiBa
                 da.Fill(ds.MAGAZZ);
             }
         }
+        public void GetMagazzByDescrizione(MigrazioneDiBaDS ds, string descrizione)
+        {
 
+            string select = @"SELECT DISTINCT * FROM GRUPPO.MAGAZZ where DESCRIZIONE = <DESCRIZIONE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("DESCRIZIONE", DbType.String, descrizione);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
         public void FillBC_ANAGRAFICA(MigrazioneDiBaDS ds)
         {
 

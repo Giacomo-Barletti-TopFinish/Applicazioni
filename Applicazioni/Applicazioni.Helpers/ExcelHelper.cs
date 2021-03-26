@@ -1249,8 +1249,8 @@ namespace Applicazioni.Helpers
 
             return true;
         }
-
-        public bool AggiungiColonneExcelDibaRVL(MigrazioneDiBaDS ds, Stream stream, out string messaggioErrore)
+     
+        public bool AggiungiColonneExcelDibaRVL(MigrazioneDiBaDS ds, Stream stream,  out string messaggioErrore)
 
         {
             messaggioErrore = string.Empty;
@@ -1305,7 +1305,7 @@ namespace Applicazioni.Helpers
                     {
                         if (indiceRiga > 0)
                         {
-                            idmagazz = ds.MAGAZZ.Where(x => x.DESMAGAZZ == valoreAttuale).Select(XmlCellProperties => XmlCellProperties.IDMAGAZZ).FirstOrDefault();
+                            idmagazz = ds.MAGAZZ.Where(x => x.DESMAGAZZ == valoreAttuale).Select(x => x.IDMAGAZZ).FirstOrDefault();
                         }
                     }
                     if (indiceColonna == (posizioneNuovaColonna + 1))
