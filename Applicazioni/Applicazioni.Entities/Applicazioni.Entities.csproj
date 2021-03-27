@@ -62,6 +62,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EstraiProdottiFinitiDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EstraiProdottiFinitiDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FlussoFattureDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -158,6 +163,17 @@
     </None>
     <None Include="EDIFornitoriDS.xss">
       <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
+    </None>
+    <None Include="EstraiProdottiFinitiDS.xsc">
+      <DependentUpon>EstraiProdottiFinitiDS.xsd</DependentUpon>
+    </None>
+    <None Include="EstraiProdottiFinitiDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EstraiProdottiFinitiDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EstraiProdottiFinitiDS.xss">
+      <DependentUpon>EstraiProdottiFinitiDS.xsd</DependentUpon>
     </None>
     <None Include="FlussoFattureDS.xsc">
       <DependentUpon>FlussoFattureDS.xsd</DependentUpon>
