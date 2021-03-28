@@ -41,6 +41,12 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
             a.FillBC_ANAGRAFICA(ds);
         }
+        [DataContext]
+        public void FillTABFAS(EstraiProdottiFinitiDS ds)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.FillTABFAS(ds);
+        }
         [DataContext(true)]
         public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds)
         {

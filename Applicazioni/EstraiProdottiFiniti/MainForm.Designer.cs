@@ -35,6 +35,8 @@
             this.dgvNodi = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MODELLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REPARTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FASE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.SuspendLayout();
@@ -85,6 +87,8 @@
             this.dgvNodi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.MODELLO,
+            this.REPARTO,
+            this.FASE,
             this.QUANTITA});
             this.dgvNodi.Location = new System.Drawing.Point(486, 69);
             this.dgvNodi.Name = "dgvNodi";
@@ -104,6 +108,22 @@
             this.MODELLO.Frozen = true;
             this.MODELLO.HeaderText = "MODELLO";
             this.MODELLO.Name = "MODELLO";
+            // 
+            // REPARTO
+            // 
+            this.REPARTO.DataPropertyName = "Reparto";
+            this.REPARTO.Frozen = true;
+            this.REPARTO.HeaderText = "REPARTO";
+            this.REPARTO.Name = "REPARTO";
+            this.REPARTO.ReadOnly = true;
+            // 
+            // FASE
+            // 
+            this.FASE.DataPropertyName = "Fase";
+            this.FASE.Frozen = true;
+            this.FASE.HeaderText = "FASE";
+            this.FASE.Name = "FASE";
+            this.FASE.ReadOnly = true;
             // 
             // QUANTITA
             // 
@@ -139,6 +159,8 @@
         private System.Windows.Forms.DataGridView dgvNodi;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn MODELLO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn REPARTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FASE;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
     }
 }

@@ -15,6 +15,10 @@ namespace EstraiProdottiFiniti
         public string Anagrafica { get; set; }
         public decimal Quantita { get; set; }
         public int IDPADRE { get; set; }
+        public string Reparto { get; set; }
+        public string Fase{ get; set; }
+        public string NoteTecniche { get; set; }
+        public string NoteStandard { get; set; }
 
         public override string ToString()
         {

@@ -79,6 +79,16 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
+        public void FillTABFAS(EstraiProdottiFinitiDS ds)
+        {
+
+            string select = string.Format(@"select * from GRUPPO.TABFAS");
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TABFAS);
+            }
+        }
         public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
