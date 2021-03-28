@@ -32,6 +32,11 @@
             this.txtArticolo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
+            this.dgvNodi = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MODELLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.SuspendLayout();
             // 
             // tvDiBa
@@ -42,6 +47,7 @@
             this.tvDiBa.Name = "tvDiBa";
             this.tvDiBa.Size = new System.Drawing.Size(458, 727);
             this.tvDiBa.TabIndex = 0;
+            this.tvDiBa.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvDiBa_NodeMouseClick);
             // 
             // txtArticolo
             // 
@@ -70,17 +76,55 @@
             this.btnCercaDiBa.UseVisualStyleBackColor = true;
             this.btnCercaDiBa.Click += new System.EventHandler(this.btnCercaDiBa_Click);
             // 
+            // dgvNodi
+            // 
+            this.dgvNodi.AllowUserToAddRows = false;
+            this.dgvNodi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvNodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNodi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.MODELLO,
+            this.QUANTITA});
+            this.dgvNodi.Location = new System.Drawing.Point(486, 69);
+            this.dgvNodi.Name = "dgvNodi";
+            this.dgvNodi.Size = new System.Drawing.Size(946, 413);
+            this.dgvNodi.TabIndex = 4;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.Frozen = true;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            // 
+            // MODELLO
+            // 
+            this.MODELLO.DataPropertyName = "Modello";
+            this.MODELLO.Frozen = true;
+            this.MODELLO.HeaderText = "MODELLO";
+            this.MODELLO.Name = "MODELLO";
+            // 
+            // QUANTITA
+            // 
+            this.QUANTITA.DataPropertyName = "Quantita";
+            this.QUANTITA.HeaderText = "QUANTITA";
+            this.QUANTITA.Name = "QUANTITA";
+            this.QUANTITA.ReadOnly = true;
+            // 
             // EstraiProdottoFinito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1452, 808);
+            this.Controls.Add(this.dgvNodi);
             this.Controls.Add(this.btnCercaDiBa);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtArticolo);
             this.Controls.Add(this.tvDiBa);
             this.Name = "EstraiProdottoFinito";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,6 +136,10 @@
         private System.Windows.Forms.TextBox txtArticolo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCercaDiBa;
+        private System.Windows.Forms.DataGridView dgvNodi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MODELLO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
     }
 }
 

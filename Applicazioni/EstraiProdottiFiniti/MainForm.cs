@@ -52,14 +52,25 @@ namespace EstraiProdottiFiniti
                     int profondita = 1;
                     EstraiDistintaBase(bEstrai, IDTDIBA, profondita, ref idNodo, -1);
                     CreaAlbero();
+                    PopolaGrigliaNodi();
                 }
             }
         }
 
-        void CreaAlbero()
+        private void PopolaGrigliaNodi()
         {
+            dgvNodi.AutoGenerateColumns = false;
+            var bindingList = new BindingList<Nodo>(Nodi);
+            var source = new BindingSource(bindingList, null);
+            dgvNodi.DataSource = source;
+            dgvNodi.Update();
+        }
+        private void CreaAlbero()
+        {
+            tvDiBa.Nodes.Clear();
             Nodo radice = Nodi.Where(x => x.IDPADRE == -1).FirstOrDefault();
             TreeNode root = tvDiBa.Nodes.Add(radice.ToString());
+            root.Tag = radice;
             AggiungiRamo(root, radice.ID);
             tvDiBa.ExpandAll();
         }
@@ -71,6 +82,7 @@ namespace EstraiProdottiFiniti
             foreach (Nodo n in rami)
             {
                 TreeNode nodoPadre = root.Nodes.Add(n.ToString());
+                nodoPadre.Tag = n;
                 AggiungiRamo(nodoPadre, n.ID);
             }
         }
@@ -112,6 +124,23 @@ namespace EstraiProdottiFiniti
                         idNodo++;
                     }
                 }
+            }
+
+        }
+
+        private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            Nodo n = (Nodo)e.Node.Tag;
+            int ID = n.ID;
+
+            foreach(DataGridViewRow riga in dgvNodi.Rows)
+            {
+
+                int IDRiga = (int)riga.Cells[0].Value;
+                if(IDRiga==ID)
+                    riga.DefaultCellStyle.BackColor = Color.Yellow;
+                else
+                    riga.DefaultCellStyle.BackColor = Color.White;
             }
 
         }

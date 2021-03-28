@@ -8,13 +8,13 @@ namespace EstraiProdottiFiniti
 {
     public class Nodo
     {
-        public int ID;
-        public int Profondita;
-        public string IDMAGAZZ;
-        public string Modello;
-        public string Anagrafica;
-        public decimal Quantita;
-        public int IDPADRE;
+        public int ID { get; set; }
+        public int Profondita { get; set; }
+        public string IDMAGAZZ { get; set; }
+        public string Modello { get; set; }
+        public string Anagrafica { get; set; }
+        public decimal Quantita { get; set; }
+        public int IDPADRE { get; set; }
 
         public override string ToString()
         {
