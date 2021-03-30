@@ -42,6 +42,266 @@ namespace Applicazioni.Helpers
     }
     public class ExcelHelper
     {
+
+        public byte[] CreaFileFaseCicli(List<Ciclo> cicli,  out string errori)
+        {
+            errori = string.Empty;
+            StringBuilder sb = new StringBuilder();
+
+            byte[] content;
+
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart wsCicli = workbookPart.AddNewPart<WorksheetPart>();
+                wsCicli.Worksheet = new Worksheet();
+
+                WorksheetPart wsCommenti = workbookPart.AddNewPart<WorksheetPart>();
+                wsCommenti.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+
+                Columns colonne = new Columns();
+                for (int i = 0; i < 19; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonne.Append(c);
+                }
+
+                Columns colonneCommenti = new Columns();
+                for (int i = 0; i < 6; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonneCommenti.Append(c);
+                }
+
+
+                wsCicli.Worksheet.AppendChild(colonne);
+                wsCommenti.Worksheet.AppendChild(colonneCommenti);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sTestata = new Sheet() { Id = workbookPart.GetIdOfPart(wsCicli), SheetId = 1, Name = "Righe cicli produzione" };
+                Sheet sCommenti = new Sheet() { Id = workbookPart.GetIdOfPart(wsCommenti), SheetId = 1, Name = "Riga commento ciclo" };
+
+                sheets.Append(sTestata);
+                sheets.Append(sCommenti);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetCicli = wsCicli.Worksheet.AppendChild(new SheetData());
+
+                Row rowHeader = new Row();
+                rowHeader.Append(ConstructCell("Nr. ciclo", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. versione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Nr. operazione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Tipo", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Nr.", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Tempo di setup", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Tempo lavorazione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Tempo attesa", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Tempo spostamento", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Dimensione lotto", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. unità mis. tempo di setup", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. unità mis. tempo lavoraz.", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. unità mis. tempo attesa", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. unità mis. tempo spostamento", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. collegamento tra ciclo e distinta base", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. task standard", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Codice condizione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Codice caratteristica", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Codice logiche lavorazione", CellValues.String, 2));
+                sheetCicli.AppendChild(rowHeader);
+
+                SheetData sheetCommenti = wsCommenti.Worksheet.AppendChild(new SheetData());
+
+                Row rowHeaderCommenti = new Row();
+                rowHeaderCommenti.Append(ConstructCell("Nr. ciclo", CellValues.String, 2));
+                rowHeaderCommenti.Append(ConstructCell("Cod. versione", CellValues.String, 2));
+                rowHeaderCommenti.Append(ConstructCell("Nr. operazione", CellValues.String, 2));
+                rowHeaderCommenti.Append(ConstructCell("Nr. riga", CellValues.String, 2));
+                rowHeaderCommenti.Append(ConstructCell("Data", CellValues.String, 2));
+                rowHeaderCommenti.Append(ConstructCell("Commento", CellValues.String, 2));
+                sheetCommenti.AppendChild(rowHeaderCommenti);
+
+                foreach (Ciclo c in cicli)
+                {
+                    foreach(Fase f in c.Fasi)
+                    {
+                        Row row = new Row();
+                        row.Append(ConstructCell(c.Codice, CellValues.String, 1));
+                        row.Append(ConstructCell(f.Versione , CellValues.String, 1));
+                        row.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(f.Tipo, CellValues.String, 1));
+                        row.Append(ConstructCell(f.AreaProduzione, CellValues.String, 1));
+                        row.Append(ConstructCell(f.TempoSetup.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(f.TempoLavorazione.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(f.TempoAttesa.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(f.TempoSpostamento.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(f.DimensioneLotto.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(f.UMSetup, CellValues.String, 1));
+                        row.Append(ConstructCell(f.UMLavorazione, CellValues.String, 1));
+                        row.Append(ConstructCell(f.UMAttesa, CellValues.String, 1));
+                        row.Append(ConstructCell(f.UMSpostamento, CellValues.String, 1));
+                        row.Append(ConstructCell(f.Collegamento, CellValues.String, 1));
+                        row.Append(ConstructCell(f.Task, CellValues.String, 1));
+                        row.Append(ConstructCell(f.Condizione, CellValues.String, 1));
+                        row.Append(ConstructCell(f.Caratteristica, CellValues.String, 1));
+                        row.Append(ConstructCell(f.LogicheLavorazione, CellValues.String, 1));
+           //             sheetCicli.AppendChild(row);
+
+                        int numeroRiga = 1000;
+                        foreach(string commento in f.Commenti)
+                        {
+                            Row rowCommento = new Row();
+                            rowCommento.Append(ConstructCell(c.Codice, CellValues.String, 1));
+                            rowCommento.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowCommento.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                            rowCommento.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
+                            rowCommento.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
+                            rowCommento.Append(ConstructCell(commento, CellValues.String, 1));
+              //              sheetCommenti.AppendChild(row);
+                            numeroRiga += 1000;
+                        }
+                    }
+
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+            errori = sb.ToString().Trim();
+            return content;
+        }
+
+        public byte[] CreaFileCompoentiDistinta(List<Distinta> distinte, out string errori)
+        {
+            errori = string.Empty;
+            StringBuilder sb = new StringBuilder();
+
+            byte[] content;
+
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart wsCicli = workbookPart.AddNewPart<WorksheetPart>();
+                wsCicli.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+
+                Columns colonne = new Columns();
+                for (int i = 0; i < 16; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 25;
+                    c.CustomWidth = true;
+
+                    colonne.Append(c);
+                }
+
+                wsCicli.Worksheet.AppendChild(colonne);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sTestata = new Sheet() { Id = workbookPart.GetIdOfPart(wsCicli), SheetId = 1, Name = "Righe DB produzione" };
+
+                sheets.Append(sTestata);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetDistinte = wsCicli.Worksheet.AppendChild(new SheetData());
+
+                Row rowHeader = new Row();
+                rowHeader.Append(ConstructCell("Nr. DB di produzione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. versione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Nr. riga", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Tipo", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Nr.", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Descrizione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. unità di misura", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Quantità", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. collegamento tra ciclo e distinta base", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("% scarto", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Quantità per", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Precious Quantity", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Formula quantità", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Codice condizione", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Nr. articolo neutro", CellValues.String, 2));
+                rowHeader.Append(ConstructCell("Cod. formula", CellValues.String, 2));
+                sheetDistinte.AppendChild(rowHeader);
+
+                foreach (Distinta d in distinte)
+                {
+                    int numeroRiga = 1000;
+                    foreach (Componente c in d.Componenti)
+                    {
+                        Row row = new Row();
+                        row.Append(ConstructCell(d.Codice, CellValues.String, 1));
+                        row.Append(ConstructCell(d.Versione, CellValues.String, 1));
+                        row.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
+                        numeroRiga += 1000;
+                        row.Append(ConstructCell(c.Tipo, CellValues.String, 1));
+                        row.Append(ConstructCell(c.Anagrafica, CellValues.String, 1));
+                        row.Append(ConstructCell(c.Descrizione.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.CodiceUM.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.Quantita.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.Collegamento.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.Scarto.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.Arrotondamento.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.PrecisionQuantity.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell(c.FormulaQuantita, CellValues.String, 1));
+                        row.Append(ConstructCell(c.Condizione, CellValues.String, 1));
+                        row.Append(ConstructCell(c.ArticoloNeutro, CellValues.String, 1));
+                        row.Append(ConstructCell(c.Formula, CellValues.String, 1));
+                        sheetDistinte.AppendChild(row);
+
+                    }
+
+                }
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+            errori = sb.ToString().Trim();
+            return content;
+        }
         public byte[] CreaFlussoFatture(List<string> idTestata, FlussoFattureDS ds, out string errori)
         {
             errori = string.Empty;

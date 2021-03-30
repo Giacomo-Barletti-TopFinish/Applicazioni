@@ -52,11 +52,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Ciclo.cs" />
     <Compile Include="CorreggiDateListiniDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CorreggiDateListiniDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Distinta.cs" />
     <Compile Include="EDIFornitoriDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

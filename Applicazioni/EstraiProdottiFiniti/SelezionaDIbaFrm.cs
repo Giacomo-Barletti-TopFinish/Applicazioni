@@ -14,6 +14,9 @@ namespace EstraiProdottiFiniti
     public partial class SelezionaDIbaFrm : Form
     {
         public string IDTDIBA = string.Empty;
+        public string NotaStd = string.Empty;
+        public string Versione = string.Empty;
+        public string Modello = string.Empty;
         public SelezionaDIbaFrm()
         {
             InitializeComponent();
@@ -23,6 +26,9 @@ namespace EstraiProdottiFiniti
         private void dgvDiBa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             IDTDIBA = estraiProdottiFinitiDS1.USR_PRD_TDIBA.Rows[e.RowIndex]["IDTDIBA"].ToString();
+            NotaStd = estraiProdottiFinitiDS1.USR_PRD_TDIBA.Rows[e.RowIndex]["NOTESTD"].ToString();
+            Versione = estraiProdottiFinitiDS1.USR_PRD_TDIBA.Rows[e.RowIndex]["DESVERSION"].ToString();
+            Modello = estraiProdottiFinitiDS1.USR_PRD_TDIBA.Rows[e.RowIndex]["MODELLO"].ToString();
             DialogResult = DialogResult.OK;
         }
 
