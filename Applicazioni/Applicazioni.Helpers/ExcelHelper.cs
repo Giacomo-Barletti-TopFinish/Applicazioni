@@ -43,7 +43,7 @@ namespace Applicazioni.Helpers
     public class ExcelHelper
     {
 
-        public byte[] CreaFileFaseCicli(List<Ciclo> cicli,  out string errori)
+        public byte[] CreaFileFaseCicli(List<Ciclo> cicli, out string errori)
         {
             errori = string.Empty;
             StringBuilder sb = new StringBuilder();
@@ -57,11 +57,11 @@ namespace Applicazioni.Helpers
                 WorkbookPart workbookPart = document.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
 
-                WorksheetPart wsCicli = workbookPart.AddNewPart<WorksheetPart>();
-                wsCicli.Worksheet = new Worksheet();
+                WorksheetPart wsTestata = workbookPart.AddNewPart<WorksheetPart>();
+                wsTestata.Worksheet = new Worksheet();
 
-                WorksheetPart wsCommenti = workbookPart.AddNewPart<WorksheetPart>();
-                wsCommenti.Worksheet = new Worksheet();
+                WorksheetPart wsDettaglio = workbookPart.AddNewPart<WorksheetPart>();
+                wsDettaglio.Worksheet = new Worksheet();
 
                 // Adding style
                 WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
@@ -69,7 +69,7 @@ namespace Applicazioni.Helpers
                 stylePart.Stylesheet.Save();
 
 
-                Columns colonne = new Columns();
+                Columns colonneTestata = new Columns();
                 for (int i = 0; i < 19; i++)
                 {
                     Column c = new Column();
@@ -79,10 +79,10 @@ namespace Applicazioni.Helpers
                     c.Width = 25;
                     c.CustomWidth = true;
 
-                    colonne.Append(c);
+                    colonneTestata.Append(c);
                 }
 
-                Columns colonneCommenti = new Columns();
+                Columns colonneDettaglio = new Columns();
                 for (int i = 0; i < 6; i++)
                 {
                     Column c = new Column();
@@ -92,111 +92,111 @@ namespace Applicazioni.Helpers
                     c.Width = 25;
                     c.CustomWidth = true;
 
-                    colonneCommenti.Append(c);
+                    colonneDettaglio.Append(c);
                 }
 
-
-                wsCicli.Worksheet.AppendChild(colonne);
-                wsCommenti.Worksheet.AppendChild(colonneCommenti);
+                wsTestata.Worksheet.AppendChild(colonneTestata);
+                wsDettaglio.Worksheet.AppendChild(colonneDettaglio);
 
                 Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                Sheet sTestata = new Sheet() { Id = workbookPart.GetIdOfPart(wsCicli), SheetId = 1, Name = "Righe cicli produzione" };
-                Sheet sCommenti = new Sheet() { Id = workbookPart.GetIdOfPart(wsCommenti), SheetId = 1, Name = "Riga commento ciclo" };
+                Sheet sTestata = new Sheet() { Id = workbookPart.GetIdOfPart(wsTestata), SheetId = 1, Name = "Righe cicli produzione" };
+                Sheet sDettaglio = new Sheet() { Id = workbookPart.GetIdOfPart(wsDettaglio), SheetId = 2, Name = "Riga commento ciclo" };
 
                 sheets.Append(sTestata);
-                sheets.Append(sCommenti);
+                sheets.Append(sDettaglio);
 
                 workbookPart.Workbook.Save();
 
-                SheetData sheetCicli = wsCicli.Worksheet.AppendChild(new SheetData());
+                SheetData sheetDataTestata = wsTestata.Worksheet.AppendChild(new SheetData());
+                SheetData sheetDataDettaglio = wsDettaglio.Worksheet.AppendChild(new SheetData());
 
-                Row rowHeader = new Row();
-                rowHeader.Append(ConstructCell("Nr. ciclo", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. versione", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Nr. operazione", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Tipo", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Nr.", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Tempo di setup", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Tempo lavorazione", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Tempo attesa", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Tempo spostamento", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Dimensione lotto", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. unità mis. tempo di setup", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. unità mis. tempo lavoraz.", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. unità mis. tempo attesa", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. unità mis. tempo spostamento", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. collegamento tra ciclo e distinta base", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Cod. task standard", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Codice condizione", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Codice caratteristica", CellValues.String, 2));
-                rowHeader.Append(ConstructCell("Codice logiche lavorazione", CellValues.String, 2));
-                sheetCicli.AppendChild(rowHeader);
 
-                SheetData sheetCommenti = wsCommenti.Worksheet.AppendChild(new SheetData());
+                Row rowHeaderTestata = new Row();
+                rowHeaderTestata.Append(ConstructCell("Nr. ciclo", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. versione", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Nr. operazione", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Tipo", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Nr.", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Tempo di setup", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Tempo lavorazione", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Tempo attesa", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Tempo spostamento", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Dimensione lotto", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. unità mis. tempo di setup", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. unità mis. tempo lavoraz.", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. unità mis. tempo attesa", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. unità mis. tempo spostamento", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. collegamento tra ciclo e distinta base", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Cod. task standard", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Codice condizione", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Codice caratteristica", CellValues.String, 2));
+                rowHeaderTestata.Append(ConstructCell("Codice logiche lavorazione", CellValues.String, 2));
+                sheetDataTestata.AppendChild(rowHeaderTestata);
 
-                Row rowHeaderCommenti = new Row();
-                rowHeaderCommenti.Append(ConstructCell("Nr. ciclo", CellValues.String, 2));
-                rowHeaderCommenti.Append(ConstructCell("Cod. versione", CellValues.String, 2));
-                rowHeaderCommenti.Append(ConstructCell("Nr. operazione", CellValues.String, 2));
-                rowHeaderCommenti.Append(ConstructCell("Nr. riga", CellValues.String, 2));
-                rowHeaderCommenti.Append(ConstructCell("Data", CellValues.String, 2));
-                rowHeaderCommenti.Append(ConstructCell("Commento", CellValues.String, 2));
-                sheetCommenti.AppendChild(rowHeaderCommenti);
+                Row rowHeaderDettaglio = new Row();
+                rowHeaderDettaglio.Append(ConstructCell("Nr. ciclo", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("Cod. versione", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("Nr. operazione", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("Nr. riga", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("Data", CellValues.String, 2));
+                rowHeaderDettaglio.Append(ConstructCell("Commento", CellValues.String, 2));
+                sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
                 foreach (Ciclo c in cicli)
                 {
-                    foreach(Fase f in c.Fasi)
+                    foreach (Fase f in c.Fasi)
                     {
-                        Row row = new Row();
-                        row.Append(ConstructCell(c.Codice, CellValues.String, 1));
-                        row.Append(ConstructCell(f.Versione , CellValues.String, 1));
-                        row.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(f.Tipo, CellValues.String, 1));
-                        row.Append(ConstructCell(f.AreaProduzione, CellValues.String, 1));
-                        row.Append(ConstructCell(f.TempoSetup.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(f.TempoLavorazione.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(f.TempoAttesa.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(f.TempoSpostamento.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(f.DimensioneLotto.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(f.UMSetup, CellValues.String, 1));
-                        row.Append(ConstructCell(f.UMLavorazione, CellValues.String, 1));
-                        row.Append(ConstructCell(f.UMAttesa, CellValues.String, 1));
-                        row.Append(ConstructCell(f.UMSpostamento, CellValues.String, 1));
-                        row.Append(ConstructCell(f.Collegamento, CellValues.String, 1));
-                        row.Append(ConstructCell(f.Task, CellValues.String, 1));
-                        row.Append(ConstructCell(f.Condizione, CellValues.String, 1));
-                        row.Append(ConstructCell(f.Caratteristica, CellValues.String, 1));
-                        row.Append(ConstructCell(f.LogicheLavorazione, CellValues.String, 1));
-           //             sheetCicli.AppendChild(row);
+                        Row rowTestata = new Row();
+
+                        rowTestata.Append(ConstructCell(c.Codice, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Versione, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Tipo, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.AreaProduzione, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.TempoSetup.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.TempoLavorazione.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.TempoAttesa.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.TempoSpostamento.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.DimensioneLotto.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.UMSetup, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.UMLavorazione, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.UMAttesa, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.UMSpostamento, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Collegamento, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Task, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Condizione, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.Caratteristica, CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(f.LogicheLavorazione, CellValues.String, 1));
+
+                        sheetDataTestata.AppendChild(rowTestata);
+
 
                         int numeroRiga = 1000;
-                        foreach(string commento in f.Commenti)
+                        foreach (string commento in f.Commenti)
                         {
-                            Row rowCommento = new Row();
-                            rowCommento.Append(ConstructCell(c.Codice, CellValues.String, 1));
-                            rowCommento.Append(ConstructCell(string.Empty, CellValues.String, 1));
-                            rowCommento.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
-                            rowCommento.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
-                            rowCommento.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
-                            rowCommento.Append(ConstructCell(commento, CellValues.String, 1));
-              //              sheetCommenti.AppendChild(row);
+                            Row rowDettaglio = new Row();
+                            rowDettaglio.Append(ConstructCell(c.Codice, CellValues.String, 1));
+                            rowDettaglio.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                            rowDettaglio.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                            rowDettaglio.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
+                            rowDettaglio.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
+                            rowDettaglio.Append(ConstructCell(commento, CellValues.String, 1));
+                            sheetDataDettaglio.AppendChild(rowDettaglio);
                             numeroRiga += 1000;
                         }
                     }
-
                 }
-
                 workbookPart.Workbook.Save();
                 document.Save();
                 document.Close();
 
                 ms.Seek(0, SeekOrigin.Begin);
                 content = ms.ToArray();
-            }
-            errori = sb.ToString().Trim();
-            return content;
-        }
 
+                errori = sb.ToString().Trim();
+                return content;
+            }
+        }
         public byte[] CreaFileCompoentiDistinta(List<Distinta> distinte, out string errori)
         {
             errori = string.Empty;
@@ -1509,8 +1509,8 @@ namespace Applicazioni.Helpers
 
             return true;
         }
-     
-        public bool AggiungiColonneExcelDibaRVL(MigrazioneDiBaDS ds, Stream stream,  out string messaggioErrore)
+
+        public bool AggiungiColonneExcelDibaRVL(MigrazioneDiBaDS ds, Stream stream, out string messaggioErrore)
 
         {
             messaggioErrore = string.Empty;

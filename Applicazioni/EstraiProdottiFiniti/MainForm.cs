@@ -387,7 +387,7 @@ namespace EstraiProdottiFiniti
             StringBuilder sbd = new StringBuilder();
             sbd.AppendLine("CICLI");
             sbd.AppendLine("-----");
-            for(int i=righe.Count-1;i>=0;i--)
+            for (int i = righe.Count - 1; i >= 0; i--)
                 sbd.AppendLine(righe[i]);
 
             txtMsgCicli.Text = sbd.ToString();
@@ -395,6 +395,23 @@ namespace EstraiProdottiFiniti
 
         private void btnVerificaDistinte_Click(object sender, EventArgs e)
         {
+            var Query = from p in Nodi.GroupBy(p => p.IDPADRE)
+                        select new
+                        {
+                            count = p.Count(),
+                            p.First().IDPADRE,
+                        };
+
+            var Montaggi = Query.Where(x => x.count > 1);
+            List<int> idPadreMOntaggi = Montaggi.Select(x => x.IDPADRE).ToList();
+            List<Nodo> NodiSenzaAnagrafica = new List<Nodo>();
+
+            foreach (int idpadreDaVerificare in idPadreMOntaggi)
+            {
+                NodiSenzaAnagrafica.AddRange(Nodi.Where(x => x.IDPADRE == idpadreDaVerificare && string.IsNullOrEmpty(x.Anagrafica)).ToList());
+            }
+
+
             distinte = new List<Distinta>();
             try
             {
@@ -412,7 +429,7 @@ namespace EstraiProdottiFiniti
                 int avantiMassimo = Nodi.Max(x => x.Profondita);
                 creaDistinta(riga, 1, Nodi.Count, distinte, righeConAnagrafica, avantiMassimo);
 
-                ImpaginaMessaggioDistinte(distinte);
+                ImpaginaMessaggioDistinte(distinte,NodiSenzaAnagrafica);
                 btnSalvaDistinte.Enabled = true;
 
             }
@@ -451,9 +468,22 @@ namespace EstraiProdottiFiniti
 
         }
 
-        private void ImpaginaMessaggioDistinte(List<Distinta> distinte)
+        private void ImpaginaMessaggioDistinte(List<Distinta> distinte, List<Nodo>nodiSenzaAnagrafica)
         {
+
             StringBuilder sb = new StringBuilder();
+            if (nodiSenzaAnagrafica.Count>0)
+            {
+
+                sb.AppendLine("NODI SENZA ANAGRAFICA");
+                sb.AppendLine("---------------------");
+                foreach (Nodo n in nodiSenzaAnagrafica)
+                {
+                    sb.AppendLine(n.Modello);
+                    sb.AppendLine(String.Empty);
+                }
+            }
+
             sb.AppendLine("DISTINTA");
             sb.AppendLine("--------");
 
@@ -503,7 +533,7 @@ namespace EstraiProdottiFiniti
             }
             catch (Exception ex)
             {
-                throw ex;
+                MostraEccezione("Errore nel creare il file", ex);
             }
             finally
             {
@@ -514,7 +544,7 @@ namespace EstraiProdottiFiniti
 
         private void btnSalvaDistinte_Click(object sender, EventArgs e)
         {
-           
+
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
             sfd.DefaultExt = "xlsx";
@@ -527,7 +557,6 @@ namespace EstraiProdottiFiniti
                 File.Delete(pathCompleto);
 
             FileStream fs = new FileStream(pathCompleto, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs);
             string errori = string.Empty;
             try
             {
@@ -540,12 +569,10 @@ namespace EstraiProdottiFiniti
             }
             catch (Exception ex)
             {
-                throw ex;
+                MostraEccezione("Errore nel creare il file", ex);
             }
             finally
             {
-                sw.Flush();
-                fs.Flush();
                 fs.Close();
             }
         }
