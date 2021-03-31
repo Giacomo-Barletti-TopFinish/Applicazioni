@@ -57,6 +57,47 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
+        public void GetUSR_PRD_TDIBATopFinish(EstraiProdottiFinitiDS ds, string IDTDIBA)
+        {
+
+            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.* from ditta2.usr_prd_tdiba tb
+                                inner join gruppo.magazz ma on ma.idmagazz = tb.idmagazz
+                                inner join GRUPPO.USR_TAB_DIBAMETHODS MET ON MET.IDDIBAMETHOD = tb.IDDIBAMETHOD
+                                where tb.IDTDIBA =  $P<IDTDIBA>");
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_TDIBATOPFINISH);
+            }
+        }
+        public void GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(EstraiProdottiFinitiDS ds, string IDMAGAZZ)
+        {
+
+            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.* from ditta2.usr_prd_tdiba tb
+                                inner join gruppo.magazz ma on ma.idmagazz = tb.idmagazz
+                                inner join GRUPPO.USR_TAB_DIBAMETHODS MET ON MET.IDDIBAMETHOD = tb.IDDIBAMETHOD
+                                where tb.IDMAGAZZ =  $P<IDMAGAZZ>");
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, IDMAGAZZ);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_TDIBATOPFINISH);
+            }
+        }
+
+        public void GetUSR_PRD_RDIBATopFinish(EstraiProdottiFinitiDS ds, string IDTDIBA)
+        {
+
+            string select = string.Format(@"select TB.* from ditta2.usr_prd_Rdiba tb
+                                where tb.IDTDIBA =  $P<IDTDIBA>");
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_RDIBATOPFINISH);
+            }
+        }
         public void GetMAGAZZ(EstraiProdottiFinitiDS ds, string IDMAGAZZ)
         {
 

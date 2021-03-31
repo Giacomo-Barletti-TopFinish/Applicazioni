@@ -74,6 +74,7 @@
             this.SUPERFICIE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOTESTANDARD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOTETECNICHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkInserisciTopFinish = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -519,11 +520,22 @@
             this.NOTETECNICHE.ReadOnly = true;
             this.NOTETECNICHE.Width = 200;
             // 
+            // chkInserisciTopFinish
+            // 
+            this.chkInserisciTopFinish.AutoSize = true;
+            this.chkInserisciTopFinish.Location = new System.Drawing.Point(88, 46);
+            this.chkInserisciTopFinish.Name = "chkInserisciTopFinish";
+            this.chkInserisciTopFinish.Size = new System.Drawing.Size(152, 17);
+            this.chkInserisciTopFinish.TabIndex = 8;
+            this.chkInserisciTopFinish.Text = "Inserisci distinte Top Finish";
+            this.chkInserisciTopFinish.UseVisualStyleBackColor = true;
+            // 
             // EstraiProdottoFinito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1452, 808);
+            this.Controls.Add(this.chkInserisciTopFinish);
             this.Controls.Add(this.txtNoteStd);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtVersioneDiBa);
@@ -597,6 +609,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SUPERFICIE;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTESTANDARD;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTETECNICHE;
+        private System.Windows.Forms.CheckBox chkInserisciTopFinish;
     }
 }
 

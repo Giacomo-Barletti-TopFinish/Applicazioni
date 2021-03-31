@@ -30,6 +30,24 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             a.GetUSR_PRD_RDIBA(ds, IDTDIBA);
         }
         [DataContext]
+        public void GetUSR_PRD_TDIBATopFinish(EstraiProdottiFinitiDS ds, string IDTDIBA)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_TDIBATopFinish(ds, IDTDIBA);
+        }
+        [DataContext]
+        public void GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(EstraiProdottiFinitiDS ds, string IDMAGAZZ)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(ds, IDMAGAZZ);
+        }
+        [DataContext]
+        public void GetUSR_PRD_RDIBATopFinish(EstraiProdottiFinitiDS ds, string IDTDIBA)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_RDIBATopFinish(ds, IDTDIBA);
+        }
+        [DataContext]
         public void GetMAGAZZ(EstraiProdottiFinitiDS ds, string IDMAGAZZ)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);

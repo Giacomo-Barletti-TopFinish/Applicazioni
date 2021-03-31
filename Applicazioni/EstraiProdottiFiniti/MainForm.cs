@@ -170,6 +170,59 @@ namespace EstraiProdottiFiniti
             EstraiProdottiFinitiDS.USR_PRD_TDIBARow testata = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
             if (testata != null)
             {
+                if (!testata.IsCODICECLIFOPRDNull() && testata.CODICECLIFOPRD.Trim() == "02350" && chkInserisciTopFinish.Checked)
+                {
+                    bEstrai.GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(_ds, testata.IDMAGAZZ);
+
+                    EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ).FirstOrDefault();
+                    if (rigaTopFinish != null)
+                        EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, 1, 0, string.Empty, string.Empty, "N");
+                }
+                else
+                {
+                    bEstrai.GetMAGAZZ(_ds, testata.IDMAGAZZ);
+                    string reparto = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
+
+                    noteTecniche = testata.IsNOTETECHNull() ? string.Empty : testata.NOTETECH;
+                    noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
+
+                    Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
+                        testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN);
+                    Nodi.Add(n);
+                    idPadre = n.ID;
+                    idNodo++;
+                }
+                bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
+                List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
+                if (componenti.Count > 0) profondita++;
+
+                foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBARow componente in componenti)
+                {
+                    string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
+                    string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
+                    if (!componente.IsIDTDIBAIFFASENull())
+                        EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN);
+                    else
+                    {
+                        bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
+                        Nodi.Add(CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
+                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN));
+                        idNodo++;
+                    }
+                }
+
+
+            }
+
+        }
+
+        private void EstraiDistintaTopFinish(EstraiProdottiFinitiBusiness bEstrai, string IDTDIBA, int profondita, ref int idNodo, int idPadre, decimal quantitaConsumo,
+           decimal quantitaOccorrenza, string noteTecniche, string noteStandard, string fornitoDaCommittente)
+        {
+            bEstrai.GetUSR_PRD_TDIBATopFinish(_ds, IDTDIBA);
+            EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow testata = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
+            if (testata != null)
+            {
                 bEstrai.GetMAGAZZ(_ds, testata.IDMAGAZZ);
                 string reparto = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
 
@@ -180,16 +233,16 @@ namespace EstraiProdottiFiniti
                     testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN);
                 Nodi.Add(n);
                 idNodo++;
-                bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
-                List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
+                bEstrai.GetUSR_PRD_RDIBATopFinish(_ds, IDTDIBA);
+                List<EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow> componenti = _ds.USR_PRD_RDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).ToList();
                 if (componenti.Count > 0) profondita++;
 
-                foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBARow componente in componenti)
+                foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow componente in componenti)
                 {
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
                     if (!componente.IsIDTDIBAIFFASENull())
-                        EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN);
+                        EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN);
                     else
                     {
                         bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
@@ -199,8 +252,8 @@ namespace EstraiProdottiFiniti
                     }
                 }
             }
-
         }
+
 
         private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
