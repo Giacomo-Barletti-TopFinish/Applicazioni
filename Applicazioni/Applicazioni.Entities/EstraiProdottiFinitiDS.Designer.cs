@@ -507,6 +507,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnMODELLO;
             
+            private global::System.Data.DataColumn columnMETODO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_PRD_TDIBADataTable() {
@@ -894,6 +896,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn METODOColumn {
+                get {
+                    return this.columnMETODO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -973,7 +983,8 @@ namespace Applicazioni.Entities {
                         decimal INFRAG_SN, 
                         string CODDITTAINFRAG, 
                         decimal NO_COSTO_DIBA_SNP, 
-                        string MODELLO) {
+                        string MODELLO, 
+                        string METODO) {
                 USR_PRD_TDIBARow rowUSR_PRD_TDIBARow = ((USR_PRD_TDIBARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDTDIBA,
@@ -1019,7 +1030,8 @@ namespace Applicazioni.Entities {
                         INFRAG_SN,
                         CODDITTAINFRAG,
                         NO_COSTO_DIBA_SNP,
-                        MODELLO};
+                        MODELLO,
+                        METODO};
                 rowUSR_PRD_TDIBARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_PRD_TDIBARow);
                 return rowUSR_PRD_TDIBARow;
@@ -1093,6 +1105,7 @@ namespace Applicazioni.Entities {
                 this.columnCODDITTAINFRAG = base.Columns["CODDITTAINFRAG"];
                 this.columnNO_COSTO_DIBA_SNP = base.Columns["NO_COSTO_DIBA_SNP"];
                 this.columnMODELLO = base.Columns["MODELLO"];
+                this.columnMETODO = base.Columns["METODO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1186,6 +1199,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnNO_COSTO_DIBA_SNP);
                 this.columnMODELLO = new global::System.Data.DataColumn("MODELLO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMODELLO);
+                this.columnMETODO = new global::System.Data.DataColumn("METODO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMETODO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDTDIBA}, true));
                 this.columnIDTDIBA.AllowDBNull = false;
@@ -6376,6 +6391,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string METODO {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_TDIBA.METODOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'METODO\' in table \'USR_PRD_TDIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_TDIBA.METODOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDMAGAZZNull() {
                 return this.IsNull(this.tableUSR_PRD_TDIBA.IDMAGAZZColumn);
             }
@@ -6696,6 +6727,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetMODELLONull() {
                 this[this.tableUSR_PRD_TDIBA.MODELLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsMETODONull() {
+                return this.IsNull(this.tableUSR_PRD_TDIBA.METODOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetMETODONull() {
+                this[this.tableUSR_PRD_TDIBA.METODOColumn] = global::System.Convert.DBNull;
             }
         }
         

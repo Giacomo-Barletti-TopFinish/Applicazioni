@@ -32,8 +32,9 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         public void GetUSR_PRD_TDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 
-            string select = string.Format(@"select MA.MODELLO,TB.* from ditta1.usr_prd_tdiba tb
+            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.* from ditta1.usr_prd_tdiba tb
                                 inner join gruppo.magazz ma on ma.idmagazz = tb.idmagazz
+                                inner join GRUPPO.USR_TAB_DIBAMETHODS MET ON MET.IDDIBAMETHOD = tb.IDDIBAMETHOD
                                 where tb.IDTDIBA =  $P<IDTDIBA>");
             ParamSet ps = new ParamSet();
             ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);

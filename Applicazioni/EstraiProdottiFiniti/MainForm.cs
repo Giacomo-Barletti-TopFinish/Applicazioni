@@ -124,7 +124,7 @@ namespace EstraiProdottiFiniti
         }
 
         private Nodo CreaNodo(int idNodo, string idmagazz, int profondita, int idpadre, decimal quantitaConsumo, decimal quantitaOccorrenza, string IDTABFAS,
-            string noteTecniche, string noteStandard, string fornitoDaCommittente)
+            string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata)
         {
             EstraiProdottiFinitiDS.MAGAZZRow magazz = _ds.MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
             EstraiProdottiFinitiDS.TABFASRow fase = _ds.TABFAS.Where(x => x.IDTABFAS == IDTABFAS).FirstOrDefault();
@@ -144,7 +144,10 @@ namespace EstraiProdottiFiniti
             if (quantitaOccorrenza == 0) quantita = quantitaConsumo;
             else quantita = 1 / quantitaOccorrenza;
 
+            n.QuantitaConsumo = quantitaConsumo;
+            n.QuantitaOccorrenza = quantitaOccorrenza;
             n.Quantita = quantita;
+
             n.Reparto = reparto;
             n.Fase = fase.CODICEFASE;
             n.Peso = magazz.PESO;
@@ -153,6 +156,11 @@ namespace EstraiProdottiFiniti
             n.NoteStandard = noteStandard;
             n.NoteTecniche = noteTecniche;
             n.Modello = (magazz == null) ? string.Empty : magazz.MODELLO;
+            n.DescrizioneArticolo = (magazz == null) ? string.Empty : magazz.DESMAGAZZ;
+            n.Metodo = metodo;
+            n.Versione = versione;
+            n.Attiva = attiva;
+            n.Controllata = n.Controllata;
             return n;
         }
         private void EstraiDistintaBase(EstraiProdottiFinitiBusiness bEstrai, string IDTDIBA, int profondita, ref int idNodo, int idPadre, decimal quantitaConsumo,
@@ -168,7 +176,8 @@ namespace EstraiProdottiFiniti
                 noteTecniche = testata.IsNOTETECHNull() ? string.Empty : testata.NOTETECH;
                 noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
 
-                Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente);
+                Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
+                    testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN);
                 Nodi.Add(n);
                 idNodo++;
                 bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
@@ -184,7 +193,8 @@ namespace EstraiProdottiFiniti
                     else
                     {
                         bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
-                        Nodi.Add(CreaNodo(idNodo, componente.IDMAGAZZ, profondita, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN));
+                        Nodi.Add(CreaNodo(idNodo, componente.IDMAGAZZ, profondita, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
+                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN));
                         idNodo++;
                     }
                 }
@@ -224,7 +234,7 @@ namespace EstraiProdottiFiniti
                 List<string> anagraficheCensite = new List<string>();
                 List<string> anagraficheModificate = new List<string>();
                 List<string> anagraficheNuove = new List<string>();
-                foreach (Nodo nodoConAnagrafica in nodiConAnagrafiche)
+                foreach (Nodo nodoConAnagrafica in nodiConAnagrafiche.Where(x => !string.IsNullOrEmpty(x.IDMAGAZZ)))
                 {
                     nodoConAnagrafica.ToUpper();
                     EstraiProdottiFinitiDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == nodoConAnagrafica.IDMAGAZZ).FirstOrDefault();
@@ -429,7 +439,7 @@ namespace EstraiProdottiFiniti
                 int avantiMassimo = Nodi.Max(x => x.Profondita);
                 creaDistinta(riga, 1, Nodi.Count, distinte, righeConAnagrafica, avantiMassimo);
 
-                ImpaginaMessaggioDistinte(distinte,NodiSenzaAnagrafica);
+                ImpaginaMessaggioDistinte(distinte, NodiSenzaAnagrafica);
                 btnSalvaDistinte.Enabled = true;
 
             }
@@ -468,11 +478,11 @@ namespace EstraiProdottiFiniti
 
         }
 
-        private void ImpaginaMessaggioDistinte(List<Distinta> distinte, List<Nodo>nodiSenzaAnagrafica)
+        private void ImpaginaMessaggioDistinte(List<Distinta> distinte, List<Nodo> nodiSenzaAnagrafica)
         {
 
             StringBuilder sb = new StringBuilder();
-            if (nodiSenzaAnagrafica.Count>0)
+            if (nodiSenzaAnagrafica.Count > 0)
             {
 
                 sb.AppendLine("NODI SENZA ANAGRAFICA");

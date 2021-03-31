@@ -28,10 +28,22 @@ namespace EstraiProdottiFiniti
         public decimal Peso { get; set; }
         public decimal Superficie { get; set; }
 
+
+        public string DescrizioneArticolo { get; set; }
+        public decimal QuantitaConsumo { get; set; }
+        public decimal QuantitaOccorrenza{ get; set; }
+        public string Attiva { get; set; }
+        public string Controllata { get; set; }
+        public string CaricoReparto { get; set; }
+        public string Metodo { get; set; }
+        public string Versione{ get; set; }
+
+
+
         public override string ToString()
         {
-            if(!string.IsNullOrEmpty(Anagrafica))
-                return string.Format("{0} {1} ({2})", ID, Modello,Anagrafica);
+            if (!string.IsNullOrEmpty(Anagrafica))
+                return string.Format("{0} {1} ({2})", ID, Modello, Anagrafica);
 
             return string.Format("{0} {1}", ID, Modello);
         }

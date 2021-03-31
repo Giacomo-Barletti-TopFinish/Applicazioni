@@ -278,7 +278,7 @@ namespace Applicazioni.Helpers
                         row.Append(ConstructCell(c.Descrizione.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell(c.CodiceUM.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell(c.Quantita.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(c.Collegamento.ToString(), CellValues.String, 1));
+                        row.Append(ConstructCell((c.Collegamento == null) ? string.Empty : c.Collegamento, CellValues.String, 1));
                         row.Append(ConstructCell(c.Scarto.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell(c.Arrotondamento.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell(c.PrecisionQuantity.ToString(), CellValues.String, 1));
