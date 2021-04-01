@@ -21,10 +21,60 @@ namespace EstraiProdottiFiniti
         private List<Nodo> Nodi = new List<Nodo>();
         private List<Distinta> distinte = new List<Distinta>();
         private List<Ciclo> cicli = new List<Ciclo>();
+        private List<string> Collegamenti;
+
 
         public EstraiProdottoFinito()
         {
             InitializeComponent();
+            CreaListaCollegamenti();
+        }
+
+        private void CreaListaCollegamenti()
+        {
+            Collegamenti = new List<string>();
+            Collegamenti.Add(string.Empty);
+            Collegamenti.Add("APERT");
+            Collegamenti.Add("AVV");
+            Collegamenti.Add("CATAF");
+            Collegamenti.Add("CONF");
+            Collegamenti.Add("CONFGREZZO");
+            Collegamenti.Add("DECA");
+            Collegamenti.Add("FBV");
+            Collegamenti.Add("FLOC");
+            Collegamenti.Add("FOR+FIL");
+            Collegamenti.Add("FRESATURA");
+            Collegamenti.Add("GALVROTO");
+            Collegamenti.Add("GALVSTAT");
+            Collegamenti.Add("INCART");
+            Collegamenti.Add("INSACC");
+            Collegamenti.Add("LEGFILI");
+            Collegamenti.Add("LEGTEL");
+            Collegamenti.Add("LUCACQUA");
+            Collegamenti.Add("LUCSECCO");
+            Collegamenti.Add("MONTFIN");
+            Collegamenti.Add("MONTGRE");
+            Collegamenti.Add("PIEG");
+            Collegamenti.Add("PREP SPED");
+            Collegamenti.Add("PULLUC");
+            Collegamenti.Add("RIFIL");
+            Collegamenti.Add("RINCOT");
+            Collegamenti.Add("RIPRESE");
+            Collegamenti.Add("SALD");
+            Collegamenti.Add("SCELTASA");
+            Collegamenti.Add("SCHIA");
+            Collegamenti.Add("SGRAS");
+            Collegamenti.Add("SLEGFILI");
+            Collegamenti.Add("SLEGTEL");
+            Collegamenti.Add("SMETEST");
+            Collegamenti.Add("STAC");
+            Collegamenti.Add("SVIRG");
+            Collegamenti.Add("TAGLIO");
+            Collegamenti.Add("TAGLIOMAT");
+            Collegamenti.Add("TORN");
+            Collegamenti.Add("TRANC");
+            Collegamenti.Add("VIBACQUA");
+            Collegamenti.Add("VIBSECCO");
         }
 
         private void DisabilitaPulsanti()
@@ -83,12 +133,21 @@ namespace EstraiProdottiFiniti
 
                 bEstrai.FillBC_ANAGRAFICA(_ds);
                 bEstrai.FillTABFAS(_ds);
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    int idNodo = 1;
+                    int profondita = 1;
+                    EstraiDistintaBase(bEstrai, IDTDIBA, profondita, ref idNodo, -1, 1, 0, string.Empty, string.Empty, "N", string.Empty);
+                    CreaAlbero();
+                    PopolaGrigliaNodi();
 
-                int idNodo = 1;
-                int profondita = 1;
-                EstraiDistintaBase(bEstrai, IDTDIBA, profondita, ref idNodo, -1, 1, 0, string.Empty, string.Empty, "N");
-                CreaAlbero();
-                PopolaGrigliaNodi();
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    MostraEccezione("Errore nel caricamento della distinta", ex);
+                }
 
             }
         }
@@ -124,7 +183,7 @@ namespace EstraiProdottiFiniti
         }
 
         private Nodo CreaNodo(int idNodo, string idmagazz, int profondita, int idpadre, decimal quantitaConsumo, decimal quantitaOccorrenza, string IDTABFAS,
-            string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata)
+            string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata, string unitaMisura)
         {
             EstraiProdottiFinitiDS.MAGAZZRow magazz = _ds.MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
             EstraiProdottiFinitiDS.TABFASRow fase = _ds.TABFAS.Where(x => x.IDTABFAS == IDTABFAS).FirstOrDefault();
@@ -160,11 +219,12 @@ namespace EstraiProdottiFiniti
             n.Metodo = metodo;
             n.Versione = versione;
             n.Attiva = attiva;
-            n.Controllata = n.Controllata;
+            n.Controllata = controllata;
+            n.UM = unitaMisura;
             return n;
         }
         private void EstraiDistintaBase(EstraiProdottiFinitiBusiness bEstrai, string IDTDIBA, int profondita, ref int idNodo, int idPadre, decimal quantitaConsumo,
-            decimal quantitaOccorrenza, string noteTecniche, string noteStandard, string fornitoDaCommittente)
+            decimal quantitaOccorrenza, string noteTecniche, string noteStandard, string fornitoDaCommittente, string unitaMisura)
         {
             bEstrai.GetUSR_PRD_TDIBA(_ds, IDTDIBA);
             EstraiProdottiFinitiDS.USR_PRD_TDIBARow testata = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
@@ -176,7 +236,7 @@ namespace EstraiProdottiFiniti
 
                     EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ).FirstOrDefault();
                     if (rigaTopFinish != null)
-                        EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, 1, 0, string.Empty, string.Empty, "N");
+                        EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, 1, 0, string.Empty, string.Empty, "N", unitaMisura);
                 }
                 else
                 {
@@ -187,10 +247,13 @@ namespace EstraiProdottiFiniti
                     noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
 
                     Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
-                        testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN);
-                    Nodi.Add(n);
-                    idPadre = n.ID;
-                    idNodo++;
+                        testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
+                    if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+                    {
+                        Nodi.Add(n);
+                        idPadre = n.ID;
+                        idNodo++;
+                    }
                 }
                 bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
@@ -201,13 +264,17 @@ namespace EstraiProdottiFiniti
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
                     if (!componente.IsIDTDIBAIFFASENull())
-                        EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN);
+                        EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
                         bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
-                        Nodi.Add(CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
-                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN));
-                        idNodo++;
+                        Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
+                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI);
+                        if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
+                        {
+                            Nodi.Add(nodoFiglio);
+                            idNodo++;
+                        }
                     }
                 }
 
@@ -217,7 +284,7 @@ namespace EstraiProdottiFiniti
         }
 
         private void EstraiDistintaTopFinish(EstraiProdottiFinitiBusiness bEstrai, string IDTDIBA, int profondita, ref int idNodo, int idPadre, decimal quantitaConsumo,
-           decimal quantitaOccorrenza, string noteTecniche, string noteStandard, string fornitoDaCommittente)
+           decimal quantitaOccorrenza, string noteTecniche, string noteStandard, string fornitoDaCommittente, string unitaMisura)
         {
             bEstrai.GetUSR_PRD_TDIBATopFinish(_ds, IDTDIBA);
             EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow testata = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
@@ -230,9 +297,12 @@ namespace EstraiProdottiFiniti
                 noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
 
                 Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
-                    testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN);
-                Nodi.Add(n);
-                idNodo++;
+                    testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
+                if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+                {
+                    Nodi.Add(n);
+                    idNodo++;
+                }
                 bEstrai.GetUSR_PRD_RDIBATopFinish(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow> componenti = _ds.USR_PRD_RDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).ToList();
                 if (componenti.Count > 0) profondita++;
@@ -242,13 +312,17 @@ namespace EstraiProdottiFiniti
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
                     if (!componente.IsIDTDIBAIFFASENull())
-                        EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN);
+                        EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
                         bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
-                        Nodi.Add(CreaNodo(idNodo, componente.IDMAGAZZ, profondita, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
-                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN));
-                        idNodo++;
+                        Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
+                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI);
+                        if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
+                        {
+                            Nodi.Add(nodoFiglio);
+                            idNodo++;
+                        }
                     }
                 }
             }
@@ -280,6 +354,8 @@ namespace EstraiProdottiFiniti
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 string messaggioErrore = string.Empty;
 
                 List<Nodo> nodiConAnagrafiche = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).ToList();
@@ -320,6 +396,9 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 txtMsgAnagrafiche.Text = ex.Message;
+                MostraEccezione("Errore in verifica distinta", ex);
+                Cursor.Current = Cursors.Default;
+
             }
         }
 
@@ -362,6 +441,7 @@ namespace EstraiProdottiFiniti
             try
             {
                 string messaggioErrore = string.Empty;
+                Cursor.Current = Cursors.WaitCursor;
 
                 List<Nodo> righeConAnagrafica = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderByDescending(x => x.ID).ToList();
                 if (righeConAnagrafica.Count == 0)
@@ -420,6 +500,9 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 txtMsgCicli.Text = ex.Message;
+                MostraEccezione("Errore in verifica cicli", ex);
+                Cursor.Current = Cursors.Default;
+
 
             }
         }
@@ -458,7 +541,11 @@ namespace EstraiProdottiFiniti
 
         private void btnVerificaDistinte_Click(object sender, EventArgs e)
         {
-            var Query = from p in Nodi.GroupBy(p => p.IDPADRE)
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                var Query = from p in Nodi.GroupBy(p => p.IDPADRE)
                         select new
                         {
                             count = p.Count(),
@@ -476,8 +563,7 @@ namespace EstraiProdottiFiniti
 
 
             distinte = new List<Distinta>();
-            try
-            {
+          
 
                 List<Nodo> righeConAnagrafica = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderBy(x => x.ID).ToList();
                 if (righeConAnagrafica.Count == 0)
@@ -499,6 +585,9 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 txtMsgDistinte.Text = ex.Message;
+                MostraEccezione("Errore in verifica distinte", ex);
+                Cursor.Current = Cursors.Default;
+
             }
         }
 
@@ -517,7 +606,7 @@ namespace EstraiProdottiFiniti
             } while (righeFiglie.Count == 0);
 
             List<Componente> componenti = new List<Componente>();
-            righeFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba)));
+            righeFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UM)));
 
             distinte.Add(new Distinta(riga.Anagrafica, componenti));
 
@@ -555,7 +644,7 @@ namespace EstraiProdottiFiniti
                 sb.AppendLine(d.Codice);
                 foreach (Componente c in d.Componenti)
                 {
-                    sb.AppendLine(string.Format("        {0} {1} ", c.Anagrafica, c.Quantita));
+                    sb.AppendLine(string.Format("        {0} {1} {2}", c.Anagrafica, c.Quantita, c.CodiceUM));
 
                 }
                 sb.AppendLine(string.Empty);
@@ -587,6 +676,8 @@ namespace EstraiProdottiFiniti
             FileStream fs = new FileStream(sfd.FileName, FileMode.Create);
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 ExcelHelper hExcel = new ExcelHelper();
                 byte[] filedata = hExcel.CreaFileFaseCicli(cicli, out errori);
 
@@ -597,6 +688,8 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 MostraEccezione("Errore nel creare il file", ex);
+                Cursor.Current = Cursors.Default;
+
             }
             finally
             {
@@ -623,6 +716,8 @@ namespace EstraiProdottiFiniti
             string errori = string.Empty;
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
+
                 ExcelHelper hExcel = new ExcelHelper();
                 byte[] filedata = hExcel.CreaFileCompoentiDistinta(distinte, out errori);
                 fs.Write(filedata, 0, filedata.Length);
@@ -633,11 +728,23 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 MostraEccezione("Errore nel creare il file", ex);
+                Cursor.Current = Cursors.Default;
+
             }
             finally
             {
                 fs.Close();
             }
+        }
+
+        private void dgvNodi_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            DataGridViewComboBoxCell boxCiclo = dgvNodi.Rows[e.RowIndex].Cells[COLLEGAMENTOCICLO.Name] as DataGridViewComboBoxCell;
+            if (boxCiclo != null)
+                boxCiclo.DataSource = Collegamenti;
+            DataGridViewComboBoxCell boxDistinta = dgvNodi.Rows[e.RowIndex].Cells[COLLEGAMENTODIBA.Name] as DataGridViewComboBoxCell;
+            if (boxDistinta != null)
+                boxDistinta.DataSource = Collegamenti;
         }
     }
 }

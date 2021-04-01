@@ -19,8 +19,17 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         public void GetUSR_PRD_TDIBAByModello(EstraiProdottiFinitiDS ds, string modello)
         {
 
-            string select = string.Format(@"select MA.MODELLO,TB.* from ditta1.usr_prd_tdiba tb
+            string select = string.Format(@"select MA.MODELLO,TB.*,MET.DESDIBAMETHOD METODO, 
+                                 case 
+                                when tdd.idtdibadefault is null then 'N'
+                                else 'S'
+                                end dEbaDefault
+
+                                from ditta1.usr_prd_tdiba tb
                                 inner join gruppo.magazz ma on ma.idmagazz = tb.idmagazz
+                                inner join GRUPPO.USR_TAB_DIBAMETHODS MET ON MET.IDDIBAMETHOD = tb.IDDIBAMETHOD
+                                left outer join ditta1.usr_prd_tdiba_default tdd on tdd.idtdiba = tb.idtdiba
+
                                 where ma.modello like '{0}%'", modello);
 
             using (DbDataAdapter da = BuildDataAdapter(select))
@@ -32,9 +41,16 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         public void GetUSR_PRD_TDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 
-            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.* from ditta1.usr_prd_tdiba tb
+            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.*,
+                                case 
+                                when tdd.idtdibadefault is null then 'N'
+                                else 'S'
+                                end dEbaDefault
+
+                                from ditta1.usr_prd_tdiba tb
                                 inner join gruppo.magazz ma on ma.idmagazz = tb.idmagazz
                                 inner join GRUPPO.USR_TAB_DIBAMETHODS MET ON MET.IDDIBAMETHOD = tb.IDDIBAMETHOD
+                                left outer join ditta1.usr_prd_tdiba_default tdd on tdd.idtdiba = tb.idtdiba
                                 where tb.IDTDIBA =  $P<IDTDIBA>");
             ParamSet ps = new ParamSet();
             ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);
@@ -47,7 +63,9 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 
-            string select = string.Format(@"select TB.* from ditta1.usr_prd_Rdiba tb
+            string select = string.Format(@"select TB.*, UN.CODICEUNIMI
+                                from ditta1.usr_prd_Rdiba tb
+                                INNER JOIN GRUPPO.TABUNIMI UN ON UN.IDTABUNIMI=TB.IDTABUNIMI
                                 where tb.IDTDIBA =  $P<IDTDIBA>");
             ParamSet ps = new ParamSet();
             ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);
@@ -89,7 +107,9 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         public void GetUSR_PRD_RDIBATopFinish(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 
-            string select = string.Format(@"select TB.* from ditta2.usr_prd_Rdiba tb
+            string select = string.Format(@"select TB.*,UN.CODICEUNIMI 
+                                from ditta2.usr_prd_Rdiba tb
+                                INNER JOIN GRUPPO.TABUNIMI UN ON UN.IDTABUNIMI=TB.IDTABUNIMI
                                 where tb.IDTDIBA =  $P<IDTDIBA>");
             ParamSet ps = new ParamSet();
             ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);

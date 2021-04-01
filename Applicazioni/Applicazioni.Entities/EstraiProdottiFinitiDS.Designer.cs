@@ -579,6 +579,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnMETODO;
             
+            private global::System.Data.DataColumn columnDEBADEFAULT;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_PRD_TDIBADataTable() {
@@ -974,6 +976,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DEBADEFAULTColumn {
+                get {
+                    return this.columnDEBADEFAULT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1054,7 +1064,8 @@ namespace Applicazioni.Entities {
                         string CODDITTAINFRAG, 
                         decimal NO_COSTO_DIBA_SNP, 
                         string MODELLO, 
-                        string METODO) {
+                        string METODO, 
+                        string DEBADEFAULT) {
                 USR_PRD_TDIBARow rowUSR_PRD_TDIBARow = ((USR_PRD_TDIBARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDTDIBA,
@@ -1101,7 +1112,8 @@ namespace Applicazioni.Entities {
                         CODDITTAINFRAG,
                         NO_COSTO_DIBA_SNP,
                         MODELLO,
-                        METODO};
+                        METODO,
+                        DEBADEFAULT};
                 rowUSR_PRD_TDIBARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_PRD_TDIBARow);
                 return rowUSR_PRD_TDIBARow;
@@ -1176,6 +1188,7 @@ namespace Applicazioni.Entities {
                 this.columnNO_COSTO_DIBA_SNP = base.Columns["NO_COSTO_DIBA_SNP"];
                 this.columnMODELLO = base.Columns["MODELLO"];
                 this.columnMETODO = base.Columns["METODO"];
+                this.columnDEBADEFAULT = base.Columns["DEBADEFAULT"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1271,6 +1284,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnMODELLO);
                 this.columnMETODO = new global::System.Data.DataColumn("METODO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMETODO);
+                this.columnDEBADEFAULT = new global::System.Data.DataColumn("DEBADEFAULT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDEBADEFAULT);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDTDIBA}, true));
                 this.columnIDTDIBA.AllowDBNull = false;
@@ -1582,6 +1597,8 @@ namespace Applicazioni.Entities {
             private global::System.Data.DataColumn columnIDRDIBACOLORE;
             
             private global::System.Data.DataColumn columnIDRDIBAVARIANTE;
+            
+            private global::System.Data.DataColumn columnCODICEUNIMI;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -2154,6 +2171,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICEUNIMIColumn {
+                get {
+                    return this.columnCODICEUNIMI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2256,7 +2281,8 @@ namespace Applicazioni.Entities {
                         decimal ORIGINEVARDIBA, 
                         string IDRDIBAMISURA, 
                         string IDRDIBACOLORE, 
-                        string IDRDIBAVARIANTE) {
+                        string IDRDIBAVARIANTE, 
+                        string CODICEUNIMI) {
                 USR_PRD_RDIBARow rowUSR_PRD_RDIBARow = ((USR_PRD_RDIBARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDRDIBA,
@@ -2325,7 +2351,8 @@ namespace Applicazioni.Entities {
                         ORIGINEVARDIBA,
                         IDRDIBAMISURA,
                         IDRDIBACOLORE,
-                        IDRDIBAVARIANTE};
+                        IDRDIBAVARIANTE,
+                        CODICEUNIMI};
                 rowUSR_PRD_RDIBARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_PRD_RDIBARow);
                 return rowUSR_PRD_RDIBARow;
@@ -2422,6 +2449,7 @@ namespace Applicazioni.Entities {
                 this.columnIDRDIBAMISURA = base.Columns["IDRDIBAMISURA"];
                 this.columnIDRDIBACOLORE = base.Columns["IDRDIBACOLORE"];
                 this.columnIDRDIBAVARIANTE = base.Columns["IDRDIBAVARIANTE"];
+                this.columnCODICEUNIMI = base.Columns["CODICEUNIMI"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2561,6 +2589,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnIDRDIBACOLORE);
                 this.columnIDRDIBAVARIANTE = new global::System.Data.DataColumn("IDRDIBAVARIANTE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDRDIBAVARIANTE);
+                this.columnCODICEUNIMI = new global::System.Data.DataColumn("CODICEUNIMI", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICEUNIMI);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDRDIBA}, true));
                 this.columnIDRDIBA.AllowDBNull = false;
@@ -6927,6 +6957,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnIDRDIBAVARIANTE;
             
+            private global::System.Data.DataColumn columnCODICEUNIMI;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_PRD_RDIBATOPFINISHDataTable() {
@@ -7498,6 +7530,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICEUNIMIColumn {
+                get {
+                    return this.columnCODICEUNIMI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7600,7 +7640,8 @@ namespace Applicazioni.Entities {
                         decimal ORIGINEVARDIBA, 
                         string IDRDIBAMISURA, 
                         string IDRDIBACOLORE, 
-                        string IDRDIBAVARIANTE) {
+                        string IDRDIBAVARIANTE, 
+                        string CODICEUNIMI) {
                 USR_PRD_RDIBATOPFINISHRow rowUSR_PRD_RDIBATOPFINISHRow = ((USR_PRD_RDIBATOPFINISHRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDRDIBA,
@@ -7669,7 +7710,8 @@ namespace Applicazioni.Entities {
                         ORIGINEVARDIBA,
                         IDRDIBAMISURA,
                         IDRDIBACOLORE,
-                        IDRDIBAVARIANTE};
+                        IDRDIBAVARIANTE,
+                        CODICEUNIMI};
                 rowUSR_PRD_RDIBATOPFINISHRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_PRD_RDIBATOPFINISHRow);
                 return rowUSR_PRD_RDIBATOPFINISHRow;
@@ -7766,6 +7808,7 @@ namespace Applicazioni.Entities {
                 this.columnIDRDIBAMISURA = base.Columns["IDRDIBAMISURA"];
                 this.columnIDRDIBACOLORE = base.Columns["IDRDIBACOLORE"];
                 this.columnIDRDIBAVARIANTE = base.Columns["IDRDIBAVARIANTE"];
+                this.columnCODICEUNIMI = base.Columns["CODICEUNIMI"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7905,6 +7948,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnIDRDIBACOLORE);
                 this.columnIDRDIBAVARIANTE = new global::System.Data.DataColumn("IDRDIBAVARIANTE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDRDIBAVARIANTE);
+                this.columnCODICEUNIMI = new global::System.Data.DataColumn("CODICEUNIMI", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICEUNIMI);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDRDIBA}, true));
                 this.columnIDRDIBA.AllowDBNull = false;
@@ -8751,6 +8796,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DEBADEFAULT {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_TDIBA.DEBADEFAULTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DEBADEFAULT\' in table \'USR_PRD_TDIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_TDIBA.DEBADEFAULTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDMAGAZZNull() {
                 return this.IsNull(this.tableUSR_PRD_TDIBA.IDMAGAZZColumn);
             }
@@ -9083,6 +9144,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetMETODONull() {
                 this[this.tableUSR_PRD_TDIBA.METODOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDEBADEFAULTNull() {
+                return this.IsNull(this.tableUSR_PRD_TDIBA.DEBADEFAULTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDEBADEFAULTNull() {
+                this[this.tableUSR_PRD_TDIBA.DEBADEFAULTColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -10049,6 +10122,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICEUNIMI {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RDIBA.CODICEUNIMIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICEUNIMI\' in table \'USR_PRD_RDIBA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RDIBA.CODICEUNIMIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDTDIBANull() {
                 return this.IsNull(this.tableUSR_PRD_RDIBA.IDTDIBAColumn);
             }
@@ -10549,6 +10638,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDRDIBAVARIANTENull() {
                 this[this.tableUSR_PRD_RDIBA.IDRDIBAVARIANTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODICEUNIMINull() {
+                return this.IsNull(this.tableUSR_PRD_RDIBA.CODICEUNIMIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODICEUNIMINull() {
+                this[this.tableUSR_PRD_RDIBA.CODICEUNIMIColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -15927,6 +16028,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICEUNIMI {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_RDIBATOPFINISH.CODICEUNIMIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICEUNIMI\' in table \'USR_PRD_RDIBATOPFINISH\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_RDIBATOPFINISH.CODICEUNIMIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDTDIBANull() {
                 return this.IsNull(this.tableUSR_PRD_RDIBATOPFINISH.IDTDIBAColumn);
             }
@@ -16427,6 +16544,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDRDIBAVARIANTENull() {
                 this[this.tableUSR_PRD_RDIBATOPFINISH.IDRDIBAVARIANTEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODICEUNIMINull() {
+                return this.IsNull(this.tableUSR_PRD_RDIBATOPFINISH.CODICEUNIMIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODICEUNIMINull() {
+                this[this.tableUSR_PRD_RDIBATOPFINISH.CODICEUNIMIColumn] = global::System.Convert.DBNull;
             }
         }
         

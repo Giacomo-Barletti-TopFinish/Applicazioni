@@ -27,6 +27,7 @@ namespace EstraiProdottiFiniti
         public string CodiceCiclo { get; set; }
         public decimal Peso { get; set; }
         public decimal Superficie { get; set; }
+        public string UM { get; set; }
 
 
         public string DescrizioneArticolo { get; set; }
