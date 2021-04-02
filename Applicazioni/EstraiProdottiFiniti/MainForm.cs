@@ -260,6 +260,15 @@ namespace EstraiProdottiFiniti
                         idPadre = n.ID;
                         idNodo++;
                     }
+                    else
+                    {
+                        if(n.Fase== "SKIC")
+                        {
+                            Nodi.Add(n);
+                            idPadre = n.ID;
+                            idNodo++;
+                        }
+                    }
                 }
                 bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
@@ -281,6 +290,17 @@ namespace EstraiProdottiFiniti
                             Nodi.Add(nodoFiglio);
                             idNodo++;
                         }
+                        else
+                        {
+                            if (nodoFiglio.Fase == "SKIC")
+                            {
+                                Nodi.Add(nodoFiglio);
+                                idPadre = nodoFiglio.ID;
+                                idNodo++;
+                            }
+
+                        }
+
                     }
                 }
 
@@ -309,6 +329,17 @@ namespace EstraiProdottiFiniti
                     Nodi.Add(n);
                     idNodo++;
                 }
+                else
+                {
+                    if (n.Fase == "SKIC")
+                    {
+                        Nodi.Add(n);
+                        idPadre = n.ID;
+                        idNodo++;
+                    }
+
+                }
+
                 bEstrai.GetUSR_PRD_RDIBATopFinish(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow> componenti = _ds.USR_PRD_RDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).ToList();
                 if (componenti.Count > 0) profondita++;
@@ -329,6 +360,17 @@ namespace EstraiProdottiFiniti
                             Nodi.Add(nodoFiglio);
                             idNodo++;
                         }
+                        else
+                        {
+                            if (n.Fase == "SKIC")
+                            {
+                                Nodi.Add(n);
+                                idPadre = n.ID;
+                                idNodo++;
+                            }
+
+                        }
+
                     }
                 }
             }
