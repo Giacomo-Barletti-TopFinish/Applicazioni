@@ -86,6 +86,7 @@ namespace EstraiProdottiFiniti
 
         private void btnCercaDiBa_Click(object sender, EventArgs e)
         {
+            txtArticolo.Text = txtArticolo.Text.ToUpper();
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
                 if (string.IsNullOrEmpty(txtArticolo.Text))
@@ -116,10 +117,15 @@ namespace EstraiProdottiFiniti
                 else
                 {
                     EstraiProdottiFinitiDS.USR_PRD_TDIBARow riga = _ds.USR_PRD_TDIBA.FirstOrDefault();
+                    if (riga == null)
+                    {
+                        MessageBox.Show("Articolo non trovato", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
                     IDTDIBA = riga.IDTDIBA;
 
-                    txtNoteStd.Text = riga.NOTESTD;
-                    txtVersioneDiBa.Text = riga.NOTETECH;
+                    txtNoteStd.Text = riga.IsNOTESTDNull() ? string.Empty : riga.NOTESTD;
+                    txtVersioneDiBa.Text = riga.IsNOTETECHNull() ? string.Empty : riga.NOTETECH;
                     modello = riga.MODELLO;
                 }
                 this.Text = string.Format("{0} {1}", this.Text, modello);
@@ -546,24 +552,24 @@ namespace EstraiProdottiFiniti
                 Cursor.Current = Cursors.WaitCursor;
 
                 var Query = from p in Nodi.GroupBy(p => p.IDPADRE)
-                        select new
-                        {
-                            count = p.Count(),
-                            p.First().IDPADRE,
-                        };
+                            select new
+                            {
+                                count = p.Count(),
+                                p.First().IDPADRE,
+                            };
 
-            var Montaggi = Query.Where(x => x.count > 1);
-            List<int> idPadreMOntaggi = Montaggi.Select(x => x.IDPADRE).ToList();
-            List<Nodo> NodiSenzaAnagrafica = new List<Nodo>();
+                var Montaggi = Query.Where(x => x.count > 1);
+                List<int> idPadreMOntaggi = Montaggi.Select(x => x.IDPADRE).ToList();
+                List<Nodo> NodiSenzaAnagrafica = new List<Nodo>();
 
-            foreach (int idpadreDaVerificare in idPadreMOntaggi)
-            {
-                NodiSenzaAnagrafica.AddRange(Nodi.Where(x => x.IDPADRE == idpadreDaVerificare && string.IsNullOrEmpty(x.Anagrafica)).ToList());
-            }
+                foreach (int idpadreDaVerificare in idPadreMOntaggi)
+                {
+                    NodiSenzaAnagrafica.AddRange(Nodi.Where(x => x.IDPADRE == idpadreDaVerificare && string.IsNullOrEmpty(x.Anagrafica)).ToList());
+                }
 
 
-            distinte = new List<Distinta>();
-          
+                distinte = new List<Distinta>();
+
 
                 List<Nodo> righeConAnagrafica = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderBy(x => x.ID).ToList();
                 if (righeConAnagrafica.Count == 0)
