@@ -72,7 +72,7 @@ namespace FlussoFatture
                 {
 
                     _ds = new FlussoFattureDS();
-                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, radioButtonAzienda,chkIgnoraMetal.Checked);
+                    bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, radioButtonAzienda, chkIgnoraMetal.Checked);
 
                     dgvRisultati.DataSource = _ds;
                     dgvRisultati.DataMember = _ds.BOLLE_VENDITA.TableName;
@@ -88,6 +88,7 @@ namespace FlussoFatture
             }
         }
 
+   
         private void btnCreaFiles_Click(object sender, EventArgs e)
         {
             try
@@ -132,11 +133,22 @@ namespace FlussoFatture
                 }
 
                 string errori;
+                StringBuilder senzaPrezzo = new StringBuilder();
                 idTestate = idTestate.Distinct().ToList();
                 using (FlussoFattureBusiness bFlussoFatture = new FlussoFattureBusiness())
                 {
                     foreach (string fullnumdoc in idTestate)
-                        bFlussoFatture.BloccaBolla(fullnumdoc);
+                    {
+                        FlussoFattureDS.BC_FLUSSO_TESTATARow testata = ds.BC_FLUSSO_TESTATA.Where(x => x.FULLNUMDOC == fullnumdoc).FirstOrDefault();
+                        if (ds.BC_FLUSSO_DETTAGLIO.Any(x => x.FULLNUMDOC == fullnumdoc && x.PREZZOTOT == 0))
+                        {
+                            senzaPrezzo.AppendLine(string.Format("{0} non esportata perchè SENZA PREZZO", fullnumdoc));
+                        }
+                        else
+                        {
+                            bFlussoFatture.BloccaBolla(fullnumdoc);
+                        }
+                    }
                 }
 
                 ExcelHelper hExcel = new ExcelHelper();
@@ -145,6 +157,8 @@ namespace FlussoFatture
                 fs.Write(filedata, 0, filedata.Length);
                 fs.Flush();
                 fs.Close();
+
+                errori = errori + string.Format(" {0}", senzaPrezzo);
 
                 if (errori.Trim().Length > 0)
                     MessageBox.Show(errori.Trim(), "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Stop);
