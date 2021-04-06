@@ -8,6 +8,7 @@ namespace Applicazioni.Entities
 {
     public class Ciclo
     {
+        public static string CodiceStandard = "IMPORT";
         public int Inizio;
         public int Fine;
         public string Codice;
@@ -23,6 +24,7 @@ namespace Applicazioni.Entities
 
     public class Fase
     {
+        public int ID;
         public string Versione = string.Empty;
         public int Operazione;
         public string Tipo = "Area di produzione";

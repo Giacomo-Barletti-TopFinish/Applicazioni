@@ -23,6 +23,7 @@ namespace Applicazioni.Entities
 
     public class Componente
     {
+        public int ID;
         public string Tipo = "Articolo";
         public string Descrizione = string.Empty;
         public string CodiceUM = "KG";
@@ -36,12 +37,13 @@ namespace Applicazioni.Entities
         public string Condizione=string.Empty;
         public string ArticoloNeutro=string.Empty;
         public string Formula=string.Empty;
-        public Componente(string Anagrafica, decimal Quantita, string Collegamento, string UM)
+        public Componente(string Anagrafica, decimal Quantita, string Collegamento, string UM, int ID)
         {
             this.Anagrafica = Anagrafica;
             this.Quantita = Quantita;
             this.Collegamento = Collegamento;
             this.CodiceUM = UM;
+            this.ID = ID;
         }
     }
 }

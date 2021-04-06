@@ -46,6 +46,7 @@ namespace EstraiProdottiFiniti
             Collegamenti.Add("FRESATURA");
             Collegamenti.Add("GALVROTO");
             Collegamenti.Add("GALVSTAT");
+            Collegamenti.Add("IMPORT");
             Collegamenti.Add("INCART");
             Collegamenti.Add("INSACC");
             Collegamenti.Add("LEGFILI");
@@ -262,7 +263,7 @@ namespace EstraiProdottiFiniti
                     }
                     else
                     {
-                        if(n.Fase== "SKIC")
+                        if (n.Fase == "SKIC")
                         {
                             Nodi.Add(n);
                             idPadre = n.ID;
@@ -398,7 +399,7 @@ namespace EstraiProdottiFiniti
 
         }
 
-        private void btnVerificaAnagrafiche_Click(object sender, EventArgs e)
+        private void VerificaAnagrafiche()
         {
             try
             {
@@ -444,16 +445,20 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 txtMsgAnagrafiche.Text = ex.Message;
-                MostraEccezione("Errore in verifica distinta", ex);
+                MostraEccezione("Errore in verifica anagrafica", ex);
                 Cursor.Current = Cursors.Default;
 
             }
+
+        }
+
+        private void btnVerificaAnagrafiche_Click(object sender, EventArgs e)
+        {
+            VerificaAnagrafiche();
         }
 
         private void btnSalvaAnagrafiche_Click(object sender, EventArgs e)
         {
-            //foreach (Nodo n in Nodi)
-            //    _ds.BC_ANAGRAFICA.AddBC_ANAGRAFICARow(n.CreaRigaTabella(_ds));
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
                 bEstrai.UpdateTable(_ds.BC_ANAGRAFICA.TableName, _ds);
@@ -482,7 +487,7 @@ namespace EstraiProdottiFiniti
             txtMsgAnagrafiche.Text += sb.ToString();
         }
 
-        private void btnVerificaCicli_Click(object sender, EventArgs e)
+        private void VerificaCicli()
         {
             cicli = new List<Ciclo>();
 
@@ -529,7 +534,7 @@ namespace EstraiProdottiFiniti
                             Fase f = new Fase();
                             f.Operazione = operazione;
                             operazione += 10;
-
+                            f.ID = riga.ID;
                             f.AreaProduzione = riga.Reparto;
                             f.TempoLavorazione = riga.PezziOrari > 0 ? 1 / riga.PezziOrari : 0;
                             f.Collegamento = riga.CollegamentoCiclo;
@@ -553,6 +558,12 @@ namespace EstraiProdottiFiniti
 
 
             }
+
+        }
+
+        private void btnVerificaCicli_Click(object sender, EventArgs e)
+        {
+            VerificaCicli();
         }
 
         private void ImpaginaMessaggioCicli(List<Ciclo> cicli)
@@ -587,7 +598,7 @@ namespace EstraiProdottiFiniti
             txtMsgCicli.Text = sbd.ToString();
         }
 
-        private void btnVerificaDistinte_Click(object sender, EventArgs e)
+        private void VerificaDistinte()
         {
             try
             {
@@ -637,6 +648,12 @@ namespace EstraiProdottiFiniti
                 Cursor.Current = Cursors.Default;
 
             }
+
+        }
+
+        private void btnVerificaDistinte_Click(object sender, EventArgs e)
+        {
+            VerificaDistinte();
         }
 
         private void creaDistinta(Nodo riga, int indiceMinimo, int indiceMassimo, List<Distinta> distinte, List<Nodo> righeConAnagrafica, int avantiMassimo)
@@ -654,7 +671,7 @@ namespace EstraiProdottiFiniti
             } while (righeFiglie.Count == 0);
 
             List<Componente> componenti = new List<Componente>();
-            righeFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UM)));
+            righeFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UM, x.ID)));
 
             distinte.Add(new Distinta(riga.Anagrafica, componenti));
 
@@ -793,6 +810,64 @@ namespace EstraiProdottiFiniti
             DataGridViewComboBoxCell boxDistinta = dgvNodi.Rows[e.RowIndex].Cells[COLLEGAMENTODIBA.Name] as DataGridViewComboBoxCell;
             if (boxDistinta != null)
                 boxDistinta.DataSource = Collegamenti;
+        }
+
+        private void btnVerifica_Click(object sender, EventArgs e)
+        {
+            VerificaAnagrafiche();
+            VerificaCicli();
+            VerificaDistinte();
+            InserisciCodiciCollegamento();
+            //            PopolaGrigliaNodi();
+            dgvNodi.Update();
+            dgvNodi.Refresh();
+
+        }
+
+        private void InserisciCodiciCollegamento()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Distinta d in distinte)
+            {
+                Ciclo c = cicli.Where(x => x.Codice == d.Codice).FirstOrDefault();
+                if (c == null)
+                {
+                    sb.AppendLine(string.Format("ERRORE: impossibile trovare il ciclo per la seguente distinta {0}", d.Codice));
+                    continue;
+                }
+
+                if (c.Fasi.Count == 0)
+                {
+                    sb.AppendLine(string.Format("ERRORE: il ciclo {0} non ha alcuna fase", c.Codice));
+                    continue;
+                }
+
+                Fase f = c.Fasi.OrderBy(x => x.Operazione).FirstOrDefault();
+                foreach (Componente comp in d.Componenti)
+                {
+                    comp.Collegamento = Ciclo.CodiceStandard;
+                    Nodo n = Nodi.Where(x => x.ID == comp.ID).FirstOrDefault();
+                    if (n == null)
+                    {
+                        sb.AppendLine(string.Format("ERRORE: impossibile trovare il nodo associato al componente {0} ", comp.Anagrafica));
+                        continue;
+                    }
+                    n.CollegamentoDiba = Ciclo.CodiceStandard;
+                }
+                f.Collegamento = Ciclo.CodiceStandard;
+
+                Nodo nCiclo = Nodi.Where(x => x.ID == f.ID).FirstOrDefault();
+                if (nCiclo == null)
+                {
+                    sb.AppendLine(string.Format("ERRORE: impossibile trovare il nodo associato alla fase {0} del ciclo {1}", f.AreaProduzione, c.Codice));
+                    continue;
+                }
+                nCiclo.CollegamentoCiclo = Ciclo.CodiceStandard;
+            }
+
+            if (sb.Length > 0)
+                MessageBox.Show(sb.ToString());
         }
     }
 }
