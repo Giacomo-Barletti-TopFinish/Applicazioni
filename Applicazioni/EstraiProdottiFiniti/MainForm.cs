@@ -195,7 +195,7 @@ namespace EstraiProdottiFiniti
             EstraiProdottiFinitiDS.MAGAZZRow magazz = _ds.MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
             EstraiProdottiFinitiDS.TABFASRow fase = _ds.TABFAS.Where(x => x.IDTABFAS == IDTABFAS).FirstOrDefault();
 
-            EstraiProdottiFinitiDS.BC_ANAGRAFICARow anagrafica = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
+            EstraiProdottiFinitiDS.BC_ANAGRAFICARow anagrafica = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == idmagazz && x.CL == 0).FirstOrDefault();
 
 
             string reparto = fase.IsCODICECLIFOPREDFASENull() ? string.Empty : fase.CODICECLIFOPREDFASE;
@@ -228,6 +228,7 @@ namespace EstraiProdottiFiniti
             n.Attiva = attiva;
             n.Controllata = controllata;
             n.UM = unitaMisura;
+            n.ContoLavoro = false;
             return n;
         }
         private void EstraiDistintaBase(EstraiProdottiFinitiBusiness bEstrai, string IDTDIBA, int profondita, ref int idNodo, int idPadre, decimal quantitaConsumo,
@@ -403,6 +404,7 @@ namespace EstraiProdottiFiniti
         {
             try
             {
+
                 Cursor.Current = Cursors.WaitCursor;
 
                 string messaggioErrore = string.Empty;
@@ -415,7 +417,7 @@ namespace EstraiProdottiFiniti
                 foreach (Nodo nodoConAnagrafica in nodiConAnagrafiche.Where(x => !string.IsNullOrEmpty(x.IDMAGAZZ)))
                 {
                     nodoConAnagrafica.ToUpper();
-                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == nodoConAnagrafica.IDMAGAZZ).FirstOrDefault();
+                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == nodoConAnagrafica.IDMAGAZZ && x.CL == (nodoConAnagrafica.ContoLavoro ? 1 : 0)).FirstOrDefault();
                     if (riga != null)
                     {
                         if (riga.BC != nodoConAnagrafica.Anagrafica.ToUpper())
@@ -431,6 +433,7 @@ namespace EstraiProdottiFiniti
                         EstraiProdottiFinitiDS.BC_ANAGRAFICARow nuovaRiga = _ds.BC_ANAGRAFICA.NewBC_ANAGRAFICARow();
                         nuovaRiga.BC = nodoConAnagrafica.Anagrafica;
                         nuovaRiga.IDMAGAZZ = nodoConAnagrafica.IDMAGAZZ;
+                        riga.CL = nodoConAnagrafica.ContoLavoro ? 1 : 0;
                         _ds.BC_ANAGRAFICA.AddBC_ANAGRAFICARow(nuovaRiga);
                         anagraficheNuove.Add(string.Format("{0} associata a {1}", nodoConAnagrafica.Modello, nodoConAnagrafica.Anagrafica));
                     }
@@ -487,8 +490,9 @@ namespace EstraiProdottiFiniti
             txtMsgAnagrafiche.Text += sb.ToString();
         }
 
-        private void VerificaCicli()
+        private void VerificaCicli(out string errori)
         {
+            errori = string.Empty;
             cicli = new List<Ciclo>();
 
             try
@@ -500,6 +504,7 @@ namespace EstraiProdottiFiniti
                 if (righeConAnagrafica.Count == 0)
                 {
                     txtMsgCicli.Text = "Nessuna anagrafica trovata";
+                    errori = txtMsgCicli.Text;
                     return;
                 }
 
@@ -553,17 +558,21 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 txtMsgCicli.Text = ex.Message;
+                errori = errori + Environment.NewLine + ex.Message;
                 MostraEccezione("Errore in verifica cicli", ex);
+            }
+            finally
+            {
                 Cursor.Current = Cursors.Default;
-
-
             }
 
         }
 
         private void btnVerificaCicli_Click(object sender, EventArgs e)
         {
-            VerificaCicli();
+            string errori = string.Empty;
+            VerificaCicli(out errori);
+
         }
 
         private void ImpaginaMessaggioCicli(List<Ciclo> cicli)
@@ -598,8 +607,9 @@ namespace EstraiProdottiFiniti
             txtMsgCicli.Text = sbd.ToString();
         }
 
-        private void VerificaDistinte()
+        private void VerificaDistinte(out string errori)
         {
+            errori = string.Empty;
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -620,14 +630,13 @@ namespace EstraiProdottiFiniti
                     NodiSenzaAnagrafica.AddRange(Nodi.Where(x => x.IDPADRE == idpadreDaVerificare && string.IsNullOrEmpty(x.Anagrafica)).ToList());
                 }
 
-
                 distinte = new List<Distinta>();
-
 
                 List<Nodo> righeConAnagrafica = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderBy(x => x.ID).ToList();
                 if (righeConAnagrafica.Count == 0)
                 {
                     txtMsgDistinte.Text = "Nessuna anagrafica trovata";
+                    errori = "DISTINTE " + Environment.NewLine + "Nessuna anagrafica trovata";
                     return;
                 }
 
@@ -638,6 +647,8 @@ namespace EstraiProdottiFiniti
                 creaDistinta(riga, 1, Nodi.Count, distinte, righeConAnagrafica, avantiMassimo);
 
                 ImpaginaMessaggioDistinte(distinte, NodiSenzaAnagrafica);
+                errori = errori + Environment.NewLine + ImpaginaNodiSenzaAnagrafica(NodiSenzaAnagrafica);
+
                 btnSalvaDistinte.Enabled = true;
 
             }
@@ -645,15 +656,19 @@ namespace EstraiProdottiFiniti
             {
                 txtMsgDistinte.Text = ex.Message;
                 MostraEccezione("Errore in verifica distinte", ex);
-                Cursor.Current = Cursors.Default;
 
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
 
         }
 
         private void btnVerificaDistinte_Click(object sender, EventArgs e)
         {
-            VerificaDistinte();
+            string errori = string.Empty;
+            VerificaDistinte(out errori);
         }
 
         private void creaDistinta(Nodo riga, int indiceMinimo, int indiceMassimo, List<Distinta> distinte, List<Nodo> righeConAnagrafica, int avantiMassimo)
@@ -671,7 +686,7 @@ namespace EstraiProdottiFiniti
             } while (righeFiglie.Count == 0);
 
             List<Componente> componenti = new List<Componente>();
-            righeFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UM, x.ID)));
+            righeFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UM, x.ID, riga.Anagrafica)));
 
             distinte.Add(new Distinta(riga.Anagrafica, componenti));
 
@@ -685,21 +700,28 @@ namespace EstraiProdottiFiniti
 
         }
 
-        private void ImpaginaMessaggioDistinte(List<Distinta> distinte, List<Nodo> nodiSenzaAnagrafica)
+        private string ImpaginaNodiSenzaAnagrafica(List<Nodo> nodiSenzaAnagrafica)
         {
-
             StringBuilder sb = new StringBuilder();
             if (nodiSenzaAnagrafica.Count > 0)
             {
 
-                sb.AppendLine("NODI SENZA ANAGRAFICA");
-                sb.AppendLine("---------------------");
+                sb.AppendLine("DISTINTE: NODI SENZA ANAGRAFICA");
+                sb.AppendLine("-------------------------------");
                 foreach (Nodo n in nodiSenzaAnagrafica)
                 {
                     sb.AppendLine(n.Modello);
                     sb.AppendLine(String.Empty);
                 }
             }
+            return sb.ToString();
+
+        }
+
+        private void ImpaginaMessaggioDistinte(List<Distinta> distinte, List<Nodo> nodiSenzaAnagrafica)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(ImpaginaNodiSenzaAnagrafica(nodiSenzaAnagrafica));
 
             sb.AppendLine("DISTINTA");
             sb.AppendLine("--------");
@@ -814,24 +836,76 @@ namespace EstraiProdottiFiniti
 
         private void btnVerifica_Click(object sender, EventArgs e)
         {
+            StringBuilder sb = new StringBuilder();
+            string errori = string.Empty;
             VerificaAnagrafiche();
-            VerificaCicli();
-            VerificaDistinte();
-            InserisciCodiciCollegamento();
-            //            PopolaGrigliaNodi();
+
+            sb.AppendLine("**** VERIFICA CICLI ****");
+            VerificaCicli(out errori);
+            if (errori.Trim().Length > 0)
+                sb.AppendLine(errori);
+
+            sb.AppendLine("**** VERIFICHE DISTINTE ****");
+            VerificaDistinte(out errori);
+            if (errori.Trim().Length > 0)
+                sb.AppendLine(errori);
+
+            sb.AppendLine("**** VERIFICA ANAGRAFICHE ORFANE ****");
+            sb.AppendLine(VerificaAnagraficheOrfane());
+
+
+            sb.AppendLine("**** VERIFICHE COLLEGAMENTO ****");
+            sb.AppendLine(InserisciCodiciCollegamento());
+            txtNotifiche.Text = sb.ToString();
+
+            if (sb.Length > 0)
+            {
+                MessageBox.Show("Ci sono errori, verifica nelle notifiche");
+                tabControl1.SelectedTab = tabPage5;
+            }
+
             dgvNodi.Update();
             dgvNodi.Refresh();
 
         }
 
-        private void InserisciCodiciCollegamento()
+        private string VerificaAnagraficheOrfane()
         {
             StringBuilder sb = new StringBuilder();
+            List<Nodo> righeConAnagrafica = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderBy(x => x.ID).ToList();
+
+            List<Componente> componenti = EstraiComponenti();
+
+            foreach (Nodo n in righeConAnagrafica)
+            {
+                if (!distinte.Any(x => x.Codice == n.Anagrafica))
+                {
+                    if (!componenti.Any(x => x.Anagrafica == n.Anagrafica))
+                        sb.AppendLine(n.Anagrafica);
+                }
+
+            }
+            return sb.ToString();
+        }
+
+        private List<Componente> EstraiComponenti()
+        {
+            List<Componente> componenti = new List<Componente>();
+            foreach (Distinta d in distinte)
+                componenti.AddRange(d.Componenti);
+            return componenti;
+        }
+
+        private string InserisciCodiciCollegamento()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            List<Componente> componenti = EstraiComponenti();
 
             foreach (Distinta d in distinte)
             {
                 Ciclo c = cicli.Where(x => x.Codice == d.Codice).FirstOrDefault();
-                if (c == null)
+                if (c == null && !componenti.Any(x => x.Anagrafica == d.Codice))
                 {
                     sb.AppendLine(string.Format("ERRORE: impossibile trovare il ciclo per la seguente distinta {0}", d.Codice));
                     continue;
@@ -866,8 +940,79 @@ namespace EstraiProdottiFiniti
                 nCiclo.CollegamentoCiclo = Ciclo.CodiceStandard;
             }
 
-            if (sb.Length > 0)
-                MessageBox.Show(sb.ToString());
+            return sb.ToString();
+
         }
+
+        private bool TrovaNodoAlbero(Nodo nodoDaTrovare, TreeNode radice)
+        {
+            Nodo nodoPadre = (Nodo)radice.Tag;
+            if (nodoPadre == nodoDaTrovare)
+            {
+                nodoPadre.ContoLavoro = true;
+                return true;
+            }
+
+            if (nodoPadre.ID == nodoDaTrovare.ID)
+            {
+                nodoPadre.ContoLavoro = true;
+                return true;
+            }
+
+            foreach (TreeNode nodoAlberoFiglio in radice.Nodes)
+            {
+                Nodo nodoFiglio = (Nodo)radice.Tag;
+                bool esito = TrovaNodoAlbero(nodoDaTrovare, nodoAlberoFiglio);
+                nodoFiglio.ContoLavoro = esito;
+                return esito;
+            }
+            return false;
+        }
+
+        private void btnContoLavoro_Click(object sender, EventArgs e)
+        {
+            List<Nodo> nodiFornitiDaCommittente = Nodi.Where(x => x.FornitoDaCommittente == "S").ToList();
+
+            TreeNode root = tvDiBa.Nodes[0];
+
+            foreach (Nodo n in nodiFornitiDaCommittente)
+            {
+                bool esito = TrovaNodoAlbero(n, root);
+            }
+
+            foreach (Nodo nodoContoLavoro in Nodi.Where(x => x.ContoLavoro))
+            {
+                string anagrafica = nodoContoLavoro.Anagrafica;
+                if (!string.IsNullOrEmpty(anagrafica) && anagrafica.Length > 3)
+                {
+                    anagrafica = anagrafica.Insert(3, "7");
+                    anagrafica = anagrafica.Remove(4, 1);
+                    nodoContoLavoro.Anagrafica = anagrafica;
+                }
+                if (string.IsNullOrEmpty(anagrafica) && !string.IsNullOrEmpty(nodoContoLavoro.IDMAGAZZ))
+                {
+                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow rigaAnagarficaContoLavoro = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == nodoContoLavoro.IDMAGAZZ && x.CL == 1).FirstOrDefault();
+                    if (rigaAnagarficaContoLavoro != null)
+                        nodoContoLavoro.Anagrafica = rigaAnagarficaContoLavoro.BC;
+                }
+            }
+
+            foreach (DataGridViewRow riga in dgvNodi.Rows)
+            {
+                if (riga.Cells[ContoLavoro.Name].Value is bool)
+                {
+                    bool contoLavoro = (bool)riga.Cells[ContoLavoro.Name].Value;
+                    if (contoLavoro)
+                    {
+                        riga.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                }
+
+            }
+
+            dgvNodi.Update();
+            dgvNodi.Refresh();
+        }
+
     }
 }

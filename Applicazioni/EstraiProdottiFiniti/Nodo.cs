@@ -10,6 +10,7 @@ namespace EstraiProdottiFiniti
     public class Nodo
     {
         public int ID { get; set; }
+        public bool ContoLavoro { get; set; }
         public int Profondita { get; set; }
         public string IDMAGAZZ { get; set; }
         public string Modello { get; set; }

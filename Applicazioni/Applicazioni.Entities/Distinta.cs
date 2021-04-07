@@ -37,13 +37,15 @@ namespace Applicazioni.Entities
         public string Condizione=string.Empty;
         public string ArticoloNeutro=string.Empty;
         public string Formula=string.Empty;
-        public Componente(string Anagrafica, decimal Quantita, string Collegamento, string UM, int ID)
+        public string DistintaPadre = string.Empty;
+        public Componente(string Anagrafica, decimal Quantita, string Collegamento, string UM, int ID, string DistintaPadre)
         {
             this.Anagrafica = Anagrafica;
             this.Quantita = Quantita;
             this.Collegamento = Collegamento;
             this.CodiceUM = UM;
             this.ID = ID;
+            this.DistintaPadre = DistintaPadre;
         }
     }
 }
