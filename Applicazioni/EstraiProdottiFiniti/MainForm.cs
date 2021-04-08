@@ -189,6 +189,12 @@ namespace EstraiProdottiFiniti
             }
         }
 
+        private void CaricaDropDownListBrand()
+        {
+
+            ddlBrand.Items.AddRange(BrandContoLavoro.EstraiLista().ToArray());
+        }
+
         private Nodo CreaNodo(int idNodo, string idmagazz, int profondita, int idpadre, decimal quantitaConsumo, decimal quantitaOccorrenza, string IDTABFAS,
             string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata, string unitaMisura)
         {
@@ -971,6 +977,13 @@ namespace EstraiProdottiFiniti
 
         private void btnContoLavoro_Click(object sender, EventArgs e)
         {
+
+            if(ddlBrand.SelectedIndex==-1)
+            {
+                MessageBox.Show("Selezionare un brand", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             List<Nodo> nodiFornitiDaCommittente = Nodi.Where(x => x.FornitoDaCommittente == "S").ToList();
 
             TreeNode root = tvDiBa.Nodes[0];
@@ -979,7 +992,7 @@ namespace EstraiProdottiFiniti
             {
                 bool esito = TrovaNodoAlbero(n, root);
             }
-
+            BrandContoLavoro brand = (BrandContoLavoro)ddlBrand.SelectedItem;
             foreach (Nodo nodoContoLavoro in Nodi.Where(x => x.ContoLavoro))
             {
                 string anagrafica = nodoContoLavoro.Anagrafica;
@@ -995,6 +1008,9 @@ namespace EstraiProdottiFiniti
                     if (rigaAnagarficaContoLavoro != null)
                         nodoContoLavoro.Anagrafica = rigaAnagarficaContoLavoro.BC;
                 }
+
+                nodoContoLavoro.Reparto = brand.AreaDiProduzione;
+
             }
 
             foreach (DataGridViewRow riga in dgvNodi.Rows)
@@ -1014,5 +1030,10 @@ namespace EstraiProdottiFiniti
             dgvNodi.Refresh();
         }
 
+        private void EstraiProdottoFinito_Load(object sender, EventArgs e)
+        {
+            CaricaDropDownListBrand();
+            ddlBrand.SelectedIndex = -1;
+        }
     }
 }

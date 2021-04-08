@@ -33,30 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
             this.dgvNodi = new System.Windows.Forms.DataGridView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.txtMsgAnagrafiche = new System.Windows.Forms.TextBox();
-            this.btnSalvaAnagrafiche = new System.Windows.Forms.Button();
-            this.btnVerificaAnagrafiche = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtMsgCicli = new System.Windows.Forms.TextBox();
-            this.btnSalvaCicli = new System.Windows.Forms.Button();
-            this.btnVerificaCicli = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.txtMsgDistinte = new System.Windows.Forms.TextBox();
-            this.btnSalvaDistinte = new System.Windows.Forms.Button();
-            this.btnVerificaDistinte = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtVersioneDiBa = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNoteStd = new System.Windows.Forms.TextBox();
-            this.chkInserisciTopFinish = new System.Windows.Forms.CheckBox();
-            this.chkControlliQualita = new System.Windows.Forms.CheckBox();
-            this.btnVerifica = new System.Windows.Forms.Button();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.txtNotifiche = new System.Windows.Forms.TextBox();
-            this.btnContoLavoro = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MODELLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESCRIZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +58,32 @@
             this.NOTESTANDARD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOTETECNICHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContoLavoro = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txtMsgAnagrafiche = new System.Windows.Forms.TextBox();
+            this.btnSalvaAnagrafiche = new System.Windows.Forms.Button();
+            this.btnVerificaAnagrafiche = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtMsgCicli = new System.Windows.Forms.TextBox();
+            this.btnSalvaCicli = new System.Windows.Forms.Button();
+            this.btnVerificaCicli = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtMsgDistinte = new System.Windows.Forms.TextBox();
+            this.btnSalvaDistinte = new System.Windows.Forms.Button();
+            this.btnVerificaDistinte = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.txtNotifiche = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtVersioneDiBa = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNoteStd = new System.Windows.Forms.TextBox();
+            this.chkInserisciTopFinish = new System.Windows.Forms.CheckBox();
+            this.chkControlliQualita = new System.Windows.Forms.CheckBox();
+            this.btnVerifica = new System.Windows.Forms.Button();
+            this.btnContoLavoro = new System.Windows.Forms.Button();
+            this.ddlBrand = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -103,7 +105,7 @@
             // 
             // txtArticolo
             // 
-            this.txtArticolo.Location = new System.Drawing.Point(103, 12);
+            this.txtArticolo.Location = new System.Drawing.Point(82, 12);
             this.txtArticolo.Name = "txtArticolo";
             this.txtArticolo.Size = new System.Drawing.Size(238, 21);
             this.txtArticolo.TabIndex = 1;
@@ -120,7 +122,7 @@
             // 
             // btnCercaDiBa
             // 
-            this.btnCercaDiBa.Location = new System.Drawing.Point(386, 10);
+            this.btnCercaDiBa.Location = new System.Drawing.Point(347, 10);
             this.btnCercaDiBa.Name = "btnCercaDiBa";
             this.btnCercaDiBa.Size = new System.Drawing.Size(152, 27);
             this.btnCercaDiBa.TabIndex = 3;
@@ -164,273 +166,6 @@
             this.dgvNodi.Size = new System.Drawing.Size(1088, 805);
             this.dgvNodi.TabIndex = 4;
             this.dgvNodi.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvNodi_RowsAdded);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(577, 80);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1102, 839);
-            this.tabControl1.TabIndex = 5;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.dgvNodi);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1094, 811);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Distinta";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.txtMsgAnagrafiche);
-            this.tabPage4.Controls.Add(this.btnSalvaAnagrafiche);
-            this.tabPage4.Controls.Add(this.btnVerificaAnagrafiche);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1094, 833);
-            this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "Anagrafiche";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // txtMsgAnagrafiche
-            // 
-            this.txtMsgAnagrafiche.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMsgAnagrafiche.Location = new System.Drawing.Point(20, 105);
-            this.txtMsgAnagrafiche.Multiline = true;
-            this.txtMsgAnagrafiche.Name = "txtMsgAnagrafiche";
-            this.txtMsgAnagrafiche.ReadOnly = true;
-            this.txtMsgAnagrafiche.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMsgAnagrafiche.Size = new System.Drawing.Size(1047, 692);
-            this.txtMsgAnagrafiche.TabIndex = 1;
-            // 
-            // btnSalvaAnagrafiche
-            // 
-            this.btnSalvaAnagrafiche.Enabled = false;
-            this.btnSalvaAnagrafiche.Location = new System.Drawing.Point(218, 18);
-            this.btnSalvaAnagrafiche.Name = "btnSalvaAnagrafiche";
-            this.btnSalvaAnagrafiche.Size = new System.Drawing.Size(161, 38);
-            this.btnSalvaAnagrafiche.TabIndex = 0;
-            this.btnSalvaAnagrafiche.Text = "Salva anagrafiche";
-            this.btnSalvaAnagrafiche.UseVisualStyleBackColor = true;
-            this.btnSalvaAnagrafiche.Click += new System.EventHandler(this.btnSalvaAnagrafiche_Click);
-            // 
-            // btnVerificaAnagrafiche
-            // 
-            this.btnVerificaAnagrafiche.Location = new System.Drawing.Point(20, 18);
-            this.btnVerificaAnagrafiche.Name = "btnVerificaAnagrafiche";
-            this.btnVerificaAnagrafiche.Size = new System.Drawing.Size(161, 38);
-            this.btnVerificaAnagrafiche.TabIndex = 0;
-            this.btnVerificaAnagrafiche.Text = "Verifica anagrafiche";
-            this.btnVerificaAnagrafiche.UseVisualStyleBackColor = true;
-            this.btnVerificaAnagrafiche.Visible = false;
-            this.btnVerificaAnagrafiche.Click += new System.EventHandler(this.btnVerificaAnagrafiche_Click);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.txtMsgCicli);
-            this.tabPage1.Controls.Add(this.btnSalvaCicli);
-            this.tabPage1.Controls.Add(this.btnVerificaCicli);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1094, 833);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Cicli";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // txtMsgCicli
-            // 
-            this.txtMsgCicli.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMsgCicli.Location = new System.Drawing.Point(22, 112);
-            this.txtMsgCicli.Multiline = true;
-            this.txtMsgCicli.Name = "txtMsgCicli";
-            this.txtMsgCicli.ReadOnly = true;
-            this.txtMsgCicli.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMsgCicli.Size = new System.Drawing.Size(1047, 692);
-            this.txtMsgCicli.TabIndex = 4;
-            // 
-            // btnSalvaCicli
-            // 
-            this.btnSalvaCicli.Enabled = false;
-            this.btnSalvaCicli.Location = new System.Drawing.Point(220, 25);
-            this.btnSalvaCicli.Name = "btnSalvaCicli";
-            this.btnSalvaCicli.Size = new System.Drawing.Size(161, 38);
-            this.btnSalvaCicli.TabIndex = 2;
-            this.btnSalvaCicli.Text = "Salva cicli";
-            this.btnSalvaCicli.UseVisualStyleBackColor = true;
-            this.btnSalvaCicli.Click += new System.EventHandler(this.btnSalvaCicli_Click);
-            // 
-            // btnVerificaCicli
-            // 
-            this.btnVerificaCicli.Location = new System.Drawing.Point(22, 25);
-            this.btnVerificaCicli.Name = "btnVerificaCicli";
-            this.btnVerificaCicli.Size = new System.Drawing.Size(161, 38);
-            this.btnVerificaCicli.TabIndex = 3;
-            this.btnVerificaCicli.Text = "Verifica cicli";
-            this.btnVerificaCicli.UseVisualStyleBackColor = true;
-            this.btnVerificaCicli.Visible = false;
-            this.btnVerificaCicli.Click += new System.EventHandler(this.btnVerificaCicli_Click);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.txtMsgDistinte);
-            this.tabPage3.Controls.Add(this.btnSalvaDistinte);
-            this.tabPage3.Controls.Add(this.btnVerificaDistinte);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1094, 833);
-            this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "Distinte";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // txtMsgDistinte
-            // 
-            this.txtMsgDistinte.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMsgDistinte.Location = new System.Drawing.Point(22, 112);
-            this.txtMsgDistinte.Multiline = true;
-            this.txtMsgDistinte.Name = "txtMsgDistinte";
-            this.txtMsgDistinte.ReadOnly = true;
-            this.txtMsgDistinte.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMsgDistinte.Size = new System.Drawing.Size(1047, 692);
-            this.txtMsgDistinte.TabIndex = 4;
-            // 
-            // btnSalvaDistinte
-            // 
-            this.btnSalvaDistinte.Enabled = false;
-            this.btnSalvaDistinte.Location = new System.Drawing.Point(220, 25);
-            this.btnSalvaDistinte.Name = "btnSalvaDistinte";
-            this.btnSalvaDistinte.Size = new System.Drawing.Size(161, 38);
-            this.btnSalvaDistinte.TabIndex = 2;
-            this.btnSalvaDistinte.Text = "Salva distinte";
-            this.btnSalvaDistinte.UseVisualStyleBackColor = true;
-            this.btnSalvaDistinte.Click += new System.EventHandler(this.btnSalvaDistinte_Click);
-            // 
-            // btnVerificaDistinte
-            // 
-            this.btnVerificaDistinte.Location = new System.Drawing.Point(22, 25);
-            this.btnVerificaDistinte.Name = "btnVerificaDistinte";
-            this.btnVerificaDistinte.Size = new System.Drawing.Size(161, 38);
-            this.btnVerificaDistinte.TabIndex = 3;
-            this.btnVerificaDistinte.Text = "Verifica distinte";
-            this.btnVerificaDistinte.UseVisualStyleBackColor = true;
-            this.btnVerificaDistinte.Visible = false;
-            this.btnVerificaDistinte.Click += new System.EventHandler(this.btnVerificaDistinte_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(609, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Versione";
-            // 
-            // txtVersioneDiBa
-            // 
-            this.txtVersioneDiBa.Location = new System.Drawing.Point(671, 12);
-            this.txtVersioneDiBa.Name = "txtVersioneDiBa";
-            this.txtVersioneDiBa.ReadOnly = true;
-            this.txtVersioneDiBa.Size = new System.Drawing.Size(220, 21);
-            this.txtVersioneDiBa.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(897, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Note Standard";
-            // 
-            // txtNoteStd
-            // 
-            this.txtNoteStd.Location = new System.Drawing.Point(988, 12);
-            this.txtNoteStd.Name = "txtNoteStd";
-            this.txtNoteStd.ReadOnly = true;
-            this.txtNoteStd.Size = new System.Drawing.Size(577, 21);
-            this.txtNoteStd.TabIndex = 7;
-            // 
-            // chkInserisciTopFinish
-            // 
-            this.chkInserisciTopFinish.AutoSize = true;
-            this.chkInserisciTopFinish.Location = new System.Drawing.Point(19, 53);
-            this.chkInserisciTopFinish.Name = "chkInserisciTopFinish";
-            this.chkInserisciTopFinish.Size = new System.Drawing.Size(173, 19);
-            this.chkInserisciTopFinish.TabIndex = 8;
-            this.chkInserisciTopFinish.Text = "Inserisci distinte Top Finish";
-            this.chkInserisciTopFinish.UseVisualStyleBackColor = true;
-            // 
-            // chkControlliQualita
-            // 
-            this.chkControlliQualita.AutoSize = true;
-            this.chkControlliQualita.Checked = true;
-            this.chkControlliQualita.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkControlliQualita.Location = new System.Drawing.Point(211, 53);
-            this.chkControlliQualita.Name = "chkControlliQualita";
-            this.chkControlliQualita.Size = new System.Drawing.Size(157, 19);
-            this.chkControlliQualita.TabIndex = 9;
-            this.chkControlliQualita.Text = "Rimuovi controlli qualità";
-            this.chkControlliQualita.UseVisualStyleBackColor = true;
-            // 
-            // btnVerifica
-            // 
-            this.btnVerifica.Location = new System.Drawing.Point(612, 48);
-            this.btnVerifica.Name = "btnVerifica";
-            this.btnVerifica.Size = new System.Drawing.Size(152, 27);
-            this.btnVerifica.TabIndex = 10;
-            this.btnVerifica.Text = "Verifica";
-            this.btnVerifica.UseVisualStyleBackColor = true;
-            this.btnVerifica.Click += new System.EventHandler(this.btnVerifica_Click);
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.txtNotifiche);
-            this.tabPage5.Location = new System.Drawing.Point(4, 24);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1094, 811);
-            this.tabPage5.TabIndex = 5;
-            this.tabPage5.Text = "Notifiche";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // txtNotifiche
-            // 
-            this.txtNotifiche.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNotifiche.Location = new System.Drawing.Point(3, 3);
-            this.txtNotifiche.Multiline = true;
-            this.txtNotifiche.Name = "txtNotifiche";
-            this.txtNotifiche.ReadOnly = true;
-            this.txtNotifiche.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNotifiche.Size = new System.Drawing.Size(1088, 805);
-            this.txtNotifiche.TabIndex = 5;
-            // 
-            // btnContoLavoro
-            // 
-            this.btnContoLavoro.Location = new System.Drawing.Point(796, 48);
-            this.btnContoLavoro.Name = "btnContoLavoro";
-            this.btnContoLavoro.Size = new System.Drawing.Size(152, 27);
-            this.btnContoLavoro.TabIndex = 11;
-            this.btnContoLavoro.Text = "Conto lavoro";
-            this.btnContoLavoro.UseVisualStyleBackColor = true;
-            this.btnContoLavoro.Click += new System.EventHandler(this.btnContoLavoro_Click);
             // 
             // ID
             // 
@@ -616,11 +351,298 @@
             this.ContoLavoro.Name = "ContoLavoro";
             this.ContoLavoro.Visible = false;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(577, 80);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1102, 839);
+            this.tabControl1.TabIndex = 5;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvNodi);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1094, 811);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Distinta";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.txtMsgAnagrafiche);
+            this.tabPage4.Controls.Add(this.btnSalvaAnagrafiche);
+            this.tabPage4.Controls.Add(this.btnVerificaAnagrafiche);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1094, 811);
+            this.tabPage4.TabIndex = 4;
+            this.tabPage4.Text = "Anagrafiche";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // txtMsgAnagrafiche
+            // 
+            this.txtMsgAnagrafiche.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMsgAnagrafiche.Location = new System.Drawing.Point(20, 105);
+            this.txtMsgAnagrafiche.Multiline = true;
+            this.txtMsgAnagrafiche.Name = "txtMsgAnagrafiche";
+            this.txtMsgAnagrafiche.ReadOnly = true;
+            this.txtMsgAnagrafiche.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMsgAnagrafiche.Size = new System.Drawing.Size(1047, 692);
+            this.txtMsgAnagrafiche.TabIndex = 1;
+            // 
+            // btnSalvaAnagrafiche
+            // 
+            this.btnSalvaAnagrafiche.Enabled = false;
+            this.btnSalvaAnagrafiche.Location = new System.Drawing.Point(218, 18);
+            this.btnSalvaAnagrafiche.Name = "btnSalvaAnagrafiche";
+            this.btnSalvaAnagrafiche.Size = new System.Drawing.Size(161, 38);
+            this.btnSalvaAnagrafiche.TabIndex = 0;
+            this.btnSalvaAnagrafiche.Text = "Salva anagrafiche";
+            this.btnSalvaAnagrafiche.UseVisualStyleBackColor = true;
+            this.btnSalvaAnagrafiche.Click += new System.EventHandler(this.btnSalvaAnagrafiche_Click);
+            // 
+            // btnVerificaAnagrafiche
+            // 
+            this.btnVerificaAnagrafiche.Location = new System.Drawing.Point(20, 18);
+            this.btnVerificaAnagrafiche.Name = "btnVerificaAnagrafiche";
+            this.btnVerificaAnagrafiche.Size = new System.Drawing.Size(161, 38);
+            this.btnVerificaAnagrafiche.TabIndex = 0;
+            this.btnVerificaAnagrafiche.Text = "Verifica anagrafiche";
+            this.btnVerificaAnagrafiche.UseVisualStyleBackColor = true;
+            this.btnVerificaAnagrafiche.Visible = false;
+            this.btnVerificaAnagrafiche.Click += new System.EventHandler(this.btnVerificaAnagrafiche_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.txtMsgCicli);
+            this.tabPage1.Controls.Add(this.btnSalvaCicli);
+            this.tabPage1.Controls.Add(this.btnVerificaCicli);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1094, 811);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Cicli";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtMsgCicli
+            // 
+            this.txtMsgCicli.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMsgCicli.Location = new System.Drawing.Point(22, 112);
+            this.txtMsgCicli.Multiline = true;
+            this.txtMsgCicli.Name = "txtMsgCicli";
+            this.txtMsgCicli.ReadOnly = true;
+            this.txtMsgCicli.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMsgCicli.Size = new System.Drawing.Size(1047, 692);
+            this.txtMsgCicli.TabIndex = 4;
+            // 
+            // btnSalvaCicli
+            // 
+            this.btnSalvaCicli.Enabled = false;
+            this.btnSalvaCicli.Location = new System.Drawing.Point(220, 25);
+            this.btnSalvaCicli.Name = "btnSalvaCicli";
+            this.btnSalvaCicli.Size = new System.Drawing.Size(161, 38);
+            this.btnSalvaCicli.TabIndex = 2;
+            this.btnSalvaCicli.Text = "Salva cicli";
+            this.btnSalvaCicli.UseVisualStyleBackColor = true;
+            this.btnSalvaCicli.Click += new System.EventHandler(this.btnSalvaCicli_Click);
+            // 
+            // btnVerificaCicli
+            // 
+            this.btnVerificaCicli.Location = new System.Drawing.Point(22, 25);
+            this.btnVerificaCicli.Name = "btnVerificaCicli";
+            this.btnVerificaCicli.Size = new System.Drawing.Size(161, 38);
+            this.btnVerificaCicli.TabIndex = 3;
+            this.btnVerificaCicli.Text = "Verifica cicli";
+            this.btnVerificaCicli.UseVisualStyleBackColor = true;
+            this.btnVerificaCicli.Visible = false;
+            this.btnVerificaCicli.Click += new System.EventHandler(this.btnVerificaCicli_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.txtMsgDistinte);
+            this.tabPage3.Controls.Add(this.btnSalvaDistinte);
+            this.tabPage3.Controls.Add(this.btnVerificaDistinte);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1094, 811);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Distinte";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // txtMsgDistinte
+            // 
+            this.txtMsgDistinte.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMsgDistinte.Location = new System.Drawing.Point(22, 112);
+            this.txtMsgDistinte.Multiline = true;
+            this.txtMsgDistinte.Name = "txtMsgDistinte";
+            this.txtMsgDistinte.ReadOnly = true;
+            this.txtMsgDistinte.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMsgDistinte.Size = new System.Drawing.Size(1047, 692);
+            this.txtMsgDistinte.TabIndex = 4;
+            // 
+            // btnSalvaDistinte
+            // 
+            this.btnSalvaDistinte.Enabled = false;
+            this.btnSalvaDistinte.Location = new System.Drawing.Point(220, 25);
+            this.btnSalvaDistinte.Name = "btnSalvaDistinte";
+            this.btnSalvaDistinte.Size = new System.Drawing.Size(161, 38);
+            this.btnSalvaDistinte.TabIndex = 2;
+            this.btnSalvaDistinte.Text = "Salva distinte";
+            this.btnSalvaDistinte.UseVisualStyleBackColor = true;
+            this.btnSalvaDistinte.Click += new System.EventHandler(this.btnSalvaDistinte_Click);
+            // 
+            // btnVerificaDistinte
+            // 
+            this.btnVerificaDistinte.Location = new System.Drawing.Point(22, 25);
+            this.btnVerificaDistinte.Name = "btnVerificaDistinte";
+            this.btnVerificaDistinte.Size = new System.Drawing.Size(161, 38);
+            this.btnVerificaDistinte.TabIndex = 3;
+            this.btnVerificaDistinte.Text = "Verifica distinte";
+            this.btnVerificaDistinte.UseVisualStyleBackColor = true;
+            this.btnVerificaDistinte.Visible = false;
+            this.btnVerificaDistinte.Click += new System.EventHandler(this.btnVerificaDistinte_Click);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.txtNotifiche);
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1094, 811);
+            this.tabPage5.TabIndex = 5;
+            this.tabPage5.Text = "Notifiche";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // txtNotifiche
+            // 
+            this.txtNotifiche.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNotifiche.Location = new System.Drawing.Point(3, 3);
+            this.txtNotifiche.Multiline = true;
+            this.txtNotifiche.Name = "txtNotifiche";
+            this.txtNotifiche.ReadOnly = true;
+            this.txtNotifiche.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtNotifiche.Size = new System.Drawing.Size(1088, 805);
+            this.txtNotifiche.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(550, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 15);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Versione";
+            // 
+            // txtVersioneDiBa
+            // 
+            this.txtVersioneDiBa.Location = new System.Drawing.Point(612, 12);
+            this.txtVersioneDiBa.Name = "txtVersioneDiBa";
+            this.txtVersioneDiBa.ReadOnly = true;
+            this.txtVersioneDiBa.Size = new System.Drawing.Size(279, 21);
+            this.txtVersioneDiBa.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(897, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 15);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Note Standard";
+            // 
+            // txtNoteStd
+            // 
+            this.txtNoteStd.Location = new System.Drawing.Point(988, 12);
+            this.txtNoteStd.Name = "txtNoteStd";
+            this.txtNoteStd.ReadOnly = true;
+            this.txtNoteStd.Size = new System.Drawing.Size(577, 21);
+            this.txtNoteStd.TabIndex = 7;
+            // 
+            // chkInserisciTopFinish
+            // 
+            this.chkInserisciTopFinish.AutoSize = true;
+            this.chkInserisciTopFinish.Location = new System.Drawing.Point(19, 53);
+            this.chkInserisciTopFinish.Name = "chkInserisciTopFinish";
+            this.chkInserisciTopFinish.Size = new System.Drawing.Size(173, 19);
+            this.chkInserisciTopFinish.TabIndex = 8;
+            this.chkInserisciTopFinish.Text = "Inserisci distinte Top Finish";
+            this.chkInserisciTopFinish.UseVisualStyleBackColor = true;
+            // 
+            // chkControlliQualita
+            // 
+            this.chkControlliQualita.AutoSize = true;
+            this.chkControlliQualita.Checked = true;
+            this.chkControlliQualita.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkControlliQualita.Location = new System.Drawing.Point(211, 53);
+            this.chkControlliQualita.Name = "chkControlliQualita";
+            this.chkControlliQualita.Size = new System.Drawing.Size(157, 19);
+            this.chkControlliQualita.TabIndex = 9;
+            this.chkControlliQualita.Text = "Rimuovi controlli qualità";
+            this.chkControlliQualita.UseVisualStyleBackColor = true;
+            // 
+            // btnVerifica
+            // 
+            this.btnVerifica.Location = new System.Drawing.Point(612, 48);
+            this.btnVerifica.Name = "btnVerifica";
+            this.btnVerifica.Size = new System.Drawing.Size(152, 27);
+            this.btnVerifica.TabIndex = 10;
+            this.btnVerifica.Text = "Verifica";
+            this.btnVerifica.UseVisualStyleBackColor = true;
+            this.btnVerifica.Click += new System.EventHandler(this.btnVerifica_Click);
+            // 
+            // btnContoLavoro
+            // 
+            this.btnContoLavoro.Location = new System.Drawing.Point(796, 48);
+            this.btnContoLavoro.Name = "btnContoLavoro";
+            this.btnContoLavoro.Size = new System.Drawing.Size(152, 27);
+            this.btnContoLavoro.TabIndex = 11;
+            this.btnContoLavoro.Text = "Conto lavoro";
+            this.btnContoLavoro.UseVisualStyleBackColor = true;
+            this.btnContoLavoro.Click += new System.EventHandler(this.btnContoLavoro_Click);
+            // 
+            // ddlBrand
+            // 
+            this.ddlBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlBrand.FormattingEnabled = true;
+            this.ddlBrand.Location = new System.Drawing.Point(1028, 51);
+            this.ddlBrand.Name = "ddlBrand";
+            this.ddlBrand.Size = new System.Drawing.Size(121, 23);
+            this.ddlBrand.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(966, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Brand CL";
+            // 
             // EstraiProdottoFinito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 932);
+            this.Controls.Add(this.ddlBrand);
             this.Controls.Add(this.btnContoLavoro);
             this.Controls.Add(this.btnVerifica);
             this.Controls.Add(this.chkControlliQualita);
@@ -631,12 +653,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCercaDiBa);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtArticolo);
             this.Controls.Add(this.tvDiBa);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "EstraiProdottoFinito";
             this.Text = "Distinta RVL";
+            this.Load += new System.EventHandler(this.EstraiProdottoFinito_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -709,6 +733,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTESTANDARD;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTETECNICHE;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ContoLavoro;
+        private System.Windows.Forms.ComboBox ddlBrand;
+        private System.Windows.Forms.Label label4;
     }
 }
 
