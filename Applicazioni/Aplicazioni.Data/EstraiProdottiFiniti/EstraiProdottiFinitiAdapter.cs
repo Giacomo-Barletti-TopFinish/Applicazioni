@@ -38,6 +38,46 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
+        public void GetBC_DETTAGLIO_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo)
+        {
+
+            string select = @"select * from BC_DETTAGLIO_CICLO where NRCICLO = $P<NRCICLO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("NRCICLO", DbType.String, codiceCiclo);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.BC_DETTAGLIO_CICLO);
+            }
+        }
+
+        public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo)
+        {
+            string select = @"select * from BC_COM_CICLO where CICLO = $P<NRCICLO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("NRCICLO", DbType.String, codiceCiclo);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.BC_COM_CICLO);
+            }
+        }
+
+        public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string distinta)
+        {
+            string select = @"select * from BC_DISTINTA where DIBA = $P<DIBA>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("DIBA", DbType.String, distinta);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.BC_DISTINTA);
+            }
+        }
+
         public void GetUSR_PRD_TDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 
@@ -54,7 +94,7 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
                                 where tb.IDTDIBA =  $P<IDTDIBA>");
             ParamSet ps = new ParamSet();
             ps.AddParam("IDTDIBA", DbType.String, IDTDIBA);
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.USR_PRD_TDIBA);
             }

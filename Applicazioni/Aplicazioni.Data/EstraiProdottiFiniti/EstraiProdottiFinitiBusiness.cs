@@ -23,6 +23,27 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
             a.GetUSR_PRD_TDIBA(ds, IDTDIBA);
         }
+
+        [DataContext]
+        public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string NRCICLO)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.GetBC_COM_CICLO(ds, NRCICLO);
+        }
+
+        [DataContext]
+        public void GetBC_DETTAGLIO_CICLO(EstraiProdottiFinitiDS ds, string NRCICLO)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.GetBC_DETTAGLIO_CICLO(ds, NRCICLO);
+        }
+
+        [DataContext]
+        public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string DIBA)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.GetBC_DISTINTA(ds, DIBA);
+        }
         [DataContext]
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {

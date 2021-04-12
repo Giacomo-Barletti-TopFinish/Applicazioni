@@ -246,11 +246,16 @@ namespace EstraiProdottiFiniti
             {
                 if (!testata.IsCODICECLIFOPRDNull() && testata.CODICECLIFOPRD.Trim() == "02350" && chkInserisciTopFinish.Checked)
                 {
+                    int IDNodoPartenza = idNodo;
+                    int idPadreNuovo = 0;
                     bEstrai.GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(_ds, testata.IDMAGAZZ);
 
                     EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ).FirstOrDefault();
                     if (rigaTopFinish != null)
                         EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, 1, 0, string.Empty, string.Empty, "N", unitaMisura);
+                    int profonditaRamo = TrovaProfonditaRamo(IDNodoPartenza, out idPadreNuovo);
+                    profondita = profonditaRamo;
+                    idPadre = idPadreNuovo;
                 }
                 else
                 {
@@ -263,10 +268,15 @@ namespace EstraiProdottiFiniti
                     Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
                         testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
                     if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+
                     {
-                        Nodi.Add(n);
-                        idPadre = n.ID;
-                        idNodo++;
+
+                        if (!n.Modello.Contains("CTRL"))
+                        {
+                            Nodi.Add(n);
+                            idPadre = n.ID;
+                            idNodo++;
+                        }
                     }
                     else
                     {
@@ -295,8 +305,11 @@ namespace EstraiProdottiFiniti
                             testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI);
                         if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
                         {
-                            Nodi.Add(nodoFiglio);
-                            idNodo++;
+                            if (!nodoFiglio.Modello.Contains("CTRL"))
+                            {
+                                Nodi.Add(nodoFiglio);
+                                idNodo++;
+                            }
                         }
                         else
                         {
@@ -317,6 +330,29 @@ namespace EstraiProdottiFiniti
 
         }
 
+        private int TrovaProfonditaRamo(int IDNodoPartenza, out int IDPadre)
+        {
+            IDPadre = IDNodoPartenza;
+            int profonditaMassima = Nodi.Where(x => x.ID == IDNodoPartenza).Select(x => x.Profondita).FirstOrDefault();
+            List<Nodo> nodiFigli = Nodi.Where(x => x.IDPADRE == IDNodoPartenza).ToList();
+            foreach (Nodo nodoFiglio in nodiFigli)
+            {
+                if (profonditaMassima < nodoFiglio.Profondita)
+                {
+                    profonditaMassima = nodoFiglio.Profondita;
+                    IDPadre = nodoFiglio.ID;
+                }
+                int auxIdPadre = 0;
+                int profondidaFiglo = TrovaProfonditaRamo(nodoFiglio.ID, out auxIdPadre);
+                if (profonditaMassima < profondidaFiglo)
+                {
+                    profonditaMassima = profondidaFiglo;
+                    IDPadre = auxIdPadre;
+                }
+            }
+            return profonditaMassima;
+        }
+
         private void EstraiDistintaTopFinish(EstraiProdottiFinitiBusiness bEstrai, string IDTDIBA, int profondita, ref int idNodo, int idPadre, decimal quantitaConsumo,
            decimal quantitaOccorrenza, string noteTecniche, string noteStandard, string fornitoDaCommittente, string unitaMisura)
         {
@@ -333,9 +369,14 @@ namespace EstraiProdottiFiniti
                 Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
                     testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
                 if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+
                 {
-                    Nodi.Add(n);
-                    idNodo++;
+                    if (!n.Modello.Contains("CTRL"))
+                    {
+                        Nodi.Add(n);
+                        idNodo++;
+                    }
+
                 }
                 else
                 {
@@ -365,8 +406,11 @@ namespace EstraiProdottiFiniti
                             testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI);
                         if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
                         {
-                            Nodi.Add(nodoFiglio);
-                            idNodo++;
+                            if (!nodoFiglio.Modello.Contains("CTRL"))
+                            {
+                                Nodi.Add(nodoFiglio);
+                                idNodo++;
+                            }
                         }
                         else
                         {
@@ -439,7 +483,7 @@ namespace EstraiProdottiFiniti
                         EstraiProdottiFinitiDS.BC_ANAGRAFICARow nuovaRiga = _ds.BC_ANAGRAFICA.NewBC_ANAGRAFICARow();
                         nuovaRiga.BC = nodoConAnagrafica.Anagrafica;
                         nuovaRiga.IDMAGAZZ = nodoConAnagrafica.IDMAGAZZ;
-                        riga.CL = nodoConAnagrafica.ContoLavoro ? 1 : 0;
+                        nuovaRiga.CL = nodoConAnagrafica.ContoLavoro ? 1 : 0;
                         _ds.BC_ANAGRAFICA.AddBC_ANAGRAFICARow(nuovaRiga);
                         anagraficheNuove.Add(string.Format("{0} associata a {1}", nodoConAnagrafica.Modello, nodoConAnagrafica.Anagrafica));
                     }
@@ -748,11 +792,7 @@ namespace EstraiProdottiFiniti
 
         private void btnSalvaCicli_Click(object sender, EventArgs e)
         {
-            foreach (Ciclo c in cicli)
-            {
-                // salva database
-
-            }
+            salvaCicli();
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
@@ -791,9 +831,127 @@ namespace EstraiProdottiFiniti
 
         }
 
+        private void salvaCicli()
+        {
+            using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
+            {
+
+                foreach (Ciclo c in cicli)
+                {
+                    _ds.BC_COM_CICLO.Clear();
+                    _ds.BC_DETTAGLIO_CICLO.Clear();
+
+                    bEstrai.GetBC_COM_CICLO(_ds, c.Codice);
+                    bEstrai.GetBC_DETTAGLIO_CICLO(_ds, c.Codice);
+
+                    foreach (EstraiProdottiFinitiDS.BC_COM_CICLORow riga in _ds.BC_COM_CICLO)
+                        riga.Delete();
+
+                    foreach (EstraiProdottiFinitiDS.BC_DETTAGLIO_CICLORow riga in _ds.BC_DETTAGLIO_CICLO)
+                        riga.Delete();
+
+                    foreach (Fase f in c.Fasi)
+                    {
+                        EstraiProdottiFinitiDS.BC_DETTAGLIO_CICLORow dettaglioCiclo = _ds.BC_DETTAGLIO_CICLO.NewBC_DETTAGLIO_CICLORow();
+
+                        dettaglioCiclo.NRCICLO = c.Codice;
+                        dettaglioCiclo.VERSIONE = f.Versione;
+                        dettaglioCiclo.OPERAZIONE = f.Operazione;
+                        dettaglioCiclo.TIPO = f.Tipo;
+                        dettaglioCiclo.NR = f.AreaProduzione;
+                        dettaglioCiclo.TEMPO_DI_SETUP = f.TempoSetup;
+                        dettaglioCiclo.TEMPO_LAVORAZIONE = f.TempoLavorazione;
+                        dettaglioCiclo.TEMPO_ATTESA = f.TempoAttesa;
+                        dettaglioCiclo.TEMPO_SPOSTAMENTO = f.TempoSpostamento;
+                        dettaglioCiclo.DIMENSIONE_LOTTO = f.DimensioneLotto;
+                        dettaglioCiclo.UM_SETUP = f.UMSetup;
+                        dettaglioCiclo.UM_LAVORAZ = f.UMLavorazione;
+                        dettaglioCiclo.UM_ATTESA = f.UMAttesa;
+                        dettaglioCiclo.UM_SPOSTAMENTO = f.UMSpostamento;
+                        dettaglioCiclo.COLLEGAMENTO = f.Collegamento;
+                        dettaglioCiclo.TASK = f.Task;
+                        dettaglioCiclo.CONDIZIONE = f.Condizione;
+                        dettaglioCiclo.CARATTERISTICA = f.Caratteristica;
+                        dettaglioCiclo.LOGICHE = f.LogicheLavorazione;
+
+                        _ds.BC_DETTAGLIO_CICLO.AddBC_DETTAGLIO_CICLORow(dettaglioCiclo);
+
+
+                        int numeroRiga = 1000;
+                        foreach (string commento in f.Commenti)
+                        {
+                            EstraiProdottiFinitiDS.BC_COM_CICLORow comCiclo = _ds.BC_COM_CICLO.NewBC_COM_CICLORow();
+                            comCiclo.CICLO = c.Codice;
+                            comCiclo.VERSIONE = string.Empty;
+                            comCiclo.OPERAZIONE = f.Operazione;
+                            comCiclo.RIGA = numeroRiga;
+                            comCiclo.DATA = DateTime.Today.ToShortDateString();
+                            comCiclo.COMMENTO = commento;
+                            _ds.BC_COM_CICLO.AddBC_COM_CICLORow(comCiclo);
+                            numeroRiga += 1000;
+                        }
+                    }
+
+                    bEstrai.UpdateTable(_ds.BC_COM_CICLO.TableName, _ds);
+                    bEstrai.UpdateTable(_ds.BC_DETTAGLIO_CICLO.TableName, _ds);
+                }
+
+            }
+
+
+        }
+
+        private void salvaDistinte()
+        {
+            using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
+            {
+                foreach (Distinta d in distinte)
+                {
+                    _ds.BC_DISTINTA.Clear();
+
+                    bEstrai.GetBC_DISTINTA(_ds, d.Codice);
+
+                    foreach (EstraiProdottiFinitiDS.BC_DISTINTARow riga in _ds.BC_DISTINTA)
+                        riga.Delete();
+
+                    int numeroRiga = 1000;
+                    foreach (Componente c in d.Componenti)
+                    {
+                        EstraiProdottiFinitiDS.BC_DISTINTARow distinta = _ds.BC_DISTINTA.NewBC_DISTINTARow();
+
+                        distinta.DIBA = d.Codice;
+                        distinta.VERSIONE = d.Versione;
+                        distinta.RIGA = numeroRiga;
+                        numeroRiga += 1000;
+                        distinta.TIPO = c.Tipo;
+                        distinta.NR = c.Anagrafica;
+                        distinta.DESCRIZIONE = c.Descrizione;
+                        distinta.UM = c.CodiceUM;
+                        distinta.QUANTITA = c.Quantita;
+                        distinta.COLLEGAMENTO = c.Collegamento;
+                        distinta.SCARTO = c.Scarto;
+                        distinta.QUANTITA_PER = c.Arrotondamento;
+                        distinta.PRECIOUS_QUANTITY = c.PrecisionQuantity;
+                        distinta.FORMULA_QUANTITA = c.FormulaQuantita;
+                        distinta.CODICE_CONDIZIONE = c.Condizione;
+                        distinta.ARTICOLO_NEUTRO = c.ArticoloNeutro;
+                        distinta.FORMULA = c.Formula;
+
+
+                        _ds.BC_DISTINTA.AddBC_DISTINTARow(distinta);
+                    }
+
+                    bEstrai.UpdateTable(_ds.BC_DISTINTA.TableName, _ds);
+
+                }
+
+            }
+
+
+        }
         private void btnSalvaDistinte_Click(object sender, EventArgs e)
         {
-
+            salvaDistinte();
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
             sfd.DefaultExt = "xlsx";
@@ -978,7 +1136,7 @@ namespace EstraiProdottiFiniti
         private void btnContoLavoro_Click(object sender, EventArgs e)
         {
 
-            if(ddlBrand.SelectedIndex==-1)
+            if (ddlBrand.SelectedIndex == -1)
             {
                 MessageBox.Show("Selezionare un brand", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
