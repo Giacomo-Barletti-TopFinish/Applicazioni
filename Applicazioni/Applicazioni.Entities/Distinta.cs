@@ -31,7 +31,7 @@ namespace Applicazioni.Entities
         public decimal Quantita;
         public string Collegamento;
         public decimal Scarto=0;
-        public decimal Arrotondamento=1/1000;
+        public decimal Arrotondamento=1.0M/1000;
         public decimal PrecisionQuantity=0;
         public string FormulaQuantita=string.Empty;
         public string Condizione=string.Empty;

@@ -264,7 +264,7 @@ namespace EstraiProdottiFiniti
 
                     noteTecniche = testata.IsNOTETECHNull() ? string.Empty : testata.NOTETECH;
                     noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
-
+                   
                     Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
                         testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
                     if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
@@ -290,7 +290,7 @@ namespace EstraiProdottiFiniti
                 }
                 bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
-                if (componenti.Count > 0) profondita++;
+                if (componenti.Count > 0 ) profondita++;
 
                 foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBARow componente in componenti)
                 {
@@ -672,10 +672,10 @@ namespace EstraiProdottiFiniti
                             };
 
                 var Montaggi = Query.Where(x => x.count > 1);
-                List<int> idPadreMOntaggi = Montaggi.Select(x => x.IDPADRE).ToList();
+                List<int> idPadreMontaggi = Montaggi.Select(x => x.IDPADRE).ToList();
                 List<Nodo> NodiSenzaAnagrafica = new List<Nodo>();
 
-                foreach (int idpadreDaVerificare in idPadreMOntaggi)
+                foreach (int idpadreDaVerificare in idPadreMontaggi)
                 {
                     NodiSenzaAnagrafica.AddRange(Nodi.Where(x => x.IDPADRE == idpadreDaVerificare && string.IsNullOrEmpty(x.Anagrafica)).ToList());
                 }
@@ -732,7 +732,7 @@ namespace EstraiProdottiFiniti
                 if (indice > avantiMassimo)
                     return;
 
-                righeFiglie = righeConAnagrafica.Where(x => x.Profondita == riga.Profondita + indice && x.ID > indiceMinimo && x.ID < indiceMassimo).ToList();
+                righeFiglie = righeConAnagrafica.Where(x => x.Profondita == riga.Profondita + indice && x.ID > indiceMinimo && x.ID <= indiceMassimo).ToList();
             } while (righeFiglie.Count == 0);
 
             List<Componente> componenti = new List<Componente>();
@@ -930,8 +930,8 @@ namespace EstraiProdottiFiniti
                         distinta.QUANTITA = c.Quantita;
                         distinta.COLLEGAMENTO = c.Collegamento;
                         distinta.SCARTO = c.Scarto;
-                        distinta.QUANTITA_PER = c.Arrotondamento;
-                        distinta.PRECIOUS_QUANTITY = c.PrecisionQuantity;
+                        distinta.QUANTITA_PER = c.Quantita;
+                        distinta.PRECIOUS_QUANTITY = c.Arrotondamento;
                         distinta.FORMULA_QUANTITA = c.FormulaQuantita;
                         distinta.CODICE_CONDIZIONE = c.Condizione;
                         distinta.ARTICOLO_NEUTRO = c.ArticoloNeutro;

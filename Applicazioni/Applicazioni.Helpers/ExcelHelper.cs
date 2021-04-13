@@ -174,15 +174,19 @@ namespace Applicazioni.Helpers
                         int numeroRiga = 1000;
                         foreach (string commento in f.Commenti)
                         {
-                            Row rowDettaglio = new Row();
-                            rowDettaglio.Append(ConstructCell(c.Codice, CellValues.String, 1));
-                            rowDettaglio.Append(ConstructCell(string.Empty, CellValues.String, 1));
-                            rowDettaglio.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
-                            rowDettaglio.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
-                            rowDettaglio.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
-                            rowDettaglio.Append(ConstructCell(commento, CellValues.String, 1));
-                            sheetDataDettaglio.AppendChild(rowDettaglio);
-                            numeroRiga += 1000;
+                            List<string> elementi = SeparaStringa(commento, 80);
+                            foreach (string elemento in elementi)
+                            {
+                                Row rowDettaglio = new Row();
+                                rowDettaglio.Append(ConstructCell(c.Codice, CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(string.Empty, CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(elemento, CellValues.String, 1));
+                                sheetDataDettaglio.AppendChild(rowDettaglio);
+                                numeroRiga += 1000;
+                            }
                         }
                     }
                 }
@@ -197,6 +201,33 @@ namespace Applicazioni.Helpers
                 return content;
             }
         }
+
+        private List<string> SeparaStringa(string stringa, int lunghezzaMassima)
+        {
+            List<string> stringhe = new List<string>();
+
+            string[] str = stringa.Split(' ');
+            string stringaComposta = string.Empty;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if ((stringaComposta.Length + str[i].Length + 1) < lunghezzaMassima)
+                {
+                    stringaComposta = stringaComposta + " " + str[i];
+
+                    if (i == str.Length - 1)
+                    {
+                        stringhe.Add(stringaComposta);
+                    }
+                }
+                else
+                {
+                    stringhe.Add(stringaComposta);
+                    stringaComposta = str[i];
+                }
+            }
+            return stringhe;
+        }
+
         public byte[] CreaFileCompoentiDistinta(List<Distinta> distinte, out string errori)
         {
             errori = string.Empty;
@@ -280,8 +311,9 @@ namespace Applicazioni.Helpers
                         row.Append(ConstructCell(c.Quantita.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell((c.Collegamento == null) ? string.Empty : c.Collegamento, CellValues.String, 1));
                         row.Append(ConstructCell(c.Scarto.ToString(), CellValues.String, 1));
+
+                        row.Append(ConstructCell(c.Quantita.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell(c.Arrotondamento.ToString(), CellValues.String, 1));
-                        row.Append(ConstructCell(c.PrecisionQuantity.ToString(), CellValues.String, 1));
                         row.Append(ConstructCell(c.FormulaQuantita, CellValues.String, 1));
                         row.Append(ConstructCell(c.Condizione, CellValues.String, 1));
                         row.Append(ConstructCell(c.ArticoloNeutro, CellValues.String, 1));
