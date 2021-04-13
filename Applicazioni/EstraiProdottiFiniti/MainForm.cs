@@ -244,6 +244,7 @@ namespace EstraiProdottiFiniti
             EstraiProdottiFinitiDS.USR_PRD_TDIBARow testata = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
             if (testata != null)
             {
+                bool modelloCOntieneCTRL = false;
                 if (!testata.IsCODICECLIFOPRDNull() && testata.CODICECLIFOPRD.Trim() == "02350" && chkInserisciTopFinish.Checked)
                 {
                     int IDNodoPartenza = idNodo;
@@ -264,7 +265,7 @@ namespace EstraiProdottiFiniti
 
                     noteTecniche = testata.IsNOTETECHNull() ? string.Empty : testata.NOTETECH;
                     noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
-                   
+
                     Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
                         testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
                     if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
@@ -277,6 +278,7 @@ namespace EstraiProdottiFiniti
                             idPadre = n.ID;
                             idNodo++;
                         }
+                        else modelloCOntieneCTRL = true;
                     }
                     else
                     {
@@ -290,7 +292,7 @@ namespace EstraiProdottiFiniti
                 }
                 bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
-                if (componenti.Count > 0 ) profondita++;
+                if (componenti.Count > 0 && !modelloCOntieneCTRL) profondita++;
 
                 foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBARow componente in componenti)
                 {
@@ -360,6 +362,7 @@ namespace EstraiProdottiFiniti
             EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow testata = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
             if (testata != null)
             {
+                bool modelloCOntieneCTRL = false;
                 bEstrai.GetMAGAZZ(_ds, testata.IDMAGAZZ);
                 string reparto = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
 
@@ -376,6 +379,7 @@ namespace EstraiProdottiFiniti
                         Nodi.Add(n);
                         idNodo++;
                     }
+                    else modelloCOntieneCTRL = true;
 
                 }
                 else
@@ -391,7 +395,7 @@ namespace EstraiProdottiFiniti
 
                 bEstrai.GetUSR_PRD_RDIBATopFinish(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow> componenti = _ds.USR_PRD_RDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).ToList();
-                if (componenti.Count > 0) profondita++;
+                if (componenti.Count > 0 && !modelloCOntieneCTRL) profondita++;
 
                 foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow componente in componenti)
                 {
@@ -1022,11 +1026,7 @@ namespace EstraiProdottiFiniti
             sb.AppendLine(InserisciCodiciCollegamento());
             txtNotifiche.Text = sb.ToString();
 
-            if (sb.Length > 0)
-            {
-                MessageBox.Show("Ci sono errori, verifica nelle notifiche");
-                tabControl1.SelectedTab = tabPage5;
-            }
+            tabControl1.SelectedTab = tabPage5;
 
             dgvNodi.Update();
             dgvNodi.Refresh();
