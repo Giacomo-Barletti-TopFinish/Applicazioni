@@ -191,6 +191,17 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
                 da.Fill(ds.TABFAS);
             }
         }
+        public void FillBC_TASK(EstraiProdottiFinitiDS ds)
+        {
+
+            string select = string.Format(@"select * from BC_TASK");
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BC_TASK);
+            }
+        }
+
         public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

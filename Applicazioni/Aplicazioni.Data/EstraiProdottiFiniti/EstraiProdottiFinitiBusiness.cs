@@ -37,7 +37,12 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
             a.GetBC_DETTAGLIO_CICLO(ds, NRCICLO);
         }
-
+        [DataContext]
+        public void FillBC_TASK(EstraiProdottiFinitiDS ds)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.FillBC_TASK(ds);
+        }
         [DataContext]
         public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string DIBA)
         {

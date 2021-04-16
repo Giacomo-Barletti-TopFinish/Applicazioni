@@ -140,6 +140,7 @@ namespace EstraiProdottiFiniti
 
                 bEstrai.FillBC_ANAGRAFICA(_ds);
                 bEstrai.FillTABFAS(_ds);
+                bEstrai.FillBC_TASK(_ds);
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -196,7 +197,7 @@ namespace EstraiProdottiFiniti
         }
 
         private Nodo CreaNodo(int idNodo, string idmagazz, int profondita, int idpadre, decimal quantitaConsumo, decimal quantitaOccorrenza, string IDTABFAS,
-            string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata, string unitaMisura)
+            string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata, string unitaMisura, string repartoDiBa)
         {
             EstraiProdottiFinitiDS.MAGAZZRow magazz = _ds.MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
             EstraiProdottiFinitiDS.TABFASRow fase = _ds.TABFAS.Where(x => x.IDTABFAS == IDTABFAS).FirstOrDefault();
@@ -220,7 +221,7 @@ namespace EstraiProdottiFiniti
             n.QuantitaOccorrenza = quantitaOccorrenza;
             n.Quantita = quantita;
 
-            n.Reparto = reparto;
+            n.Reparto = string.IsNullOrEmpty(repartoDiBa) ? reparto : repartoDiBa;
             n.Fase = fase.CODICEFASE;
             n.Peso = magazz.PESO;
             n.Superficie = magazz.SUPERFICIE;
@@ -267,7 +268,14 @@ namespace EstraiProdottiFiniti
                     noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
 
                     Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
-                        testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
+                        testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura, reparto);
+                    EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
+                    if (task != null)
+                    {
+                        if (task.TASK.Trim() == "***ESCLUDERE")
+                            n.Reparto = "CTRL";
+                    }
+
                     if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
 
                     {
@@ -302,9 +310,19 @@ namespace EstraiProdottiFiniti
                         EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
+                        string repartoDiba = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
                         bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
                         Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
-                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI);
+                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI, repartoDiba);
+
+                        EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
+                        if (task != null)
+                        {
+                            if (task.TASK.Trim() == "***ESCLUDERE")
+                                nodoFiglio.Reparto = "CTRL";
+                        }
+
+
                         if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
                         {
                             if (!nodoFiglio.Modello.Contains("CTRL"))
@@ -370,7 +388,16 @@ namespace EstraiProdottiFiniti
                 noteStandard = testata.IsNOTESTDNull() ? string.Empty : testata.NOTESTD;
 
                 Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
-                    testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura);
+                    testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura, reparto);
+
+                //EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
+                //if (task != null)
+                //{
+                //    if (task.TASK.Trim() == "***ESCLUDERE")
+                //        n.Reparto = "CTRL";
+                //}
+
+
                 if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
 
                 {
@@ -405,9 +432,18 @@ namespace EstraiProdottiFiniti
                         EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
+                        string repartoDiba = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
                         bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
                         Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
-                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI);
+                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI, repartoDiba);
+
+                        // task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
+                        //if (task != null)
+                        //{
+                        //    if (task.TASK.Trim() == "***ESCLUDERE")
+                        //        nodoFiglio.Reparto = "CTRL";
+                        //}
+
                         if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
                         {
                             if (!nodoFiglio.Modello.Contains("CTRL"))
@@ -546,6 +582,12 @@ namespace EstraiProdottiFiniti
 
         private void VerificaCicli(out string errori)
         {
+            using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
+            {
+                _ds.BC_TASK.Clear();
+                bEstrai.FillBC_TASK(_ds);
+            }
+
             errori = string.Empty;
             cicli = new List<Ciclo>();
 
@@ -597,12 +639,20 @@ namespace EstraiProdottiFiniti
                             f.AreaProduzione = riga.Reparto;
                             f.TempoLavorazione = riga.PezziOrari > 0 ? 1 / riga.PezziOrari : 0;
                             f.Collegamento = riga.CollegamentoCiclo;
-                            f.Task = riga.Fase;
+
+                            EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == riga.Fase).FirstOrDefault();
+                            if (task == null)
+                            {
+                                txtMsgCicli.Text = Environment.NewLine + string.Format("La fase {0} non ha un task associato", riga.Fase);
+                            }
+
+                            f.Task = task.IsTASKNull() ? string.Empty : task.TASK;
                             if (!string.IsNullOrEmpty(riga.NoteStandard))
                                 f.Commenti.Add(riga.NoteStandard);
                             if (!string.IsNullOrEmpty(riga.NoteTecniche))
                                 f.Commenti.Add(riga.NoteTecniche);
-                            c.Fasi.Add(f);
+                            if (task.TASK != "***ESCLUDERE")
+                                c.Fasi.Add(f);
                         }
                     }
                 }
