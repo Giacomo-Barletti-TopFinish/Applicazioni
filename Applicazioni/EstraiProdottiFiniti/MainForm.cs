@@ -87,7 +87,7 @@ namespace EstraiProdottiFiniti
 
         private void btnCercaDiBa_Click(object sender, EventArgs e)
         {
-            txtArticolo.Text = txtArticolo.Text.ToUpper();
+            txtArticolo.Text = txtArticolo.Text.Trim().ToUpper();
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
                 if (string.IsNullOrEmpty(txtArticolo.Text))
@@ -190,12 +190,6 @@ namespace EstraiProdottiFiniti
             }
         }
 
-        private void CaricaDropDownListBrand()
-        {
-
-            ddlBrand.Items.AddRange(BrandContoLavoro.EstraiLista().ToArray());
-        }
-
         private Nodo CreaNodo(int idNodo, string idmagazz, int profondita, int idpadre, decimal quantitaConsumo, decimal quantitaOccorrenza, string IDTABFAS,
             string noteTecniche, string noteStandard, string fornitoDaCommittente, string metodo, string versione, string attiva, string controllata, string unitaMisura, string repartoDiBa)
         {
@@ -215,7 +209,7 @@ namespace EstraiProdottiFiniti
 
             decimal quantita = 0;
             if (quantitaOccorrenza == 0) quantita = quantitaConsumo;
-            else quantita = 1 / quantitaOccorrenza;
+            else quantita = 1.0M / quantitaOccorrenza;
 
             n.QuantitaConsumo = quantitaConsumo;
             n.QuantitaOccorrenza = quantitaOccorrenza;
@@ -226,6 +220,15 @@ namespace EstraiProdottiFiniti
             n.Peso = magazz.PESO;
             n.Superficie = magazz.SUPERFICIE;
             n.FornitoDaCommittente = fornitoDaCommittente;
+
+            noteStandard = noteStandard.Replace("\n", String.Empty);
+            noteStandard = noteStandard.Replace("\r", String.Empty);
+            noteStandard = noteStandard.Replace("\t", String.Empty);
+
+            noteTecniche = noteTecniche.Replace("\n", String.Empty);
+            noteTecniche = noteTecniche.Replace("\r", String.Empty);
+            noteTecniche = noteTecniche.Replace("\t", String.Empty);
+
             n.NoteStandard = noteStandard;
             n.NoteTecniche = noteTecniche;
             n.Modello = (magazz == null) ? string.Empty : magazz.MODELLO;
@@ -315,12 +318,12 @@ namespace EstraiProdottiFiniti
                         Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
                             testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI, repartoDiba);
 
-                        EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
-                        if (task != null)
-                        {
-                            if (task.TASK.Trim() == "***ESCLUDERE")
-                                nodoFiglio.Reparto = "CTRL";
-                        }
+                        //EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
+                        //if (task != null)
+                        //{
+                        //    if (task.TASK.Trim() == "***ESCLUDERE")
+                        //        nodoFiglio.Reparto = "CTRL";
+                        //}
 
 
                         if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
@@ -637,9 +640,9 @@ namespace EstraiProdottiFiniti
                             operazione += 10;
                             f.ID = riga.ID;
                             f.AreaProduzione = riga.Reparto;
-                            f.TempoLavorazione = riga.PezziOrari > 0 ? 1 / riga.PezziOrari : 0;
+                            f.TempoLavorazione = 1;
                             f.Collegamento = riga.CollegamentoCiclo;
-
+                            f.DimensioneLotto = (int)riga.PezziOrari;
                             EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == riga.Fase).FirstOrDefault();
                             if (task == null)
                             {
@@ -647,8 +650,8 @@ namespace EstraiProdottiFiniti
                             }
 
                             f.Task = task.IsTASKNull() ? string.Empty : task.TASK;
-                            if (!string.IsNullOrEmpty(riga.NoteStandard))
-                                f.Commenti.Add(riga.NoteStandard);
+                            //if (!string.IsNullOrEmpty(riga.NoteStandard))
+                            //    f.Commenti.Add(riga.NoteStandard);
                             if (!string.IsNullOrEmpty(riga.NoteTecniche))
                                 f.Commenti.Add(riga.NoteTecniche);
                             if (task.TASK != "***ESCLUDERE")
@@ -1186,12 +1189,6 @@ namespace EstraiProdottiFiniti
         private void btnContoLavoro_Click(object sender, EventArgs e)
         {
 
-            if (ddlBrand.SelectedIndex == -1)
-            {
-                MessageBox.Show("Selezionare un brand", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             List<Nodo> nodiFornitiDaCommittente = Nodi.Where(x => x.FornitoDaCommittente == "S").ToList();
 
             TreeNode root = tvDiBa.Nodes[0];
@@ -1200,7 +1197,6 @@ namespace EstraiProdottiFiniti
             {
                 bool esito = TrovaNodoAlbero(n, root);
             }
-            BrandContoLavoro brand = (BrandContoLavoro)ddlBrand.SelectedItem;
             foreach (Nodo nodoContoLavoro in Nodi.Where(x => x.ContoLavoro))
             {
                 string anagrafica = nodoContoLavoro.Anagrafica;
@@ -1217,7 +1213,7 @@ namespace EstraiProdottiFiniti
                         nodoContoLavoro.Anagrafica = rigaAnagarficaContoLavoro.BC;
                 }
 
-                nodoContoLavoro.Reparto = brand.AreaDiProduzione;
+                nodoContoLavoro.Reparto = nodoContoLavoro.Reparto;
 
             }
 
@@ -1228,7 +1224,12 @@ namespace EstraiProdottiFiniti
                     bool contoLavoro = (bool)riga.Cells[ContoLavoro.Name].Value;
                     if (contoLavoro)
                     {
-                        riga.DefaultCellStyle.ForeColor = Color.Red;
+                        string idmagazz = riga.Cells[IDMAGAZZ.Name].Value.ToString();
+                        if (_ds.BC_ANAGRAFICA.Any(x => x.IDMAGAZZ == idmagazz && x.CL == 1))
+                            riga.DefaultCellStyle.ForeColor = Color.ForestGreen;
+                        else
+                            riga.DefaultCellStyle.ForeColor = Color.Red;
+
                     }
                 }
 
@@ -1240,8 +1241,6 @@ namespace EstraiProdottiFiniti
 
         private void EstraiProdottoFinito_Load(object sender, EventArgs e)
         {
-            CaricaDropDownListBrand();
-            ddlBrand.SelectedIndex = -1;
         }
     }
 }

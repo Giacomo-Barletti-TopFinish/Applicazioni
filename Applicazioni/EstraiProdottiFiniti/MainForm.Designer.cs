@@ -28,11 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.txtArticolo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
             this.dgvNodi = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txtMsgAnagrafiche = new System.Windows.Forms.TextBox();
+            this.btnSalvaAnagrafiche = new System.Windows.Forms.Button();
+            this.btnVerificaAnagrafiche = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtMsgCicli = new System.Windows.Forms.TextBox();
+            this.btnSalvaCicli = new System.Windows.Forms.Button();
+            this.btnVerificaCicli = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtMsgDistinte = new System.Windows.Forms.TextBox();
+            this.btnSalvaDistinte = new System.Windows.Forms.Button();
+            this.btnVerificaDistinte = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.txtNotifiche = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtVersioneDiBa = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNoteStd = new System.Windows.Forms.TextBox();
+            this.chkInserisciTopFinish = new System.Windows.Forms.CheckBox();
+            this.chkControlliQualita = new System.Windows.Forms.CheckBox();
+            this.btnVerifica = new System.Windows.Forms.Button();
+            this.btnContoLavoro = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MODELLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESCRIZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,32 +83,6 @@
             this.NOTESTANDARD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOTETECNICHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContoLavoro = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.txtMsgAnagrafiche = new System.Windows.Forms.TextBox();
-            this.btnSalvaAnagrafiche = new System.Windows.Forms.Button();
-            this.btnVerificaAnagrafiche = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtMsgCicli = new System.Windows.Forms.TextBox();
-            this.btnSalvaCicli = new System.Windows.Forms.Button();
-            this.btnVerificaCicli = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.txtMsgDistinte = new System.Windows.Forms.TextBox();
-            this.btnSalvaDistinte = new System.Windows.Forms.Button();
-            this.btnVerificaDistinte = new System.Windows.Forms.Button();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.txtNotifiche = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtVersioneDiBa = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNoteStd = new System.Windows.Forms.TextBox();
-            this.chkInserisciTopFinish = new System.Windows.Forms.CheckBox();
-            this.chkControlliQualita = new System.Windows.Forms.CheckBox();
-            this.btnVerifica = new System.Windows.Forms.Button();
-            this.btnContoLavoro = new System.Windows.Forms.Button();
-            this.ddlBrand = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -133,6 +132,14 @@
             // dgvNodi
             // 
             this.dgvNodi.AllowUserToAddRows = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNodi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvNodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNodi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -166,190 +173,6 @@
             this.dgvNodi.Size = new System.Drawing.Size(1088, 805);
             this.dgvNodi.TabIndex = 4;
             this.dgvNodi.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvNodi_RowsAdded);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.Frozen = true;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // MODELLO
-            // 
-            this.MODELLO.DataPropertyName = "Modello";
-            this.MODELLO.Frozen = true;
-            this.MODELLO.HeaderText = "MODELLO";
-            this.MODELLO.Name = "MODELLO";
-            // 
-            // DESCRIZIONE
-            // 
-            this.DESCRIZIONE.DataPropertyName = "DescrizioneArticolo";
-            this.DESCRIZIONE.Frozen = true;
-            this.DESCRIZIONE.HeaderText = "DESCRIZIONE";
-            this.DESCRIZIONE.Name = "DESCRIZIONE";
-            this.DESCRIZIONE.ReadOnly = true;
-            // 
-            // REPARTO
-            // 
-            this.REPARTO.DataPropertyName = "Reparto";
-            this.REPARTO.Frozen = true;
-            this.REPARTO.HeaderText = "REPARTO";
-            this.REPARTO.Name = "REPARTO";
-            this.REPARTO.ReadOnly = true;
-            // 
-            // FASE
-            // 
-            this.FASE.DataPropertyName = "Fase";
-            this.FASE.Frozen = true;
-            this.FASE.HeaderText = "FASE";
-            this.FASE.Name = "FASE";
-            this.FASE.ReadOnly = true;
-            // 
-            // IDMAGAZZ
-            // 
-            this.IDMAGAZZ.DataPropertyName = "IDMAGAZZ";
-            this.IDMAGAZZ.Frozen = true;
-            this.IDMAGAZZ.HeaderText = "IDMAGAZZ";
-            this.IDMAGAZZ.Name = "IDMAGAZZ";
-            // 
-            // ANAGRAFICA
-            // 
-            this.ANAGRAFICA.DataPropertyName = "Anagrafica";
-            this.ANAGRAFICA.Frozen = true;
-            this.ANAGRAFICA.HeaderText = "ANAGRAFICA";
-            this.ANAGRAFICA.Name = "ANAGRAFICA";
-            // 
-            // CODICECICLO
-            // 
-            this.CODICECICLO.DataPropertyName = "CodiceCiclo";
-            this.CODICECICLO.HeaderText = "CODICE CICLO";
-            this.CODICECICLO.Name = "CODICECICLO";
-            // 
-            // COLLEGAMENTOCICLO
-            // 
-            this.COLLEGAMENTOCICLO.DataPropertyName = "CollegamentoCiclo";
-            this.COLLEGAMENTOCICLO.HeaderText = "COLLEGAMENTO CICLO";
-            this.COLLEGAMENTOCICLO.Name = "COLLEGAMENTOCICLO";
-            this.COLLEGAMENTOCICLO.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.COLLEGAMENTOCICLO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.COLLEGAMENTOCICLO.Width = 80;
-            // 
-            // COLLEGAMENTODIBA
-            // 
-            this.COLLEGAMENTODIBA.DataPropertyName = "CollegamentoDiba";
-            this.COLLEGAMENTODIBA.HeaderText = "COLLEGAMENTO DISTINTA";
-            this.COLLEGAMENTODIBA.Name = "COLLEGAMENTODIBA";
-            this.COLLEGAMENTODIBA.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.COLLEGAMENTODIBA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.COLLEGAMENTODIBA.Width = 80;
-            // 
-            // PEZZIORARI
-            // 
-            this.PEZZIORARI.DataPropertyName = "PezziOrari";
-            this.PEZZIORARI.HeaderText = "PEZZI ORARI";
-            this.PEZZIORARI.Name = "PEZZIORARI";
-            this.PEZZIORARI.Width = 50;
-            // 
-            // QUANTITA
-            // 
-            this.QUANTITA.DataPropertyName = "Quantita";
-            this.QUANTITA.HeaderText = "QUANTITA";
-            this.QUANTITA.Name = "QUANTITA";
-            this.QUANTITA.ReadOnly = true;
-            // 
-            // QUANTITACONSUMO
-            // 
-            this.QUANTITACONSUMO.DataPropertyName = "QuantitaConsumo";
-            this.QUANTITACONSUMO.HeaderText = "QUANTITA CONSUMO";
-            this.QUANTITACONSUMO.Name = "QUANTITACONSUMO";
-            this.QUANTITACONSUMO.ReadOnly = true;
-            // 
-            // QUANTITAOCCORRENZA
-            // 
-            this.QUANTITAOCCORRENZA.DataPropertyName = "QualitaOccorrenza";
-            this.QUANTITAOCCORRENZA.HeaderText = "QUANTITA OCCORRENZA";
-            this.QUANTITAOCCORRENZA.Name = "QUANTITAOCCORRENZA";
-            this.QUANTITAOCCORRENZA.ReadOnly = true;
-            // 
-            // UM
-            // 
-            this.UM.DataPropertyName = "UM";
-            this.UM.HeaderText = "UM";
-            this.UM.Name = "UM";
-            // 
-            // METODO
-            // 
-            this.METODO.DataPropertyName = "Metodo";
-            this.METODO.HeaderText = "METODO";
-            this.METODO.Name = "METODO";
-            this.METODO.ReadOnly = true;
-            // 
-            // VERSIONE
-            // 
-            this.VERSIONE.DataPropertyName = "Versione";
-            this.VERSIONE.HeaderText = "VERSIONE";
-            this.VERSIONE.Name = "VERSIONE";
-            this.VERSIONE.ReadOnly = true;
-            // 
-            // ATTIVA
-            // 
-            this.ATTIVA.DataPropertyName = "Attiva";
-            this.ATTIVA.HeaderText = "ATTIVA";
-            this.ATTIVA.Name = "ATTIVA";
-            this.ATTIVA.ReadOnly = true;
-            // 
-            // CONTROLLATA
-            // 
-            this.CONTROLLATA.DataPropertyName = "Controllata";
-            this.CONTROLLATA.HeaderText = "CONTROLLATA";
-            this.CONTROLLATA.Name = "CONTROLLATA";
-            this.CONTROLLATA.ReadOnly = true;
-            // 
-            // FORNITOCOMMITTENTE
-            // 
-            this.FORNITOCOMMITTENTE.DataPropertyName = "FornitoDaCommittente";
-            this.FORNITOCOMMITTENTE.HeaderText = "FORN. COMMIT.";
-            this.FORNITOCOMMITTENTE.Name = "FORNITOCOMMITTENTE";
-            this.FORNITOCOMMITTENTE.ReadOnly = true;
-            // 
-            // PESO
-            // 
-            this.PESO.DataPropertyName = "Peso";
-            this.PESO.HeaderText = "PESO";
-            this.PESO.Name = "PESO";
-            this.PESO.ReadOnly = true;
-            this.PESO.Width = 50;
-            // 
-            // SUPERFICIE
-            // 
-            this.SUPERFICIE.DataPropertyName = "Superficie";
-            this.SUPERFICIE.HeaderText = "SUPERFICIE";
-            this.SUPERFICIE.Name = "SUPERFICIE";
-            this.SUPERFICIE.ReadOnly = true;
-            this.SUPERFICIE.Width = 50;
-            // 
-            // NOTESTANDARD
-            // 
-            this.NOTESTANDARD.DataPropertyName = "NoteStandard";
-            this.NOTESTANDARD.HeaderText = "NOTE STANDARD";
-            this.NOTESTANDARD.Name = "NOTESTANDARD";
-            this.NOTESTANDARD.ReadOnly = true;
-            this.NOTESTANDARD.Width = 200;
-            // 
-            // NOTETECNICHE
-            // 
-            this.NOTETECNICHE.DataPropertyName = "NoteTecniche";
-            this.NOTETECNICHE.HeaderText = "NOTE TECNICHE";
-            this.NOTETECNICHE.Name = "NOTETECNICHE";
-            this.NOTETECNICHE.ReadOnly = true;
-            this.NOTETECNICHE.Width = 200;
-            // 
-            // ContoLavoro
-            // 
-            this.ContoLavoro.DataPropertyName = "ContoLavoro";
-            this.ContoLavoro.HeaderText = "ContoLavoro";
-            this.ContoLavoro.Name = "ContoLavoro";
-            this.ContoLavoro.Visible = false;
             // 
             // tabControl1
             // 
@@ -579,6 +402,8 @@
             // chkInserisciTopFinish
             // 
             this.chkInserisciTopFinish.AutoSize = true;
+            this.chkInserisciTopFinish.Checked = true;
+            this.chkInserisciTopFinish.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkInserisciTopFinish.Location = new System.Drawing.Point(19, 53);
             this.chkInserisciTopFinish.Name = "chkInserisciTopFinish";
             this.chkInserisciTopFinish.Size = new System.Drawing.Size(173, 19);
@@ -618,31 +443,194 @@
             this.btnContoLavoro.UseVisualStyleBackColor = true;
             this.btnContoLavoro.Click += new System.EventHandler(this.btnContoLavoro_Click);
             // 
-            // ddlBrand
+            // ID
             // 
-            this.ddlBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlBrand.FormattingEnabled = true;
-            this.ddlBrand.Location = new System.Drawing.Point(1028, 51);
-            this.ddlBrand.Name = "ddlBrand";
-            this.ddlBrand.Size = new System.Drawing.Size(121, 23);
-            this.ddlBrand.TabIndex = 12;
+            this.ID.DataPropertyName = "ID";
+            this.ID.Frozen = true;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
             // 
-            // label4
+            // MODELLO
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(966, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Brand CL";
+            this.MODELLO.DataPropertyName = "Modello";
+            this.MODELLO.Frozen = true;
+            this.MODELLO.HeaderText = "MODELLO";
+            this.MODELLO.Name = "MODELLO";
+            // 
+            // DESCRIZIONE
+            // 
+            this.DESCRIZIONE.DataPropertyName = "DescrizioneArticolo";
+            this.DESCRIZIONE.Frozen = true;
+            this.DESCRIZIONE.HeaderText = "DESCRIZIONE";
+            this.DESCRIZIONE.Name = "DESCRIZIONE";
+            this.DESCRIZIONE.ReadOnly = true;
+            // 
+            // REPARTO
+            // 
+            this.REPARTO.DataPropertyName = "Reparto";
+            this.REPARTO.Frozen = true;
+            this.REPARTO.HeaderText = "REPARTO";
+            this.REPARTO.Name = "REPARTO";
+            this.REPARTO.ReadOnly = true;
+            // 
+            // FASE
+            // 
+            this.FASE.DataPropertyName = "Fase";
+            this.FASE.Frozen = true;
+            this.FASE.HeaderText = "FASE";
+            this.FASE.Name = "FASE";
+            this.FASE.ReadOnly = true;
+            // 
+            // IDMAGAZZ
+            // 
+            this.IDMAGAZZ.DataPropertyName = "IDMAGAZZ";
+            this.IDMAGAZZ.Frozen = true;
+            this.IDMAGAZZ.HeaderText = "IDMAGAZZ";
+            this.IDMAGAZZ.Name = "IDMAGAZZ";
+            // 
+            // ANAGRAFICA
+            // 
+            this.ANAGRAFICA.DataPropertyName = "Anagrafica";
+            this.ANAGRAFICA.Frozen = true;
+            this.ANAGRAFICA.HeaderText = "ANAGRAFICA";
+            this.ANAGRAFICA.Name = "ANAGRAFICA";
+            // 
+            // CODICECICLO
+            // 
+            this.CODICECICLO.DataPropertyName = "CodiceCiclo";
+            this.CODICECICLO.HeaderText = "CODICE CICLO";
+            this.CODICECICLO.Name = "CODICECICLO";
+            // 
+            // COLLEGAMENTOCICLO
+            // 
+            this.COLLEGAMENTOCICLO.DataPropertyName = "CollegamentoCiclo";
+            this.COLLEGAMENTOCICLO.HeaderText = "COLLEGAMENTO CICLO";
+            this.COLLEGAMENTOCICLO.Name = "COLLEGAMENTOCICLO";
+            this.COLLEGAMENTOCICLO.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.COLLEGAMENTOCICLO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.COLLEGAMENTOCICLO.Width = 80;
+            // 
+            // COLLEGAMENTODIBA
+            // 
+            this.COLLEGAMENTODIBA.DataPropertyName = "CollegamentoDiba";
+            this.COLLEGAMENTODIBA.HeaderText = "COLLEGAMENTO DISTINTA";
+            this.COLLEGAMENTODIBA.Name = "COLLEGAMENTODIBA";
+            this.COLLEGAMENTODIBA.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.COLLEGAMENTODIBA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.COLLEGAMENTODIBA.Width = 80;
+            // 
+            // PEZZIORARI
+            // 
+            this.PEZZIORARI.DataPropertyName = "PezziOrari";
+            this.PEZZIORARI.HeaderText = "PEZZI ORARI";
+            this.PEZZIORARI.Name = "PEZZIORARI";
+            this.PEZZIORARI.Width = 50;
+            // 
+            // QUANTITA
+            // 
+            this.QUANTITA.DataPropertyName = "Quantita";
+            this.QUANTITA.HeaderText = "QUANTITA";
+            this.QUANTITA.Name = "QUANTITA";
+            // 
+            // QUANTITACONSUMO
+            // 
+            this.QUANTITACONSUMO.DataPropertyName = "QuantitaConsumo";
+            this.QUANTITACONSUMO.HeaderText = "QUANTITA CONSUMO";
+            this.QUANTITACONSUMO.Name = "QUANTITACONSUMO";
+            this.QUANTITACONSUMO.ReadOnly = true;
+            // 
+            // QUANTITAOCCORRENZA
+            // 
+            this.QUANTITAOCCORRENZA.DataPropertyName = "QualitaOccorrenza";
+            this.QUANTITAOCCORRENZA.HeaderText = "QUANTITA OCCORRENZA";
+            this.QUANTITAOCCORRENZA.Name = "QUANTITAOCCORRENZA";
+            this.QUANTITAOCCORRENZA.ReadOnly = true;
+            // 
+            // UM
+            // 
+            this.UM.DataPropertyName = "UM";
+            this.UM.HeaderText = "UM";
+            this.UM.Name = "UM";
+            // 
+            // METODO
+            // 
+            this.METODO.DataPropertyName = "Metodo";
+            this.METODO.HeaderText = "METODO";
+            this.METODO.Name = "METODO";
+            this.METODO.ReadOnly = true;
+            // 
+            // VERSIONE
+            // 
+            this.VERSIONE.DataPropertyName = "Versione";
+            this.VERSIONE.HeaderText = "VERSIONE";
+            this.VERSIONE.Name = "VERSIONE";
+            this.VERSIONE.ReadOnly = true;
+            // 
+            // ATTIVA
+            // 
+            this.ATTIVA.DataPropertyName = "Attiva";
+            this.ATTIVA.HeaderText = "ATTIVA";
+            this.ATTIVA.Name = "ATTIVA";
+            this.ATTIVA.ReadOnly = true;
+            // 
+            // CONTROLLATA
+            // 
+            this.CONTROLLATA.DataPropertyName = "Controllata";
+            this.CONTROLLATA.HeaderText = "CONTROLLATA";
+            this.CONTROLLATA.Name = "CONTROLLATA";
+            this.CONTROLLATA.ReadOnly = true;
+            // 
+            // FORNITOCOMMITTENTE
+            // 
+            this.FORNITOCOMMITTENTE.DataPropertyName = "FornitoDaCommittente";
+            this.FORNITOCOMMITTENTE.HeaderText = "FORN. COMMIT.";
+            this.FORNITOCOMMITTENTE.Name = "FORNITOCOMMITTENTE";
+            this.FORNITOCOMMITTENTE.ReadOnly = true;
+            // 
+            // PESO
+            // 
+            this.PESO.DataPropertyName = "Peso";
+            this.PESO.HeaderText = "PESO";
+            this.PESO.Name = "PESO";
+            this.PESO.ReadOnly = true;
+            this.PESO.Width = 50;
+            // 
+            // SUPERFICIE
+            // 
+            this.SUPERFICIE.DataPropertyName = "Superficie";
+            this.SUPERFICIE.HeaderText = "SUPERFICIE";
+            this.SUPERFICIE.Name = "SUPERFICIE";
+            this.SUPERFICIE.ReadOnly = true;
+            this.SUPERFICIE.Width = 50;
+            // 
+            // NOTESTANDARD
+            // 
+            this.NOTESTANDARD.DataPropertyName = "NoteStandard";
+            this.NOTESTANDARD.HeaderText = "NOTE STANDARD";
+            this.NOTESTANDARD.Name = "NOTESTANDARD";
+            this.NOTESTANDARD.ReadOnly = true;
+            this.NOTESTANDARD.Width = 200;
+            // 
+            // NOTETECNICHE
+            // 
+            this.NOTETECNICHE.DataPropertyName = "NoteTecniche";
+            this.NOTETECNICHE.HeaderText = "NOTE TECNICHE";
+            this.NOTETECNICHE.Name = "NOTETECNICHE";
+            this.NOTETECNICHE.ReadOnly = true;
+            this.NOTETECNICHE.Width = 200;
+            // 
+            // ContoLavoro
+            // 
+            this.ContoLavoro.DataPropertyName = "ContoLavoro";
+            this.ContoLavoro.HeaderText = "ContoLavoro";
+            this.ContoLavoro.Name = "ContoLavoro";
+            this.ContoLavoro.Visible = false;
             // 
             // EstraiProdottoFinito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 932);
-            this.Controls.Add(this.ddlBrand);
             this.Controls.Add(this.btnContoLavoro);
             this.Controls.Add(this.btnVerifica);
             this.Controls.Add(this.chkControlliQualita);
@@ -653,7 +641,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCercaDiBa);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtArticolo);
             this.Controls.Add(this.tvDiBa);
@@ -733,8 +720,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTESTANDARD;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTETECNICHE;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ContoLavoro;
-        private System.Windows.Forms.ComboBox ddlBrand;
-        private System.Windows.Forms.Label label4;
     }
 }
 
