@@ -147,6 +147,9 @@ namespace EstraiProdottiFiniti
                     int idNodo = 1;
                     int profondita = 1;
                     EstraiDistintaBase(bEstrai, IDTDIBA, profondita, ref idNodo, -1, 1, 0, string.Empty, string.Empty, "N", string.Empty);
+
+                    pulisciNodi();
+
                     CreaAlbero();
                     PopolaGrigliaNodi();
 
@@ -158,6 +161,43 @@ namespace EstraiProdottiFiniti
                 }
 
             }
+        }
+
+        private void pulisciNodi()
+        {
+            if (chkControlliQualita.Checked)
+            {
+
+                List<Nodo> lista = new List<Nodo>();
+                foreach (Nodo n in Nodi)
+                {
+                    EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == n.Fase).FirstOrDefault();
+                    if (task != null && task.TASK == "***ESCLUDERE")
+                    {
+                        if (Nodi.Any(x => x.IDPADRE == n.ID))
+                        {
+                            foreach (Nodo nodoFiglio in Nodi.Where(x => x.IDPADRE == n.ID))
+                                nodoFiglio.IDPADRE = n.IDPADRE;
+                        }
+                        else
+                            lista.Add(n);
+                    }
+                    else
+                        lista.Add(n);
+                }
+                Nodi = lista;
+            }
+            Nodo radice = Nodi[0];
+            aggiornaProfondita(radice, radice.Profondita);
+
+        }
+
+        private void aggiornaProfondita(Nodo nodoDaAggiornare, int profondita)
+        {
+            nodoDaAggiornare.Profondita = profondita;
+            profondita++;
+            foreach (Nodo nodoFiglio in Nodi.Where(x => x.IDPADRE == nodoDaAggiornare.ID))
+                aggiornaProfondita(nodoFiglio, profondita);
         }
 
         private void PopolaGrigliaNodi()
@@ -272,38 +312,44 @@ namespace EstraiProdottiFiniti
 
                     Nodo n = CreaNodo(idNodo, testata.IDMAGAZZ, profondita, idPadre, quantitaConsumo, quantitaOccorrenza, testata.IDTABFAS, noteTecniche, noteStandard, fornitoDaCommittente,
                         testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, unitaMisura, reparto);
-                    EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
-                    if (task != null)
-                    {
-                        if (task.TASK.Trim() == "***ESCLUDERE")
-                            n.Reparto = "CTRL";
-                    }
 
-                    if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+                    Nodi.Add(n);
+                    idPadre = n.ID;
+                    idNodo++;
 
-                    {
+                    //EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
+                    //if (task != null)
+                    //{
+                    //    if (task.TASK.Trim() == "***ESCLUDERE")
+                    //        n.Reparto = "CTRL";
+                    //}
 
-                        if (!n.Modello.Contains("CTRL"))
-                        {
-                            Nodi.Add(n);
-                            idPadre = n.ID;
-                            idNodo++;
-                        }
-                        else modelloCOntieneCTRL = true;
-                    }
-                    else
-                    {
-                        if (n.Fase == "SKIC")
-                        {
-                            Nodi.Add(n);
-                            idPadre = n.ID;
-                            idNodo++;
-                        }
-                    }
+                    //if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+
+                    //{
+
+                    //    if (!n.Modello.Contains("CTRL"))
+                    //    {
+                    //        Nodi.Add(n);
+                    //        idPadre = n.ID;
+                    //        idNodo++;
+                    //    }
+                    //    else modelloCOntieneCTRL = true;
+                    //}
+                    //else
+                    //{
+                    //    if (n.Fase == "SKIC")
+                    //    {
+                    //        Nodi.Add(n);
+                    //        idPadre = n.ID;
+                    //        idNodo++;
+                    //    }
+                    //}
                 }
                 bEstrai.GetUSR_PRD_RDIBA(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBARow> componenti = _ds.USR_PRD_RDIBA.Where(x => x.IDTDIBA == IDTDIBA).ToList();
-                if (componenti.Count > 0 && !modelloCOntieneCTRL) profondita++;
+                if (componenti.Count > 0 && !modelloCOntieneCTRL)
+                    profondita++;
 
                 foreach (EstraiProdottiFinitiDS.USR_PRD_RDIBARow componente in componenti)
                 {
@@ -318,6 +364,8 @@ namespace EstraiProdottiFiniti
                         Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
                             testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI, repartoDiba);
 
+                        Nodi.Add(nodoFiglio);
+                        idNodo++;
                         //EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
                         //if (task != null)
                         //{
@@ -326,24 +374,24 @@ namespace EstraiProdottiFiniti
                         //}
 
 
-                        if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
-                        {
-                            if (!nodoFiglio.Modello.Contains("CTRL"))
-                            {
-                                Nodi.Add(nodoFiglio);
-                                idNodo++;
-                            }
-                        }
-                        else
-                        {
-                            if (nodoFiglio.Fase == "SKIC")
-                            {
-                                Nodi.Add(nodoFiglio);
-                                idPadre = nodoFiglio.ID;
-                                idNodo++;
-                            }
+                        //if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
+                        //{
+                        //    if (!nodoFiglio.Modello.Contains("CTRL"))
+                        //    {
+                        //        Nodi.Add(nodoFiglio);
+                        //        idNodo++;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    if (nodoFiglio.Fase == "SKIC")
+                        //    {
+                        //        Nodi.Add(nodoFiglio);
+                        //        idPadre = nodoFiglio.ID;
+                        //        idNodo++;
+                        //    }
 
-                        }
+                        //}
 
                     }
                 }
@@ -401,27 +449,31 @@ namespace EstraiProdottiFiniti
                 //}
 
 
-                if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
+                //if (!chkControlliQualita.Checked || !n.Reparto.Contains("CTRL"))
 
-                {
-                    if (!n.Modello.Contains("CTRL"))
-                    {
-                        Nodi.Add(n);
-                        idNodo++;
-                    }
-                    else modelloCOntieneCTRL = true;
+                //{
+                //    if (!n.Modello.Contains("CTRL"))
+                //    {
+                //        Nodi.Add(n);
+                //        idNodo++;
+                //    }
+                //    else modelloCOntieneCTRL = true;
 
-                }
-                else
-                {
-                    if (n.Fase == "SKIC")
-                    {
-                        Nodi.Add(n);
-                        idPadre = n.ID;
-                        idNodo++;
-                    }
+                //}
+                //else
+                //{
+                //    if (n.Fase == "SKIC")
+                //    {
+                //        Nodi.Add(n);
+                //        idPadre = n.ID;
+                //        idNodo++;
+                //    }
 
-                }
+                //}
+
+                Nodi.Add(n);
+                idPadre = n.ID;
+                idNodo++;
 
                 bEstrai.GetUSR_PRD_RDIBATopFinish(_ds, IDTDIBA);
                 List<EstraiProdottiFinitiDS.USR_PRD_RDIBATOPFINISHRow> componenti = _ds.USR_PRD_RDIBATOPFINISH.Where(x => x.IDTDIBA == IDTDIBA).ToList();
@@ -447,24 +499,26 @@ namespace EstraiProdottiFiniti
                         //        nodoFiglio.Reparto = "CTRL";
                         //}
 
-                        if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
-                        {
-                            if (!nodoFiglio.Modello.Contains("CTRL"))
-                            {
-                                Nodi.Add(nodoFiglio);
-                                idNodo++;
-                            }
-                        }
-                        else
-                        {
-                            if (n.Fase == "SKIC")
-                            {
-                                Nodi.Add(n);
-                                idPadre = n.ID;
-                                idNodo++;
-                            }
+                        //if (!chkControlliQualita.Checked || !nodoFiglio.Reparto.Contains("CTRL"))
+                        //{
+                        //    if (!nodoFiglio.Modello.Contains("CTRL"))
+                        //    {
+                        //        Nodi.Add(nodoFiglio);
+                        //        idNodo++;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    if (n.Fase == "SKIC")
+                        //    {
+                        //        Nodi.Add(n);
+                        //        idPadre = n.ID;
+                        //        idNodo++;
+                        //    }
 
-                        }
+                        //}
+                        Nodi.Add(nodoFiglio);
+                        idNodo++;
 
                     }
                 }
@@ -655,7 +709,9 @@ namespace EstraiProdottiFiniti
                             if (!string.IsNullOrEmpty(riga.NoteTecniche))
                                 f.Commenti.Add(riga.NoteTecniche);
                             if (task.TASK != "***ESCLUDERE")
+                            {
                                 c.Fasi.Add(f);
+                            }
                         }
                     }
                 }
@@ -783,6 +839,7 @@ namespace EstraiProdottiFiniti
             int indice = 0;
 
             List<Nodo> righeFiglie = new List<Nodo>();
+
             do
             {
                 indice++;
@@ -930,6 +987,7 @@ namespace EstraiProdottiFiniti
                         dettaglioCiclo.CONDIZIONE = f.Condizione;
                         dettaglioCiclo.CARATTERISTICA = f.Caratteristica;
                         dettaglioCiclo.LOGICHE = f.LogicheLavorazione;
+                        dettaglioCiclo.DATAINSERIMENTO = DateTime.Now;
 
                         _ds.BC_DETTAGLIO_CICLO.AddBC_DETTAGLIO_CICLORow(dettaglioCiclo);
 
@@ -944,6 +1002,7 @@ namespace EstraiProdottiFiniti
                             comCiclo.RIGA = numeroRiga;
                             comCiclo.DATA = DateTime.Today.ToShortDateString();
                             comCiclo.COMMENTO = commento;
+                            comCiclo.DATAINSERIMENTO = DateTime.Now;
                             _ds.BC_COM_CICLO.AddBC_COM_CICLORow(comCiclo);
                             numeroRiga += 1000;
                         }
@@ -993,6 +1052,7 @@ namespace EstraiProdottiFiniti
                         distinta.CODICE_CONDIZIONE = c.Condizione;
                         distinta.ARTICOLO_NEUTRO = c.ArticoloNeutro;
                         distinta.FORMULA = c.Formula;
+                        distinta.DATAINSERIMENTO = DateTime.Now;
 
 
                         _ds.BC_DISTINTA.AddBC_DISTINTARow(distinta);
@@ -1057,33 +1117,41 @@ namespace EstraiProdottiFiniti
 
         private void btnVerifica_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            string errori = string.Empty;
-            VerificaAnagrafiche();
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                string errori = string.Empty;
+                VerificaAnagrafiche();
 
-            sb.AppendLine("**** VERIFICA CICLI ****");
-            VerificaCicli(out errori);
-            if (errori.Trim().Length > 0)
-                sb.AppendLine(errori);
+                sb.AppendLine("**** VERIFICA CICLI ****");
+                VerificaCicli(out errori);
+                if (errori.Trim().Length > 0)
+                    sb.AppendLine(errori);
 
-            sb.AppendLine("**** VERIFICHE DISTINTE ****");
-            VerificaDistinte(out errori);
-            if (errori.Trim().Length > 0)
-                sb.AppendLine(errori);
+                sb.AppendLine("**** VERIFICHE DISTINTE ****");
+                VerificaDistinte(out errori);
+                if (errori.Trim().Length > 0)
+                    sb.AppendLine(errori);
 
-            sb.AppendLine("**** VERIFICA ANAGRAFICHE ORFANE ****");
-            sb.AppendLine(VerificaAnagraficheOrfane());
+                sb.AppendLine("**** VERIFICA ANAGRAFICHE ORFANE ****");
+                sb.AppendLine(VerificaAnagraficheOrfane());
 
 
-            sb.AppendLine("**** VERIFICHE COLLEGAMENTO ****");
-            sb.AppendLine(InserisciCodiciCollegamento());
-            txtNotifiche.Text = sb.ToString();
+                sb.AppendLine("**** VERIFICHE COLLEGAMENTO ****");
+                sb.AppendLine(InserisciCodiciCollegamento());
+                txtNotifiche.Text = sb.ToString();
 
-            tabControl1.SelectedTab = tabPage5;
+                tabControl1.SelectedTab = tabPage5;
 
-            dgvNodi.Update();
-            dgvNodi.Refresh();
+                dgvNodi.Update();
+                dgvNodi.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore nel creare il file", ex);
+                Cursor.Current = Cursors.Default;
 
+            }
         }
 
         private string VerificaAnagraficheOrfane()

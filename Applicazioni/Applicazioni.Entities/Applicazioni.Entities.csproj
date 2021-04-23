@@ -64,6 +64,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDIFornitoriDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EstraiProdottiFinitiDS.cs">
+      <DependentUpon>EstraiProdottiFinitiDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EstraiProdottiFinitiDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

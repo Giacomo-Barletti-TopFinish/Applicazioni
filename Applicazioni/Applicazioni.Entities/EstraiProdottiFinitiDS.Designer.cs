@@ -8320,6 +8320,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnCOMMENTO;
             
+            private global::System.Data.DataColumn columnDATAINSERIMENTO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BC_COM_CICLODataTable() {
@@ -8411,6 +8413,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAINSERIMENTOColumn {
+                get {
+                    return this.columnDATAINSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -8446,7 +8456,7 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public BC_COM_CICLORow AddBC_COM_CICLORow(decimal IDCOMCICLO, string CICLO, string VERSIONE, decimal OPERAZIONE, decimal RIGA, string DATA, string COMMENTO) {
+            public BC_COM_CICLORow AddBC_COM_CICLORow(decimal IDCOMCICLO, string CICLO, string VERSIONE, decimal OPERAZIONE, decimal RIGA, string DATA, string COMMENTO, System.DateTime DATAINSERIMENTO) {
                 BC_COM_CICLORow rowBC_COM_CICLORow = ((BC_COM_CICLORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDCOMCICLO,
@@ -8455,7 +8465,8 @@ namespace Applicazioni.Entities {
                         OPERAZIONE,
                         RIGA,
                         DATA,
-                        COMMENTO};
+                        COMMENTO,
+                        DATAINSERIMENTO};
                 rowBC_COM_CICLORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBC_COM_CICLORow);
                 return rowBC_COM_CICLORow;
@@ -8485,6 +8496,7 @@ namespace Applicazioni.Entities {
                 this.columnRIGA = base.Columns["RIGA"];
                 this.columnDATA = base.Columns["DATA"];
                 this.columnCOMMENTO = base.Columns["COMMENTO"];
+                this.columnDATAINSERIMENTO = base.Columns["DATAINSERIMENTO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8504,6 +8516,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnDATA);
                 this.columnCOMMENTO = new global::System.Data.DataColumn("COMMENTO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOMMENTO);
+                this.columnDATAINSERIMENTO = new global::System.Data.DataColumn("DATAINSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAINSERIMENTO);
                 this.columnCICLO.MaxLength = 26;
                 this.columnVERSIONE.MaxLength = 26;
                 this.columnDATA.MaxLength = 26;
@@ -8680,6 +8694,8 @@ namespace Applicazioni.Entities {
             private global::System.Data.DataColumn columnCARATTERISTICA;
             
             private global::System.Data.DataColumn columnLOGICHE;
+            
+            private global::System.Data.DataColumn columnDATAINSERIMENTO;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -8876,6 +8892,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAINSERIMENTOColumn {
+                get {
+                    return this.columnDATAINSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -8931,7 +8955,8 @@ namespace Applicazioni.Entities {
                         string TASK, 
                         string CONDIZIONE, 
                         string CARATTERISTICA, 
-                        string LOGICHE) {
+                        string LOGICHE, 
+                        System.DateTime DATAINSERIMENTO) {
                 BC_DETTAGLIO_CICLORow rowBC_DETTAGLIO_CICLORow = ((BC_DETTAGLIO_CICLORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDDETCICLO,
@@ -8953,7 +8978,8 @@ namespace Applicazioni.Entities {
                         TASK,
                         CONDIZIONE,
                         CARATTERISTICA,
-                        LOGICHE};
+                        LOGICHE,
+                        DATAINSERIMENTO};
                 rowBC_DETTAGLIO_CICLORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBC_DETTAGLIO_CICLORow);
                 return rowBC_DETTAGLIO_CICLORow;
@@ -8996,6 +9022,7 @@ namespace Applicazioni.Entities {
                 this.columnCONDIZIONE = base.Columns["CONDIZIONE"];
                 this.columnCARATTERISTICA = base.Columns["CARATTERISTICA"];
                 this.columnLOGICHE = base.Columns["LOGICHE"];
+                this.columnDATAINSERIMENTO = base.Columns["DATAINSERIMENTO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9041,6 +9068,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnCARATTERISTICA);
                 this.columnLOGICHE = new global::System.Data.DataColumn("LOGICHE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLOGICHE);
+                this.columnDATAINSERIMENTO = new global::System.Data.DataColumn("DATAINSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAINSERIMENTO);
                 this.columnNRCICLO.MaxLength = 26;
                 this.columnVERSIONE.MaxLength = 26;
                 this.columnTIPO.MaxLength = 26;
@@ -9221,6 +9250,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnFORMULA;
             
+            private global::System.Data.DataColumn columnDATAINSERIMENTO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BC_DISTINTADataTable() {
@@ -9392,6 +9423,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAINSERIMENTOColumn {
+                get {
+                    return this.columnDATAINSERIMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -9444,7 +9483,8 @@ namespace Applicazioni.Entities {
                         string FORMULA_QUANTITA, 
                         string CODICE_CONDIZIONE, 
                         string ARTICOLO_NEUTRO, 
-                        string FORMULA) {
+                        string FORMULA, 
+                        System.DateTime DATAINSERIMENTO) {
                 BC_DISTINTARow rowBC_DISTINTARow = ((BC_DISTINTARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDDIBA,
@@ -9463,7 +9503,8 @@ namespace Applicazioni.Entities {
                         FORMULA_QUANTITA,
                         CODICE_CONDIZIONE,
                         ARTICOLO_NEUTRO,
-                        FORMULA};
+                        FORMULA,
+                        DATAINSERIMENTO};
                 rowBC_DISTINTARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBC_DISTINTARow);
                 return rowBC_DISTINTARow;
@@ -9503,6 +9544,7 @@ namespace Applicazioni.Entities {
                 this.columnCODICE_CONDIZIONE = base.Columns["CODICE_CONDIZIONE"];
                 this.columnARTICOLO_NEUTRO = base.Columns["ARTICOLO_NEUTRO"];
                 this.columnFORMULA = base.Columns["FORMULA"];
+                this.columnDATAINSERIMENTO = base.Columns["DATAINSERIMENTO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9542,6 +9584,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnARTICOLO_NEUTRO);
                 this.columnFORMULA = new global::System.Data.DataColumn("FORMULA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFORMULA);
+                this.columnDATAINSERIMENTO = new global::System.Data.DataColumn("DATAINSERIMENTO", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAINSERIMENTO);
                 this.columnDIBA.MaxLength = 26;
                 this.columnVERSIONE.MaxLength = 26;
                 this.columnTIPO.MaxLength = 26;
@@ -18542,6 +18586,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAINSERIMENTO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBC_COM_CICLO.DATAINSERIMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATAINSERIMENTO\' in table \'BC_COM_CICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_COM_CICLO.DATAINSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDCOMCICLONull() {
                 return this.IsNull(this.tableBC_COM_CICLO.IDCOMCICLOColumn);
             }
@@ -18622,6 +18682,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCOMMENTONull() {
                 this[this.tableBC_COM_CICLO.COMMENTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDATAINSERIMENTONull() {
+                return this.IsNull(this.tableBC_COM_CICLO.DATAINSERIMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDATAINSERIMENTONull() {
+                this[this.tableBC_COM_CICLO.DATAINSERIMENTOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -18963,6 +19035,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAINSERIMENTO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBC_DETTAGLIO_CICLO.DATAINSERIMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATAINSERIMENTO\' in table \'BC_DETTAGLIO_CICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_DETTAGLIO_CICLO.DATAINSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDDETCICLONull() {
                 return this.IsNull(this.tableBC_DETTAGLIO_CICLO.IDDETCICLOColumn);
             }
@@ -19199,6 +19287,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetLOGICHENull() {
                 this[this.tableBC_DETTAGLIO_CICLO.LOGICHEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDATAINSERIMENTONull() {
+                return this.IsNull(this.tableBC_DETTAGLIO_CICLO.DATAINSERIMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDATAINSERIMENTONull() {
+                this[this.tableBC_DETTAGLIO_CICLO.DATAINSERIMENTOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -19490,6 +19590,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAINSERIMENTO {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBC_DISTINTA.DATAINSERIMENTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATAINSERIMENTO\' in table \'BC_DISTINTA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBC_DISTINTA.DATAINSERIMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDDIBANull() {
                 return this.IsNull(this.tableBC_DISTINTA.IDDIBAColumn);
             }
@@ -19690,6 +19806,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetFORMULANull() {
                 this[this.tableBC_DISTINTA.FORMULAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDATAINSERIMENTONull() {
+                return this.IsNull(this.tableBC_DISTINTA.DATAINSERIMENTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDATAINSERIMENTONull() {
+                this[this.tableBC_DISTINTA.DATAINSERIMENTOColumn] = global::System.Convert.DBNull;
             }
         }
         
