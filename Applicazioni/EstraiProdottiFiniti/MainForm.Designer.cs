@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.txtArticolo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -69,6 +68,7 @@
             this.COLLEGAMENTOCICLO = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.COLLEGAMENTODIBA = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.PEZZIORARI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OREPERIODO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITACONSUMO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITAOCCORRENZA = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,14 +132,6 @@
             // dgvNodi
             // 
             this.dgvNodi.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvNodi.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvNodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNodi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -153,6 +145,7 @@
             this.COLLEGAMENTOCICLO,
             this.COLLEGAMENTODIBA,
             this.PEZZIORARI,
+            this.OREPERIODO,
             this.QUANTITA,
             this.QUANTITACONSUMO,
             this.QUANTITAOCCORRENZA,
@@ -526,6 +519,14 @@
             this.PEZZIORARI.Name = "PEZZIORARI";
             this.PEZZIORARI.Width = 50;
             // 
+            // OREPERIODO
+            // 
+            this.OREPERIODO.DataPropertyName = "OrePeriodo";
+            this.OREPERIODO.FillWeight = 50F;
+            this.OREPERIODO.HeaderText = "ORE PERIODO";
+            this.OREPERIODO.Name = "OREPERIODO";
+            this.OREPERIODO.Width = 50;
+            // 
             // QUANTITA
             // 
             this.QUANTITA.DataPropertyName = "Quantita";
@@ -706,6 +707,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn COLLEGAMENTOCICLO;
         private System.Windows.Forms.DataGridViewComboBoxColumn COLLEGAMENTODIBA;
         private System.Windows.Forms.DataGridViewTextBoxColumn PEZZIORARI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OREPERIODO;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITACONSUMO;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITAOCCORRENZA;

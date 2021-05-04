@@ -172,7 +172,7 @@ namespace EstraiProdottiFiniti
                 foreach (Nodo n in Nodi)
                 {
                     EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == n.Fase).FirstOrDefault();
-                    if (task != null && task.TASK == "***ESCLUDERE")
+                    if ((task != null && task.TASK == "***ESCLUDERE")||(n.Modello.Contains("CQSL")))
                     {
                         if (Nodi.Any(x => x.IDPADRE == n.ID))
                         {
@@ -260,6 +260,7 @@ namespace EstraiProdottiFiniti
             n.Peso = magazz.PESO;
             n.Superficie = magazz.SUPERFICIE;
             n.FornitoDaCommittente = fornitoDaCommittente;
+            n.OrePeriodo = 1;
 
             noteStandard = noteStandard.Replace("\n", String.Empty);
             noteStandard = noteStandard.Replace("\r", String.Empty);
@@ -694,7 +695,7 @@ namespace EstraiProdottiFiniti
                             operazione += 10;
                             f.ID = riga.ID;
                             f.AreaProduzione = riga.Reparto;
-                            f.TempoLavorazione = 1;
+                            f.TempoLavorazione = riga.OrePeriodo;
                             f.Collegamento = riga.CollegamentoCiclo;
                             f.DimensioneLotto = (int)riga.PezziOrari;
                             EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == riga.Fase).FirstOrDefault();
@@ -1250,7 +1251,7 @@ namespace EstraiProdottiFiniti
                 Nodo nodoFiglio = (Nodo)radice.Tag;
                 bool esito = TrovaNodoAlbero(nodoDaTrovare, nodoAlberoFiglio);
                 nodoFiglio.ContoLavoro = esito;
-                return esito;
+                if(esito) return esito;
             }
             return false;
         }
