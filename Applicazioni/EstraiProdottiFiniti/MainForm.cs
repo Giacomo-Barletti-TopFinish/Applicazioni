@@ -804,10 +804,11 @@ namespace EstraiProdottiFiniti
                 }
 
                 Nodo riga = righeConAnagrafica.FirstOrDefault();
+                int idMax = Nodi.Max(x => x.ID);
 
                 riga.ToUpper();
                 int avantiMassimo = Nodi.Max(x => x.Profondita);
-                creaDistinta(riga, 1, Nodi.Count, distinte, righeConAnagrafica, avantiMassimo);
+                creaDistinta(riga, 1, idMax/*Nodi.Count*/, distinte, righeConAnagrafica, avantiMassimo);
 
                 ImpaginaMessaggioDistinte(distinte, NodiSenzaAnagrafica);
                 errori = errori + Environment.NewLine + ImpaginaNodiSenzaAnagrafica(NodiSenzaAnagrafica);
@@ -846,7 +847,7 @@ namespace EstraiProdottiFiniti
                 if (indice > avantiMassimo)
                     return;
 
-                righeFiglie = righeConAnagrafica.Where(x => x.Profondita == riga.Profondita + indice && x.ID > indiceMinimo && x.ID <= indiceMassimo).ToList();
+                righeFiglie = righeConAnagrafica.Where(x => x.Profondita == riga.Profondita + indice && x.ID >= indiceMinimo && x.ID <= indiceMassimo).ToList();
             } while (righeFiglie.Count == 0);
 
             List<Componente> componenti = new List<Componente>();
