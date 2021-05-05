@@ -206,7 +206,11 @@ namespace Applicazioni.Helpers
         {
             List<string> stringhe = new List<string>();
 
-            string[] str = stringa.Split(' ');
+            string stringaModificata = stringa.Replace("+", " + ");
+            stringaModificata = stringaModificata.Replace("-", " - ");
+            stringaModificata = stringaModificata.Replace("  ", " ");
+
+            string[] str = stringaModificata.Split(' ');
             string stringaComposta = string.Empty;
             for (int i = 0; i < str.Length; i++)
             {

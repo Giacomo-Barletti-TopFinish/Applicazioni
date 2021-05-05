@@ -69,6 +69,7 @@
             this.COLLEGAMENTODIBA = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.PEZZIORARI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OREPERIODO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOTESTANDARD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITACONSUMO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QUANTITAOCCORRENZA = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,7 +81,6 @@
             this.FORNITOCOMMITTENTE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PESO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SUPERFICIE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOTESTANDARD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOTETECNICHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ContoLavoro = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
@@ -146,6 +146,7 @@
             this.COLLEGAMENTODIBA,
             this.PEZZIORARI,
             this.OREPERIODO,
+            this.NOTESTANDARD,
             this.QUANTITA,
             this.QUANTITACONSUMO,
             this.QUANTITAOCCORRENZA,
@@ -157,7 +158,6 @@
             this.FORNITOCOMMITTENTE,
             this.PESO,
             this.SUPERFICIE,
-            this.NOTESTANDARD,
             this.NOTETECNICHE,
             this.ContoLavoro});
             this.dgvNodi.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -527,6 +527,14 @@
             this.OREPERIODO.Name = "OREPERIODO";
             this.OREPERIODO.Width = 50;
             // 
+            // NOTESTANDARD
+            // 
+            this.NOTESTANDARD.DataPropertyName = "NoteStandard";
+            this.NOTESTANDARD.HeaderText = "NOTE STANDARD";
+            this.NOTESTANDARD.Name = "NOTESTANDARD";
+            this.NOTESTANDARD.ReadOnly = true;
+            this.NOTESTANDARD.Width = 200;
+            // 
             // QUANTITA
             // 
             this.QUANTITA.DataPropertyName = "Quantita";
@@ -603,14 +611,6 @@
             this.SUPERFICIE.Name = "SUPERFICIE";
             this.SUPERFICIE.ReadOnly = true;
             this.SUPERFICIE.Width = 50;
-            // 
-            // NOTESTANDARD
-            // 
-            this.NOTESTANDARD.DataPropertyName = "NoteStandard";
-            this.NOTESTANDARD.HeaderText = "NOTE STANDARD";
-            this.NOTESTANDARD.Name = "NOTESTANDARD";
-            this.NOTESTANDARD.ReadOnly = true;
-            this.NOTESTANDARD.Width = 200;
             // 
             // NOTETECNICHE
             // 
@@ -708,6 +708,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn COLLEGAMENTODIBA;
         private System.Windows.Forms.DataGridViewTextBoxColumn PEZZIORARI;
         private System.Windows.Forms.DataGridViewTextBoxColumn OREPERIODO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NOTESTANDARD;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITACONSUMO;
         private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITAOCCORRENZA;
@@ -719,7 +720,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FORNITOCOMMITTENTE;
         private System.Windows.Forms.DataGridViewTextBoxColumn PESO;
         private System.Windows.Forms.DataGridViewTextBoxColumn SUPERFICIE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NOTESTANDARD;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTETECNICHE;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ContoLavoro;
     }

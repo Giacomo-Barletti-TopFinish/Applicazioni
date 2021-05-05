@@ -25,7 +25,7 @@ namespace EstraiProdottiFiniti
         public string CollegamentoDiba { get; set; }
         public string CollegamentoCiclo { get; set; }
         public decimal PezziOrari { get; set; }
-        public int OrePeriodo { get; set; }
+        public decimal OrePeriodo { get; set; }
         public string CodiceCiclo { get; set; }
         public decimal Peso { get; set; }
         public decimal Superficie { get; set; }

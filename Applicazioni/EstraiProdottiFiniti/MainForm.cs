@@ -172,7 +172,7 @@ namespace EstraiProdottiFiniti
                 foreach (Nodo n in Nodi)
                 {
                     EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == n.Fase).FirstOrDefault();
-                    if ((task != null && task.TASK == "***ESCLUDERE")||(n.Modello.Contains("CQSL")))
+                    if ((task != null && task.TASK == "***ESCLUDERE")||(n.Modello.Contains("CQSL") || n.Modello.Contains("CTRL")))
                     {
                         if (Nodi.Any(x => x.IDPADRE == n.ID))
                         {
