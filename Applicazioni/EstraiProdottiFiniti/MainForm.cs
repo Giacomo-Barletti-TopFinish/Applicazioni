@@ -172,7 +172,7 @@ namespace EstraiProdottiFiniti
                 foreach (Nodo n in Nodi)
                 {
                     EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == n.Fase).FirstOrDefault();
-                    if ((task != null && task.TASK == "***ESCLUDERE")||(n.Modello.Contains("CQSL") || n.Modello.Contains("CTRL")))
+                    if ((task != null && task.TASK == "***ESCLUDERE") || (n.Modello.Contains("CQSL") || n.Modello.Contains("CTRL")))
                     {
                         if (Nodi.Any(x => x.IDPADRE == n.ID))
                         {
@@ -557,6 +557,14 @@ namespace EstraiProdottiFiniti
 
                 string messaggioErrore = string.Empty;
 
+                List<Nodo> nodiSenzaAnagrafiche = Nodi.Where(x => string.IsNullOrEmpty(x.Anagrafica)).ToList();
+                foreach (Nodo nodo in nodiSenzaAnagrafiche.Where(x => !string.IsNullOrEmpty(x.IDMAGAZZ)))
+                {
+                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.RowState != DataRowState.Deleted && x.IDMAGAZZ == nodo.IDMAGAZZ).FirstOrDefault();
+                    if (riga != null)
+                        riga.Delete();
+                }
+
                 List<Nodo> nodiConAnagrafiche = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).ToList();
 
                 List<string> anagraficheCensite = new List<string>();
@@ -565,7 +573,7 @@ namespace EstraiProdottiFiniti
                 foreach (Nodo nodoConAnagrafica in nodiConAnagrafiche.Where(x => !string.IsNullOrEmpty(x.IDMAGAZZ)))
                 {
                     nodoConAnagrafica.ToUpper();
-                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == nodoConAnagrafica.IDMAGAZZ && x.CL == (nodoConAnagrafica.ContoLavoro ? 1 : 0)).FirstOrDefault();
+                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow riga = _ds.BC_ANAGRAFICA.Where(x => x.RowState != DataRowState.Deleted && x.IDMAGAZZ == nodoConAnagrafica.IDMAGAZZ && x.CL == (nodoConAnagrafica.ContoLavoro ? 1 : 0)).FirstOrDefault();
                     if (riga != null)
                     {
                         if (riga.BC != nodoConAnagrafica.Anagrafica.ToUpper())
@@ -1251,7 +1259,7 @@ namespace EstraiProdottiFiniti
                 Nodo nodoFiglio = (Nodo)radice.Tag;
                 bool esito = TrovaNodoAlbero(nodoDaTrovare, nodoAlberoFiglio);
                 nodoFiglio.ContoLavoro = esito;
-                if(esito) return esito;
+                if (esito) return esito;
             }
             return false;
         }

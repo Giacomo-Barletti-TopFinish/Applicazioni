@@ -484,15 +484,19 @@
             // ANAGRAFICA
             // 
             this.ANAGRAFICA.DataPropertyName = "Anagrafica";
+            this.ANAGRAFICA.FillWeight = 160F;
             this.ANAGRAFICA.Frozen = true;
             this.ANAGRAFICA.HeaderText = "ANAGRAFICA";
             this.ANAGRAFICA.Name = "ANAGRAFICA";
+            this.ANAGRAFICA.Width = 160;
             // 
             // CODICECICLO
             // 
             this.CODICECICLO.DataPropertyName = "CodiceCiclo";
+            this.CODICECICLO.FillWeight = 80F;
             this.CODICECICLO.HeaderText = "CODICE CICLO";
             this.CODICECICLO.Name = "CODICECICLO";
+            this.CODICECICLO.Width = 80;
             // 
             // COLLEGAMENTOCICLO
             // 
