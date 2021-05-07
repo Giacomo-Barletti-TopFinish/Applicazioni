@@ -52,8 +52,11 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         [DataContext]
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
-            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.GetUSR_PRD_RDIBA(ds, IDTDIBA);
+            if(!ds.USR_PRD_RDIBA.Any(x=>x.IDTDIBA==IDTDIBA))
+            {
+                EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+                a.GetUSR_PRD_RDIBA(ds, IDTDIBA);
+            }
         }
         [DataContext]
         public void GetUSR_PRD_TDIBATopFinish(EstraiProdottiFinitiDS ds, string IDTDIBA)

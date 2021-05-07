@@ -167,7 +167,6 @@ namespace EstraiProdottiFiniti
         {
             if (chkControlliQualita.Checked)
             {
-
                 List<Nodo> lista = new List<Nodo>();
                 foreach (Nodo n in Nodi)
                 {
@@ -177,7 +176,13 @@ namespace EstraiProdottiFiniti
                         if (Nodi.Any(x => x.IDPADRE == n.ID))
                         {
                             foreach (Nodo nodoFiglio in Nodi.Where(x => x.IDPADRE == n.ID))
+                            {
                                 nodoFiglio.IDPADRE = n.IDPADRE;
+                                nodoFiglio.Quantita = n.Quantita;
+                                nodoFiglio.QuantitaConsumo = n.QuantitaConsumo;
+                                nodoFiglio.QuantitaOccorrenza = n.QuantitaOccorrenza;
+
+                            }
                         }
                         else
                             lista.Add(n);
@@ -287,6 +292,7 @@ namespace EstraiProdottiFiniti
         {
             bEstrai.GetUSR_PRD_TDIBA(_ds, IDTDIBA);
             EstraiProdottiFinitiDS.USR_PRD_TDIBARow testata = _ds.USR_PRD_TDIBA.Where(x => x.IDTDIBA == IDTDIBA).FirstOrDefault();
+
             if (testata != null)
             {
                 bool modelloCOntieneCTRL = false;
@@ -298,7 +304,7 @@ namespace EstraiProdottiFiniti
 
                     EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ).FirstOrDefault();
                     if (rigaTopFinish != null)
-                        EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, 1, 0, string.Empty, string.Empty, "N", unitaMisura);
+                        EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, quantitaConsumo, quantitaOccorrenza, string.Empty, string.Empty, "N", unitaMisura);
                     int profonditaRamo = TrovaProfonditaRamo(IDNodoPartenza, out idPadreNuovo);
                     profondita = profonditaRamo;
                     idPadre = idPadreNuovo;
@@ -702,22 +708,34 @@ namespace EstraiProdottiFiniti
                             f.Operazione = operazione;
                             operazione += 10;
                             f.ID = riga.ID;
-                            f.AreaProduzione = riga.Reparto;
+
+                            if (riga.Reparto.Trim() == "MAG")
+                                f.AreaProduzione = "***";
+                            else
+                                f.AreaProduzione = riga.Reparto;
                             f.TempoLavorazione = riga.OrePeriodo;
                             f.Collegamento = riga.CollegamentoCiclo;
                             f.DimensioneLotto = (int)riga.PezziOrari;
                             EstraiProdottiFinitiDS.BC_TASKRow task = _ds.BC_TASK.Where(x => x.CODICEFASE == riga.Fase).FirstOrDefault();
                             if (task == null)
                             {
-                                txtMsgCicli.Text = Environment.NewLine + string.Format("La fase {0} non ha un task associato", riga.Fase);
+                                txtMsgCicli.Text = Environment.NewLine + string.Format("   La fase {0} non ha un task associato", riga.Fase);
+                                errori += txtMsgCicli.Text;
+                                f.Task = "INDEFINITO";
                             }
-
-                            f.Task = task.IsTASKNull() ? string.Empty : task.TASK;
+                            else
+                            {
+                                f.Task = task.IsTASKNull() ? string.Empty : task.TASK;
+                            }
                             //if (!string.IsNullOrEmpty(riga.NoteStandard))
                             //    f.Commenti.Add(riga.NoteStandard);
                             if (!string.IsNullOrEmpty(riga.NoteTecniche))
                                 f.Commenti.Add(riga.NoteTecniche);
-                            if (task.TASK != "***ESCLUDERE")
+
+                            if (task == null)
+                                c.Fasi.Add(f);
+
+                            if (task != null && task.TASK != "***ESCLUDERE")
                             {
                                 c.Fasi.Add(f);
                             }
