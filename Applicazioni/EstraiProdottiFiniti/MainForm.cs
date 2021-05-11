@@ -137,10 +137,12 @@ namespace EstraiProdottiFiniti
                 _ds.MAGAZZ.Clear();
                 _ds.BC_ANAGRAFICA.Clear();
                 _ds.TABFAS.Clear();
+                _ds.BC_NODO.Clear();
 
                 bEstrai.FillBC_ANAGRAFICA(_ds);
                 bEstrai.FillTABFAS(_ds);
                 bEstrai.FillBC_TASK(_ds);
+                bEstrai.FillBC_NODO(_ds);
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -149,6 +151,7 @@ namespace EstraiProdottiFiniti
                     EstraiDistintaBase(bEstrai, IDTDIBA, profondita, ref idNodo, -1, 1, 0, string.Empty, string.Empty, "N", string.Empty);
 
                     pulisciNodi();
+                    riempiNodi();
 
                     CreaAlbero();
                     PopolaGrigliaNodi();
@@ -161,6 +164,60 @@ namespace EstraiProdottiFiniti
                 }
 
             }
+        }
+
+        private void riempiNodi()
+        {
+            foreach (Nodo n in Nodi)
+            {
+                EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
+                if (datiNodo != null)
+                {
+                    n.CodiceCiclo = datiNodo.IsCODICECICLONull() ? string.Empty : datiNodo.CODICECICLO;
+                    n.CollegamentoCiclo = datiNodo.IsCOLLEGAMENTOCICLONull() ? string.Empty : datiNodo.COLLEGAMENTOCICLO;
+                    n.CollegamentoDiba = datiNodo.IsCOLLEGAMENTODIBANull() ? string.Empty : datiNodo.COLLEGAMENTODIBA;
+                    if (!datiNodo.IsPEZZIORARINull())
+                        n.PezziOrari = datiNodo.PEZZIORARI;
+                    if (!datiNodo.IsOREPERIODONull())
+                        n.OrePeriodo = datiNodo.OREPERIODO;
+                }
+            }
+        }
+
+
+        private void salvaNodi()
+        {
+            foreach (Nodo n in Nodi)
+            {
+                EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
+                if (datiNodo != null)
+                {
+                    datiNodo.CODICECICLO = n.CodiceCiclo.ToUpper();
+                    datiNodo.COLLEGAMENTOCICLO = n.CollegamentoCiclo.ToUpper();
+                    datiNodo.COLLEGAMENTODIBA = n.CollegamentoDiba.ToUpper();
+                    datiNodo.PEZZIORARI = n.PezziOrari;
+                    datiNodo.OREPERIODO = n.OrePeriodo;
+                    datiNodo.QUANTITA = n.Quantita;
+                }
+                else
+                {
+                    datiNodo = _ds.BC_NODO.NewBC_NODORow();
+                    datiNodo.IDMAGAZZ = n.IDMAGAZZ;
+                    if (!string.IsNullOrEmpty(n.CodiceCiclo))
+                        datiNodo.CODICECICLO = n.CodiceCiclo.ToUpper();
+                    if (!string.IsNullOrEmpty(n.CollegamentoCiclo))
+                        datiNodo.COLLEGAMENTOCICLO = n.CollegamentoCiclo.ToUpper();
+                    if (!string.IsNullOrEmpty(n.CollegamentoDiba))
+                        datiNodo.COLLEGAMENTODIBA = n.CollegamentoDiba.ToUpper();
+                    datiNodo.PEZZIORARI = n.PezziOrari;
+                    datiNodo.OREPERIODO = n.OrePeriodo;
+                    datiNodo.QUANTITA = n.Quantita;
+                    _ds.BC_NODO.AddBC_NODORow(datiNodo);
+                }
+            }
+            using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
+                bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds);
+
         }
 
         private void pulisciNodi()
@@ -977,7 +1034,7 @@ namespace EstraiProdottiFiniti
         {
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
-
+                salvaNodi();
                 foreach (Ciclo c in cicli)
                 {
                     _ds.BC_COM_CICLO.Clear();
@@ -1049,6 +1106,7 @@ namespace EstraiProdottiFiniti
         {
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
+                salvaNodi();
                 foreach (Distinta d in distinte)
                 {
                     _ds.BC_DISTINTA.Clear();

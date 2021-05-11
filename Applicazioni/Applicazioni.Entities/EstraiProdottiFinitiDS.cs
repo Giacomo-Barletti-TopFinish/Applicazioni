@@ -2,10 +2,12 @@
 {
 }
 
-namespace Applicazioni.Entities {
-    
-    
-    public partial class EstraiProdottiFinitiDS {
+namespace Applicazioni.Entities
+{
+
+
+    public partial class EstraiProdottiFinitiDS
+    {
     }
 }
 namespace Applicazioni.Entities {

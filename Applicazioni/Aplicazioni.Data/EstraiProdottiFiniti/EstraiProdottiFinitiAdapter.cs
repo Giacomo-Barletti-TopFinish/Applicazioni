@@ -78,6 +78,15 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
+        public void FillBC_NODO(EstraiProdottiFinitiDS ds)
+        {
+            string select = @"select * from BC_NODO";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BC_NODO);
+            }
+        }
         public void GetUSR_PRD_TDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 

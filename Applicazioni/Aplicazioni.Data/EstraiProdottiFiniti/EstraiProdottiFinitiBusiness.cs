@@ -50,9 +50,15 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             a.GetBC_DISTINTA(ds, DIBA);
         }
         [DataContext]
+        public void FillBC_NODO(EstraiProdottiFinitiDS ds)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.FillBC_NODO(ds);
+        }
+        [DataContext]
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
-            if(!ds.USR_PRD_RDIBA.Any(x=>x.IDTDIBA==IDTDIBA))
+            if (!ds.USR_PRD_RDIBA.Any(x => x.IDTDIBA == IDTDIBA))
             {
                 EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
                 a.GetUSR_PRD_RDIBA(ds, IDTDIBA);
