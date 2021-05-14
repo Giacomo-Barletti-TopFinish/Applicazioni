@@ -189,12 +189,19 @@ namespace EstraiProdottiFiniti
         {
             foreach (Nodo n in Nodi)
             {
+                string codiceCiclo = (n.CodiceCiclo == null) ? string.Empty : n.CodiceCiclo.ToUpper();
+                string CollegamentoCiclo = (n.CollegamentoCiclo == null) ? string.Empty : n.CollegamentoCiclo.ToUpper();
+                string CollegamentoDiba = (n.CollegamentoDiba == null) ? string.Empty : n.CollegamentoDiba.ToUpper();
+
                 EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
                 if (datiNodo != null)
                 {
-                    datiNodo.CODICECICLO = n.CodiceCiclo.ToUpper();
-                    datiNodo.COLLEGAMENTOCICLO = n.CollegamentoCiclo.ToUpper();
-                    datiNodo.COLLEGAMENTODIBA = n.CollegamentoDiba.ToUpper();
+                    if (datiNodo.IsCODICECICLONull()) datiNodo.CODICECICLO = string.Empty;
+                    if (datiNodo.IsCOLLEGAMENTOCICLONull()) datiNodo.COLLEGAMENTOCICLO = string.Empty;
+                    if (datiNodo.IsCOLLEGAMENTODIBANull()) datiNodo.COLLEGAMENTODIBA = string.Empty;
+                    datiNodo.CODICECICLO = codiceCiclo;
+                    datiNodo.COLLEGAMENTOCICLO = CollegamentoCiclo;
+                    datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
                     datiNodo.PEZZIORARI = n.PezziOrari;
                     datiNodo.OREPERIODO = n.OrePeriodo;
                     datiNodo.QUANTITA = n.Quantita;
@@ -203,12 +210,9 @@ namespace EstraiProdottiFiniti
                 {
                     datiNodo = _ds.BC_NODO.NewBC_NODORow();
                     datiNodo.IDMAGAZZ = n.IDMAGAZZ;
-                    if (!string.IsNullOrEmpty(n.CodiceCiclo))
-                        datiNodo.CODICECICLO = n.CodiceCiclo.ToUpper();
-                    if (!string.IsNullOrEmpty(n.CollegamentoCiclo))
-                        datiNodo.COLLEGAMENTOCICLO = n.CollegamentoCiclo.ToUpper();
-                    if (!string.IsNullOrEmpty(n.CollegamentoDiba))
-                        datiNodo.COLLEGAMENTODIBA = n.CollegamentoDiba.ToUpper();
+                    datiNodo.CODICECICLO = codiceCiclo;
+                    datiNodo.COLLEGAMENTOCICLO = CollegamentoCiclo;
+                    datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
                     datiNodo.PEZZIORARI = n.PezziOrari;
                     datiNodo.OREPERIODO = n.OrePeriodo;
                     datiNodo.QUANTITA = n.Quantita;
@@ -298,7 +302,7 @@ namespace EstraiProdottiFiniti
             EstraiProdottiFinitiDS.MAGAZZRow magazz = _ds.MAGAZZ.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
             EstraiProdottiFinitiDS.TABFASRow fase = _ds.TABFAS.Where(x => x.IDTABFAS == IDTABFAS).FirstOrDefault();
 
-            EstraiProdottiFinitiDS.BC_ANAGRAFICARow anagrafica = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == idmagazz && x.CL == 0).FirstOrDefault();
+            EstraiProdottiFinitiDS.BC_ANAGRAFICARow anagrafica = _ds.BC_ANAGRAFICA.Where(x => x.RowState != DataRowState.Deleted && x.IDMAGAZZ == idmagazz && x.CL == 0).FirstOrDefault();
 
 
             string reparto = fase.IsCODICECLIFOPREDFASENull() ? string.Empty : fase.CODICECLIFOPREDFASE;
@@ -1362,7 +1366,7 @@ namespace EstraiProdottiFiniti
                 }
                 if (string.IsNullOrEmpty(anagrafica) && !string.IsNullOrEmpty(nodoContoLavoro.IDMAGAZZ))
                 {
-                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow rigaAnagarficaContoLavoro = _ds.BC_ANAGRAFICA.Where(x => x.IDMAGAZZ == nodoContoLavoro.IDMAGAZZ && x.CL == 1).FirstOrDefault();
+                    EstraiProdottiFinitiDS.BC_ANAGRAFICARow rigaAnagarficaContoLavoro = _ds.BC_ANAGRAFICA.Where(x => x.RowState != DataRowState.Deleted && x.IDMAGAZZ == nodoContoLavoro.IDMAGAZZ && x.CL == 1).FirstOrDefault();
                     if (rigaAnagarficaContoLavoro != null)
                         nodoContoLavoro.Anagrafica = rigaAnagarficaContoLavoro.BC;
                 }
@@ -1379,7 +1383,7 @@ namespace EstraiProdottiFiniti
                     if (contoLavoro)
                     {
                         string idmagazz = riga.Cells[IDMAGAZZ.Name].Value.ToString();
-                        if (_ds.BC_ANAGRAFICA.Any(x => x.IDMAGAZZ == idmagazz && x.CL == 1))
+                        if (_ds.BC_ANAGRAFICA.Any(x => x.RowState != DataRowState.Deleted && x.IDMAGAZZ == idmagazz && x.CL == 1))
                             riga.DefaultCellStyle.ForeColor = Color.ForestGreen;
                         else
                             riga.DefaultCellStyle.ForeColor = Color.Red;
