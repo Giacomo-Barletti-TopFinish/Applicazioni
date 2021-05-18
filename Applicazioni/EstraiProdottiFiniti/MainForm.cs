@@ -193,31 +193,35 @@ namespace EstraiProdottiFiniti
                 string CollegamentoCiclo = (n.CollegamentoCiclo == null) ? string.Empty : n.CollegamentoCiclo.ToUpper();
                 string CollegamentoDiba = (n.CollegamentoDiba == null) ? string.Empty : n.CollegamentoDiba.ToUpper();
 
-                EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
-                if (datiNodo != null)
+                if(n.IDMAGAZZ!=null)
                 {
-                    if (datiNodo.IsCODICECICLONull()) datiNodo.CODICECICLO = string.Empty;
-                    if (datiNodo.IsCOLLEGAMENTOCICLONull()) datiNodo.COLLEGAMENTOCICLO = string.Empty;
-                    if (datiNodo.IsCOLLEGAMENTODIBANull()) datiNodo.COLLEGAMENTODIBA = string.Empty;
-                    datiNodo.CODICECICLO = codiceCiclo;
-                    datiNodo.COLLEGAMENTOCICLO = CollegamentoCiclo;
-                    datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
-                    datiNodo.PEZZIORARI = n.PezziOrari;
-                    datiNodo.OREPERIODO = n.OrePeriodo;
-                    datiNodo.QUANTITA = n.Quantita;
+                    EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
+                    if (datiNodo != null)
+                    {
+                        if (datiNodo.IsCODICECICLONull()) datiNodo.CODICECICLO = string.Empty;
+                        if (datiNodo.IsCOLLEGAMENTOCICLONull()) datiNodo.COLLEGAMENTOCICLO = string.Empty;
+                        if (datiNodo.IsCOLLEGAMENTODIBANull()) datiNodo.COLLEGAMENTODIBA = string.Empty;
+                        datiNodo.CODICECICLO = codiceCiclo;
+                        datiNodo.COLLEGAMENTOCICLO = CollegamentoCiclo;
+                        datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
+                        datiNodo.PEZZIORARI = n.PezziOrari;
+                        datiNodo.OREPERIODO = n.OrePeriodo;
+                        datiNodo.QUANTITA = n.Quantita;
+                    }
+                    else
+                    {
+                        datiNodo = _ds.BC_NODO.NewBC_NODORow();
+                        datiNodo.IDMAGAZZ = n.IDMAGAZZ;
+                        datiNodo.CODICECICLO = codiceCiclo;
+                        datiNodo.COLLEGAMENTOCICLO = CollegamentoCiclo;
+                        datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
+                        datiNodo.PEZZIORARI = n.PezziOrari;
+                        datiNodo.OREPERIODO = n.OrePeriodo;
+                        datiNodo.QUANTITA = n.Quantita;
+                        _ds.BC_NODO.AddBC_NODORow(datiNodo);
+                    }
                 }
-                else
-                {
-                    datiNodo = _ds.BC_NODO.NewBC_NODORow();
-                    datiNodo.IDMAGAZZ = n.IDMAGAZZ;
-                    datiNodo.CODICECICLO = codiceCiclo;
-                    datiNodo.COLLEGAMENTOCICLO = CollegamentoCiclo;
-                    datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
-                    datiNodo.PEZZIORARI = n.PezziOrari;
-                    datiNodo.OREPERIODO = n.OrePeriodo;
-                    datiNodo.QUANTITA = n.Quantita;
-                    _ds.BC_NODO.AddBC_NODORow(datiNodo);
-                }
+
             }
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
                 bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds);
