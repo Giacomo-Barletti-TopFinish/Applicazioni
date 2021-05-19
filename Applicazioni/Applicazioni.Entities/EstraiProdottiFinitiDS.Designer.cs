@@ -5851,6 +5851,8 @@ namespace Applicazioni.Entities {
             
             private global::System.Data.DataColumn columnMETODO;
             
+            private global::System.Data.DataColumn columnDEBADEFAULT;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public USR_PRD_TDIBATOPFINISHDataTable() {
@@ -6246,6 +6248,14 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DEBADEFAULTColumn {
+                get {
+                    return this.columnDEBADEFAULT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6326,7 +6336,8 @@ namespace Applicazioni.Entities {
                         string CODDITTAINFRAG, 
                         decimal NO_COSTO_DIBA_SNP, 
                         string MODELLO, 
-                        string METODO) {
+                        string METODO, 
+                        string DEBADEFAULT) {
                 USR_PRD_TDIBATOPFINISHRow rowUSR_PRD_TDIBATOPFINISHRow = ((USR_PRD_TDIBATOPFINISHRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDTDIBA,
@@ -6373,7 +6384,8 @@ namespace Applicazioni.Entities {
                         CODDITTAINFRAG,
                         NO_COSTO_DIBA_SNP,
                         MODELLO,
-                        METODO};
+                        METODO,
+                        DEBADEFAULT};
                 rowUSR_PRD_TDIBATOPFINISHRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSR_PRD_TDIBATOPFINISHRow);
                 return rowUSR_PRD_TDIBATOPFINISHRow;
@@ -6448,6 +6460,7 @@ namespace Applicazioni.Entities {
                 this.columnNO_COSTO_DIBA_SNP = base.Columns["NO_COSTO_DIBA_SNP"];
                 this.columnMODELLO = base.Columns["MODELLO"];
                 this.columnMETODO = base.Columns["METODO"];
+                this.columnDEBADEFAULT = base.Columns["DEBADEFAULT"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6543,6 +6556,8 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnMODELLO);
                 this.columnMETODO = new global::System.Data.DataColumn("METODO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMETODO);
+                this.columnDEBADEFAULT = new global::System.Data.DataColumn("DEBADEFAULT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDEBADEFAULT);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDTDIBA}, true));
                 this.columnIDTDIBA.AllowDBNull = false;
@@ -16858,6 +16873,22 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DEBADEFAULT {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSR_PRD_TDIBATOPFINISH.DEBADEFAULTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DEBADEFAULT\' in table \'USR_PRD_TDIBATOPFINISH\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSR_PRD_TDIBATOPFINISH.DEBADEFAULTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDMAGAZZNull() {
                 return this.IsNull(this.tableUSR_PRD_TDIBATOPFINISH.IDMAGAZZColumn);
             }
@@ -17190,6 +17221,18 @@ namespace Applicazioni.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetMETODONull() {
                 this[this.tableUSR_PRD_TDIBATOPFINISH.METODOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDEBADEFAULTNull() {
+                return this.IsNull(this.tableUSR_PRD_TDIBATOPFINISH.DEBADEFAULTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDEBADEFAULTNull() {
+                this[this.tableUSR_PRD_TDIBATOPFINISH.DEBADEFAULTColumn] = global::System.Convert.DBNull;
             }
         }
         

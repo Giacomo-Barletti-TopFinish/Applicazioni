@@ -141,9 +141,16 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         public void GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(EstraiProdottiFinitiDS ds, string IDMAGAZZ)
         {
 
-            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.* from ditta2.usr_prd_tdiba tb
+            string select = string.Format(@"select MA.MODELLO,MET.DESDIBAMETHOD METODO,TB.*,
+                                case 
+                                when tdd.idtdibadefault is null then 'N'
+                                else 'S'
+                                end dEbaDefault
+
+                                from ditta2.usr_prd_tdiba tb
                                 inner join gruppo.magazz ma on ma.idmagazz = tb.idmagazz
                                 inner join GRUPPO.USR_TAB_DIBAMETHODS MET ON MET.IDDIBAMETHOD = tb.IDDIBAMETHOD
+                                left outer join ditta2.usr_prd_tdiba_default tdd on tdd.idtdiba = tb.idtdiba
                                 where tb.IDMAGAZZ =  $P<IDMAGAZZ>");
             ParamSet ps = new ParamSet();
             ps.AddParam("IDMAGAZZ", DbType.String, IDMAGAZZ);

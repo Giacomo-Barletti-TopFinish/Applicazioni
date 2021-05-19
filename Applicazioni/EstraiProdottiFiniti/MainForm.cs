@@ -367,7 +367,7 @@ namespace EstraiProdottiFiniti
                     int idPadreNuovo = 0;
                     bEstrai.GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(_ds, testata.IDMAGAZZ);
 
-                    EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ).FirstOrDefault();
+                    EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ && x.DEBADEFAULT=="S").FirstOrDefault();
                     if (rigaTopFinish != null)
                         EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, quantitaConsumo, quantitaOccorrenza, string.Empty, string.Empty, "N", unitaMisura);
                     int profonditaRamo = TrovaProfonditaRamo(IDNodoPartenza, out idPadreNuovo);
