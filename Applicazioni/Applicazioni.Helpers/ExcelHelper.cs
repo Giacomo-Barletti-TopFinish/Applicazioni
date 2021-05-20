@@ -217,16 +217,15 @@ namespace Applicazioni.Helpers
                 if ((stringaComposta.Length + str[i].Length + 1) < lunghezzaMassima)
                 {
                     stringaComposta = stringaComposta + " " + str[i];
-
-                    if (i == str.Length - 1)
-                    {
-                        stringhe.Add(stringaComposta);
-                    }
                 }
                 else
                 {
                     stringhe.Add(stringaComposta);
                     stringaComposta = str[i];
+                }
+                if (i == str.Length - 1)
+                {
+                    stringhe.Add(stringaComposta);
                 }
             }
             return stringhe;
