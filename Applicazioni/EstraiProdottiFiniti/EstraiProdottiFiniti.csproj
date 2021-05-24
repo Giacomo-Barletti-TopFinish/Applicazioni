@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\Applicazioni\EstraiProdottiFiniti\</InstallUrl>
-    <MinimumRequiredVersion>1.1.0.19</MinimumRequiredVersion>
-    <ApplicationRevision>19</ApplicationRevision>
+    <MinimumRequiredVersion>1.1.0.21</MinimumRequiredVersion>
+    <ApplicationRevision>21</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

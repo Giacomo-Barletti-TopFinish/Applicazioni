@@ -25,17 +25,17 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
         }
 
         [DataContext]
-        public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string NRCICLO)
+        public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string NRCICLO, bool test)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.GetBC_COM_CICLO(ds, NRCICLO);
+            a.GetBC_COM_CICLO(ds, NRCICLO, test);
         }
 
         [DataContext]
-        public void GetBC_DETTAGLIO_CICLO(EstraiProdottiFinitiDS ds, string NRCICLO)
+        public void GetBC_DETTAGLIO_CICLO(EstraiProdottiFinitiDS ds, string NRCICLO, bool test)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.GetBC_DETTAGLIO_CICLO(ds, NRCICLO);
+            a.GetBC_DETTAGLIO_CICLO(ds, NRCICLO, test);
         }
         [DataContext]
         public void FillBC_TASK(EstraiProdottiFinitiDS ds)
@@ -44,16 +44,16 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             a.FillBC_TASK(ds);
         }
         [DataContext]
-        public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string DIBA)
+        public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string DIBA, bool test)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.GetBC_DISTINTA(ds, DIBA);
+            a.GetBC_DISTINTA(ds, DIBA, test);
         }
         [DataContext]
-        public void FillBC_NODO(EstraiProdottiFinitiDS ds)
+        public void FillBC_NODO(EstraiProdottiFinitiDS ds, bool test)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.FillBC_NODO(ds);
+            a.FillBC_NODO(ds, test);
         }
         [DataContext]
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
@@ -89,10 +89,10 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             a.GetMAGAZZ(ds, IDMAGAZZ);
         }
         [DataContext]
-        public void FillBC_ANAGRAFICA(EstraiProdottiFinitiDS ds)
+        public void FillBC_ANAGRAFICA(EstraiProdottiFinitiDS ds, bool test)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.FillBC_ANAGRAFICA(ds);
+            a.FillBC_ANAGRAFICA(ds, test);
         }
         [DataContext]
         public void FillTABFAS(EstraiProdottiFinitiDS ds)
@@ -101,10 +101,10 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             a.FillTABFAS(ds);
         }
         [DataContext(true)]
-        public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds)
+        public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds, string tabellaFisica)
         {
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
-            a.UpdateTable(tablename, ds);
+            a.UpdateTable(tablename, ds, tabellaFisica);
         }
     }
 }

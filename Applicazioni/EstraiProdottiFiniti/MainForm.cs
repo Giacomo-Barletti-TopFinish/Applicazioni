@@ -139,10 +139,10 @@ namespace EstraiProdottiFiniti
                 _ds.TABFAS.Clear();
                 _ds.BC_NODO.Clear();
 
-                bEstrai.FillBC_ANAGRAFICA(_ds);
+                bEstrai.FillBC_ANAGRAFICA(_ds, chkTest.Checked);
                 bEstrai.FillTABFAS(_ds);
                 bEstrai.FillBC_TASK(_ds);
-                bEstrai.FillBC_NODO(_ds);
+                bEstrai.FillBC_NODO(_ds, chkTest.Checked);
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -193,7 +193,7 @@ namespace EstraiProdottiFiniti
                 string CollegamentoCiclo = (n.CollegamentoCiclo == null) ? string.Empty : n.CollegamentoCiclo.ToUpper();
                 string CollegamentoDiba = (n.CollegamentoDiba == null) ? string.Empty : n.CollegamentoDiba.ToUpper();
 
-                if(n.IDMAGAZZ!=null)
+                if (n.IDMAGAZZ != null)
                 {
                     EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
                     if (datiNodo != null)
@@ -224,7 +224,13 @@ namespace EstraiProdottiFiniti
 
             }
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
-                bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds);
+            {
+                if (chkTest.Checked)
+                    bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds, "BC_NODO");
+                else
+                    bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds, "BC_NODO_PRODUZIONE");
+
+            }
 
         }
 
@@ -367,7 +373,7 @@ namespace EstraiProdottiFiniti
                     int idPadreNuovo = 0;
                     bEstrai.GetUSR_PRD_TDIBATopFinishByIDMAGAZZ(_ds, testata.IDMAGAZZ);
 
-                    EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ && x.DEBADEFAULT=="S").FirstOrDefault();
+                    EstraiProdottiFinitiDS.USR_PRD_TDIBATOPFINISHRow rigaTopFinish = _ds.USR_PRD_TDIBATOPFINISH.Where(x => x.IDMAGAZZ == testata.IDMAGAZZ && x.DEBADEFAULT == "S").FirstOrDefault();
                     if (rigaTopFinish != null)
                         EstraiDistintaTopFinish(bEstrai, rigaTopFinish.IDTDIBA, profondita, ref idNodo, idPadre, quantitaConsumo, quantitaOccorrenza, string.Empty, string.Empty, "N", unitaMisura);
                     int profonditaRamo = TrovaProfonditaRamo(IDNodoPartenza, out idPadreNuovo);
@@ -559,10 +565,10 @@ namespace EstraiProdottiFiniti
                         EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
-                        string repartoDiba = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
-                        bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
-                        Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
-                            testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI, repartoDiba);
+                        //      string repartoDiba = testata.IsCODICECLIFOPRDNull() ? string.Empty : testata.CODICECLIFOPRD;
+                        //     bEstrai.GetMAGAZZ(_ds, componente.IDMAGAZZ);
+                        //      Nodo nodoFiglio = CreaNodo(idNodo, componente.IDMAGAZZ, profondita, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, testata.IDTABFAS, noteTecniche, noteStandard, componente.CVENSN,
+                        //          testata.METODO, testata.VERSION.ToString(), testata.ACTIVESN, testata.CHECKSN, componente.CODICEUNIMI, repartoDiba);
 
                         // task = _ds.BC_TASK.Where(x => x.IDTABFAS == testata.IDTABFAS).FirstOrDefault();
                         //if (task != null)
@@ -589,8 +595,8 @@ namespace EstraiProdottiFiniti
                         //    }
 
                         //}
-                        Nodi.Add(nodoFiglio);
-                        idNodo++;
+                        //       Nodi.Add(nodoFiglio);
+                        //        idNodo++;
 
                     }
                 }
@@ -691,7 +697,10 @@ namespace EstraiProdottiFiniti
         {
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
-                bEstrai.UpdateTable(_ds.BC_ANAGRAFICA.TableName, _ds);
+                if (chkTest.Checked)
+                    bEstrai.UpdateTable(_ds.BC_ANAGRAFICA.TableName, _ds, "BC_ANAGRAFICA");
+                else
+                    bEstrai.UpdateTable(_ds.BC_ANAGRAFICA.TableName, _ds, "BC_ANAGRAFICA_PRODUZIONE");
             }
         }
 
@@ -1048,8 +1057,8 @@ namespace EstraiProdottiFiniti
                     _ds.BC_COM_CICLO.Clear();
                     _ds.BC_DETTAGLIO_CICLO.Clear();
 
-                    bEstrai.GetBC_COM_CICLO(_ds, c.Codice);
-                    bEstrai.GetBC_DETTAGLIO_CICLO(_ds, c.Codice);
+                    bEstrai.GetBC_COM_CICLO(_ds, c.Codice, chkTest.Checked);
+                    bEstrai.GetBC_DETTAGLIO_CICLO(_ds, c.Codice, chkTest.Checked);
 
                     foreach (EstraiProdottiFinitiDS.BC_COM_CICLORow riga in _ds.BC_COM_CICLO)
                         riga.Delete();
@@ -1100,9 +1109,17 @@ namespace EstraiProdottiFiniti
                             numeroRiga += 1000;
                         }
                     }
+                    if (chkTest.Checked)
+                    {
+                        bEstrai.UpdateTable(_ds.BC_COM_CICLO.TableName, _ds, "BC_COM_CICLO");
+                        bEstrai.UpdateTable(_ds.BC_DETTAGLIO_CICLO.TableName, _ds, "BC_DETTAGLIO_CICLO");
+                    }
+                    else
+                    {
+                        bEstrai.UpdateTable(_ds.BC_COM_CICLO.TableName, _ds, "BC_COM_CICLO_PRODUZIONE");
+                        bEstrai.UpdateTable(_ds.BC_DETTAGLIO_CICLO.TableName, _ds, "BC_DETTAGLIO_CICLO_PRODUZIONE");
 
-                    bEstrai.UpdateTable(_ds.BC_COM_CICLO.TableName, _ds);
-                    bEstrai.UpdateTable(_ds.BC_DETTAGLIO_CICLO.TableName, _ds);
+                    }
                 }
 
             }
@@ -1119,7 +1136,7 @@ namespace EstraiProdottiFiniti
                 {
                     _ds.BC_DISTINTA.Clear();
 
-                    bEstrai.GetBC_DISTINTA(_ds, d.Codice);
+                    bEstrai.GetBC_DISTINTA(_ds, d.Codice, chkTest.Checked);
 
                     foreach (EstraiProdottiFinitiDS.BC_DISTINTARow riga in _ds.BC_DISTINTA)
                         riga.Delete();
@@ -1152,7 +1169,10 @@ namespace EstraiProdottiFiniti
                         _ds.BC_DISTINTA.AddBC_DISTINTARow(distinta);
                     }
 
-                    bEstrai.UpdateTable(_ds.BC_DISTINTA.TableName, _ds);
+                    if (chkTest.Checked)
+                        bEstrai.UpdateTable(_ds.BC_DISTINTA.TableName, _ds, "BC_DISTINTA");
+                    else
+                        bEstrai.UpdateTable(_ds.BC_DISTINTA.TableName, _ds, "BC_DISTINTA_PRODUZIONE");
 
                 }
 

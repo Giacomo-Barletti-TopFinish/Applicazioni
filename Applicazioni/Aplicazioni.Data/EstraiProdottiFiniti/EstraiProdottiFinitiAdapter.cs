@@ -38,10 +38,13 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
-        public void GetBC_DETTAGLIO_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo)
+        public void GetBC_DETTAGLIO_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo, bool test)
         {
-
-            string select = @"select * from BC_DETTAGLIO_CICLO where NRCICLO = $P<NRCICLO>";
+            string select = string.Empty;
+            if (test)
+                select = @"select * from BC_DETTAGLIO_CICLO where NRCICLO = $P<NRCICLO>";
+            else
+                select = @"select * from BC_DETTAGLIO_CICLO_PRODUZIONE where NRCICLO = $P<NRCICLO>";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("NRCICLO", DbType.String, codiceCiclo);
@@ -52,9 +55,13 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
-        public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo)
+        public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo, bool test)
         {
-            string select = @"select * from BC_COM_CICLO where CICLO = $P<NRCICLO>";
+            string select = string.Empty;
+            if (test)
+                select = @"select * from BC_COM_CICLO where CICLO = $P<NRCICLO>";
+            else
+                select = @"select * from BC_COM_CICLO_PRODUZIONE where CICLO = $P<NRCICLO>";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("NRCICLO", DbType.String, codiceCiclo);
@@ -65,9 +72,14 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
-        public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string distinta)
+        public void GetBC_DISTINTA(EstraiProdottiFinitiDS ds, string distinta, bool test)
         {
-            string select = @"select * from BC_DISTINTA where DIBA = $P<DIBA>";
+
+            string select = string.Empty;
+            if (test)
+                select = @"select * from BC_DISTINTA where DIBA = $P<DIBA>";
+            else
+                select = @"select * from BC_DISTINTA_PRODUZIONE where DIBA = $P<DIBA>";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("DIBA", DbType.String, distinta);
@@ -78,9 +90,14 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
-        public void FillBC_NODO(EstraiProdottiFinitiDS ds)
+        public void FillBC_NODO(EstraiProdottiFinitiDS ds, bool test)
         {
-            string select = @"select * from BC_NODO";
+
+            string select = string.Empty;
+            if (test)
+                select = @"select * from BC_NODO";
+            else
+                select = @"select * from BC_NODO_PRODUZIONE";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
@@ -186,10 +203,13 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
-        public void FillBC_ANAGRAFICA(EstraiProdottiFinitiDS ds)
+        public void FillBC_ANAGRAFICA(EstraiProdottiFinitiDS ds, bool test)
         {
-
-            string select = string.Format(@"select * from BC_ANAGRAFICA");
+            string select = string.Empty;
+            if (test)
+                select = string.Format(@"select * from BC_ANAGRAFICA");
+            else
+                select = string.Format(@"select * from BC_ANAGRAFICA_PRODUZIONE");
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
@@ -218,9 +238,9 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
-        public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds)
+        public void UpdateTable(string tablename, EstraiProdottiFinitiDS ds, string tabellaFisica)
         {
-            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tabellaFisica);
 
             using (DbDataAdapter a = BuildDataAdapter(query))
             {
