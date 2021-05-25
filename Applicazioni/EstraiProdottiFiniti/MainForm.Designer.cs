@@ -635,6 +635,8 @@
             // chkTest
             // 
             this.chkTest.AutoSize = true;
+            this.chkTest.Checked = true;
+            this.chkTest.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkTest.ForeColor = System.Drawing.Color.Red;
             this.chkTest.Location = new System.Drawing.Point(1078, 53);
