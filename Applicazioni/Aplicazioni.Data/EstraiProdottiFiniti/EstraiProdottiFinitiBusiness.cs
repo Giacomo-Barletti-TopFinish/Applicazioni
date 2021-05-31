@@ -56,6 +56,12 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             a.FillBC_NODO(ds, test);
         }
         [DataContext]
+        public void fILLBC_NODO_Q(EstraiProdottiFinitiDS ds, bool test)
+        {
+            EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+            a.fILLBC_NODO_Q(ds, test);
+        }
+        [DataContext]
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
             if (!ds.USR_PRD_RDIBA.Any(x => x.IDTDIBA == IDTDIBA))

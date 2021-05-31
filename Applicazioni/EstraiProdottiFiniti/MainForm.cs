@@ -103,7 +103,7 @@ namespace EstraiProdottiFiniti
                 string IDTDIBA = string.Empty;
                 string modello = string.Empty;
                 bEstrai.GetUSR_PRD_TDIBAByModello(_ds, txtArticolo.Text);
-                if (_ds.USR_PRD_TDIBA.Rows.Count > 1)
+                if (_ds.USR_PRD_TDIBA.Rows.Count > 0)
                 {
                     SelezionaDIbaFrm frm = new SelezionaDIbaFrm();
                     frm.estraiProdottiFinitiDS1 = _ds;
@@ -143,6 +143,7 @@ namespace EstraiProdottiFiniti
                 bEstrai.FillTABFAS(_ds);
                 bEstrai.FillBC_TASK(_ds);
                 bEstrai.FillBC_NODO(_ds, chkTest.Checked);
+                bEstrai.fILLBC_NODO_Q(_ds, chkTest.Checked);
                 try
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -170,6 +171,14 @@ namespace EstraiProdottiFiniti
         {
             foreach (Nodo n in Nodi)
             {
+                string IDMAGAZZPADRE = "-1";
+
+                if (n.IDPADRE > 0)
+                {
+                    Nodo nodoPadre = Nodi.Where(x => x.ID == n.IDPADRE).FirstOrDefault();
+                    IDMAGAZZPADRE = nodoPadre.IDMAGAZZ;
+                }
+
                 EstraiProdottiFinitiDS.BC_NODORow datiNodo = _ds.BC_NODO.Where(x => x.IDMAGAZZ == n.IDMAGAZZ).FirstOrDefault();
                 if (datiNodo != null)
                 {
@@ -180,6 +189,23 @@ namespace EstraiProdottiFiniti
                         n.PezziOrari = datiNodo.PEZZIORARI;
                     if (!datiNodo.IsOREPERIODONull())
                         n.OrePeriodo = datiNodo.OREPERIODO;
+
+                    if (!datiNodo.IsCODICECICLONull())
+                        n.CodiceCiclo = datiNodo.CODICECICLO;
+                    if (!datiNodo.IsCOLLEGAMENTOCICLONull())
+                        n.CollegamentoCiclo = datiNodo.COLLEGAMENTOCICLO;
+                    if (!datiNodo.IsCOLLEGAMENTODIBANull())
+                        n.CollegamentoDiba = datiNodo.COLLEGAMENTODIBA;
+                }
+
+                EstraiProdottiFinitiDS.BC_NODO_QRow datiNodoQ = _ds.BC_NODO_Q.Where(x => x.IDMAGAZZ == n.IDMAGAZZ && !x.IsIDMAGAZZPADRENull() && x.IDMAGAZZPADRE == IDMAGAZZPADRE).FirstOrDefault();
+                if (datiNodoQ != null)
+                {
+                    if (!datiNodoQ.IsQUANTITANull())
+                        n.Quantita = datiNodoQ.QUANTITA;
+
+                    if (!datiNodoQ.IsUMQUANTITANull())
+                        n.UM = datiNodoQ.UMQUANTITA;
                 }
             }
         }
@@ -192,6 +218,13 @@ namespace EstraiProdottiFiniti
                 string codiceCiclo = (n.CodiceCiclo == null) ? string.Empty : n.CodiceCiclo.ToUpper();
                 string CollegamentoCiclo = (n.CollegamentoCiclo == null) ? string.Empty : n.CollegamentoCiclo.ToUpper();
                 string CollegamentoDiba = (n.CollegamentoDiba == null) ? string.Empty : n.CollegamentoDiba.ToUpper();
+                string IDMAGAZZPADRE = "-1";
+
+                if (n.IDPADRE > 0)
+                {
+                    Nodo nodoPadre = Nodi.Where(x => x.ID == n.IDPADRE).FirstOrDefault();
+                    IDMAGAZZPADRE = nodoPadre.IDMAGAZZ;
+                }
 
                 if (n.IDMAGAZZ != null)
                 {
@@ -206,7 +239,6 @@ namespace EstraiProdottiFiniti
                         datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
                         datiNodo.PEZZIORARI = n.PezziOrari;
                         datiNodo.OREPERIODO = n.OrePeriodo;
-                        datiNodo.QUANTITA = n.Quantita;
                     }
                     else
                     {
@@ -217,8 +249,23 @@ namespace EstraiProdottiFiniti
                         datiNodo.COLLEGAMENTODIBA = CollegamentoDiba;
                         datiNodo.PEZZIORARI = n.PezziOrari;
                         datiNodo.OREPERIODO = n.OrePeriodo;
-                        datiNodo.QUANTITA = n.Quantita;
                         _ds.BC_NODO.AddBC_NODORow(datiNodo);
+                    }
+
+                    EstraiProdottiFinitiDS.BC_NODO_QRow datiNodoQ = _ds.BC_NODO_Q.Where(x => x.IDMAGAZZ == n.IDMAGAZZ && !x.IsIDMAGAZZPADRENull() && x.IDMAGAZZPADRE == IDMAGAZZPADRE).FirstOrDefault();
+                    if (datiNodoQ != null)
+                    {
+                        datiNodoQ.QUANTITA = n.Quantita;
+                        datiNodoQ.UMQUANTITA = n.UM;
+                    }
+                    else
+                    {
+                        datiNodoQ = _ds.BC_NODO_Q.NewBC_NODO_QRow();
+                        datiNodoQ.IDMAGAZZ = n.IDMAGAZZ;
+                        datiNodoQ.QUANTITA = n.Quantita;
+                        datiNodoQ.IDMAGAZZPADRE = IDMAGAZZPADRE;
+                        datiNodoQ.UMQUANTITA = n.UM;
+                        _ds.BC_NODO_Q.AddBC_NODO_QRow(datiNodoQ);
                     }
                 }
 
@@ -226,10 +273,15 @@ namespace EstraiProdottiFiniti
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
                 if (chkTest.Checked)
+                {
                     bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds, "BC_NODO");
+                    bEstrai.UpdateTable(_ds.BC_NODO_Q.TableName, _ds, "BC_NODO_Q");
+                }
                 else
+                {
                     bEstrai.UpdateTable(_ds.BC_NODO.TableName, _ds, "BC_NODO_PRODUZIONE");
-
+                    bEstrai.UpdateTable(_ds.BC_NODO_Q.TableName, _ds, "BC_NODO_Q_PRODUZIONE");
+                }
             }
 
         }
@@ -695,6 +747,11 @@ namespace EstraiProdottiFiniti
 
         private void btnSalvaAnagrafiche_Click(object sender, EventArgs e)
         {
+            salvaAnagrafiche();
+        }
+
+        private void salvaAnagrafiche()
+        {
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {
                 if (chkTest.Checked)
@@ -703,8 +760,6 @@ namespace EstraiProdottiFiniti
                     bEstrai.UpdateTable(_ds.BC_ANAGRAFICA.TableName, _ds, "BC_ANAGRAFICA_PRODUZIONE");
             }
         }
-
-
         private void ImpaginaMessaggioAnagrafiche(List<string> anagraficheCensite, List<string> anagraficheModificate, List<string> anagraficheNuove)
         {
             StringBuilder sb = new StringBuilder();
@@ -784,7 +839,7 @@ namespace EstraiProdottiFiniti
                             f.ID = riga.ID;
 
                             if (riga.Reparto.Trim() == "MAG")
-                                f.AreaProduzione = "***";
+                                f.AreaProduzione = "TBD";
                             else
                                 f.AreaProduzione = riga.Reparto;
                             f.TempoLavorazione = riga.OrePeriodo;
@@ -1423,6 +1478,13 @@ namespace EstraiProdottiFiniti
 
         private void EstraiProdottoFinito_Load(object sender, EventArgs e)
         {
+        }
+
+        private void btnSalvaTutto_Click(object sender, EventArgs e)
+        {
+            VerificaAnagrafiche();
+            salvaAnagrafiche();
+            salvaNodi();
         }
     }
 }
