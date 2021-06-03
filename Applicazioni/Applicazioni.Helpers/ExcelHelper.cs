@@ -470,6 +470,13 @@ namespace Applicazioni.Helpers
                         sb.AppendLine(messaggio);
                         continue;
                     }
+
+                    if (dettagli.Any(x=>x.IsCONTOCGNull()))
+                    {
+                        string messaggio = string.Format("Codice conto non trovato FULLNUMDOC: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
+                        sb.AppendLine(messaggio);
+                        continue;
+                    }
                     Row rowTestata = new Row();
                     rowTestata.Append(ConstructCell(testata.IsSPEDIZIONENull() ? string.Empty : testata.SPEDIZIONE, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsFATTURAZIONENull() ? string.Empty : testata.FATTURAZIONE, CellValues.String, 1));
