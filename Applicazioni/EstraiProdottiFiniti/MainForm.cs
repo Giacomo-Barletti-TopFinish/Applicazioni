@@ -1439,8 +1439,8 @@ namespace EstraiProdottiFiniti
                 string anagrafica = nodoContoLavoro.Anagrafica;
                 if (!string.IsNullOrEmpty(anagrafica) && anagrafica.Length > 3)
                 {
-                    anagrafica = anagrafica.Insert(3, "7");
-                    anagrafica = anagrafica.Remove(4, 1);
+                    anagrafica = anagrafica.Insert(5, "7");
+                    anagrafica = anagrafica.Remove(6, 1);
                     nodoContoLavoro.Anagrafica = anagrafica;
                 }
                 if (string.IsNullOrEmpty(anagrafica) && !string.IsNullOrEmpty(nodoContoLavoro.IDMAGAZZ))
