@@ -485,7 +485,7 @@ namespace EstraiProdottiFiniti
                 {
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
-                    if (!componente.IsIDTDIBAIFFASENull())
+                    if (!componente.IsIDTDIBAIFFASENull() && componente.STOCKSN=="N")
                         EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
@@ -613,7 +613,7 @@ namespace EstraiProdottiFiniti
                 {
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
-                    if (!componente.IsIDTDIBAIFFASENull())
+                    if (!componente.IsIDTDIBAIFFASENull() && componente.STOCKSN=="N")
                         EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
@@ -1398,7 +1398,7 @@ namespace EstraiProdottiFiniti
 
         }
 
-        private bool TrovaNodoAlbero(Nodo nodoDaTrovare, TreeNode radice)
+        private bool TrovaNodoContolavoroAlbero(Nodo nodoDaTrovare, TreeNode radice)
         {
             Nodo nodoPadre = (Nodo)radice.Tag;
             if (nodoPadre == nodoDaTrovare)
@@ -1416,8 +1416,9 @@ namespace EstraiProdottiFiniti
             foreach (TreeNode nodoAlberoFiglio in radice.Nodes)
             {
                 Nodo nodoFiglio = (Nodo)radice.Tag;
-                bool esito = TrovaNodoAlbero(nodoDaTrovare, nodoAlberoFiglio);
-                nodoFiglio.ContoLavoro = esito;
+                bool esito = TrovaNodoContolavoroAlbero(nodoDaTrovare, nodoAlberoFiglio);
+                if (!nodoFiglio.ContoLavoro)
+                    nodoFiglio.ContoLavoro = esito;
                 if (esito) return esito;
             }
             return false;
@@ -1432,12 +1433,12 @@ namespace EstraiProdottiFiniti
 
             foreach (Nodo n in nodiFornitiDaCommittente)
             {
-                bool esito = TrovaNodoAlbero(n, root);
+                bool esito = TrovaNodoContolavoroAlbero(n, root);
             }
             foreach (Nodo nodoContoLavoro in Nodi.Where(x => x.ContoLavoro))
             {
                 string anagrafica = nodoContoLavoro.Anagrafica;
-                if (!string.IsNullOrEmpty(anagrafica) && anagrafica.Length > 3)
+                if (!string.IsNullOrEmpty(anagrafica) && anagrafica.Length > 10)
                 {
                     anagrafica = anagrafica.Insert(5, "7");
                     anagrafica = anagrafica.Remove(6, 1);
@@ -1450,7 +1451,7 @@ namespace EstraiProdottiFiniti
                         nodoContoLavoro.Anagrafica = rigaAnagarficaContoLavoro.BC;
                 }
 
-                nodoContoLavoro.Reparto = nodoContoLavoro.Reparto;
+                //              nodoContoLavoro.Reparto = nodoContoLavoro.Reparto;
 
             }
 
