@@ -17,7 +17,16 @@ namespace EstraiProdottiFiniti
         public string Anagrafica { get; set; }
         public decimal Quantita { get; set; }
         public int IDPADRE { get; set; }
-        public string Reparto { get; set; }
+        private string _reparto;
+        public string Reparto
+        {
+            get { return _reparto; }
+            set
+            {
+                if (value.Trim() == "PUL TF") _reparto = "PULI";
+                else _reparto = value;
+            }
+        }
         public string Fase { get; set; }
         public string NoteTecniche { get; set; }
         public string NoteStandard { get; set; }
@@ -34,12 +43,12 @@ namespace EstraiProdottiFiniti
 
         public string DescrizioneArticolo { get; set; }
         public decimal QuantitaConsumo { get; set; }
-        public decimal QuantitaOccorrenza{ get; set; }
+        public decimal QuantitaOccorrenza { get; set; }
         public string Attiva { get; set; }
         public string Controllata { get; set; }
         public string CaricoReparto { get; set; }
         public string Metodo { get; set; }
-        public string Versione{ get; set; }
+        public string Versione { get; set; }
 
 
 
