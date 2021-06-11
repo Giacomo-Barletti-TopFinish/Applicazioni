@@ -1365,6 +1365,8 @@ namespace EstraiProdottiFiniti
                     continue;
                 }
 
+                if (c == null) continue;
+
                 if (c.Fasi.Count == 0)
                 {
                     sb.AppendLine(string.Format("ERRORE: il ciclo {0} non ha alcuna fase", c.Codice));
