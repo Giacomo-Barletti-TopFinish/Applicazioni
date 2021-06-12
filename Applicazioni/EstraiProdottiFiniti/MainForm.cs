@@ -1485,9 +1485,16 @@ namespace EstraiProdottiFiniti
 
         private void btnSalvaTutto_Click(object sender, EventArgs e)
         {
-            VerificaAnagrafiche();
-            salvaAnagrafiche();
-            salvaNodi();
+            try
+            {
+                VerificaAnagrafiche();
+                salvaAnagrafiche();
+                salvaNodi();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in salva nodi e anagrafiche", ex);
+            }
         }
     }
 }
