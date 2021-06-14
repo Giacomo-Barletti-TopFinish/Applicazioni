@@ -301,9 +301,12 @@ namespace EstraiProdottiFiniti
                             foreach (Nodo nodoFiglio in Nodi.Where(x => x.IDPADRE == n.ID))
                             {
                                 nodoFiglio.IDPADRE = n.IDPADRE;
-                                nodoFiglio.Quantita = n.Quantita;
-                                nodoFiglio.QuantitaConsumo = n.QuantitaConsumo;
-                                nodoFiglio.QuantitaOccorrenza = n.QuantitaOccorrenza;
+                                if (n.Quantita != 1 && n.Quantita>0)
+                                {                                  
+                                    nodoFiglio.Quantita = n.Quantita;
+                                    nodoFiglio.QuantitaConsumo = n.QuantitaConsumo;
+                                    nodoFiglio.QuantitaOccorrenza = n.QuantitaOccorrenza;
+                                }
 
                             }
                         }
