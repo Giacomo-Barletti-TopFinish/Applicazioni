@@ -301,8 +301,8 @@ namespace EstraiProdottiFiniti
                             foreach (Nodo nodoFiglio in Nodi.Where(x => x.IDPADRE == n.ID))
                             {
                                 nodoFiglio.IDPADRE = n.IDPADRE;
-                                if (n.Quantita != 1 && n.Quantita>0)
-                                {                                  
+                                if (n.Quantita != 1 && n.Quantita > 0)
+                                {
                                     nodoFiglio.Quantita = n.Quantita;
                                     nodoFiglio.QuantitaConsumo = n.QuantitaConsumo;
                                     nodoFiglio.QuantitaOccorrenza = n.QuantitaOccorrenza;
@@ -488,7 +488,7 @@ namespace EstraiProdottiFiniti
                 {
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
-                    if (!componente.IsIDTDIBAIFFASENull() && componente.STOCKSN=="N")
+                    if (!componente.IsIDTDIBAIFFASENull() && componente.STOCKSN == "N")
                         EstraiDistintaBase(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, idPadre, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
@@ -616,7 +616,7 @@ namespace EstraiProdottiFiniti
                 {
                     string nTech = componente.IsNOTETECHNull() ? string.Empty : componente.NOTETECH;
                     string nStad = componente.IsNOTESTDNull() ? string.Empty : componente.NOTESTD;
-                    if (!componente.IsIDTDIBAIFFASENull() && componente.STOCKSN=="N")
+                    if (!componente.IsIDTDIBAIFFASENull() && componente.STOCKSN == "N")
                         EstraiDistintaTopFinish(bEstrai, componente.IDTDIBAIFFASE, profondita, ref idNodo, n.ID, componente.QTACONSUMO, componente.QTAOCCORRENZA, nTech, nStad, componente.CVENSN, componente.CODICEUNIMI);
                     else
                     {
@@ -841,10 +841,10 @@ namespace EstraiProdottiFiniti
                             operazione += 10;
                             f.ID = riga.ID;
 
-                            if (riga.Reparto.Trim() == "MAG")
-                                f.AreaProduzione = "TBD";
-                            else
-                                f.AreaProduzione = riga.Reparto;
+                            //if (riga.Reparto.Trim() == "MAG")
+                            //    f.AreaProduzione = "TBD";
+                            //else
+                            f.AreaProduzione = riga.Reparto;
                             f.TempoLavorazione = riga.OrePeriodo;
                             f.Collegamento = riga.CollegamentoCiclo;
                             f.DimensioneLotto = (int)riga.PezziOrari;
