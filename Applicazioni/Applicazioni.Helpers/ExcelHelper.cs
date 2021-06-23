@@ -471,7 +471,7 @@ namespace Applicazioni.Helpers
                         continue;
                     }
 
-                    if (dettagli.Any(x=>x.IsCONTOCGNull()))
+                    if (dettagli.Any(x => x.IsCONTOCGNull()))
                     {
                         string messaggio = string.Format("Codice conto non trovato FULLNUMDOC: {0} LA BOLLA NON E' STATA ESPORTATA", documento);
                         sb.AppendLine(messaggio);
@@ -512,7 +512,7 @@ namespace Applicazioni.Helpers
                         Row rowDettaglio = new Row();
                         rowDettaglio.Append(ConstructCell(dettaglio.NUMDOC, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CONTOCG, CellValues.String, 1));
-                        rowDettaglio.Append(ConstructCell(dettaglio.MODELLO, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(convertiModello(testata.FATTURAZIONE, dettaglio.MODELLO), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.QTATOT.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.PREZZOTOT.ToString(), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CODIVARIGA, CellValues.String, 1));
@@ -569,6 +569,25 @@ namespace Applicazioni.Helpers
             }
             errori = sb.ToString().Trim();
             return content;
+        }
+
+        private string convertiModello(string fatturarea, string modello)
+        {
+            if (fatturarea == "C00030")
+            {
+                string[] split = modello.Split('-');
+                if (split.Count() == 4)
+                {
+                    string prefisso = split[0].PadLeft(6, '0');
+                    return string.Format("{0}-{1}-{2}", prefisso, split[1], split[2]);
+                }
+                if (split.Count() == 5)
+                {
+                    string prefisso = split[0].PadLeft(6, '0');
+                    return string.Format("{0}-{1}-{2}-{3}", prefisso, split[1], split[2], split[3]);
+                }
+            }
+            return modello;
         }
 
         public byte[] CreaExcelOpera(List<SpedizioniDS.SPOPERARow> righeDaSalvare)
