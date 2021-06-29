@@ -27,6 +27,7 @@ namespace Applicazioni.Entities
         public int ID;
         public string Versione = string.Empty;
         public int Operazione;
+        public string IdMagazz;
         public string Tipo = "Area di produzione";
         public string AreaProduzione;
         public decimal TempoSetup = 0;

@@ -140,7 +140,29 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
                 da.Fill(ds.USR_PRD_TDIBA);
             }
         }
+        public void GetUSR_LIS_ACQ(EstraiProdottiFinitiDS ds, string idmagazz)
+        {
 
+            string select = string.Format(@"select *
+                                from ditta1.USR_LIS_ACQ tb
+                                where idmagazz =  $P<IDMAGAZZ>");
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, idmagazz);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_LIS_ACQ);
+            }
+        }
+        public void fILLLISTINICONTOLAVORO(EstraiProdottiFinitiDS ds)
+        {
+
+            string select = string.Format(@"select *
+                                from LISTINICONTOLAVORO");
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.LISTINICONTOLAVORO);
+            }
+        }
         public void GetUSR_PRD_RDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)
         {
 

@@ -85,6 +85,7 @@
             this.btnContoLavoro = new System.Windows.Forms.Button();
             this.chkTest = new System.Windows.Forms.CheckBox();
             this.btnSalvaTutto = new System.Windows.Forms.Button();
+            this.btnEstraiListiniContoLavoro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -656,11 +657,22 @@
             this.btnSalvaTutto.UseVisualStyleBackColor = true;
             this.btnSalvaTutto.Click += new System.EventHandler(this.btnSalvaTutto_Click);
             // 
+            // btnEstraiListiniContoLavoro
+            // 
+            this.btnEstraiListiniContoLavoro.Location = new System.Drawing.Point(1413, 47);
+            this.btnEstraiListiniContoLavoro.Name = "btnEstraiListiniContoLavoro";
+            this.btnEstraiListiniContoLavoro.Size = new System.Drawing.Size(152, 27);
+            this.btnEstraiListiniContoLavoro.TabIndex = 14;
+            this.btnEstraiListiniContoLavoro.Text = "Estrai listini conto lavoro";
+            this.btnEstraiListiniContoLavoro.UseVisualStyleBackColor = true;
+            this.btnEstraiListiniContoLavoro.Click += new System.EventHandler(this.btnEstraiListiniContoLavoro_Click);
+            // 
             // EstraiProdottoFinito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 932);
+            this.Controls.Add(this.btnEstraiListiniContoLavoro);
             this.Controls.Add(this.btnSalvaTutto);
             this.Controls.Add(this.chkTest);
             this.Controls.Add(this.btnContoLavoro);
@@ -755,6 +767,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SUPERFICIE;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOTETECNICHE;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ContoLavoro;
+        private System.Windows.Forms.Button btnEstraiListiniContoLavoro;
     }
 }
 
