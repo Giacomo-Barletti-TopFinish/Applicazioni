@@ -699,6 +699,9 @@ namespace EstraiProdottiFiniti
 
                 List<Nodo> nodiConAnagrafiche = Nodi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).ToList();
 
+                List<string> anagrafiche = Nodi.Select(x => x.Anagrafica).ToList();
+
+                List<string> duplicati = anagrafiche.GroupBy(x => x).Where(g => g.Count() > 1).Select(y => y.Key).ToList();           
                 List<string> anagraficheCensite = new List<string>();
                 List<string> anagraficheModificate = new List<string>();
                 List<string> anagraficheNuove = new List<string>();
@@ -728,7 +731,7 @@ namespace EstraiProdottiFiniti
                 }
                 txtMsgAnagrafiche.Text = messaggioErrore;
 
-                ImpaginaMessaggioAnagrafiche(anagraficheCensite, anagraficheModificate, anagraficheNuove);
+                ImpaginaMessaggioAnagrafiche(anagraficheCensite, anagraficheModificate, anagraficheNuove, duplicati);
 
                 btnSalvaAnagrafiche.Enabled = true;
 
@@ -763,7 +766,7 @@ namespace EstraiProdottiFiniti
                     bEstrai.UpdateTable(_ds.BC_ANAGRAFICA.TableName, _ds, "BC_ANAGRAFICA_PRODUZIONE");
             }
         }
-        private void ImpaginaMessaggioAnagrafiche(List<string> anagraficheCensite, List<string> anagraficheModificate, List<string> anagraficheNuove)
+        private void ImpaginaMessaggioAnagrafiche(List<string> anagraficheCensite, List<string> anagraficheModificate, List<string> anagraficheNuove, List<string> duplicati)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("NUOVE ANAGRAFICHE");
@@ -779,6 +782,11 @@ namespace EstraiProdottiFiniti
             sb.AppendLine("ANAGRAFICHE GIA' CENSITE");
             sb.AppendLine("------------------------");
             anagraficheCensite.ForEach(x => sb.AppendLine(x));
+            sb.AppendLine(string.Empty);
+
+            sb.AppendLine("ANAGRAFICHE DUPLICATE IN DISTINTA");
+            sb.AppendLine("------------------------");
+            duplicati.ForEach(x => sb.AppendLine(x));
             sb.AppendLine(string.Empty);
 
             txtMsgAnagrafiche.Text += sb.ToString();
@@ -1552,8 +1560,8 @@ namespace EstraiProdottiFiniti
                         pulisciNodi();
                         riempiNodi();
 
-           //             CreaAlbero();
-          //              PopolaGrigliaNodi();
+                        //             CreaAlbero();
+                        //              PopolaGrigliaNodi();
 
                     }
                     catch (Exception ex)
@@ -1577,7 +1585,7 @@ namespace EstraiProdottiFiniti
                         foreach (Fase fase in ciclo.Fasi)
                         {
                             bEstrai.GetUSR_LIS_ACQ(_ds, fase.IdMagazz);
-                            List<EstraiProdottiFinitiDS.USR_LIS_ACQRow> listini = _ds.USR_LIS_ACQ.Where(x => x.IDMAGAZZ == fase.IdMagazz && x.FINEVALIDITA >= inizioAnno &&  x.IDTIPOLISTINO == "0000000005").OrderByDescending(x => x.VALIDITA).ToList();
+                            List<EstraiProdottiFinitiDS.USR_LIS_ACQRow> listini = _ds.USR_LIS_ACQ.Where(x => x.IDMAGAZZ == fase.IdMagazz && x.FINEVALIDITA >= inizioAnno && x.IDTIPOLISTINO == "0000000005").OrderByDescending(x => x.VALIDITA).ToList();
 
                             if (listini.Count > 0)
                             {
@@ -1623,7 +1631,7 @@ namespace EstraiProdottiFiniti
         private void btnEstraiListiniContoLavoro_Click(object sender, EventArgs e)
         {
 
-         //   estraiListiniContoLavoroMassivo();
+            //   estraiListiniContoLavoroMassivo();
 
             /*******************************************************************************************/
             string errori = string.Empty;
@@ -1641,7 +1649,7 @@ namespace EstraiProdottiFiniti
                     foreach (Fase fase in ciclo.Fasi)
                     {
                         bEstrai.GetUSR_LIS_ACQ(_ds, fase.IdMagazz);
-                        List<EstraiProdottiFinitiDS.USR_LIS_ACQRow> listini = _ds.USR_LIS_ACQ.Where(x => x.IDMAGAZZ == fase.IdMagazz && x.FINEVALIDITA >= inizioAnno && x.IDTIPOLISTINO== "0000000005").OrderByDescending(x => x.VALIDITA).ToList();
+                        List<EstraiProdottiFinitiDS.USR_LIS_ACQRow> listini = _ds.USR_LIS_ACQ.Where(x => x.IDMAGAZZ == fase.IdMagazz && x.FINEVALIDITA >= inizioAnno && x.IDTIPOLISTINO == "0000000005").OrderByDescending(x => x.VALIDITA).ToList();
 
                         if (listini.Count > 0)
                         {
@@ -1683,7 +1691,7 @@ namespace EstraiProdottiFiniti
 
         private string[] crealistaArticoli()
         {
-            return  new string[] {
+            return new string[] {
                     "11010030-9971",
                     "12733-CONT INSACC",
                     "415377-PN-9971",
