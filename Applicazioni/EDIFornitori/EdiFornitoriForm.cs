@@ -410,9 +410,10 @@ namespace EDIFornitori
                     case "EACO":
                     case "EAMO":
                         return "TERO";
+                    case "EMFS":
+                        return "TSHP";
                     case "EACP":
                     case "EAMP":
-                    case "EMFS":
                     case "EMFW":
                     case "EACS":
                         return "TERZ";
@@ -430,8 +431,9 @@ namespace EDIFornitori
                 {
                     case "EACO":
                         return "TERO";
-                    case "EACP":
                     case "EMFS":
+                        return "TSHP";
+                    case "EACP":
                     case "EMFW":
                     case "EACS":
                         return "TERZ";
