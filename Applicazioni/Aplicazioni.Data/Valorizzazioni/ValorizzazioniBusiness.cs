@@ -145,6 +145,12 @@ namespace Applicazioni.Data.Valorizzazioni
         }
 
         [DataContext]
+        public void FillBILANCIO_2020(ValorizzazioneDS ds)
+        {
+            ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);
+            a.FillBILANCIO_2020(ds);
+        }
+        [DataContext]
         public void FillUSR_LIS_FASE(ValorizzazioneDS ds)
         {
             ValorizzazioneAdapter a = new ValorizzazioneAdapter(DbConnection, DbTransaction);

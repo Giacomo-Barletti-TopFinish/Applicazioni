@@ -167,6 +167,15 @@ namespace Applicazioni.Data.Valorizzazioni
             }
         }
 
+        public void FillBILANCIO_2020(ValorizzazioneDS ds)
+        {
+            string select = @"SELECT * FROM BILANCIO_2020 ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BILANCIO_2020);
+            }
+        }
         public void FillUSR_LIS_FASE(ValorizzazioneDS ds)
         {
             string select = @"SELECT * FROM USR_LIS_FASE ";

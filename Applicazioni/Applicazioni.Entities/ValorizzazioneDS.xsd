@@ -1839,6 +1839,20 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="BILANCIO_2020" msprop:Generator_TableClassName="BILANCIO_2020DataTable" msprop:Generator_TableVarName="tableBILANCIO_2020" msprop:Generator_TablePropName="BILANCIO_2020" msprop:Generator_RowDeletingName="BILANCIO_2020RowDeleting" msprop:Generator_RowChangingName="BILANCIO_2020RowChanging" msprop:Generator_RowEvHandlerName="BILANCIO_2020RowChangeEventHandler" msprop:Generator_RowDeletedName="BILANCIO_2020RowDeleted" msprop:Generator_UserTableName="BILANCIO_2020" msprop:Generator_RowChangedName="BILANCIO_2020RowChanged" msprop:Generator_RowEvArgName="BILANCIO_2020RowChangeEvent" msprop:Generator_RowClassName="BILANCIO_2020Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COSTO" msprop:Generator_ColumnVarNameInTable="columnCOSTO" msprop:Generator_ColumnPropNameInRow="COSTO" msprop:Generator_ColumnPropNameInTable="COSTOColumn" msprop:Generator_UserColumnName="COSTO" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">

@@ -46,9 +46,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dtDataFine = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnCalcolaCostiGalvanica = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dtFineListiniCostoGalvanica = new System.Windows.Forms.DateTimePicker();
+            this.btnCalcolaCostiGalvanica = new System.Windows.Forms.Button();
+            this.chkInventario2020 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -161,7 +162,7 @@
             this.chkVenditaTopFinish.AutoSize = true;
             this.chkVenditaTopFinish.Checked = true;
             this.chkVenditaTopFinish.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVenditaTopFinish.Location = new System.Drawing.Point(28, 251);
+            this.chkVenditaTopFinish.Location = new System.Drawing.Point(28, 248);
             this.chkVenditaTopFinish.Name = "chkVenditaTopFinish";
             this.chkVenditaTopFinish.Size = new System.Drawing.Size(274, 20);
             this.chkVenditaTopFinish.TabIndex = 13;
@@ -173,7 +174,7 @@
             this.chkUsaDiBaNonDefault.AutoSize = true;
             this.chkUsaDiBaNonDefault.Checked = true;
             this.chkUsaDiBaNonDefault.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUsaDiBaNonDefault.Location = new System.Drawing.Point(28, 284);
+            this.chkUsaDiBaNonDefault.Location = new System.Drawing.Point(28, 278);
             this.chkUsaDiBaNonDefault.Name = "chkUsaDiBaNonDefault";
             this.chkUsaDiBaNonDefault.Size = new System.Drawing.Size(352, 20);
             this.chkUsaDiBaNonDefault.TabIndex = 14;
@@ -232,16 +233,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Costi galvanica";
             // 
-            // btnCalcolaCostiGalvanica
-            // 
-            this.btnCalcolaCostiGalvanica.Location = new System.Drawing.Point(12, 82);
-            this.btnCalcolaCostiGalvanica.Name = "btnCalcolaCostiGalvanica";
-            this.btnCalcolaCostiGalvanica.Size = new System.Drawing.Size(200, 39);
-            this.btnCalcolaCostiGalvanica.TabIndex = 0;
-            this.btnCalcolaCostiGalvanica.Text = "Calcola costi galvanica";
-            this.btnCalcolaCostiGalvanica.UseVisualStyleBackColor = true;
-            this.btnCalcolaCostiGalvanica.Click += new System.EventHandler(this.btnCalcolaCostiGalvanica_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -259,11 +250,34 @@
             this.dtFineListiniCostoGalvanica.TabIndex = 16;
             this.dtFineListiniCostoGalvanica.Value = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
             // 
+            // btnCalcolaCostiGalvanica
+            // 
+            this.btnCalcolaCostiGalvanica.Location = new System.Drawing.Point(12, 82);
+            this.btnCalcolaCostiGalvanica.Name = "btnCalcolaCostiGalvanica";
+            this.btnCalcolaCostiGalvanica.Size = new System.Drawing.Size(200, 39);
+            this.btnCalcolaCostiGalvanica.TabIndex = 0;
+            this.btnCalcolaCostiGalvanica.Text = "Calcola costi galvanica";
+            this.btnCalcolaCostiGalvanica.UseVisualStyleBackColor = true;
+            this.btnCalcolaCostiGalvanica.Click += new System.EventHandler(this.btnCalcolaCostiGalvanica_Click);
+            // 
+            // chkInventario2020
+            // 
+            this.chkInventario2020.AutoSize = true;
+            this.chkInventario2020.Checked = true;
+            this.chkInventario2020.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkInventario2020.Location = new System.Drawing.Point(28, 308);
+            this.chkInventario2020.Name = "chkInventario2020";
+            this.chkInventario2020.Size = new System.Drawing.Size(144, 20);
+            this.chkInventario2020.TabIndex = 17;
+            this.chkInventario2020.Text = "Usa inventario 2020";
+            this.chkInventario2020.UseVisualStyleBackColor = true;
+            // 
             // ValorizzazioneFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 712);
+            this.Controls.Add(this.chkInventario2020);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkUsaDiBaNonDefault);
@@ -318,6 +332,7 @@
         private System.Windows.Forms.Button btnCalcolaCostiGalvanica;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtFineListiniCostoGalvanica;
+        private System.Windows.Forms.CheckBox chkInventario2020;
     }
 }
 

@@ -181,7 +181,7 @@ namespace ValorizzazioniFrm
             worker.ReportProgress(diba.CostiDaCalcolare(true), string.Format("Prodotti Finiti: {0}", diba.CostiDaCalcolare(true)));
 
             worker.ReportProgress(0, "Inizio Calcolo Costi Galvanica");
-            diba.CalcolaCostiGalvanica( DataFine, worker, e);
+            diba.CalcolaCostiGalvanica(DataFine, worker, e);
             worker.ReportProgress(diba.CostiDaCalcolare(true), string.Format("Salvataggio dati in corso...", diba.CostiDaCalcolare(true)));
             diba.SalvaCostiGalvanica();
         }
@@ -257,6 +257,17 @@ namespace ValorizzazioniFrm
                 return;
             }
             diba.FillMAGAZZ();
+
+            if (dto.consideraInvatrio2020)
+            {
+                worker.ReportProgress(0, "Carica inventario 2020");
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                diba.FillINVENTARIO_2020();
+            }
 
             worker.ReportProgress(0, "Carica listini acquisto");
             if (worker.CancellationPending)
@@ -343,7 +354,7 @@ namespace ValorizzazioniFrm
             worker.ReportProgress(diba.CostiDaCalcolare(dto.tuttiProdottiFiniti), string.Format("Prodotti Finiti: {0}", diba.CostiDaCalcolare(dto.tuttiProdottiFiniti)));
 
             worker.ReportProgress(0, "Inizio Calcolo Costi");
-            diba.CalcolaCostiArticolo(IdTestata, DataFine, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish, dto.usaDiBaNonDiDefault, dto.tuttiProdottiFiniti);
+            diba.CalcolaCostiArticolo(IdTestata, DataFine, worker, e, dto.consideraTutteLeFasi, dto.consideraListiniTopFinish, dto.usaDiBaNonDiDefault, dto.tuttiProdottiFiniti, dto.consideraInvatrio2020);
             worker.ReportProgress(diba.CostiDaCalcolare(dto.tuttiProdottiFiniti), string.Format("Salvataggio dati in corso...", diba.CostiDaCalcolare(dto.tuttiProdottiFiniti)));
             diba.SalvaCostiArticolo();
 
@@ -406,6 +417,7 @@ namespace ValorizzazioniFrm
                     dto.consideraListiniTopFinish = chkVenditaTopFinish.Checked;
                     dto.usaDiBaNonDiDefault = chkUsaDiBaNonDefault.Checked;
                     dto.tuttiProdottiFiniti = chkProdottiFiniti.Checked;
+                    dto.consideraInvatrio2020 = chkInventario2020.Checked;
 
                     _bgwCosto.RunWorkerAsync(dto);
                     return;
@@ -466,6 +478,7 @@ namespace ValorizzazioniFrm
                     dto.consideraListiniTopFinish = chkVenditaTopFinish.Checked;
                     dto.usaDiBaNonDiDefault = chkUsaDiBaNonDefault.Checked;
                     dto.tuttiProdottiFiniti = chkProdottiFiniti.Checked;
+                    dto.consideraInvatrio2020 = chkInventario2020.Checked;
 
                     _bgwCostoGalvanica.RunWorkerAsync(dto);
                     return;
@@ -492,5 +505,6 @@ namespace ValorizzazioniFrm
         public bool consideraListiniTopFinish { get; set; }
         public bool usaDiBaNonDiDefault { get; set; }
         public bool tuttiProdottiFiniti { get; set; }
+        public bool consideraInvatrio2020 { get; set; }
     }
 }
