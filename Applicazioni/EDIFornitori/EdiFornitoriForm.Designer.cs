@@ -36,7 +36,6 @@
             this.dtAl = new System.Windows.Forms.DateTimePicker();
             this.btnTrova = new System.Windows.Forms.Button();
             this.dgvRisultati = new System.Windows.Forms.DataGridView();
-            this.btnCreaFiles = new System.Windows.Forms.Button();
             this.SELEZIONATA = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DOCUMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUMERO = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +50,12 @@
             this.RAGIONESOC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUMERORIGHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RIFERIMENTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCreaFiles = new System.Windows.Forms.Button();
+            this.rbRVL = new System.Windows.Forms.RadioButton();
+            this.rbBusinessCentral = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rbMetal
@@ -145,16 +149,6 @@
             this.dgvRisultati.Name = "dgvRisultati";
             this.dgvRisultati.Size = new System.Drawing.Size(1626, 591);
             this.dgvRisultati.TabIndex = 4;
-            // 
-            // btnCreaFiles
-            // 
-            this.btnCreaFiles.Location = new System.Drawing.Point(634, 28);
-            this.btnCreaFiles.Name = "btnCreaFiles";
-            this.btnCreaFiles.Size = new System.Drawing.Size(92, 48);
-            this.btnCreaFiles.TabIndex = 4;
-            this.btnCreaFiles.Text = "Crea files";
-            this.btnCreaFiles.UseVisualStyleBackColor = true;
-            this.btnCreaFiles.Click += new System.EventHandler(this.btnCreaFiles_Click);
             // 
             // SELEZIONATA
             // 
@@ -258,12 +252,57 @@
             this.RIFERIMENTO.Name = "RIFERIMENTO";
             this.RIFERIMENTO.Width = 130;
             // 
+            // btnCreaFiles
+            // 
+            this.btnCreaFiles.Location = new System.Drawing.Point(634, 28);
+            this.btnCreaFiles.Name = "btnCreaFiles";
+            this.btnCreaFiles.Size = new System.Drawing.Size(92, 48);
+            this.btnCreaFiles.TabIndex = 4;
+            this.btnCreaFiles.Text = "Crea files";
+            this.btnCreaFiles.UseVisualStyleBackColor = true;
+            this.btnCreaFiles.Click += new System.EventHandler(this.btnCreaFiles_Click);
+            // 
+            // rbRVL
+            // 
+            this.rbRVL.AutoSize = true;
+            this.rbRVL.Checked = true;
+            this.rbRVL.Location = new System.Drawing.Point(11, 31);
+            this.rbRVL.Name = "rbRVL";
+            this.rbRVL.Size = new System.Drawing.Size(46, 17);
+            this.rbRVL.TabIndex = 5;
+            this.rbRVL.TabStop = true;
+            this.rbRVL.Text = "RVL";
+            this.rbRVL.UseVisualStyleBackColor = true;
+            // 
+            // rbBusinessCentral
+            // 
+            this.rbBusinessCentral.AutoSize = true;
+            this.rbBusinessCentral.Location = new System.Drawing.Point(86, 31);
+            this.rbBusinessCentral.Name = "rbBusinessCentral";
+            this.rbBusinessCentral.Size = new System.Drawing.Size(103, 17);
+            this.rbBusinessCentral.TabIndex = 5;
+            this.rbBusinessCentral.TabStop = true;
+            this.rbBusinessCentral.Text = "Business Central";
+            this.rbBusinessCentral.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbRVL);
+            this.groupBox1.Controls.Add(this.rbBusinessCentral);
+            this.groupBox1.Location = new System.Drawing.Point(751, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(212, 73);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ambiente";
+            // 
             // EdiFornitoriForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1650, 689);
             this.Controls.Add(this.dgvRisultati);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCreaFiles);
             this.Controls.Add(this.btnTrova);
             this.Controls.Add(this.label2);
@@ -277,6 +316,8 @@
             this.Load += new System.EventHandler(this.EdiFornitoriForm_Load);
             this.Shown += new System.EventHandler(this.EdiFornitoriForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,6 +348,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RAGIONESOC;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUMERORIGHE;
         private System.Windows.Forms.DataGridViewTextBoxColumn RIFERIMENTO;
+        private System.Windows.Forms.RadioButton rbRVL;
+        private System.Windows.Forms.RadioButton rbBusinessCentral;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

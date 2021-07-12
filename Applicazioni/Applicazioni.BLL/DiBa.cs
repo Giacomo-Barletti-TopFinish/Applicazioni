@@ -228,9 +228,8 @@ namespace Applicazioni.BLL
                 idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
             else
                 idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
-            //    bool m = idmagazz.Contains("0000096837");
-            // idmagazz = new List<string>(new string[] { "0000085010" });
-
+            //   bool m = idmagazz.Contains("0000001298");
+//             idmagazz = new List<string>(new string[] { "0000189546","0000190024","0000194776","0000197953","0000197701","0000197700" });
 
             foreach (string articolo in idmagazz)
             {
@@ -294,6 +293,7 @@ namespace Applicazioni.BLL
 
         }
 
+
         private decimal CalcolaCosto(string idtdiba, string idmagazz, string IdInventarioT, DateTime DataFine, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, string notaEsterna, string idProdottoFinito, bool consideraInvatrio2020)
         {
             if (consideraInvatrio2020)
@@ -301,6 +301,7 @@ namespace Applicazioni.BLL
                 ValorizzazioneDS.BILANCIO_2020Row elementoInvntario2020 = _ds.BILANCIO_2020.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
                 if (elementoInvntario2020 != null && !elementoInvntario2020.IsCOSTONull())
                 {
+                    RegistraCostoArticolo(elementoInvntario2020.COSTO, 0, 0, null, IdInventarioT, idmagazz, "Inventario 2020", string.Empty, idProdottoFinito);
                     return elementoInvntario2020.COSTO;
                 }
             }
@@ -351,21 +352,34 @@ namespace Applicazioni.BLL
                         costoFiglio = costoArticoloMateriale.COSTOFASE + costoArticoloMateriale.COSTOFIGLI + costoArticoloMateriale.COSTOMATERIALE;
                     else
                     {
-                        List<ValorizzazioneDS.USR_LIS_ACQRow> listiniMateriale = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == rdiba.IDMAGAZZ
-                            && x.VALIDITA <= DataFine
-                            //  && x.FINEVALIDITA >= InventarioT.DataInizio
-                            && !x.IsFINEVALIDITANull()
-                            && x.FINEVALIDITA >= DataFine
-                            && x.AZIENDA == "MP").ToList();
-                        if (listiniMateriale.Count > 0)
+
+                        if (consideraInvatrio2020)
                         {
-                            string idListinoMateriale;
-                            costoFiglio = ValutaCostoListino(articolo.Peso, listiniMateriale, out idListinoMateriale);
-                            RegistraCostoArticolo(costoFiglio, 0, 0, null, IdInventarioT, rdiba.IDMAGAZZ, string.Empty, idListinoMateriale, idProdottoFinito);
-                            //return costoListino;
+                            ValorizzazioneDS.BILANCIO_2020Row elementoInvntario2020 = _ds.BILANCIO_2020.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
+                            if (elementoInvntario2020 != null && !elementoInvntario2020.IsCOSTONull())
+                            {
+                                RegistraCostoArticolo(elementoInvntario2020.COSTO, 0, 0, null, IdInventarioT, idmagazz, "Inventario 2020", string.Empty, idProdottoFinito);
+                                return elementoInvntario2020.COSTO;
+                            }
+                        }
+                        else
+                        {
+                            List<ValorizzazioneDS.USR_LIS_ACQRow> listiniMateriale = _ds.USR_LIS_ACQ.Where(x => !x.IsIDMAGAZZNull() && x.IDMAGAZZ == rdiba.IDMAGAZZ
+                                && x.VALIDITA <= DataFine
+                                //  && x.FINEVALIDITA >= InventarioT.DataInizio
+                                && !x.IsFINEVALIDITANull()
+                                && x.FINEVALIDITA >= DataFine
+                                && x.AZIENDA == "MP").ToList();
+                            if (listiniMateriale.Count > 0)
+                            {
+                                string idListinoMateriale;
+                                costoFiglio = ValutaCostoListino(articolo.Peso, listiniMateriale, out idListinoMateriale);
+                                RegistraCostoArticolo(costoFiglio, 0, 0, null, IdInventarioT, rdiba.IDMAGAZZ, string.Empty, idListinoMateriale, idProdottoFinito);
+                                //return costoListino;
+                            }
+
                         }
                     }
-
                 }
                 costoFigli = costoFigli + costoFiglio * rdiba.QTACONSUMO;
             }

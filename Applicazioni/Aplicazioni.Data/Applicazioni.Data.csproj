@@ -50,6 +50,7 @@
     <Compile Include="Anagrafica\AnagraficaBusiness.cs" />
     <Compile Include="AnalisiOrdiniVendita\AnalisiOrdiniVenditaAdapter.cs" />
     <Compile Include="AnalisiOrdiniVendita\AnalisiOrdiniVenditaBusiness.cs" />
+    <Compile Include="BusinessBaseSQL.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="Core\AdapterBase.cs" />
     <Compile Include="Core\BusinessBase.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="CorreggiDateListini\CorreggiDateListiniAdapter.cs" />
     <Compile Include="CorreggiDateListini\CorreggiDateListiniBusiness.cs" />
     <Compile Include="EDIFornitori\EDIFornitoriAdapter.cs" />
+    <Compile Include="EDIFornitori\EDIFornitoriBusinessSQL.cs" />
     <Compile Include="EDIFornitori\EDIFornitoriBusiness.cs" />
     <Compile Include="EstraiProdottiFiniti\EstraiProdottiFinitiAdapter.cs" />
     <Compile Include="EstraiProdottiFiniti\EstraiProdottiFinitiBusiness.cs" />

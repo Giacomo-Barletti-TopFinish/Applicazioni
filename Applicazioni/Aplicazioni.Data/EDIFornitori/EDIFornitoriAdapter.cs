@@ -21,7 +21,7 @@ namespace Applicazioni.Data.EDIFornitori
             string AlStr = Al.ToString("dd/MM/yyyy");
 
             string select = @"  select DISTINCT AZIENDA, DESTABTIPDOC, CODICETIPDOC, CODICETIPOO, DESTABTIPOO, CODICECAUTR, DESTABCAUTR, 
-                IDVENDITET, FATTURARE_SN, CONFERMATO_SN, DEFINITIVO_SN, FULLNUMDOC, DATDOC, ANNODOC, NUMDOC, CODICECLIFO, TRIM(RAGIONESOC) RAGIONESOC, CODINDSP, 
+                IDVENDITET, FATTURARE_SN, CONFERMATO_SN, DEFINITIVO_SN, FULLNUMDOC, DATDOC, ANNODOC, NUMDOC, CODICECLIFO, TRIM(RAGIONESOC) CODICECLIFO, CODINDSP, 
                 FATTURAREA, FATTURAREALTER, SEGNALATORE, TRIM(SEGNALATORE_RS) SEGNALATORE_RS, NUMERORIGHE,RIFERIMENTO,trim(ind.ragsoc) DESTINAZIONE,
                 AC.CODICE ACCESSORISTA
                 from bolle_vendita bv
@@ -47,6 +47,28 @@ namespace Applicazioni.Data.EDIFornitori
             }
         }
 
+        public void FillBOLLE_VENDITATESTATASQL(EDIFornitoriDS ds, DateTime Dal, DateTime Al)
+        {
+            string DalStr = Dal.ToString("yyyyMMdd");
+            string AlStr = Al.ToString("yyyyMMdd");
+
+            string select = @"  select DISTINCT AZIENDA, DESTABTIPDOC, CODICETIPDOC, CODICETIPOO, DESTABTIPOO, CODICECAUTR, DESTABCAUTR, 
+                IDVENDITET, FATTURARE_SN, CONFERMATO_SN, DEFINITIVO_SN, FULLNUMDOC, DATDOC, ANNODOC, NUMDOC, CODICECLIFO, CODICECLIFO, CODINDSP, 
+                FATTURAREA, FATTURAREALTER, SEGNALATORE, SEGNALATORE_RS, NUMERORIGHE,RIFERIMENTO, DESTINAZIONE,
+                ACCESSORISTA
+                from bolle_vendita bv
+                where 1=1
+
+                and datdoc >='{0}' 
+                and datdoc <='{1}'";
+
+            select = string.Format(select, DalStr, AlStr);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BOLLE_VENDITA);
+            }
+        }
 
         public void FillBOLLE_VENDITA(EDIFornitoriDS ds, DateTime Dal, DateTime Al, string CodiceFornitore)
         {

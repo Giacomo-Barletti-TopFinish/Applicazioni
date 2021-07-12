@@ -44,9 +44,13 @@ namespace EDIFornitori
                 }
 
                 using (EDIFornitoriBusiness bEDI = new EDIFornitoriBusiness())
+                using (EDIFornitoriBusinessSQL bEDISQL = new EDIFornitoriBusinessSQL())
                 {
                     _ds = new EDIFornitoriDS();
-                    bEDI.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, codiceFornitore);
+                    if (rbBusinessCentral.Checked)
+                        bEDISQL.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value);
+                    else
+                        bEDI.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, codiceFornitore);
                     dgvRisultati.DataSource = _ds;
                     dgvRisultati.DataMember = _ds.BOLLE_VENDITA.TableName;
                 }
@@ -270,7 +274,7 @@ namespace EDIFornitori
                 {
                     suffissoParte = aggiustaStringa(articolo[0], 6, '0');
                     codiceParte = aggiustaStringa(articolo[1], 5, '0');
-                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ',true);
+                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ', true);
                     if (codiceColoreParte.Trim() == "MOD")
                         codiceColoreParte = "     ";
                 }
@@ -325,7 +329,7 @@ namespace EDIFornitori
                     suffissoParte = "      ";
                     codiceModello = aggiustaStringa(articolo[0], 6, '0');
                     codiceParte = aggiustaStringa(articolo[1], 5, '0');
-                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ',true);
+                    codiceColoreParte = aggiustaStringa(articolo[2], 5, ' ', true);
                     if (codiceColoreParte.Trim() == "MOD")
                         codiceColoreParte = "     ";
                 }
