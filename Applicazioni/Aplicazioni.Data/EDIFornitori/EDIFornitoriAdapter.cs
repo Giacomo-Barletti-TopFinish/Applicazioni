@@ -96,6 +96,24 @@ namespace Applicazioni.Data.EDIFornitori
             }
         }
 
+        public void FillBOLLE_VENDITASQL(EDIFornitoriDS ds, DateTime Dal, DateTime Al)
+        {
+            string DalStr = Dal.ToString("yyyyMMdd");
+            string AlStr = Al.ToString("yyyyMMdd");
+
+            string select = @"  select *
+                from bolle_vendita
+                where 1=1
+                and datdoc >='{0}' 
+                and datdoc <='{1}'";
+
+            select = string.Format(select, DalStr, AlStr);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BOLLE_VENDITA);
+            }
+        }
         public void FillACCESSORISTI(EDIFornitoriDS ds)
         {
 

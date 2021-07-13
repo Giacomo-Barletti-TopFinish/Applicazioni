@@ -113,10 +113,21 @@ namespace EDIFornitori
                 EDIFornitoriDS ds = new EDIFornitoriDS();
                 string codiceFornitore = verificaRadioButton();
 
-                using (EDIFornitoriBusiness bEDI = new EDIFornitoriBusiness())
+                if (rbRVL.Checked)
                 {
-                    bEDI.FillBOLLE_VENDITA(ds, dtDal.Value, dtAl.Value, codiceFornitore);
-                    bEDI.FillACCESSORISTI(ds);
+                    using (EDIFornitoriBusiness bEDI = new EDIFornitoriBusiness())
+                    {
+                        bEDI.FillBOLLE_VENDITA(ds, dtDal.Value, dtAl.Value, codiceFornitore);
+                        bEDI.FillACCESSORISTI(ds);
+                    }
+                }
+                else
+                {
+                    using (EDIFornitoriBusinessSQL bEDI = new EDIFornitoriBusinessSQL())
+                    {
+                        bEDI.FillBOLLE_VENDITA(ds, dtDal.Value, dtAl.Value);
+                        bEDI.FillACCESSORISTI(ds);
+                    }
                 }
 
                 StringBuilder sbMessaggio = new StringBuilder();
@@ -183,8 +194,11 @@ namespace EDIFornitori
             string mm = dt.Minute.ToString().PadLeft(2, '0');
             string ss = dt.Second.ToString().PadLeft(2, '0');
 
-            if (numeroDDT.Length > 8) throw new ArgumentException("Numero DDT più lungo di 8 caratteri");
+            //            if (numeroDDT.Length > 8) throw new ArgumentException("Numero DDT più lungo di 8 caratteri");
             if (codiceFornitore.Length > 6) throw new ArgumentException("Codice fornitore più lungo di 8 caratteri");
+
+            if (numeroDDT.Length>5 && numeroDDT.Substring(2, 3) == "DDT")
+                numeroDDT = numeroDDT.Remove(0, 6);
 
             string fornitore = codiceFornitore.PadLeft(6, '0');
             string ddt = numeroDDT.PadLeft(8, '0');
@@ -196,7 +210,10 @@ namespace EDIFornitori
         {
             string codiceAzienda = "06";
             string fornitore = aggiustaStringa(codiceFornitore, 6, '0');
-            string documentoRiferimento = aggiustaStringa(dettaglio.NUMDOC, 10, '0');
+            string numeroDDT = dettaglio.NUMDOC;
+            if (numeroDDT.Length > 5 && numeroDDT.Substring(2, 3) == "DDT")
+                numeroDDT = numeroDDT.Remove(0, 6);
+            string documentoRiferimento = aggiustaStringa(numeroDDT, 10, '0');
             string dataDocumentoRiferimento = dettaglio.DATDOC.ToString("ddMMyyyy");
             string codiceMagazzinoDestinazione = EstraiCodiceMagazzinoDestinazione(dettaglio);
             string causaleMagazzino = "  ";
@@ -342,6 +359,10 @@ namespace EDIFornitori
                 }
             }
             quantita = dettaglio.QTATOT.ToString();
+            string[] qtastr = quantita.Split(',');
+            if (qtastr.Length > 1)
+                quantita = qtastr[0];
+
             quantita = quantita + "000";
             quantita = aggiustaStringa(quantita, 11, '0');
 

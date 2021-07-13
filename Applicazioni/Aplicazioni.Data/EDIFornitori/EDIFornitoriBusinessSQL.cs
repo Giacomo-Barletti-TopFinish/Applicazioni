@@ -18,10 +18,10 @@ namespace Applicazioni.Data.EDIFornitori
         }
 
         [DataContext]
-        public void FillBOLLE_VENDITA(EDIFornitoriDS ds, DateTime Dal, DateTime Al, string CodiceFornitore)
+        public void FillBOLLE_VENDITA(EDIFornitoriDS ds, DateTime Dal, DateTime Al)
         {
             EDIFornitoriAdapter a = new EDIFornitoriAdapter(DbConnection, DbTransaction);
-            a.FillBOLLE_VENDITA(ds, Dal, Al, CodiceFornitore);
+            a.FillBOLLE_VENDITASQL(ds, Dal, Al);
         }
         [DataContext]
         public void FillACCESSORISTI(EDIFornitoriDS ds)

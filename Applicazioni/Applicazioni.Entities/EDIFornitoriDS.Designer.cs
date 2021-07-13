@@ -3142,7 +3142,7 @@ namespace Applicazioni.Entities {
                 this.columnNUMERORIGHE.MaxLength = 5;
                 this.columnNRRIGA.MaxLength = 5;
                 this.columnCODICEUNIMI.MaxLength = 3;
-                this.columnIDMAGAZZ.MaxLength = 10;
+                this.columnIDMAGAZZ.MaxLength = 15;
                 this.columnMODELLO.MaxLength = 30;
                 this.columnID_OC.MaxLength = 25;
                 this.columnTIPO_OC.MaxLength = 50;

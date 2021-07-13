@@ -3,10 +3,10 @@ USE MPI_TEST
 GO
 CREATE VIEW BOLLE_VENDITA AS
 select 'METALPLUS' AZIENDA,
-NULL DESTABTIPDOC, NULL CODICETIPDOC, ente.[MTP Authority code] CODICETIPOO, NULL DESTABTIPOO, NULL CODICECAUTR, testata.[Reason Code] DESTABCAUTR, 
-                NULL IDVENDITET, NULL FATTURARE_SN, NULL CONFERMATO_SN, NULL DEFINITIVO_SN,
+NULL DESTABTIPDOC, NULL CODICETIPDOC, ente.[MTP Authority code] CODICETIPOO, NULL DESTABTIPOO, testata.[Reason Code] CODICECAUTR, rea.[Description] DESTABCAUTR, 
+                testata.No_ IDVENDITET, NULL FATTURARE_SN, NULL CONFERMATO_SN, NULL DEFINITIVO_SN,
 
-testata.No_ FULLNUMDOC,testata.[posting Date] DATDOC,NULL ANNODOC,NULL NUMDOC,testata.[Bill_Pay-to No_] CODICECLIFO,testata.[Bill_Pay-to Name] RAGIONESOC,
+testata.No_ FULLNUMDOC,testata.[posting Date] DATDOC,NULL ANNODOC,testata.No_ NUMDOC,acc.codcf CODICECLIFO,testata.[Bill_Pay-to Name] RAGIONESOC,
 testata.[Bill_Pay-to Country_Reg_ Code]NAZIONE,
 acc.CODIND CODINDSP,NULL FATTURAREA, NULL FATTURAREALTER, NULL SEGNALATORE, NULL SEGNALATORE_RS,
 NULL NUMERORIGHE,
@@ -14,13 +14,13 @@ NULL DATACR, NULL DATAVR,
 NULL NRRIGA, DET.[Unit of Measure Code] CODICEUNIMI, DET.No_ IDMAGAZZ, DET.[Description] MODELLO, DET.Quantity QTAUNI, DET.Quantity QTATOT, NULL QTADAC, NULL PREZZOUNI, NULL PREZZOTOT, NULL VALORE, NULL DATACR_DET, NULL DATAVR_DET, NULL PREZZONET, 
 NULL DATA_RICHIESTA, NULL DATA_CONFERMA, NULL ID_OC, NULL TIPO_OC, NULL FULLNUMDOC_OC, NULL DATDOC_OC, NULL ANNODOC_OC, NULL NUMDOC_OC, NULL DATARIF_OC, NULL DATACR_OC, NULL DATAVR_OC, 
 testata.[Your Reference] RIFERIMENTO, ente.[MTP Customer Line No_] RIFERIMENTORIGA,
-acc.CODICE ACCESSORISTA,testata.[Ship-to Name] DESTINAZIONE,
-DET.*
+acc.CODICE ACCESSORISTA,testata.[Ship-to Name] DESTINAZIONE
 
 from [test].[dbo].[MetalPlus_WS$EOS CWS Shipment Header$a879d9e1-a8d9-4dc8-87d8-69d278c5e003] testata WITH (NOLOCK)
 inner join ACCESSORISTI acc WITH (NOLOCK) on acc.[Ship-to Code]=testata.[Ship-to Code] COLLATE SQL_Latin1_General_CP1_CI_AS
 INNER JOIN [TEST].[dbo].[MetalPlus_WS$EOS CWS Shipment Line$a879d9e1-a8d9-4dc8-87d8-69d278c5e003] DET  WITH (NOLOCK) ON DET.[document no_]=testata.No_
 left outer join [test].[dbo].[MetalPlus_WS$EOS CWS Shipment Line$acfbaca5-f819-4981-a342-d769a95abeb3] ente WITH (NOLOCK) on ente.[Document No_]=testata.No_ AND ente.[Line No_]=DET.[Line No_]
+inner join [TEST].[dbo].[MetalPlus_WS$Reason Code$437dbf0e-84ff-417a-965d-ed2bb9650972] rea WITH (NOLOCK) ON rea.Code = testata.[Reason Code]
 where det.correction = 0
 GO
 
