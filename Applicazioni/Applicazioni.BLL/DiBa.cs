@@ -296,6 +296,11 @@ namespace Applicazioni.BLL
 
         private decimal CalcolaCosto(string idtdiba, string idmagazz, string IdInventarioT, DateTime DataFine, bool consideraTutteLeFasi, bool consideraListiniVenditaTopFinish, string notaEsterna, string idProdottoFinito, bool consideraInvatrio2020)
         {
+
+            ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == IdInventarioT && x.IDMAGAZZ == idmagazz).FirstOrDefault();
+            if (costoArticolo != null)
+                return costoArticolo.COSTOFASE + costoArticolo.COSTOFIGLI + costoArticolo.COSTOMATERIALE;
+
             if (consideraInvatrio2020)
             {
                 ValorizzazioneDS.BILANCIO_2020Row elementoInvntario2020 = _ds.BILANCIO_2020.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
@@ -305,10 +310,6 @@ namespace Applicazioni.BLL
                     return elementoInvntario2020.COSTO;
                 }
             }
-
-            ValorizzazioneDS.COSTI_ARTICOLIRow costoArticolo = _ds.COSTI_ARTICOLI.Where(x => x.IDINVENTARIOT == IdInventarioT && x.IDMAGAZZ == idmagazz).FirstOrDefault();
-            if (costoArticolo != null)
-                return costoArticolo.COSTOFASE + costoArticolo.COSTOFIGLI + costoArticolo.COSTOMATERIALE;
 
             StringBuilder nota = new StringBuilder();
             nota.Append(notaEsterna);
