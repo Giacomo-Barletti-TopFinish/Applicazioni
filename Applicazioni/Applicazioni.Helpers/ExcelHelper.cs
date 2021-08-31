@@ -539,7 +539,7 @@ namespace Applicazioni.Helpers
 
                             Row rowDettaglioMami = new Row();
                             rowDettaglioMami.Append(ConstructCell(dettaglio.NUMDOC, CellValues.String, 1));
-                            rowDettaglioMami.Append(ConstructCell("0400007", CellValues.String, 1));
+                            rowDettaglioMami.Append(ConstructCell("0400006", CellValues.String, 1));
                             rowDettaglioMami.Append(ConstructCell(dettaglio.MATERIALE, CellValues.String, 1));
                             rowDettaglioMami.Append(ConstructCell(peso.ToString(), CellValues.String, 1));
                             rowDettaglioMami.Append(ConstructCell(materiale.PREZZO.ToString(), CellValues.String, 1));
