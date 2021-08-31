@@ -437,7 +437,7 @@ namespace Applicazioni.Helpers
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
                 List<FlussoFattureDS.BC_FLUSSO_TESTATARow> righeTestate = ds.BC_FLUSSO_TESTATA.Where(x => idTestata.Contains(x.FULLNUMDOC)).ToList();
-                //    righeTestate = righeTestate.OrderBy(x => x.FATTURAZIONE).ToList();
+                    righeTestate = righeTestate.OrderBy(x => x.NUMDOC).ToList();
 
                 foreach (FlussoFattureDS.BC_FLUSSO_TESTATARow testata in righeTestate)
                 {

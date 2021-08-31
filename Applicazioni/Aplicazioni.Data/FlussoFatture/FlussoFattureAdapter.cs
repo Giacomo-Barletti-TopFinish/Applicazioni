@@ -59,7 +59,7 @@ namespace Applicazioni.Data.FlussoFatture
                 select += " AND CODICECLIFO <>'01631'";
 
             }
-
+            select += " order by bv.NUMDOC";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.BOLLE_VENDITA);
