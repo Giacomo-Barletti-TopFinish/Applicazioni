@@ -83,6 +83,12 @@
     <Compile Include="DiBaForm.Designer.cs">
       <DependentUpon>DiBaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MigrazioneFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MigrazioneFrm.Designer.cs">
+      <DependentUpon>MigrazioneFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="DiBaForm.resx">
       <DependentUpon>DiBaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MigrazioneFrm.resx">
+      <DependentUpon>MigrazioneFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

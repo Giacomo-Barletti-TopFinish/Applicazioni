@@ -44,7 +44,7 @@ namespace EstraiProdottiFiniti
             }
             catch (Exception ex)
             {
-                base.MostraEccezione(ex, "Errore in apertura finestra balenciaga");
+                base.MostraEccezione(ex, "Errore in apertura finestra");
             }
         }
 
@@ -62,6 +62,20 @@ namespace EstraiProdottiFiniti
             catch (Exception ex)
             {
                 base.MostraEccezione(ex, "Errore in chiusura applicazione");
+            }
+        }
+
+        private void mIgrazioneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MigrazioneFrm form = new MigrazioneFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                base.MostraEccezione(ex, "Errore in apertura finestra");
             }
         }
     }

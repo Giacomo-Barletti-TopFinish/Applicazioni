@@ -16,6 +16,15 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
             a.GetUSR_PRD_TDIBAByModello(ds, modello);
         }
+        [DataContext]
+        public void GetMagazzinoRVL(EstraiProdottiFinitiDS ds, string idmagazz)
+        {
+            if (!ds.MAGAZZINORVL.Any(x => x.IDMAGAZZ == idmagazz))
+            {
+                EstraiProdottiFinitiAdapter a = new EstraiProdottiFinitiAdapter(DbConnection, DbTransaction);
+                a.GetMagazzinoRVL(ds, idmagazz);
+            }
+        }
 
         [DataContext]
         public void GetUSR_PRD_TDIBA(EstraiProdottiFinitiDS ds, string IDTDIBA)

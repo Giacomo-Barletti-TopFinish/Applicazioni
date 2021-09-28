@@ -31,12 +31,13 @@
             this.preventiviMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.distinteRVLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.apriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.distinteRVLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.apriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mIgrazioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +71,22 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // distinteRVLToolStripMenuItem
+            // 
+            this.distinteRVLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.apriToolStripMenuItem,
+            this.mIgrazioneToolStripMenuItem});
+            this.distinteRVLToolStripMenuItem.Name = "distinteRVLToolStripMenuItem";
+            this.distinteRVLToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
+            this.distinteRVLToolStripMenuItem.Text = "Distinte RVL";
+            // 
+            // apriToolStripMenuItem
+            // 
+            this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
+            this.apriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.apriToolStripMenuItem.Text = "Apri";
+            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
+            // 
             // finestreToolStripMenuItem
             // 
             this.finestreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -84,7 +101,7 @@
             this.cascataToolStripMenuItem,
             this.organizzaToolStripMenuItem});
             this.disponiToolStripMenuItem.Name = "disponiToolStripMenuItem";
-            this.disponiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disponiToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.disponiToolStripMenuItem.Text = "Disponi";
             // 
             // cascataToolStripMenuItem
@@ -101,20 +118,12 @@
             this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
             this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
             // 
-            // distinteRVLToolStripMenuItem
+            // mIgrazioneToolStripMenuItem
             // 
-            this.distinteRVLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.apriToolStripMenuItem});
-            this.distinteRVLToolStripMenuItem.Name = "distinteRVLToolStripMenuItem";
-            this.distinteRVLToolStripMenuItem.Size = new System.Drawing.Size(89, 21);
-            this.distinteRVLToolStripMenuItem.Text = "Distinte RVL";
-            // 
-            // apriToolStripMenuItem
-            // 
-            this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
-            this.apriToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.apriToolStripMenuItem.Text = "Apri";
-            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
+            this.mIgrazioneToolStripMenuItem.Name = "mIgrazioneToolStripMenuItem";
+            this.mIgrazioneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mIgrazioneToolStripMenuItem.Text = "Migrazione";
+            this.mIgrazioneToolStripMenuItem.Click += new System.EventHandler(this.mIgrazioneToolStripMenuItem_Click);
             // 
             // DiBaForm
             // 
@@ -144,5 +153,6 @@
         private System.Windows.Forms.ToolStripMenuItem organizzaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distinteRVLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem apriToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mIgrazioneToolStripMenuItem;
     }
 }

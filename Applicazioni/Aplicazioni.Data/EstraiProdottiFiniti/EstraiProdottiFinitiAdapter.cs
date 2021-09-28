@@ -55,6 +55,33 @@ namespace Applicazioni.Data.EstraiProdottiFiniti
             }
         }
 
+        public void GetMagazzinoRVL(EstraiProdottiFinitiDS ds, string idmagazz)
+        {
+            string select = @"
+                             select SG.IDMAGAZZ,tm.codicemag,cl.codice,trim(cl.ragionesoc) descrizione,sg.qesi 
+                                  from saldi_gen sg
+                                  inner join gruppo.tabmag tm on tm.idtabmag = sg.idtabmag
+                                  inner join gruppo.clifo cl on cl.codice = sg.codiceclifo
+                                  where 
+                                  SG.IDMAGAZZ = $P<IDMAGAZZ>
+                                  AND (tm.codicemag ='EXIT' 
+                                      or tm.codicemag ='LAV' 
+                                      OR tm.codicemag ='PLT%' 
+                                      OR tm.codicemag ='ACQ_%' 
+                                      OR tm.codicemag ='CONF-%' 
+                                      OR tm.codicemag ='FINITO-%' 
+                                      OR tm.codicemag ='GRE\SAL%' 
+                                      OR DESTABMAG LIKE '%UBICAZIONE%')
+                                  and sg.qesi <> 0";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, idmagazz);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.MAGAZZINORVL);
+            }
+        }
         public void GetBC_COM_CICLO(EstraiProdottiFinitiDS ds, string codiceCiclo, bool test)
         {
             string select = string.Empty;

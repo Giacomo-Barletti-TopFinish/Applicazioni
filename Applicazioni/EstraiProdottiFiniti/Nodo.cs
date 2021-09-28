@@ -50,8 +50,18 @@ namespace EstraiProdottiFiniti
         public string Metodo { get; set; }
         public string Versione { get; set; }
 
+        public List<Magazzino> MagazzinoRVL { get; set; }
 
-
+        public string ListaMagazzino
+        {
+            get
+            {
+                string str = string.Empty;
+                foreach (Magazzino m in MagazzinoRVL)
+                    str = str + string.Format("{0} {1} {2}", m.Quantita, m.Codice, m.Reparto) + Environment.NewLine;
+                return str.Trim();
+            }
+        }
         public override string ToString()
         {
             if (!string.IsNullOrEmpty(Anagrafica))
@@ -76,6 +86,26 @@ namespace EstraiProdottiFiniti
             if (CollegamentoCiclo != null) CollegamentoCiclo = CollegamentoCiclo.ToUpper();
             if (CollegamentoDiba != null) CollegamentoDiba = CollegamentoDiba.ToUpper();
             if (Reparto != null) Reparto = Reparto.ToUpper();
+        }
+    }
+
+    public class Magazzino
+    {
+        public string IDMAGAZZ { get; set; }
+        public string Codice { get; set; }
+        public string Reparto { get; set; }
+        public decimal Quantita { get; set; }
+
+        public static Magazzino CreaMagazzino(EstraiProdottiFinitiDS.MAGAZZINORVLRow magazzinoRVL)
+        {
+            Magazzino m = new Magazzino();
+            m.IDMAGAZZ = magazzinoRVL.IDMAGAZZ;
+            m.Codice = magazzinoRVL.CODICEMAG;
+            string c = magazzinoRVL.IsCODICENull() ? string.Empty : magazzinoRVL.CODICE;
+            string d = magazzinoRVL.IsDESCRIZIONENull() ? string.Empty : magazzinoRVL.DESCRIZIONE;
+            m.Reparto = string.Format("{0} - {1}", c, d).Trim();
+            m.Quantita = magazzinoRVL.QESI;
+            return m;
         }
     }
 }
