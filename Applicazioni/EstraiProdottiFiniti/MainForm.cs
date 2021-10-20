@@ -85,6 +85,52 @@ namespace EstraiProdottiFiniti
             btnSalvaDistinte.Enabled = false;
         }
 
+        public List<Nodo> CreaListaNodi(string modello)
+        {
+            txtArticolo.Text = modello.Trim().ToUpper();
+            using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
+            {
+                _ds.USR_PRD_TDIBA.Clear();
+                txtNoteStd.Text = string.Empty;
+                txtVersioneDiBa.Text = string.Empty;
+                this.Text = "Distinta RVL";
+                string IDTDIBA = string.Empty;
+                bEstrai.GetUSR_PRD_TDIBAByModello(_ds, txtArticolo.Text);
+                if (_ds.USR_PRD_TDIBA.Rows.Count > 0)
+                {
+                    IDTDIBA = _ds.USR_PRD_TDIBA.Where(x => x.ACTIVESN == "S").Select(x => x.IDTDIBA).FirstOrDefault();
+                    if (string.IsNullOrEmpty(IDTDIBA)) return null;
+                }
+                else
+                {
+                    return null;
+                }
+
+                Nodi = new List<Nodo>();
+                _ds.USR_PRD_TDIBA.Clear();
+                _ds.USR_PRD_RDIBA.Clear();
+                _ds.MAGAZZ.Clear();
+                _ds.BC_ANAGRAFICA.Clear();
+                _ds.TABFAS.Clear();
+                _ds.BC_NODO.Clear();
+
+                bEstrai.FillBC_ANAGRAFICA(_ds, chkTest.Checked);
+                bEstrai.FillTABFAS(_ds);
+                bEstrai.FillBC_TASK(_ds);
+                bEstrai.FillBC_NODO(_ds, chkTest.Checked);
+                bEstrai.fILLBC_NODO_Q(_ds, chkTest.Checked);
+
+                int idNodo = 1;
+                int profondita = 1;
+                EstraiDistintaBase(bEstrai, IDTDIBA, profondita, ref idNodo, -1, 1, 0, string.Empty, string.Empty, "N", string.Empty);
+
+                pulisciNodi();
+                riempiNodi();
+
+                return Nodi;
+            }
+        }
+
         private void btnCercaDiBa_Click(object sender, EventArgs e)
         {
             txtArticolo.Text = txtArticolo.Text.Trim().ToUpper();
@@ -701,7 +747,7 @@ namespace EstraiProdottiFiniti
 
                 List<string> anagrafiche = Nodi.Select(x => x.Anagrafica).ToList();
 
-                List<string> duplicati = anagrafiche.GroupBy(x => x).Where(g => g.Count() > 1).Select(y => y.Key).ToList();           
+                List<string> duplicati = anagrafiche.GroupBy(x => x).Where(g => g.Count() > 1).Select(y => y.Key).ToList();
                 List<string> anagraficheCensite = new List<string>();
                 List<string> anagraficheModificate = new List<string>();
                 List<string> anagraficheNuove = new List<string>();

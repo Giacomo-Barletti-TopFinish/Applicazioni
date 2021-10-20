@@ -56,6 +56,7 @@
             this.ContoLavoro = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.MagazzinoClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtMagazzino = new System.Windows.Forms.TextBox();
+            this.txtODL = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -345,19 +346,29 @@
             // 
             // txtMagazzino
             // 
-            this.txtMagazzino.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMagazzino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtMagazzino.Location = new System.Drawing.Point(594, 779);
             this.txtMagazzino.Multiline = true;
             this.txtMagazzino.Name = "txtMagazzino";
-            this.txtMagazzino.Size = new System.Drawing.Size(1088, 119);
+            this.txtMagazzino.Size = new System.Drawing.Size(538, 119);
             this.txtMagazzino.TabIndex = 14;
+            // 
+            // txtODL
+            // 
+            this.txtODL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtODL.Location = new System.Drawing.Point(1144, 779);
+            this.txtODL.Multiline = true;
+            this.txtODL.Name = "txtODL";
+            this.txtODL.Size = new System.Drawing.Size(538, 119);
+            this.txtODL.TabIndex = 15;
             // 
             // MigrazioneFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 932);
+            this.Controls.Add(this.txtODL);
             this.Controls.Add(this.txtMagazzino);
             this.Controls.Add(this.dgvNodi);
             this.Controls.Add(this.chkTest);
@@ -411,6 +422,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn ContoLavoro;
         private System.Windows.Forms.DataGridViewTextBoxColumn MagazzinoClm;
         private System.Windows.Forms.TextBox txtMagazzino;
+        private System.Windows.Forms.TextBox txtODL;
     }
 }
 

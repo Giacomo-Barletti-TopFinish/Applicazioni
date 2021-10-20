@@ -90,6 +90,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MigrazioneODLDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MigrazioneODLDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ParametriEDIFornitori.cs" />
     <Compile Include="PreventiviDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -212,6 +217,17 @@
     </None>
     <None Include="MigrazioneDiBaDS.xss">
       <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
+    </None>
+    <None Include="MigrazioneODLDS.xsc">
+      <DependentUpon>MigrazioneODLDS.xsd</DependentUpon>
+    </None>
+    <None Include="MigrazioneODLDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MigrazioneODLDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MigrazioneODLDS.xss">
+      <DependentUpon>MigrazioneODLDS.xsd</DependentUpon>
     </None>
     <None Include="PreventiviDS.xsc">
       <DependentUpon>PreventiviDS.xsd</DependentUpon>

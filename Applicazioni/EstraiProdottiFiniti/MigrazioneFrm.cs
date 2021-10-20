@@ -172,11 +172,29 @@ namespace EstraiProdottiFiniti
                     n.MagazzinoRVL = new List<Magazzino>();
                     foreach(EstraiProdottiFinitiDS.MAGAZZINORVLRow r in ds.MAGAZZINORVL.Where(x=>x.IDMAGAZZ==n.IDMAGAZZ))
                     {
-                        n.MagazzinoRVL.Add(Magazzino.CreaMagazzino(r));
+                        n.MagazzinoRVL.Add(new Magazzino(r));
                     }
                 }
             }
         }
+
+        private void caricaODL()
+        {
+            EstraiProdottiFinitiDS ds = new EstraiProdottiFinitiDS();
+            using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
+            {
+                foreach (Nodo n in Nodi)
+                {
+                    bEstrai.GetMagazzinoRVL(ds, n.IDMAGAZZ);
+                    n.MagazzinoRVL = new List<Magazzino>();
+                    foreach (EstraiProdottiFinitiDS.MAGAZZINORVLRow r in ds.MAGAZZINORVL.Where(x => x.IDMAGAZZ == n.IDMAGAZZ))
+                    {
+                        n.MagazzinoRVL.Add(new Magazzino(r));
+                    }
+                }
+            }
+        }
+
         private void riempiNodi()
         {
             foreach (Nodo n in Nodi)

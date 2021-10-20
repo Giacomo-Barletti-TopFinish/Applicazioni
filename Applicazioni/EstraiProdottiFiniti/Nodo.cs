@@ -96,16 +96,34 @@ namespace EstraiProdottiFiniti
         public string Reparto { get; set; }
         public decimal Quantita { get; set; }
 
-        public static Magazzino CreaMagazzino(EstraiProdottiFinitiDS.MAGAZZINORVLRow magazzinoRVL)
+        public Magazzino (EstraiProdottiFinitiDS.MAGAZZINORVLRow magazzinoRVL)
         {
-            Magazzino m = new Magazzino();
-            m.IDMAGAZZ = magazzinoRVL.IDMAGAZZ;
-            m.Codice = magazzinoRVL.CODICEMAG;
+            IDMAGAZZ = magazzinoRVL.IDMAGAZZ;
+            Codice = magazzinoRVL.CODICEMAG;
             string c = magazzinoRVL.IsCODICENull() ? string.Empty : magazzinoRVL.CODICE;
             string d = magazzinoRVL.IsDESCRIZIONENull() ? string.Empty : magazzinoRVL.DESCRIZIONE;
-            m.Reparto = string.Format("{0} - {1}", c, d).Trim();
-            m.Quantita = magazzinoRVL.QESI;
-            return m;
+            Reparto = string.Format("{0} - {1}", c, d).Trim();
+            Quantita = magazzinoRVL.QESI;
+        }
+    }
+
+    public class ODL
+    {
+        public string Barcode { get; set; }
+        public string NumMovFase { get; set; }
+        public string IDPRDMOVFASE { get; set; }
+        public decimal Quantita { get; set; }
+        public decimal QuantitaDaTerminare { get; set; }
+        public string IDMAGAZZ { get; set; }
+        public string Azienda{ get; set; }
+
+        public ODL(EstraiProdottiFinitiDS.USR_PRD_MOVFASIRow riga)
+        {
+            IDMAGAZZ = riga.IDMAGAZZ;
+            Barcode = riga.BARCODE;
+            IDPRDMOVFASE = riga.IDPRDMOVFASE;
+            Quantita = riga.QTA;
+            QuantitaDaTerminare = riga.QTADATER;
         }
     }
 }

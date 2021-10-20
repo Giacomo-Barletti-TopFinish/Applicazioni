@@ -1,0 +1,635 @@
+﻿namespace MigrazioneODL
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnCercaODL = new System.Windows.Forms.Button();
+            this.txtBarcodeODL = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtIDPRDMOVFASE = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAZIENDA = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtREPARTO = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtFASE = new System.Windows.Forms.TextBox();
+            this.txtIDMAGAZZ = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtArticolo = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtMetodoDiba = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtVersioneDiba = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtQuantita = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtQtaDaTer = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtDescVersione = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtAnagrafica = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.btnSCaricaNodi = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnCercaODL
+            // 
+            this.btnCercaODL.Location = new System.Drawing.Point(173, 27);
+            this.btnCercaODL.Name = "btnCercaODL";
+            this.btnCercaODL.Size = new System.Drawing.Size(75, 23);
+            this.btnCercaODL.TabIndex = 0;
+            this.btnCercaODL.Text = "Cerca ODL";
+            this.btnCercaODL.UseVisualStyleBackColor = true;
+            this.btnCercaODL.Click += new System.EventHandler(this.btnCercaODL_Click);
+            // 
+            // txtBarcodeODL
+            // 
+            this.txtBarcodeODL.Location = new System.Drawing.Point(34, 29);
+            this.txtBarcodeODL.Name = "txtBarcodeODL";
+            this.txtBarcodeODL.Size = new System.Drawing.Size(127, 20);
+            this.txtBarcodeODL.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "BARCODE";
+            // 
+            // txtIDPRDMOVFASE
+            // 
+            this.txtIDPRDMOVFASE.Location = new System.Drawing.Point(17, 40);
+            this.txtIDPRDMOVFASE.Name = "txtIDPRDMOVFASE";
+            this.txtIDPRDMOVFASE.ReadOnly = true;
+            this.txtIDPRDMOVFASE.Size = new System.Drawing.Size(127, 20);
+            this.txtIDPRDMOVFASE.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "IDPRDMOVFASE";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(179, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "AZIENDA";
+            // 
+            // txtAZIENDA
+            // 
+            this.txtAZIENDA.Location = new System.Drawing.Point(179, 40);
+            this.txtAZIENDA.Name = "txtAZIENDA";
+            this.txtAZIENDA.ReadOnly = true;
+            this.txtAZIENDA.Size = new System.Drawing.Size(127, 20);
+            this.txtAZIENDA.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(341, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "REPARTO";
+            // 
+            // txtREPARTO
+            // 
+            this.txtREPARTO.Location = new System.Drawing.Point(341, 40);
+            this.txtREPARTO.Name = "txtREPARTO";
+            this.txtREPARTO.ReadOnly = true;
+            this.txtREPARTO.Size = new System.Drawing.Size(127, 20);
+            this.txtREPARTO.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(501, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "FASE";
+            // 
+            // txtFASE
+            // 
+            this.txtFASE.Location = new System.Drawing.Point(503, 40);
+            this.txtFASE.Name = "txtFASE";
+            this.txtFASE.ReadOnly = true;
+            this.txtFASE.Size = new System.Drawing.Size(127, 20);
+            this.txtFASE.TabIndex = 7;
+            // 
+            // txtIDMAGAZZ
+            // 
+            this.txtIDMAGAZZ.Location = new System.Drawing.Point(17, 96);
+            this.txtIDMAGAZZ.Name = "txtIDMAGAZZ";
+            this.txtIDMAGAZZ.ReadOnly = true;
+            this.txtIDMAGAZZ.Size = new System.Drawing.Size(127, 20);
+            this.txtIDMAGAZZ.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 80);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "IDMAGAZZ";
+            // 
+            // txtArticolo
+            // 
+            this.txtArticolo.Location = new System.Drawing.Point(179, 96);
+            this.txtArticolo.Name = "txtArticolo";
+            this.txtArticolo.ReadOnly = true;
+            this.txtArticolo.Size = new System.Drawing.Size(127, 20);
+            this.txtArticolo.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(179, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "ARTICOLO";
+            // 
+            // txtMetodoDiba
+            // 
+            this.txtMetodoDiba.Location = new System.Drawing.Point(17, 159);
+            this.txtMetodoDiba.Name = "txtMetodoDiba";
+            this.txtMetodoDiba.ReadOnly = true;
+            this.txtMetodoDiba.Size = new System.Drawing.Size(127, 20);
+            this.txtMetodoDiba.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "METODO DISTINA";
+            // 
+            // txtVersioneDiba
+            // 
+            this.txtVersioneDiba.Location = new System.Drawing.Point(179, 159);
+            this.txtVersioneDiba.Name = "txtVersioneDiba";
+            this.txtVersioneDiba.ReadOnly = true;
+            this.txtVersioneDiba.Size = new System.Drawing.Size(127, 20);
+            this.txtVersioneDiba.TabIndex = 3;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(179, 143);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "VERSIONE";
+            // 
+            // txtQuantita
+            // 
+            this.txtQuantita.Location = new System.Drawing.Point(341, 96);
+            this.txtQuantita.Name = "txtQuantita";
+            this.txtQuantita.ReadOnly = true;
+            this.txtQuantita.Size = new System.Drawing.Size(127, 20);
+            this.txtQuantita.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(341, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "QUANTITA\'";
+            // 
+            // txtQtaDaTer
+            // 
+            this.txtQtaDaTer.Location = new System.Drawing.Point(504, 96);
+            this.txtQtaDaTer.Name = "txtQtaDaTer";
+            this.txtQtaDaTer.ReadOnly = true;
+            this.txtQtaDaTer.Size = new System.Drawing.Size(127, 20);
+            this.txtQtaDaTer.TabIndex = 3;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(501, 80);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(147, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "QUANTITA DA TERMINARE";
+            // 
+            // txtDescVersione
+            // 
+            this.txtDescVersione.Location = new System.Drawing.Point(341, 159);
+            this.txtDescVersione.Name = "txtDescVersione";
+            this.txtDescVersione.ReadOnly = true;
+            this.txtDescVersione.Size = new System.Drawing.Size(127, 20);
+            this.txtDescVersione.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(341, 143);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(94, 13);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "DESC VERSIONE";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtIDPRDMOVFASE);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtIDMAGAZZ);
+            this.groupBox1.Controls.Add(this.txtFASE);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.txtMetodoDiba);
+            this.groupBox1.Controls.Add(this.txtREPARTO);
+            this.groupBox1.Controls.Add(this.txtAZIENDA);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtArticolo);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.txtQuantita);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.txtQtaDaTer);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtVersioneDiba);
+            this.groupBox1.Controls.Add(this.txtDescVersione);
+            this.groupBox1.Location = new System.Drawing.Point(21, 73);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(731, 219);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ODL";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtAnagrafica);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.textBox4);
+            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.textBox6);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label18);
+            this.groupBox2.Controls.Add(this.textBox7);
+            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Controls.Add(this.textBox8);
+            this.groupBox2.Controls.Add(this.label20);
+            this.groupBox2.Controls.Add(this.textBox9);
+            this.groupBox2.Controls.Add(this.label21);
+            this.groupBox2.Controls.Add(this.label22);
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Controls.Add(this.textBox10);
+            this.groupBox2.Controls.Add(this.textBox11);
+            this.groupBox2.Location = new System.Drawing.Point(21, 328);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(731, 219);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Ordine Produzione";
+            // 
+            // txtAnagrafica
+            // 
+            this.txtAnagrafica.Location = new System.Drawing.Point(17, 40);
+            this.txtAnagrafica.Name = "txtAnagrafica";
+            this.txtAnagrafica.ReadOnly = true;
+            this.txtAnagrafica.Size = new System.Drawing.Size(127, 20);
+            this.txtAnagrafica.TabIndex = 1;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(501, 24);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "FASE";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(17, 96);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(127, 20);
+            this.textBox2.TabIndex = 1;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(503, 40);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(127, 20);
+            this.textBox3.TabIndex = 7;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(17, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "ANAGRAFICA";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(341, 24);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(59, 13);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "REPARTO";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(17, 159);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(127, 20);
+            this.textBox4.TabIndex = 1;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(341, 40);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(127, 20);
+            this.textBox5.TabIndex = 5;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(179, 40);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(127, 20);
+            this.textBox6.TabIndex = 3;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(341, 143);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(94, 13);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "DESC VERSIONE";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(17, 80);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(63, 13);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "IDMAGAZZ";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(179, 143);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(62, 13);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "VERSIONE";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(179, 96);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(127, 20);
+            this.textBox7.TabIndex = 3;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(501, 80);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(147, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "QUANTITA DA TERMINARE";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(341, 96);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(127, 20);
+            this.textBox8.TabIndex = 3;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(341, 80);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(64, 13);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "QUANTITA\'";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(504, 96);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(127, 20);
+            this.textBox9.TabIndex = 3;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(179, 80);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(61, 13);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "ARTICOLO";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(17, 143);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(100, 13);
+            this.label22.TabIndex = 2;
+            this.label22.Text = "METODO DISTINA";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(179, 24);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(54, 13);
+            this.label23.TabIndex = 4;
+            this.label23.Text = "AZIENDA";
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(179, 159);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(127, 20);
+            this.textBox10.TabIndex = 3;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(341, 159);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
+            this.textBox11.Size = new System.Drawing.Size(127, 20);
+            this.textBox11.TabIndex = 3;
+            // 
+            // btnSCaricaNodi
+            // 
+            this.btnSCaricaNodi.Location = new System.Drawing.Point(346, 27);
+            this.btnSCaricaNodi.Name = "btnSCaricaNodi";
+            this.btnSCaricaNodi.Size = new System.Drawing.Size(75, 23);
+            this.btnSCaricaNodi.TabIndex = 11;
+            this.btnSCaricaNodi.Text = "Scarica nodi";
+            this.btnSCaricaNodi.UseVisualStyleBackColor = true;
+            this.btnSCaricaNodi.Click += new System.EventHandler(this.btnSCaricaNodi_Click);
+            // 
+            // Form1
+            // 
+            this.AcceptButton = this.btnCercaODL;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(793, 740);
+            this.Controls.Add(this.btnSCaricaNodi);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtBarcodeODL);
+            this.Controls.Add(this.btnCercaODL);
+            this.Name = "Form1";
+            this.Text = "Migrazione ODL";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnCercaODL;
+        private System.Windows.Forms.TextBox txtBarcodeODL;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtIDPRDMOVFASE;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtAZIENDA;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtREPARTO;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtFASE;
+        private System.Windows.Forms.TextBox txtIDMAGAZZ;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtArticolo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtMetodoDiba;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtVersioneDiba;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtQuantita;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtQtaDaTer;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtDescVersione;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtAnagrafica;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Button btnSCaricaNodi;
+    }
+}
+
