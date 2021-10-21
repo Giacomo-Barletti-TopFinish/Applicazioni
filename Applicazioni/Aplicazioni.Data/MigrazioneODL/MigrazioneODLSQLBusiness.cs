@@ -1,4 +1,5 @@
 ﻿using Applicazioni.Data.Core;
+using Applicazioni.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,18 @@ namespace Applicazioni.Data.MigrazioneODL
     public class MigrazioneODLSQLBusiness : BusinessBaseSQL
     {
         [DataContext]
-        public void FillBOLLE_VENDITATESTATA(Entities.MigrazioneODLDS ds, DateTime Dal, DateTime Al)
+        public void GetDistinteBCTestata(MigrazioneODLDS ds, string codiceTestata)
         {
-            //EDIFornitoriAdapter a = new EDIFornitoriAdapter(DbConnection, DbTransaction);
-            //a.FillBOLLE_VENDITATESTATASQL(ds, Dal, Al);
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetDistinteBCTestata(ds, codiceTestata);
         }
 
-      
+        [DataContext]
+        public void GetDistinteBCDettaglio(MigrazioneODLDS ds, string codiceTestata)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetDistinteBCDettaglio(ds, codiceTestata);
+        }
+
     }
 }

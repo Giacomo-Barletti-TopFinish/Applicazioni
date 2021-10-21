@@ -85,8 +85,10 @@ namespace EstraiProdottiFiniti
             btnSalvaDistinte.Enabled = false;
         }
 
-        public List<Nodo> CreaListaNodi(string modello)
+        public List<Nodo> CreaListaNodi(string modello, bool test)
         {
+            _ds = new EstraiProdottiFinitiDS();
+            chkTest.Checked = test;
             txtArticolo.Text = modello.Trim().ToUpper();
             using (EstraiProdottiFinitiBusiness bEstrai = new EstraiProdottiFinitiBusiness())
             {

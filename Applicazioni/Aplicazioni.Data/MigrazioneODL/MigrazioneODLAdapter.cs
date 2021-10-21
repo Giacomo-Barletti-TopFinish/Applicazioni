@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,45 +99,61 @@ namespace Applicazioni.Data.MigrazioneODL
             }
         }
 
-        public void GetUSR_PRD_TDIBA(MigrazioneODLDS ds, String idmagazz, string dibaMethod, decimal version, string desVersion)
+        public void FillBC_MIGRAZIONE(MigrazioneODLDS ds)
         {
 
-            string select = @"select td.* 
-                                    from usr_prd_tdiba td 
-                                    WHERE td.IDMAGAZZ= $P<IDMAGAZZ>
-                                    and td.iddibamethod = $P<DIBAMETHOD>
-                                    and td.version = $P<VERSION>
-                                    and td.desversion = $P<DESVERSION>
-                                    ";
+            string select = @"select * from BC_MIGRAZIONE";
 
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BC_MIGRAZIONE);
+            }
+        }
+        public void UpdateTable(string tablename, MigrazioneODLDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                try
+                {
+                    a.ContinueUpdateOnError = false;
+                    DataTable dt = ds.Tables[tablename];
+                    DbCommandBuilder cmd = BuildCommandBuilder(a);
+                    a.UpdateCommand = cmd.GetUpdateCommand();
+                    a.DeleteCommand = cmd.GetDeleteCommand();
+                    a.InsertCommand = cmd.GetInsertCommand();
+                    a.Update(dt);
+                }
+                catch (DBConcurrencyException ex)
+                {
+
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public void GetDistinteBCTestata(MigrazioneODLDS ds, string codiceTestata)
+        {
             ParamSet ps = new ParamSet();
-            ps.AddParam("IDMAGAZZ", DbType.String, idmagazz);
-            ps.AddParam("DIBAMETHOD", DbType.String, dibaMethod);
-            ps.AddParam("VERSION", DbType.Decimal, version);
-            ps.AddParam("DESVERSION", DbType.String, desVersion);
-
+            string select = @"select * from DistinteBCTestata where 1=1";
+            AddConditionAndParam(ref select, "[No_]", "TESTATA", codiceTestata, ps, true);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
-                da.Fill(ds.USR_PRD_TDIBA);
+                da.Fill(ds.DistinteBCTestata);
             }
         }
 
-        public void GetUSR_PRD_TDIBA1(MigrazioneODLDS ds, String idTdiba, string azienda)
+        public void GetDistinteBCDettaglio(MigrazioneODLDS ds, string codiceTestata)
         {
-
-            string select = @"select td.*, RD.IDTDIBAIFFASE
-                                    from usr_prd_tdiba td 
-                                    inner join usr_prd_rdiba rd on rd.idtdiba = td.idtdiba and rd.azienda = td.azienda
-                                    where rd.idtdibaiffase = $P<IDTDIBA> and rd.azienda = $P<AZIENDA> and td.activesn = 'S'
-                                    ";
-
+            string select = @"select * from DistinteBCDettaglio where [Production BOM No_] =  $P<TESTATA>";
             ParamSet ps = new ParamSet();
-            ps.AddParam("IDTDIBA", DbType.String, idTdiba);
-            ps.AddParam("AZIENDA", DbType.String, azienda);
-
+            ps.AddParam("TESTATA", DbType.String, codiceTestata);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
-                da.Fill(ds.USR_PRD_TDIBA1);
+                da.Fill(ds.DistinteBCDettaglio);
             }
         }
     }

@@ -30,12 +30,15 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetCLIFO(ds, CodiceClifo);
         }
         [DataContext]
-        public void GetANAGRAFICA(MigrazioneODLDS ds, String idmagazz)
+        public MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow GetANAGRAFICA(MigrazioneODLDS ds, String idmagazz)
         {
-            if (ds.BC_ANAGRAFICA_PRODUZIONE.Any(x => x.IDMAGAZZ == idmagazz)) return;
+            MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = ds.BC_ANAGRAFICA_PRODUZIONE.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
+
+            if (anagrafica != null) return anagrafica;
 
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.GetANAGRAFICA(ds, idmagazz);
+            return ds.BC_ANAGRAFICA_PRODUZIONE.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
         }
         [DataContext]
         public void GetTABFAS(MigrazioneODLDS ds, String idtabfas)
@@ -53,29 +56,24 @@ namespace Applicazioni.Data.MigrazioneODL
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.GetMAGAZZ(ds, idmagazz);
         }
-        [DataContext]
-        public void GetUSR_PRD_TDIBA(MigrazioneODLDS ds, String idmagazz, string dibaMethod, decimal version, string desVersion)
-        {
-            if (ds.USR_PRD_TDIBA.Any(x => x.IDMAGAZZ == idmagazz && x.IDDIBAMETHOD == dibaMethod && x.VERSION == version && x.DESVERSION == desVersion)) return;
-
-            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.GetUSR_PRD_TDIBA(ds, idmagazz, dibaMethod, version, desVersion);
-        }
-
-        [DataContext]
-        public void GetUSR_PRD_TDIBA1(MigrazioneODLDS ds, String idTdiba, string azienda)
-        {
-            if (ds.USR_PRD_TDIBA1.Any(x => x.IDTDIBAIFFASE == idTdiba && x.AZIENDA == azienda)) return;
-
-            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.GetUSR_PRD_TDIBA1(ds, idTdiba, azienda);
-        }
 
         [DataContext]
         public void GetPRODOTTIFINITI(MigrazioneODLDS ds)
         {
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.GetPRODOTTIFINITI(ds);
+        }
+        [DataContext]
+        public void FillBC_MIGRAZIONE(MigrazioneODLDS ds)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.FillBC_MIGRAZIONE(ds);
+        }
+        [DataContext(true)]
+        public void UpdateTable(string tablename, MigrazioneODLDS ds)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.UpdateTable(tablename, ds);
         }
     }
 }
