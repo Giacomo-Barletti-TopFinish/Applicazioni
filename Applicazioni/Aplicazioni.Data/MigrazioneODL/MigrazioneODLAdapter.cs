@@ -46,6 +46,46 @@ namespace Applicazioni.Data.MigrazioneODL
             }
         }
 
+        public void GetODL2ODP(MigrazioneODLDS ds, String NUMMOVFASE)
+        {
+
+            string select = @"SELECT * from ODL2ODP WHERE NUMMOVFASE = $P<NUMMOVFASE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("NUMMOVFASE", DbType.String, NUMMOVFASE);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ODL2ODP);
+            }
+        }
+
+        public void InsertODL2ODP(string azienda, string idPrdMovFase, string numMovFase, string reparto, string fase, string idmagazz, string anagrafica, decimal quantita,
+            string odv, string descrizione, string descrizione2, string company)
+        {
+
+            string select = @"insert into ODL2ODP (AZIENDA,IDPRDMOVFASE,NUMMOVFASE,REPARTO,FASE,IDMAGAZZ,ANAGRAFICA, QUANTITA,ODV,DESCRIZIONE,DESCRIZIONE2,DATACREAZIONE, COMPANY)values ($P{AZIENDA},$P{IDPRDMOVFASE},$P{NUMMOVFASE},$P{REPARTO},$P{FASE},$P{IDMAGAZZ},$P{ANAGRAFICA}, $P{QUANTITA},$P{ODV},$P{DESCRIZIONE},$P{DESCRIZIONE2},$P{DATACREAZIONE},$P{COMPANY})";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("AZIENDA", DbType.String, azienda);
+            ps.AddParam("IDPRDMOVFASE", DbType.String, idPrdMovFase);
+            ps.AddParam("NUMMOVFASE", DbType.String, numMovFase);
+            ps.AddParam("REPARTO", DbType.String, reparto);
+            ps.AddParam("FASE", DbType.String, fase);
+            ps.AddParam("IDMAGAZZ", DbType.String, idmagazz);
+            ps.AddParam("ANAGRAFICA", DbType.String, anagrafica);
+            ps.AddParam("QUANTITA", DbType.Decimal, quantita);
+            ps.AddParam("ODV", DbType.String, odv);
+            ps.AddParam("DESCRIZIONE", DbType.String, descrizione);
+            ps.AddParam("DESCRIZIONE2", DbType.String, descrizione2);
+            ps.AddParam("DATACREAZIONE", DbType.DateTime, DateTime.Now);
+            ps.AddParam("COMPANY", DbType.String, company);
+
+            using (DbCommand cmd = BuildCommand(select, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
         public void GetPRODOTTIFINITI(MigrazioneODLDS ds)
         {
 

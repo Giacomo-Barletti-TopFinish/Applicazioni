@@ -54,19 +54,24 @@
             this.txtDescVersione = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtNumOdl = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnMigraOrdineProduzione = new System.Windows.Forms.Button();
+            this.txtDescrizione2ODV = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtPRODOTTOFINITO = new System.Windows.Forms.TextBox();
+            this.txtComponentiODV = new System.Windows.Forms.TextBox();
+            this.txtDescrizioneODV = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.txtAnagrafica = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnSCaricaNodi = new System.Windows.Forms.Button();
             this.txtMessaggi = new System.Windows.Forms.TextBox();
-            this.txtPRODOTTOFINITO = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtDescrizioneODV = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtDescrizione2ODV = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtComponentiODV = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtODP = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -299,9 +304,11 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtArticolo);
+            this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtQuantita);
             this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.txtNumOdl);
             this.groupBox1.Controls.Add(this.txtQtaDaTer);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label8);
@@ -315,13 +322,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ODL";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(500, 143);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(57, 13);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "NUM ODL";
+            // 
+            // txtNumOdl
+            // 
+            this.txtNumOdl.Location = new System.Drawing.Point(503, 159);
+            this.txtNumOdl.Name = "txtNumOdl";
+            this.txtNumOdl.ReadOnly = true;
+            this.txtNumOdl.Size = new System.Drawing.Size(127, 20);
+            this.txtNumOdl.TabIndex = 3;
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnMigraOrdineProduzione);
             this.groupBox2.Controls.Add(this.txtDescrizione2ODV);
             this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.txtODP);
             this.groupBox2.Controls.Add(this.txtPRODOTTOFINITO);
             this.groupBox2.Controls.Add(this.txtComponentiODV);
             this.groupBox2.Controls.Add(this.txtDescrizioneODV);
+            this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label15);
@@ -333,6 +360,86 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ordine Produzione";
+            // 
+            // btnMigraOrdineProduzione
+            // 
+            this.btnMigraOrdineProduzione.Location = new System.Drawing.Point(421, 37);
+            this.btnMigraOrdineProduzione.Name = "btnMigraOrdineProduzione";
+            this.btnMigraOrdineProduzione.Size = new System.Drawing.Size(151, 38);
+            this.btnMigraOrdineProduzione.TabIndex = 13;
+            this.btnMigraOrdineProduzione.Text = "Migra ordine di produzione";
+            this.btnMigraOrdineProduzione.UseVisualStyleBackColor = true;
+            this.btnMigraOrdineProduzione.Click += new System.EventHandler(this.btnMigraOrdineProduzione_Click);
+            // 
+            // txtDescrizione2ODV
+            // 
+            this.txtDescrizione2ODV.Location = new System.Drawing.Point(222, 90);
+            this.txtDescrizione2ODV.Name = "txtDescrizione2ODV";
+            this.txtDescrizione2ODV.ReadOnly = true;
+            this.txtDescrizione2ODV.Size = new System.Drawing.Size(168, 20);
+            this.txtDescrizione2ODV.TabIndex = 3;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(222, 74);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 13);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "DESCRIZIONE 2";
+            // 
+            // txtPRODOTTOFINITO
+            // 
+            this.txtPRODOTTOFINITO.Location = new System.Drawing.Point(222, 40);
+            this.txtPRODOTTOFINITO.Name = "txtPRODOTTOFINITO";
+            this.txtPRODOTTOFINITO.ReadOnly = true;
+            this.txtPRODOTTOFINITO.Size = new System.Drawing.Size(168, 20);
+            this.txtPRODOTTOFINITO.TabIndex = 3;
+            // 
+            // txtComponentiODV
+            // 
+            this.txtComponentiODV.Location = new System.Drawing.Point(13, 138);
+            this.txtComponentiODV.Multiline = true;
+            this.txtComponentiODV.Name = "txtComponentiODV";
+            this.txtComponentiODV.ReadOnly = true;
+            this.txtComponentiODV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtComponentiODV.Size = new System.Drawing.Size(377, 91);
+            this.txtComponentiODV.TabIndex = 1;
+            // 
+            // txtDescrizioneODV
+            // 
+            this.txtDescrizioneODV.Location = new System.Drawing.Point(17, 90);
+            this.txtDescrizioneODV.Name = "txtDescrizioneODV";
+            this.txtDescrizioneODV.ReadOnly = true;
+            this.txtDescrizioneODV.Size = new System.Drawing.Size(168, 20);
+            this.txtDescrizioneODV.TabIndex = 1;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 122);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(79, 13);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "COMPONENTI";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(222, 24);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(106, 13);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "PRODOTTO FINITO";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(17, 74);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(80, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "DESCRIZIONE";
             // 
             // txtAnagrafica
             // 
@@ -359,6 +466,7 @@
             this.btnSCaricaNodi.TabIndex = 11;
             this.btnSCaricaNodi.Text = "Scarica nodi";
             this.btnSCaricaNodi.UseVisualStyleBackColor = true;
+            this.btnSCaricaNodi.Visible = false;
             this.btnSCaricaNodi.Click += new System.EventHandler(this.btnSCaricaNodi_Click);
             // 
             // txtMessaggi
@@ -371,75 +479,23 @@
             this.txtMessaggi.Size = new System.Drawing.Size(731, 161);
             this.txtMessaggi.TabIndex = 12;
             // 
-            // txtPRODOTTOFINITO
+            // label19
             // 
-            this.txtPRODOTTOFINITO.Location = new System.Drawing.Point(222, 40);
-            this.txtPRODOTTOFINITO.Name = "txtPRODOTTOFINITO";
-            this.txtPRODOTTOFINITO.ReadOnly = true;
-            this.txtPRODOTTOFINITO.Size = new System.Drawing.Size(168, 20);
-            this.txtPRODOTTOFINITO.TabIndex = 3;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(591, 31);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(30, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "ODP";
             // 
-            // label13
+            // txtODP
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(222, 24);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 13);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "PRODOTTO FINITO";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(17, 74);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 13);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "DESCRIZIONE";
-            // 
-            // txtDescrizioneODV
-            // 
-            this.txtDescrizioneODV.Location = new System.Drawing.Point(17, 90);
-            this.txtDescrizioneODV.Name = "txtDescrizioneODV";
-            this.txtDescrizioneODV.ReadOnly = true;
-            this.txtDescrizioneODV.Size = new System.Drawing.Size(168, 20);
-            this.txtDescrizioneODV.TabIndex = 1;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(222, 74);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(89, 13);
-            this.label16.TabIndex = 4;
-            this.label16.Text = "DESCRIZIONE 2";
-            // 
-            // txtDescrizione2ODV
-            // 
-            this.txtDescrizione2ODV.Location = new System.Drawing.Point(222, 90);
-            this.txtDescrizione2ODV.Name = "txtDescrizione2ODV";
-            this.txtDescrizione2ODV.ReadOnly = true;
-            this.txtDescrizione2ODV.Size = new System.Drawing.Size(168, 20);
-            this.txtDescrizione2ODV.TabIndex = 3;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 122);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(79, 13);
-            this.label17.TabIndex = 2;
-            this.label17.Text = "COMPONENTI";
-            // 
-            // txtComponentiODV
-            // 
-            this.txtComponentiODV.Location = new System.Drawing.Point(13, 138);
-            this.txtComponentiODV.Multiline = true;
-            this.txtComponentiODV.Name = "txtComponentiODV";
-            this.txtComponentiODV.ReadOnly = true;
-            this.txtComponentiODV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComponentiODV.Size = new System.Drawing.Size(377, 91);
-            this.txtComponentiODV.TabIndex = 1;
+            this.txtODP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtODP.ForeColor = System.Drawing.Color.Red;
+            this.txtODP.Location = new System.Drawing.Point(591, 47);
+            this.txtODP.Name = "txtODP";
+            this.txtODP.Size = new System.Drawing.Size(119, 23);
+            this.txtODP.TabIndex = 3;
             // 
             // Form1
             // 
@@ -507,6 +563,11 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtComponentiODV;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btnMigraOrdineProduzione;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtNumOdl;
+        private System.Windows.Forms.TextBox txtODP;
+        private System.Windows.Forms.Label label19;
     }
 }
 

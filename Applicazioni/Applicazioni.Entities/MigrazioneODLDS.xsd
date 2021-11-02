@@ -16,7 +16,7 @@
   <xs:element name="MigrazioneODLDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MigrazioneODLDS" msprop:Generator_UserDSName="MigrazioneODLDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="USR_PRD_MOVFASI" msprop:Generator_TableClassName="USR_PRD_MOVFASIDataTable" msprop:Generator_TableVarName="tableUSR_PRD_MOVFASI" msprop:Generator_TablePropName="USR_PRD_MOVFASI" msprop:Generator_RowDeletingName="USR_PRD_MOVFASIRowDeleting" msprop:Generator_RowChangingName="USR_PRD_MOVFASIRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_MOVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_MOVFASIRowDeleted" msprop:Generator_UserTableName="USR_PRD_MOVFASI" msprop:Generator_RowChangedName="USR_PRD_MOVFASIRowChanged" msprop:Generator_RowEvArgName="USR_PRD_MOVFASIRowChangeEvent" msprop:Generator_RowClassName="USR_PRD_MOVFASIRow">
+        <xs:element name="USR_PRD_MOVFASI" msprop:Generator_TableClassName="USR_PRD_MOVFASIDataTable" msprop:Generator_TableVarName="tableUSR_PRD_MOVFASI" msprop:Generator_RowChangedName="USR_PRD_MOVFASIRowChanged" msprop:Generator_TablePropName="USR_PRD_MOVFASI" msprop:Generator_RowDeletingName="USR_PRD_MOVFASIRowDeleting" msprop:Generator_RowChangingName="USR_PRD_MOVFASIRowChanging" msprop:Generator_RowEvHandlerName="USR_PRD_MOVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="USR_PRD_MOVFASIRowDeleted" msprop:Generator_RowClassName="USR_PRD_MOVFASIRow" msprop:Generator_UserTableName="USR_PRD_MOVFASI" msprop:Generator_RowEvArgName="USR_PRD_MOVFASIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
@@ -331,7 +331,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CLIFO" msprop:Generator_TableClassName="CLIFODataTable" msprop:Generator_TableVarName="tableCLIFO" msprop:Generator_TablePropName="CLIFO" msprop:Generator_RowDeletingName="CLIFORowDeleting" msprop:Generator_RowChangingName="CLIFORowChanging" msprop:Generator_RowEvHandlerName="CLIFORowChangeEventHandler" msprop:Generator_RowDeletedName="CLIFORowDeleted" msprop:Generator_UserTableName="CLIFO" msprop:Generator_RowChangedName="CLIFORowChanged" msprop:Generator_RowEvArgName="CLIFORowChangeEvent" msprop:Generator_RowClassName="CLIFORow">
+        <xs:element name="CLIFO" msprop:Generator_TableClassName="CLIFODataTable" msprop:Generator_TableVarName="tableCLIFO" msprop:Generator_RowChangedName="CLIFORowChanged" msprop:Generator_TablePropName="CLIFO" msprop:Generator_RowDeletingName="CLIFORowDeleting" msprop:Generator_RowChangingName="CLIFORowChanging" msprop:Generator_RowEvHandlerName="CLIFORowChangeEventHandler" msprop:Generator_RowDeletedName="CLIFORowDeleted" msprop:Generator_RowClassName="CLIFORow" msprop:Generator_UserTableName="CLIFO" msprop:Generator_RowEvArgName="CLIFORowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TIPO" msprop:Generator_ColumnVarNameInTable="columnTIPO" msprop:Generator_ColumnPropNameInRow="TIPO" msprop:Generator_ColumnPropNameInTable="TIPOColumn" msprop:Generator_UserColumnName="TIPO" minOccurs="0">
@@ -1008,7 +1008,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TABFAS" msprop:Generator_TableClassName="TABFASDataTable" msprop:Generator_TableVarName="tableTABFAS" msprop:Generator_TablePropName="TABFAS" msprop:Generator_RowDeletingName="TABFASRowDeleting" msprop:Generator_RowChangingName="TABFASRowChanging" msprop:Generator_RowEvHandlerName="TABFASRowChangeEventHandler" msprop:Generator_RowDeletedName="TABFASRowDeleted" msprop:Generator_UserTableName="TABFAS" msprop:Generator_RowChangedName="TABFASRowChanged" msprop:Generator_RowEvArgName="TABFASRowChangeEvent" msprop:Generator_RowClassName="TABFASRow">
+        <xs:element name="TABFAS" msprop:Generator_TableClassName="TABFASDataTable" msprop:Generator_TableVarName="tableTABFAS" msprop:Generator_RowChangedName="TABFASRowChanged" msprop:Generator_TablePropName="TABFAS" msprop:Generator_RowDeletingName="TABFASRowDeleting" msprop:Generator_RowChangingName="TABFASRowChanging" msprop:Generator_RowEvHandlerName="TABFASRowChangeEventHandler" msprop:Generator_RowDeletedName="TABFASRowDeleted" msprop:Generator_RowClassName="TABFASRow" msprop:Generator_UserTableName="TABFAS" msprop:Generator_RowEvArgName="TABFASRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDTABFAS" msprop:Generator_ColumnVarNameInTable="columnIDTABFAS" msprop:Generator_ColumnPropNameInRow="IDTABFAS" msprop:Generator_ColumnPropNameInTable="IDTABFASColumn" msprop:Generator_UserColumnName="IDTABFAS">
@@ -1196,7 +1196,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BC_ANAGRAFICA_PRODUZIONE" msprop:Generator_TableClassName="BC_ANAGRAFICA_PRODUZIONEDataTable" msprop:Generator_TableVarName="tableBC_ANAGRAFICA_PRODUZIONE" msprop:Generator_TablePropName="BC_ANAGRAFICA_PRODUZIONE" msprop:Generator_RowDeletingName="BC_ANAGRAFICA_PRODUZIONERowDeleting" msprop:Generator_RowChangingName="BC_ANAGRAFICA_PRODUZIONERowChanging" msprop:Generator_RowEvHandlerName="BC_ANAGRAFICA_PRODUZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="BC_ANAGRAFICA_PRODUZIONERowDeleted" msprop:Generator_UserTableName="BC_ANAGRAFICA_PRODUZIONE" msprop:Generator_RowChangedName="BC_ANAGRAFICA_PRODUZIONERowChanged" msprop:Generator_RowEvArgName="BC_ANAGRAFICA_PRODUZIONERowChangeEvent" msprop:Generator_RowClassName="BC_ANAGRAFICA_PRODUZIONERow">
+        <xs:element name="BC_ANAGRAFICA_PRODUZIONE" msprop:Generator_TableClassName="BC_ANAGRAFICA_PRODUZIONEDataTable" msprop:Generator_TableVarName="tableBC_ANAGRAFICA_PRODUZIONE" msprop:Generator_RowChangedName="BC_ANAGRAFICA_PRODUZIONERowChanged" msprop:Generator_TablePropName="BC_ANAGRAFICA_PRODUZIONE" msprop:Generator_RowDeletingName="BC_ANAGRAFICA_PRODUZIONERowDeleting" msprop:Generator_RowChangingName="BC_ANAGRAFICA_PRODUZIONERowChanging" msprop:Generator_RowEvHandlerName="BC_ANAGRAFICA_PRODUZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="BC_ANAGRAFICA_PRODUZIONERowDeleted" msprop:Generator_RowClassName="BC_ANAGRAFICA_PRODUZIONERow" msprop:Generator_UserTableName="BC_ANAGRAFICA_PRODUZIONE" msprop:Generator_RowEvArgName="BC_ANAGRAFICA_PRODUZIONERowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDANAGRAFICA" msprop:Generator_ColumnVarNameInTable="columnIDANAGRAFICA" msprop:Generator_ColumnPropNameInRow="IDANAGRAFICA" msprop:Generator_ColumnPropNameInTable="IDANAGRAFICAColumn" msprop:Generator_UserColumnName="IDANAGRAFICA" type="xs:decimal" />
@@ -1227,7 +1227,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MAGAZZ" msprop:Generator_TableClassName="MAGAZZDataTable" msprop:Generator_TableVarName="tableMAGAZZ" msprop:Generator_TablePropName="MAGAZZ" msprop:Generator_RowDeletingName="MAGAZZRowDeleting" msprop:Generator_RowChangingName="MAGAZZRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZRowDeleted" msprop:Generator_UserTableName="MAGAZZ" msprop:Generator_RowChangedName="MAGAZZRowChanged" msprop:Generator_RowEvArgName="MAGAZZRowChangeEvent" msprop:Generator_RowClassName="MAGAZZRow">
+        <xs:element name="MAGAZZ" msprop:Generator_TableClassName="MAGAZZDataTable" msprop:Generator_TableVarName="tableMAGAZZ" msprop:Generator_RowChangedName="MAGAZZRowChanged" msprop:Generator_TablePropName="MAGAZZ" msprop:Generator_RowDeletingName="MAGAZZRowDeleting" msprop:Generator_RowChangingName="MAGAZZRowChanging" msprop:Generator_RowEvHandlerName="MAGAZZRowChangeEventHandler" msprop:Generator_RowDeletedName="MAGAZZRowDeleted" msprop:Generator_RowClassName="MAGAZZRow" msprop:Generator_UserTableName="MAGAZZ" msprop:Generator_RowEvArgName="MAGAZZRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ">
@@ -1712,7 +1712,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BC_MIGRAZIONE" msprop:Generator_TableClassName="BC_MIGRAZIONEDataTable" msprop:Generator_TableVarName="tableBC_MIGRAZIONE" msprop:Generator_RowChangedName="BC_MIGRAZIONERowChanged" msprop:Generator_TablePropName="BC_MIGRAZIONE" msprop:Generator_RowDeletingName="BC_MIGRAZIONERowDeleting" msprop:Generator_RowChangingName="BC_MIGRAZIONERowChanging" msprop:Generator_RowEvHandlerName="BC_MIGRAZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="BC_MIGRAZIONERowDeleted" msprop:Generator_RowClassName="BC_MIGRAZIONERow" msprop:Generator_UserTableName="BC_MIGRAZIONE" msprop:Generator_RowEvArgName="BC_MIGRAZIONERowChangeEvent">
+        <xs:element name="BC_MIGRAZIONE" msprop:Generator_TableClassName="BC_MIGRAZIONEDataTable" msprop:Generator_TableVarName="tableBC_MIGRAZIONE" msprop:Generator_TablePropName="BC_MIGRAZIONE" msprop:Generator_RowDeletingName="BC_MIGRAZIONERowDeleting" msprop:Generator_RowChangingName="BC_MIGRAZIONERowChanging" msprop:Generator_RowEvHandlerName="BC_MIGRAZIONERowChangeEventHandler" msprop:Generator_RowDeletedName="BC_MIGRAZIONERowDeleted" msprop:Generator_UserTableName="BC_MIGRAZIONE" msprop:Generator_RowChangedName="BC_MIGRAZIONERowChanged" msprop:Generator_RowEvArgName="BC_MIGRAZIONERowChangeEvent" msprop:Generator_RowClassName="BC_MIGRAZIONERow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMIGRAZIONE" msprop:Generator_ColumnVarNameInTable="columnIDMIGRAZIONE" msprop:Generator_ColumnPropNameInRow="IDMIGRAZIONE" msprop:Generator_ColumnPropNameInTable="IDMIGRAZIONEColumn" msprop:Generator_UserColumnName="IDMIGRAZIONE" type="xs:decimal" minOccurs="0" />
@@ -1766,7 +1766,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DistinteBCTestata" msprop:Generator_TableClassName="DistinteBCTestataDataTable" msprop:Generator_TableVarName="tableDistinteBCTestata" msprop:Generator_TablePropName="DistinteBCTestata" msprop:Generator_RowDeletingName="DistinteBCTestataRowDeleting" msprop:Generator_RowChangingName="DistinteBCTestataRowChanging" msprop:Generator_RowEvHandlerName="DistinteBCTestataRowChangeEventHandler" msprop:Generator_RowDeletedName="DistinteBCTestataRowDeleted" msprop:Generator_UserTableName="DistinteBCTestata" msprop:Generator_RowChangedName="DistinteBCTestataRowChanged" msprop:Generator_RowEvArgName="DistinteBCTestataRowChangeEvent" msprop:Generator_RowClassName="DistinteBCTestataRow">
+        <xs:element name="DistinteBCTestata" msprop:Generator_TableClassName="DistinteBCTestataDataTable" msprop:Generator_TableVarName="tableDistinteBCTestata" msprop:Generator_RowChangedName="DistinteBCTestataRowChanged" msprop:Generator_TablePropName="DistinteBCTestata" msprop:Generator_RowDeletingName="DistinteBCTestataRowDeleting" msprop:Generator_RowChangingName="DistinteBCTestataRowChanging" msprop:Generator_RowEvHandlerName="DistinteBCTestataRowChangeEventHandler" msprop:Generator_RowDeletedName="DistinteBCTestataRowDeleted" msprop:Generator_RowClassName="DistinteBCTestataRow" msprop:Generator_UserTableName="DistinteBCTestata" msprop:Generator_RowEvArgName="DistinteBCTestataRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="timestamp" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columntimestamp" msprop:Generator_ColumnPropNameInRow="timestamp" msprop:Generator_ColumnPropNameInTable="timestampColumn" msprop:Generator_UserColumnName="timestamp" type="xs:base64Binary" minOccurs="0" />
@@ -1831,7 +1831,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DistinteBCDettaglio" msprop:Generator_TableClassName="DistinteBCDettaglioDataTable" msprop:Generator_TableVarName="tableDistinteBCDettaglio" msprop:Generator_TablePropName="DistinteBCDettaglio" msprop:Generator_RowDeletingName="DistinteBCDettaglioRowDeleting" msprop:Generator_RowChangingName="DistinteBCDettaglioRowChanging" msprop:Generator_RowEvHandlerName="DistinteBCDettaglioRowChangeEventHandler" msprop:Generator_RowDeletedName="DistinteBCDettaglioRowDeleted" msprop:Generator_UserTableName="DistinteBCDettaglio" msprop:Generator_RowChangedName="DistinteBCDettaglioRowChanged" msprop:Generator_RowEvArgName="DistinteBCDettaglioRowChangeEvent" msprop:Generator_RowClassName="DistinteBCDettaglioRow">
+        <xs:element name="DistinteBCDettaglio" msprop:Generator_TableClassName="DistinteBCDettaglioDataTable" msprop:Generator_TableVarName="tableDistinteBCDettaglio" msprop:Generator_RowChangedName="DistinteBCDettaglioRowChanged" msprop:Generator_TablePropName="DistinteBCDettaglio" msprop:Generator_RowDeletingName="DistinteBCDettaglioRowDeleting" msprop:Generator_RowChangingName="DistinteBCDettaglioRowChanging" msprop:Generator_RowEvHandlerName="DistinteBCDettaglioRowChangeEventHandler" msprop:Generator_RowDeletedName="DistinteBCDettaglioRowDeleted" msprop:Generator_RowClassName="DistinteBCDettaglioRow" msprop:Generator_UserTableName="DistinteBCDettaglio" msprop:Generator_RowEvArgName="DistinteBCDettaglioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="timestamp" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columntimestamp" msprop:Generator_ColumnPropNameInRow="timestamp" msprop:Generator_ColumnPropNameInTable="timestampColumn" msprop:Generator_UserColumnName="timestamp" type="xs:base64Binary" minOccurs="0" />
@@ -1929,6 +1929,86 @@
               <xs:element name="_x0024_systemCreatedBy" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="_column_systemCreatedBy" msprop:Generator_ColumnPropNameInRow="__systemCreatedBy" msprop:Generator_ColumnPropNameInTable="__systemCreatedByColumn" msprop:Generator_UserColumnName="$systemCreatedBy" type="xs:string" />
               <xs:element name="_x0024_systemModifiedAt" msprop:Generator_ColumnVarNameInTable="_column_systemModifiedAt" msprop:Generator_ColumnPropNameInRow="__systemModifiedAt" msprop:Generator_ColumnPropNameInTable="__systemModifiedAtColumn" msprop:Generator_UserColumnName="$systemModifiedAt" type="xs:dateTime" />
               <xs:element name="_x0024_systemModifiedBy" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="_column_systemModifiedBy" msprop:Generator_ColumnPropNameInRow="__systemModifiedBy" msprop:Generator_ColumnPropNameInTable="__systemModifiedByColumn" msprop:Generator_UserColumnName="$systemModifiedBy" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ODL2ODP" msprop:Generator_TableClassName="ODL2ODPDataTable" msprop:Generator_TableVarName="tableODL2ODP" msprop:Generator_RowChangedName="ODL2ODPRowChanged" msprop:Generator_TablePropName="ODL2ODP" msprop:Generator_RowDeletingName="ODL2ODPRowDeleting" msprop:Generator_RowChangingName="ODL2ODPRowChanging" msprop:Generator_RowEvHandlerName="ODL2ODPRowChangeEventHandler" msprop:Generator_RowDeletedName="ODL2ODPRowDeleted" msprop:Generator_RowClassName="ODL2ODPRow" msprop:Generator_UserTableName="ODL2ODP" msprop:Generator_RowEvArgName="ODL2ODPRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDODL2ODP" msprop:Generator_ColumnVarNameInTable="columnIDODL2ODP" msprop:Generator_ColumnPropNameInRow="IDODL2ODP" msprop:Generator_ColumnPropNameInTable="IDODL2ODPColumn" msprop:Generator_UserColumnName="IDODL2ODP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDPRDMOVFASE" msprop:Generator_ColumnVarNameInTable="columnIDPRDMOVFASE" msprop:Generator_ColumnPropNameInRow="IDPRDMOVFASE" msprop:Generator_ColumnPropNameInTable="IDPRDMOVFASEColumn" msprop:Generator_UserColumnName="IDPRDMOVFASE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NUMMOVFASE" msprop:Generator_ColumnVarNameInTable="columnNUMMOVFASE" msprop:Generator_ColumnPropNameInRow="NUMMOVFASE" msprop:Generator_ColumnPropNameInTable="NUMMOVFASEColumn" msprop:Generator_UserColumnName="NUMMOVFASE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="REPARTO" msprop:Generator_ColumnVarNameInTable="columnREPARTO" msprop:Generator_ColumnPropNameInRow="REPARTO" msprop:Generator_ColumnPropNameInTable="REPARTOColumn" msprop:Generator_UserColumnName="REPARTO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FASE" msprop:Generator_ColumnVarNameInTable="columnFASE" msprop:Generator_ColumnPropNameInRow="FASE" msprop:Generator_ColumnPropNameInTable="FASEColumn" msprop:Generator_UserColumnName="FASE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDMAGAZZ" msprop:Generator_ColumnVarNameInTable="columnIDMAGAZZ" msprop:Generator_ColumnPropNameInRow="IDMAGAZZ" msprop:Generator_ColumnPropNameInTable="IDMAGAZZColumn" msprop:Generator_UserColumnName="IDMAGAZZ" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ANAGRAFICA" msprop:Generator_ColumnVarNameInTable="columnANAGRAFICA" msprop:Generator_ColumnPropNameInRow="ANAGRAFICA" msprop:Generator_ColumnPropNameInTable="ANAGRAFICAColumn" msprop:Generator_UserColumnName="ANAGRAFICA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QUANTITA" msprop:Generator_ColumnVarNameInTable="columnQUANTITA" msprop:Generator_ColumnPropNameInRow="QUANTITA" msprop:Generator_ColumnPropNameInTable="QUANTITAColumn" msprop:Generator_UserColumnName="QUANTITA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ODV" msprop:Generator_ColumnVarNameInTable="columnODV" msprop:Generator_ColumnPropNameInRow="ODV" msprop:Generator_ColumnPropNameInTable="ODVColumn" msprop:Generator_UserColumnName="ODV" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE2" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE2" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE2" msprop:Generator_ColumnPropNameInTable="DESCRIZIONE2Column" msprop:Generator_UserColumnName="DESCRIZIONE2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATACREAZIONE" msprop:Generator_ColumnVarNameInTable="columnDATACREAZIONE" msprop:Generator_ColumnPropNameInRow="DATACREAZIONE" msprop:Generator_ColumnPropNameInTable="DATACREAZIONEColumn" msprop:Generator_UserColumnName="DATACREAZIONE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="COMPANY" msprop:Generator_ColumnVarNameInTable="columnCOMPANY" msprop:Generator_ColumnPropNameInRow="COMPANY" msprop:Generator_ColumnPropNameInTable="COMPANYColumn" msprop:Generator_UserColumnName="COMPANY" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -5,6 +5,7 @@ using EstraiProdottiFiniti;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -39,6 +40,8 @@ namespace MigrazioneODL
             txtQuantita.Text = string.Empty;
             txtDescVersione.Text = string.Empty;
             txtAnagrafica.Text = string.Empty;
+            txtNumOdl.Text = string.Empty;
+            txtODP.Text = string.Empty;
 
             if (!string.IsNullOrEmpty(barcode))
             {
@@ -61,9 +64,9 @@ namespace MigrazioneODL
                 bMigrazione.GetDistinteBCDettaglio(_ds, txtAnagrafica.Text);
                 StringBuilder sb = new StringBuilder();
 
-                foreach(MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in _ds.DistinteBCDettaglio.Where(x=>x.Production_BOM_No_==txtAnagrafica.Text))
+                foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in _ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == txtAnagrafica.Text))
                 {
-                    sb.AppendLine(string.Format("{0} - qta: {1}",dettaglio.No_,dettaglio.Quantity_per));
+                    sb.AppendLine(string.Format("{0} - qta: {1}", dettaglio.No_, dettaglio.Quantity_per));
                 }
                 txtComponentiODV.Text = sb.ToString();
             }
@@ -100,6 +103,8 @@ namespace MigrazioneODL
                     txtMetodoDiba.Text = odl.IDDIBAMETHOD;
                     txtVersioneDiba.Text = odl.VERSION.ToString();
                     txtDescVersione.Text = odl.DESVERSION.Trim();
+                    txtDescVersione.Text = odl.NUMMOVFASE;
+                    txtNumOdl.Text = odl.NUMMOVFASE;
                 }
                 return odl;
             }
@@ -232,6 +237,81 @@ namespace MigrazioneODL
             bcMigrazione.DIBA = iddiba;
             bcMigrazione.PRODOTTOFINALE = prodottoFinale;
             _ds.BC_MIGRAZIONE.AddBC_MIGRAZIONERow(bcMigrazione);
+        }
+
+        private void btnMigraOrdineProduzione_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MigrazioneODLDS ds = new MigrazioneODLDS();
+                Cursor.Current = Cursors.WaitCursor;
+                txtBarcodeODL.Focus();
+                txtMessaggi.Text = string.Empty;
+                txtODP.Text = string.Empty;
+
+                if (string.IsNullOrEmpty(txtNumOdl.Text))
+                {
+                    txtMessaggi.Text = "Prima selezionare in ODL";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtAnagrafica.Text))
+                {
+                    txtMessaggi.Text = "Impossibile inserire un'anagrafica vuota";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtQtaDaTer.Text))
+                {
+                    txtMessaggi.Text = "Quantità da terminare indefinita";
+                    return;
+                }
+
+                string company = ConfigurationManager.AppSettings["Azienda"];
+
+                MPIntranet.WS.BCServices bc = new MPIntranet.WS.BCServices();
+                bc.CreaConnessione(company);
+                decimal quantita = 0;
+                if (!decimal.TryParse(txtQuantita.Text, out quantita))
+                {
+                    txtMessaggi.Text = "Impossibile convertire quantità da terminare";
+                    return;
+                }
+                using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
+                {
+                    bMigrazioneODL.GetODL2ODP(ds, txtNumOdl.Text);
+                    List<MigrazioneODLDS.ODL2ODPRow> odls = ds.ODL2ODP.Where(x => x.NUMMOVFASE == txtNumOdl.Text && x.COMPANY == company).ToList();
+                    if (odls.Count == 0)
+                    {
+                        string codiceODP = bc.CreaOdDPConfermato(txtAnagrafica.Text, DateTime.Now, quantita, "MTP", txtDescrizioneODV.Text, txtDescrizione2ODV.Text);
+                        bMigrazioneODL.InsertODL2ODP(txtAZIENDA.Text, txtIDPRDMOVFASE.Text, txtNumOdl.Text, txtREPARTO.Text, txtFASE.Text, txtIDMAGAZZ.Text, txtAnagrafica.Text, quantita, codiceODP, txtDescrizioneODV.Text, txtDescrizione2ODV.Text, company);
+                        txtODP.Text = codiceODP;
+                    }
+                    else
+                    {
+                        MigrazioneODLDS.ODL2ODPRow odp = odls[0];
+                        txtMessaggi.Text = String.Format("ODL già migrato nell'ordine di produzione {0} per la company {1}", odp.ODV, company);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("ERRORE IRREVERSIBILE");
+                while (ex != null)
+                {
+                    sb.AppendLine(ex.Message);
+                    ex = ex.InnerException;
+                }
+                txtMessaggi.Text = sb.ToString();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+
+
         }
     }
 }

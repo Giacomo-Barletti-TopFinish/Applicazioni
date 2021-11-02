@@ -40,6 +40,22 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetANAGRAFICA(ds, idmagazz);
             return ds.BC_ANAGRAFICA_PRODUZIONE.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
         }
+
+        [DataContext]
+        public void GetODL2ODP(MigrazioneODLDS ds, String NUMMOVFASE)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetODL2ODP(ds, NUMMOVFASE);
+        }
+        [DataContext(true)]
+        public void InsertODL2ODP(string azienda, string idPrdMovFase, string numMovFase, string reparto, string fase, string idmagazz, string anagrafica, decimal quantita,
+            string odv, string descrizione, string descrizione2,string company)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.InsertODL2ODP(azienda, idPrdMovFase, numMovFase, reparto, fase, idmagazz, anagrafica, quantita, odv, descrizione, descrizione2, company);
+        }
+
+
         [DataContext]
         public void GetTABFAS(MigrazioneODLDS ds, String idtabfas)
         {
