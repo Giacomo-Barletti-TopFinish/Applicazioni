@@ -40,7 +40,19 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetANAGRAFICA(ds, idmagazz);
             return ds.BC_ANAGRAFICA_PRODUZIONE.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
         }
+        [DataContext]
+        public void GetDistinteBCDettaglio(MigrazioneODLDS ds, String codiceTestata)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetDistinteBCDettaglio(ds, codiceTestata);
+        }
 
+        [DataContext]
+        public void GetODL2ODPCOMPONENTI(MigrazioneODLDS ds, String NUMMOVFASE)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetODL2ODPCOMPONENTI(ds, NUMMOVFASE);
+        }
         [DataContext]
         public void GetODL2ODP(MigrazioneODLDS ds, String NUMMOVFASE)
         {
@@ -49,12 +61,18 @@ namespace Applicazioni.Data.MigrazioneODL
         }
         [DataContext(true)]
         public void InsertODL2ODP(string azienda, string idPrdMovFase, string numMovFase, string reparto, string fase, string idmagazz, string anagrafica, decimal quantita,
-            string odv, string descrizione, string descrizione2,string company)
+            string odv, string descrizione, string descrizione2, string company)
         {
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.InsertODL2ODP(azienda, idPrdMovFase, numMovFase, reparto, fase, idmagazz, anagrafica, quantita, odv, descrizione, descrizione2, company);
         }
-
+        [DataContext(true)]
+        public void InsertODL2ODPComponenti(string azienda, string numMovFase, string reparto, string fase, string distinta, string componente, decimal quantita, decimal quantitaNominale,
+          string odv, string ubicazione, string collocazione, string company)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.InsertODL2ODPComponenti(azienda, numMovFase, reparto, fase, distinta, componente, quantita, quantitaNominale, odv, ubicazione, collocazione, company);
+        }
 
         [DataContext]
         public void GetTABFAS(MigrazioneODLDS ds, String idtabfas)

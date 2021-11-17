@@ -241,6 +241,8 @@ namespace MigrazioneODL
 
         private void btnMigraOrdineProduzione_Click(object sender, EventArgs e)
         {
+            string ubicazione = "MTP";
+            string collocazione = "IMPORTAZIONE";
             try
             {
                 MigrazioneODLDS ds = new MigrazioneODLDS();
@@ -269,29 +271,51 @@ namespace MigrazioneODL
 
                 string company = ConfigurationManager.AppSettings["Azienda"];
 
-                MPIntranet.WS.BCServices bc = new MPIntranet.WS.BCServices();
-                bc.CreaConnessione(company);
                 decimal quantita = 0;
                 if (!decimal.TryParse(txtQuantita.Text, out quantita))
                 {
                     txtMessaggi.Text = "Impossibile convertire quantità da terminare";
                     return;
                 }
+
+                MPIntranet.WS.BCServices bc = new MPIntranet.WS.BCServices();
+                bc.CreaConnessione(company);
                 using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
                 {
                     bMigrazioneODL.GetODL2ODP(ds, txtNumOdl.Text);
+                    bMigrazioneODL.GetODL2ODPCOMPONENTI(ds, txtNumOdl.Text);
+                    bMigrazioneODL.GetDistinteBCDettaglio(ds, txtAnagrafica.Text);
+                    
                     List<MigrazioneODLDS.ODL2ODPRow> odls = ds.ODL2ODP.Where(x => x.NUMMOVFASE == txtNumOdl.Text && x.COMPANY == company).ToList();
-                    if (odls.Count == 0)
-                    {
-                        string codiceODP = bc.CreaOdDPConfermato(txtAnagrafica.Text, DateTime.Now, quantita, "MTP", txtDescrizioneODV.Text, txtDescrizione2ODV.Text);
-                        bMigrazioneODL.InsertODL2ODP(txtAZIENDA.Text, txtIDPRDMOVFASE.Text, txtNumOdl.Text, txtREPARTO.Text, txtFASE.Text, txtIDMAGAZZ.Text, txtAnagrafica.Text, quantita, codiceODP, txtDescrizioneODV.Text, txtDescrizione2ODV.Text, company);
-                        txtODP.Text = codiceODP;
-                    }
-                    else
+                    if (odls.Count > 0)
                     {
                         MigrazioneODLDS.ODL2ODPRow odp = odls[0];
                         txtMessaggi.Text = String.Format("ODL già migrato nell'ordine di produzione {0} per la company {1}", odp.ODV, company);
+                        return;
                     }
+
+                    List<MigrazioneODLDS.ODL2ODPCOMPONENTIRow> odlsComp = ds.ODL2ODPCOMPONENTI.Where(x => x.NUMMOVFASE == txtNumOdl.Text && x.COMPANY == company).ToList();
+                    if (odls.Count > 0)
+                    {
+                        MigrazioneODLDS.ODL2ODPRow odp = odls[0];
+                        txtMessaggi.Text = String.Format("Componenti dell'ODL {0} già a sistema per la company {1}", odp.ODV, company);
+                        return;
+                    }
+
+                    string codiceODP = bc.CreaOdDPConfermato(txtAnagrafica.Text, DateTime.Now, quantita, ubicazione, txtDescrizioneODV.Text, txtDescrizione2ODV.Text);
+                    bMigrazioneODL.InsertODL2ODP(txtAZIENDA.Text, txtIDPRDMOVFASE.Text, txtNumOdl.Text, txtREPARTO.Text, txtFASE.Text, txtIDMAGAZZ.Text, txtAnagrafica.Text, quantita, codiceODP, txtDescrizioneODV.Text, txtDescrizione2ODV.Text, company);
+                    txtODP.Text = codiceODP;
+
+                    int linenumber = 0;
+                    foreach(MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in ds.DistinteBCDettaglio.Where(x=>x.Production_BOM_No_==txtAnagrafica.Text))
+                    {
+                        decimal quantitaComponente = quantita * dettaglio.Quantity;
+                        linenumber += 1000;
+                        bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, txtDescrizioneODV.Text, linenumber, quantitaComponente, dettaglio.No_);
+                        bMigrazioneODL.InsertODL2ODPComponenti(txtAZIENDA.Text, txtDescrizioneODV.Text, txtREPARTO.Text, txtFASE.Text, txtAnagrafica.Text, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, company);
+                    }
+
+                    bc.PostingRegMag();
 
                 }
             }
@@ -313,5 +337,7 @@ namespace MigrazioneODL
 
 
         }
+
+
     }
 }

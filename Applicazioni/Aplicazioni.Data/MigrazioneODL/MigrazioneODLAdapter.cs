@@ -60,6 +60,21 @@ namespace Applicazioni.Data.MigrazioneODL
             }
         }
 
+        public void GetODL2ODPCOMPONENTI(MigrazioneODLDS ds, String NUMMOVFASE)
+        {
+
+            string select = @"SELECT * from ODL2ODPCOMPONENTI WHERE NUMMOVFASE = $P<NUMMOVFASE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("NUMMOVFASE", DbType.String, NUMMOVFASE);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ODL2ODPCOMPONENTI);
+            }
+        }
+
+
         public void InsertODL2ODP(string azienda, string idPrdMovFase, string numMovFase, string reparto, string fase, string idmagazz, string anagrafica, decimal quantita,
             string odv, string descrizione, string descrizione2, string company)
         {
@@ -86,6 +101,35 @@ namespace Applicazioni.Data.MigrazioneODL
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void InsertODL2ODPComponenti(string azienda, string numMovFase, string reparto, string fase, string distinta, string componente, decimal quantita, decimal quantitaNominale,
+          string odv, string ubicazione, string collocazione, string company)
+        {
+
+            string select = @"insert into ODL2ODPCOMPONENTI (AZIENDA,NUMMOVFASE,REPARTO,FASE,COMPANY,ODV,DISTINTA,COMPONENTE,QUANTITA_NOMINALE,QUANTITA,UBICAZIONE,COLLOCAZIONE,DATACREAZIONE) values 
+                                        ($P{AZIENDA},$P{NUMMOVFASE},$P{REPARTO},$P{FASE},$P{COMPANY},$P{ODV},$P{DISTINTA},$P{COMPONENTE},$P{QUANTITA_NOMINALE},$P{QUANTITA},$P{UBICAZIONE},$P{COLLOCAZIONE},$P{DATACREAZIONE})";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("AZIENDA", DbType.String, azienda);
+            ps.AddParam("NUMMOVFASE", DbType.String, numMovFase);
+            ps.AddParam("REPARTO", DbType.String, reparto);
+            ps.AddParam("FASE", DbType.String, fase);
+            ps.AddParam("COMPANY", DbType.String, company);
+            ps.AddParam("ODV", DbType.String, odv);
+            ps.AddParam("DISTINTA", DbType.String, distinta);
+            ps.AddParam("COMPONENTE", DbType.String, componente);
+            ps.AddParam("QUANTITA_NOMINALE", DbType.Decimal, quantitaNominale);
+            ps.AddParam("QUANTITA", DbType.Decimal, quantita);
+            ps.AddParam("UBICAZIONE", DbType.String, ubicazione);
+            ps.AddParam("COLLOCAZIONE", DbType.String, collocazione);
+            ps.AddParam("DATACREAZIONE", DbType.DateTime, DateTime.Now);
+
+            using (DbCommand cmd = BuildCommand(select, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public void GetPRODOTTIFINITI(MigrazioneODLDS ds)
         {
 
