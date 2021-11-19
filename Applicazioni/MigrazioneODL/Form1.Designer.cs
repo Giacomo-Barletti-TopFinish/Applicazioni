@@ -74,6 +74,7 @@
             this.txtMessaggi = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
+            this.ChBoxRegMag = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -340,9 +341,11 @@
             this.txtNumOdl.ReadOnly = true;
             this.txtNumOdl.Size = new System.Drawing.Size(127, 20);
             this.txtNumOdl.TabIndex = 3;
+            this.txtNumOdl.TextChanged += new System.EventHandler(this.txtNumOdl_TextChanged);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ChBoxRegMag);
             this.groupBox2.Controls.Add(this.btnMigraOrdineProduzione);
             this.groupBox2.Controls.Add(this.txtDescrizione2ODV);
             this.groupBox2.Controls.Add(this.label16);
@@ -517,6 +520,18 @@
             this.lblCompany.Size = new System.Drawing.Size(0, 13);
             this.lblCompany.TabIndex = 14;
             // 
+            // ChBoxRegMag
+            // 
+            this.ChBoxRegMag.AutoSize = true;
+            this.ChBoxRegMag.Checked = true;
+            this.ChBoxRegMag.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChBoxRegMag.Location = new System.Drawing.Point(421, 92);
+            this.ChBoxRegMag.Name = "ChBoxRegMag";
+            this.ChBoxRegMag.Size = new System.Drawing.Size(125, 17);
+            this.ChBoxRegMag.TabIndex = 14;
+            this.ChBoxRegMag.Text = "Consolida magazzino";
+            this.ChBoxRegMag.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnCercaODL;
@@ -592,6 +607,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblCompany;
+        private System.Windows.Forms.CheckBox ChBoxRegMag;
     }
 }
 

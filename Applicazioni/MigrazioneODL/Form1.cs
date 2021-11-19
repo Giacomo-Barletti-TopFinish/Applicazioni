@@ -2,6 +2,7 @@
 using Applicazioni.Data.MigrazioneODL;
 using Applicazioni.Entities;
 using EstraiProdottiFiniti;
+using NAV;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -295,27 +296,32 @@ namespace MigrazioneODL
                     }
 
                     List<MigrazioneODLDS.ODL2ODPCOMPONENTIRow> odlsComp = ds.ODL2ODPCOMPONENTI.Where(x => x.NUMMOVFASE == txtNumOdl.Text && x.COMPANY == company).ToList();
-                    if (odls.Count > 0)
+                    if (odlsComp.Count > 0)
                     {
-                        MigrazioneODLDS.ODL2ODPRow odp = odls[0];
-                        txtMessaggi.Text = String.Format("Componenti dell'ODL {0} già a sistema per la company {1}", odp.ODV, company);
+                        txtMessaggi.Text = String.Format("Componenti dell'ODL {0} già a sistema per la company {1}", txtNumOdl.Text, company);
                         return;
                     }
 
                     string codiceODP = bc.CreaOdDPConfermato(txtAnagrafica.Text, DateTime.Now, quantita, ubicazione, txtDescrizioneODV.Text, txtDescrizione2ODV.Text);
                     bMigrazioneODL.InsertODL2ODP(txtAZIENDA.Text, txtIDPRDMOVFASE.Text, txtNumOdl.Text, txtREPARTO.Text, txtFASE.Text, txtIDMAGAZZ.Text, txtAnagrafica.Text, quantita, codiceODP, txtDescrizioneODV.Text, txtDescrizione2ODV.Text, company);
-                    txtODP.Text = codiceODP;
 
+                    txtODP.Text = codiceODP;
                     int linenumber = 0;
+                    List<RegMesWS> magazzino = bc.EstraiRegMag();
+                    if (magazzino.Count > 0)
+                        linenumber = magazzino.Where(x => x.Journal_Batch_Name == "REGWS").Max(x => x.Line_No);
+
                     foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in _ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == txtAnagrafica.Text))
                     {
                         decimal quantitaComponente = quantita * dettaglio.Quantity;
                         linenumber += 1000;
-                        bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, txtDescrizioneODV.Text, quantitaComponente, dettaglio.No_);
-                        bMigrazioneODL.InsertODL2ODPComponenti(txtAZIENDA.Text, txtDescrizioneODV.Text, txtREPARTO.Text, txtFASE.Text, txtAnagrafica.Text, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, company);
+                        bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, txtNumOdl.Text, quantitaComponente, dettaglio.No_);
+                        bMigrazioneODL.InsertODL2ODPComponenti(txtAZIENDA.Text, txtNumOdl.Text, txtREPARTO.Text, txtFASE.Text, txtAnagrafica.Text, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, company);
+                        
+                        txtMessaggi.Text = "Ordine Migrato Correttamente";
                     }
-
-                    bc.PostingRegMag();
+                    if(ChBoxRegMag.Checked)
+                        bc.PostingRegMag();
 
                 }
             }
@@ -338,6 +344,9 @@ namespace MigrazioneODL
 
         }
 
+        private void txtNumOdl_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
