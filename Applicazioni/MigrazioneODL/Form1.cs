@@ -285,7 +285,7 @@ namespace MigrazioneODL
                     bMigrazioneODL.GetODL2ODP(ds, txtNumOdl.Text);
                     bMigrazioneODL.GetODL2ODPCOMPONENTI(ds, txtNumOdl.Text);
                     bMigrazioneODL.GetDistinteBCDettaglio(ds, txtAnagrafica.Text);
-                    
+
                     List<MigrazioneODLDS.ODL2ODPRow> odls = ds.ODL2ODP.Where(x => x.NUMMOVFASE == txtNumOdl.Text && x.COMPANY == company).ToList();
                     if (odls.Count > 0)
                     {
@@ -307,11 +307,11 @@ namespace MigrazioneODL
                     txtODP.Text = codiceODP;
 
                     int linenumber = 0;
-                    foreach(MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in ds.DistinteBCDettaglio.Where(x=>x.Production_BOM_No_==txtAnagrafica.Text))
+                    foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == txtAnagrafica.Text))
                     {
                         decimal quantitaComponente = quantita * dettaglio.Quantity;
                         linenumber += 1000;
-                        bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, txtDescrizioneODV.Text, linenumber, quantitaComponente, dettaglio.No_);
+                        bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, txtDescrizioneODV.Text, quantitaComponente, dettaglio.No_);
                         bMigrazioneODL.InsertODL2ODPComponenti(txtAZIENDA.Text, txtDescrizioneODV.Text, txtREPARTO.Text, txtFASE.Text, txtAnagrafica.Text, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, company);
                     }
 
