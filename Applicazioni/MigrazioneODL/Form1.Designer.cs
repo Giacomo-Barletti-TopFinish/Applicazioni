@@ -60,9 +60,11 @@
             this.btnMigraOrdineProduzione = new System.Windows.Forms.Button();
             this.txtDescrizione2ODV = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.txtODP = new System.Windows.Forms.TextBox();
             this.txtPRODOTTOFINITO = new System.Windows.Forms.TextBox();
             this.txtComponentiODV = new System.Windows.Forms.TextBox();
             this.txtDescrizioneODV = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -70,8 +72,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btnSCaricaNodi = new System.Windows.Forms.Button();
             this.txtMessaggi = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtODP = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblCompany = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -388,6 +390,15 @@
             this.label16.TabIndex = 4;
             this.label16.Text = "DESCRIZIONE 2";
             // 
+            // txtODP
+            // 
+            this.txtODP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtODP.ForeColor = System.Drawing.Color.Red;
+            this.txtODP.Location = new System.Drawing.Point(591, 47);
+            this.txtODP.Name = "txtODP";
+            this.txtODP.Size = new System.Drawing.Size(119, 23);
+            this.txtODP.TabIndex = 3;
+            // 
             // txtPRODOTTOFINITO
             // 
             this.txtPRODOTTOFINITO.Location = new System.Drawing.Point(222, 40);
@@ -413,6 +424,15 @@
             this.txtDescrizioneODV.ReadOnly = true;
             this.txtDescrizioneODV.Size = new System.Drawing.Size(168, 20);
             this.txtDescrizioneODV.TabIndex = 1;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(591, 31);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(30, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "ODP";
             // 
             // label17
             // 
@@ -479,23 +499,23 @@
             this.txtMessaggi.Size = new System.Drawing.Size(731, 161);
             this.txtMessaggi.TabIndex = 12;
             // 
-            // label19
+            // label20
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(591, 31);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(30, 13);
-            this.label19.TabIndex = 4;
-            this.label19.Text = "ODP";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(491, 13);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(51, 13);
+            this.label20.TabIndex = 13;
+            this.label20.Text = "Company";
             // 
-            // txtODP
+            // lblCompany
             // 
-            this.txtODP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtODP.ForeColor = System.Drawing.Color.Red;
-            this.txtODP.Location = new System.Drawing.Point(591, 47);
-            this.txtODP.Name = "txtODP";
-            this.txtODP.Size = new System.Drawing.Size(119, 23);
-            this.txtODP.TabIndex = 3;
+            this.lblCompany.AutoSize = true;
+            this.lblCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompany.Location = new System.Drawing.Point(491, 33);
+            this.lblCompany.Name = "lblCompany";
+            this.lblCompany.Size = new System.Drawing.Size(0, 13);
+            this.lblCompany.TabIndex = 14;
             // 
             // Form1
             // 
@@ -503,6 +523,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 740);
+            this.Controls.Add(this.lblCompany);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.txtMessaggi);
             this.Controls.Add(this.btnSCaricaNodi);
             this.Controls.Add(this.groupBox2);
@@ -568,6 +590,8 @@
         private System.Windows.Forms.TextBox txtNumOdl;
         private System.Windows.Forms.TextBox txtODP;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lblCompany;
     }
 }
 

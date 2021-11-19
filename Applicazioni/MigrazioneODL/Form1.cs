@@ -170,6 +170,7 @@ namespace MigrazioneODL
 
             txtBarcodeODL.Focus();
             ActiveControl = txtBarcodeODL;
+            lblCompany.Text = ConfigurationManager.AppSettings["Azienda"];
         }
 
         private void btnSCaricaNodi_Click(object sender, EventArgs e)
@@ -284,8 +285,8 @@ namespace MigrazioneODL
                 {
                     bMigrazioneODL.GetODL2ODP(ds, txtNumOdl.Text);
                     bMigrazioneODL.GetODL2ODPCOMPONENTI(ds, txtNumOdl.Text);
-                    bMigrazioneODL.GetDistinteBCDettaglio(ds, txtAnagrafica.Text);
-                    
+             //       bMigrazioneODL.GetDistinteBCDettaglio(ds, txtAnagrafica.Text);
+
                     List<MigrazioneODLDS.ODL2ODPRow> odls = ds.ODL2ODP.Where(x => x.NUMMOVFASE == txtNumOdl.Text && x.COMPANY == company).ToList();
                     if (odls.Count > 0)
                     {
@@ -307,7 +308,7 @@ namespace MigrazioneODL
                     txtODP.Text = codiceODP;
 
                     int linenumber = 0;
-                    foreach(MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in ds.DistinteBCDettaglio.Where(x=>x.Production_BOM_No_==txtAnagrafica.Text))
+                    foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in _ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == txtAnagrafica.Text))
                     {
                         decimal quantitaComponente = quantita * dettaglio.Quantity;
                         linenumber += 1000;
