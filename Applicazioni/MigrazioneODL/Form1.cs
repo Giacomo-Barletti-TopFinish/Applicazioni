@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,37 @@ namespace MigrazioneODL
     public partial class Form1 : Form
     {
         private MigrazioneODLDS _ds = new MigrazioneODLDS();
-
+        private const string etichettaStart = "Elabora";
+        private const string etichettaStop = "Annulla";
+        private BackgroundWorker _bgwMigraODL = new BackgroundWorker();
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void inizializzaBackgroundWorker()
+        {
+            _bgwMigraODL.WorkerReportsProgress = true;
+            _bgwMigraODL.WorkerSupportsCancellation = true;
+
+            _bgwMigraODL.DoWork += _bgwMigraODL_DoWork;
+            _bgwMigraODL.RunWorkerCompleted += _bgwMigraODL_RunWorkerCompleted;
+            _bgwMigraODL.ProgressChanged += _bgwMigraODL_ProgressChanged;
+        }
+
+        private void _bgwMigraODL_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _bgwMigraODL_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _bgwMigraODL_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void btnCercaODL_Click(object sender, EventArgs e)
@@ -172,6 +200,12 @@ namespace MigrazioneODL
             txtBarcodeODL.Focus();
             ActiveControl = txtBarcodeODL;
             lblCompany.Text = ConfigurationManager.AppSettings["Azienda"];
+            lblMetàAvanzamento.Text = string.Empty;
+            lblFineAvanzamento.Text = string.Empty;
+            btnEseguiMigrazione.Text = etichettaStart;
+
+
+            inizializzaBackgroundWorker();
         }
 
         private void btnSCaricaNodi_Click(object sender, EventArgs e)
@@ -317,10 +351,10 @@ namespace MigrazioneODL
                         linenumber += 1000;
                         bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, txtNumOdl.Text, quantitaComponente, dettaglio.No_);
                         bMigrazioneODL.InsertODL2ODPComponenti(txtAZIENDA.Text, txtNumOdl.Text, txtREPARTO.Text, txtFASE.Text, txtAnagrafica.Text, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, company);
-                        
+
                         txtMessaggi.Text = "Ordine Migrato Correttamente";
                     }
-                    if(ChBoxRegMag.Checked)
+                    if (ChBoxRegMag.Checked)
                         bc.PostingRegMag();
 
                 }
@@ -348,5 +382,132 @@ namespace MigrazioneODL
         {
 
         }
+
+        private void txtIDPRDMOVFASE_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtComponentiODV_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDescrizioneODV_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAnagrafica_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Text Files (*.txt)|*.txt";
+            openFile.AddExtension = true;
+            openFile.Multiselect = false;
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                txtRicercaFile.Text = openFile.FileName;
+            }
+
+        }
+
+        private void btnEseguiMigrazione_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtMessaggi.Text = string.Empty;
+
+                if (btnEseguiMigrazione.Text == etichettaStart)
+                {
+                    if (string.IsNullOrEmpty(txtRicercaFile.Text))
+                    {
+                        txtMessaggi.Text = "Seleziona un file";
+                        return;
+                    }
+
+                    if (!File.Exists(txtRicercaFile.Text))
+                    {
+                        txtMessaggi.Text = string.Format("Il file {0} non è stato trovato", txtRicercaFile.Text);
+                        return;
+                    }
+
+                    List<string> odls = new List<string>();
+
+
+                    using (FileStream fs = new FileStream(txtRicercaFile.Text, FileMode.Open, FileAccess.Read))
+                    {
+                        StreamReader sr = new StreamReader(fs);
+                        while (!sr.EndOfStream)
+                        {
+                            string odl = sr.ReadLine();
+                            odls.Add(odl);
+                        }
+                        sr.Close();
+                    }
+
+                    if (odls.Count == 0)
+                    {
+                        txtMessaggi.Text = string.Format("Il file {0} è vuoto", txtRicercaFile.Text);
+                        return;
+                    }
+
+                    AggiornaMessaggio(string.Format(" ***********  File in elaborazione {0}", txtRicercaFile.Text));
+
+                    AggiornaMessaggio(string.Format("Trovate {0} righe", odls.Count));
+
+                    if (!_bgwMigraODL.IsBusy)
+                    {
+                        ODLDTO dto = new ODLDTO();
+                        dto.odls = odls;
+
+                        _bgwMigraODL.RunWorkerAsync(dto);
+
+                        btnEseguiMigrazione.Text = etichettaStop;
+                    }
+                }
+                else if (_bgwMigraODL.WorkerSupportsCancellation == true && _bgwMigraODL.IsBusy)
+                {
+                    _bgwMigraODL.CancelAsync();
+                    btnEseguiMigrazione.Text = etichettaStart;
+                }
+            }
+            catch (Exception ex)
+            {
+                txtMessaggi.Text = ex.Message;
+            }
+        }
+
+        private void AggiornaMessaggio(string messaggio)
+        {
+            string str = string.Format("{0} - {1}", DateTime.Now.ToShortTimeString(), messaggio);
+            txtMessaggi.Text = str + Environment.NewLine + txtMessaggi.Text;
+        }
     }
+
+    public class ODLDTO
+    {
+        public List<string> odls { get; set; }
+    }
+
 }
