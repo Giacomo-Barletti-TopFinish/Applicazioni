@@ -62,6 +62,7 @@
             this.ddlInventario.Name = "ddlInventario";
             this.ddlInventario.Size = new System.Drawing.Size(289, 24);
             this.ddlInventario.TabIndex = 0;
+            this.ddlInventario.SelectedIndexChanged += new System.EventHandler(this.ddlInventario_SelectedIndexChanged);
             // 
             // label1
             // 

@@ -29,7 +29,19 @@ namespace Applicazioni.Data.MigrazioneODL
                 da.Fill(ds.USR_PRD_MOVFASI);
             }
         }
+        public void GetUSR_PRD_MOVFASIByNumdoc(MigrazioneODLDS ds, String NUMMOVFASE)
+        {
 
+            string select = @"SELECT * FROM USR_PRD_MOVFASI WHERE NUMMOVFASE = $P<NUMMOVFASE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("NUMMOVFASE", DbType.String, NUMMOVFASE);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
         public void GetANAGRAFICA(MigrazioneODLDS ds, String idmagazz)
         {
 
@@ -130,6 +142,28 @@ namespace Applicazioni.Data.MigrazioneODL
             }
         }
 
+        public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company)
+        {
+
+            if (nota.Length > 1000)
+                nota = nota.Substring(0, 1000);
+            
+
+            string select = @"insert into ODL2ODPLOG (NUMMOVFASE,NOTA,ESECUZIONE,COMPANY,DATACREAZIONE) values 
+                                        ($P{NUMMOVFASE},$P{NOTA},$P{ESECUZIONE},$P{COMPANY},$P{DATACREAZIONE})";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("NUMMOVFASE", DbType.String, numMovFase);
+            ps.AddParam("NOTA", DbType.String, nota);
+            ps.AddParam("ESECUZIONE", DbType.String, esecuzione);
+            ps.AddParam("COMPANY", DbType.String, company);
+            ps.AddParam("DATACREAZIONE", DbType.DateTime, DateTime.Now);
+
+            using (DbCommand cmd = BuildCommand(select, ps))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
         public void GetPRODOTTIFINITI(MigrazioneODLDS ds)
         {
 

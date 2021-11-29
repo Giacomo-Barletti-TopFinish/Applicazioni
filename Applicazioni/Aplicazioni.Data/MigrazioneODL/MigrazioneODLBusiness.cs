@@ -20,7 +20,14 @@ namespace Applicazioni.Data.MigrazioneODL
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.GetUSR_PRD_MOVFASI(ds, Barcode);
         }
+        [DataContext]
+        public void GetUSR_PRD_MOVFASIByNumdoc(MigrazioneODLDS ds, String NUMMOVFASE)
+        {
+            if (ds.USR_PRD_MOVFASI.Any(x => x.NUMMOVFASE == NUMMOVFASE)) return;
 
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_MOVFASIByNumdoc(ds, NUMMOVFASE);
+        }
         [DataContext]
         public void GetCLIFO(MigrazioneODLDS ds, String CodiceClifo)
         {
@@ -73,7 +80,12 @@ namespace Applicazioni.Data.MigrazioneODL
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.InsertODL2ODPComponenti(azienda, numMovFase, reparto, fase, distinta, componente, quantita, quantitaNominale, odv, ubicazione, collocazione, company);
         }
-
+        [DataContext(true)]
+        public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company)
+        {
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.InsertODL2ODPlog(numMovFase, nota, esecuzione,company);
+        }
         [DataContext]
         public void GetTABFAS(MigrazioneODLDS ds, String idtabfas)
         {

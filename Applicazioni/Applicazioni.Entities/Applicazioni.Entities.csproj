@@ -90,6 +90,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MigrazioneDiBaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MigrazioneODLDS.cs">
+      <DependentUpon>MigrazioneODLDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MigrazioneODLDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

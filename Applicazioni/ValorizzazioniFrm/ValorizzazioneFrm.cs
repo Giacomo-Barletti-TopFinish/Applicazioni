@@ -494,6 +494,11 @@ namespace ValorizzazioniFrm
                 btnCalcolaCostiGalvanica.Text = etichettaStart;
             }
         }
+
+        private void ddlInventario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class CostiDTO
