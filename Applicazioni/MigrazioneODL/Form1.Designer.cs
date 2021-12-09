@@ -76,13 +76,14 @@
             this.label20 = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnCercaFile = new System.Windows.Forms.Button();
-            this.btnEseguiMigrazione = new System.Windows.Forms.Button();
-            this.pbAvanzamento = new System.Windows.Forms.ProgressBar();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtRicercaFile = new System.Windows.Forms.TextBox();
-            this.lblMetàAvanzamento = new System.Windows.Forms.Label();
             this.lblFineAvanzamento = new System.Windows.Forms.Label();
+            this.lblMetàAvanzamento = new System.Windows.Forms.Label();
+            this.txtRicercaFile = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.pbAvanzamento = new System.Windows.Forms.ProgressBar();
+            this.btnEseguiMigrazione = new System.Windows.Forms.Button();
+            this.btnCercaFile = new System.Windows.Forms.Button();
+            this.chkSoloRVL = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -517,7 +518,6 @@
             this.btnSCaricaNodi.TabIndex = 11;
             this.btnSCaricaNodi.Text = "Scarica nodi";
             this.btnSCaricaNodi.UseVisualStyleBackColor = true;
-            this.btnSCaricaNodi.Visible = false;
             this.btnSCaricaNodi.Click += new System.EventHandler(this.btnSCaricaNodi_Click);
             // 
             // txtMessaggi
@@ -550,6 +550,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkSoloRVL);
             this.groupBox3.Controls.Add(this.lblFineAvanzamento);
             this.groupBox3.Controls.Add(this.lblMetàAvanzamento);
             this.groupBox3.Controls.Add(this.txtRicercaFile);
@@ -564,15 +565,46 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Importazione File";
             // 
-            // btnCercaFile
+            // lblFineAvanzamento
             // 
-            this.btnCercaFile.Location = new System.Drawing.Point(423, 19);
-            this.btnCercaFile.Name = "btnCercaFile";
-            this.btnCercaFile.Size = new System.Drawing.Size(75, 23);
-            this.btnCercaFile.TabIndex = 0;
-            this.btnCercaFile.Text = "Cerca";
-            this.btnCercaFile.UseVisualStyleBackColor = true;
-            this.btnCercaFile.Click += new System.EventHandler(this.button1_Click);
+            this.lblFineAvanzamento.AutoSize = true;
+            this.lblFineAvanzamento.Location = new System.Drawing.Point(675, 48);
+            this.lblFineAvanzamento.Name = "lblFineAvanzamento";
+            this.lblFineAvanzamento.Size = new System.Drawing.Size(13, 13);
+            this.lblFineAvanzamento.TabIndex = 21;
+            this.lblFineAvanzamento.Text = "3";
+            // 
+            // lblMetàAvanzamento
+            // 
+            this.lblMetàAvanzamento.AutoSize = true;
+            this.lblMetàAvanzamento.Location = new System.Drawing.Point(354, 45);
+            this.lblMetàAvanzamento.Name = "lblMetàAvanzamento";
+            this.lblMetàAvanzamento.Size = new System.Drawing.Size(13, 13);
+            this.lblMetàAvanzamento.TabIndex = 20;
+            this.lblMetàAvanzamento.Text = "2";
+            // 
+            // txtRicercaFile
+            // 
+            this.txtRicercaFile.Location = new System.Drawing.Point(9, 20);
+            this.txtRicercaFile.Name = "txtRicercaFile";
+            this.txtRicercaFile.Size = new System.Drawing.Size(396, 20);
+            this.txtRicercaFile.TabIndex = 19;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 48);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(13, 13);
+            this.label21.TabIndex = 18;
+            this.label21.Text = "1";
+            // 
+            // pbAvanzamento
+            // 
+            this.pbAvanzamento.Location = new System.Drawing.Point(6, 64);
+            this.pbAvanzamento.Name = "pbAvanzamento";
+            this.pbAvanzamento.Size = new System.Drawing.Size(719, 16);
+            this.pbAvanzamento.TabIndex = 2;
             // 
             // btnEseguiMigrazione
             // 
@@ -584,46 +616,27 @@
             this.btnEseguiMigrazione.UseVisualStyleBackColor = true;
             this.btnEseguiMigrazione.Click += new System.EventHandler(this.btnEseguiMigrazione_Click);
             // 
-            // pbAvanzamento
+            // btnCercaFile
             // 
-            this.pbAvanzamento.Location = new System.Drawing.Point(6, 64);
-            this.pbAvanzamento.Name = "pbAvanzamento";
-            this.pbAvanzamento.Size = new System.Drawing.Size(719, 16);
-            this.pbAvanzamento.TabIndex = 2;
+            this.btnCercaFile.Location = new System.Drawing.Point(423, 19);
+            this.btnCercaFile.Name = "btnCercaFile";
+            this.btnCercaFile.Size = new System.Drawing.Size(75, 23);
+            this.btnCercaFile.TabIndex = 0;
+            this.btnCercaFile.Text = "Cerca";
+            this.btnCercaFile.UseVisualStyleBackColor = true;
+            this.btnCercaFile.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label21
+            // chkSoloRVL
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 48);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(13, 13);
-            this.label21.TabIndex = 18;
-            this.label21.Text = "1";
-            // 
-            // txtRicercaFile
-            // 
-            this.txtRicercaFile.Location = new System.Drawing.Point(9, 20);
-            this.txtRicercaFile.Name = "txtRicercaFile";
-            this.txtRicercaFile.Size = new System.Drawing.Size(396, 20);
-            this.txtRicercaFile.TabIndex = 19;
-            // 
-            // lblMetàAvanzamento
-            // 
-            this.lblMetàAvanzamento.AutoSize = true;
-            this.lblMetàAvanzamento.Location = new System.Drawing.Point(354, 45);
-            this.lblMetàAvanzamento.Name = "lblMetàAvanzamento";
-            this.lblMetàAvanzamento.Size = new System.Drawing.Size(13, 13);
-            this.lblMetàAvanzamento.TabIndex = 20;
-            this.lblMetàAvanzamento.Text = "2";
-            // 
-            // lblFineAvanzamento
-            // 
-            this.lblFineAvanzamento.AutoSize = true;
-            this.lblFineAvanzamento.Location = new System.Drawing.Point(712, 48);
-            this.lblFineAvanzamento.Name = "lblFineAvanzamento";
-            this.lblFineAvanzamento.Size = new System.Drawing.Size(13, 13);
-            this.lblFineAvanzamento.TabIndex = 21;
-            this.lblFineAvanzamento.Text = "3";
+            this.chkSoloRVL.AutoSize = true;
+            this.chkSoloRVL.Checked = true;
+            this.chkSoloRVL.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSoloRVL.Location = new System.Drawing.Point(616, 23);
+            this.chkSoloRVL.Name = "chkSoloRVL";
+            this.chkSoloRVL.Size = new System.Drawing.Size(68, 17);
+            this.chkSoloRVL.TabIndex = 15;
+            this.chkSoloRVL.Text = "SoloRVL";
+            this.chkSoloRVL.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -712,6 +725,7 @@
         private System.Windows.Forms.ProgressBar pbAvanzamento;
         private System.Windows.Forms.Button btnEseguiMigrazione;
         private System.Windows.Forms.Button btnCercaFile;
+        private System.Windows.Forms.CheckBox chkSoloRVL;
     }
 }
 

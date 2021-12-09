@@ -29,6 +29,18 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetUSR_PRD_MOVFASIByNumdoc(ds, NUMMOVFASE);
         }
         [DataContext]
+        public MigrazioneODLDS.USR_PRD_FASIRow GetUSR_PRD_FASI(MigrazioneODLDS ds, String IDPRDFASE, string AZIENDA)
+        {
+            MigrazioneODLDS.USR_PRD_FASIRow RIGA = ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE && x.AZIENDA == AZIENDA).FirstOrDefault();
+            if (RIGA == null)
+            {
+                MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+                a.GetUSR_PRD_FASI(ds, IDPRDFASE, AZIENDA);
+            }
+            return ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE && x.AZIENDA == AZIENDA).FirstOrDefault();
+        }
+
+        [DataContext]
         public void GetCLIFO(MigrazioneODLDS ds, String CodiceClifo)
         {
             if (ds.CLIFO.Any(x => x.CODICE == CodiceClifo)) return;
@@ -47,12 +59,12 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetANAGRAFICA(ds, idmagazz);
             return ds.BC_ANAGRAFICA_PRODUZIONE.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
         }
-        [DataContext]
-        public void GetDistinteBCDettaglio(MigrazioneODLDS ds, String codiceTestata)
-        {
-            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.GetDistinteBCDettaglio(ds, codiceTestata);
-        }
+        //[DataContext]
+        //public void GetDistinteBCDettaglio(MigrazioneODLDS ds, String codiceTestata)
+        //{
+        //    MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+        //    a.GetDistinteBCDettaglio(ds, codiceTestata);
+        //}
 
         [DataContext]
         public void GetODL2ODPCOMPONENTI(MigrazioneODLDS ds, String NUMMOVFASE)
@@ -84,7 +96,7 @@ namespace Applicazioni.Data.MigrazioneODL
         public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company)
         {
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.InsertODL2ODPlog(numMovFase, nota, esecuzione,company);
+            a.InsertODL2ODPlog(numMovFase, nota, esecuzione, company);
         }
         [DataContext]
         public void GetTABFAS(MigrazioneODLDS ds, String idtabfas)

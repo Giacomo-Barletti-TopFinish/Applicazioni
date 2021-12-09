@@ -31,6 +31,8 @@ namespace MigrazioneODL
         {
             InitializeComponent();
         }
+        private DateTime _start;
+
 
         private void inizializzaBackgroundWorker()
         {
@@ -46,6 +48,7 @@ namespace MigrazioneODL
         {
 
             pbAvanzamento.Value = e.ProgressPercentage;
+            lblMetàAvanzamento.Text = e.ProgressPercentage.ToString();
 
         }
         private void _bgwMigraODL_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -57,6 +60,10 @@ namespace MigrazioneODL
             else
                 AggiornaMessaggio("Operazione terminata correttamente");
             pbAvanzamento.Value = pbAvanzamento.Maximum;
+
+            TimeSpan ts = DateTime.Now.Subtract(_start);
+            string msd = string.Format("Durata Attività {0}:{1}", ts.Hours, ts.Minutes);
+            AggiornaMessaggio(msd);
         }
 
         private void _bgwMigraODL_DoWork(object sender, DoWorkEventArgs e)
@@ -66,14 +73,13 @@ namespace MigrazioneODL
 
             ODLDTO dto = (ODLDTO)e.Argument;
 
-
-
             int progress = 1;
 
             foreach (string nummovfase in dto.odls)
             {
-                decimal perc = (progress * 100) / dto.odls.Count;
+                decimal perc = progress;
 
+                string distintaBC = string.Empty;
                 worker.ReportProgress((int)perc);
                 if (worker.CancellationPending)
                 {
@@ -84,53 +90,57 @@ namespace MigrazioneODL
                 {
                     MigrazioneODLDS ds = new MigrazioneODLDS();
 
-                    if (!string.IsNullOrEmpty(nummovfase)) continue;
+                    if (string.IsNullOrEmpty(nummovfase)) continue;
+                    //string anagraficaBC = string.Empty;
+                    MigrazioneODLDS.USR_PRD_MOVFASIRow odl = null;
+                    MigrazioneODLDS.MAGAZZRow articolo = null;
+                    string desvcrizione2odl = string.Empty;
+                    string descrizioneVersioneODV = string.Empty;
+                    string repartoRagSoc = string.Empty;
+                    string faseCodice = string.Empty;
 
                     using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
                     {
 
-                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione iniziata", dto.esecuzione, dto.company);
+                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, "8 Migrazione iniziata", dto.esecuzione, dto.company);
 
-                        bMigrazioneODL.GetUSR_PRD_MOVFASIByNumdoc(_ds, nummovfase);
-                        MigrazioneODLDS.USR_PRD_MOVFASIRow odl = _ds.USR_PRD_MOVFASI.Where(x => x.NUMMOVFASE == nummovfase).FirstOrDefault();
+                        bMigrazioneODL.GetUSR_PRD_MOVFASIByNumdoc(ds, nummovfase);
+                        odl = ds.USR_PRD_MOVFASI.Where(x => x.NUMMOVFASE == nummovfase).FirstOrDefault();
 
                         if (odl == null)
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "ODL NON TROVATO", dto.esecuzione, dto.company);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "1 ODL NON TROVATO", dto.esecuzione, dto.company);
                             continue;
                         }
 
-                        bMigrazioneODL.GetCLIFO(_ds, odl.CODICECLIFO);
-                        MigrazioneODLDS.CLIFORow reparto = _ds.CLIFO.Where(x => x.CODICE == odl.CODICECLIFO).FirstOrDefault();
-                        worker.ReportProgress(0, "Carica clienti");
+                        bMigrazioneODL.GetCLIFO(ds, odl.CODICECLIFO);
+                        MigrazioneODLDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == odl.CODICECLIFO).FirstOrDefault();
+                        repartoRagSoc = reparto.CODICE;
+
+                        if (reparto.CODICE.Substring(0, 1) == "0")
+                        {
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "7 REPARTO TERZISTA", dto.esecuzione, dto.company);
+                            continue;
+                        }
+
                         if (worker.CancellationPending)
                         {
                             e.Cancel = true;
                             return;
                         }
 
-                        bMigrazioneODL.GetTABFAS(_ds, odl.IDTABFAS);
-                        MigrazioneODLDS.TABFASRow fase = _ds.TABFAS.Where(x => x.IDTABFAS == odl.IDTABFAS).FirstOrDefault();
-                        worker.ReportProgress(0, "Carica fasi");
+                        bMigrazioneODL.GetTABFAS(ds, odl.IDTABFAS);
+                        MigrazioneODLDS.TABFASRow fase = ds.TABFAS.Where(x => x.IDTABFAS == odl.IDTABFAS).FirstOrDefault();
+                        faseCodice = fase.CODICEFASE;
+
                         if (worker.CancellationPending)
                         {
                             e.Cancel = true;
                             return;
                         }
 
-                        bMigrazioneODL.GetMAGAZZ(_ds, odl.IDMAGAZZ);
-                        MigrazioneODLDS.MAGAZZRow articolo = _ds.MAGAZZ.Where(x => x.IDMAGAZZ == odl.IDMAGAZZ).FirstOrDefault();
-
-
-                        string IDPRDMOVFASE = odl.IDPRDMOVFASE;
-                        string azienda = odl.AZIENDA;
-                        string idmagazz = articolo.IDMAGAZZ.Trim();
-                        string modello = articolo.MODELLO.Trim();
-                        decimal quantita = odl.QTA;
-                        decimal qtadater = odl.QTADATER;
-                        string metododiba = odl.IDDIBAMETHOD;
-                        string version = odl.VERSION.ToString();
-                        string descrizioneVersione = odl.DESVERSION.Trim();
+                        bMigrazioneODL.GetMAGAZZ(ds, odl.IDMAGAZZ);
+                        articolo = ds.MAGAZZ.Where(x => x.IDMAGAZZ == odl.IDMAGAZZ).FirstOrDefault();
 
                         bool continua = true;
                         if (worker.CancellationPending)
@@ -138,53 +148,70 @@ namespace MigrazioneODL
                             e.Cancel = true;
                             return;
                         }
-                        MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, idmagazz);
+                        MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(ds, odl.IDMAGAZZ);
 
-                        bMigrazioneODL.FillBC_MIGRAZIONE(_ds);
-                        MigrazioneODLDS.BC_MIGRAZIONERow riga = _ds.BC_MIGRAZIONE.Where(x => x.IDMAGAZZ == idmagazz).FirstOrDefault();
-                        if (riga == null)
+                        MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(ds, odl.IDPRDFASE, odl.AZIENDA);
+                        if (prdFase == null && anagrafica == null)
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "DISTINTA NON TROVATA IN BC_MIGRAZIONE", dto.esecuzione, dto.company);
+                            string str = string.Format("2 USR PRD FASE non trovata ");
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company);
                             continue;
                         }
-                        decimal iddiba = riga.DIBA;
-                        decimal idnodo = riga.IDNODO;
                         while (anagrafica == null && continua)
                         {
-                            riga = ds.BC_MIGRAZIONE.Where(x => x.IDNODO == idnodo && x.DIBA == iddiba).FirstOrDefault();
-                            if (riga == null)
+                            if (prdFase.IsIDPRDFASEPADRENull() || string.IsNullOrEmpty(prdFase.IDPRDFASEPADRE))
                             {
+                                string str = string.Format("9 impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
+                                bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company);
                                 continua = false;
+                                continue;
+                            }
+                            prdFase = bMigrazioneODL.GetUSR_PRD_FASI(ds, prdFase.IDPRDFASEPADRE, prdFase.AZIENDA);
+                            if (prdFase != null)
+                            {
+                                anagrafica = bMigrazioneODL.GetANAGRAFICA(ds, prdFase.IDMAGAZZ);
                             }
                             else
                             {
-                                if (riga.IDPADRE < 0)
-                                {
-                                    continua = false;
-                                }
-                                else
-                                {
-                                    MigrazioneODLDS.BC_MIGRAZIONERow rigaPadre = _ds.BC_MIGRAZIONE.Where(x => x.IDNODO == riga.IDPADRE && x.DIBA == iddiba).FirstOrDefault();
-                                    idmagazz = rigaPadre.IDMAGAZZ;
-                                    idnodo = rigaPadre.IDNODO;
-                                    anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, idmagazz);
-                                }
+                                string str = string.Format("3 fase padre non trovata ");
+                                bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company);
+                                continua = false;
                             }
                         }
 
-                        if (!continua)
+                        if (anagrafica == null)
                         {
-                            string str = string.Format("Anagrafica non trovata per la distinta {0} e nodo {1}", iddiba, idnodo);
+                            string str = string.Format("4 Anagrafica non trovata ");
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company);
                             continue;
                         }
 
-                        string prodottofinale = riga.PRODOTTOFINALE;
+                        distintaBC = anagrafica.BC;
 
-                        string descrizioneVersioneODV = string.Format("{0} {1}", odl.NUMMOVFASE, odl.DATAMOVFASE.ToShortDateString());
-                        string desvcrizione2odl = string.Format("{0} - {1}", txtREPARTO.Text, txtFASE.Text);
-                        bMigrazioneODL.GetDistinteBCDettaglio(_ds, anagrafica.BC);
+                        descrizioneVersioneODV = string.Format("{0} {1}", odl.NUMMOVFASE, odl.DATAMOVFASE.ToShortDateString());
+                        desvcrizione2odl = string.Format("{0} - {1}", reparto.CODICE.Trim(), fase.CODICEFASE.Trim());
 
+                    }
+
+                    if (odl == null) continue;
+                    if (articolo == null) continue;
+
+                    string IDPRDMOVFASE = odl.IDPRDMOVFASE;
+                    string azienda = odl.AZIENDA;
+                    string idmagazz = articolo.IDMAGAZZ.Trim();
+                    string modello = articolo.MODELLO.Trim();
+                    decimal quantita = odl.QTA;
+                    decimal qtadater = odl.QTADATER;
+                    string metododiba = odl.IDDIBAMETHOD;
+                    string version = odl.VERSION.ToString();
+                    string descrizioneVersione = odl.DESVERSION.Trim();
+
+                    using (MigrazioneODLSQLBusiness bMigrazioneODLSQL = new MigrazioneODLSQLBusiness())
+                    {
+                        bMigrazioneODLSQL.GetDistinteBCDettaglio(ds, distintaBC);
+                    }
+                    using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
+                    {
                         if (worker.CancellationPending)
                         {
                             e.Cancel = true;
@@ -201,7 +228,7 @@ namespace MigrazioneODL
                         if (odls.Count > 0)
                         {
                             MigrazioneODLDS.ODL2ODPRow odp = odls[0];
-                            string msg = String.Format("ODL già migrato nell'ordine di produzione {0} per la company {1}", odp.ODV, dto.company);
+                            string msg = String.Format("5 ODL già migrato nell'ordine di produzione {0} per la company {1}", odp.ODV, dto.company);
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, msg, dto.esecuzione, dto.company);
                             continue;
                         }
@@ -209,7 +236,7 @@ namespace MigrazioneODL
                         List<MigrazioneODLDS.ODL2ODPCOMPONENTIRow> odlsComp = ds.ODL2ODPCOMPONENTI.Where(x => x.NUMMOVFASE == nummovfase && x.COMPANY == dto.company).ToList();
                         if (odlsComp.Count > 0)
                         {
-                            string msg = String.Format("Componenti dell'ODL {0} già a sistema per la company {1}", txtNumOdl.Text, dto.company);
+                            string msg = String.Format("6 Componenti dell'ODL {0} già a sistema per la company {1}", txtNumOdl.Text, dto.company);
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, msg, dto.esecuzione, dto.company);
                             continue;
                         }
@@ -218,26 +245,32 @@ namespace MigrazioneODL
                             e.Cancel = true;
                             return;
                         }
-                        string codiceODP = bc.CreaOdDPConfermato(anagrafica.BC, DateTime.Now, quantita, ubicazione, descrizioneVersioneODV, desvcrizione2odl);
-                        bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, reparto.RAGIONESOC.Trim(), fase.CODICEFASE, idmagazz, anagrafica.BC, quantita, codiceODP, descrizioneVersioneODV, desvcrizione2odl, dto.company);
+
+                        if (dto.soloRVL)
+                        {
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "0 Migrazione completata correttamente SOLO RVL", dto.esecuzione, dto.company);
+                            continue;
+                        }
+                        string codiceODP = bc.CreaOdDPConfermato(distintaBC, DateTime.Now, quantita, ubicazione, descrizioneVersioneODV, desvcrizione2odl);
+                        bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, codiceODP, descrizioneVersioneODV, desvcrizione2odl, dto.company);
 
                         int linenumber = 0;
                         List<RegMesWS> magazzino = bc.EstraiRegMag();
                         if (magazzino.Count > 0)
                             linenumber = magazzino.Where(x => x.Journal_Batch_Name == "REGWS").Max(x => x.Line_No);
 
-                        foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in _ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == anagrafica.BC))
+                        foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == distintaBC))
                         {
                             decimal quantitaComponente = quantita * dettaglio.Quantity;
                             linenumber += 1000;
                             bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, nummovfase, quantitaComponente, dettaglio.No_);
-                            bMigrazioneODL.InsertODL2ODPComponenti(azienda, nummovfase, reparto.RAGIONESOC.Trim(), fase.CODICEFASE, anagrafica.BC, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, dto.company);
+                            bMigrazioneODL.InsertODL2ODPComponenti(azienda, nummovfase, repartoRagSoc.Trim(), faseCodice, distintaBC, dettaglio.No_, quantitaComponente, quantita, codiceODP, ubicazione, collocazione, dto.company);
 
                         }
                         if (dto.ChBoxRegMag)
                             bc.PostingRegMag();
 
-                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente", dto.esecuzione, dto.company);
+                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, "0 Migrazione completata correttamente", dto.esecuzione, dto.company);
 
                     }
 
@@ -392,7 +425,8 @@ namespace MigrazioneODL
         private bool trovaAnagraficaPerMigrazione(MigrazioneODLDS.USR_PRD_MOVFASIRow odl)
         {
             txtAnagrafica.Text = string.Empty;
-            if (odl.IsIDMAGAZZNull()) return false;
+            if (odl.IsIDMAGAZZNull())
+                return false;
 
 
             string idmagazz = odl.IDMAGAZZ;
@@ -725,6 +759,8 @@ namespace MigrazioneODL
 
                     if (!_bgwMigraODL.IsBusy)
                     {
+                        pbAvanzamento.Maximum = odls.Count + 1;
+                        lblFineAvanzamento.Text = pbAvanzamento.Maximum.ToString();
                         ODLDTO dto = new ODLDTO();
                         dto.odls = odls;
                         dto.esecuzione = DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -732,9 +768,11 @@ namespace MigrazioneODL
                         dto.collocazione = collocazione;
                         dto.ubicazione = ubicazione;
                         dto.ChBoxRegMag = ChBoxRegMag.Checked;
+                        dto.soloRVL = chkSoloRVL.Checked;
+
 
                         _bgwMigraODL.RunWorkerAsync(dto);
-
+                        _start = DateTime.Now;
                         btnEseguiMigrazione.Text = etichettaStop;
                     }
                 }
@@ -766,6 +804,8 @@ namespace MigrazioneODL
         public string ubicazione { get; set; }
         public string collocazione { get; set; }
         public bool ChBoxRegMag { get; set; }
+
+        public bool soloRVL { get; set; }
     }
 
 }

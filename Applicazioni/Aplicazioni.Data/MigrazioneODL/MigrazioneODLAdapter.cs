@@ -217,6 +217,21 @@ namespace Applicazioni.Data.MigrazioneODL
             }
         }
 
+        public void GetUSR_PRD_FASI(MigrazioneODLDS ds, String IDPRDFASE, string AZIENDA)
+        {
+
+            string select = @"SELECT * FROM USR_PRD_FASI WHERE IDPRDFASE= $P<IDPRDFASE> AND AZIENDA = $P<AZIENDA>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRDFASE", DbType.String, IDPRDFASE);
+            ps.AddParam("AZIENDA", DbType.String, AZIENDA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+
         public void FillBC_MIGRAZIONE(MigrazioneODLDS ds)
         {
 
@@ -256,7 +271,7 @@ namespace Applicazioni.Data.MigrazioneODL
         public void GetDistinteBCTestata(MigrazioneODLDS ds, string codiceTestata)
         {
             ParamSet ps = new ParamSet();
-            string select = @"select * from DistinteBCTestata where 1=1";
+            string select = @"select * from [dbo].DistinteBCTestata where 1=1";
             AddConditionAndParam(ref select, "[No_]", "TESTATA", codiceTestata, ps, true);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
