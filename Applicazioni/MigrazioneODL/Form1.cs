@@ -150,7 +150,7 @@ namespace MigrazioneODL
                         }
                         MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(ds, odl.IDMAGAZZ);
 
-                        MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(ds, odl.IDPRDFASE, odl.AZIENDA);
+                        MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(ds, odl.IsIDPRDFASENull() ? string.Empty : odl.IDPRDFASE, odl.AZIENDA);
                         if (prdFase == null && anagrafica == null)
                         {
                             string str = string.Format("2 USR PRD FASE non trovata ");
@@ -202,9 +202,7 @@ namespace MigrazioneODL
                     string modello = articolo.MODELLO.Trim();
                     decimal quantita = odl.QTA;
                     decimal qtadater = odl.QTADATER;
-                    string metododiba = odl.IDDIBAMETHOD;
-                    string version = odl.VERSION.ToString();
-                    string descrizioneVersione = odl.DESVERSION.Trim();
+
 
                     using (MigrazioneODLSQLBusiness bMigrazioneODLSQL = new MigrazioneODLSQLBusiness())
                     {
@@ -278,7 +276,7 @@ namespace MigrazioneODL
                 catch (Exception ex)
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("ECCEZIONE");
+                    sb.AppendLine("ECCEZIONE ");
                     while (ex != null)
                     {
                         sb.AppendLine(ex.Message);
