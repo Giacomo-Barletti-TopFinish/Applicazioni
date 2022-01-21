@@ -70,6 +70,12 @@ namespace FlussoFatture
 
                 using (FlussoFattureBusiness bFlussoFatture = new FlussoFattureBusiness())
                 {
+                    _ds = new FlussoFattureDS();
+                    bFlussoFatture.FillVerificaNazioneNulla(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, chkIgnoraMetal.Checked);
+                    if (_ds.BOLLE_VENDITA.Count > 0)
+                    {
+                        MessageBox.Show("CI SONO BOLLE SENZA NAZIONE. Queste bolle non verranno esportate!!!!!!");
+                    }
 
                     _ds = new FlussoFattureDS();
                     bFlussoFatture.FillBOLLE_VENDITATESTATA(_ds, dtDal.Value, dtAl.Value, radioButtonEstero, radioButtonAzienda, chkIgnoraMetal.Checked);
@@ -88,7 +94,7 @@ namespace FlussoFatture
             }
         }
 
-   
+
         private void btnCreaFiles_Click(object sender, EventArgs e)
         {
             try

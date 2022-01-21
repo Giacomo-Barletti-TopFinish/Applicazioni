@@ -52,6 +52,8 @@
     <Compile Include="AnalisiOrdiniVendita\AnalisiOrdiniVenditaBusiness.cs" />
     <Compile Include="BusinessBaseSQL.cs" />
     <Compile Include="BusinessBase.cs" />
+    <Compile Include="CaricoLavoro\CaricoLavoroBusiness.cs" />
+    <Compile Include="CaricoLavoro\CarioLavoroAdapter.cs" />
     <Compile Include="Core\AdapterBase.cs" />
     <Compile Include="Core\BusinessBase.cs" />
     <Compile Include="Core\ColumnMapAttribute.cs" />

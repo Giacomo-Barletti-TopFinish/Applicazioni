@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstraiProdottiFiniti", "Est
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrazioneODL", "MigrazioneODL\MigrazioneODL.csproj", "{E168D0E4-0FF2-46B8-98E9-0A77514D2275}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaricoLavoro", "CaricoLavoro\CaricoLavoro.csproj", "{745A663F-2B0C-4424-960A-857CDE41EF3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{E168D0E4-0FF2-46B8-98E9-0A77514D2275}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E168D0E4-0FF2-46B8-98E9-0A77514D2275}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E168D0E4-0FF2-46B8-98E9-0A77514D2275}.Release|Any CPU.Build.0 = Release|Any CPU
+		{745A663F-2B0C-4424-960A-857CDE41EF3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745A663F-2B0C-4424-960A-857CDE41EF3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745A663F-2B0C-4424-960A-857CDE41EF3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745A663F-2B0C-4424-960A-857CDE41EF3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

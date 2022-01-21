@@ -14,7 +14,13 @@ namespace Applicazioni.Data.FlussoFatture
         public void FillBOLLE_VENDITATESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al, string radioButton, string radioButtonAzienda, bool ignoraMetalplus)
         {
             FlussoFattureAdapter a = new FlussoFattureAdapter(DbConnection, DbTransaction);
-            a.FillBOLLE_VENDITATESTATA(ds, Dal, Al, radioButton, radioButtonAzienda,ignoraMetalplus);
+            a.FillBOLLE_VENDITATESTATA(ds, Dal, Al, radioButton, radioButtonAzienda, ignoraMetalplus);
+        }
+        [DataContext]
+        public void FillVerificaNazioneNulla(FlussoFattureDS ds, DateTime Dal, DateTime Al, string radioButton, bool ignoraMetalplus)
+        {
+            FlussoFattureAdapter a = new FlussoFattureAdapter(DbConnection, DbTransaction);
+            a.FillVerificaNazioneNulla(ds, Dal, Al, radioButton, ignoraMetalplus);
         }
         [DataContext]
         public void FillBC_FLUSSO_TESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al)
