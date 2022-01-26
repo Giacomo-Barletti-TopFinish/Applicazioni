@@ -44,9 +44,9 @@ namespace Applicazioni.Entities {
         
         private ODL2ODPCOMPONENTIDataTable tableODL2ODPCOMPONENTI;
         
-        private ODL2ODPLOGDataTable tableODL2ODPLOG;
-        
         private USR_PRD_FASIDataTable tableUSR_PRD_FASI;
+        
+        private ODL2ODPLOGDataTable tableODL2ODPLOG;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -106,11 +106,11 @@ namespace Applicazioni.Entities {
                 if ((ds.Tables["ODL2ODPCOMPONENTI"] != null)) {
                     base.Tables.Add(new ODL2ODPCOMPONENTIDataTable(ds.Tables["ODL2ODPCOMPONENTI"]));
                 }
-                if ((ds.Tables["ODL2ODPLOG"] != null)) {
-                    base.Tables.Add(new ODL2ODPLOGDataTable(ds.Tables["ODL2ODPLOG"]));
-                }
                 if ((ds.Tables["USR_PRD_FASI"] != null)) {
                     base.Tables.Add(new USR_PRD_FASIDataTable(ds.Tables["USR_PRD_FASI"]));
+                }
+                if ((ds.Tables["ODL2ODPLOG"] != null)) {
+                    base.Tables.Add(new ODL2ODPLOGDataTable(ds.Tables["ODL2ODPLOG"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -234,9 +234,9 @@ namespace Applicazioni.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ODL2ODPLOGDataTable ODL2ODPLOG {
+        public USR_PRD_FASIDataTable USR_PRD_FASI {
             get {
-                return this.tableODL2ODPLOG;
+                return this.tableUSR_PRD_FASI;
             }
         }
         
@@ -244,9 +244,9 @@ namespace Applicazioni.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public USR_PRD_FASIDataTable USR_PRD_FASI {
+        public ODL2ODPLOGDataTable ODL2ODPLOG {
             get {
-                return this.tableUSR_PRD_FASI;
+                return this.tableODL2ODPLOG;
             }
         }
         
@@ -347,11 +347,11 @@ namespace Applicazioni.Entities {
                 if ((ds.Tables["ODL2ODPCOMPONENTI"] != null)) {
                     base.Tables.Add(new ODL2ODPCOMPONENTIDataTable(ds.Tables["ODL2ODPCOMPONENTI"]));
                 }
-                if ((ds.Tables["ODL2ODPLOG"] != null)) {
-                    base.Tables.Add(new ODL2ODPLOGDataTable(ds.Tables["ODL2ODPLOG"]));
-                }
                 if ((ds.Tables["USR_PRD_FASI"] != null)) {
                     base.Tables.Add(new USR_PRD_FASIDataTable(ds.Tables["USR_PRD_FASI"]));
+                }
+                if ((ds.Tables["ODL2ODPLOG"] != null)) {
+                    base.Tables.Add(new ODL2ODPLOGDataTable(ds.Tables["ODL2ODPLOG"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -446,16 +446,16 @@ namespace Applicazioni.Entities {
                     this.tableODL2ODPCOMPONENTI.InitVars();
                 }
             }
-            this.tableODL2ODPLOG = ((ODL2ODPLOGDataTable)(base.Tables["ODL2ODPLOG"]));
-            if ((initTable == true)) {
-                if ((this.tableODL2ODPLOG != null)) {
-                    this.tableODL2ODPLOG.InitVars();
-                }
-            }
             this.tableUSR_PRD_FASI = ((USR_PRD_FASIDataTable)(base.Tables["USR_PRD_FASI"]));
             if ((initTable == true)) {
                 if ((this.tableUSR_PRD_FASI != null)) {
                     this.tableUSR_PRD_FASI.InitVars();
+                }
+            }
+            this.tableODL2ODPLOG = ((ODL2ODPLOGDataTable)(base.Tables["ODL2ODPLOG"]));
+            if ((initTable == true)) {
+                if ((this.tableODL2ODPLOG != null)) {
+                    this.tableODL2ODPLOG.InitVars();
                 }
             }
         }
@@ -488,10 +488,10 @@ namespace Applicazioni.Entities {
             base.Tables.Add(this.tableODL2ODP);
             this.tableODL2ODPCOMPONENTI = new ODL2ODPCOMPONENTIDataTable();
             base.Tables.Add(this.tableODL2ODPCOMPONENTI);
-            this.tableODL2ODPLOG = new ODL2ODPLOGDataTable();
-            base.Tables.Add(this.tableODL2ODPLOG);
             this.tableUSR_PRD_FASI = new USR_PRD_FASIDataTable();
             base.Tables.Add(this.tableUSR_PRD_FASI);
+            this.tableODL2ODPLOG = new ODL2ODPLOGDataTable();
+            base.Tables.Add(this.tableODL2ODPLOG);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -556,13 +556,13 @@ namespace Applicazioni.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeODL2ODPLOG() {
+        private bool ShouldSerializeUSR_PRD_FASI() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeUSR_PRD_FASI() {
+        private bool ShouldSerializeODL2ODPLOG() {
             return false;
         }
         
@@ -652,10 +652,10 @@ namespace Applicazioni.Entities {
         public delegate void ODL2ODPCOMPONENTIRowChangeEventHandler(object sender, ODL2ODPCOMPONENTIRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void ODL2ODPLOGRowChangeEventHandler(object sender, ODL2ODPLOGRowChangeEvent e);
+        public delegate void USR_PRD_FASIRowChangeEventHandler(object sender, USR_PRD_FASIRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void USR_PRD_FASIRowChangeEventHandler(object sender, USR_PRD_FASIRowChangeEvent e);
+        public delegate void ODL2ODPLOGRowChangeEventHandler(object sender, ODL2ODPLOGRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -9696,329 +9696,6 @@ namespace Applicazioni.Entities {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ODL2ODPLOGDataTable : global::System.Data.TypedTableBase<ODL2ODPLOGRow> {
-            
-            private global::System.Data.DataColumn columnIDODL2ODPLOG;
-            
-            private global::System.Data.DataColumn columnNUMMOVFASE;
-            
-            private global::System.Data.DataColumn columnNOTA;
-            
-            private global::System.Data.DataColumn columnESECUZIONE;
-            
-            private global::System.Data.DataColumn columnDATACREAZIONE;
-            
-            private global::System.Data.DataColumn columnCOMPANY;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ODL2ODPLOGDataTable() {
-                this.TableName = "ODL2ODPLOG";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal ODL2ODPLOGDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected ODL2ODPLOGDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn IDODL2ODPLOGColumn {
-                get {
-                    return this.columnIDODL2ODPLOG;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn NUMMOVFASEColumn {
-                get {
-                    return this.columnNUMMOVFASE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn NOTAColumn {
-                get {
-                    return this.columnNOTA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ESECUZIONEColumn {
-                get {
-                    return this.columnESECUZIONE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn DATACREAZIONEColumn {
-                get {
-                    return this.columnDATACREAZIONE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn COMPANYColumn {
-                get {
-                    return this.columnCOMPANY;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ODL2ODPLOGRow this[int index] {
-                get {
-                    return ((ODL2ODPLOGRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddODL2ODPLOGRow(ODL2ODPLOGRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ODL2ODPLOGRow AddODL2ODPLOGRow(decimal IDODL2ODPLOG, string NUMMOVFASE, string NOTA, string ESECUZIONE, System.DateTime DATACREAZIONE, string COMPANY) {
-                ODL2ODPLOGRow rowODL2ODPLOGRow = ((ODL2ODPLOGRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        IDODL2ODPLOG,
-                        NUMMOVFASE,
-                        NOTA,
-                        ESECUZIONE,
-                        DATACREAZIONE,
-                        COMPANY};
-                rowODL2ODPLOGRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowODL2ODPLOGRow);
-                return rowODL2ODPLOGRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                ODL2ODPLOGDataTable cln = ((ODL2ODPLOGDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new ODL2ODPLOGDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
-                this.columnIDODL2ODPLOG = base.Columns["IDODL2ODPLOG"];
-                this.columnNUMMOVFASE = base.Columns["NUMMOVFASE"];
-                this.columnNOTA = base.Columns["NOTA"];
-                this.columnESECUZIONE = base.Columns["ESECUZIONE"];
-                this.columnDATACREAZIONE = base.Columns["DATACREAZIONE"];
-                this.columnCOMPANY = base.Columns["COMPANY"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
-                this.columnIDODL2ODPLOG = new global::System.Data.DataColumn("IDODL2ODPLOG", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDODL2ODPLOG);
-                this.columnNUMMOVFASE = new global::System.Data.DataColumn("NUMMOVFASE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNUMMOVFASE);
-                this.columnNOTA = new global::System.Data.DataColumn("NOTA", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNOTA);
-                this.columnESECUZIONE = new global::System.Data.DataColumn("ESECUZIONE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnESECUZIONE);
-                this.columnDATACREAZIONE = new global::System.Data.DataColumn("DATACREAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDATACREAZIONE);
-                this.columnCOMPANY = new global::System.Data.DataColumn("COMPANY", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOMPANY);
-                this.columnIDODL2ODPLOG.Caption = "IDODL2ODP";
-                this.columnNUMMOVFASE.MaxLength = 25;
-                this.columnNOTA.Caption = "REPARTO";
-                this.columnNOTA.MaxLength = 1000;
-                this.columnESECUZIONE.Caption = "FASE";
-                this.columnESECUZIONE.MaxLength = 14;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ODL2ODPLOGRow NewODL2ODPLOGRow() {
-                return ((ODL2ODPLOGRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new ODL2ODPLOGRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(ODL2ODPLOGRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.ODL2ODPLOGRowChanged != null)) {
-                    this.ODL2ODPLOGRowChanged(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.ODL2ODPLOGRowChanging != null)) {
-                    this.ODL2ODPLOGRowChanging(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.ODL2ODPLOGRowDeleted != null)) {
-                    this.ODL2ODPLOGRowDeleted(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.ODL2ODPLOGRowDeleting != null)) {
-                    this.ODL2ODPLOGRowDeleting(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveODL2ODPLOGRow(ODL2ODPLOGRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MigrazioneODLDS ds = new MigrazioneODLDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "ODL2ODPLOGDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class USR_PRD_FASIDataTable : global::System.Data.TypedTableBase<USR_PRD_FASIRow> {
             
             private global::System.Data.DataColumn columnAZIENDA;
@@ -11627,6 +11304,367 @@ namespace Applicazioni.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "USR_PRD_FASIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ODL2ODPLOGDataTable : global::System.Data.TypedTableBase<ODL2ODPLOGRow> {
+            
+            private global::System.Data.DataColumn columnIDODL2ODPLOG;
+            
+            private global::System.Data.DataColumn columnNUMMOVFASE;
+            
+            private global::System.Data.DataColumn columnNOTA;
+            
+            private global::System.Data.DataColumn columnESECUZIONE;
+            
+            private global::System.Data.DataColumn columnDATACREAZIONE;
+            
+            private global::System.Data.DataColumn columnCOMPANY;
+            
+            private global::System.Data.DataColumn columnERRORE;
+            
+            private global::System.Data.DataColumn columnMODELLO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ODL2ODPLOGDataTable() {
+                this.TableName = "ODL2ODPLOG";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ODL2ODPLOGDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected ODL2ODPLOGDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn IDODL2ODPLOGColumn {
+                get {
+                    return this.columnIDODL2ODPLOG;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NUMMOVFASEColumn {
+                get {
+                    return this.columnNUMMOVFASE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NOTAColumn {
+                get {
+                    return this.columnNOTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ESECUZIONEColumn {
+                get {
+                    return this.columnESECUZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DATACREAZIONEColumn {
+                get {
+                    return this.columnDATACREAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn COMPANYColumn {
+                get {
+                    return this.columnCOMPANY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ERROREColumn {
+                get {
+                    return this.columnERRORE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MODELLOColumn {
+                get {
+                    return this.columnMODELLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ODL2ODPLOGRow this[int index] {
+                get {
+                    return ((ODL2ODPLOGRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event ODL2ODPLOGRowChangeEventHandler ODL2ODPLOGRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddODL2ODPLOGRow(ODL2ODPLOGRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ODL2ODPLOGRow AddODL2ODPLOGRow(decimal IDODL2ODPLOG, string NUMMOVFASE, string NOTA, string ESECUZIONE, System.DateTime DATACREAZIONE, string COMPANY, decimal ERRORE, string MODELLO) {
+                ODL2ODPLOGRow rowODL2ODPLOGRow = ((ODL2ODPLOGRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDODL2ODPLOG,
+                        NUMMOVFASE,
+                        NOTA,
+                        ESECUZIONE,
+                        DATACREAZIONE,
+                        COMPANY,
+                        ERRORE,
+                        MODELLO};
+                rowODL2ODPLOGRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowODL2ODPLOGRow);
+                return rowODL2ODPLOGRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ODL2ODPLOGRow FindByIDODL2ODPLOG(decimal IDODL2ODPLOG) {
+                return ((ODL2ODPLOGRow)(this.Rows.Find(new object[] {
+                            IDODL2ODPLOG})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ODL2ODPLOGDataTable cln = ((ODL2ODPLOGDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ODL2ODPLOGDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnIDODL2ODPLOG = base.Columns["IDODL2ODPLOG"];
+                this.columnNUMMOVFASE = base.Columns["NUMMOVFASE"];
+                this.columnNOTA = base.Columns["NOTA"];
+                this.columnESECUZIONE = base.Columns["ESECUZIONE"];
+                this.columnDATACREAZIONE = base.Columns["DATACREAZIONE"];
+                this.columnCOMPANY = base.Columns["COMPANY"];
+                this.columnERRORE = base.Columns["ERRORE"];
+                this.columnMODELLO = base.Columns["MODELLO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnIDODL2ODPLOG = new global::System.Data.DataColumn("IDODL2ODPLOG", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDODL2ODPLOG);
+                this.columnNUMMOVFASE = new global::System.Data.DataColumn("NUMMOVFASE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNUMMOVFASE);
+                this.columnNOTA = new global::System.Data.DataColumn("NOTA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTA);
+                this.columnESECUZIONE = new global::System.Data.DataColumn("ESECUZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnESECUZIONE);
+                this.columnDATACREAZIONE = new global::System.Data.DataColumn("DATACREAZIONE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATACREAZIONE);
+                this.columnCOMPANY = new global::System.Data.DataColumn("COMPANY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOMPANY);
+                this.columnERRORE = new global::System.Data.DataColumn("ERRORE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnERRORE);
+                this.columnMODELLO = new global::System.Data.DataColumn("MODELLO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMODELLO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnIDODL2ODPLOG}, true));
+                this.columnIDODL2ODPLOG.AllowDBNull = false;
+                this.columnIDODL2ODPLOG.Unique = true;
+                this.columnNUMMOVFASE.MaxLength = 25;
+                this.columnNOTA.MaxLength = 1000;
+                this.columnESECUZIONE.MaxLength = 14;
+                this.columnCOMPANY.MaxLength = 50;
+                this.columnMODELLO.MaxLength = 100;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ODL2ODPLOGRow NewODL2ODPLOGRow() {
+                return ((ODL2ODPLOGRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ODL2ODPLOGRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ODL2ODPLOGRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ODL2ODPLOGRowChanged != null)) {
+                    this.ODL2ODPLOGRowChanged(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ODL2ODPLOGRowChanging != null)) {
+                    this.ODL2ODPLOGRowChanging(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ODL2ODPLOGRowDeleted != null)) {
+                    this.ODL2ODPLOGRowDeleted(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ODL2ODPLOGRowDeleting != null)) {
+                    this.ODL2ODPLOGRowDeleting(this, new ODL2ODPLOGRowChangeEvent(((ODL2ODPLOGRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveODL2ODPLOGRow(ODL2ODPLOGRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MigrazioneODLDS ds = new MigrazioneODLDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ODL2ODPLOGDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -21832,189 +21870,6 @@ namespace Applicazioni.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ODL2ODPLOGRow : global::System.Data.DataRow {
-            
-            private ODL2ODPLOGDataTable tableODL2ODPLOG;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal ODL2ODPLOGRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableODL2ODPLOG = ((ODL2ODPLOGDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal IDODL2ODPLOG {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableODL2ODPLOG.IDODL2ODPLOGColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IDODL2ODPLOG\' in table \'ODL2ODPLOG\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableODL2ODPLOG.IDODL2ODPLOGColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string NUMMOVFASE {
-                get {
-                    try {
-                        return ((string)(this[this.tableODL2ODPLOG.NUMMOVFASEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NUMMOVFASE\' in table \'ODL2ODPLOG\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableODL2ODPLOG.NUMMOVFASEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string NOTA {
-                get {
-                    try {
-                        return ((string)(this[this.tableODL2ODPLOG.NOTAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA\' in table \'ODL2ODPLOG\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableODL2ODPLOG.NOTAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ESECUZIONE {
-                get {
-                    try {
-                        return ((string)(this[this.tableODL2ODPLOG.ESECUZIONEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ESECUZIONE\' in table \'ODL2ODPLOG\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableODL2ODPLOG.ESECUZIONEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime DATACREAZIONE {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableODL2ODPLOG.DATACREAZIONEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DATACREAZIONE\' in table \'ODL2ODPLOG\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableODL2ODPLOG.DATACREAZIONEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string COMPANY {
-                get {
-                    try {
-                        return ((string)(this[this.tableODL2ODPLOG.COMPANYColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'COMPANY\' in table \'ODL2ODPLOG\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableODL2ODPLOG.COMPANYColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsIDODL2ODPLOGNull() {
-                return this.IsNull(this.tableODL2ODPLOG.IDODL2ODPLOGColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetIDODL2ODPLOGNull() {
-                this[this.tableODL2ODPLOG.IDODL2ODPLOGColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsNUMMOVFASENull() {
-                return this.IsNull(this.tableODL2ODPLOG.NUMMOVFASEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetNUMMOVFASENull() {
-                this[this.tableODL2ODPLOG.NUMMOVFASEColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsNOTANull() {
-                return this.IsNull(this.tableODL2ODPLOG.NOTAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetNOTANull() {
-                this[this.tableODL2ODPLOG.NOTAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsESECUZIONENull() {
-                return this.IsNull(this.tableODL2ODPLOG.ESECUZIONEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetESECUZIONENull() {
-                this[this.tableODL2ODPLOG.ESECUZIONEColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsDATACREAZIONENull() {
-                return this.IsNull(this.tableODL2ODPLOG.DATACREAZIONEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetDATACREAZIONENull() {
-                this[this.tableODL2ODPLOG.DATACREAZIONEColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCOMPANYNull() {
-                return this.IsNull(this.tableODL2ODPLOG.COMPANYColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCOMPANYNull() {
-                this[this.tableODL2ODPLOG.COMPANYColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class USR_PRD_FASIRow : global::System.Data.DataRow {
             
             private USR_PRD_FASIDataTable tableUSR_PRD_FASI;
@@ -24604,6 +24459,228 @@ namespace Applicazioni.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ODL2ODPLOGRow : global::System.Data.DataRow {
+            
+            private ODL2ODPLOGDataTable tableODL2ODPLOG;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal ODL2ODPLOGRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableODL2ODPLOG = ((ODL2ODPLOGDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal IDODL2ODPLOG {
+                get {
+                    return ((decimal)(this[this.tableODL2ODPLOG.IDODL2ODPLOGColumn]));
+                }
+                set {
+                    this[this.tableODL2ODPLOG.IDODL2ODPLOGColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string NUMMOVFASE {
+                get {
+                    try {
+                        return ((string)(this[this.tableODL2ODPLOG.NUMMOVFASEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NUMMOVFASE\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.NUMMOVFASEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string NOTA {
+                get {
+                    try {
+                        return ((string)(this[this.tableODL2ODPLOG.NOTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.NOTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ESECUZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableODL2ODPLOG.ESECUZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ESECUZIONE\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.ESECUZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime DATACREAZIONE {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableODL2ODPLOG.DATACREAZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATACREAZIONE\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.DATACREAZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string COMPANY {
+                get {
+                    try {
+                        return ((string)(this[this.tableODL2ODPLOG.COMPANYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COMPANY\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.COMPANYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal ERRORE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableODL2ODPLOG.ERROREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ERRORE\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.ERROREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string MODELLO {
+                get {
+                    try {
+                        return ((string)(this[this.tableODL2ODPLOG.MODELLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MODELLO\' in table \'ODL2ODPLOG\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableODL2ODPLOG.MODELLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNUMMOVFASENull() {
+                return this.IsNull(this.tableODL2ODPLOG.NUMMOVFASEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNUMMOVFASENull() {
+                this[this.tableODL2ODPLOG.NUMMOVFASEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNOTANull() {
+                return this.IsNull(this.tableODL2ODPLOG.NOTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNOTANull() {
+                this[this.tableODL2ODPLOG.NOTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsESECUZIONENull() {
+                return this.IsNull(this.tableODL2ODPLOG.ESECUZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetESECUZIONENull() {
+                this[this.tableODL2ODPLOG.ESECUZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDATACREAZIONENull() {
+                return this.IsNull(this.tableODL2ODPLOG.DATACREAZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDATACREAZIONENull() {
+                this[this.tableODL2ODPLOG.DATACREAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsCOMPANYNull() {
+                return this.IsNull(this.tableODL2ODPLOG.COMPANYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetCOMPANYNull() {
+                this[this.tableODL2ODPLOG.COMPANYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsERRORENull() {
+                return this.IsNull(this.tableODL2ODPLOG.ERROREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetERRORENull() {
+                this[this.tableODL2ODPLOG.ERROREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsMODELLONull() {
+                return this.IsNull(this.tableODL2ODPLOG.MODELLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetMODELLONull() {
+                this[this.tableODL2ODPLOG.MODELLOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -24947,22 +25024,22 @@ namespace Applicazioni.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class ODL2ODPLOGRowChangeEvent : global::System.EventArgs {
+        public class USR_PRD_FASIRowChangeEvent : global::System.EventArgs {
             
-            private ODL2ODPLOGRow eventRow;
+            private USR_PRD_FASIRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ODL2ODPLOGRowChangeEvent(ODL2ODPLOGRow row, global::System.Data.DataRowAction action) {
+            public USR_PRD_FASIRowChangeEvent(USR_PRD_FASIRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ODL2ODPLOGRow Row {
+            public USR_PRD_FASIRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -24981,22 +25058,22 @@ namespace Applicazioni.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class USR_PRD_FASIRowChangeEvent : global::System.EventArgs {
+        public class ODL2ODPLOGRowChangeEvent : global::System.EventArgs {
             
-            private USR_PRD_FASIRow eventRow;
+            private ODL2ODPLOGRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public USR_PRD_FASIRowChangeEvent(USR_PRD_FASIRow row, global::System.Data.DataRowAction action) {
+            public ODL2ODPLOGRowChangeEvent(ODL2ODPLOGRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public USR_PRD_FASIRow Row {
+            public ODL2ODPLOGRow Row {
                 get {
                     return this.eventRow;
                 }

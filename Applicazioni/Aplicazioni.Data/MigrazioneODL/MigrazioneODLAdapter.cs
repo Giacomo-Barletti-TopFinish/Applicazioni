@@ -142,15 +142,15 @@ namespace Applicazioni.Data.MigrazioneODL
             }
         }
 
-        public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company)
+        public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company, int errore, string modello)
         {
 
             if (nota.Length > 1000)
                 nota = nota.Substring(0, 1000);
-            
 
-            string select = @"insert into ODL2ODPLOG (NUMMOVFASE,NOTA,ESECUZIONE,COMPANY,DATACREAZIONE) values 
-                                        ($P{NUMMOVFASE},$P{NOTA},$P{ESECUZIONE},$P{COMPANY},$P{DATACREAZIONE})";
+
+            string select = @"insert into ODL2ODPLOG (NUMMOVFASE,NOTA,ESECUZIONE,COMPANY,DATACREAZIONE,ERRORE,MODELLO) values 
+                                        ($P{NUMMOVFASE},$P{NOTA},$P{ESECUZIONE},$P{COMPANY},$P{DATACREAZIONE},$P{ERRORE},$P{MODELLO})";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("NUMMOVFASE", DbType.String, numMovFase);
@@ -158,6 +158,8 @@ namespace Applicazioni.Data.MigrazioneODL
             ps.AddParam("ESECUZIONE", DbType.String, esecuzione);
             ps.AddParam("COMPANY", DbType.String, company);
             ps.AddParam("DATACREAZIONE", DbType.DateTime, DateTime.Now);
+            ps.AddParam("ERRORE", DbType.Int32, errore);
+            ps.AddParam("MODELLO", DbType.String, modello);
 
             using (DbCommand cmd = BuildCommand(select, ps))
             {
