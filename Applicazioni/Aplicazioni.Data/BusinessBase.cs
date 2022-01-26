@@ -24,7 +24,6 @@ namespace Applicazioni.Data
         {
             get
             {
-
                 ConnectionStringSettings c = ConfigurationManager.ConnectionStrings[ConnectionName];
                 return c.ConnectionString;
             }

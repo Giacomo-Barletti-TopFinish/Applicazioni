@@ -66,6 +66,47 @@ namespace Applicazioni.Data.FlussoFatture
             }
         }
 
+        public void FillVerificaNazioneNulla(FlussoFattureDS ds, DateTime Dal, DateTime Al, string radioButtonAzienda, bool ignoraMetalplus)
+        {
+            string DalStr = Dal.ToString("dd/MM/yyyy");
+            string AlStr = Al.ToString("dd/MM/yyyy");
+
+            string select = @"  select DISTINCT AZIENDA, DESTABTIPDOC, CODICETIPDOC, CODICETIPOO, DESTABTIPOO, CODICECAUTR, DESTABCAUTR, 
+                IDVENDITET, FATTURARE_SN, CONFERMATO_SN, DEFINITIVO_SN, FULLNUMDOC, DATDOC, ANNODOC, NUMDOC, CODICECLIFO, TRIM(RAGIONESOC) RAGIONESOC, CODINDSP, 
+                FATTURAREA, FATTURAREALTER, SEGNALATORE, TRIM(SEGNALATORE_RS) SEGNALATORE_RS, NUMERORIGHE,RIFERIMENTO,trim(ind.ragsoc) DESTINAZIONE, NAZIONE
+                from bolle_vendita bv
+                LEFT OUTER JOIN GRUPPO.INDSPED IND ON IND.CODCF=BV.CODICECLIFO AND IND.CODIND=BV.CODINDSP                
+                where 1=1
+
+                and datdoc >=to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
+                and datdoc <to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')";
+
+                select += "  AND (TRIM(NAZIONE) ='' OR TRIM(NAZIONE)='' OR NAZIONE IS NULL) ";
+
+            if (radioButtonAzienda == Etichette.METAL)
+            {
+                select += " AND AZIENDA ='METALPLUS'";
+            }
+
+            if (radioButtonAzienda == Etichette.TOP)
+            {
+                select += " AND AZIENDA ='TOP FINISH'";
+            }
+
+            select = string.Format(select, DalStr, AlStr);
+
+            if (ignoraMetalplus)
+            {
+                select += " AND CODICECLIFO <>'01631'";
+
+            }
+            select += " order by bv.NUMDOC";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.BOLLE_VENDITA);
+            }
+        }
+
         public void FillBC_FLUSSO_TESTATA(FlussoFattureDS ds, DateTime Dal, DateTime Al)
         {
             string DalStr = Dal.ToString("dd/MM/yyyy");

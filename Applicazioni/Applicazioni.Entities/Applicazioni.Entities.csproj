@@ -52,6 +52,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CaricoLavoroDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaricoLavoroDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Ciclo.cs" />
     <Compile Include="CorreggiDateListiniDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -155,6 +160,17 @@
       <DependentUpon>AnalisiOrdiniVenditaDS.xsd</DependentUpon>
     </None>
     <None Include="app.config" />
+    <None Include="CaricoLavoroDS.xsc">
+      <DependentUpon>CaricoLavoroDS.xsd</DependentUpon>
+    </None>
+    <None Include="CaricoLavoroDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CaricoLavoroDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="CaricoLavoroDS.xss">
+      <DependentUpon>CaricoLavoroDS.xsd</DependentUpon>
+    </None>
     <None Include="CorreggiDateListiniDS.xsc">
       <DependentUpon>CorreggiDateListiniDS.xsd</DependentUpon>
     </None>
