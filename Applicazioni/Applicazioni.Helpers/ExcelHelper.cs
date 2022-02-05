@@ -437,7 +437,7 @@ namespace Applicazioni.Helpers
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
                 List<FlussoFattureDS.BC_FLUSSO_TESTATARow> righeTestate = ds.BC_FLUSSO_TESTATA.Where(x => idTestata.Contains(x.FULLNUMDOC)).ToList();
-                    righeTestate = righeTestate.OrderBy(x => x.NUMDOC).ToList();
+                righeTestate = righeTestate.OrderBy(x => x.NUMDOC).ToList();
 
                 foreach (FlussoFattureDS.BC_FLUSSO_TESTATARow testata in righeTestate)
                 {
@@ -478,10 +478,14 @@ namespace Applicazioni.Helpers
                         continue;
                     }
                     Row rowTestata = new Row();
+                    string numero = testata.NUMDOC;
+                    if (testata.FATTURAZIONE == "C00197" && !testata.IsNOTEVENTESNull())
+                        numero = string.Format("{0}-{1}", testata.NUMDOC, testata.NOTEVENTES);
+
                     rowTestata.Append(ConstructCell(testata.IsSPEDIZIONENull() ? string.Empty : testata.SPEDIZIONE, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsFATTURAZIONENull() ? string.Empty : testata.FATTURAZIONE, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.CODICETIPOO, CellValues.String, 1));
-                    rowTestata.Append(ConstructCell(testata.NUMDOC, CellValues.String, 1));
+                    rowTestata.Append(ConstructCell(numero, CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsPESOLORDONull() ? string.Empty : testata.PESOLORDO.ToString(), CellValues.String, 1));
                     rowTestata.Append(ConstructCell(testata.IsPESONETTONull() ? string.Empty : testata.PESONETTO.ToString(), CellValues.String, 1));
@@ -510,7 +514,7 @@ namespace Applicazioni.Helpers
 
 
                         Row rowDettaglio = new Row();
-                        rowDettaglio.Append(ConstructCell(dettaglio.NUMDOC, CellValues.String, 1));
+                        rowDettaglio.Append(ConstructCell(numero, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.CONTOCG, CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(convertiModello(testata.FATTURAZIONE, dettaglio.MODELLO), CellValues.String, 1));
                         rowDettaglio.Append(ConstructCell(dettaglio.QTATOT.ToString(), CellValues.String, 1));

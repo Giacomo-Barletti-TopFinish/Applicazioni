@@ -176,7 +176,8 @@ namespace MigrazioneODL
                         {
                             if (prdFase.IsIDPRDFASEPADRENull() || string.IsNullOrEmpty(prdFase.IDPRDFASEPADRE))
                             {
-                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
+                                //                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
+                                string str = "Impossibile trovare una anagrafica di trasferimento";
                                 bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaAnagraficaTrasf, articolo.MODELLO);
                                 continua = false;
                                 continue;
@@ -261,7 +262,7 @@ namespace MigrazioneODL
 
                         if (dto.soloRVL)
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente SOLO RVL", dto.esecuzione, dto.company, 0, articolo.MODELLO);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente SOLO RVL", dto.esecuzione, dto.company, (int)Errori.FinitoCorrettamenteRVL, articolo.MODELLO);
                             continue;
                         }
                         string codiceODP = bc.CreaOdDPConfermato(distintaBC, DateTime.Now, quantita, ubicazione, descrizioneVersioneODV, desvcrizione2odl);
@@ -822,6 +823,6 @@ namespace MigrazioneODL
         public bool soloRVL { get; set; }
     }
 
-    public enum Errori { Avvio, EsitoOK, Riparazione, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MnacaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamente }
+    public enum Errori { Avvio, EsitoOK, Riparazione, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MnacaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL, FinitoCorrettamente }
 
 }

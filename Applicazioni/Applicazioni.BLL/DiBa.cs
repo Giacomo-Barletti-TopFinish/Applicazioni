@@ -265,7 +265,7 @@ namespace Applicazioni.BLL
             //            idmagazz = _ds.USR_VENDITED.Where(x => !x.IsIDMAGAZZNull()).Select(x => x.IDMAGAZZ).Distinct().ToList();
             idmagazz = _ds.USR_INVENTARIOD.Select(x => x.IDMAGAZZ).Distinct().ToList();
             //    bool m = idmagazz.Contains("0000096837");
-            idmagazz = new List<string>(new string[] { "0000010919" });
+         //   idmagazz = new List<string>(new string[] { "0000010919" });
 
             foreach (string articolo in idmagazz)
             {
