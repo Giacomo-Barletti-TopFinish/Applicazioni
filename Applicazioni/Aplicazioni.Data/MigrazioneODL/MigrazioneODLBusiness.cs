@@ -21,6 +21,14 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetUSR_PRD_MOVFASI(ds, Barcode);
         }
         [DataContext]
+        public void GetTask(MigrazioneODLDS ds, String IDTABFAS)
+        {
+            if (ds.BC_TASK.Any(x => x.IDTABFAS == IDTABFAS)) return;
+
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetTask(ds, IDTABFAS);
+        }
+        [DataContext]
         public void GetUSR_PRD_MOVFASIByNumdoc(MigrazioneODLDS ds, String NUMMOVFASE)
         {
             if (ds.USR_PRD_MOVFASI.Any(x => x.NUMMOVFASE == NUMMOVFASE)) return;
@@ -80,7 +88,7 @@ namespace Applicazioni.Data.MigrazioneODL
         }
         [DataContext(true)]
         public void InsertODL2ODP(string azienda, string idPrdMovFase, string numMovFase, string reparto, string fase, string idmagazz, string anagrafica, decimal quantita,
-            string odv, string descrizione, string descrizione2, string company )
+            string odv, string descrizione, string descrizione2, string company)
         {
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
             a.InsertODL2ODP(azienda, idPrdMovFase, numMovFase, reparto, fase, idmagazz, anagrafica, quantita, odv, descrizione, descrizione2, company);
@@ -98,10 +106,10 @@ namespace Applicazioni.Data.MigrazioneODL
             InsertODL2ODPlog(numMovFase, nota, esecuzione, company, errore, string.Empty);
         }
         [DataContext(true)]
-        public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company,int errore,string modello )
+        public void InsertODL2ODPlog(string numMovFase, string nota, string esecuzione, string company, int errore, string modello)
         {
             MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.InsertODL2ODPlog(numMovFase, nota, esecuzione, company,errore,modello);
+            a.InsertODL2ODPlog(numMovFase, nota, esecuzione, company, errore, modello);
         }
         [DataContext]
         public void GetTABFAS(MigrazioneODLDS ds, String idtabfas)

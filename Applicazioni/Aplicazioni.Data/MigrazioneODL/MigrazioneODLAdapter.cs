@@ -29,6 +29,19 @@ namespace Applicazioni.Data.MigrazioneODL
                 da.Fill(ds.USR_PRD_MOVFASI);
             }
         }
+        public void GetTask(MigrazioneODLDS ds, String IDTABFAS)
+        {
+
+            string select = @"SELECT * FROM BC_TASK WHERE IDTABFAS = $P<IDTABFAS>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDTABFAS", DbType.String, IDTABFAS);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.BC_TASK);
+            }
+        }
         public void GetUSR_PRD_MOVFASIByNumdoc(MigrazioneODLDS ds, String NUMMOVFASE)
         {
 

@@ -71,6 +71,8 @@ namespace MigrazioneODL
             TimeSpan ts = DateTime.Now.Subtract(_start);
             string msd = string.Format("Durata Attività {0}:{1}", ts.Hours, ts.Minutes);
             AggiornaMessaggio(msd);
+            btnEseguiMigrazione.Text = etichettaStart;
+
         }
 
         private void _bgwMigraODL_DoWork(object sender, DoWorkEventArgs e)
@@ -130,6 +132,13 @@ namespace MigrazioneODL
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, " REPARTO TERZISTA", dto.esecuzione, dto.company, (int)Errori.Terzista);
                             continue;
                         }
+                        bMigrazioneODL.GetTask(ds, odl.IDTABFAS);
+                        MigrazioneODLDS.BC_TASKRow task = ds.BC_TASK.Where(x => x.IDTABFAS == odl.IDTABFAS).FirstOrDefault();
+                        if (task != null && task.TASK == "***ESCLUDERE")
+                        {
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, " FASE ELIMINATA DALLA DISTINTA", dto.esecuzione, dto.company, (int)Errori.FaseEliminataDallaDistinta);
+                            continue;
+                        }
 
                         if (worker.CancellationPending)
                         {
@@ -172,6 +181,7 @@ namespace MigrazioneODL
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaUsRPRDFASE, articolo.MODELLO);
                             continue;
                         }
+                        bool errore = false;
                         while (anagrafica == null && continua)
                         {
                             if (prdFase.IsIDPRDFASEPADRENull() || string.IsNullOrEmpty(prdFase.IDPRDFASEPADRE))
@@ -180,6 +190,7 @@ namespace MigrazioneODL
                                 string str = "Impossibile trovare una anagrafica di trasferimento";
                                 bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaAnagraficaTrasf, articolo.MODELLO);
                                 continua = false;
+                                errore = true;
                                 continue;
                             }
                             prdFase = bMigrazioneODL.GetUSR_PRD_FASI(ds, prdFase.IDPRDFASEPADRE, prdFase.AZIENDA);
@@ -190,10 +201,13 @@ namespace MigrazioneODL
                             else
                             {
                                 string str = string.Format("fase padre non trovata ");
-                                bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MnacaFasePadre, articolo.MODELLO);
+                                bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaFasePadre, articolo.MODELLO);
                                 continua = false;
+                                errore = true;
                             }
                         }
+
+                        if (errore) continue;
 
                         if (anagrafica == null)
                         {
@@ -823,6 +837,6 @@ namespace MigrazioneODL
         public bool soloRVL { get; set; }
     }
 
-    public enum Errori { Avvio, EsitoOK, Riparazione, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MnacaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL, FinitoCorrettamente }
+    public enum Errori { Avvio, EsitoOK, Riparazione, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MancaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL, FinitoCorrettamente, FaseEliminataDallaDistinta }
 
 }
