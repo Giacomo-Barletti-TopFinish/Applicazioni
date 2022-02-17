@@ -1967,7 +1967,7 @@
               <xs:element name="FASE" msprop:Generator_ColumnVarNameInTable="columnFASE" msprop:Generator_ColumnPropNameInRow="FASE" msprop:Generator_ColumnPropNameInTable="FASEColumn" msprop:Generator_UserColumnName="FASE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="19" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -2040,7 +2040,7 @@
               <xs:element name="FASE" msprop:Generator_ColumnVarNameInTable="columnFASE" msprop:Generator_ColumnPropNameInRow="FASE" msprop:Generator_ColumnPropNameInTable="FASEColumn" msprop:Generator_UserColumnName="FASE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

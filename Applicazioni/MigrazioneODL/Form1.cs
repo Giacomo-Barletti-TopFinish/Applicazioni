@@ -51,6 +51,22 @@ namespace MigrazioneODL
             }
             return false;
         }
+        private bool VerificaODLPreserie(MigrazioneODLDS.USR_PRD_MOVFASIRow odl, MigrazioneODLDS.MAGAZZRow articolo)
+        {
+            if (articolo != null)
+            {
+                return articolo.MODELLO.StartsWith("P-");
+            }
+            return false;
+        }
+        private bool VerificaODLCampionario(MigrazioneODLDS.USR_PRD_MOVFASIRow odl, MigrazioneODLDS.MAGAZZRow articolo)
+        {
+            if (articolo != null)
+            {
+                return articolo.MODELLO.StartsWith("K-");
+            }
+            return false;
+        }
         private void _bgwMigraODL_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
 
@@ -112,14 +128,14 @@ namespace MigrazioneODL
                     using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
                     {
 
-                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, " Migrazione iniziata", dto.esecuzione, dto.company, (int)Errori.Avvio);
+                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione iniziata", dto.esecuzione, dto.company, (int)Errori.Avvio);
 
                         bMigrazioneODL.GetUSR_PRD_MOVFASIByNumdoc(ds, nummovfase);
                         odl = ds.USR_PRD_MOVFASI.Where(x => x.NUMMOVFASE == nummovfase).FirstOrDefault();
 
                         if (odl == null)
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "ODL NON TROVATO", dto.esecuzione, dto.company, (int)Errori.NoODL);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato : ODL non trovato", dto.esecuzione, dto.company, (int)Errori.NoODL);
                             continue;
                         }
 
@@ -127,16 +143,22 @@ namespace MigrazioneODL
                         MigrazioneODLDS.CLIFORow reparto = ds.CLIFO.Where(x => x.CODICE == odl.CODICECLIFO).FirstOrDefault();
                         repartoRagSoc = reparto.CODICE;
 
+                        if (reparto.CODICE.Trim() == "02350")
+                        {
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato: reparto TOPFINISH", dto.esecuzione, dto.company, (int)Errori.TopFinish, reparto.CODICE.Trim());
+                            continue;
+                        }
+
                         if (reparto.CODICE.Substring(0, 1) == "0")
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, " REPARTO TERZISTA", dto.esecuzione, dto.company, (int)Errori.Terzista);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato: reparto terzista", dto.esecuzione, dto.company, (int)Errori.Terzista, reparto.CODICE.Trim());
                             continue;
                         }
                         bMigrazioneODL.GetTask(ds, odl.IDTABFAS);
                         MigrazioneODLDS.BC_TASKRow task = ds.BC_TASK.Where(x => x.IDTABFAS == odl.IDTABFAS).FirstOrDefault();
                         if (task != null && task.TASK == "***ESCLUDERE")
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, " FASE ELIMINATA DALLA DISTINTA", dto.esecuzione, dto.company, (int)Errori.FaseEliminataDallaDistinta);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato: fase eliminata dalla distinta BC", dto.esecuzione, dto.company, (int)Errori.FaseEliminataDallaDistinta, task.CODICEFASE);
                             continue;
                         }
 
@@ -161,7 +183,17 @@ namespace MigrazioneODL
 
                         if (VerificaODLRiparazioni(odl, articolo))
                         {
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Riparazione", dto.esecuzione, dto.company, (int)Errori.Riparazione, articolo.MODELLO);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato perchè riparazione", dto.esecuzione, dto.company, (int)Errori.Riparazione, articolo.MODELLO);
+                            continue;
+                        }
+                        if (VerificaODLPreserie(odl, articolo))
+                        {
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato perchè preserie", dto.esecuzione, dto.company, (int)Errori.Preserie, articolo.MODELLO);
+                            continue;
+                        }
+                        if (VerificaODLCampionario(odl, articolo))
+                        {
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato perchè campionario", dto.esecuzione, dto.company, (int)Errori.Campionario, articolo.MODELLO);
                             continue;
                         }
 
@@ -177,7 +209,7 @@ namespace MigrazioneODL
                         MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(ds, odl.IsIDPRDFASENull() ? string.Empty : odl.IDPRDFASE, odl.AZIENDA);
                         if (prdFase == null && anagrafica == null)
                         {
-                            string str = string.Format("USR PRD FASE non trovata ");
+                            string str = string.Format("Non migrato: USR PRD FASE non trovata ");
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaUsRPRDFASE, articolo.MODELLO);
                             continue;
                         }
@@ -187,7 +219,7 @@ namespace MigrazioneODL
                             if (prdFase.IsIDPRDFASEPADRENull() || string.IsNullOrEmpty(prdFase.IDPRDFASEPADRE))
                             {
                                 //                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
-                                string str = "Impossibile trovare una anagrafica di trasferimento";
+                                string str = "Non migrato: impossibile trovare una anagrafica di trasferimento dell distinta RVL";
                                 bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaAnagraficaTrasf, articolo.MODELLO);
                                 continua = false;
                                 errore = true;
@@ -200,7 +232,7 @@ namespace MigrazioneODL
                             }
                             else
                             {
-                                string str = string.Format("fase padre non trovata ");
+                                string str = string.Format("Non migrato: fase padre non trovata");
                                 bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaFasePadre, articolo.MODELLO);
                                 continua = false;
                                 errore = true;
@@ -211,7 +243,7 @@ namespace MigrazioneODL
 
                         if (anagrafica == null)
                         {
-                            string str = string.Format("Anagrafica non trovata ");
+                            string str = string.Format("Non migrato :anagrafica non trovata ");
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, str, dto.esecuzione, dto.company, (int)Errori.MancaAnagrafica, articolo.MODELLO);
                             continue;
                         }
@@ -246,8 +278,6 @@ namespace MigrazioneODL
                             return;
                         }
 
-                        MPIntranet.WS.BCServices bc = new MPIntranet.WS.BCServices();
-                        bc.CreaConnessione(dto.company);
 
                         bMigrazioneODL.GetODL2ODP(ds, nummovfase);
                         bMigrazioneODL.GetODL2ODPCOMPONENTI(ds, nummovfase);
@@ -256,7 +286,7 @@ namespace MigrazioneODL
                         if (odls.Count > 0)
                         {
                             MigrazioneODLDS.ODL2ODPRow odp = odls[0];
-                            string msg = String.Format("ODL già migrato nell'ordine di produzione {0} per la company {1}", odp.ODV, dto.company);
+                            string msg = String.Format("Non migrato: ODL già migrato per la company {0}", dto.company);
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, msg, dto.esecuzione, dto.company, (int)Errori.OrdinePrecMigrato, articolo.MODELLO);
                             continue;
                         }
@@ -264,7 +294,7 @@ namespace MigrazioneODL
                         List<MigrazioneODLDS.ODL2ODPCOMPONENTIRow> odlsComp = ds.ODL2ODPCOMPONENTI.Where(x => x.NUMMOVFASE == nummovfase && x.COMPANY == dto.company).ToList();
                         if (odlsComp.Count > 0)
                         {
-                            string msg = String.Format("Componenti dell'ODL {0} già a sistema per la company {1}", txtNumOdl.Text, dto.company);
+                            string msg = String.Format("Non migrato: componenti dell'ODL già a sistema per la company {0}", dto.company);
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, msg, dto.esecuzione, dto.company, (int)Errori.CompGiàMigrati, articolo.MODELLO);
                             continue;
                         }
@@ -274,18 +304,29 @@ namespace MigrazioneODL
                             return;
                         }
 
+
                         if (dto.soloRVL)
                         {
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente SOLO RVL", dto.esecuzione, dto.company, (int)Errori.FinitoCorrettamenteRVL, articolo.MODELLO);
                             continue;
                         }
-                        string codiceODP = bc.CreaOdDPConfermato(distintaBC, DateTime.Now, quantita, ubicazione, descrizioneVersioneODV, desvcrizione2odl);
+                        MPIntranet.WS.BCServices bc = new MPIntranet.WS.BCServices();
+                        bc.CreaConnessione(dto.company);
+
+                        //                        string codiceODP = bc.CreaOdDPConfermato(distintaBC, DateTime.Now, quantita, ubicazione, descrizioneVersioneODV, desvcrizione2odl);
+
+                        string codiceODP = string.Empty;
+                        bc.MTPWS(distintaBC, quantita, odl.DATAFINE, ubicazione, ref codiceODP, descrizioneVersioneODV, desvcrizione2odl);
                         bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, codiceODP, descrizioneVersioneODV, desvcrizione2odl, dto.company);
 
                         int linenumber = 0;
                         List<RegMesWS> magazzino = bc.EstraiRegMag();
                         if (magazzino.Count > 0)
-                            linenumber = magazzino.Where(x => x.Journal_Batch_Name == "REGWS").Max(x => x.Line_No);
+                        {
+                            magazzino = magazzino.Where(x => x.Journal_Batch_Name == "REGWS").ToList();
+                            if (magazzino.Count > 0)
+                                linenumber = magazzino.Max(x => x.Line_No);
+                        }
 
                         foreach (MigrazioneODLDS.DistinteBCDettaglioRow dettaglio in ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == distintaBC))
                         {
@@ -316,7 +357,7 @@ namespace MigrazioneODL
                     }
                     using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
                     {
-                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, sb.ToString(), dto.esecuzione, dto.company, -1, string.Empty);
+                        bMigrazioneODL.InsertODL2ODPlog(nummovfase, sb.ToString(), dto.esecuzione, dto.company, (int)Errori.Eccezione, string.Empty);
                     }
                 }
                 finally
@@ -792,7 +833,7 @@ namespace MigrazioneODL
                         lblFineAvanzamento.Text = pbAvanzamento.Maximum.ToString();
                         ODLDTO dto = new ODLDTO();
                         dto.odls = odls;
-                        dto.esecuzione = DateTime.Now.ToString("yyyyMMddhhmmss");
+                        dto.esecuzione = DateTime.Now.ToString("yyyyMMdd-HHmmss");
                         dto.company = lblCompany.Text;
                         dto.collocazione = collocazione;
                         dto.ubicazione = ubicazione;
@@ -837,6 +878,6 @@ namespace MigrazioneODL
         public bool soloRVL { get; set; }
     }
 
-    public enum Errori { Avvio, EsitoOK, Riparazione, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MancaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL, FinitoCorrettamente, FaseEliminataDallaDistinta }
+    public enum Errori { Avvio, EsitoOK, TopFinish, Riparazione, Preserie, Campionario, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MancaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL, FinitoCorrettamente, FaseEliminataDallaDistinta, Eccezione }
 
 }

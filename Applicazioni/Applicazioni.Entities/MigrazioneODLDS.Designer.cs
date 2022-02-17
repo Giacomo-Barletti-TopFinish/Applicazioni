@@ -9155,7 +9155,7 @@ namespace Applicazioni.Entities {
                 this.columnIDPRDMOVFASE.MaxLength = 25;
                 this.columnNUMMOVFASE.MaxLength = 25;
                 this.columnREPARTO.MaxLength = 10;
-                this.columnFASE.MaxLength = 10;
+                this.columnFASE.MaxLength = 19;
                 this.columnIDMAGAZZ.MaxLength = 10;
                 this.columnANAGRAFICA.MaxLength = 20;
                 this.columnODV.MaxLength = 20;
@@ -9593,7 +9593,7 @@ namespace Applicazioni.Entities {
                 this.columnAZIENDA.MaxLength = 2;
                 this.columnNUMMOVFASE.MaxLength = 25;
                 this.columnREPARTO.MaxLength = 10;
-                this.columnFASE.MaxLength = 10;
+                this.columnFASE.MaxLength = 20;
                 this.columnCOMPANY.MaxLength = 50;
                 this.columnODV.MaxLength = 20;
                 this.columnDISTINTA.MaxLength = 20;

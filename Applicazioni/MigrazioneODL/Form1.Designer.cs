@@ -76,6 +76,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkSoloRVL = new System.Windows.Forms.CheckBox();
             this.lblFineAvanzamento = new System.Windows.Forms.Label();
             this.lblMetàAvanzamento = new System.Windows.Forms.Label();
             this.txtRicercaFile = new System.Windows.Forms.TextBox();
@@ -83,7 +84,6 @@
             this.pbAvanzamento = new System.Windows.Forms.ProgressBar();
             this.btnEseguiMigrazione = new System.Windows.Forms.Button();
             this.btnCercaFile = new System.Windows.Forms.Button();
-            this.chkSoloRVL = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -380,8 +380,6 @@
             // ChBoxRegMag
             // 
             this.ChBoxRegMag.AutoSize = true;
-            this.ChBoxRegMag.Checked = true;
-            this.ChBoxRegMag.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChBoxRegMag.Location = new System.Drawing.Point(421, 92);
             this.ChBoxRegMag.Name = "ChBoxRegMag";
             this.ChBoxRegMag.Size = new System.Drawing.Size(125, 17);
@@ -565,6 +563,18 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Importazione File";
             // 
+            // chkSoloRVL
+            // 
+            this.chkSoloRVL.AutoSize = true;
+            this.chkSoloRVL.Checked = true;
+            this.chkSoloRVL.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSoloRVL.Location = new System.Drawing.Point(616, 23);
+            this.chkSoloRVL.Name = "chkSoloRVL";
+            this.chkSoloRVL.Size = new System.Drawing.Size(68, 17);
+            this.chkSoloRVL.TabIndex = 15;
+            this.chkSoloRVL.Text = "SoloRVL";
+            this.chkSoloRVL.UseVisualStyleBackColor = true;
+            // 
             // lblFineAvanzamento
             // 
             this.lblFineAvanzamento.AutoSize = true;
@@ -625,18 +635,6 @@
             this.btnCercaFile.Text = "Cerca";
             this.btnCercaFile.UseVisualStyleBackColor = true;
             this.btnCercaFile.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // chkSoloRVL
-            // 
-            this.chkSoloRVL.AutoSize = true;
-            this.chkSoloRVL.Checked = true;
-            this.chkSoloRVL.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSoloRVL.Location = new System.Drawing.Point(616, 23);
-            this.chkSoloRVL.Name = "chkSoloRVL";
-            this.chkSoloRVL.Size = new System.Drawing.Size(68, 17);
-            this.chkSoloRVL.TabIndex = 15;
-            this.chkSoloRVL.Text = "SoloRVL";
-            this.chkSoloRVL.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

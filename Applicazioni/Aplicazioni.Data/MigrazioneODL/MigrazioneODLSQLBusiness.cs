@@ -13,15 +13,21 @@ namespace Applicazioni.Data.MigrazioneODL
         [DataContext]
         public void GetDistinteBCTestata(MigrazioneODLDS ds, string codiceTestata)
         {
-            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.GetDistinteBCTestata(ds, codiceTestata);
+            if (!ds.DistinteBCTestata.Any(x => x.No_ == codiceTestata))
+            {
+                MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+                a.GetDistinteBCTestata(ds, codiceTestata);
+            }
         }
 
         [DataContext]
         public void GetDistinteBCDettaglio(MigrazioneODLDS ds, string codiceTestata)
         {
-            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
-            a.GetDistinteBCDettaglio(ds, codiceTestata);
+            if (!ds.DistinteBCDettaglio.Any(x => x.Production_BOM_No_ == codiceTestata))
+            {
+                MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+                a.GetDistinteBCDettaglio(ds, codiceTestata);
+            }
         }
 
     }

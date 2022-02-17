@@ -15,7 +15,7 @@
     <Shape ID="DesignTable:DistinteBCTestata" ZOrder="8" X="580" Y="480" Height="304" Width="169" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:DistinteBCDettaglio" ZOrder="7" X="243" Y="608" Height="304" Width="181" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:ODL2ODP" ZOrder="6" X="1469" Y="577" Height="276" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="272" />
-    <Shape ID="DesignTable:ODL2ODPCOMPONENTI" ZOrder="5" X="1829" Y="575" Height="295" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
+    <Shape ID="DesignTable:ODL2ODPCOMPONENTI" ZOrder="5" X="1829" Y="575" Height="295" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="291" />
     <Shape ID="DesignTable:USR_PRD_FASI" ZOrder="2" X="579" Y="101" Height="304" Width="186" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
     <Shape ID="DesignTable:ODL2ODPLOG" ZOrder="4" X="64" Y="84" Height="143" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="251" />
     <Shape ID="DesignTable:BC_TASK" ZOrder="1" X="1843" Y="187" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="149" />
