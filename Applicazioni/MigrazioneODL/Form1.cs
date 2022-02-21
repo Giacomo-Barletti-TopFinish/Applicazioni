@@ -25,7 +25,8 @@ namespace MigrazioneODL
         private BackgroundWorker _bgwMigraODL = new BackgroundWorker();
 
         string ubicazione = "MTP";
-        string collocazione = "IMPORTAZIONE";
+        //        string collocazione = "IMPORTAZIONE";
+        string collocazione = "PROD";
 
         public Form1()
         {
@@ -156,7 +157,8 @@ namespace MigrazioneODL
                         }
                         bMigrazioneODL.GetTask(ds, odl.IDTABFAS);
                         MigrazioneODLDS.BC_TASKRow task = ds.BC_TASK.Where(x => x.IDTABFAS == odl.IDTABFAS).FirstOrDefault();
-                        if (task != null && task.TASK == "***ESCLUDERE")
+
+                        if (task != null && task.TASK == "***ESCLUDERE" && !(task.IDTABFAS == "0000000862" || task.IDTABFAS == "0000000856"))
                         {
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Non migrato: fase eliminata dalla distinta BC", dto.esecuzione, dto.company, (int)Errori.FaseEliminataDallaDistinta, task.CODICEFASE);
                             continue;
@@ -315,11 +317,20 @@ namespace MigrazioneODL
 
                         //                        string codiceODP = bc.CreaOdDPConfermato(distintaBC, DateTime.Now, quantita, ubicazione, descrizioneVersioneODV, desvcrizione2odl);
 
+                        int linenumber = 0;
+                        if (odl.IDTABFAS == "0000000862" || odl.IDTABFAS == "0000000856")
+                        {
+                            bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, nummovfase, quantita, distintaBC);
+                            bMigrazioneODL.InsertODL2ODPComponenti(azienda, nummovfase, repartoRagSoc.Trim(), faseCodice, distintaBC, distintaBC, quantita, quantita, "MAG3", ubicazione, collocazione, dto.company);
+                            bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, "MAG3", descrizioneVersioneODV, desvcrizione2odl, dto.company);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente", dto.esecuzione, dto.company, (int)Errori.Spedizioni, articolo.MODELLO);
+                            continue;
+                        }
+
                         string codiceODP = string.Empty;
                         bc.MTPWS(distintaBC, quantita, odl.DATAFINE, ubicazione, ref codiceODP, descrizioneVersioneODV, desvcrizione2odl);
                         bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, codiceODP, descrizioneVersioneODV, desvcrizione2odl, dto.company);
 
-                        int linenumber = 0;
                         List<RegMesWS> magazzino = bc.EstraiRegMag();
                         if (magazzino.Count > 0)
                         {
@@ -340,7 +351,7 @@ namespace MigrazioneODL
                             bc.PostingRegMag();
 
                         bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente", dto.esecuzione, dto.company, (int)Errori.FinitoCorrettamente, articolo.MODELLO);
-
+                       
                     }
 
                 }
@@ -878,6 +889,11 @@ namespace MigrazioneODL
         public bool soloRVL { get; set; }
     }
 
-    public enum Errori { Avvio, EsitoOK, TopFinish, Riparazione, Preserie, Campionario, NoODL, Terzista, MancaUsRPRDFASE, MancaAnagraficaTrasf, MancaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL, FinitoCorrettamente, FaseEliminataDallaDistinta, Eccezione }
+    public enum Errori
+    {
+        Avvio, EsitoOK, TopFinish, Riparazione, Preserie, Campionario, NoODL, Terzista, MancaUsRPRDFASE,
+        MancaAnagraficaTrasf, MancaFasePadre, MancaAnagrafica, OrdinePrecMigrato, CompGiàMigrati, FinitoCorrettamenteRVL,
+        FinitoCorrettamente, FaseEliminataDallaDistinta, Eccezione, Spedizioni
+    }
 
 }
