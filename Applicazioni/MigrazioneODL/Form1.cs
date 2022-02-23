@@ -323,13 +323,32 @@ namespace MigrazioneODL
                             bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, nummovfase, quantita, distintaBC);
                             bMigrazioneODL.InsertODL2ODPComponenti(azienda, nummovfase, repartoRagSoc.Trim(), faseCodice, distintaBC, distintaBC, quantita, quantita, "MAG3", ubicazione, collocazione, dto.company);
                             bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, "MAG3", descrizioneVersioneODV, desvcrizione2odl, dto.company);
-                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente", dto.esecuzione, dto.company, (int)Errori.Spedizioni, articolo.MODELLO);
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente (MAG 3)", dto.esecuzione, dto.company, (int)Errori.Spedizioni, articolo.MODELLO);
                             continue;
                         }
 
                         string codiceODP = string.Empty;
-                        bc.MTPWS(distintaBC, quantita, odl.DATAFINE, ubicazione, ref codiceODP, descrizioneVersioneODV, desvcrizione2odl);
-                        bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, codiceODP, descrizioneVersioneODV, desvcrizione2odl, dto.company);
+                        MPIntranet.WS.BCServices bcw = new MPIntranet.WS.BCServices();
+                        try
+                        {
+                            bcw.MTPWS(distintaBC, quantita, odl.DATAFINE, ubicazione, ref codiceODP, descrizioneVersioneODV, desvcrizione2odl);
+                            bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, codiceODP, descrizioneVersioneODV, desvcrizione2odl, dto.company);
+                        }
+                        catch (Exception ex)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            sb.Append("ECCEZIONE ");
+                            while (ex != null)
+                            {
+                                sb.Append(ex.Message);
+                                sb.Append(' ');
+                                sb.Append(ex.Source);
+                                sb.Append(' ');
+                                ex = ex.InnerException;
+                                sb.Append("**");
+                            }
+                            bMigrazioneODL.InsertODL2ODPlog(nummovfase, sb.ToString(), dto.esecuzione, dto.company, (int)Errori.Eccezione, codiceODP);
+                        }
 
                         List<RegMesWS> magazzino = bc.EstraiRegMag();
                         if (magazzino.Count > 0)
@@ -351,7 +370,7 @@ namespace MigrazioneODL
                             bc.PostingRegMag();
 
                         bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente", dto.esecuzione, dto.company, (int)Errori.FinitoCorrettamente, articolo.MODELLO);
-                       
+
                     }
 
                 }
