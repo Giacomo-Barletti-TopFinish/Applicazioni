@@ -264,8 +264,8 @@ namespace MigrazioneODL
                     string azienda = odl.AZIENDA;
                     string idmagazz = articolo.IDMAGAZZ.Trim();
                     string modello = articolo.MODELLO.Trim();
-                    decimal quantita = odl.QTA;
-                    decimal qtadater = odl.QTADATER;
+                    decimal quantita = odl.QTADATER;
+               //     decimal qtadater = odl.QTADATER;
 
 
                     using (MigrazioneODLSQLBusiness bMigrazioneODLSQL = new MigrazioneODLSQLBusiness())
@@ -320,7 +320,7 @@ namespace MigrazioneODL
                         int linenumber = 0;
                         if (odl.IDTABFAS == "0000000862" || odl.IDTABFAS == "0000000856")
                         {
-                            bc.CreaRegistrazioneMagazzino(ubicazione, collocazione, linenumber, nummovfase, quantita, distintaBC);
+                            bc.CreaRegistrazioneMagazzino(ubicazione, "SPED", linenumber, nummovfase, quantita, distintaBC);
                             bMigrazioneODL.InsertODL2ODPComponenti(azienda, nummovfase, repartoRagSoc.Trim(), faseCodice, distintaBC, distintaBC, quantita, quantita, "MAG3", ubicazione, collocazione, dto.company);
                             bMigrazioneODL.InsertODL2ODP(azienda, odl.IDPRDMOVFASE, nummovfase, repartoRagSoc.Trim(), faseCodice, idmagazz, distintaBC, quantita, "MAG3", descrizioneVersioneODV, desvcrizione2odl, dto.company);
                             bMigrazioneODL.InsertODL2ODPlog(nummovfase, "Migrazione completata correttamente (MAG 3)", dto.esecuzione, dto.company, (int)Errori.Spedizioni, articolo.MODELLO);
@@ -329,6 +329,7 @@ namespace MigrazioneODL
 
                         string codiceODP = string.Empty;
                         MPIntranet.WS.BCServices bcw = new MPIntranet.WS.BCServices();
+                        bcw.CreaConnessione(dto.company);
                         try
                         {
                             bcw.MTPWS(distintaBC, quantita, odl.DATAFINE, ubicazione, ref codiceODP, descrizioneVersioneODV, desvcrizione2odl);
