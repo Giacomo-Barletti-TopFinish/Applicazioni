@@ -504,7 +504,7 @@ namespace MigrazioneODL
                     txtArticoloTR.Text = trasferimento.MODELLO;
                     txtQuantitaTR.Text = trasferimento.QTA.ToString();
                     txtTrasferimento.Text = barcode;
-                    tcxtAnagraficaBCTR.Text = trasferimento.BC;
+                    tcxtAnagraficaBCTR.Text = (trasferimento.IsBCNull()) ? String.Empty : trasferimento.BC;
 
                 }
                 return trasferimento;
@@ -794,7 +794,8 @@ namespace MigrazioneODL
                     if (odls.Count > 0)
                     {
                         MigrazioneODLDS.ODL2ODPRow odp = odls[0];
-                        txtMessaggi.Text = String.Format("ODL già migrato nell'ordine di produzione {0} per la company {1}", odp.ODV, company);
+                        String ODV = odp.IsODVNull() ? String.Empty : odp.ODV;
+                        txtMessaggi.Text = String.Format("ODL già migrato nell'ordine di produzione {0} per la company {1}", ODV, company);
                         return;
                     }
 
@@ -1065,6 +1066,12 @@ namespace MigrazioneODL
 
         private void btnCaricaTrasferimento_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(tcxtAnagraficaBCTR.Text))
+            {
+                txtMessaggi.Text = "Impossibile procedere senza un'anagrafica BC!!";
+                return;
+            }
+
             try
             {
                 string company = ConfigurationManager.AppSettings["Azienda"];
