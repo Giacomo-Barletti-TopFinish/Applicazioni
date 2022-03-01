@@ -29,6 +29,23 @@ namespace Applicazioni.Data.MigrazioneODL
                 da.Fill(ds.USR_PRD_MOVFASI);
             }
         }
+
+        public void GetTrasferimenti(MigrazioneODLDS ds, String Barcode)
+        {
+
+            string select = @"select bc.bc,ma.modello, ri.* from usr_trasf_rich ri
+                        inner join gruppo.magazz ma on ma.idmagazz = ri.idmagazz
+                        left outer join bc_anagrafica_produzione bc on bc.idmagazz=ri.idmagazz
+                        where RI.barcode = $P<BARCODE>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("BARCODE", DbType.String, Barcode);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.TRASFERIMENTIRVL);
+            }
+        }
         public void GetTask(MigrazioneODLDS ds, String IDTABFAS)
         {
 

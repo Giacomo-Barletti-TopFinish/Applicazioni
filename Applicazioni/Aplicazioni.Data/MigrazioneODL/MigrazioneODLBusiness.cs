@@ -21,6 +21,14 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetUSR_PRD_MOVFASI(ds, Barcode);
         }
         [DataContext]
+        public void GetTrasferimenti(MigrazioneODLDS ds, String Barcode)
+        {
+            if (ds.USR_PRD_MOVFASI.Any(x => x.BARCODE == Barcode)) return;
+
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetTrasferimenti(ds, Barcode);
+        }
+        [DataContext]
         public void GetTask(MigrazioneODLDS ds, String IDTABFAS)
         {
             if (ds.BC_TASK.Any(x => x.IDTABFAS == IDTABFAS)) return;

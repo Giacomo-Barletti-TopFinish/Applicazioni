@@ -54,6 +54,8 @@
             this.txtDescVersione = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtIDTABFAS = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtNumOdl = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -84,14 +86,37 @@
             this.pbAvanzamento = new System.Windows.Forms.ProgressBar();
             this.btnEseguiMigrazione = new System.Windows.Forms.Button();
             this.btnCercaFile = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnPulisciTrasferimenti = new System.Windows.Forms.Button();
+            this.btnCercaTrasferimenti = new System.Windows.Forms.Button();
+            this.txtBarcodeTrasferimento = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtIdmagazzTR = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtArticoloTR = new System.Windows.Forms.TextBox();
+            this.txtQuantitaTR = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.btnCaricaTrasferimento = new System.Windows.Forms.Button();
+            this.tcxtAnagraficaBCTR = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.chkConsolidaTrasferimento = new System.Windows.Forms.CheckBox();
+            this.txtTrasferimento = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCercaODL
             // 
-            this.btnCercaODL.Location = new System.Drawing.Point(173, 27);
+            this.btnCercaODL.Location = new System.Drawing.Point(156, 22);
             this.btnCercaODL.Name = "btnCercaODL";
             this.btnCercaODL.Size = new System.Drawing.Size(75, 23);
             this.btnCercaODL.TabIndex = 0;
@@ -101,7 +126,7 @@
             // 
             // txtBarcodeODL
             // 
-            this.txtBarcodeODL.Location = new System.Drawing.Point(34, 29);
+            this.txtBarcodeODL.Location = new System.Drawing.Point(17, 24);
             this.txtBarcodeODL.Name = "txtBarcodeODL";
             this.txtBarcodeODL.Size = new System.Drawing.Size(127, 20);
             this.txtBarcodeODL.TabIndex = 1;
@@ -109,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 13);
+            this.label1.Location = new System.Drawing.Point(17, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 2;
@@ -305,6 +330,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.txtIDTABFAS);
             this.groupBox1.Controls.Add(this.txtIDPRDMOVFASE);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtIDMAGAZZ);
@@ -329,12 +356,30 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtVersioneDiba);
             this.groupBox1.Controls.Add(this.txtDescVersione);
-            this.groupBox1.Location = new System.Drawing.Point(21, 73);
+            this.groupBox1.Location = new System.Drawing.Point(20, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(731, 219);
+            this.groupBox1.Size = new System.Drawing.Size(762, 219);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ODL";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(656, 24);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 10;
+            this.label22.Text = "IDTABFAS";
+            this.label22.Click += new System.EventHandler(this.label22_Click);
+            // 
+            // txtIDTABFAS
+            // 
+            this.txtIDTABFAS.Location = new System.Drawing.Point(656, 40);
+            this.txtIDTABFAS.Name = "txtIDTABFAS";
+            this.txtIDTABFAS.ReadOnly = true;
+            this.txtIDTABFAS.Size = new System.Drawing.Size(89, 20);
+            this.txtIDTABFAS.TabIndex = 9;
             // 
             // label18
             // 
@@ -370,9 +415,9 @@
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.txtAnagrafica);
             this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(21, 298);
+            this.groupBox2.Location = new System.Drawing.Point(20, 296);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(731, 235);
+            this.groupBox2.Size = new System.Drawing.Size(762, 235);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ordine Produzione";
@@ -510,28 +555,29 @@
             // 
             // btnSCaricaNodi
             // 
-            this.btnSCaricaNodi.Location = new System.Drawing.Point(346, 27);
+            this.btnSCaricaNodi.Location = new System.Drawing.Point(698, 21);
             this.btnSCaricaNodi.Name = "btnSCaricaNodi";
             this.btnSCaricaNodi.Size = new System.Drawing.Size(75, 23);
             this.btnSCaricaNodi.TabIndex = 11;
             this.btnSCaricaNodi.Text = "Scarica nodi";
             this.btnSCaricaNodi.UseVisualStyleBackColor = true;
+            this.btnSCaricaNodi.Visible = false;
             this.btnSCaricaNodi.Click += new System.EventHandler(this.btnSCaricaNodi_Click);
             // 
             // txtMessaggi
             // 
-            this.txtMessaggi.Location = new System.Drawing.Point(21, 626);
+            this.txtMessaggi.Location = new System.Drawing.Point(12, 693);
             this.txtMessaggi.Multiline = true;
             this.txtMessaggi.Name = "txtMessaggi";
             this.txtMessaggi.ReadOnly = true;
             this.txtMessaggi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessaggi.Size = new System.Drawing.Size(731, 161);
+            this.txtMessaggi.Size = new System.Drawing.Size(804, 94);
             this.txtMessaggi.TabIndex = 12;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(491, 13);
+            this.label20.Location = new System.Drawing.Point(710, 9);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(51, 13);
             this.label20.TabIndex = 13;
@@ -556,9 +602,9 @@
             this.groupBox3.Controls.Add(this.pbAvanzamento);
             this.groupBox3.Controls.Add(this.btnEseguiMigrazione);
             this.groupBox3.Controls.Add(this.btnCercaFile);
-            this.groupBox3.Location = new System.Drawing.Point(21, 534);
+            this.groupBox3.Location = new System.Drawing.Point(20, 537);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(731, 86);
+            this.groupBox3.Size = new System.Drawing.Size(762, 86);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Importazione File";
@@ -636,22 +682,223 @@
             this.btnCercaFile.UseVisualStyleBackColor = true;
             this.btnCercaFile.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(278, 22);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(126, 23);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "Pulisci campi";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 27);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(804, 657);
+            this.tabControl1.TabIndex = 18;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.btnCercaODL);
+            this.tabPage1.Controls.Add(this.txtBarcodeODL);
+            this.tabPage1.Controls.Add(this.btnSCaricaNodi);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(796, 631);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "ODL";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.txtTrasferimento);
+            this.tabPage2.Controls.Add(this.label28);
+            this.tabPage2.Controls.Add(this.chkConsolidaTrasferimento);
+            this.tabPage2.Controls.Add(this.tcxtAnagraficaBCTR);
+            this.tabPage2.Controls.Add(this.label27);
+            this.tabPage2.Controls.Add(this.btnCaricaTrasferimento);
+            this.tabPage2.Controls.Add(this.txtIdmagazzTR);
+            this.tabPage2.Controls.Add(this.label24);
+            this.tabPage2.Controls.Add(this.txtArticoloTR);
+            this.tabPage2.Controls.Add(this.txtQuantitaTR);
+            this.tabPage2.Controls.Add(this.label25);
+            this.tabPage2.Controls.Add(this.label26);
+            this.tabPage2.Controls.Add(this.btnPulisciTrasferimenti);
+            this.tabPage2.Controls.Add(this.btnCercaTrasferimenti);
+            this.tabPage2.Controls.Add(this.txtBarcodeTrasferimento);
+            this.tabPage2.Controls.Add(this.label23);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(796, 631);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "TRASFERIMENTI";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnPulisciTrasferimenti
+            // 
+            this.btnPulisciTrasferimenti.Location = new System.Drawing.Point(281, 38);
+            this.btnPulisciTrasferimenti.Name = "btnPulisciTrasferimenti";
+            this.btnPulisciTrasferimenti.Size = new System.Drawing.Size(126, 23);
+            this.btnPulisciTrasferimenti.TabIndex = 21;
+            this.btnPulisciTrasferimenti.Text = "Pulisci campi";
+            this.btnPulisciTrasferimenti.UseVisualStyleBackColor = true;
+            this.btnPulisciTrasferimenti.Click += new System.EventHandler(this.btnPulisciTrasferimenti_Click);
+            // 
+            // btnCercaTrasferimenti
+            // 
+            this.btnCercaTrasferimenti.Location = new System.Drawing.Point(159, 38);
+            this.btnCercaTrasferimenti.Name = "btnCercaTrasferimenti";
+            this.btnCercaTrasferimenti.Size = new System.Drawing.Size(75, 23);
+            this.btnCercaTrasferimenti.TabIndex = 18;
+            this.btnCercaTrasferimenti.Text = "Cerca";
+            this.btnCercaTrasferimenti.UseVisualStyleBackColor = true;
+            this.btnCercaTrasferimenti.Click += new System.EventHandler(this.btnCercaTrasferimenti_Click);
+            // 
+            // txtBarcodeTrasferimento
+            // 
+            this.txtBarcodeTrasferimento.Location = new System.Drawing.Point(20, 40);
+            this.txtBarcodeTrasferimento.Name = "txtBarcodeTrasferimento";
+            this.txtBarcodeTrasferimento.Size = new System.Drawing.Size(127, 20);
+            this.txtBarcodeTrasferimento.TabIndex = 19;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(20, 24);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(59, 13);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "BARCODE";
+            // 
+            // txtIdmagazzTR
+            // 
+            this.txtIdmagazzTR.Location = new System.Drawing.Point(20, 104);
+            this.txtIdmagazzTR.Name = "txtIdmagazzTR";
+            this.txtIdmagazzTR.ReadOnly = true;
+            this.txtIdmagazzTR.Size = new System.Drawing.Size(127, 20);
+            this.txtIdmagazzTR.TabIndex = 22;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(20, 88);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(63, 13);
+            this.label24.TabIndex = 23;
+            this.label24.Text = "IDMAGAZZ";
+            // 
+            // txtArticoloTR
+            // 
+            this.txtArticoloTR.Location = new System.Drawing.Point(182, 104);
+            this.txtArticoloTR.Name = "txtArticoloTR";
+            this.txtArticoloTR.ReadOnly = true;
+            this.txtArticoloTR.Size = new System.Drawing.Size(127, 20);
+            this.txtArticoloTR.TabIndex = 24;
+            // 
+            // txtQuantitaTR
+            // 
+            this.txtQuantitaTR.Location = new System.Drawing.Point(344, 104);
+            this.txtQuantitaTR.Name = "txtQuantitaTR";
+            this.txtQuantitaTR.ReadOnly = true;
+            this.txtQuantitaTR.Size = new System.Drawing.Size(127, 20);
+            this.txtQuantitaTR.TabIndex = 25;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(344, 88);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(64, 13);
+            this.label25.TabIndex = 26;
+            this.label25.Text = "QUANTITA\'";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(182, 88);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(61, 13);
+            this.label26.TabIndex = 27;
+            this.label26.Text = "ARTICOLO";
+            // 
+            // btnCaricaTrasferimento
+            // 
+            this.btnCaricaTrasferimento.Location = new System.Drawing.Point(236, 180);
+            this.btnCaricaTrasferimento.Name = "btnCaricaTrasferimento";
+            this.btnCaricaTrasferimento.Size = new System.Drawing.Size(151, 38);
+            this.btnCaricaTrasferimento.TabIndex = 28;
+            this.btnCaricaTrasferimento.Text = "Migra ordine di produzione";
+            this.btnCaricaTrasferimento.UseVisualStyleBackColor = true;
+            this.btnCaricaTrasferimento.Click += new System.EventHandler(this.btnCaricaTrasferimento_Click);
+            // 
+            // tcxtAnagraficaBCTR
+            // 
+            this.tcxtAnagraficaBCTR.Location = new System.Drawing.Point(23, 190);
+            this.tcxtAnagraficaBCTR.Name = "tcxtAnagraficaBCTR";
+            this.tcxtAnagraficaBCTR.ReadOnly = true;
+            this.tcxtAnagraficaBCTR.Size = new System.Drawing.Size(127, 20);
+            this.tcxtAnagraficaBCTR.TabIndex = 29;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(23, 174);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(75, 13);
+            this.label27.TabIndex = 30;
+            this.label27.Text = "Anagrafica BC";
+            // 
+            // chkConsolidaTrasferimento
+            // 
+            this.chkConsolidaTrasferimento.AutoSize = true;
+            this.chkConsolidaTrasferimento.Location = new System.Drawing.Point(439, 193);
+            this.chkConsolidaTrasferimento.Name = "chkConsolidaTrasferimento";
+            this.chkConsolidaTrasferimento.Size = new System.Drawing.Size(125, 17);
+            this.chkConsolidaTrasferimento.TabIndex = 31;
+            this.chkConsolidaTrasferimento.Text = "Consolida magazzino";
+            this.chkConsolidaTrasferimento.UseVisualStyleBackColor = true;
+            // 
+            // txtTrasferimento
+            // 
+            this.txtTrasferimento.Location = new System.Drawing.Point(509, 104);
+            this.txtTrasferimento.Name = "txtTrasferimento";
+            this.txtTrasferimento.ReadOnly = true;
+            this.txtTrasferimento.Size = new System.Drawing.Size(127, 20);
+            this.txtTrasferimento.TabIndex = 32;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(509, 88);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(99, 13);
+            this.label28.TabIndex = 33;
+            this.label28.Text = "TRASFERIMENTO";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnCercaODL;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 799);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(844, 809);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lblCompany);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.txtMessaggi);
-            this.Controls.Add(this.btnSCaricaNodi);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtBarcodeODL);
-            this.Controls.Add(this.btnCercaODL);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Migrazione ODL";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -661,6 +908,11 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -724,6 +976,28 @@
         private System.Windows.Forms.Button btnEseguiMigrazione;
         private System.Windows.Forms.Button btnCercaFile;
         private System.Windows.Forms.CheckBox chkSoloRVL;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtIDTABFAS;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox tcxtAnagraficaBCTR;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button btnCaricaTrasferimento;
+        private System.Windows.Forms.TextBox txtIdmagazzTR;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txtArticoloTR;
+        private System.Windows.Forms.TextBox txtQuantitaTR;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button btnPulisciTrasferimenti;
+        private System.Windows.Forms.Button btnCercaTrasferimenti;
+        private System.Windows.Forms.TextBox txtBarcodeTrasferimento;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.CheckBox chkConsolidaTrasferimento;
+        private System.Windows.Forms.TextBox txtTrasferimento;
+        private System.Windows.Forms.Label label28;
     }
 }
 
