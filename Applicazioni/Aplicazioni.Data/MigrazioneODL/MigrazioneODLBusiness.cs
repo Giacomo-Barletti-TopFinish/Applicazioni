@@ -29,6 +29,14 @@ namespace Applicazioni.Data.MigrazioneODL
             a.GetTrasferimenti(ds, Barcode);
         }
         [DataContext]
+        public void GetUSR_PRD_MOVFASI_Trasferimento(MigrazioneODLDS ds, String IDMAGAZZ)
+        {
+            if (ds.USR_PRD_MOVFASI.Any(x => x.IDMAGAZZ == IDMAGAZZ)) return;
+
+            MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+            a.GetUSR_PRD_MOVFASI_Trasferimento(ds, IDMAGAZZ);
+        }
+        [DataContext]
         public void GetTask(MigrazioneODLDS ds, String IDTABFAS)
         {
             if (ds.BC_TASK.Any(x => x.IDTABFAS == IDTABFAS)) return;
@@ -55,6 +63,19 @@ namespace Applicazioni.Data.MigrazioneODL
             }
             return ds.USR_PRD_FASI.Where(x => x.IDPRDFASE == IDPRDFASE && x.AZIENDA == AZIENDA).FirstOrDefault();
         }
+
+        [DataContext]
+        public MigrazioneODLDS.USR_PRD_FASIRow GetUSR_PRD_FASIParde(MigrazioneODLDS ds, String IDPRDFASEPADRE, string AZIENDA)
+        {
+            MigrazioneODLDS.USR_PRD_FASIRow RIGA = ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == IDPRDFASEPADRE && x.AZIENDA == AZIENDA).FirstOrDefault();
+            if (RIGA == null)
+            {
+                MigrazioneODLAdapter a = new MigrazioneODLAdapter(DbConnection, DbTransaction);
+                a.GetUSR_PRD_FASIPadre(ds, IDPRDFASEPADRE, AZIENDA);
+            }
+            return ds.USR_PRD_FASI.Where(x => !x.IsIDPRDFASEPADRENull() && x.IDPRDFASEPADRE == IDPRDFASEPADRE && x.AZIENDA == AZIENDA).FirstOrDefault();
+        }
+
 
         [DataContext]
         public void GetCLIFO(MigrazioneODLDS ds, String CodiceClifo)

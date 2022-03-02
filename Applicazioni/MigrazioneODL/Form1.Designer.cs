@@ -90,22 +90,22 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnPulisciTrasferimenti = new System.Windows.Forms.Button();
-            this.btnCercaTrasferimenti = new System.Windows.Forms.Button();
-            this.txtBarcodeTrasferimento = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
+            this.txtTrasferimento = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.chkConsolidaTrasferimento = new System.Windows.Forms.CheckBox();
+            this.tcxtAnagraficaBCTR = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.btnCaricaTrasferimento = new System.Windows.Forms.Button();
             this.txtIdmagazzTR = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.txtArticoloTR = new System.Windows.Forms.TextBox();
             this.txtQuantitaTR = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.btnCaricaTrasferimento = new System.Windows.Forms.Button();
-            this.tcxtAnagraficaBCTR = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.chkConsolidaTrasferimento = new System.Windows.Forms.CheckBox();
-            this.txtTrasferimento = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
+            this.btnPulisciTrasferimenti = new System.Windows.Forms.Button();
+            this.btnCercaTrasferimenti = new System.Windows.Forms.Button();
+            this.txtBarcodeTrasferimento = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -696,7 +696,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 27);
+            this.tabControl1.Location = new System.Drawing.Point(12, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(804, 657);
@@ -746,41 +746,59 @@
             this.tabPage2.Text = "TRASFERIMENTI";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnPulisciTrasferimenti
+            // txtTrasferimento
             // 
-            this.btnPulisciTrasferimenti.Location = new System.Drawing.Point(281, 38);
-            this.btnPulisciTrasferimenti.Name = "btnPulisciTrasferimenti";
-            this.btnPulisciTrasferimenti.Size = new System.Drawing.Size(126, 23);
-            this.btnPulisciTrasferimenti.TabIndex = 21;
-            this.btnPulisciTrasferimenti.Text = "Pulisci campi";
-            this.btnPulisciTrasferimenti.UseVisualStyleBackColor = true;
-            this.btnPulisciTrasferimenti.Click += new System.EventHandler(this.btnPulisciTrasferimenti_Click);
+            this.txtTrasferimento.Location = new System.Drawing.Point(509, 104);
+            this.txtTrasferimento.Name = "txtTrasferimento";
+            this.txtTrasferimento.ReadOnly = true;
+            this.txtTrasferimento.Size = new System.Drawing.Size(127, 20);
+            this.txtTrasferimento.TabIndex = 32;
             // 
-            // btnCercaTrasferimenti
+            // label28
             // 
-            this.btnCercaTrasferimenti.Location = new System.Drawing.Point(159, 38);
-            this.btnCercaTrasferimenti.Name = "btnCercaTrasferimenti";
-            this.btnCercaTrasferimenti.Size = new System.Drawing.Size(75, 23);
-            this.btnCercaTrasferimenti.TabIndex = 18;
-            this.btnCercaTrasferimenti.Text = "Cerca";
-            this.btnCercaTrasferimenti.UseVisualStyleBackColor = true;
-            this.btnCercaTrasferimenti.Click += new System.EventHandler(this.btnCercaTrasferimenti_Click);
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(509, 88);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(99, 13);
+            this.label28.TabIndex = 33;
+            this.label28.Text = "TRASFERIMENTO";
             // 
-            // txtBarcodeTrasferimento
+            // chkConsolidaTrasferimento
             // 
-            this.txtBarcodeTrasferimento.Location = new System.Drawing.Point(20, 40);
-            this.txtBarcodeTrasferimento.Name = "txtBarcodeTrasferimento";
-            this.txtBarcodeTrasferimento.Size = new System.Drawing.Size(127, 20);
-            this.txtBarcodeTrasferimento.TabIndex = 19;
+            this.chkConsolidaTrasferimento.AutoSize = true;
+            this.chkConsolidaTrasferimento.Location = new System.Drawing.Point(439, 193);
+            this.chkConsolidaTrasferimento.Name = "chkConsolidaTrasferimento";
+            this.chkConsolidaTrasferimento.Size = new System.Drawing.Size(125, 17);
+            this.chkConsolidaTrasferimento.TabIndex = 31;
+            this.chkConsolidaTrasferimento.Text = "Consolida magazzino";
+            this.chkConsolidaTrasferimento.UseVisualStyleBackColor = true;
             // 
-            // label23
+            // tcxtAnagraficaBCTR
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(20, 24);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(59, 13);
-            this.label23.TabIndex = 20;
-            this.label23.Text = "BARCODE";
+            this.tcxtAnagraficaBCTR.Location = new System.Drawing.Point(23, 190);
+            this.tcxtAnagraficaBCTR.Name = "tcxtAnagraficaBCTR";
+            this.tcxtAnagraficaBCTR.ReadOnly = true;
+            this.tcxtAnagraficaBCTR.Size = new System.Drawing.Size(127, 20);
+            this.tcxtAnagraficaBCTR.TabIndex = 29;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(23, 174);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(75, 13);
+            this.label27.TabIndex = 30;
+            this.label27.Text = "Anagrafica BC";
+            // 
+            // btnCaricaTrasferimento
+            // 
+            this.btnCaricaTrasferimento.Location = new System.Drawing.Point(236, 180);
+            this.btnCaricaTrasferimento.Name = "btnCaricaTrasferimento";
+            this.btnCaricaTrasferimento.Size = new System.Drawing.Size(151, 38);
+            this.btnCaricaTrasferimento.TabIndex = 28;
+            this.btnCaricaTrasferimento.Text = "Migra ordine di produzione";
+            this.btnCaricaTrasferimento.UseVisualStyleBackColor = true;
+            this.btnCaricaTrasferimento.Click += new System.EventHandler(this.btnCaricaTrasferimento_Click);
             // 
             // txtIdmagazzTR
             // 
@@ -833,59 +851,41 @@
             this.label26.TabIndex = 27;
             this.label26.Text = "ARTICOLO";
             // 
-            // btnCaricaTrasferimento
+            // btnPulisciTrasferimenti
             // 
-            this.btnCaricaTrasferimento.Location = new System.Drawing.Point(236, 180);
-            this.btnCaricaTrasferimento.Name = "btnCaricaTrasferimento";
-            this.btnCaricaTrasferimento.Size = new System.Drawing.Size(151, 38);
-            this.btnCaricaTrasferimento.TabIndex = 28;
-            this.btnCaricaTrasferimento.Text = "Migra ordine di produzione";
-            this.btnCaricaTrasferimento.UseVisualStyleBackColor = true;
-            this.btnCaricaTrasferimento.Click += new System.EventHandler(this.btnCaricaTrasferimento_Click);
+            this.btnPulisciTrasferimenti.Location = new System.Drawing.Point(281, 38);
+            this.btnPulisciTrasferimenti.Name = "btnPulisciTrasferimenti";
+            this.btnPulisciTrasferimenti.Size = new System.Drawing.Size(126, 23);
+            this.btnPulisciTrasferimenti.TabIndex = 21;
+            this.btnPulisciTrasferimenti.Text = "Pulisci campi";
+            this.btnPulisciTrasferimenti.UseVisualStyleBackColor = true;
+            this.btnPulisciTrasferimenti.Click += new System.EventHandler(this.btnPulisciTrasferimenti_Click);
             // 
-            // tcxtAnagraficaBCTR
+            // btnCercaTrasferimenti
             // 
-            this.tcxtAnagraficaBCTR.Location = new System.Drawing.Point(23, 190);
-            this.tcxtAnagraficaBCTR.Name = "tcxtAnagraficaBCTR";
-            this.tcxtAnagraficaBCTR.ReadOnly = true;
-            this.tcxtAnagraficaBCTR.Size = new System.Drawing.Size(127, 20);
-            this.tcxtAnagraficaBCTR.TabIndex = 29;
+            this.btnCercaTrasferimenti.Location = new System.Drawing.Point(159, 38);
+            this.btnCercaTrasferimenti.Name = "btnCercaTrasferimenti";
+            this.btnCercaTrasferimenti.Size = new System.Drawing.Size(75, 23);
+            this.btnCercaTrasferimenti.TabIndex = 18;
+            this.btnCercaTrasferimenti.Text = "Cerca";
+            this.btnCercaTrasferimenti.UseVisualStyleBackColor = true;
+            this.btnCercaTrasferimenti.Click += new System.EventHandler(this.btnCercaTrasferimenti_Click);
             // 
-            // label27
+            // txtBarcodeTrasferimento
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(23, 174);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(75, 13);
-            this.label27.TabIndex = 30;
-            this.label27.Text = "Anagrafica BC";
+            this.txtBarcodeTrasferimento.Location = new System.Drawing.Point(20, 40);
+            this.txtBarcodeTrasferimento.Name = "txtBarcodeTrasferimento";
+            this.txtBarcodeTrasferimento.Size = new System.Drawing.Size(127, 20);
+            this.txtBarcodeTrasferimento.TabIndex = 19;
             // 
-            // chkConsolidaTrasferimento
+            // label23
             // 
-            this.chkConsolidaTrasferimento.AutoSize = true;
-            this.chkConsolidaTrasferimento.Location = new System.Drawing.Point(439, 193);
-            this.chkConsolidaTrasferimento.Name = "chkConsolidaTrasferimento";
-            this.chkConsolidaTrasferimento.Size = new System.Drawing.Size(125, 17);
-            this.chkConsolidaTrasferimento.TabIndex = 31;
-            this.chkConsolidaTrasferimento.Text = "Consolida magazzino";
-            this.chkConsolidaTrasferimento.UseVisualStyleBackColor = true;
-            // 
-            // txtTrasferimento
-            // 
-            this.txtTrasferimento.Location = new System.Drawing.Point(509, 104);
-            this.txtTrasferimento.Name = "txtTrasferimento";
-            this.txtTrasferimento.ReadOnly = true;
-            this.txtTrasferimento.Size = new System.Drawing.Size(127, 20);
-            this.txtTrasferimento.TabIndex = 32;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(509, 88);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(99, 13);
-            this.label28.TabIndex = 33;
-            this.label28.Text = "TRASFERIMENTO";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(20, 24);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(59, 13);
+            this.label23.TabIndex = 20;
+            this.label23.Text = "BARCODE";
             // 
             // Form1
             // 

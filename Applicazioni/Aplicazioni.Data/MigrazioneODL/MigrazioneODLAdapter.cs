@@ -29,6 +29,20 @@ namespace Applicazioni.Data.MigrazioneODL
                 da.Fill(ds.USR_PRD_MOVFASI);
             }
         }
+        public void GetUSR_PRD_MOVFASI_Trasferimento(MigrazioneODLDS ds, String IDMAGAZZ)
+        {
+
+            string select = @"select * from (select * from usr_prd_movfasi where idmagazz = $P<IDMAGAZZ> 
+and substr(nummovfase,1,3)='ODL' order by datamovfase desc)T where rownum = 1 ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, IDMAGAZZ);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_MOVFASI);
+            }
+        }
 
         public void GetTrasferimenti(MigrazioneODLDS ds, String Barcode)
         {
@@ -256,6 +270,21 @@ namespace Applicazioni.Data.MigrazioneODL
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDPRDFASE", DbType.String, IDPRDFASE);
+            ps.AddParam("AZIENDA", DbType.String, AZIENDA);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.USR_PRD_FASI);
+            }
+        }
+
+        public void GetUSR_PRD_FASIPadre(MigrazioneODLDS ds, String IDPRDFASEPADRE, string AZIENDA)
+        {
+
+            string select = @"SELECT * FROM USR_PRD_FASI WHERE IDPRDFASEPADRE= $P<IDPRDFASEPADRE> AND AZIENDA = $P<AZIENDA>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRDFASEPADRE", DbType.String, IDPRDFASEPADRE);
             ps.AddParam("AZIENDA", DbType.String, AZIENDA);
 
             using (DbDataAdapter da = BuildDataAdapter(select, ps))

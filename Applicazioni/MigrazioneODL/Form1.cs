@@ -506,6 +506,60 @@ namespace MigrazioneODL
                     txtTrasferimento.Text = barcode;
                     tcxtAnagraficaBCTR.Text = (trasferimento.IsBCNull()) ? String.Empty : trasferimento.BC;
 
+                    if (trasferimento.IsBCNull())
+                    {
+                        bMigrazioneODL.GetUSR_PRD_MOVFASI_Trasferimento(_ds, trasferimento.IDMAGAZZ);
+
+                        MigrazioneODLDS.USR_PRD_MOVFASIRow odl = _ds.USR_PRD_MOVFASI.Where(x => x.IDMAGAZZ == trasferimento.IDMAGAZZ).FirstOrDefault();
+                        if(odl == null)
+                        {
+                            txtMessaggi.Text = "ODL non trovato";
+                            return trasferimento;
+                        }
+                        MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, odl.IDMAGAZZ);
+
+                        MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(_ds, odl.IsIDPRDFASENull() ? string.Empty : odl.IDPRDFASE, odl.AZIENDA);
+                        if (prdFase == null && anagrafica == null)
+                        {
+                            txtMessaggi.Text = string.Format("Non migrato: USR PRD FASE non trovata ");
+                            return trasferimento;
+                        }
+                        bool errore = false;
+                        bool continua = true;
+                        int iterazioni = 0;
+                        while (anagrafica == null && continua )
+                        {
+                             prdFase = bMigrazioneODL.GetUSR_PRD_FASIParde(_ds, prdFase.IsIDPRDFASENull() ? string.Empty : prdFase.IDPRDFASE, odl.AZIENDA);
+
+                            if (prdFase == null)
+                            {
+                                //                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
+                                txtMessaggi.Text = "Non migrato: impossibile trovare una anagrafica padre";
+                                continua = false;
+                                errore = true;
+                                return trasferimento;
+                            }
+                                anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, prdFase.IDMAGAZZ);
+                            iterazioni++;
+                            if(iterazioni==70)
+                            {
+                                txtMessaggi.Text = "Impossibile procedere";
+                                return trasferimento;
+                            }
+                        }
+
+                        if (errore) return trasferimento;
+
+                        if (anagrafica == null)
+                        {
+                            txtMessaggi.Text = string.Format("Non migrato :anagrafica non trovata ");
+                            return trasferimento;
+                        }
+                        trasferimento.BC = anagrafica.BC;
+                        tcxtAnagraficaBCTR.Text = anagrafica.BC;
+                    }
+
+
                 }
                 return trasferimento;
             }
@@ -560,10 +614,6 @@ namespace MigrazioneODL
 
             using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
             {
-
-
-
-
                 bMigrazioneODL.GetCLIFO(_ds, odl.CODICECLIFO);
                 MigrazioneODLDS.CLIFORow reparto = _ds.CLIFO.Where(x => x.CODICE == odl.CODICECLIFO).FirstOrDefault();
 
@@ -1047,26 +1097,41 @@ namespace MigrazioneODL
 
         private void btnCercaTrasferimenti_Click(object sender, EventArgs e)
         {
-            _ds = new MigrazioneODLDS();
-            string barcode = txtBarcodeTrasferimento.Text;
-            txtBarcodeTrasferimento.Text = string.Empty;
-
-            txtBarcodeTrasferimento.Text = string.Empty;
-            txtIdmagazzTR.Text = string.Empty;
-            txtArticoloTR.Text = string.Empty;
-            txtQuantitaTR.Text = string.Empty;
-            txtTrasferimento.Text = string.Empty;
-            tcxtAnagraficaBCTR.Text = string.Empty;
-
-            if (!string.IsNullOrEmpty(barcode))
+            try
             {
-                MigrazioneODLDS.TRASFERIMENTIRVLRow trasferimento = estraDatiTrasferimento(barcode);
+                Cursor.Current = Cursors.WaitCursor;
+
+                _ds = new MigrazioneODLDS();
+                string barcode = txtBarcodeTrasferimento.Text;
+                txtBarcodeTrasferimento.Text = string.Empty;
+
+                txtBarcodeTrasferimento.Text = string.Empty;
+                txtIdmagazzTR.Text = string.Empty;
+                txtArticoloTR.Text = string.Empty;
+                txtQuantitaTR.Text = string.Empty;
+                txtTrasferimento.Text = string.Empty;
+                tcxtAnagraficaBCTR.Text = string.Empty;
+
+                if (!string.IsNullOrEmpty(barcode))
+                {
+                    MigrazioneODLDS.TRASFERIMENTIRVLRow trasferimento = estraDatiTrasferimento(barcode);
+                }
             }
+            catch (Exception ex)
+            {
+                txtMessaggi.Text = ex.Message;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                txtBarcodeTrasferimento.Focus();
+            }
+
         }
 
         private void btnCaricaTrasferimento_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(tcxtAnagraficaBCTR.Text))
+            if (string.IsNullOrEmpty(tcxtAnagraficaBCTR.Text))
             {
                 txtMessaggi.Text = "Impossibile procedere senza un'anagrafica BC!!";
                 return;
@@ -1103,6 +1168,10 @@ namespace MigrazioneODL
                 }
                 txtMessaggi.Text = sb.ToString();
             }
+            finally
+            {
+                txtBarcodeTrasferimento.Focus();
+            }
         }
 
         private void btnPulisciTrasferimenti_Click(object sender, EventArgs e)
@@ -1112,6 +1181,8 @@ namespace MigrazioneODL
             txtArticoloTR.Text = string.Empty;
             txtQuantitaTR.Text = string.Empty;
             txtTrasferimento.Text = string.Empty;
+            tcxtAnagraficaBCTR.Text = string.Empty;
+
             txtBarcodeTrasferimento.Focus();
         }
     }
