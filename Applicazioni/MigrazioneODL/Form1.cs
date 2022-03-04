@@ -1,4 +1,5 @@
-﻿using Applicazioni.Data.EstraiProdottiFiniti;
+﻿using Applicazioni.BLL;
+using Applicazioni.Data.EstraiProdottiFiniti;
 using Applicazioni.Data.MigrazioneODL;
 using Applicazioni.Entities;
 using EstraiProdottiFiniti;
@@ -511,7 +512,7 @@ namespace MigrazioneODL
                         bMigrazioneODL.GetUSR_PRD_MOVFASI_Trasferimento(_ds, trasferimento.IDMAGAZZ);
 
                         MigrazioneODLDS.USR_PRD_MOVFASIRow odl = _ds.USR_PRD_MOVFASI.Where(x => x.IDMAGAZZ == trasferimento.IDMAGAZZ).FirstOrDefault();
-                        if(odl == null)
+                        if (odl == null)
                         {
                             txtMessaggi.Text = "ODL non trovato";
                             return trasferimento;
@@ -527,9 +528,9 @@ namespace MigrazioneODL
                         bool errore = false;
                         bool continua = true;
                         int iterazioni = 0;
-                        while (anagrafica == null && continua )
+                        while (anagrafica == null && continua)
                         {
-                             prdFase = bMigrazioneODL.GetUSR_PRD_FASIParde(_ds, prdFase.IsIDPRDFASENull() ? string.Empty : prdFase.IDPRDFASE, odl.AZIENDA);
+                            prdFase = bMigrazioneODL.GetUSR_PRD_FASIParde(_ds, prdFase.IsIDPRDFASENull() ? string.Empty : prdFase.IDPRDFASE, odl.AZIENDA);
 
                             if (prdFase == null)
                             {
@@ -539,9 +540,9 @@ namespace MigrazioneODL
                                 errore = true;
                                 return trasferimento;
                             }
-                                anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, prdFase.IDMAGAZZ);
+                            anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, prdFase.IDMAGAZZ);
                             iterazioni++;
-                            if(iterazioni==70)
+                            if (iterazioni == 70)
                             {
                                 txtMessaggi.Text = "Impossibile procedere";
                                 return trasferimento;
@@ -1184,6 +1185,106 @@ namespace MigrazioneODL
             tcxtAnagraficaBCTR.Text = string.Empty;
 
             txtBarcodeTrasferimento.Focus();
+        }
+
+        private void btnPulisciAnagrafica_Click(object sender, EventArgs e)
+        {
+            txtAnagBC.Text = string.Empty;
+            txtAnagIdmagazz.Text = string.Empty;
+            txtAnagModello.Text = string.Empty;
+            txtMessaggi.Text = string.Empty;
+        }
+
+        private void btnCercaAnagarafica_Click(object sender, EventArgs e)
+        {
+            txtAnagBC.Text = string.Empty;
+
+            txtAnagModello.Text = string.Empty;
+            txtMessaggi.Text = string.Empty;
+
+            string IDMAGAZZ = txtAnagIdmagazz.Text;
+            if (IDMAGAZZ.Contains("RVL")) IDMAGAZZ = IDMAGAZZ.Replace("RVL", string.Empty);
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
+                {
+
+                    if (!string.IsNullOrEmpty(IDMAGAZZ))
+                    {
+                        Anagrafica a = new Anagrafica();
+                        AnagraficaDS.MAGAZZRow m = a.GetMAGAZZ(IDMAGAZZ);
+                        if (m != null) txtAnagModello.Text = m.MODELLO;
+
+                        bMigrazioneODL.GetUSR_PRD_MOVFASI_Trasferimento(_ds, IDMAGAZZ);
+
+                        MigrazioneODLDS.USR_PRD_MOVFASIRow odl = _ds.USR_PRD_MOVFASI.Where(x => x.IDMAGAZZ == IDMAGAZZ).FirstOrDefault();
+                        if (odl == null)
+                        {
+                            txtMessaggi.Text = "ODL non trovato";
+                            return;
+                        }
+                        MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, odl.IDMAGAZZ);
+                        
+                        MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(_ds, odl.IsIDPRDFASENull() ? string.Empty : odl.IDPRDFASE, odl.AZIENDA);
+                        if (prdFase == null && anagrafica == null)
+                        {
+                            txtMessaggi.Text = string.Format("Non migrato: USR PRD FASE non trovata ");
+                            return;
+                        }
+                        bool errore = false;
+                        bool continua = true;
+                        int iterazioni = 0;
+                        while (anagrafica == null && continua)
+                        {
+                            prdFase = bMigrazioneODL.GetUSR_PRD_FASIParde(_ds, prdFase.IsIDPRDFASENull() ? string.Empty : prdFase.IDPRDFASE, odl.AZIENDA);
+
+                            if (prdFase == null)
+                            {
+                                //                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
+                                txtMessaggi.Text = "Non migrato: impossibile trovare una anagrafica padre";
+                                continua = false;
+                                errore = true;
+                                return;
+                            }
+                            anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, prdFase.IDMAGAZZ);
+                            iterazioni++;
+                            if (iterazioni == 70)
+                            {
+                                txtMessaggi.Text = "Impossibile procedere";
+                                return;
+                            }
+                        }
+
+                        if (errore) return;
+
+                        if (anagrafica == null)
+                        {
+                            txtMessaggi.Text = string.Format("Non migrato :anagrafica non trovata ");
+                            return;
+                        }
+                        txtAnagBC.Text = anagrafica.BC;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("ERRORE IRREVERSIBILE");
+                while (ex != null)
+                {
+                    sb.AppendLine(ex.Message);
+                    ex = ex.InnerException;
+                }
+                txtMessaggi.Text = sb.ToString();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 

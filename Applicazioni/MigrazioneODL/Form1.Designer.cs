@@ -106,12 +106,22 @@
             this.btnCercaTrasferimenti = new System.Windows.Forms.Button();
             this.txtBarcodeTrasferimento = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnPulisciAnagrafica = new System.Windows.Forms.Button();
+            this.btnCercaAnagarafica = new System.Windows.Forms.Button();
+            this.txtAnagBC = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.txtAnagIdmagazz = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.txtAnagModello = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCercaODL
@@ -696,6 +706,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -887,6 +898,93 @@
             this.label23.TabIndex = 20;
             this.label23.Text = "BARCODE";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnPulisciAnagrafica);
+            this.tabPage3.Controls.Add(this.btnCercaAnagarafica);
+            this.tabPage3.Controls.Add(this.txtAnagBC);
+            this.tabPage3.Controls.Add(this.label29);
+            this.tabPage3.Controls.Add(this.txtAnagIdmagazz);
+            this.tabPage3.Controls.Add(this.label30);
+            this.tabPage3.Controls.Add(this.txtAnagModello);
+            this.tabPage3.Controls.Add(this.label31);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(796, 631);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "ANAGRAFICHE";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnPulisciAnagrafica
+            // 
+            this.btnPulisciAnagrafica.Location = new System.Drawing.Point(422, 141);
+            this.btnPulisciAnagrafica.Name = "btnPulisciAnagrafica";
+            this.btnPulisciAnagrafica.Size = new System.Drawing.Size(75, 23);
+            this.btnPulisciAnagrafica.TabIndex = 38;
+            this.btnPulisciAnagrafica.Text = "Pulisci tutto";
+            this.btnPulisciAnagrafica.UseVisualStyleBackColor = true;
+            this.btnPulisciAnagrafica.Click += new System.EventHandler(this.btnPulisciAnagrafica_Click);
+            // 
+            // btnCercaAnagarafica
+            // 
+            this.btnCercaAnagarafica.Location = new System.Drawing.Point(419, 82);
+            this.btnCercaAnagarafica.Name = "btnCercaAnagarafica";
+            this.btnCercaAnagarafica.Size = new System.Drawing.Size(75, 23);
+            this.btnCercaAnagarafica.TabIndex = 37;
+            this.btnCercaAnagarafica.Text = "Cerca";
+            this.btnCercaAnagarafica.UseVisualStyleBackColor = true;
+            this.btnCercaAnagarafica.Click += new System.EventHandler(this.btnCercaAnagarafica_Click);
+            // 
+            // txtAnagBC
+            // 
+            this.txtAnagBC.Location = new System.Drawing.Point(522, 85);
+            this.txtAnagBC.Name = "txtAnagBC";
+            this.txtAnagBC.ReadOnly = true;
+            this.txtAnagBC.Size = new System.Drawing.Size(223, 20);
+            this.txtAnagBC.TabIndex = 35;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(522, 68);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(92, 13);
+            this.label29.TabIndex = 36;
+            this.label29.Text = "ANAGRAFICA BC";
+            // 
+            // txtAnagIdmagazz
+            // 
+            this.txtAnagIdmagazz.Location = new System.Drawing.Point(29, 85);
+            this.txtAnagIdmagazz.Name = "txtAnagIdmagazz";
+            this.txtAnagIdmagazz.Size = new System.Drawing.Size(163, 20);
+            this.txtAnagIdmagazz.TabIndex = 31;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(29, 68);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(163, 13);
+            this.label30.TabIndex = 32;
+            this.label30.Text = "IDMAGAZZ (RVLXXXXXXXXXX)";
+            // 
+            // txtAnagModello
+            // 
+            this.txtAnagModello.Location = new System.Drawing.Point(225, 85);
+            this.txtAnagModello.Name = "txtAnagModello";
+            this.txtAnagModello.ReadOnly = true;
+            this.txtAnagModello.Size = new System.Drawing.Size(179, 20);
+            this.txtAnagModello.TabIndex = 33;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(225, 68);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(59, 13);
+            this.label31.TabIndex = 34;
+            this.label31.Text = "MODELLO";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnCercaODL;
@@ -913,6 +1011,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -998,6 +1098,15 @@
         private System.Windows.Forms.CheckBox chkConsolidaTrasferimento;
         private System.Windows.Forms.TextBox txtTrasferimento;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btnPulisciAnagrafica;
+        private System.Windows.Forms.Button btnCercaAnagarafica;
+        private System.Windows.Forms.TextBox txtAnagBC;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox txtAnagIdmagazz;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox txtAnagModello;
+        private System.Windows.Forms.Label label31;
     }
 }
 

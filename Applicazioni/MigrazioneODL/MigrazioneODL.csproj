@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\Applicazioni\MigrazioneODL\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.10</MinimumRequiredVersion>
-    <ApplicationRevision>11</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.11</MinimumRequiredVersion>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -121,6 +121,10 @@
     <ProjectReference Include="..\Aplicazioni.Data\Applicazioni.Data.csproj">
       <Project>{1A2FF071-6851-4CED-8851-976E881E9E9D}</Project>
       <Name>Applicazioni.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applicazioni.BLL\Applicazioni.BLL.csproj">
+      <Project>{EE28EE16-BE7B-4D2B-972B-4C0607376ADE}</Project>
+      <Name>Applicazioni.BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Applicazioni.Common\Applicazioni.Common.csproj">
       <Project>{54f6c463-9f23-4199-b679-07e1e099aae6}</Project>
