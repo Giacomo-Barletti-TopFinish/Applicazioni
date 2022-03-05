@@ -2838,7 +2838,7 @@ namespace Applicazioni.Entities {
                         string DEFINITIVO_SN, 
                         string FULLNUMDOC, 
                         System.DateTime DATDOC, 
-                        decimal ANNODOC, 
+                        string ANNODOC, 
                         string NUMDOC, 
                         string CODICECLIFO, 
                         string RAGIONESOC, 
@@ -2848,32 +2848,32 @@ namespace Applicazioni.Entities {
                         string SEGNALATORE, 
                         string SEGNALATORE_RS, 
                         string NUMERORIGHE, 
-                        System.DateTime DATACR, 
-                        System.DateTime DATAVR, 
+                        string DATACR, 
+                        string DATAVR, 
                         string NRRIGA, 
                         string CODICEUNIMI, 
                         string IDMAGAZZ, 
                         string MODELLO, 
                         decimal QTAUNI, 
                         decimal QTATOT, 
-                        decimal QTADAC, 
-                        decimal PREZZOUNI, 
-                        decimal PREZZOTOT, 
-                        decimal VALORE, 
-                        System.DateTime DATACR_DET, 
-                        System.DateTime DATAVR_DET, 
-                        decimal PREZZONET, 
-                        System.DateTime DATA_RICHIESTA, 
-                        System.DateTime DATA_CONFERMA, 
+                        string QTADAC, 
+                        string PREZZOUNI, 
+                        string PREZZOTOT, 
+                        string VALORE, 
+                        string DATACR_DET, 
+                        string DATAVR_DET, 
+                        string PREZZONET, 
+                        string DATA_RICHIESTA, 
+                        string DATA_CONFERMA, 
                         string ID_OC, 
                         string TIPO_OC, 
                         string FULLNUMDOC_OC, 
-                        System.DateTime DATDOC_OC, 
-                        decimal ANNODOC_OC, 
+                        string DATDOC_OC, 
+                        string ANNODOC_OC, 
                         string NUMDOC_OC, 
-                        System.DateTime DATARIF_OC, 
-                        System.DateTime DATACR_OC, 
-                        System.DateTime DATAVR_OC, 
+                        string DATARIF_OC, 
+                        string DATACR_OC, 
+                        string DATAVR_OC, 
                         string RIFERIMENTO, 
                         string DESTINAZIONE, 
                         string ACCESSORISTA, 
@@ -3039,7 +3039,7 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnFULLNUMDOC);
                 this.columnDATDOC = new global::System.Data.DataColumn("DATDOC", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATDOC);
-                this.columnANNODOC = new global::System.Data.DataColumn("ANNODOC", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnANNODOC = new global::System.Data.DataColumn("ANNODOC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnANNODOC);
                 this.columnNUMDOC = new global::System.Data.DataColumn("NUMDOC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNUMDOC);
@@ -3059,9 +3059,9 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnSEGNALATORE_RS);
                 this.columnNUMERORIGHE = new global::System.Data.DataColumn("NUMERORIGHE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNUMERORIGHE);
-                this.columnDATACR = new global::System.Data.DataColumn("DATACR", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATACR = new global::System.Data.DataColumn("DATACR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATACR);
-                this.columnDATAVR = new global::System.Data.DataColumn("DATAVR", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATAVR = new global::System.Data.DataColumn("DATAVR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATAVR);
                 this.columnNRRIGA = new global::System.Data.DataColumn("NRRIGA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNRRIGA);
@@ -3075,23 +3075,23 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnQTAUNI);
                 this.columnQTATOT = new global::System.Data.DataColumn("QTATOT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQTATOT);
-                this.columnQTADAC = new global::System.Data.DataColumn("QTADAC", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnQTADAC = new global::System.Data.DataColumn("QTADAC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQTADAC);
-                this.columnPREZZOUNI = new global::System.Data.DataColumn("PREZZOUNI", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnPREZZOUNI = new global::System.Data.DataColumn("PREZZOUNI", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPREZZOUNI);
-                this.columnPREZZOTOT = new global::System.Data.DataColumn("PREZZOTOT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnPREZZOTOT = new global::System.Data.DataColumn("PREZZOTOT", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPREZZOTOT);
-                this.columnVALORE = new global::System.Data.DataColumn("VALORE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnVALORE = new global::System.Data.DataColumn("VALORE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVALORE);
-                this.columnDATACR_DET = new global::System.Data.DataColumn("DATACR_DET", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATACR_DET = new global::System.Data.DataColumn("DATACR_DET", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATACR_DET);
-                this.columnDATAVR_DET = new global::System.Data.DataColumn("DATAVR_DET", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATAVR_DET = new global::System.Data.DataColumn("DATAVR_DET", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATAVR_DET);
-                this.columnPREZZONET = new global::System.Data.DataColumn("PREZZONET", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnPREZZONET = new global::System.Data.DataColumn("PREZZONET", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPREZZONET);
-                this.columnDATA_RICHIESTA = new global::System.Data.DataColumn("DATA_RICHIESTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATA_RICHIESTA = new global::System.Data.DataColumn("DATA_RICHIESTA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATA_RICHIESTA);
-                this.columnDATA_CONFERMA = new global::System.Data.DataColumn("DATA_CONFERMA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATA_CONFERMA = new global::System.Data.DataColumn("DATA_CONFERMA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATA_CONFERMA);
                 this.columnID_OC = new global::System.Data.DataColumn("ID_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID_OC);
@@ -3099,17 +3099,17 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnTIPO_OC);
                 this.columnFULLNUMDOC_OC = new global::System.Data.DataColumn("FULLNUMDOC_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFULLNUMDOC_OC);
-                this.columnDATDOC_OC = new global::System.Data.DataColumn("DATDOC_OC", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATDOC_OC = new global::System.Data.DataColumn("DATDOC_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATDOC_OC);
-                this.columnANNODOC_OC = new global::System.Data.DataColumn("ANNODOC_OC", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnANNODOC_OC = new global::System.Data.DataColumn("ANNODOC_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnANNODOC_OC);
                 this.columnNUMDOC_OC = new global::System.Data.DataColumn("NUMDOC_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNUMDOC_OC);
-                this.columnDATARIF_OC = new global::System.Data.DataColumn("DATARIF_OC", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATARIF_OC = new global::System.Data.DataColumn("DATARIF_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATARIF_OC);
-                this.columnDATACR_OC = new global::System.Data.DataColumn("DATACR_OC", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATACR_OC = new global::System.Data.DataColumn("DATACR_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATACR_OC);
-                this.columnDATAVR_OC = new global::System.Data.DataColumn("DATAVR_OC", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDATAVR_OC = new global::System.Data.DataColumn("DATAVR_OC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDATAVR_OC);
                 this.columnRIFERIMENTO = new global::System.Data.DataColumn("RIFERIMENTO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRIFERIMENTO);
@@ -3119,12 +3119,12 @@ namespace Applicazioni.Entities {
                 base.Columns.Add(this.columnACCESSORISTA);
                 this.columnRIFERIMENTORIGA = new global::System.Data.DataColumn("RIFERIMENTORIGA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRIFERIMENTORIGA);
-                this.columnAZIENDA.MaxLength = 10;
+                this.columnAZIENDA.MaxLength = 12;
                 this.columnDESTABTIPDOC.MaxLength = 50;
-                this.columnCODICETIPDOC.MaxLength = 3;
-                this.columnCODICETIPOO.MaxLength = 5;
+                this.columnCODICETIPDOC.MaxLength = 12;
+                this.columnCODICETIPOO.MaxLength = 12;
                 this.columnDESTABTIPOO.MaxLength = 50;
-                this.columnCODICECAUTR.MaxLength = 3;
+                this.columnCODICECAUTR.MaxLength = 12;
                 this.columnDESTABCAUTR.MaxLength = 25;
                 this.columnIDVENDITET.MaxLength = 25;
                 this.columnFATTURARE_SN.MaxLength = 2;
@@ -3134,16 +3134,16 @@ namespace Applicazioni.Entities {
                 this.columnNUMDOC.MaxLength = 25;
                 this.columnCODICECLIFO.MaxLength = 10;
                 this.columnRAGIONESOC.MaxLength = 254;
-                this.columnCODINDSP.MaxLength = 3;
-                this.columnFATTURAREA.MaxLength = 10;
-                this.columnFATTURAREALTER.MaxLength = 10;
-                this.columnSEGNALATORE.MaxLength = 10;
+                this.columnCODINDSP.MaxLength = 12;
+                this.columnFATTURAREA.MaxLength = 12;
+                this.columnFATTURAREALTER.MaxLength = 12;
+                this.columnSEGNALATORE.MaxLength = 12;
                 this.columnSEGNALATORE_RS.MaxLength = 254;
-                this.columnNUMERORIGHE.MaxLength = 5;
+                this.columnNUMERORIGHE.MaxLength = 6;
                 this.columnNRRIGA.MaxLength = 5;
                 this.columnCODICEUNIMI.MaxLength = 3;
-                this.columnIDMAGAZZ.MaxLength = 15;
-                this.columnMODELLO.MaxLength = 30;
+                this.columnIDMAGAZZ.MaxLength = 21;
+                this.columnMODELLO.MaxLength = 60;
                 this.columnID_OC.MaxLength = 25;
                 this.columnTIPO_OC.MaxLength = 50;
                 this.columnFULLNUMDOC_OC.MaxLength = 100;
@@ -6732,10 +6732,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal ANNODOC {
+            public string ANNODOC {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.ANNODOCColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.ANNODOCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ANNODOC\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -6892,10 +6892,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATACR {
+            public string DATACR {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATACRColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATACRColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATACR\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -6908,10 +6908,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATAVR {
+            public string DATAVR {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATAVRColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATAVRColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATAVR\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7020,10 +7020,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal QTADAC {
+            public string QTADAC {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.QTADACColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.QTADACColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'QTADAC\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7036,10 +7036,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal PREZZOUNI {
+            public string PREZZOUNI {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.PREZZOUNIColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.PREZZOUNIColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'PREZZOUNI\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7052,10 +7052,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal PREZZOTOT {
+            public string PREZZOTOT {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.PREZZOTOTColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.PREZZOTOTColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'PREZZOTOT\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7068,10 +7068,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal VALORE {
+            public string VALORE {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.VALOREColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.VALOREColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'VALORE\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7084,10 +7084,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATACR_DET {
+            public string DATACR_DET {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATACR_DETColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATACR_DETColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATACR_DET\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7100,10 +7100,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATAVR_DET {
+            public string DATAVR_DET {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATAVR_DETColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATAVR_DETColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATAVR_DET\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7116,10 +7116,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal PREZZONET {
+            public string PREZZONET {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.PREZZONETColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.PREZZONETColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'PREZZONET\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7132,10 +7132,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATA_RICHIESTA {
+            public string DATA_RICHIESTA {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATA_RICHIESTAColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATA_RICHIESTAColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATA_RICHIESTA\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7148,10 +7148,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATA_CONFERMA {
+            public string DATA_CONFERMA {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATA_CONFERMAColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATA_CONFERMAColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATA_CONFERMA\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7212,10 +7212,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATDOC_OC {
+            public string DATDOC_OC {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATDOC_OCColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATDOC_OCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATDOC_OC\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7228,10 +7228,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal ANNODOC_OC {
+            public string ANNODOC_OC {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBOLLE_VENDITA.ANNODOC_OCColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.ANNODOC_OCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ANNODOC_OC\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7260,10 +7260,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATARIF_OC {
+            public string DATARIF_OC {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATARIF_OCColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATARIF_OCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATARIF_OC\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7276,10 +7276,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATACR_OC {
+            public string DATACR_OC {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATACR_OCColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATACR_OCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATACR_OC\' in table \'BOLLE_VENDITA\' is DBNull.", e);
@@ -7292,10 +7292,10 @@ namespace Applicazioni.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime DATAVR_OC {
+            public string DATAVR_OC {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableBOLLE_VENDITA.DATAVR_OCColumn]));
+                        return ((string)(this[this.tableBOLLE_VENDITA.DATAVR_OCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DATAVR_OC\' in table \'BOLLE_VENDITA\' is DBNull.", e);

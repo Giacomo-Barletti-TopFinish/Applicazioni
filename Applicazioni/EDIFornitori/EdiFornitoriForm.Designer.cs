@@ -265,18 +265,17 @@
             // rbRVL
             // 
             this.rbRVL.AutoSize = true;
-            this.rbRVL.Checked = true;
             this.rbRVL.Location = new System.Drawing.Point(11, 31);
             this.rbRVL.Name = "rbRVL";
             this.rbRVL.Size = new System.Drawing.Size(46, 17);
             this.rbRVL.TabIndex = 5;
-            this.rbRVL.TabStop = true;
             this.rbRVL.Text = "RVL";
             this.rbRVL.UseVisualStyleBackColor = true;
             // 
             // rbBusinessCentral
             // 
             this.rbBusinessCentral.AutoSize = true;
+            this.rbBusinessCentral.Checked = true;
             this.rbBusinessCentral.Location = new System.Drawing.Point(86, 31);
             this.rbBusinessCentral.Name = "rbBusinessCentral";
             this.rbBusinessCentral.Size = new System.Drawing.Size(103, 17);
