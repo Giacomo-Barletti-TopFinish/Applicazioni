@@ -8,7 +8,7 @@ namespace Applicazioni.Helpers
 {
     public class ZebraHelper
     {
-        public static void StampaEtichettaUbicazione(string zebraPrinter,string codice, string descrizione, string barcode)
+        public static void StampaEtichettaUbicazione(string zebraPrinter, string codice, string descrizione, string barcode)
         {
             StringBuilder sb = new StringBuilder();
             string fontGrande = "RN,120,80";
@@ -24,7 +24,35 @@ namespace Applicazioni.Helpers
 
             sb.Append(InserisciTesto(posizioneX, 120, fontNormale, descrizione));
 
-            sb.Append(InserisciBarcode128Code(posizioneX,175,barcode));
+            sb.Append(InserisciBarcode128Code(posizioneX, 175, barcode));
+
+            sb.Append("^XZ");
+
+            RawPrinterHelper.SendStringToPrinter(zebraPrinter, sb.ToString());
+        }
+        public static void StampaEtichettaMagazzino(string zebraPrinter, string codiceRVL, string codiceBC, string collocazione, string quantita)
+        {
+            StringBuilder sb = new StringBuilder();
+            string fontGrande = "RN,120,80";
+            string fontNormale = "SN,50,50";
+
+            //string fontGrande = "TN,9,9";
+            //string fontNormale = "QN,20,12";
+
+            int posizioneX = 30;
+
+            sb.Append("^XA");
+            sb.Append(InserisciTesto(posizioneX, 30, fontNormale, codiceRVL));
+            sb.Append(InserisciBarcode128Code(posizioneX, 75, codiceRVL));
+
+            sb.Append(InserisciTesto(posizioneX, 240, fontNormale, codiceBC));
+            sb.Append(InserisciBarcode128Code(posizioneX, 300, codiceBC));
+
+            sb.Append(InserisciTesto(posizioneX, 450, fontGrande, collocazione));
+            string col = string.Format("MTP.{0}", collocazione);
+            sb.Append(InserisciBarcode128Code(posizioneX, 550, col));
+
+            sb.Append(InserisciTesto(posizioneX, 700, fontGrande, quantita));
 
             sb.Append("^XZ");
 

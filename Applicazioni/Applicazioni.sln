@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaricoLavoro", "CaricoLavor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollocazioniZebraFrm", "CollocazioniZebraFrm\CollocazioniZebraFrm.csproj", "{57CA82CA-E65F-4472-B221-D11263D1FB9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtichetteMagazzinoBC", "EtichetteMagazzinoBC\EtichetteMagazzinoBC.csproj", "{33383E16-D00B-4DFC-8E35-1A0C30955A2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{57CA82CA-E65F-4472-B221-D11263D1FB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57CA82CA-E65F-4472-B221-D11263D1FB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57CA82CA-E65F-4472-B221-D11263D1FB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33383E16-D00B-4DFC-8E35-1A0C30955A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33383E16-D00B-4DFC-8E35-1A0C30955A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33383E16-D00B-4DFC-8E35-1A0C30955A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33383E16-D00B-4DFC-8E35-1A0C30955A2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
