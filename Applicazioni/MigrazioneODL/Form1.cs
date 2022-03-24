@@ -1227,7 +1227,7 @@ namespace MigrazioneODL
                             return;
                         }
                         MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, odl.IDMAGAZZ);
-                        
+
                         MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(_ds, odl.IsIDPRDFASENull() ? string.Empty : odl.IDPRDFASE, odl.AZIENDA);
                         if (prdFase == null && anagrafica == null)
                         {
@@ -1269,6 +1269,174 @@ namespace MigrazioneODL
                     }
 
                 }
+            }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("ERRORE IRREVERSIBILE");
+                while (ex != null)
+                {
+                    sb.AppendLine(ex.Message);
+                    ex = ex.InnerException;
+                }
+                txtMessaggi.Text = sb.ToString();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void btnAnagraficaFileCerca_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Text Files (*.txt)|*.txt";
+            openFile.AddExtension = true;
+            openFile.Multiselect = false;
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                txtAnagraficaFileDaVerificare.Text = openFile.FileName;
+            }
+        }
+
+        private void btnAnagraficaConverti_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtMessaggi.Text = string.Empty;
+                Cursor.Current = Cursors.WaitCursor;
+
+                if (string.IsNullOrEmpty(txtAnagraficaFileDaVerificare.Text))
+                {
+                    txtMessaggi.Text = "Seleziona un file";
+                    return;
+                }
+
+                if (!File.Exists(txtAnagraficaFileDaVerificare.Text))
+                {
+                    txtMessaggi.Text = string.Format("Il file {0} non è stato trovato", txtAnagraficaFileDaVerificare.Text);
+                    return;
+                }
+
+                List<string> modelli = new List<string>();
+
+
+                using (FileStream fs = new FileStream(txtAnagraficaFileDaVerificare.Text, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader sr = new StreamReader(fs);
+                    while (!sr.EndOfStream)
+                    {
+                        string modello = sr.ReadLine();
+                        modelli.Add(modello);
+                    }
+                    sr.Close();
+                }
+
+                if (modelli.Count == 0)
+                {
+                    txtMessaggi.Text = string.Format("Il file {0} è vuoto", txtAnagraficaFileDaVerificare.Text);
+                    return;
+                }
+
+                AggiornaMessaggio(string.Format(" ***********  File in elaborazione {0}", txtAnagraficaFileDaVerificare.Text));
+
+                AggiornaMessaggio(string.Format("Trovate {0} righe", modelli.Count));
+
+                StringBuilder sbFileOut = new StringBuilder();
+
+                foreach (string modello in modelli)
+                {
+
+                    using (MigrazioneODLBusiness bMigrazioneODL = new MigrazioneODLBusiness())
+                    {
+
+                        Anagrafica a = new Anagrafica();
+                        AnagraficaDS.MAGAZZRow m = a.GetMAGAZZDaModello(modello);
+                        if (m == null)
+                        {
+                            string msg = string.Format("Articolo RVL {0} non trovato su RVL", modello);
+                            AggiornaMessaggio(msg);
+                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "RVL non trovato"));
+                            continue;
+                        }
+                        string IDMAGAZZ = m.IDMAGAZZ;
+
+                        bMigrazioneODL.GetUSR_PRD_MOVFASI_Trasferimento(_ds, IDMAGAZZ);
+
+                        MigrazioneODLDS.USR_PRD_MOVFASIRow odl = _ds.USR_PRD_MOVFASI.Where(x => x.IDMAGAZZ == IDMAGAZZ).FirstOrDefault();
+                        if (odl == null)
+                        {
+                            string msg = "ODL non trovato";
+                            AggiornaMessaggio(modello + " " + msg);
+                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "ODL non trovato"));
+
+                            continue;
+                        }
+                        MigrazioneODLDS.BC_ANAGRAFICA_PRODUZIONERow anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, odl.IDMAGAZZ);
+
+                        MigrazioneODLDS.USR_PRD_FASIRow prdFase = bMigrazioneODL.GetUSR_PRD_FASI(_ds, odl.IsIDPRDFASENull() ? string.Empty : odl.IDPRDFASE, odl.AZIENDA);
+                        if (prdFase == null && anagrafica == null)
+                        {
+                            AggiornaMessaggio(string.Format("{0} USR PRD FASE non trovata ", modello));
+                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "FASE non trovata"));
+
+                            continue;
+                        }
+                        bool errore = false;
+                        bool continua = true;
+                        int iterazioni = 0;
+                        while (anagrafica == null && continua)
+                        {
+                            prdFase = bMigrazioneODL.GetUSR_PRD_FASIParde(_ds, prdFase.IsIDPRDFASENull() ? string.Empty : prdFase.IDPRDFASE, odl.AZIENDA);
+
+                            if (prdFase == null)
+                            {
+                                //                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
+                                AggiornaMessaggio(modello + " impossibile trovare una anagrafica padre");
+                                sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "BC non trovato"));
+
+                                continua = false;
+                                errore = true;
+                                continue;
+                            }
+                            anagrafica = bMigrazioneODL.GetANAGRAFICA(_ds, prdFase.IDMAGAZZ);
+                            iterazioni++;
+                            if (iterazioni == 70)
+                            {
+                                AggiornaMessaggio(modello + " Impossibile procedere");
+                                sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "BC non trovato"));
+
+                                continue;
+                            }
+                        }
+
+                        if (errore) return;
+
+                        if (anagrafica == null)
+                        {
+                            AggiornaMessaggio(string.Format("{0} Non migrato :anagrafica non trovata ", modello));
+                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "BC non trovato"));
+
+                            continue;
+                        }
+                        sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, anagrafica.BC));
+                    }
+                }
+
+                FileInfo fi = new FileInfo(txtAnagraficaFileDaVerificare.Text);
+                string fileOut = string.Format(@"{0}\ESITO {1}",fi.Directory,fi.Name);
+
+                using (FileStream fs = new FileStream(fileOut, FileMode.Create, FileAccess.Write))
+                {
+                    StreamWriter sw = new StreamWriter(fs);
+                    sw.Write(sbFileOut.ToString());
+                    sw.Flush();
+                    sw.Close();
+                    fs.Close();
+                }
+
+                AggiornaMessaggio("*** OPERAZIONE COMPLETATA ***");
             }
             catch (Exception ex)
             {

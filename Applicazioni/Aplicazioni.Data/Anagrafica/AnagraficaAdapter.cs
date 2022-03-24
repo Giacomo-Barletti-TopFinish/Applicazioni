@@ -28,6 +28,20 @@ namespace Applicazioni.Data.Anagrafica
             }
         }
 
+        public void FillMAGAZZDaModello(AnagraficaDS ds, string Modello)
+        {
+
+            string select = @"SELECT * FROM GRUPPO.MAGAZZ WHERE MODELLO = $P<MODELLO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("MODELLO", DbType.String, Modello);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.MAGAZZ);
+            }
+        }
+
         public void FillUSR_PREV_GRUPPI(AnagraficaDS ds)
         {
             string select = @"SELECT * FROM GRUPPO.USR_PREV_GRUPPI ";

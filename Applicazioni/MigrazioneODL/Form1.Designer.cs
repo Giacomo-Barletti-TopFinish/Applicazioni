@@ -107,6 +107,11 @@
             this.txtBarcodeTrasferimento = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txtAnagraficaFileDaVerificare = new System.Windows.Forms.TextBox();
+            this.btnAnagraficaConverti = new System.Windows.Forms.Button();
+            this.btnAnagraficaFileCerca = new System.Windows.Forms.Button();
             this.btnPulisciAnagrafica = new System.Windows.Forms.Button();
             this.btnCercaAnagarafica = new System.Windows.Forms.Button();
             this.txtAnagBC = new System.Windows.Forms.TextBox();
@@ -122,6 +127,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCercaODL
@@ -900,6 +906,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox4);
             this.tabPage3.Controls.Add(this.btnPulisciAnagrafica);
             this.tabPage3.Controls.Add(this.btnCercaAnagarafica);
             this.tabPage3.Controls.Add(this.txtAnagBC);
@@ -914,6 +921,55 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ANAGRAFICHE";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label32);
+            this.groupBox4.Controls.Add(this.txtAnagraficaFileDaVerificare);
+            this.groupBox4.Controls.Add(this.btnAnagraficaConverti);
+            this.groupBox4.Controls.Add(this.btnAnagraficaFileCerca);
+            this.groupBox4.Location = new System.Drawing.Point(29, 231);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(716, 184);
+            this.groupBox4.TabIndex = 39;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groupBox4";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(21, 42);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(88, 13);
+            this.label32.TabIndex = 40;
+            this.label32.Text = "Fole da verificare";
+            // 
+            // txtAnagraficaFileDaVerificare
+            // 
+            this.txtAnagraficaFileDaVerificare.Location = new System.Drawing.Point(15, 58);
+            this.txtAnagraficaFileDaVerificare.Name = "txtAnagraficaFileDaVerificare";
+            this.txtAnagraficaFileDaVerificare.Size = new System.Drawing.Size(396, 20);
+            this.txtAnagraficaFileDaVerificare.TabIndex = 22;
+            // 
+            // btnAnagraficaConverti
+            // 
+            this.btnAnagraficaConverti.Location = new System.Drawing.Point(541, 57);
+            this.btnAnagraficaConverti.Name = "btnAnagraficaConverti";
+            this.btnAnagraficaConverti.Size = new System.Drawing.Size(75, 23);
+            this.btnAnagraficaConverti.TabIndex = 21;
+            this.btnAnagraficaConverti.Text = "Cerca su BC";
+            this.btnAnagraficaConverti.UseVisualStyleBackColor = true;
+            this.btnAnagraficaConverti.Click += new System.EventHandler(this.btnAnagraficaConverti_Click);
+            // 
+            // btnAnagraficaFileCerca
+            // 
+            this.btnAnagraficaFileCerca.Location = new System.Drawing.Point(429, 57);
+            this.btnAnagraficaFileCerca.Name = "btnAnagraficaFileCerca";
+            this.btnAnagraficaFileCerca.Size = new System.Drawing.Size(75, 23);
+            this.btnAnagraficaFileCerca.TabIndex = 20;
+            this.btnAnagraficaFileCerca.Text = "Cerca";
+            this.btnAnagraficaFileCerca.UseVisualStyleBackColor = true;
+            this.btnAnagraficaFileCerca.Click += new System.EventHandler(this.btnAnagraficaFileCerca_Click);
             // 
             // btnPulisciAnagrafica
             // 
@@ -1013,6 +1069,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1107,6 +1165,11 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox txtAnagModello;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtAnagraficaFileDaVerificare;
+        private System.Windows.Forms.Button btnAnagraficaConverti;
+        private System.Windows.Forms.Button btnAnagraficaFileCerca;
     }
 }
 

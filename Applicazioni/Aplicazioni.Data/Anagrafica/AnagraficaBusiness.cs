@@ -43,6 +43,14 @@ namespace Applicazioni.Data.Anagrafica
         }
 
         [DataContext]
+        public void FillMAGAZZDaModello(AnagraficaDS ds, string Modello)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillMAGAZZDaModello(ds, Modello);
+        }
+
+
+        [DataContext]
         public void FillUSR_PRD_CDDIBA(AnagraficaDS ds)
         {
             AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);

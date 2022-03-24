@@ -23,6 +23,17 @@ namespace Applicazioni.BLL
             }
             return _ds.MAGAZZ.Where(x => x.IDMAGAZZ == IDMAGAZZ).FirstOrDefault();
         }
+        public AnagraficaDS.MAGAZZRow GetMAGAZZDaModello(string Modello)
+        {
+            if (!_ds.MAGAZZ.Any(x => x.IDMAGAZZ == Modello))
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                {
+                    bAnagrafica.FillMAGAZZDaModello(_ds, Modello);
+                }
+            }
+            return _ds.MAGAZZ.Where(x => x.IDMAGAZZ == Modello).FirstOrDefault();
+        }
 
         public Articolo GetArticolo(string IDMAGAZZ)
         {
