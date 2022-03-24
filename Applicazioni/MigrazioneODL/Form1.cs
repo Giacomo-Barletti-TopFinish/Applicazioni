@@ -1328,7 +1328,7 @@ namespace MigrazioneODL
                     while (!sr.EndOfStream)
                     {
                         string modello = sr.ReadLine();
-                        modelli.Add(modello);
+                        modelli.Add(modello.Trim());
                     }
                     sr.Close();
                 }
@@ -1410,7 +1410,7 @@ namespace MigrazioneODL
                             }
                         }
 
-                        if (errore) return;
+                        if (errore) continue;
 
                         if (anagrafica == null)
                         {
