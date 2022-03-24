@@ -933,7 +933,8 @@
             this.groupBox4.Size = new System.Drawing.Size(716, 184);
             this.groupBox4.TabIndex = 39;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Trascodifica Codici";
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
             // label32
             // 

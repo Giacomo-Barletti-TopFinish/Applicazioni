@@ -1355,7 +1355,7 @@ namespace MigrazioneODL
                         AnagraficaDS.MAGAZZRow m = a.GetMAGAZZDaModello(modello);
                         if (m == null)
                         {
-                            string msg = string.Format("Articolo RVL {0} non trovato su RVL", modello);
+                            string msg = string.Format("Articolo RVL {0} non trovato su BC", modello);
                             AggiornaMessaggio(msg);
                             sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "RVL non trovato"));
                             continue;
@@ -1453,6 +1453,11 @@ namespace MigrazioneODL
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 
