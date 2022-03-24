@@ -32,7 +32,7 @@ namespace Applicazioni.BLL
                     bAnagrafica.FillMAGAZZDaModello(_ds, Modello);
                 }
             }
-            return _ds.MAGAZZ.Where(x => x.IDMAGAZZ == Modello).FirstOrDefault();
+            return _ds.MAGAZZ.Where(x => x.MODELLO == Modello).FirstOrDefault();
         }
 
         public Articolo GetArticolo(string IDMAGAZZ)

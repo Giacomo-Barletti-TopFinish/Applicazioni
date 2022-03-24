@@ -1355,9 +1355,9 @@ namespace MigrazioneODL
                         AnagraficaDS.MAGAZZRow m = a.GetMAGAZZDaModello(modello);
                         if (m == null)
                         {
-                            string msg = string.Format("Articolo RVL {0} non trovato su BC", modello);
+                            string msg = string.Format("Articolo RVL {0} non trovato su RVL", modello);
                             AggiornaMessaggio(msg);
-                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "RVL non trovato"));
+                            sbFileOut.AppendLine(creaRigaPerFile(modello, string.Empty, "Articolo non trovato su RVL", 0));
                             continue;
                         }
                         string IDMAGAZZ = m.IDMAGAZZ;
@@ -1369,7 +1369,7 @@ namespace MigrazioneODL
                         {
                             string msg = "ODL non trovato";
                             AggiornaMessaggio(modello + " " + msg);
-                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "ODL non trovato"));
+                            sbFileOut.AppendLine(creaRigaPerFile(modello, string.Empty, "ODL non trovato su RVL", 0));
 
                             continue;
                         }
@@ -1379,7 +1379,7 @@ namespace MigrazioneODL
                         if (prdFase == null && anagrafica == null)
                         {
                             AggiornaMessaggio(string.Format("{0} USR PRD FASE non trovata ", modello));
-                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "FASE non trovata"));
+                            sbFileOut.AppendLine(creaRigaPerFile(modello, string.Empty, "Fase non trovata su RVL", 0));
 
                             continue;
                         }
@@ -1394,7 +1394,7 @@ namespace MigrazioneODL
                             {
                                 //                                string str = string.Format("Impossibile trovare una anagrafica di trasferimento idmagazz {0} odl {1}", odl.IDMAGAZZ, odl.IDPRDMOVFASE);
                                 AggiornaMessaggio(modello + " impossibile trovare una anagrafica padre");
-                                sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "BC non trovato"));
+                                sbFileOut.AppendLine(creaRigaPerFile(modello, string.Empty, "Diba interrotta su RVL", 0));
 
                                 continua = false;
                                 errore = true;
@@ -1405,8 +1405,7 @@ namespace MigrazioneODL
                             if (iterazioni == 70)
                             {
                                 AggiornaMessaggio(modello + " Impossibile procedere");
-                                sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "BC non trovato"));
-
+                                sbFileOut.AppendLine(creaRigaPerFile(modello, string.Empty, "Non trovato", iterazioni));
                                 continue;
                             }
                         }
@@ -1416,16 +1415,16 @@ namespace MigrazioneODL
                         if (anagrafica == null)
                         {
                             AggiornaMessaggio(string.Format("{0} Non migrato :anagrafica non trovata ", modello));
-                            sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, "BC non trovato"));
+                            sbFileOut.AppendLine(creaRigaPerFile(modello, string.Empty, "Non trovato ", iterazioni));
 
                             continue;
                         }
-                        sbFileOut.AppendLine(string.Format("{0} -> {1}", modello, anagrafica.BC));
+                        sbFileOut.AppendLine(creaRigaPerFile(modello, anagrafica.BC, string.Empty, iterazioni));
                     }
                 }
 
                 FileInfo fi = new FileInfo(txtAnagraficaFileDaVerificare.Text);
-                string fileOut = string.Format(@"{0}\ESITO {1}",fi.Directory,fi.Name);
+                string fileOut = string.Format(@"{0}\ESITO {1}", fi.Directory, fi.Name);
 
                 using (FileStream fs = new FileStream(fileOut, FileMode.Create, FileAccess.Write))
                 {
@@ -1436,6 +1435,7 @@ namespace MigrazioneODL
                     fs.Close();
                 }
 
+                AggiornaMessaggio(string.Format("Creato il file {0} ", fileOut));
                 AggiornaMessaggio("*** OPERAZIONE COMPLETATA ***");
             }
             catch (Exception ex)
@@ -1454,7 +1454,13 @@ namespace MigrazioneODL
                 Cursor.Current = Cursors.Default;
             }
         }
+        private string creaRigaPerFile(string modello, string bc, string errore, int iterazioni)
+        {
+            if (iterazioni > 0)
+                return string.Format("{0};{1};{2} ({3})", modello, bc, errore, iterazioni);
 
+            return string.Format("{0};{1};{2}", modello, bc, errore);
+        }
         private void groupBox4_Enter(object sender, EventArgs e)
         {
 
