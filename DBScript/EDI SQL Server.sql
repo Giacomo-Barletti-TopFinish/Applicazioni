@@ -1,4 +1,4 @@
-USE MPI
+﻿USE MPI
 
 
 CREATE TABLE ACCESSORISTI
@@ -67,3 +67,29 @@ Insert into ACCESSORISTI (CODICE,CODCF,CODIND) values ('598405','01154     ','46
 Insert into ACCESSORISTI (CODICE,CODCF,CODIND) values ('002170','01154     ','163');
 go
 SELECT * FROM ACCESSORISTI
+go
+CREATE VIEW [dbo].[BOLLE_VENDITA] AS
+select 'METALPLUS' AZIENDA,
+'' DESTABTIPDOC, '' CODICETIPDOC, ente.[MTP Authority code] CODICETIPOO, '' DESTABTIPOO, testata.[Reason Code] CODICECAUTR, rea.[Description] DESTABCAUTR, 
+                testata.No_ IDVENDITET, '' FATTURARE_SN, '' CONFERMATO_SN, '' DEFINITIVO_SN,
+
+testata.No_ FULLNUMDOC,testata.[posting Date] DATDOC,'' ANNODOC,testata.No_ NUMDOC,acc.codcf CODICECLIFO,testata.[Bill_Pay-to Name] RAGIONESOC,
+testata.[Bill_Pay-to Country_Reg_ Code]NAZIONE,
+acc.CODIND CODINDSP,'' FATTURAREA, '' FATTURAREALTER, '' SEGNALATORE, '' SEGNALATORE_RS,
+'' NUMERORIGHE,
+'' DATACR, '' DATAVR,
+'' NRRIGA, DET.[Unit of Measure Code] CODICEUNIMI, DET.No_ IDMAGAZZ,DET.[Cross-Reference No_] MODELLO, DET.Quantity QTAUNI, DET.Quantity QTATOT, '' QTADAC, '' PREZZOUNI, 
+'' PREZZOTOT, '' VALORE, '' DATACR_DET, '' DATAVR_DET, '' PREZZONET, 
+'' DATA_RICHIESTA, '' DATA_CONFERMA, '' ID_OC, '' TIPO_OC, '' FULLNUMDOC_OC, '' DATDOC_OC, '' ANNODOC_OC, '' NUMDOC_OC, '' DATARIF_OC, '' DATACR_OC, '' DATAVR_OC, 
+testata.[Your Reference] RIFERIMENTO, ente.[MTP Customer Line No_] RIFERIMENTORIGA,
+acc.CODICE ACCESSORISTA,testata.[Ship-to Name] DESTINAZIONE
+
+from [prod].[dbo].[METALPLUS$EOS CWS Shipment Header$a879d9e1-a8d9-4dc8-87d8-69d278c5e003] testata WITH (NOLOCK)
+inner join ACCESSORISTI acc WITH (NOLOCK) on acc.[Ship-to Code]=testata.[Ship-to Code] COLLATE SQL_Latin1_General_CP1_CI_AS
+INNER JOIN [prod].[dbo].[METALPLUS$EOS CWS Shipment Line$a879d9e1-a8d9-4dc8-87d8-69d278c5e003] DET  WITH (NOLOCK) ON DET.[document no_]=testata.No_
+left outer join [prod].[dbo].[METALPLUS$EOS CWS Shipment Line$acfbaca5-f819-4981-a342-d769a95abeb3] ente WITH (NOLOCK) on ente.[Document No_]=testata.No_ AND ente.[Line No_]=DET.[Line No_]
+inner join [prod].[dbo].[METALPLUS$Reason Code$437dbf0e-84ff-417a-965d-ed2bb9650972] rea WITH (NOLOCK) ON rea.Code = testata.[Reason Code]
+
+--INNER JOIN [PROD].[dbo].[MetalPlus$Item Cross Reference$437dbf0e-84ff-417a-965d-ed2bb9650972] CROS WITH(NOLOCK) ON CROS.[Item No_]=DET.No_ and CROS.[Cross-Reference Type No_]=DET.[Destination No_]
+
+where det.correction = 0 
